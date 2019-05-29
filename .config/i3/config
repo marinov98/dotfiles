@@ -7,10 +7,10 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 # ALT is mode button
-set $mod Mod1
+#set $mod Mod1
 
 # WIN is mode buttom
-# set $mod2 Mod4
+set $mod Mod4
 
  
 # Font for window titles. Will also be used by the bar unless a different font
@@ -144,9 +144,7 @@ exec_always killall feh
 
 
 # Startup Functions
-#exec_always setxkbmap -option 'caps:ctrl_modifier'
-#exec_always xcape -e 'Caps_Lock=Escape'
-
+exec --no-startup-id setxkbmap -option 'caps:none'
 exec --no-startup-id setxkbmap -option 'caps:ctrl_modifier'
 exec --no-startup-id xcape -e 'Caps_Lock=Escape'
 
@@ -189,5 +187,3 @@ bar {
         status_command i3status
 		position top
 }
-
-
