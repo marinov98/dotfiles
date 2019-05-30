@@ -198,3 +198,25 @@ bar {
     #    urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
    # }
 }
+
+for_window [class="^.*"] border pixel 0
+
+#gaps inner 10
+#gaps outer 15
+smart_gaps on
+gaps inner 8
+gaps outer 0
+
+mode "gaps" {
+        bindsym t gaps inner all set 20
+        bindsym f gaps inner all set 0
+
+        bindsym k gaps inner all plus 5
+        bindsym j gaps inner all minus 5
+
+        # back to normal: enter or escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+g mode "gaps"
