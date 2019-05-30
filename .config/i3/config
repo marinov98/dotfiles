@@ -40,7 +40,6 @@ bindsym $mod+d exec dmenu_run -l 5 #-nb black -sb red -l 5
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-# DMENU CUSTOMIZATION
 
 # Shutdown
 bindsym $mod+Shift+s exec shutdown now
@@ -146,10 +145,10 @@ exec_always killall xcape
 exec_always killall compton
 exec_always killall feh
 
-
 # CAPS LOCK to ESC and CTRL Functions
 exec_always --no-startup-id setxkbmap -option 'caps:ctrl_modifier'
 exec_always --no-startup-id xcape -e 'Caps_Lock=Escape'
+exec_always --no-startup-id sh .profile
 
 # WALLPAPER
 exec_always --no-startup-id feh --bg-scale ~/Pictures/redgalaxy.jpg
