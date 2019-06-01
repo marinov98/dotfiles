@@ -40,6 +40,7 @@ bindsym $mod+d exec dmenu_run -l 5 #-nb black -sb red -l 5
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+# DMENU CUSTOMIZATION
 
 # Shutdown
 bindsym $mod+Shift+s exec shutdown now
@@ -187,7 +188,9 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status # i3blocks -c ~/.config/i3/i3blocks.conf
+		tray_output primary
 		position top
+		
 	#	colors {
     #    background $bg-color
     #        separator #757575
@@ -200,8 +203,6 @@ bar {
 
 for_window [class="^.*"] border pixel 0
 
-#gaps inner 10
-#gaps outer 15
 smart_gaps on
 gaps inner 8
 gaps outer 0
@@ -219,3 +220,23 @@ mode "gaps" {
 }
 
 bindsym $mod+g mode "gaps"
+
+# MONITOR 
+set $displayMode "Set displamode [l]aptop Y  [h]ome Y"
+bindsym $mod+x mode $displayMode
+
+mode $displayMode {
+    #bindsym w exec "\
+      #          ~/.config/i3/scripts/work-displays.sh && \
+      #          ~/.config/i3/scripts/dpi-96.sh"; \
+      #          mode "default"
+    
+
+    bindsym h exec " ~/.config/i3/scripts/home-display.sh"; \
+                mode "default"
+    bindsym l exec " ~/.config/i3/scripts/laptop-display.sh"; \
+                mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
