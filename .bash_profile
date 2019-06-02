@@ -48,4 +48,13 @@ alias DT='tee ~/Desktop/terminalOut.txt'    # DT:           Pipe content to file
 export HISTSIZE=10000
 export HISTFILESIZE=120000
 
+# Powerline
+function _update_ps1() {
+    PS1=$(powerline-shell $?)
+}
+
+if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
+    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+fi
+
 neofetch
