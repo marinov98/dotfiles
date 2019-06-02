@@ -163,4 +163,15 @@ mcd () { mkdir -p "$1" && cd "$1"; }        # mcd:          Makes new Dir and ju
 trash () { command mv "$@" ~/.Trash ; }     # trash:        Moves a file to the MacOS trash
 
 xcape -e '#66=Escape'
+
+function _update_ps1() {
+    PS1=$(powerline-shell $?)
+}
+
+if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
+    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+fi
+
+
+
 neofetch
