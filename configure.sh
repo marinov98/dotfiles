@@ -38,6 +38,6 @@ cp .config/* ~/.config/
 # XORG
 echo "creating xorg configuration..."
 cd
-mkdir -p /etc/X11
+sudo mkdir -p /etc/X11
 cd dotfiles/
-cp /etc/X11/* /etc/X11/
+sudo cp /etc/X11/* /etc/X11/
