@@ -48,3 +48,4 @@ alias DT='tee ~/Desktop/terminalOut.txt'    # DT:           Pipe content to file
 export HISTSIZE=10000
 export HISTFILESIZE=120000
 
+neofetch
