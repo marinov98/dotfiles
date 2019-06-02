@@ -31,4 +31,4 @@ fi
 #feh --randomize --bg-fill ~/Pictures/redgalaxy.jpg
 
 xcape -e '#66=Escape'
-
+neofetch
