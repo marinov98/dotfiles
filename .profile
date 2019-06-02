@@ -31,4 +31,15 @@ fi
 #feh --randomize --bg-fill ~/Pictures/redgalaxy.jpg
 
 xcape -e '#66=Escape'
+
+## POWERLINE-SHELL
+function _update_ps1() {
+    PS1=$(powerline-shell $?)
+}
+
+if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
+    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+fi
+
+
 neofetch
