@@ -1,5 +1,5 @@
 # dotfiles
-all my dot files without any guides
+all my dot files
 
 my **Emacs** guide : https://github.com/marinov98/My_Emacs-Detailed_Guide
 
