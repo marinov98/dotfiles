@@ -31,8 +31,11 @@ mkdir -p ~/.vim
 cp .vim/* ~/.vim/
 
 # I3 
-echo "setting up i3 window manager configuration..."
-cp .config/* ~/.config/
+echo "setting up i3 window manager..."
+mkdir -p ~/.config/i3
+mkdir -p ~/.config/i3status
+cp .config/i3/* ~/.config/i3/
+cp .config/i3status/* ~/.config/i3status/
 
 # XORG
 echo "creating xorg configuration..."
