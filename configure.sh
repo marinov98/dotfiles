@@ -10,7 +10,7 @@ echo "Copying bash profiles..."
 
 # powerline-shell
 echo "setting up powerline-shell"
-mkdir -p ~/.config/powerline-shell && powerline-shell --generate-config > ~/.config/powerline-shell/config.json
+mkdir -p ~/.config/powerline-shell 
 cp .config/powerline-shell/config.json ~/.config/powerline-shell/
 
 
