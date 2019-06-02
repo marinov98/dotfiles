@@ -32,7 +32,6 @@ cp .vim/* ~/.vim/
 
 # I3 
 echo "setting up i3 window manager configuration..."
-mkdir -p ~/.config
 cp .config/* ~/.config/
 
 # XORG
