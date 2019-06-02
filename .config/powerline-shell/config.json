@@ -1,0 +1,15 @@
+{
+  "segments": [
+    "virtual_env", 
+    "ssh", 
+	"cwd", 
+    "git", 
+	"git_stash",
+    "jobs", 
+    "root"
+  ],
+  "cwd": {
+	  "mode":"dironly",
+	  "max_depth": "4"
+  }
+}
