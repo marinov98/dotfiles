@@ -232,7 +232,7 @@ mode $displayMode {
       #          mode "default"
     
 
-    bindsym h exec " ~/.config/i3/scripts/home-display.sh"; \
+    bindsym h exec " ~/.config/i3/scripts/DP2-display.sh"; \
                 mode "default"
     bindsym l exec " ~/.config/i3/scripts/laptop-display.sh"; \
                 mode "default"
