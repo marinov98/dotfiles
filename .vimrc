@@ -1,4 +1,4 @@
-" Vim plug
+"Vim plug
 call plug#begin('~/.vim/plugged')
 
 "snippets and utensils
@@ -16,8 +16,20 @@ Plug 'https://github.com/nanotech/jellybeans.vim'
 "Gruvbox Theme 
 Plug 'https://github.com/morhetz/gruvbox'
 
+"Cobalt2 Theme
+Plug 'herrbischoff/cobalt2.vim' 
+
+" Zenburn Theme
+Plug 'https://github.com/jnurmine/Zenburn'
+
+"Dracula
+Plug 'dracula/vim', { 'as': 'dracula' }
+
 "Linter
 Plug 'w0rp/ale'
+let g:ale_sign_error = '●' " Less aggressive than the default '>>'
+let g:ale_sign_warning = '.'
+let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
 
 " Modeline
 Plug 'itchyny/lightline.vim'
@@ -25,8 +37,6 @@ Plug 'itchyny/lightline.vim'
 " Surround
 Plug 'https://github.com/tpope/vim-surround'
 
-" Emmet 
-Plug 'mattn/emmet-vim'
 
 " CSS - Color
 Plug 'https://github.com/skammer/vim-css-color'
@@ -75,7 +85,18 @@ let g:ycm_key_list_previous_completion=[]
 
 "Web-dev
 Plug 'https://github.com/pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 Plug 'https://github.com/hail2u/vim-css3-syntax'
+" Emmet 
+Plug 'mattn/emmet-vim'
+let g:user_emmet_leader_key='<Tab>'
+let g:user_emmet_settings = {
+  \  'javascript.jsx' : {
+    \      'extends' : 'jsx',
+    \  },
+  \}
+
+
 
 "Github integration
 Plug 'jreybert/vimagit'
@@ -132,3 +153,4 @@ command! W :w
 
 " Force Minimum window length
 set winwidth=110
+
