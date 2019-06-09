@@ -38,6 +38,11 @@ Plug 'itchyny/lightline.vim'
 " Surround
 Plug 'https://github.com/tpope/vim-surround'
 
+" Prettier
+"Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 
 " CSS - Color
 Plug 'https://github.com/skammer/vim-css-color'
