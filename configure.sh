@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# WARNING: script has not been tested
+## Script works best when directory is cloned in home not desktop
+
+## IMPORTANT ensure appropriate packages are installed for terminal : neofetch, powerline shell, xcape before using script!
 
 # BASH profiles
 echo "Copying bash profiles..."
@@ -43,9 +45,9 @@ cp .config/i3status/config ~/.config/i3status/
 echo "i3 finished"
 
 # XORG
-echo "creating xorg configuration..."
-cd
-sudo mkdir -p /etc/X11
-cd dotfiles/
-sudo cp /etc/X11/xorg.conf /etc/X11/
-echo "xorg finished"
+# echo "creating xorg configuration..."
+# cd
+# sudo mkdir -p /etc/X11
+# cd dotfiles/
+# sudo cp /etc/X11/xorg.conf /etc/X11/
+# echo "xorg finished"
