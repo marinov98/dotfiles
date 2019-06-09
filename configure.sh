@@ -47,5 +47,5 @@ echo "creating xorg configuration..."
 cd
 sudo mkdir -p /etc/X11
 cd dotfiles/
-sudo cp /etc/X11/* /etc/X11/
+sudo cp /etc/X11/xorg.conf /etc/X11/
 echo "xorg finished"
