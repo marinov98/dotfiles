@@ -17,7 +17,8 @@ Plug 'https://github.com/nanotech/jellybeans.vim'
 Plug 'https://github.com/morhetz/gruvbox'
 
 "Cobalt2 Theme
-Plug 'herrbischoff/cobalt2.vim' 
+"Plug 'herrbischoff/cobalt2.vim' 
+Plug 'gertjanreynaert/cobalt2-vim-theme'
 
 " Zenburn Theme
 Plug 'https://github.com/jnurmine/Zenburn'
@@ -109,7 +110,7 @@ syntax enable
 
 " Color theme
 set background=dark
-colorscheme jellybeans
+colorscheme cobalt2
 
 " Indentation
 set tabstop=4
