@@ -29,10 +29,10 @@ echo "installing python tools using pip..."
 sudo pip install rope jedi flake8 autopep8 yapf pygments virtualenv virtualenvwrapper powerline-shell
 
 echo "installing tools for Javascript..."
-sudo pacman -S nodejs npm
-echo "installing tools for Javascript using npm..."
-sudo npm install npm@latest -g
-sudo npm install -g tern eslint http-server react react-dom create-react-app prop-types express typescript requirejs @angluar/cli reactstrap webpack
+sudo pacman -S nodejs  # npm
+#echo "installing tools for Javascript using npm..."
+#sudo npm install npm@latest -g
+#sudo npm install -g tern eslint http-server react react-dom create-react-app prop-types express typescript requirejs @angluar/cli reactstrap webpack
 
 echo "installing browser and video players..."
 sudo pacman -S google-chrome chrome-widevine pepper-flash vlc
@@ -46,8 +46,3 @@ sudo pacman -S feh compton i3-gaps i3status dmenu trash-cli
 
 echo "Latex setup"
 sudo pacman -S texlive-core texline-bin biber texlive-fontsextra texlive-bibtexextra texlive-formatsextra texlive-science
-
-
-
-
-
