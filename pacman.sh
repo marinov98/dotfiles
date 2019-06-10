@@ -26,7 +26,7 @@ sudo pacman -S xf86-input-libinput xf86-input-wacom xf86-video-fbdev xf86-video-
 echo "installing tools for Python..."
 sudo pacman -S python3 python-pip pyenv
 echo "installing python tools using pip..."
-sudo pip install rope jedi flake8 autopep8 yapf pygments virtualenv virtualenvwrapper powerline-shell
+pip install --user rope jedi flake8 autopep8 yapf pygments virtualenv virtualenvwrapper powerline-shell
 
 echo "installing tools for Javascript..."
 sudo pacman -S nodejs  # npm
