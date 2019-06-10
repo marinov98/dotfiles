@@ -32,6 +32,8 @@ echo "emacs finished"
 # Vim
 echo "setting up Vim..."
 cp .vimrc ~/
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 mkdir -p ~/.vim
 cp .vim/.ycm_extra_conf.py ~/.vim/
 echo "vim finished"
