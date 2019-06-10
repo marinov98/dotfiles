@@ -32,7 +32,7 @@ echo "installing tools for Javascript..."
 sudo pacman -S nodejs  # npm
 #echo "installing tools for Javascript using npm..."
 #npm install npm@latest -g
-#npm install -g tern @fortawesome/free-solid-svg-icons eslint http-server react react-dom create-react-app prop-types express typescript requirejs @angluar/cli reactstrap webpack
+#npm install -g tern jquery @fortawesome/free-solid-svg-icons eslint http-server react react-dom create-react-app prop-types express typescript requirejs @angluar/cli reactstrap webpack
 
 echo "installing browser and video players..."
 sudo pacman -S google-chrome chrome-widevine pepper-flash vlc
