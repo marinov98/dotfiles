@@ -31,8 +31,8 @@ pip install --user rope jedi flake8 autopep8 yapf pygments virtualenv virtualenv
 echo "installing tools for Javascript..."
 sudo pacman -S nodejs  # npm
 #echo "installing tools for Javascript using npm..."
-#sudo npm install npm@latest -g
-#sudo npm install -g tern eslint http-server react react-dom create-react-app prop-types express typescript requirejs @angluar/cli reactstrap webpack
+#npm install npm@latest -g
+#npm install -g tern @fortawesome/free-solid-svg-icons eslint http-server react react-dom create-react-app prop-types express typescript requirejs @angluar/cli reactstrap webpack
 
 echo "installing browser and video players..."
 sudo pacman -S google-chrome chrome-widevine pepper-flash vlc
