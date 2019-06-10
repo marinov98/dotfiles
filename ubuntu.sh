@@ -21,8 +21,8 @@ sudo apt install xrandr arandr
 echo "installing programming essentials..."
 sudo apt install gummi gcc clang libclang-dev lldb ctags libncurses5-dev libncursesw5-dev cmake ranger nnn clang-format python-pip 
 echo "python tools using pip..."
-sudo pip install virtualenv texlive-full 
-sudo pip install rope jedi flake8 autopep8 yapf pygments virtualenvwrapper powerline-shell
+pip install --user virtualenv texlive-full 
+pip install --user rope jedi flake8 autopep8 yapf pygments virtualenvwrapper powerline-shell
 
 echo "javascript..."
 sudo apt install nodejs   # npm 
