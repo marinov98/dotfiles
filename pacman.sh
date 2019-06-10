@@ -34,8 +34,8 @@ sudo npm install -g tern eslint react react-dom create-react-app typescript @ang
 echo "installing browser and video players..."
 sudo pacman -S google-chrome chrome-widevine pepper-flash vlc
 
-echo "installing emacs and cask"
-sudo pacman -S emacs auctex
+echo "installing emacs, vim, and cask"
+sudo pacman -S emacs auctex vim
 curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 
 echo "preparation for i3 configuring..."
