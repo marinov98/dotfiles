@@ -32,7 +32,7 @@ echo "installing tools for Javascript..."
 sudo pacman -S nodejs npm
 echo "installing tools for Javascript using npm..."
 sudo npm install npm@latest -g
-sudo npm install -g tern eslint react react-dom create-react-app prop-types typescript requirejs @angluar/cli reactstrap webpack
+sudo npm install -g tern eslint http-server react react-dom create-react-app prop-types typescript requirejs @angluar/cli reactstrap webpack
 
 echo "installing browser and video players..."
 sudo pacman -S google-chrome chrome-widevine pepper-flash vlc
