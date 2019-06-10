@@ -28,7 +28,7 @@ echo "javascript..."
 sudo apt install nodejs  npm 
 echo "npm installations..."
 sudo npm install npm@latest -g
-sudo npm -g install tern eslint react react-dom create-react-app prop-types requirejs typescript @anglular/cli reactrap webpack
+sudo npm -g install tern eslint http-server react react-dom create-react-app prop-types requirejs typescript express @anglular/cli reactrap webpack
 
 echo "emacs installation..."
 sudo apt install emacs26 auctex
