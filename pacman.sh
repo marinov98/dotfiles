@@ -39,7 +39,7 @@ sudo pacman -S yarn emacs auctex vim
 curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 
 echo "preparation for i3 configuring..."
-sudo pacman -S feh compton i3-gaps i3status trash-cli
+sudo pacman -S feh compton i3-gaps i3status dmenu trash-cli
 
 
 
