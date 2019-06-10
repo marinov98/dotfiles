@@ -34,7 +34,7 @@ echo "emacs installation..."
 sudo apt install emacs26 auctex
 
 echo "battery management..."
-sudo apt install tlp &sudo apt install tlpui
+sudo apt install tlp && sudo apt install tlpui
 
 echo "Browsing and music..."
 sudo apt install snapd spotify chromium-browser
