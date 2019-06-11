@@ -27,6 +27,7 @@ pip install --user rope jedi flake8 autopep8 yapf pygments virtualenvwrapper pow
 
 echo "javascript..."
 sudo apt install nodejs npm 
+sudo apt-get install postgresql-10
 echo "npm installations..."
 sudo chown -R $(whoami) ~/.npm
 npm install npm@latest -g
