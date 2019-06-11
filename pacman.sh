@@ -12,7 +12,7 @@ echo "installing neofeth..."
 sudo pacman -S neofetch
 
 echo "installing git,gdb,curl,ranger, and nnn..."
-sudo pacman -S git gdb curl ranger nnn wireless_tools gnupg wget 
+sudo pacman -S git gdb curl ranger nnn wireless_tools gnupg wget base-devel
 
 echo "power management"
 # pamac stuff to be done when OS is installed
@@ -24,7 +24,7 @@ echo "installing keyboard configuration tools..."
 sudo pacman -S xorg-xmodmap xkeycaps interception-caps2esc xcape xorg-xprop xorg-xrandr arandr xorg-xrefresh
 
 echo "installing tools for C++..."
-sudo pacman -S base-devel clang cmake llvm lldb ctags clang-format
+sudo pacman -S clang cmake llvm lldb ctags clang-format
 
 echo "x stuff"
 sudo pacman -S xf86-input-libinput xf86-input-wacom xf86-video-fbdev xf86-video-intel xf86-video-vesa xfsprogs xorg-bdftopcf xorg-font-util xorg-fonts-encodings xorg-iceauth xorg-luit xorg-mkfontscale xorg-server xorg-sessreg
