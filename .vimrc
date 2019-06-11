@@ -14,7 +14,7 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'https://github.com/altercation/vim-colors-solarized'
 
 " Base 16
-Plug 'chriskempson/base16-vim'
+"Plug 'chriskempson/base16-vim'
 
 " JellyBeans Theme
 Plug 'https://github.com/nanotech/jellybeans.vim'
@@ -30,7 +30,7 @@ Plug 'gertjanreynaert/cobalt2-vim-theme'
 Plug 'https://github.com/jnurmine/Zenburn'
 
 "Dracula
-Plug 'dracula/vim', { 'as': 'dracula' }
+"Plug 'dracula/vim', { 'as': 'dracula' }
 
 "Linter
 Plug 'w0rp/ale'
@@ -92,8 +92,16 @@ Plug 'https://github.com/jiangmiao/auto-pairs'
 Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
 " Make YCM not use tab so that UtilSnippets work properly
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-let g:ycm_key_list_select_completion=[]
-let g:ycm_key_list_previous_completion=[]
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 "Web-dev
 Plug 'https://github.com/pangloss/vim-javascript'
@@ -158,7 +166,8 @@ set bs=2
 set mouse=a
 
 " Copy/Paste from anywhere
-set clipboard=unnamed
+"set clipboard=unnamed
+set clipboard=unnamedplus
 
 " Commands
 command! W :w
