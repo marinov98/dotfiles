@@ -6,13 +6,13 @@ echo "Updating before installing packages..."
 sudo pacman -Sy
 
 echo "installing fonts..."
-sudo pacman -S font-config ttf-hack ttf-fira-code adobe-source-code-pro-fonts ttf-inconsolata ttf-font-awesome
+sudo pacman -S base-devel font-config ttf-hack ttf-fira-code adobe-source-code-pro-fonts ttf-inconsolata ttf-font-awesome
 
 echo "installing neofeth..."
 sudo pacman -S neofetch
 
 echo "installing git,gdb,curl,ranger, and nnn..."
-sudo pacman -S git gdb curl ranger nnn wireless_tools gnupg wget base-devel
+sudo pacman -S git gdb curl ranger nnn wireless_tools gnupg wget 
 
 echo "power management"
 # pamac stuff to be done when OS is installed
