@@ -12,7 +12,7 @@ echo "installing neofeth..."
 sudo pacman -S neofetch
 
 echo "installing git,gdb,curl,ranger, and nnn..."
-sudo pacman -S git gdb curl ranger nnn wireless_tools
+sudo pacman -S git gdb curl ranger nnn wireless_tools gnupg wget
 
 echo "installing keyboard configuration tools..."
 sudo pacman -S xorg-xmodmap xkeycaps interception-caps2esc xcape xorg-xprop xorg-xrandr arandr xorg-xrefresh
