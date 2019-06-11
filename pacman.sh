@@ -31,6 +31,7 @@ sudo pacman -S xf86-input-libinput xf86-input-wacom xf86-video-fbdev xf86-video-
 
 echo "installing tools for Python..."
 sudo pacman -S python3 python-pip pyenv
+sudo chown -R $(whoami) /usr/local/bin/
 echo "installing python tools using pip..."
 pip install --user rope jedi flake8 autopep8 yapf pygments virtualenv virtualenvwrapper powerline-shell
 
