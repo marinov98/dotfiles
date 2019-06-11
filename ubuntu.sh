@@ -25,10 +25,12 @@ pip install --user virtualenv texlive-full
 pip install --user rope jedi flake8 autopep8 yapf pygments virtualenvwrapper powerline-shell
 
 echo "javascript..."
-sudo apt install nodejs   # npm 
-#echo "npm installations..."
-#npm install npm@latest -g
-#npm -g install tern jquery eslint @fortawesome/free-solid-svg-icons http-server react react-dom create-react-app prop-types requirejs typescript express @anglular/cli reactrap webpack
+sudo apt install nodejs npm 
+echo "npm installations..."
+sudo chown -R $(whoami) ~/.npm
+npm install npm@latest -g
+sudo chown -R $(whoami) /usr/local/lib/node_modules
+npm -g install tern jquery eslint @fortawesome/free-solid-svg-icons http-server react react-dom create-react-app prop-types requirejs typescript express @anglular/cli reactrap webpack
 
 echo "emacs installation..."
 sudo apt install emacs26 auctex
