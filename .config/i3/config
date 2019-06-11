@@ -222,16 +222,12 @@ mode "gaps" {
 bindsym $mod+g mode "gaps"
 
 # MONITOR 
-set $displayMode "Set displamode [l]aptop Y  [h]ome Y"
+set $displayMode "Set displamode [l]aptop  [h]DP2 [w]DP1"
 bindsym $mod+x mode $displayMode
 
 mode $displayMode {
-    #bindsym w exec "\
-      #          ~/.config/i3/scripts/work-displays.sh && \
-      #          ~/.config/i3/scripts/dpi-96.sh"; \
-      #          mode "default"
-    
-
+    bindsym w exec "~/.config/i3/scripts/home-display.sh";  \
+                mode "default"
     bindsym h exec " ~/.config/i3/scripts/DP2-display.sh"; \
                 mode "default"
     bindsym l exec " ~/.config/i3/scripts/laptop-display.sh"; \
