@@ -14,9 +14,10 @@ sudo pacman -S neofetch
 echo "installing git,gdb,curl,ranger, and nnn..."
 sudo pacman -S git gdb curl ranger nnn wireless_tools gnupg wget 
 
-#echo "power management"
+echo "power management"
 # pamac stuff to be done when OS is installed
-# pamac install tlp tlpui
+sudo pacman -Syu pamac-gtk 
+pamac install tlp tlpui
 
 
 echo "installing keyboard configuration tools..."
