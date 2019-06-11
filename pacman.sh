@@ -41,7 +41,7 @@ sudo chown -R $(whoami) ~/.npm
 echo "installing tools for Javascript using npm..."
 npm install npm@latest -g
 sudo chown -R $(whoami) /usr/local/lib/node_modules
-npm i -g tern jquery @fortawesome/free-solid-svg-icons sequelize-cli eslint angular http-server react react-dom create-react-app prop-types express @angular/core typescript requirejs reactstrap webpack
+npm i -g tern jquery @fortawesome/free-solid-svg-icons sequelize-cli eslint angular @angular/cli http-server react react-dom create-react-app prop-types express @angular/core typescript requirejs reactstrap webpack
 
 echo "installing browser and video players..."
 sudo pacman -S google-chrome chrome-widevine pepper-flash vlc
