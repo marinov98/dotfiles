@@ -41,7 +41,8 @@ echo "battery management..."
 sudo apt-get install tlp && sudo apt install tlpui
 
 echo "Browsing and music..."
-sudo apt-get install snapd spotify chromium-browser
+sudo apt-get install snapd chromium-browser
+sudo snap install spotify
 
 echo "i3..."
 sudo apt-get install i3 i3status i3lock suckless-tools rofi
