@@ -44,7 +44,7 @@ cp .config/i3/config ~/.config/i3/
 cp .config/i3status/config ~/.config/i3status/
 echo "i3 finished"
 
-echo "setting up compton"
+echo "setting up compton..."
 cp .config/compton.conf  ~/.config
 echo "Transfer complete"
 
