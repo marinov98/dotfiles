@@ -6,7 +6,7 @@ echo "updating..."
 sudo apt-get update
 
 echo "installing necessities (curl,git,gdb,net-tools,feh,compton,trash-cli)"
-sudo apt install curl git gdb net-tools neofetch feh compton trash-cli 
+sudo apt-get install curl git gdb net-tools neofetch feh compton trash-cli 
 curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 
 echo "keyboard configurations..."
