@@ -32,7 +32,7 @@ echo "npm installations..."
 sudo chown -R $(whoami) ~/.npm
 npm install npm@latest -g
 sudo chown -R $(whoami) /usr/local/lib/node_modules
-npm i -g tern jquery eslint @fortawesome/free-solid-svg-icons http-server sequelize-cli react react-dom create-react-app prop-types requirejs typescript express angular @angular/cli reactrap webpack @angular/core
+npm i -g tern jquery eslint @fortawesome/free-solid-svg-icons http-server sequelize-cli react react-dom create-react-app prop-types requirejs typescript@* express angular @angular/cli reactrap webpack @angular/core
 
 
 echo "emacs installation..."
