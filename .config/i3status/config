@@ -4,6 +4,7 @@
 # If the above line is not correctly displayed, fix your editor first!
 #label=VOL
 general {
+	output_format = "i3bar"
 	colors = true
 	color_good = "#01C4FF"
 	color_degraded = "#EAB60A"
