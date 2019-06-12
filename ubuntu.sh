@@ -6,7 +6,7 @@ echo "updating..."
 sudo apt-get update
 
 echo "installing necessities (curl,git,gdb,net-tools,feh,compton,trash-cli)"
-sudo apt-get install curl git gdb net-tools neofetch feh compton trash-cli 
+sudo apt-get install curl git gdb net-tools neofetch feh compton trash-cli chromium-browser
 curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 
 echo "keyboard configurations..."
@@ -41,7 +41,7 @@ echo "battery management..."
 sudo apt-get install tlp && sudo apt install tlpui
 
 echo "Browsing and music..."
-sudo apt-get install snapd chromium-browser
+sudo apt-get install snapd snapd-xdg-open 
 sudo snap install spotify
 
 echo "i3..."
