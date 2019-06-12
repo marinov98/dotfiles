@@ -11,8 +11,8 @@ sudo pacman -S base-devel font-config ttf-hack ttf-fira-code adobe-source-code-p
 echo "installing neofeth..."
 sudo pacman -S neofetch
 
-echo "installing git,gdb,curl,ranger, and nnn..."
-sudo pacman -S git gdb curl ranger nnn wireless_tools gnupg wget 
+echo "installing version control, debuggers and file mamagers.."
+sudo pacman -S git gdb curl ranger wireless_tools gnupg wget 
 
 echo "power management"
 # pamac stuff to be done when OS is installed
@@ -41,7 +41,7 @@ sudo chown -R $(whoami) ~/.npm
 echo "installing tools for Javascript using npm..."
 npm install npm@latest -g
 sudo chown -R $(whoami) /usr/local/lib/node_modules
-npm i -g tern jquery @fortawesome/free-solid-svg-icons sequelize-cli eslint angular @angular/cli http-server react react-dom create-react-app prop-types express @angular/core typescript@* requirejs reactstrap webpack
+npm i -g tern pg jquery @fortawesome/free-solid-svg-icons sequelize-cli eslint angular @angular/cli http-server react react-dom create-react-app prop-types express @angular/core typescript tslint requirejs reactstrap webpack
 
 echo "installing browser and video players..."
 sudo pacman -S google-chrome chrome-widevine pepper-flash vlc
