@@ -20,10 +20,11 @@ bindsym $mod+Shift+q kill
 
 
 ################################
-##### DMENU
+##### DMENU/ROFI
 ################################
-
-bindsym $mod+d exec "dmenu_run -l 5 -nf '#BBBBBB' -nb '#0D2F04' -sb '#0A9750' -sf '#FFFFFF' -fn 'monospace-12' -p 'Search:'"
+bindsym $mod+d exec rofi -show run -lines 4 -display-run "Search:" -theme Arc # bg '#0D2F04' -fg '#0A9750' 
+###### DMENU 
+#bindsym $mod+d exec "dmenu_run -l 5 -nf '#BBBBBB' -nb '#0D2F04' -sb '#0A9750' -sf '#FFFFFF' -fn 'monospace-12' -p 'Search:'"
 #bindsym $mod+d exec dmenu_run -nb '#0D2F04'-sb '#0ECF6E' -l 5
 
 # Shutdown
