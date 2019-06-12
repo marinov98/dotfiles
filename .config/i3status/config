@@ -1,8 +1,3 @@
-# MODIFIED github.com/rafi i3status config
-
-# i3status configuration file
-# see "man i3status" for documentation.
-
 # It is important that this file is edited as UTF-8.
 # The following line should contain a sharp s:
 # ß
@@ -10,9 +5,9 @@
 #label=VOL
 general {
 	colors = true
-	color_good = "#BBBBBB"
-	color_bad = "#CC1616"
-	color_degraded = "#55858E"
+	color_good = "#01C4FF"
+	color_degraded = "#EAB60A"
+	color_bad = "#FF0000"
 	interval = 2
 }
 
@@ -89,8 +84,6 @@ disk "/media/media" {
 }
 
 wireless wlp1s0 {
-#	format_up = "<span background='#b48ead'>  %essid </span>"
-#	format_up = "W: (%quality)"
 	format_up = "   %quality %essid" # %ip "
 	format_down = "  WiFi "
 }
