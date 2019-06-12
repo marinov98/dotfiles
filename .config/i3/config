@@ -145,9 +145,9 @@ exec_always killall feh
 exec_always --no-startup-id setxkbmap -option 'caps:ctrl_modifier'
 exec_always --no-startup-id xcape -e 'Caps_Lock=Escape'
 exec_always --no-startup-id sh .profile
-
+exec_always compton --config ~/.config/compton.conf -b
 # WALLPAPER
-exec_always --no-startup-id feh --bg-scale ~/Pictures/redgalaxy.jpg
+exec_always --no-startup-id feh --bg-scale ~/Pictures/WhiteMountain.jpg
 
 exec_always xset dpms 0 1900 2400
 exec_always echo -e 'power on\nquit' | bluetoothctl
