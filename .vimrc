@@ -175,6 +175,6 @@ command! W :w
 " Force Minimum window length
 set winwidth=110
 
-" Disable Opacity while in VIm
+" Disable Opacity while in Vim
 highlight Normal ctermbg=Black
 highlight NonText ctermbg=Black
