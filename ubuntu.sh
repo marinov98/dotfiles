@@ -19,7 +19,7 @@ echo "displays..."
 sudo apt-get install xrandr arandr
 
 echo "installing programming essentials..."
-sudo apt-get install gummi gcc clang libclang-dev lldb ctags libncurses5-dev libncursesw5-dev cmake ranger nnn clang-format python-pip 
+sudo apt-get install gummi gcc clang libclang-dev lldb ctags libncurses5-dev libncursesw5-dev cmake rangerclang-format python-pip 
 echo "python tools using pip..."
 sudo chown -R $(whoami) /usr/local/bin/
 pip install --user virtualenv texlive-full 
@@ -32,7 +32,7 @@ echo "npm installations..."
 sudo chown -R $(whoami) ~/.npm
 npm install npm@latest -g
 sudo chown -R $(whoami) /usr/local/lib/node_modules
-npm i -g tern jquery eslint @fortawesome/free-solid-svg-icons http-server sequelize-cli react react-dom create-react-app prop-types requirejs typescript@* express angular @angular/cli reactrap webpack @angular/core
+npm i -g tern jquery eslint @fortawesome/free-solid-svg-icons http-server sequelize-cli react react-dom create-react-app prop-types requirejs typescript tslint typescript@* express angular @angular/cli reactrap webpack @angular/core
 
 
 echo "emacs installation..."
