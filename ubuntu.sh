@@ -45,4 +45,4 @@ echo "Browsing and music..."
 sudo apt-get install snapd spotify chromium-browser
 
 echo "i3..."
-sudo apt-get install i3 i3status i3lock
+sudo apt-get install i3 i3status i3lock suckless-tools rofi
