@@ -31,6 +31,8 @@ Plug 'https://github.com/jnurmine/Zenburn'
 "Dracula
 Plug 'dracula/vim', { 'as': 'dracula' }
 
+Plug 'https://github.com/itchyny/vim-gitbranch'
+
 "Linter
 Plug 'w0rp/ale'
 let g:ale_sign_error = '●' " Less aggressive than the default '>>'
@@ -39,6 +41,16 @@ let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
 
 " Modeline
 Plug 'itchyny/lightline.vim'
+let g:lightline = {
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'gitbranch#name'
+      \ },
+      \ }
+
 
 " Surround
 Plug 'https://github.com/tpope/vim-surround'
@@ -175,6 +187,6 @@ command! W :w
 " Force Minimum window length
 set winwidth=110
 
-" Disable Opacity while in Vim
+" Disable Opacity while in vim
 "highlight Normal ctermbg=dark
 "highlight NonText ctermbg=dark
