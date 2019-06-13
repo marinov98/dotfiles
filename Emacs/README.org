@@ -1,2 +1,0 @@
-* Emacs Configuration
-** Both Files need to be used for the configuration to work
