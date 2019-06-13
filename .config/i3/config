@@ -124,7 +124,7 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #d
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 # LockScreen
-bindsym $mod+shift+x exec i3lock 
+bindsym $mod+shift+x exec i3lock -f -i ~/Pictures/LockGalaxy.png
 
 
 ################################
@@ -196,9 +196,9 @@ bar {
 		colors {
 			background #1A203A
 			separator  #BBBBBB
-       #                                          border        background      text
-			focused_workspace	 #00E0C2        #7B109B         #FFFFFF
-			inactive_workspace       #333333        #5F676A		#FFFFFF
+        #							 border         background      text
+			focused_workspace		 #00E0C2        #7B109B        #FFFFFF
+			inactive_workspace       #333333        #5F676A			#FFFFFF
 			urgent_workspace         #EA6213        #9E0000         #FFFFFF
 		}
 }
