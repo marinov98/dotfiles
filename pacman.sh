@@ -12,7 +12,7 @@ echo "installing neofeth..."
 sudo pacman -S neofetch
 
 echo "installing version control, debuggers and file mamagers.."
-sudo pacman -S git gdb curl ranger wireless_tools gnupg wget 
+sudo pacman -S git gdb curl ranger wireless_tools gnupg wget fzf
 
 echo "power management"
 # pamac stuff to be done when OS is installed
