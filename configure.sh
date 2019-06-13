@@ -20,6 +20,7 @@ echo "powerline-shell done"
 # FORMATTERS
 echo "Copying formatters..."
 cp .clang-format ~/
+cp .prettierrc ~/
 cp .jsbeautifyrc ~/
 echo "formatters done"
 
