@@ -14,7 +14,7 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'https://github.com/altercation/vim-colors-solarized'
 
 " Base 16
-"Plug 'chriskempson/base16-vim'
+Plug 'chriskempson/base16-vim'
 
 " JellyBeans Theme
 Plug 'https://github.com/nanotech/jellybeans.vim'
@@ -23,14 +23,13 @@ Plug 'https://github.com/nanotech/jellybeans.vim'
 Plug 'https://github.com/morhetz/gruvbox'
 
 "Cobalt2 Theme
-"Plug 'herrbischoff/cobalt2.vim' 
 Plug 'gertjanreynaert/cobalt2-vim-theme'
 
 " Zenburn Theme
 Plug 'https://github.com/jnurmine/Zenburn'
 
 "Dracula
-"Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'dracula/vim', { 'as': 'dracula' }
 
 "Linter
 Plug 'w0rp/ale'
@@ -107,6 +106,7 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 Plug 'https://github.com/pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'https://github.com/hail2u/vim-css3-syntax'
+Plug 'alvan/vim-closetag'
 " Emmet 
 Plug 'mattn/emmet-vim'
 let g:user_emmet_leader_key='<Tab>'
@@ -129,7 +129,7 @@ syntax enable
 
 " Color theme
 set background=dark
-colorscheme cobalt2
+colorscheme jellybeans
 
 " Indentation
 set tabstop=4
@@ -176,5 +176,5 @@ command! W :w
 set winwidth=110
 
 " Disable Opacity while in Vim
-highlight Normal ctermbg=Black
-highlight NonText ctermbg=Black
+"highlight Normal ctermbg=dark
+"highlight NonText ctermbg=dark
