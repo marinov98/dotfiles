@@ -643,11 +643,19 @@
 #+BEGIN_SRC emacs-lisp
 (use-package skewer-mode
     :ensure t
+    :commands skewer-mode run-skewer
     :config
     (add-hook 'js2-mode-hook 'skewer-mode)
     (add-hook 'css-mode-hook 'skewer-css-mode)
-    (add-hook 'html-mode-hook 'skewer-html-mode))
+    (add-hook 'html-mode-hook 'skewer-html-mode)
+    (skewer-setup))
+    
 #+END_SRC
+** Impatient-Mode
+   #+BEGIN_SRC emacs-lisp
+   (use-package impatient-mode
+       :ensure t)  
+   #+END_SRC
 ** Emmet 
 #+BEGIN_SRC emacs-lisp
 (use-package emmet-mode
