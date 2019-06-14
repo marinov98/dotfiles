@@ -39,8 +39,7 @@ echo "vim finished"
 
 # i3wn 
 echo "setting up i3 window manager..."
-mkdir -p ~/.config/i3
-mkdir -p ~/.config/i3status
+mkdir -p ~/.config/{i3,i3status}
 cp .config/i3/config ~/.config/i3/
 cp .config/i3status/config ~/.config/i3status/
 echo "i3 finished"
