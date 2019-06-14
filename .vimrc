@@ -42,12 +42,13 @@ let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
 " Modeline
 Plug 'itchyny/lightline.vim'
 let g:lightline = {
+	  \ 'colorscheme': 'jellybeans'	,
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'gitbranch#name'
+      \   'gitbranch': 'fugitive#head'
       \ },
       \ }
 
@@ -56,7 +57,6 @@ let g:lightline = {
 Plug 'https://github.com/tpope/vim-surround'
 
 " Prettier
-"Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
@@ -91,6 +91,9 @@ Plug 'https://github.com/scrooloose/nerdtree'
 " If you want to have nerd tree toggled always:
 "autocmd vimenter * NERDTree
 map <C-t> :NERDTreeToggle<CR>
+
+" Ranger
+Plug 'francoiscabrol/ranger.vim'
 
 " Bar Utility
 Plug 'majutsushi/tagbar'
