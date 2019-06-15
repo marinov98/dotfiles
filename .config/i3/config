@@ -142,10 +142,11 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightnes
 exec_always killall xcape
 exec_always killall compton
 exec_always killall feh
-
+# exec_always --no-startup-id setxkbmap -option "ctrl:swapcaps"
 exec_always --no-startup-id setxkbmap -option 'caps:ctrl_modifier'
-exec_always --no-startup-id xcape -e 'Caps_Lock=Escape'
-exec_always --no-startup-id sh .profile
+# exec_always --no-startup-id xcape -e 'Caps_Lock=Escape'
+exec_always --no-startup-id xcape -e '#66=Escape'
+#exec_always --no-startup-id sh .profile
 exec_always compton --config ~/.config/compton.conf -b
 # WALLPAPER
 exec_always --no-startup-id feh --bg-scale ~/Pictures/WhiteMountain.jpg
