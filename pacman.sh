@@ -6,10 +6,10 @@ echo "Updating before installing packages..."
 sudo pacman -Sy
 
 echo "installing fonts..."
-sudo pacman -S base-devel font-config ttf-hack ttf-fira-code adobe-source-code-pro-fonts ttf-inconsolata ttf-font-awesome
+sudo pacman -S base base-devel font-config ttf-hack ttf-fira-code adobe-source-code-pro-fonts ttf-inconsolata ttf-font-awesome
 
-echo "installing neofeth..."
-sudo pacman -S neofetch
+echo "installing neofeth,tmux,htop..."
+sudo pacman -S neofetch tmux htop
 
 echo "installing version control, debuggers and file mamagers.."
 sudo pacman -S git gdb curl ranger wireless_tools gnupg wget fzf
@@ -26,7 +26,7 @@ sudo pacman -S xorg-xmodmap xkeycaps interception-caps2esc xcape xorg-xprop xorg
 echo "installing tools for C++..."
 sudo pacman -S clang cmake llvm lldb ctags clang-format
 
-echo "x stuff"
+echo "x stuff..."
 sudo pacman -S xf86-input-libinput xf86-input-wacom xf86-video-fbdev xf86-video-intel xf86-video-vesa xfsprogs xorg-bdftopcf xorg-font-util xorg-fonts-encodings xorg-iceauth xorg-luit xorg-mkfontscale xorg-server xorg-sessreg
 
 echo "installing tools for Python..."
