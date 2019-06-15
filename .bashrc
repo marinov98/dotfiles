@@ -1,3 +1,5 @@
+## THIS IS MEANT FOR LINUX
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -162,6 +164,12 @@ alias cic='set completion-ignore-case On'   # cic:          Make tab-completion 
 mcd () { mkdir -p "$1" && cd "$1"; }        # mcd:          Makes new Dir and jumps inside
 trash () { command mv "$@" ~/.Trash ; }     # trash:        Moves a file to the MacOS trash
 
+#########################
+####### KEYBOARD CONFIG
+#########################
+
+# Uncomment option below for non-gnome desktop environemtns
+# setxkbmap -option "ctrl:swapcaps"
 xcape -e '#66=Escape'
 
 # function _update_ps1() {
