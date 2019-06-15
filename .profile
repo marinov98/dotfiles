@@ -1,3 +1,5 @@
+# USED FOR LINUX
+
 # ~/.profile: executed by the command interpreter for login shells.
 # This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
 # exists.
@@ -30,6 +32,13 @@ fi
 
 #feh --randomize --bg-fill ~/Pictures/redgalaxy.jpg
 
+
+#########################
+####### KEYBOARD CONFIG
+#########################
+
+# Uncomment option below for non-gnome desktop environemtns
+# setxkbmap -option "ctrl:swapcaps"
 xcape -e '#66=Escape'
 
 ## POWERLINE-SHELL
