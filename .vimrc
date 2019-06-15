@@ -102,8 +102,8 @@ Plug 'ervandew/supertab'
 " Auto Close Braces
 Plug 'https://github.com/jiangmiao/auto-pairs'
 
-" Auto-complete
-Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
+" Auto-complete SHOULD BE INSTALLED MANUALLY
+" Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
 " Make YCM not use tab so that UtilSnippets work properly
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 
