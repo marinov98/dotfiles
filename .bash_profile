@@ -7,7 +7,7 @@ parse_git_branch() {
 } 
  
 PS1="\[$(tput bold)\]\n";
-PS1+="\[$(tput setaf 39)\]Marinov ";        # blue  user
+PS1+="\[$(tput setaf 39)\]$(whoami) ";        # blue  user
 PS1+="\[$(tput setaf 148)\]at: "
 PS1+="\[$(tput setaf 196)\]\W";   # red directories
 PS1+="\[$(tput setaf 162)\]\$(parse_git_branch) >> "; #github integration
