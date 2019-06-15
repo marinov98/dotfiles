@@ -1,5 +1,3 @@
-# USED FOR LINUX
-
 # ~/.profile: executed by the command interpreter for login shells.
 # This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
 # exists.
@@ -32,23 +30,23 @@ fi
 
 #feh --randomize --bg-fill ~/Pictures/redgalaxy.jpg
 
+################################
+##### KEYBOARD MODIFICATIONS
+################################
 
-#########################
-####### KEYBOARD CONFIG
-#########################
+# The commands below make caps lock act as both esc and ctrl
+# they also make the old ctrl caps lock I swap instead of 
+# completly eliminating caps lock because sometimes it would
+# turn on and there would be no way to turn it back on
+# If you ARE RUNNING i3wn these lines should not need to be uncommented 
+# if you are encountering a problem where caps lock turns on and there is no way to turn it back on then uncomment the first line
+# if you are running a GNOME desktop environment and NOT i3wn then only the second line needs to be uncommented
+# Any other desktop environment without i3 would require both lines to be uncommented
 
-# Uncomment option below for non-gnome desktop environemtns
 # setxkbmap -option "ctrl:swapcaps"
-xcape -e '#66=Escape'
 
-## POWERLINE-SHELL
-# function _update_ps1() {
-#     PS1=$(powerline-shell $?)
-# }
-
-# if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
-#     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
-# fi
+# xcape -e '#66=Escape'
 
 
-neofetch
+
+
