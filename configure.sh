@@ -50,4 +50,11 @@ echo "Config transfer complete"
 # sudo mkdir -p /etc/X11
 # cd dotfiles/
 # sudo cp /etc/X11/xorg.conf /etc/X11/
-# echo "xorg finished"
+# echo "xocrg finished"
+
+echo "checking if system is Linux..."
+echo "small change will occur if it is"
+if [[ $(uname -s) == Linux ]]
+then
+    sudo rm ~/.bash_profile
+fi
