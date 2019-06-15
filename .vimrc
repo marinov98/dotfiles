@@ -103,7 +103,7 @@ Plug 'ervandew/supertab'
 Plug 'https://github.com/jiangmiao/auto-pairs'
 
 " Auto-complete SHOULD BE INSTALLED MANUALLY
-" Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
+Plug 'Valloric/YouCompleteMe'
 " Make YCM not use tab so that UtilSnippets work properly
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 
