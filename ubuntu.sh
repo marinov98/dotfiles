@@ -19,7 +19,7 @@ echo "displays..."
 sudo apt install xrandr arandr
 
 echo "installing programming essentials..."
-sudo apt install gummi gcc clang libclang-dev lldb ctags libncurses5-dev libncursesw5-dev cmake rangerclang-format python-pip 
+sudo apt install gummi gcc build-essential clang libclang-dev lldb ctags libncurses5-dev libncursesw5-dev cmake rangerclang-format python-pip 
 echo "python tools using pip..."
 sudo chown -R $(whoami) /usr/local/bin/
 pip install --user virtualenv texlive-full 
@@ -36,6 +36,10 @@ npm i -g core-js express-generator tern pg jquery @fortawesome/free-solid-svg-ic
 
 echo "emacs installation..."
 sudo apt install emacs26 auctex
+
+echo "vim installation..."
+sudo apt install vim vim-addon-manager
+vim-addon-manager install youcompleteme
 
 echo "battery management..."
 sudo apt install tlp && sudo apt install tlpui
