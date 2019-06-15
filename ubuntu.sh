@@ -41,7 +41,7 @@ echo "battery management..."
 sudo apt install tlp && sudo apt install tlpui
 
 echo "Browsing and music..."
-sudo apt install snapd snapd-xdg-open 
+sudo apt install snapd snapd-xdg-open yarn
 sudo snap install spotify postman
 
 echo "i3..."
