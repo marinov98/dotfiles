@@ -5,8 +5,8 @@
 echo "updating..."
 sudo apt update
 
-echo "installing necessities (curl,git,gdb,net-tools,feh,compton,trash-cli)"
-sudo apt install curl git gdb net-tools neofetch feh compton trash-cli chromium-browser
+echo "installing necessities..."
+sudo apt install curl git gdb net-tools neofetch feh compton trash-cli chromium-browser htop tmux
 curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 
 echo "keyboard configurations..."
