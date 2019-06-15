@@ -86,7 +86,7 @@ disk "/media/media" {
 
 wireless wlp1s0 {
 	format_up = "   %quality %essid" # %ip "
-	format_down = "  WiFi "
+	format_down = "No WiFi Connected "
 }
 
 ethernet enp1s0 {
@@ -110,7 +110,7 @@ run_watch VPN {
 tztime local {
 #	format = " %h-%d %H:%M ☰ "
 	# termsyn font
-	format = "%h-%d-%Y %H:%M:%S"	
+	format = "📅 %h-%d-%Y  | ⏰ %H:%M:%S "	
 
 	#format = " %h-%d É %H:%M  ¸ ÈÈÈ È "
 }
