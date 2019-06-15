@@ -48,7 +48,7 @@ let g:lightline = {
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'fugitive#head'
+      \   'gitbranch': 'gitbranch#name'
       \ },
       \ }
 
@@ -190,6 +190,12 @@ command! W :w
 " Force Minimum window length
 set winwidth=110
 
+" Always show statusline
+set laststatus=2
+
+" no need to show extra modes
+set noshowmode
+
 " Disable Opacity while in vim
-"highlight Normal ctermbg=dark
-"highlight NonText ctermbg=dark
+"highlight Normal ctermbg=Black
+"highlight NonText ctermbg=Black
