@@ -19,7 +19,6 @@ echo "power management"
 sudo pacman -Syu pamac-gtk 
 pamac install tlp tlpui
 
-
 echo "installing keyboard configuration tools..."
 sudo pacman -S xorg-xmodmap xkeycaps interception-caps2esc xcape xorg-xprop xorg-xrandr arandr xorg-xrefresh
 
