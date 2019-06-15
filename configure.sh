@@ -11,12 +11,6 @@ echo "Copying bash profiles..."
 \cp .bash_profile ~/
 echo "bash done"
 
-# powerline-shell
-echo "setting up powerline-shell"
-mkdir -p ~/.config/powerline-shell 
-cp .config/powerline-shell/config.json ~/.config/powerline-shell/
-echo "powerline-shell done"
-
 # FORMATTERS
 echo "Copying formatters..."
 cp .clang-format ~/
@@ -38,15 +32,17 @@ cp .vim/.ycm_extra_conf.py ~/.vim/
 echo "vim finished"
 
 # i3wn 
-echo "setting up i3 window manager..."
-mkdir -p ~/.config/{i3,i3status}
+echo "setting up i3 window manager,powerline-shell,and ranger ..."
+mkdir -p ~/.config/{i3,i3status,powerline-shell,ranger}
 cp .config/i3/config ~/.config/i3/
 cp .config/i3status/config ~/.config/i3status/
-echo "i3 finished"
+cp .config/powerline-shell/config.json ~/.config/powerline-shell/
+cp .config/ranger/rc.conf ~/.config/ranger/
+echo "finished"
 
 echo "setting up compton..."
 cp .config/compton.conf  ~/.config/
-echo "Transfer complete"
+echo "Config transfer complete"
 
 # XORG
 # echo "creating xorg configuration..."
