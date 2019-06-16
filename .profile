@@ -40,7 +40,8 @@ fi
 # turn on and there would be no way to turn it back on
 # If you ARE RUNNING i3wn these lines should not need to be uncommented 
 # if you are encountering a problem where caps lock turns on and there is no way to turn it back on then uncomment the first line
-# if you are running a GNOME desktop environment and NOT i3wn then only the second line needs to be uncommented
+# if you are running a GNOME desktop environment and NOT i3wn then only the second line needs to be uncommented since 
+# you can get caps to act like control using gnome-tweak-tool
 # Any other desktop environment without i3 would require both lines to be uncommented
 
 # setxkbmap -option "ctrl:swapcaps"
