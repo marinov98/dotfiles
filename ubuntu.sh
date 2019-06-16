@@ -6,7 +6,7 @@ echo "updating..."
 sudo apt update
 
 echo "installing necessities..."
-sudo apt install curl git gdb net-tools neofetch feh compton trash-cli chromium-browser htop tmux
+sudo apt install curl git gdb net-tools neofetch feh compton trash-cli chromium-browser htop tmux texlive-full
 curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 
 echo "keyboard configurations..."
@@ -20,10 +20,6 @@ sudo apt install xrandr arandr
 
 echo "installing programming essentials..."
 sudo apt install gummi gcc build-essential clang libclang-dev lldb ctags libncurses5-dev libncursesw5-dev cmake rangerclang-format python-pip 
-echo "python tools using pip..."
-sudo chown -R $(whoami) /usr/local/bin/
-pip install --user virtualenv texlive-full 
-pip install --user rope jedi flake8 autopep8 yapf pygments virtualenvwrapper powerline-shell
 
 echo "javascript..."
 sudo apt install nodejs npm 
