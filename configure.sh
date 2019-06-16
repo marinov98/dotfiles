@@ -60,3 +60,9 @@ echo "Config transfer complete"
 # cd dotfiles/
 # sudo cp /etc/X11/xorg.conf /etc/X11/
 # echo "xocrg finished"
+
+echo "Files copied, now installing packages with pip and npm"
+
+echo "python tools using pip..."
+sudo chown -R $(whoami) /usr/local/bin/
+pip install --user rope jedi flake8 autopep8 yapf pygments virtualenv virtualenvwrapper powerline-shell
