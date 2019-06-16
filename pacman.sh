@@ -6,7 +6,7 @@ echo "Updating before installing packages..."
 sudo pacman -Sy
 
 echo "installing fonts..."
-sudo pacman -S base base-devel font-config ttf-hack ttf-fira-code adobe-source-code-pro-fonts ttf-inconsolata ttf-font-awesome
+sudo pacman -S base base-devel font-config aspell ttf-hack ttf-fira-code adobe-source-code-pro-fonts ttf-inconsolata ttf-font-awesome
 
 echo "installing neofeth,tmux,htop..."
 sudo pacman -S neofetch tmux htop
@@ -26,7 +26,7 @@ echo "installing tools for C++..."
 sudo pacman -S clang cmake llvm lldb ctags clang-format
 
 echo "x stuff..."
-sudo pacman -S xf86-input-libinput xf86-input-wacom xf86-video-fbdev xf86-video-intel xf86-video-vesa xfsprogs xorg-bdftopcf xorg-font-util xorg-fonts-encodings xorg-iceauth xorg-luit xorg-mkfontscale xorg-server xorg-sessreg
+sudo pacman -S xf86-input-libinput xbacklight xf86-input-wacom xf86-video-fbdev xf86-video-intel xf86-video-vesa xfsprogs xorg-bdftopcf xorg-font-util xorg-fonts-encodings xorg-iceauth xorg-luit xorg-mkfontscale xorg-server xorg-sessreg
 
 echo "installing tools for Python..."
 sudo pacman -S python3 python-pip pyenv
@@ -35,7 +35,7 @@ echo "installing tools for Javascript..."
 sudo pacman -S nodejs npm postgresql
 
 echo "installing browser and video players..."
-sudo pacman -S google-chrome chrome-widevine pepper-flash vlc
+sudo pacman -S google-chrome chrome-widevine pepper-flash vlc 
 
 echo "installing emacs, vim, and cask"
 sudo pacman -S yarn emacs auctex vim
