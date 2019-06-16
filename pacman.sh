@@ -30,17 +30,9 @@ sudo pacman -S xf86-input-libinput xf86-input-wacom xf86-video-fbdev xf86-video-
 
 echo "installing tools for Python..."
 sudo pacman -S python3 python-pip pyenv
-sudo chown -R $(whoami) /usr/local/bin/
-echo "installing python tools using pip..."
-pip install --user rope jedi flake8 autopep8 yapf pygments virtualenv virtualenvwrapper powerline-shell
 
 echo "installing tools for Javascript..."
 sudo pacman -S nodejs npm postgresql
-sudo chown -R $(whoami) ~/.npm
-echo "installing tools for Javascript using npm..."
-npm install npm@latest -g
-sudo chown -R $(whoami) /usr/local/lib/node_modules
-npm i -g core-js express-generator tern pg jquery @fortawesome/free-solid-svg-icons sequelize-cli eslint heroku angular @angular/cli http-server react react-dom create-react-app prop-types express @angular/core typescript tslint requirejs reactstrap webpack
 
 echo "installing browser and video players..."
 sudo pacman -S google-chrome chrome-widevine pepper-flash vlc
