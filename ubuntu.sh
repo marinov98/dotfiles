@@ -50,3 +50,7 @@ sudo snap install spotify postman
 
 echo "i3..."
 sudo apt install i3 i3status i3lock suckless-tools rofi
+
+echo "Package install complete, transfering appropriate files now"
+sudo chmod +x configure.sh
+./configure.sh
