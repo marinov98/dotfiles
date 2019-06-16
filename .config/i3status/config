@@ -110,7 +110,7 @@ run_watch VPN {
 tztime local {
 #	format = " %h-%d %H:%M ☰ "
 	# termsyn font
-	format = "📅 %h-%d-%Y  | ⏰ %H:%M:%S "	
+	format = "📅 %h-%d-%Y  | ⏰ %H:%M:%S"	
 
 	#format = " %h-%d É %H:%M  ¸ ÈÈÈ È "
 }
