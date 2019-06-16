@@ -5,10 +5,18 @@
 ## IMPORTANT ensure appropriate packages are installed for terminal : neofetch, powerline shell, xcape before using script!
 
 # BASH profiles
-echo "Copying bash profiles..."
-\cp .bashrc ~/
-\cp .profile ~/
-\cp .bash_profile ~/
+echo "Resolving bash configs..."
+echo "Certain bash configurations will be copied based on the system"
+if [[ $(uname -s) == Linux ]]
+then
+    echo "machine found to be linux"
+    \cp .bashrc ~/
+    \cp .profile ~/
+    
+else
+    echo "Machine found to not be linux "
+    \cp .bash_profile ~/
+fi
 echo "bash done"
 
 # FORMATTERS
@@ -52,10 +60,3 @@ echo "Config transfer complete"
 # cd dotfiles/
 # sudo cp /etc/X11/xorg.conf /etc/X11/
 # echo "xocrg finished"
-
-echo "checking if system is Linux..."
-echo "small change will occur if it is"
-if [[ $(uname -s) == Linux ]]
-then
-    sudo rm ~/.bash_profile
-fi
