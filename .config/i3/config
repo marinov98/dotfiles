@@ -20,14 +20,18 @@ bindsym $mod+Shift+q kill
 
 
 ################################
-##### DMENU/ROFI
+##### ROFI/DMENU
 ################################
-bindsym $mod+d exec rofi -show run -lines 4 -display-run "exec " -padding 400 -opacity "85" -bg "#0D2F04" -fg "#0A9750"  -font "Hack 14" -theme Arc 
 
-#bindsym $mod+d exec rofi -show run -lines 4 -display-run "Find:" -theme Arc # bg '#0D2F04' -fg '#0A9750' 
+###### ROFI
+
+bindsym $mod+d exec rofi -show run -lines 4 -display-run "exec " -padding 400 -opacity "85" -bg "#0D2F04" -fg "#0A9750"  -font "Hack 14" -theme Arc 
+# bindsym $mod+d exec rofi -show run -lines 4 -display-run "Find:" -theme Arc # bg '#0D2F04' -fg '#0A9750'
+
 ###### DMENU 
-#bindsym $mod+d exec "dmenu_run -l 5 -nf '#BBBBBB' -nb '#0D2F04' -sb '#0A9750' -sf '#FFFFFF' -fn 'monospace-12' -p 'Search:'"
-#bindsym $mod+d exec dmenu_run -nb '#0D2F04'-sb '#0ECF6E' -l 5
+
+# bindsym $mod+d exec "dmenu_run -l 5 -nf '#BBBBBB' -nb '#0D2F04' -sb '#0A9750' -sf '#FFFFFF' -fn 'monospace-12' -p 'Search:'"
+# bindsym $mod+d exec dmenu_run -nb '#0D2F04'-sb '#0ECF6E' -l 5
 
 
 # change focus
@@ -172,10 +176,12 @@ exec_always killall compton
 exec_always killall feh
 
 # exec_always --no-startup-id setxkbmap -option "ctrl:swapcaps"
+# exec_always --no-startup-id xcape -e 'Caps_Lock=Escape'
+# exec_always --no-startup-id sh .profile
+
+# Makes CAPS LOCK act as both CTRL and ESC
 exec_always --no-startup-id setxkbmap -option 'caps:ctrl_modifier'
-#exec_always --no-startup-id xcape -e 'Caps_Lock=Escape'
 exec_always --no-startup-id xcape -e '#66=Escape'
-#exec_always --no-startup-id sh .profile
 
 ###############################
 ##### WALLPAPER AND OPACITY
@@ -236,9 +242,9 @@ bar {
 		colors {
 			background #1A203A
 			separator  #BBBBBB
-        #							 border         background      text
-			focused_workspace		 #00E0C2        #7B109B        #FFFFFF
-			inactive_workspace       #333333        #5F676A			#FFFFFF
+        #					 border         background      text
+			focused_workspace	 #00E0C2        #7B109B         #FFFFFF
+			inactive_workspace       #333333        #5F676A		#FFFFFF
 			urgent_workspace         #EA6213        #9E0000         #FFFFFF
 		}
 }
@@ -269,7 +275,7 @@ mode "gaps" {
 bindsym $mod+g mode "gaps"
 
 ################################
-##### DISPLAY MONITOR
+##### EXTRERNAL MONITOR(S)
 ################################
 
 set $displayMode "Set displamode [l]aptop  [h]DP2 [w]DP1"
