@@ -12,5 +12,5 @@ my **Vim**  guide : https://github.com/marinov98/My-Vim
   - [ubuntu.sh](https://github.com/marinov98/dotfiles/blob/master/ubuntu.sh)
 ## Shell script for Mac users:
   - [brew.sh](https://github.com/marinov98/dotfiles/blob/master/brew.sh)
-## NOTE: both shell scripts for ubuntu and arch run configure.sh 
+## NOTE: all shell scripts run configure.sh 
 
