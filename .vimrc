@@ -7,8 +7,10 @@ endif
 "Vim plug
 call plug#begin('~/.vim/plugged')
 
-"snippets and utensils
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+
+""""""""""""""""""""""
+""""""" THEMES
+""""""""""""""""""""""
 
 " Solarized Theme
 Plug 'https://github.com/altercation/vim-colors-solarized'
@@ -31,13 +33,78 @@ Plug 'https://github.com/jnurmine/Zenburn'
 "Dracula
 Plug 'dracula/vim', { 'as': 'dracula' }
 
-Plug 'https://github.com/itchyny/vim-gitbranch'
+
+""""""""""""""""""""""
+""""""" File Managment
+""""""""""""""""""""""
+
+" Fizzy file find
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+" Ranger
+Plug 'francoiscabrol/ranger.vim'
+
+""""""""""""""""""""""
+""""""" CODING
+""""""""""""""""""""""
+
+"snippets and utensils
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 "Linter
 Plug 'w0rp/ale'
+
 let g:ale_sign_error = '●' " Less aggressive than the default '>>'
 let g:ale_sign_warning = '.'
 let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
+
+" Prettier
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+
+let g:prettier#exec_cmd_path = "~/.prettierrc"
+" No need for @format
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
+
+" Clang-Format
+Plug 'https://github.com/rhysd/vim-clang-format'
+" Auto format on save C C++ and objective-C files
+autocmd FileType c,cpp,objc ClangFormatAutoEnable
+
+" Nerd Tree
+Plug 'https://github.com/scrooloose/nerdtree'
+" If you want to have nerd tree toggled always:
+"autocmd vimenter * NERDTree
+map <C-t> :NERDTreeToggle<CR>
+
+" Auto Close Braces
+Plug 'https://github.com/jiangmiao/auto-pairs'
+
+" Bar Utility
+Plug 'majutsushi/tagbar'
+Plug 'ervandew/supertab'
+
+" Auto-complete
+Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
+
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+""""""""""""""""""""""
+""""""" MODELINE
+""""""""""""""""""""""
 
 " Modeline
 Plug 'itchyny/lightline.vim'
@@ -52,23 +119,16 @@ let g:lightline = {
       \ },
       \ }
 
-
-" Surround
-Plug 'https://github.com/tpope/vim-surround'
-
-" Prettier
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
-
-" CSS - Color
-Plug 'https://github.com/skammer/vim-css-color'
-let g:cssColorVimDoNotMessMyUpdatetime = 1
-
+""""""""""""""""""""""
+""""""" VIM UTILITY
+""""""""""""""""""""""
 " Vim-repeat
 Plug 'https://github.com/tpope/vim-repeat'
 
-" Multiple Cursor 
+" Vim-Surround
+Plug 'https://github.com/tpope/vim-surround'
+
+" Vim-Multiple Cursor 
 Plug 'terryma/vim-multiple-cursors'
 
 let g:multi_cursor_use_default_mapping=0
@@ -82,46 +142,21 @@ let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
 
-" Fizzy file find
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+	
+""""""""""""""""""""""
+""""""" WEB-DEV
+""""""""""""""""""""""
 
-" Nerd Tree
-Plug 'https://github.com/scrooloose/nerdtree'
-" If you want to have nerd tree toggled always:
-"autocmd vimenter * NERDTree
-map <C-t> :NERDTreeToggle<CR>
+" CSS - Color
+Plug 'https://github.com/skammer/vim-css-color'
+let g:cssColorVimDoNotMessMyUpdatetime = 1
 
-" Ranger
-Plug 'francoiscabrol/ranger.vim'
 
-" Bar Utility
-Plug 'majutsushi/tagbar'
-Plug 'ervandew/supertab'
-
-" Auto Close Braces
-Plug 'https://github.com/jiangmiao/auto-pairs'
-
-" Auto-complete SHOULD BE INSTALLED MANUALLY
-Plug 'Valloric/YouCompleteMe'
-" Make YCM not use tab so that UtilSnippets work properly
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-
-" better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-
-"Web-dev
 Plug 'https://github.com/pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'https://github.com/hail2u/vim-css3-syntax'
 Plug 'alvan/vim-closetag'
+
 " Emmet 
 Plug 'mattn/emmet-vim'
 let g:user_emmet_leader_key='<Tab>'
@@ -131,11 +166,14 @@ let g:user_emmet_settings = {
     \  },
   \}
 
-
-
-"Github integration
+""""""""""""""""""""""
+""""""" GITHUB
+""""""""""""""""""""""
+" magit
 Plug 'jreybert/vimagit'
 Plug 'airblade/vim-gitgutter'
+" Git Branch
+Plug 'https://github.com/itchyny/vim-gitbranch'
 
 call plug#end()
  
