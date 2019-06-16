@@ -54,3 +54,7 @@ sudo pacman -S feh compton i3-gaps i3status i3lock dmenu rofi trash-cli
 
 echo "Latex setup"
 sudo pacman -S texlive-core texline-bin biber texlive-fontsextra texlive-bibtexextra texlive-formatsextra texlive-science
+
+echo "Package install complete, transfering appropriate files now"
+sudo chmod +x configure.sh
+./configure.sh
