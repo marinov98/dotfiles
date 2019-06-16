@@ -12,11 +12,12 @@ echo "Copying bash profiles..."
 echo "bash done"
 
 # FORMATTERS
-echo "Copying formatters..."
+echo "Copying formatters & tmux..."
 cp .clang-format ~/
 cp .prettierrc ~/
 cp .jsbeautifyrc ~/
-echo "formatters done"
+cp .tmux.conf ~/
+echo "formatters & tmux done"
 
 # EMACS
 echo "setting up emacs..."
