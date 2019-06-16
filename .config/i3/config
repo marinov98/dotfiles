@@ -26,7 +26,7 @@ bindsym $mod+Shift+q kill
 ###### ROFI
 
 bindsym $mod+d exec rofi -show run -lines 4 -display-run "exec " -padding 400 -opacity "85" -bg "#0D2F04" -fg "#0A9750"  -font "Hack 14" -theme Arc 
-# bindsym $mod+d exec rofi -show run -lines 4 -display-run "Find:" -theme Arc # bg '#0D2F04' -fg '#0A9750'
+# bindsym $mod+d exec rofi -show run -lines 4 -display-run "Find:" -theme Arc # bg '#0D2F04' -fg '#0A9750' 
 
 ###### DMENU 
 
