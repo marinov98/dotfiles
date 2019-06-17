@@ -13,6 +13,7 @@ brew install curl cask ranger tmux
 echo "installing programming essentials..."
 brew install --with-toolchain llvm
 brew install pip clang-format gcc ctags aspell cmake node npm gdb karabiner karabiner-elements pyenv pyenv-virtualenv pyenv-virtualenvwrapper
+
 echo "installing latex packages"
 brew install tap
 breww tap caskroom/cask
