@@ -1,5 +1,8 @@
 ## THIS IS MEANT FOR MAC 
 
+###################################
+####### PS1   
+###################################
 
 ## Git integration
 parse_git_branch() {
@@ -15,9 +18,9 @@ PS1+="\[$(tput sgr0)\]";
 export PS1;
 
 
-#   -----------------------------
-#   2. MAKE TERMINAL BETTER
-#   -----------------------------
+###################################
+####### Aliases   
+###################################
 
 alias ls='ls -GFh'
 alias ls='ls -G'
@@ -39,11 +42,7 @@ alias .6='cd ../../../../../../'            # Go back 6 directory levels
 alias v='vim'                               # v:            Opens any file in vim editor
 alias rr='ranger'                           # ra:           Opens ranger
 alias t='tmux'                              # t:            Opens tmux
-
-alias get='sudo apt install'                # get:          UBUNTU: installs a specified package
-alias rem='sudo apt remove'                 # rem:          UBUNTU: removes specified package        
-alias purge='sudo apt purge'                # purge:        UBUNTU: purges specified package
-alias p='sudo pacman'                       # p:            ARCH installed a specified package
+alias ts='tmux attach'                      # ts:           Tmux attaches to specified session
 
 alias f='open -a Finder ./'                 # f:            Opens current directory in MacOS Finder
 alias ~="cd ~"                              # ~:            Go Home
@@ -57,11 +56,15 @@ alias cic='set completion-ignore-case On'   # cic:          Make tab-completion 
 mcd () { mkdir -p "$1" && cd "$1"; }        # mcd:          Makes new Dir and jumps inside
 trash () { command mv "$@" ~/.Trash ; }     # trash:        Moves a file to the MacOS trash
 
+
 #### History Size
 export HISTSIZE=10000
 export HISTFILESIZE=120000
 
-# Powerline
+###################################
+####### Powerline-Shell PS1   
+###################################
+
 # function _update_ps1() {
 #     PS1=$(powerline-shell $?)
 # }
