@@ -119,9 +119,9 @@ fi
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 
-#   -----------------------------
-#   2. MAKE TERMINAL BETTER
-#   -----------------------------
+###################################
+####### Aliases   
+###################################
 
 alias ls='ls -GFh'
 alias ls='ls -G'
@@ -143,6 +143,7 @@ alias .6='cd ../../../../../../'            # Go back 6 directory levels
 alias v='vim'                               # v:            Opens any file in vim editor
 alias rr='ranger'                           # ra:           Opens ranger
 alias t='tmux'                              # t:            Opens tmux
+alias ts='tmux attach'                      # ts:           Tmux attaches to specified session
 
 alias get='sudo apt install'                # get:          UBUNTU: installs specified package(s)
 alias rem='sudo apt remove'                 # rem:          UBUNTU: removes specified package(s)        
@@ -164,12 +165,12 @@ trash () { command mv "$@" ~/.Trash ; }     # trash:        Moves a file to the 
 
 
 ###################################
-####### POWERLINE-SHELL && PS1
+####### PS1
 ###################################
 
-# Git integration
+Git integration
 parse_git_branch() {
-     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1]/'
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1]/'
 }
 
 PS1="\[$(tput bold)\]\n";
@@ -179,6 +180,10 @@ PS1+="\[$(tput setaf 196)\]\W";   # red directories
 PS1+="\[$(tput setaf 162)\]\$(parse_git_branch) >> "; #github integration
 PS1+="\[$(tput sgr0)\]";
 export PS1;
+
+###################################
+####### POWERLINE SHELL PS1
+###################################
 
 # function _update_ps1() {
 #     PS1=$(powerline-shell $?)
