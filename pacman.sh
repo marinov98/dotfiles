@@ -38,7 +38,7 @@ echo "installing browser and video players..."
 sudo pacman -S google-chrome chrome-widevine pepper-flash vlc blueman
 
 echo "installing emacs, vim, and cask"
-sudo pacman -S yarn emacs auctex vim
+sudo pacman -S yarn emacs auctex gvim
 curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 
 echo "preparation for i3 configuring..."
