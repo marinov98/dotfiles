@@ -141,7 +141,7 @@ alias .5='cd ../../../../../'               # Go back 5 directory levels
 alias .6='cd ../../../../../../'            # Go back 6 directory levels
 
 alias v='vim'                               # v:            Opens any file in vim editor
-alias ra='ranger'                           # ra:           Opens ranger
+alias rr='ranger'                           # ra:           Opens ranger
 alias t='tmux'                              # t:            Opens tmux
 
 alias get='sudo apt install'                # get:          UBUNTU: installs a specified package
