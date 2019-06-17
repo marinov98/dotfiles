@@ -29,7 +29,7 @@ echo "emacs installation..."
 sudo apt install emacs26 auctex
 
 echo "vim installation..."
-sudo apt install vim vim-addon-manager
+sudo apt install vim vim-gtk vim-addon-manager
 vim-addon-manager install youcompleteme
 
 echo "battery management..."
