@@ -8,7 +8,7 @@ sudo pacman -Sy
 echo "installing fonts..."
 sudo pacman -S base base-devel font-config aspell ttf-hack ttf-fira-code adobe-source-code-pro-fonts ttf-inconsolata ttf-font-awesome
 
-echo "installing neofeth,tmux,htop..."
+echo "installing neofetch,tmux,htop..."
 sudo pacman -S neofetch tmux htop
 
 echo "installing version control, debuggers and file mamagers.."
