@@ -68,7 +68,15 @@ sudo chown -R $(whoami) /usr/local/bin/
 pip install --user rope jedi flake8 autopep8 yapf pygments virtualenv virtualenvwrapper powerline-shell
 
 echo "npm installations..."
+
 sudo chown -R $(whoami) ~/.npm
-npm install npm@latest -g
+sudo chown -R $(whoami) -R /user/lib/node_modules
 sudo chown -R $(whoami) /usr/local/lib/node_modules
+
+npm install npm@latest -g
+
+sudo chown -R $(whoami) ~/.npm
+sudo chown -R $(whoami) -R /user/lib/node_modules
+sudo chown -R $(whoami) /usr/local/lib/node_modules
+
 npm i -g core-js express-generator tern pg jquery prettier @fortawesome/free-solid-svg-icons sequelize-cli eslint heroku angular @angular/cli http-server react react-dom create-react-app prop-types express @angular/core typescript tslint requirejs reactstrap webpack
