@@ -28,7 +28,11 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-#feh --randomize --bg-fill ~/Pictures/redgalaxy.jpg
+
+# fix npm sudo problem
+
+npm config set prefix ~/.npm  
+export PATH=$HOME/.npm/bin:$PATH  
 
 ################################
 ##### KEYBOARD MODIFICATIONS
