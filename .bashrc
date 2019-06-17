@@ -144,10 +144,10 @@ alias v='vim'                               # v:            Opens any file in vi
 alias rr='ranger'                           # ra:           Opens ranger
 alias t='tmux'                              # t:            Opens tmux
 
-alias get='sudo apt install'                # get:          UBUNTU: installs a specified package
-alias rem='sudo apt remove'                 # rem:          UBUNTU: removes specified package        
-alias purge='sudo apt purge'                # purge:        UBUNTU: purges specified package
-alias p='sudo pacman'                       # p:            ARCH installed a specified package
+alias get='sudo apt install'                # get:          UBUNTU: installs the specified package(s)
+alias rem='sudo apt remove'                 # rem:          UBUNTU: removes specified package(s)        
+alias purge='sudo apt purge'                # purge:        UBUNTU: purges specified package(s)
+alias p='sudo pacman'                       # p:            ARCH installs a specified package(s)
 
 alias f='open -a Finder ./'                 # f:            Opens current directory in MacOS Finder
 alias ~="cd ~"                              # ~:            Go Home
