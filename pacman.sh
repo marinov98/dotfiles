@@ -35,7 +35,7 @@ echo "installing tools for Javascript..."
 sudo pacman -S nodejs npm postgresql
 
 echo "installing browser and video players..."
-sudo pacman -S google-chrome chrome-widevine pepper-flash vlc 
+sudo pacman -S google-chrome chrome-widevine pepper-flash vlc blueman
 
 echo "installing emacs, vim, and cask"
 sudo pacman -S yarn emacs auctex vim
