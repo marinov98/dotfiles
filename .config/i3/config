@@ -279,7 +279,7 @@ mode "gaps" {
 bindsym $mod+g mode "gaps"
 
 ################################
-##### EXTRERNAL MONITOR(S)
+##### EXTERNAL MONITOR(S)
 ################################
 
 set $displayMode "Set displamode [l]aptop  [h]DP2 [w]DP1"
