@@ -19,7 +19,7 @@ echo "displays..."
 sudo apt install xrandr arandr
 
 echo "installing programming essentials..."
-sudo apt install gummi gcc build-essential clang libclang-dev lldb ctags libncurses5-dev libncursesw5-dev cmake rangerclang-format python-pip 
+sudo apt install gummi gcc build-essential clang libclang-dev lldb ctags libncurses5-dev libncursesw5-dev cmake ranger clang-format python-pip 
 
 echo "javascript..."
 sudo apt install nodejs npm 
