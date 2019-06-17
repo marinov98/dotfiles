@@ -7,7 +7,6 @@ endif
 "Vim plug
 call plug#begin('~/.vim/plugged')
 
-
 """"""""""""""""""""""
 """"""" THEMES
 """"""""""""""""""""""
@@ -32,7 +31,6 @@ Plug 'https://github.com/jnurmine/Zenburn'
 
 "Dracula
 Plug 'dracula/vim', { 'as': 'dracula' }
-
 
 """"""""""""""""""""""
 """"""" File Managment
@@ -102,6 +100,7 @@ let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
+
 """"""""""""""""""""""
 """"""" MODELINE
 """"""""""""""""""""""
@@ -122,6 +121,7 @@ let g:lightline = {
 """"""""""""""""""""""
 """"""" VIM UTILITY
 """"""""""""""""""""""
+
 " Vim-repeat
 Plug 'https://github.com/tpope/vim-repeat'
 
@@ -169,6 +169,7 @@ let g:user_emmet_settings = {
 """"""""""""""""""""""
 """"""" GITHUB
 """"""""""""""""""""""
+
 " magit
 Plug 'jreybert/vimagit'
 Plug 'airblade/vim-gitgutter'
@@ -237,3 +238,7 @@ set noshowmode
 " Disable Opacity while in vim
 "highlight Normal ctermbg=Black
 "highlight NonText ctermbg=Black
+"let g:solarized_termtrans=0
+
+ " tmux fix
+ set t_Co=256
