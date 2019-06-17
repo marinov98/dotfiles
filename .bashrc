@@ -168,24 +168,24 @@ trash () { command mv "$@" ~/.Trash ; }     # trash:        Moves a file to the 
 ###################################
 
 # Git integration
-#parse_git_branch() {
-#     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1]/'
-#}
-
-#PS1="\[$(tput bold)\]\n";
-#PS1+="\[$(tput setaf 39)\]Marinov ";        # blue  user
-#PS1+="\[$(tput setaf 148)\]at: "
-#PS1+="\[$(tput setaf 196)\]\W";   # red directories
-#PS1+="\[$(tput setaf 162)\]\$(parse_git_branch) >> "; #github integration
-#PS1+="\[$(tput sgr0)\]";
-#export PS1;
-
-function _update_ps1() {
-    PS1=$(powerline-shell $?)
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1]/'
 }
 
-if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
-    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
-fi
+PS1="\[$(tput bold)\]\n";
+PS1+="\[$(tput setaf 39)\]$(whoami) ";        # blue  user
+PS1+="\[$(tput setaf 148)\]at: "
+PS1+="\[$(tput setaf 196)\]\W";   # red directories
+PS1+="\[$(tput setaf 162)\]\$(parse_git_branch) >> "; #github integration
+PS1+="\[$(tput sgr0)\]";
+export PS1;
+
+# function _update_ps1() {
+#     PS1=$(powerline-shell $?)
+# }
+
+# if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
+#     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+# fi
 
 neofetch
