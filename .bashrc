@@ -148,7 +148,7 @@ alias ts='tmux attach'                      # ts:           Tmux attaches to spe
 alias get='sudo apt install'                # get:          UBUNTU: installs specified package(s)
 alias rem='sudo apt remove'                 # rem:          UBUNTU: removes specified package(s)        
 alias purge='sudo apt purge'                # purge:        UBUNTU: purges specified package(s)
-alias p='sudo pacman'                       # p:            ARCH: installs specified package(s)
+alias p='sudo pacman'                       # p:            ARCH: shorter install/update/remove command
 
 alias f='open -a Finder ./'                 # f:            Opens current directory in MacOS Finder
 alias ~="cd ~"                              # ~:            Go Home
@@ -168,29 +168,29 @@ trash () { command mv "$@" ~/.Trash ; }     # trash:        Moves a file to the 
 ####### PS1
 ###################################
 
-Git integration
-parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1]/'
-}
+# Git integration
+#parse_git_branch() {
+#     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1]/'
+#}
 
-PS1="\[$(tput bold)\]\n";
-PS1+="\[$(tput setaf 39)\]$(whoami) ";        # blue  user
-PS1+="\[$(tput setaf 148)\]at: "
-PS1+="\[$(tput setaf 196)\]\W";   # red directories
-PS1+="\[$(tput setaf 162)\]\$(parse_git_branch) >> "; #github integration
-PS1+="\[$(tput sgr0)\]";
-export PS1;
+#PS1="\[$(tput bold)\]\n";
+#PS1+="\[$(tput setaf 39)\]$(whoami) ";        # blue  user
+#PS1+="\[$(tput setaf 148)\]at: "
+#PS1+="\[$(tput setaf 196)\]\W";   # red directories
+#PS1+="\[$(tput setaf 162)\]\$(parse_git_branch) >> "; #github integration
+#PS1+="\[$(tput sgr0)\]";
+#export PS1;
 
 ###################################
 ####### POWERLINE SHELL PS1
 ###################################
 
-# function _update_ps1() {
-#     PS1=$(powerline-shell $?)
-# }
+function _update_ps1() {
+    PS1=$(powerline-shell $?)
+}
 
-# if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
-#     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
-# fi
+if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
+    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+fi
 
 neofetch
