@@ -6,7 +6,7 @@ echo "updating..."
 sudo apt update
 
 echo "installing necessities..."
-sudo apt install curl git gdb net-tools neofetch feh compton trash-cli chromium-browser htop tmux texlive-full aspell xbacklight
+sudo apt install curl git gdb net-tools neofetch feh compton trash-cli chromium-browser htop tmux texlive-full blueman aspell xbacklight
 curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 
 echo "keyboard configurations..."
