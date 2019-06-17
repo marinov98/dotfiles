@@ -9,6 +9,7 @@ echo "installing packages with brew now"
 
 echo "installing terminal essentials..."
 brew install curl cask ranger tmux
+brew install reattach-to-user-namespace
 
 echo "installing programming essentials..."
 brew install --with-toolchain llvm
