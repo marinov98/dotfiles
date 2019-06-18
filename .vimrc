@@ -232,7 +232,7 @@ set mouse=a
 set clipboard=unnamedplus
 
 " Commands
-command! W :w
+"command! W :w
 
 " Force Minimum window length
 set winwidth=110
@@ -250,3 +250,6 @@ set noshowmode
 
  " tmux fix
  set t_Co=256
+
+ " Search stops highlighting after you press ESC twice
+ nnoremap <esc><esc> :noh<return>
