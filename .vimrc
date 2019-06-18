@@ -148,8 +148,12 @@ let g:multi_cursor_quit_key            = '<Esc>'
 """"""""""""""""""""""
 
 " CSS - Color
-Plug 'https://github.com/skammer/vim-css-color'
-let g:cssColorVimDoNotMessMyUpdatetime = 1
+Plug 'https://github.com/ap/vim-css-color'
+
+" Enable C-x C-o autocompletion
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+" make it work for scss files
+autocmd BufNewFile,BufRead *.scss set ft=scss.css
 
 
 Plug 'https://github.com/pangloss/vim-javascript'
@@ -220,7 +224,11 @@ set bs=2
 set mouse=a
 
 " Copy/Paste from anywhere
+
+" Windows
 "set clipboard=unnamed
+
+" Linux
 set clipboard=unnamedplus
 
 " Commands
