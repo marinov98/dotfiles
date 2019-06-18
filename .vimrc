@@ -15,7 +15,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'https://github.com/altercation/vim-colors-solarized'
 
 " Base 16
-Plug 'chriskempson/base16-vim'
+"Plug 'chriskempson/base16-vim'
 
 " JellyBeans Theme
 Plug 'https://github.com/nanotech/jellybeans.vim'
@@ -30,15 +30,15 @@ Plug 'gertjanreynaert/cobalt2-vim-theme'
 Plug 'https://github.com/jnurmine/Zenburn'
 
 "Dracula
-Plug 'dracula/vim', { 'as': 'dracula' }
+"Plug 'dracula/vim', { 'as': 'dracula' }
 
 """"""""""""""""""""""
 """"""" File Managment
 """"""""""""""""""""""
 
 " Fizzy file find
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"Plug 'junegunn/fzf.vim'
 
 " Ranger
 Plug 'francoiscabrol/ranger.vim'
@@ -99,6 +99,16 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+
+" Better Tab functionality
+Plug 'https://github.com/gcmt/taboo.vim'
+set guioptions-=e
+set sessionoptions+=tabpages,globals
+
+" TabooRename <tabname> Renames the current tab with the name provided.
+" TabooOpen <tabname> Opens a new tab and and gives it the name provided.
+" TabooReset Removes the custom label associated with the current tab.
 
 
 """"""""""""""""""""""
@@ -185,9 +195,11 @@ call plug#end()
 " Syntax highlighting 
 syntax enable
 
+let g:gruvbox_contrast_dark='hard'
 " Color theme
 set background=dark
 colorscheme jellybeans
+
 
 " Indentation
 set tabstop=4
@@ -232,7 +244,7 @@ set mouse=a
 set clipboard=unnamedplus
 
 " Commands
-"command! W :w
+command! W :w
 
 " Force Minimum window length
 set winwidth=110
