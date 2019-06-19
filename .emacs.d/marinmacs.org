@@ -638,6 +638,17 @@
 	 (setq web-mode-enable-current-column-highlight t)
 	 (setq web-mode-enable-current-element-highlight t))
 
+;; enable css coloring
+(use-package rainbow-mode 
+    :ensure t
+    :mode "\\.css\\'")
+
+(use-package prettier-js
+    :ensure t
+    :config 
+    (add-hook 'js2-mode-hook 'prettier-js-mode)
+    (add-hook 'web-mode-hook 'prettier-js-mode))
+
 #+END_SRC
 ** Skewer
 #+BEGIN_SRC emacs-lisp
