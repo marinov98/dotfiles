@@ -38,7 +38,7 @@ sudo apt install tlp && sudo apt install tlpui
 echo "Browsing and music..."
 sudo apt install snapd snapd-xdg-open yarn
 sudo snap install spotify postman
-sudo snapm install --classic heroku
+sudo snap install --classic heroku
 
 echo "i3..."
 sudo apt install i3 i3status i3lock suckless-tools rofi
