@@ -141,6 +141,7 @@ alias .5='cd ../../../../../'               # Go back 5 directory levels
 alias .6='cd ../../../../../../'            # Go back 6 directory levels
 
 alias v='vim'                               # v:            Opens any file in vim editor
+alias c='code .'                            # c:            Open VS Code
 alias rr='ranger'                           # ra:           Opens ranger
 alias t='tmux'                              # t:            Opens tmux
 alias ts='tmux attach'                      # ts:           Tmux attaches to specified session
@@ -152,7 +153,6 @@ alias p='sudo pacman'                       # p:            ARCH: shorter instal
 
 alias f='open -a Finder ./'                 # f:            Opens current directory in MacOS Finder
 alias ~="cd ~"                              # ~:            Go Home
-alias c='code .'                            # c:            Open VS Code
 alias which='type -all'                     # which:        Find executables
 alias path='echo -e ${PATH//:/\\n}'         # path:         Echo all executable Paths
 alias show_options='shopt'                  # Show_options: display bash options settings
@@ -162,7 +162,8 @@ alias cic='set completion-ignore-case On'   # cic:          Make tab-completion 
 mcd () { mkdir -p "$1" && cd "$1"; }        # mcd:          Makes new Dir and jumps inside
 trash () { command mv "$@" ~/.Trash ; }     # trash:        Moves a file to the MacOS trash
 
-
+# Fix Vim C-s crash
+stty -ixon
 
 ###################################
 ####### PS1
