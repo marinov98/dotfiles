@@ -25,6 +25,11 @@ brew tap d12frosted/emacs-plus
 brew install emacs-plus vim && brew install macvim
 brew link macvim
 
+echo "Installing Postgres"
+brew uninstall --force posrgresql
+rm -rf /usr/local/var/postgres
+brew install postgres postgis
+
 echo "all packages installed, time to copy appropriate files..."
 sudo chmod +x configure.sh
 ./configure.sh
