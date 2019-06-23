@@ -13,7 +13,7 @@ brew install reattach-to-user-namespace
 
 echo "installing programming essentials..."
 brew install --with-toolchain llvm
-brew install pip clang-format gcc ctags aspell cmake node npm gdb neofetch karabiner karabiner-elements pyenv pyenv-virtualenv pyenv-virtualenvwrapper
+brew install pip clang-format gcc ctags aspell cmake yarn node npm gdb neofetch karabiner karabiner-elements pyenv pyenv-virtualenv pyenv-virtualenvwrapper
 
 echo "installing latex packages"
 brew install tap
