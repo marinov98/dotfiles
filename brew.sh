@@ -1,3 +1,4 @@
+#!/bin/bash
 echo "installing xcode tools"
 xcode-select --install
 
