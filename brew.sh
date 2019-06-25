@@ -14,8 +14,9 @@ brew install reattach-to-user-namespace
 echo "installing programming essentials..."
 brew install --with-toolchain llvm
 brew install pip 
-brew install clang-format gcc ctags aspell yarn cmake node npm gdb neofetch 
-brew install  pyenv pyenv-virtualenv pyenv-virtualenvwrapper
+brew install clang-format gcc ctags aspell yarn 
+brew install cmake node npm gdb neofetch 
+brew install pyenv pyenv-virtualenv pyenv-virtualenvwrapper
 
 echo "installing latex packages"
 brew install tap
@@ -24,7 +25,9 @@ brew cask install mactex
 
 echo "installing emacs and vim "
 brew tap d12frosted/emacs-plus
-brew install emacs-plus vim && brew install macvim
+brew install emacs-plus vim
+brew unlink vim
+brew install macvim
 brew link macvim
 
 echo "Installing Postgres"
