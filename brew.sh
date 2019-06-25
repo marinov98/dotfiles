@@ -25,7 +25,8 @@ brew cask install mactex
 
 echo "installing emacs and vim "
 brew tap d12frosted/emacs-plus
-brew install emacs-plus vim
+brew install emacs-plus 
+brew install vim
 brew unlink vim
 brew install macvim
 brew link macvim
