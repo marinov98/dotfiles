@@ -8,6 +8,10 @@
 parse_git_branch() {
    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1]/'
 } 
+
+# Git autocompletetion
+source ~/git-completion.bash
+
  
 PS1="\[$(tput bold)\]\n";
 PS1+="\[$(tput setaf 39)\]$(whoami) ";        # blue  user
