@@ -19,8 +19,11 @@ else
 fi
 echo "bash done"
 
+echo "copying git autocompletions"
+cp git-completion.bash ~/
+
 # FORMATTERS
-echo "Copying formatters & tmux..."
+echo "Copying formatters,tmux..."
 cp .clang-format ~/
 cp .prettierrc ~/
 cp .jsbeautifyrc ~/
