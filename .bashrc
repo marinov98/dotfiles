@@ -186,6 +186,9 @@ stty -ixon
 ####### POWERLINE SHELL PS1
 ###################################
 
+# Git autocompletetion
+source ~/git-completion.bash
+
 function _update_ps1() {
     PS1=$(powerline-shell $?)
 }
