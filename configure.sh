@@ -77,4 +77,4 @@ sudo chown -R $(whoami) /user/lib/node_modules
 sudo chown -R $(whoami) /usr/local/lib/node_modules
 
 
-npm i -g core-js concurrently nodemon express-generator tern pg jquery bootstrap prettier @fortawesome/free-solid-svg-icons sequelize-cli eslint heroku angular @angular/cli http-server react react-dom create-react-app prop-types express @angular/core typescript tslint requirejs reactstrap webpack console-info console-warn console-error
+npm i -g core-js esm concurrently nodemon express-generator tern pg jquery bootstrap prettier @fortawesome/free-solid-svg-icons sequelize-cli eslint heroku angular @angular/cli http-server react react-dom create-react-app prop-types express @angular/core typescript tslint requirejs reactstrap webpack console-info console-warn console-error
