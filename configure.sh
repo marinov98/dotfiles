@@ -77,4 +77,4 @@ sudo chown -R $(whoami) /user/lib/node_modules
 sudo chown -R $(whoami) /usr/local/lib/node_modules
 
 
-npm i -g esm concurrently nodemon express-generator tern pg prettier sequelize-cli eslint heroku angular @angular/cli http-server react create-react-app prop-types express @angular/core typescript tslint requirejs webpack graphql apollo 
+npm i -g esm concurrently nodemon express-generator pg prettier sequelize-cli eslint heroku angular @angular/cli http-server react create-react-app prop-types express @angular/core typescript tslint requirejs webpack graphql apollo 
