@@ -77,4 +77,4 @@ sudo chown -R $(whoami) /user/lib/node_modules
 sudo chown -R $(whoami) /usr/local/lib/node_modules
 
 
-npm i -g babel-cli @babel/core babel-runtime babel-preset-env @babel/generator @babel/register @babel/preset-react esm concurrently nodemon express-generator tern pg jquery bootstrap prettier sequelize-cli eslint heroku angular @angular/cli http-server react react-dom create-react-app prop-types express @angular/core typescript tslint requirejs reactstrap webpack graphql apollo console-info console-warn console-error
+npm i -g esm concurrently nodemon express-generator tern pg prettier sequelize-cli eslint heroku angular @angular/cli http-server react create-react-app prop-types express @angular/core typescript tslint requirejs webpack graphql apollo 
