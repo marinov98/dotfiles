@@ -23,7 +23,7 @@ brew tap heroku/brew && brew install heroku
 
 echo "installing latex packages"
 brew install tap
-breww tap caskroom/cask
+brew tap caskroom/cask
 brew cask install mactex
 
 echo "installing emacs and vim "
