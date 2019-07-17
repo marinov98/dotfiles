@@ -19,6 +19,7 @@ brew install clang-format gcc ctags aspell
 brew install yarn 
 brew install cmake node npm gdb neofetch 
 brew install pyenv pyenv-virtualenv pyenv-virtualenvwrapper
+brew tap heroku/brew && brew install heroku
 
 echo "installing latex packages"
 brew install tap
