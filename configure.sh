@@ -77,4 +77,4 @@ sudo chown -R $(whoami) /user/lib/node_modules
 sudo chown -R $(whoami) /usr/local/lib/node_modules
 
 
-npm i -g concurrently prettier @angular/cli http-server create-react-app requirejs express-generator
+npm i -g concurrently prettier @angular/cli http-server requirejs 
