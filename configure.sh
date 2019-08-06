@@ -68,7 +68,7 @@ echo "Files copied, now installing packages with pip and npm"
 
 echo "python tools using pip..."
 sudo chown -R $(whoami) /usr/local/bin/
-pip3 install rope jedi flake8 autopep8 yapf pygments virtualenv virtualenvwrapper powerline-shell
+pip3 install rope jedi pylint flake8 autopep8 yapf pygments virtualenv virtualenvwrapper powerline-shell
 
 echo "npm installations..."
 
