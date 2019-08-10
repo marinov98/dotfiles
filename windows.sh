@@ -6,6 +6,8 @@ set-executionpolicy remotesigned -scope currentuser
 iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
 
 echo 'installing packages via scoop'
-scoop install git yarn nodejs vim vimtutor
+scoop install git gcc yarn nodejs vim vimtutor curl
+
+
 
 
