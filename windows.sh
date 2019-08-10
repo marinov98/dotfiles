@@ -8,6 +8,5 @@ iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
 echo 'installing packages via scoop'
 scoop install git gcc yarn nodejs vim vimtutor curl
 
-
-
-
+echo 'moving to configure shell script`
+./configure.sh
