@@ -12,7 +12,7 @@ my **Vim**  guide : https://github.com/marinov98/My-Vim
   - [ubuntu.sh](https://github.com/marinov98/dotfiles/blob/master/ubuntu.sh)
 ## Shell script for Mac:
   - [brew.sh](https://github.com/marinov98/dotfiles/blob/master/brew.sh)
-## Shell script for Windows
+## Shell script for Windows:
 - [windows.sh](https://github.com/marinov98/dotfiles/blob/master/windows.sh)
   
 ## NOTE: all shell scripts EXCEPT the Windows one run [configure.sh](https://github.com/marinov98/dotfiles/blob/master/configure.sh)
