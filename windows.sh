@@ -8,5 +8,10 @@ iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
 echo 'installing packages via scoop'
 scoop install git gcc yarn nodejs vim vimtutor curl
 
-echo 'moving to configure shell script`
-./configure.sh
+echo 'installing global yarn packages'
+yarn global add netlify-cli prettier @angular/cli http-server requirejs ngrok
+
+echo 'installing choco`
+Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+choco install poshgit
+
