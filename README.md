@@ -15,5 +15,5 @@ my **Vim**  guide : https://github.com/marinov98/My-Vim
 ## Shell script for Windows
 - [windows.sh](https://github.com/marinov98/dotfiles/blob/master/windows.sh)
   
-## NOTE: all shell scripts EXCEPT the Windows one run configure.sh 
+## NOTE: all shell scripts EXCEPT the Windows one run [configure.sh](https://github.com/marinov98/dotfiles/blob/master/configure.sh)
 
