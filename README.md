@@ -1,9 +1,9 @@
 # dotfiles
-all my dot files
+All my dot files
 
-my [**Emacs**](https://github.com/marinov98/My_Emacs-Detailed_Guide) guide
+My [**Emacs**](https://github.com/marinov98/My_Emacs-Detailed_Guide) guide
 
-my [**Vim**](https://github.com/marinov98/My-Vim) guide
+My [**Vim**](https://github.com/marinov98/My-Vim) guide
 
 ## Shell script for Arch and Arch-based distros using the pacman package manager: 
   - [pacman.sh](https://github.com/marinov98/dotfiles/blob/master/pacman.sh)
