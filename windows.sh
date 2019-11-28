@@ -6,7 +6,8 @@ set-executionpolicy remotesigned -scope currentuser
 iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
 
 echo 'installing packages via scoop'
-scoop install git gcc yarn nodejs vim vimtutor curl
+scoop install git gcc yarn nodejs vim vimtutor curl make
+scoop install cmake
 
 echo 'installing global yarn packages'
 yarn global add netlify-cli prettier @angular/cli http-server requirejs ngrok
