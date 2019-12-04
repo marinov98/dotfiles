@@ -12,7 +12,7 @@ call plug#begin('~/.vim/plugged')
 """"""""""""""""""""""
 
 " Solarized Theme
-Plug 'https://github.com/altercation/vim-colors-solarized'
+"Plug 'https://github.com/altercation/vim-colors-solarized'
 
 " Base 16
 "Plug 'chriskempson/base16-vim'
@@ -21,13 +21,13 @@ Plug 'https://github.com/altercation/vim-colors-solarized'
 Plug 'https://github.com/nanotech/jellybeans.vim'
 
 "Gruvbox Theme 
-Plug 'https://github.com/morhetz/gruvbox'
+"Plug 'https://github.com/morhetz/gruvbox'
 
 "Cobalt2 Theme
-Plug 'gertjanreynaert/cobalt2-vim-theme'
+"Plug 'gertjanreynaert/cobalt2-vim-theme'
 
 " Zenburn Theme
-Plug 'https://github.com/jnurmine/Zenburn'
+"Plug 'https://github.com/jnurmine/Zenburn'
 
 "Dracula
 "Plug 'dracula/vim', { 'as': 'dracula' }
@@ -48,14 +48,14 @@ Plug 'francoiscabrol/ranger.vim'
 """"""""""""""""""""""
 
 "snippets and utensils
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+"Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 "Linter
-Plug 'w0rp/ale'
-
-let g:ale_sign_error = '●' " Less aggressive than the default '>>'
-let g:ale_sign_warning = '.'
-let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
+"Plug 'w0rp/ale'
+"et g:ale_enabled = 0
+"et g:ale_sign_error = '●' " Less aggressive than the default '>>'
+"et g:ale_sign_warning = '.'
+"et g:ale_lint_on_enter = 0 " Less distracting when opening a new file
 
 " Prettier
 Plug 'prettier/vim-prettier', {
@@ -71,7 +71,7 @@ autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.gra
 Plug 'https://github.com/rhysd/vim-clang-format'
 " Auto format on save C C++ and objective-C files
 autocmd FileType c,cpp,objc ClangFormatAutoEnable
-
+		
 " Nerd Tree
 Plug 'https://github.com/scrooloose/nerdtree'
 " If you want to have nerd tree toggled always:
@@ -82,8 +82,8 @@ map <C-t> :NERDTreeToggle<CR>
 Plug 'https://github.com/jiangmiao/auto-pairs'
 
 " Bar Utility
-Plug 'majutsushi/tagbar'
-Plug 'ervandew/supertab'
+"lug 'majutsushi/tagbar'
+"lug 'ervandew/supertab'
 
 " Auto-complete
 Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
@@ -99,6 +99,9 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+" Disable preview window
+set completeopt-=preview
 
 
 " Better Tab functionality
@@ -152,36 +155,7 @@ let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
 
-" Nerd Commenter
-Plug 'https://github.com/scrooloose/nerdcommenter'
-
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
-
-" Use compact syntax for prettified multi-line comments
-let g:NERDCompactSexyComs = 1
-
-" Align line-wise comment delimiters flush left instead of following code indentation
-let g:NERDDefaultAlign = 'left'
-
-" Set a language to use its alternate delimiters by default
-let g:NERDAltDelims_java = 1
-
-" Add your own custom formats or override the defaults
-let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
-
-" Allow commenting and inverting empty lines (useful when commenting a region)
-let g:NERDCommentEmptyLines = 1
-
-" Enable trimming of trailing whitespace when uncommenting
-let g:NERDTrimTrailingWhitespace = 1
-
-" Enable NERDCommenterToggle to check all selected lines is commented or not
-let g:NERDToggleCheckAllLines = 1
-
-" Tmux-Navigator
-Plug  'christoomey/vim-tmux-navigator'
-
+	
 """"""""""""""""""""""
 """"""" WEB-DEV
 """"""""""""""""""""""
@@ -214,7 +188,7 @@ let g:user_emmet_settings = {
 """"""""""""""""""""""
 
 " magit
-Plug 'jreybert/vimagit'
+"Plug 'jreybert/vimagit'
 Plug 'airblade/vim-gitgutter'
 " Git Branch
 Plug 'https://github.com/itchyny/vim-gitbranch'
@@ -224,7 +198,7 @@ call plug#end()
 " Syntax highlighting 
 syntax enable
 
-let g:gruvbox_contrast_dark='hard'
+"let g:gruvbox_contrast_dark='hard'
 " Color theme
 set background=dark
 colorscheme jellybeans
@@ -266,7 +240,7 @@ set mouse=a
 
 " Copy/Paste from anywhere
 
-" Windows & Mac
+" Windows
 "set clipboard=unnamed
 
 " Linux
