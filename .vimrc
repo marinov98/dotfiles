@@ -52,11 +52,30 @@ Plug 'francoiscabrol/ranger.vim'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 "Linter
-"Plug 'w0rp/ale'
-"et g:ale_enabled = 0
-"et g:ale_sign_error = '●' " Less aggressive than the default '>>'
-"et g:ale_sign_warning = '.'
-"et g:ale_lint_on_enter = 0 " Less distracting when opening a new file
+Plug 'dense-analysis/ale'
+"
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\   'python': ['flake8','pylint']
+\}
+
+" Only run linters named in ale_linters settings.
+let g:ale_linters_explicit = 1
+let g:ale_sign_error = '●' " Less aggressive than the default '>>'
+let g:ale_sign_warning = '.'
+let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
+let g:ale_open_list = 0
+" Do not lint or fix minified files.
+let g:ale_pattern_options = {
+\ '\.min\.js$': {'ale_linters': [], 'ale_fixers': []},
+\ '\.min\.css$': {'ale_linters': [], 'ale_fixers': []},
+\}
+" Delay linting 
+let g:ale_lint_delay = 500
+let g:ale_lint_on_text_changed = 'normal'
+" Lint only on save
+"let g:ale_lint_on_text_changed = 'never'
+"let g:ale_lint_on_insert_leave = 0
 
 " Prettier
 Plug 'prettier/vim-prettier', {
@@ -90,6 +109,9 @@ Plug 'ervandew/supertab'
 Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
 
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+"et g:ycm_error_symbol = '*'
+"et g:ycm_warning_symbol = 'w'
+let g:ycm_enable_diagnostic_signs = 0 
 
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -210,9 +232,9 @@ colorscheme jellybeans
 
 
 " Indentation
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set noexpandtab
 
 " line numbers
