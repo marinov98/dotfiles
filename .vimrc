@@ -16,6 +16,7 @@ call plug#begin('~/.vim/plugged')
 
 " Base 16
 "Plug 'chriskempson/base16-vim'
+							
 
 " JellyBeans Theme
 Plug 'https://github.com/nanotech/jellybeans.vim'
@@ -48,7 +49,7 @@ Plug 'francoiscabrol/ranger.vim'
 """"""""""""""""""""""
 
 "snippets and utensils
-"Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 "Linter
 "Plug 'w0rp/ale'
@@ -83,7 +84,7 @@ Plug 'https://github.com/jiangmiao/auto-pairs'
 
 " Bar Utility
 "lug 'majutsushi/tagbar'
-"lug 'ervandew/supertab'
+Plug 'ervandew/supertab'
 
 " Auto-complete
 Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
@@ -102,7 +103,6 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " Disable preview window
 set completeopt-=preview
-
 
 " Better Tab functionality
 Plug 'https://github.com/gcmt/taboo.vim'
@@ -176,12 +176,16 @@ Plug 'alvan/vim-closetag'
 
 " Emmet 
 Plug 'mattn/emmet-vim'
-let g:user_emmet_leader_key='<Tab>'
+"let g:user_emmet_leader_key='<Tab>' " Default key is <c-y>
 let g:user_emmet_settings = {
   \  'javascript.jsx' : {
     \      'extends' : 'jsx',
     \  },
   \}
+
+" Enable only in html and css file extensions
+let g:user_emmet_install_global = 0
+autocmd FileType html,js,jsx,css EmmetInstall
 
 """"""""""""""""""""""
 """"""" GITHUB
@@ -189,7 +193,8 @@ let g:user_emmet_settings = {
 
 " magit
 "Plug 'jreybert/vimagit'
-Plug 'airblade/vim-gitgutter'
+"Plug 'airblade/vim-gitgutter'
+
 " Git Branch
 Plug 'https://github.com/itchyny/vim-gitbranch'
 
