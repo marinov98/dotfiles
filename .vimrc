@@ -12,37 +12,20 @@ call plug#begin('~/.vim/plugged')
 """"""""""""""""""""""
 
 " Solarized Theme
-"Plug 'https://github.com/altercation/vim-colors-solarized'
+Plug 'https://github.com/altercation/vim-colors-solarized'
 
-" Base 16
-"Plug 'chriskempson/base16-vim'
-							
+" Palelight
+Plug 'drewtempelmeyer/palenight.vim'
 
 " JellyBeans Theme
 Plug 'https://github.com/nanotech/jellybeans.vim'
-
-"Gruvbox Theme 
-"Plug 'https://github.com/morhetz/gruvbox'
-
-"Cobalt2 Theme
-"Plug 'gertjanreynaert/cobalt2-vim-theme'
-
-" Zenburn Theme
-"Plug 'https://github.com/jnurmine/Zenburn'
-
-"Dracula
-"Plug 'dracula/vim', { 'as': 'dracula' }
 
 """"""""""""""""""""""
 """"""" File Managment
 """"""""""""""""""""""
 
 " Fizzy file find
-"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-"Plug 'junegunn/fzf.vim'
-
-" Ranger
-Plug 'francoiscabrol/ranger.vim'
+"Plug ctrlpvim/ctrlp.vim
 
 """"""""""""""""""""""
 """"""" CODING
@@ -103,7 +86,6 @@ map <C-t> :NERDTreeToggle<CR>
 Plug 'https://github.com/jiangmiao/auto-pairs'
 
 " Bar Utility
-"lug 'majutsushi/tagbar'
 Plug 'ervandew/supertab'
 
 " Auto-complete
@@ -213,23 +195,19 @@ autocmd FileType html,js,jsx,css EmmetInstall
 """"""""""""""""""""""
 """"""" GITHUB
 """"""""""""""""""""""
-
-" magit
-"Plug 'jreybert/vimagit'
-"Plug 'airblade/vim-gitgutter'
-
 " Git Branch
 Plug 'https://github.com/itchyny/vim-gitbranch'
 
 call plug#end()
+
+set nocompatible
  
 " Syntax highlighting 
 syntax enable
 
-"let g:gruvbox_contrast_dark='hard'
 " Color theme
 set background=dark
-colorscheme jellybeans
+colorscheme palenight
 
 
 " Indentation
@@ -248,6 +226,11 @@ set incsearch
 set hlsearch
 set showmatch
 set wildmenu
+" Don't offer to open certain files/directories
+set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
+set wildignore+=*.pdf,*.psd
+set wildignore+=node_modules/*,bower_components/*
+
 augroup project
     autocmd!
     autocmd BufRead,BufNewFile *.h,*.c set filetype=c.doxygen
@@ -295,4 +278,4 @@ set noshowmode
  set t_Co=256
 
  " Search stops highlighting after you press ESC twice
- nnoremap <esc><esc> :noh<return>
+nnoremap <C-s> :noh<return>
