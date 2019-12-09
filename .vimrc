@@ -4,91 +4,95 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-"Vim plug
 call plug#begin('~/.vim/plugged')
-
 """"""""""""""""""""""
 """"""" THEMES
 """"""""""""""""""""""
-
-" Solarized Theme
 Plug 'https://github.com/altercation/vim-colors-solarized'
-
-" Palelight
 Plug 'drewtempelmeyer/palenight.vim'
-
-" JellyBeans Theme
 Plug 'https://github.com/nanotech/jellybeans.vim'
-
 """"""""""""""""""""""
 """"""" File Managment
 """"""""""""""""""""""
-
-" Fizzy file find
-"Plug ctrlpvim/ctrlp.vim
-
+Plug 'ctrlpvim/ctrlp.vim'
 """"""""""""""""""""""
 """"""" CODING
 """"""""""""""""""""""
-
-"snippets and utensils
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-
-"Linter
 Plug 'dense-analysis/ale'
-"
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+Plug 'https://github.com/rhysd/vim-clang-format'
+Plug 'https://github.com/scrooloose/nerdtree'
+Plug 'https://github.com/jiangmiao/auto-pairs'
+Plug 'ervandew/supertab'
+Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
+Plug 'https://github.com/gcmt/taboo.vim'
+""""""""""""""""""""""
+""""""" MODELINE
+""""""""""""""""""""""
+Plug 'itchyny/lightline.vim'
+""""""""""""""""""""""
+""""""" VIM UTILITY
+""""""""""""""""""""""
+Plug 'https://github.com/tpope/vim-repeat'
+Plug 'https://github.com/tpope/vim-surround'
+Plug 'terryma/vim-multiple-cursors'
+""""""""""""""""""""""
+""""""" WEB-DEV
+""""""""""""""""""""""
+Plug 'https://github.com/pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'https://github.com/hail2u/vim-css3-syntax'
+Plug 'alvan/vim-closetag'
+Plug 'mattn/emmet-vim'
+Plug 'https://github.com/ap/vim-css-color'
+""""""""""""""""""""""
+""""""" GITHUB
+""""""""""""""""""""""
+Plug 'https://github.com/itchyny/vim-gitbranch'
+call plug#end()
+
+
+""""""""""""""""""""""
+""""""" LINTER
+""""""""""""""""""""""
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'python': ['flake8','pylint']
 \}
 
-" Only run linters named in ale_linters settings.
 let g:ale_linters_explicit = 1
 let g:ale_sign_error = '●' " Less aggressive than the default '>>'
 let g:ale_sign_warning = '.'
 let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
 let g:ale_open_list = 0
-" Do not lint or fix minified files.
 let g:ale_pattern_options = {
 \ '\.min\.js$': {'ale_linters': [], 'ale_fixers': []},
 \ '\.min\.css$': {'ale_linters': [], 'ale_fixers': []},
 \}
-
-" Delay linting 
 let g:ale_lint_delay = 500
 let g:ale_lint_on_text_changed = 'normal'
 
-" Prettier
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
-
+""""""""""""""""""""""
+""""""" PRETTIER 
+""""""""""""""""""""""
 let g:prettier#exec_cmd_path = "~/.prettierrc"
 let g:prettier#quickfix_enabled = 0
-" No need for @format
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
 
 " Clang-Format
-Plug 'https://github.com/rhysd/vim-clang-format'
-" Auto format on save C C++ and objective-C files
 autocmd FileType c,cpp,objc ClangFormatAutoEnable
 		
 " Nerd Tree
-Plug 'https://github.com/scrooloose/nerdtree'
-" If you want to have nerd tree toggled always:
-"autocmd vimenter * NERDTree
 map <C-t> :NERDTreeToggle<CR>
 
-" Auto Close Braces
-Plug 'https://github.com/jiangmiao/auto-pairs'
 
-" Bar Utility
-Plug 'ervandew/supertab'
-
-" Auto-complete
-Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
-
+""""""""""""""""""""""
+""""""" AUTO-COMPLETE 
+""""""""""""""""""""""
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 let g:ycm_enable_diagnostic_signs = 0 
 
@@ -102,25 +106,7 @@ let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
-" Disable preview window
-set completeopt-=preview
-
-" Better Tab functionality
-Plug 'https://github.com/gcmt/taboo.vim'
-set guioptions-=e
-set sessionoptions+=tabpages,globals
-
-" TabooRename <tabname> Renames the current tab with the name provided.
-" TabooOpen <tabname> Opens a new tab and and gives it the name provided.
-" TabooReset Removes the custom label associated with the current tab.
-
-
-""""""""""""""""""""""
-""""""" MODELINE
-""""""""""""""""""""""
-
 " Modeline
-Plug 'itchyny/lightline.vim'
 let g:lightline = {
 	  \ 'colorscheme': 'jellybeans'	,
       \ 'active': {
@@ -132,19 +118,7 @@ let g:lightline = {
       \ },
       \ }
 
-""""""""""""""""""""""
-""""""" VIM UTILITY
-""""""""""""""""""""""
-
-" Vim-repeat
-Plug 'https://github.com/tpope/vim-repeat'
-
-" Vim-Surround
-Plug 'https://github.com/tpope/vim-surround'
-
-" Vim-Multiple Cursor 
-Plug 'terryma/vim-multiple-cursors'
-
+" Multiple-cursors
 let g:multi_cursor_use_default_mapping=0
 
 let g:multi_cursor_start_word_key      = '<C-n>'
@@ -156,55 +130,34 @@ let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
 
-	
-""""""""""""""""""""""
-""""""" WEB-DEV
-""""""""""""""""""""""
-
-" CSS - Color
-Plug 'https://github.com/ap/vim-css-color'
-
-" Enable C-x C-o autocompletion
+" CSS and Emmet
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 " make it work for scss files
 autocmd BufNewFile,BufRead *.scss set ft=scss.css
-
-
-Plug 'https://github.com/pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'https://github.com/hail2u/vim-css3-syntax'
-Plug 'alvan/vim-closetag'
-
-" Emmet 
-Plug 'mattn/emmet-vim'
-
 let g:user_emmet_settings = {
   \  'javascript.jsx' : {
     \      'extends' : 'jsx',
     \  },
   \}
-
-" Enable only in html and css file extensions
 let g:user_emmet_install_global = 0
 autocmd FileType html,js,jsx,css EmmetInstall
 
-""""""""""""""""""""""
-""""""" GITHUB
-""""""""""""""""""""""
-" Git Branch
-Plug 'https://github.com/itchyny/vim-gitbranch'
+" auto-close brackets
+let g:AutoPairsFlyMode = 0
+let g:AutoPairsShortcutBackInsert = '<M-b>'
 
-call plug#end()
-
-set nocompatible
+"CtrlP
+let g:ctrlp_map = '<C-a>'
  
-" Syntax highlighting 
+""""""""""""""""""""""
+""""""" BASICS
+""""""""""""""""""""""
 syntax enable
+set nocompatible
 
 " Color theme
 set background=dark
 colorscheme palenight
-
 
 " Indentation
 set tabstop=2
@@ -212,69 +165,40 @@ set softtabstop=2
 set shiftwidth=2
 set noexpandtab
 
-" line numbers
+" line numbers and tabs
 set number relativenumber
 set nu rnu 
+set completeopt-=preview
+set guioptions-=e
+set sessionoptions+=tabpages,globals
 
-" directory navigations
+" directory navigations and settings
 set foldenable
 set incsearch
 set hlsearch
 set showmatch
 set wildmenu
+set noswapfile
+set tags=tags
+set bs=2
+set mouse=a
+set clipboard=unnamedplus
+set winwidth=110
+set laststatus=2
+set noshowmode
+set t_Co=256
+
 " Don't offer to open certain files/directories
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
 set wildignore+=*.pdf,*.psd
 set wildignore+=node_modules/*,bower_components/*
-
 augroup project
     autocmd!
     autocmd BufRead,BufNewFile *.h,*.c set filetype=c.doxygen
 augroup END
 
-" auto-close brackets
-let g:AutoPairsFlyMode = 0
-let g:AutoPairsShortcutBackInsert = '<M-b>'
-
-" No swap
-set noswapfile
-
-" Enable ctags
-set tags=tags
-
-" Make backspace work
-set bs=2
-
-"Enable the use of the mouse
-set mouse=a
-
-" Copy/Paste from anywhere
-
-" Windows
-"set clipboard=unnamed
-
-" Linux
-set clipboard=unnamedplus
-
 " Commands
 command! W :w
-
-" Force Minimum window length
-set winwidth=110
-
-" Always show statusline
-set laststatus=2
-
-" no need to show extra modes
-set noshowmode
-
-" Disable Opacity while in vim
-"highlight Normal ctermbg=Black
-"highlight NonText ctermbg=Black
-"let g:solarized_termtrans=0
-
- " tmux fix
-set t_Co=256
 
  " Search stops highlighting after you press ESC twice
 nnoremap <C-s> :noh<return>
