@@ -113,10 +113,10 @@
 (use-package zerodark-theme
    :ensure t)
     
-;(use-package nord-theme
-;   :ensure t
-;   :config
-;   (load-theme 'nord t))
+;use-package nord-theme
+;  :ensure t
+;  :config
+;  (load-theme 'nord t))
 
 ;; (use-package zenburn-theme
 ;;   :ensure t)
@@ -262,16 +262,6 @@
 
 
 #+END_SRC
-** Avy
-#+BEGIN_SRC emacs-lisp
-;use-package avy
-;  :ensure t
-;  :bind 
-;  (("C-:" . avy-goto-word-1)
-;  ("M-g f" . avy-goto-line)))
-
-
-#+END_SRC
 ** Ranger
 #+BEGIN_SRC emacs-lisp
 ;; Ranger
@@ -369,8 +359,8 @@
 #+END_SRC
 ** Latex 
 #+BEGIN_SRC emacs-lisp
-(use-package tex
-    :ensure auctex)
+;(use-package tex
+;    :ensure auctex)
 
 ;; Settings 
 (setq TeX-auto-save t)
@@ -380,35 +370,6 @@
 ;; Spellchecker and Linter for Latex
 (add-hook 'LaTeX-mode-hook 'turn-on-flyspell)
 (add-hook 'LaTeX-mode-hook 'flycheck-mode)
-#+END_SRC
-** Writing & PDF
-#+BEGIN_SRC emacs-lisp 
-;; Pdf tools
-(use-package pdf-tools
-    :ensure t)
-
-(use-package org-pdfview
-    :ensure t)
-
-(require 'pdf-tools)
-(require 'org-pdfview)
-
-;; writegood and wc mode 
-(use-package wc-mode
-    :ensure t
-    :bind 
-    ("C-x C-j" . wc-mode))
-
-(use-package writegood-mode
-    :ensure t
-    :bind 
-    ("C-." . writegood-mode))
-
-;; Settings
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
-(add-hook 'text-mode-hook 'turn-on-flyspell) ;; spellchecker
-
- #+END_SRC
 #+END_SRC
 * Coding Productivity 
 ** Beacon 
@@ -529,10 +490,10 @@
 #+END_SRC
 ** Elpy
 #+BEGIN_SRC emacs-lisp
-;use-package elpy
-;   :ensure t
-;   :config 
-;   (elpy-enable))
+(use-package elpy
+   :ensure t
+   :config 
+   (elpy-enable))
 #+END_SRC
 ** Virtualenv
 #+BEGIN_SRC emacs-lisp
@@ -669,24 +630,22 @@
 #+END_SRC
 ** Company-tern IntelliSense
 #+BEGIN_SRC emacs-lisp
-
 (use-package company-tern
-   :ensure t
-   :ensure tern
-   :config
-   (add-to-list 'company-backends 'company-tern)
+  :ensure t
+  :ensure tern
+  :config
+  (add-to-list 'company-backends 'company-tern)
+  (add-hook 'js2-mode-hook (lambda ()
+                          (tern-mode)
+                          (company-mode)))               
+   ;; Disable completion keybindings, as we use xref-js2 instead
+   (define-key tern-mode-keymap (kbd "M-.") nil)
+   (define-key tern-mode-keymap (kbd "M-,") nil)
+   ;; Js-mode (which js2 is based on) binds "M-." which conflicts with xref, so
+   ;; unbind it.
+   (define-key js-mode-map (kbd "M-.") nil)
    (add-hook 'js2-mode-hook (lambda ()
-                           (tern-mode)
-                           (company-mode)))               
-    ;; Disable completion keybindings, as we use xref-js2 instead
-    (define-key tern-mode-keymap (kbd "M-.") nil)
-    (define-key tern-mode-keymap (kbd "M-,") nil)
-    ;; Js-mode (which js2 is based on) binds "M-." which conflicts with xref, so
-    ;; unbind it.
-    (define-key js-mode-map (kbd "M-.") nil)
-    (add-hook 'js2-mode-hook (lambda ()
-	(add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))))
-
+(add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))))
 #+END_SRC
 ** Es-lint
 #+BEGIN_SRC emacs-lisp
