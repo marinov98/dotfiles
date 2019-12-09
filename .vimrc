@@ -120,7 +120,6 @@ let g:lightline = {
 
 " Multiple-cursors
 let g:multi_cursor_use_default_mapping=0
-
 let g:multi_cursor_start_word_key      = '<C-n>'
 let g:multi_cursor_select_all_word_key = '<A-n>'
 let g:multi_cursor_start_key           = 'g<C-n>'
@@ -148,6 +147,13 @@ let g:AutoPairsShortcutBackInsert = '<M-b>'
 
 "CtrlP
 let g:ctrlp_map = '<C-a>'
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
  
 """"""""""""""""""""""
 """"""" BASICS
@@ -183,7 +189,7 @@ set tags=tags
 set bs=2
 set mouse=a
 set clipboard=unnamedplus
-set winwidth=110
+set winwidth=125
 set laststatus=2
 set noshowmode
 set t_Co=256
@@ -192,6 +198,8 @@ set t_Co=256
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
 set wildignore+=*.pdf,*.psd
 set wildignore+=node_modules/*,bower_components/*
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+
 augroup project
     autocmd!
     autocmd BufRead,BufNewFile *.h,*.c set filetype=c.doxygen
