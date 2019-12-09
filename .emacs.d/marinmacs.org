@@ -110,8 +110,13 @@
 ;; Multiple themes can mix into a super theme
 ;; Some themes do not mix well which is why I commented some themes
 
- (use-package zerodark-theme
-    :ensure t)
+(use-package zerodark-theme
+   :ensure t)
+    
+;(use-package nord-theme
+;   :ensure t
+;   :config
+;   (load-theme 'nord t))
 
 ;; (use-package zenburn-theme
 ;;   :ensure t)
@@ -126,10 +131,10 @@
 ;; (use-package gruvbox-theme
 ;;    :ensure t)
 
-(use-package base16-theme
-    :ensure t
-    :config 
-    (load-theme 'base16-ocean t))
+;use-package base16-theme
+;  :ensure t
+;  :config 
+;  (load-theme 'base16-ocean t))
 
 ;;(use-package jbeans-theme
 ;;    :ensure t)
@@ -163,16 +168,7 @@
        :ensure t
        :config
        (setq telephone-line-lhs
-           '((evil   . (telephone-line-evil-tag-segment))
-	   (accent . (telephone-line-vc-segment
-	   telephone-line-erc-modified-channels-segment
-	   telephone-line-process-segment))
-	   (nil    . (telephone-line-minor-mode-segment
-	   telephone-line-buffer-segment))))
-       (setq telephone-line-rhs
-           '((nil    . (telephone-line-misc-info-segment))
-	   (accent . (telephone-line-major-mode-segment))
-	   (evil   . (telephone-line-airline-position-segment)))) 
+      '((evil   . (telephone-line-evil-tag-segment))))
        (telephone-line-mode 1))
 
 
@@ -268,11 +264,11 @@
 #+END_SRC
 ** Avy
 #+BEGIN_SRC emacs-lisp
-(use-package avy
-   :ensure t
-   :bind 
-   (("C-:" . avy-goto-word-1)
-   ("M-g f" . avy-goto-line)))
+;use-package avy
+;  :ensure t
+;  :bind 
+;  (("C-:" . avy-goto-word-1)
+;  ("M-g f" . avy-goto-line)))
 
 
 #+END_SRC
@@ -323,15 +319,6 @@
    #+END_SRC
 
 * Global Convenience
-** Auto-Complete
-#+BEGIN_SRC emacs-lisp
-(use-package auto-complete 
-  :ensure t
-  :init
-  (progn
-  (ac-config-default)
-  (global-auto-complete-mode t)))
-#+END_SRC
 ** Yasnippet
 #+BEGIN_SRC emacs-lisp
 (use-package yasnippet
@@ -372,9 +359,6 @@
 (use-package org 
    :ensure t
    :pin org)
-
-;; enable auto-complete for org 
-(add-to-list 'ac-modes 'org-mode)
 #+END_SRC
 ** Org Bullets
 #+Begin_SRC emacs-lisp
@@ -447,18 +431,6 @@
     :bind ("C-c t" . neotree-toggle)
     :config (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
 #+END_SRC
-** Multiple-Cursors
-#+BEGIN_SRC emacs-lisp
-;; DISCLAIMER only use this if you are using native EMACS KeyBindings
-;; Evil mode uses evil-mc 
-(use-package multiple-cursors
-    :ensure t
-    :config
-    (global-set-key (kbd "C-x c") 'mc/edit-lines)
-    (global-set-key (kbd "C-c x") 'mc/mark-next-like-this)
-    (global-set-key (kbd "C-c z") 'mc/mark-previous-like-this)
-    (global-set-key (kbd "C-c a") 'mc/mark-all-like-this))
-#+END_SRC
 ** Iedit
 #+BEGIN_SRC emacs-lisp
 (use-package iedit
@@ -477,11 +449,6 @@
     :config 
     (setq dumb-jump-selector 'ivy) 
     :ensure)
-#+END_SRC
-** Cider
-#+BEGIN_SRC emacs-lisp
-(use-package cider
-    :ensure t)
 #+END_SRC
 * Github Integration
 #+BEGIN_SRC emacs-lisp
@@ -554,16 +521,6 @@
     :after (flycheck)
     :hook (flycheck-mode . flycheck-irony-setup))
 #+END_SRC
-** ggtags 
-#+BEGIN_SRC emacs-lisp
-(use-package ggtags
-    :ensure t
-    :config 
-    (add-hook 'c-mode-common-hook
-          (lambda ()
-            (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
-              (ggtags-mode 1))))) 
-#+END_SRC
 * Python
 ** Version
 #+BEGIN_SRC emacs-lisp
@@ -572,10 +529,10 @@
 #+END_SRC
 ** Elpy
 #+BEGIN_SRC emacs-lisp
-(use-package elpy
-    :ensure t
-    :config 
-    (elpy-enable))
+;use-package elpy
+;   :ensure t
+;   :config 
+;   (elpy-enable))
 #+END_SRC
 ** Virtualenv
 #+BEGIN_SRC emacs-lisp
@@ -750,15 +707,4 @@
 ;; Use eslint with web-mode for jsx files
 (flycheck-add-mode 'javascript-eslint 'web-mode)
 (flycheck-add-mode 'javascript-eslint 'javascript-mode)
-#+END_SRC
-* Assembly
-** Asm Mode
-#+BEGIN_SRC emacs-lisp
-(defun my-asm-mode-hook ()
-  ;; you can use `comment-dwim' (M-;) for this kind of behaviour anyway
-  (local-unset-key (vector asm-comment-char))
-  ;; asm-mode sets it locally to nil, to "stay closer to the old TAB behaviour".
-  (setq tab-always-indent (default-value 'tab-always-indent)))
-
-(add-hook 'asm-mode-hook #'my-asm-mode-hook)
 #+END_SRC
