@@ -53,12 +53,10 @@ let g:ale_pattern_options = {
 \ '\.min\.js$': {'ale_linters': [], 'ale_fixers': []},
 \ '\.min\.css$': {'ale_linters': [], 'ale_fixers': []},
 \}
+
 " Delay linting 
 let g:ale_lint_delay = 500
 let g:ale_lint_on_text_changed = 'normal'
-" Lint only on save
-"let g:ale_lint_on_text_changed = 'never'
-"let g:ale_lint_on_insert_leave = 0
 
 " Prettier
 Plug 'prettier/vim-prettier', {
@@ -92,8 +90,6 @@ Plug 'ervandew/supertab'
 Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
 
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-"et g:ycm_error_symbol = '*'
-"et g:ycm_warning_symbol = 'w'
 let g:ycm_enable_diagnostic_signs = 0 
 
 " make YCM compatible with UltiSnips (using supertab)
@@ -181,7 +177,7 @@ Plug 'alvan/vim-closetag'
 
 " Emmet 
 Plug 'mattn/emmet-vim'
-"let g:user_emmet_leader_key='<Tab>' " Default key is <c-y>
+
 let g:user_emmet_settings = {
   \  'javascript.jsx' : {
     \      'extends' : 'jsx',
@@ -240,6 +236,9 @@ augroup END
 let g:AutoPairsFlyMode = 0
 let g:AutoPairsShortcutBackInsert = '<M-b>'
 
+" No swap
+set noswapfile
+
 " Enable ctags
 set tags=tags
 
@@ -275,7 +274,8 @@ set noshowmode
 "let g:solarized_termtrans=0
 
  " tmux fix
- set t_Co=256
+set t_Co=256
 
  " Search stops highlighting after you press ESC twice
 nnoremap <C-s> :noh<return>
+nnoremap Y y$
