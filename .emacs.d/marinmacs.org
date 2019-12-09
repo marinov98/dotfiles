@@ -110,13 +110,18 @@
 ;; Multiple themes can mix into a super theme
 ;; Some themes do not mix well which is why I commented some themes
 
-(use-package zerodark-theme
-   :ensure t)
-    
-;use-package nord-theme
-;  :ensure t
-;  :config
-;  (load-theme 'nord t))
+;(use-package zerodark-theme
+;   :ensure t)
+ 
+;(use-package minimal-theme
+;    :ensure t
+;    :config
+;    (load-theme 'minimal t))
+   
+(use-package nord-theme
+  :ensure t
+  :config
+  (load-theme 'nord t))
 
 ;; (use-package zenburn-theme
 ;;   :ensure t)
@@ -240,7 +245,16 @@
     :bind
     (("M-y" . counsel-yank-pop)
     :map ivy-minibuffer-map
-    ("M-y" . ivy-next-line)))
+    ("M-y" . ivy-next-line))
+    :config
+    (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"
+          counsel-describe-function-function #'helpful-callable
+          ncounsel-describe-variable-function #'helpful-variable
+          ;; Add smart-casing (-S) to default command arguments:
+          counsel-rg-base-command "rg -S --no-heading --line-number --color never %s ."
+          counsel-ag-base-command "ag -S --nocolor --nogroup %s"
+          counsel-pt-base-command "pt -S --nocolor --nogroup -e %s"
+          counsel-find-file-at-point t))
 
 
 ;; Swiper 
