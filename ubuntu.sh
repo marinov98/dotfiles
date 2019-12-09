@@ -27,7 +27,8 @@ sudo apt install nodejs npm
 sudo apt install postgresql-10 postgresql postgresql-contrib
 
 echo "emacs installation..."
-sudo apt install emacs26 auctex
+sudo snap install emacs --classic
+sudo apt install auctex
 
 echo "vim installation..."
 sudo apt install vim vim-gtk vim-addon-manager
