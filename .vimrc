@@ -11,6 +11,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'https://github.com/altercation/vim-colors-solarized'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'https://github.com/nanotech/jellybeans.vim'
+Plug 'croaker/mustang-vim'
 """"""""""""""""""""""
 """"""" File Managment
 """"""""""""""""""""""
@@ -88,7 +89,12 @@ autocmd FileType c,cpp,objc ClangFormatAutoEnable
 		
 " Nerd Tree
 map <C-t> :NERDTreeToggle<CR>
-
+map <C-f> :NERDTree<CR>
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+let NERDTreeAutoDeleteBuffer = 1
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
 
 """"""""""""""""""""""
 """"""" AUTO-COMPLETE 
@@ -108,15 +114,15 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " Modeline
 let g:lightline = {
-	  \ 'colorscheme': 'jellybeans'	,
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'gitbranch#name'
-      \ },
-      \ }
+  \ 'colorscheme': 'jellybeans'	,
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ],
+    \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+    \ },
+    \ 'component_function': {
+    \   'gitbranch': 'gitbranch#name'
+    \ },
+    \ }
 
 " Multiple-cursors
 let g:multi_cursor_use_default_mapping=0
