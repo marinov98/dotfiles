@@ -12,7 +12,7 @@ then
     echo "machine found to be linux"
     \cp .bashrc ~/
     \cp .profile ~/
-    
+    \cp .xprofile ~/
 else
     echo "Machine found to not be linux "
     \cp .bash_profile ~/
