@@ -120,18 +120,18 @@
 ;; Multiple themes can mix into a super theme
 ;; Some themes do not mix well which is why I commented some themes
 
-;(use-package zerodark-theme
-;   :ensure t)
+(use-package zerodark-theme
+   :ensure t)
  
 ;(use-package minimal-theme
 ;    :ensure t
 ;    :config
 ;    (load-theme 'minimal t))
    
-(use-package nord-theme
-  :ensure t
-  :config
-  (load-theme 'nord t))
+;use-package nord-theme
+; :ensure t
+; :config
+; (load-theme 'nord t))
 
 ;; (use-package zenburn-theme
 ;;   :ensure t)
@@ -179,23 +179,31 @@
    
   ;;  Telephone-line
    
-   (use-package telephone-line
-       :ensure t
-       :config
-       (setq telephone-line-lhs
-      '((evil   . (telephone-line-evil-tag-segment))))
-       (telephone-line-mode 1))
-
-
+; (use-package telephone-line
+;     :ensure t
+;     :config
+;     (setq telephone-line-lhs
+;         '((evil   . (telephone-line-evil-tag-segment))
+;          (accent . (telephone-line-vc-segment
+;                     telephone-line-erc-modified-channels-segment
+;                     telephone-line-process-segment))
+;          (nil    . (telephone-line-minor-mode-segment
+;                     telephone-line-buffer-segment))))
+;     (setq telephone-line-rhs
+;           '((nil    . (telephone-line-misc-info-segment))
+;            (accent . (telephone-line-major-mode-segment))
+;            (evil   . (telephone-line-airline-position-segment))))
+;     telephone-line-mode 1)
+;
 ;; Spaceline
   
-  ;; (use-package spaceline
-  ;;    :ensure t
-  ;;    :config
-  ;;    (require 'spaceline-config)
-  ;;    (setq powerline-default-separator (quote arrow))
-  ;;    (spaceline-highlight-face-evil-state) ;; evil mode only
-  ;;    (spaceline-spacemacs-theme))
+  (use-package spaceline
+     :ensure t
+     :config
+     (require 'spaceline-config)
+     (setq powerline-default-separator (quote arrow))
+     (spaceline-highlight-face-evil-state) ;; evil mode only
+     (spaceline-spacemacs-theme))
 
 ;; Powerline
 
@@ -428,6 +436,7 @@
     :bind 
     (("C-M-g" . dumb-jump-go-other-window)
     ("M-g j" . dumb-jump-go)
+    ("M-g b" . dumb-jump-back)
     ("M-g i" . dumb-jump-go-prompt)
     ("M-g x" . dumb-jump-go-prefer-external)
     ("M-g z" . dumb-jump-go-prefer-external-other-window))
