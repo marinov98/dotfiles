@@ -146,10 +146,10 @@
 ;; (use-package gruvbox-theme
 ;;    :ensure t)
 
-;use-package base16-theme
-;  :ensure t
-;  :config 
-;  (load-theme 'base16-ocean t))
+(use-package base16-theme
+  :ensure t
+  :config 
+  (load-theme 'base16-ocean t))
 
 ;;(use-package jbeans-theme
 ;;    :ensure t)
@@ -179,31 +179,31 @@
    
   ;;  Telephone-line
    
-; (use-package telephone-line
-;     :ensure t
-;     :config
-;     (setq telephone-line-lhs
-;         '((evil   . (telephone-line-evil-tag-segment))
-;          (accent . (telephone-line-vc-segment
-;                     telephone-line-erc-modified-channels-segment
-;                     telephone-line-process-segment))
-;          (nil    . (telephone-line-minor-mode-segment
-;                     telephone-line-buffer-segment))))
-;     (setq telephone-line-rhs
-;           '((nil    . (telephone-line-misc-info-segment))
-;            (accent . (telephone-line-major-mode-segment))
-;            (evil   . (telephone-line-airline-position-segment))))
-;     telephone-line-mode 1)
+;(use-package telephone-line
+;    :ensure t
+;    :config
+;    (setq telephone-line-lhs
+;        '((evil   . (telephone-line-evil-tag-segment))
+;         (accent . (telephone-line-vc-segment
+;                    telephone-line-erc-modified-channels-segment
+;                    telephone-line-process-segment))
+;         (nil    . (telephone-line-minor-mode-segment
+;                    telephone-line-buffer-segment))))
+;    (setq telephone-line-rhs
+;          '((nil    . (telephone-line-misc-info-segment))
+;           (accent . (telephone-line-major-mode-segment))
+;           (evil   . (telephone-line-airline-position-segment))))
+;    telephone-line-mode 1)
 ;
 ;; Spaceline
   
-  (use-package spaceline
-     :ensure t
-     :config
-     (require 'spaceline-config)
-     (setq powerline-default-separator (quote arrow))
-     (spaceline-highlight-face-evil-state) ;; evil mode only
-     (spaceline-spacemacs-theme))
+ (use-package spaceline
+    :ensure t
+    :config
+    (require 'spaceline-config)
+    (setq powerline-default-separator (quote arrow))
+    (spaceline-highlight-face-evil-state) ;; evil mode only
+    (spaceline-spacemacs-theme))
 
 ;; Powerline
 
