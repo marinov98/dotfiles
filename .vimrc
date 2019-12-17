@@ -30,6 +30,7 @@ Plug 'https://github.com/jiangmiao/auto-pairs'
 Plug 'ervandew/supertab'
 Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
 Plug 'https://github.com/gcmt/taboo.vim'
+Plug 'octol/vim-cpp-enhanced-highlight'
 """"""""""""""""""""""
 """"""" MODELINE
 """"""""""""""""""""""
