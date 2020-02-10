@@ -32,6 +32,7 @@
 (setq sgml-quick-keys 'close) ;; html autoclose
 ;; syntax highlighthing & auto-close braces
 (global-font-lock-mode 1)  ;; syntax highlighting
+(setq font-lock-maximum-decoration t)
 (electric-pair-mode)       ;; auto closing brackets
 
 ;; Quick y/n prompt & Disable menu bars
@@ -120,8 +121,8 @@
 ;; Multiple themes can mix into a super theme
 ;; Some themes do not mix well which is why I commented some themes
 
-(use-package zerodark-theme
-   :ensure t)
+;(use-package zerodark-theme
+;   :ensure t)
  
 ;(use-package minimal-theme
 ;    :ensure t
@@ -327,7 +328,7 @@
 (use-package better-shell
     :ensure t
     :bind 
-    (("C-x C-`" . better-shell-shell)
+    (("C-`" . better-shell-shell)
     ("C-;" . better-shell-remote-open)))
 
 (use-package exec-path-from-shell
@@ -337,7 +338,7 @@
     (exec-path-from-shell-initialize)))
 
 ;; Eshell 
-(global-set-key (kbd "C-`") 'eshell) ;; terminal in emacs
+;;(global-set-key (kbd "C-`") 'eshell) ;; terminal in emacs
    #+END_SRC
 
 * Global Convenience
@@ -452,6 +453,47 @@
     (("C-x g" . magit-status)
     ("C-x M-g" . magit-dispatch-popup)))
 #+END_SRC
+* LSP
+** config
+#+BEGIN_SRC emacs-lisp  
+(use-package lsp-mode
+  :ensure t
+  :config
+  (add-hook 'c++-mode-hook #'lsp)
+  (add-hook 'python-mode-hook #'lsp)
+  (add-hook 'js2-mode-hook #'lsp)
+  (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")))
+  
+(use-package lsp-ui
+  :requires lsp-mode flycheck
+  :ensure t
+  :config
+  (setq lsp-ui-doc-enable t
+        lsp-ui-doc-use-childframe t
+        lsp-ui-doc-position 'top
+        lsp-ui-doc-include-signature t
+        lsp-ui-sideline-enable nil
+        lsp-ui-flycheck-enable t
+        lsp-ui-flycheck-list-position 'right
+        lsp-ui-flycheck-live-reporting t
+        lsp-ui-peek-enable t
+        lsp-ui-peek-list-width 60
+        lsp-ui-peek-peek-height 25)
+
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+  
+(use-package company-lsp
+  :requires company
+  :ensure t
+  :config
+  (push 'company-lsp company-backends)
+   ;; Disable client-side cache because the LSP server does a better job.
+  (setq company-transformers nil
+        company-lsp-async t
+        company-lsp-cache-candidates nil
+	company-lsp-enable-recompletion t))
+
+#+END_SRC
 * C++
 ** Modern Font Lock
 #+BEGIN_SRC emacs-lisp
@@ -471,50 +513,6 @@
     (setq clang-format-style-option ".clang-format")) 
  ;; (setq clang-format-style-option "llvm")) use this option if you do not have a .clang-format file
 #+END_SRC
-** Company-Irony IntelliSense
-#+BEGIN_SRC emacs-lisp
-
-;; Begin auto-completion for C++
-(use-package company-irony
-    :ensure t
-    :config
-    (require 'company)
-    (add-to-list 'company-backends 'company-irony))
-
-;; C Headers Auto-Completion
-(use-package company-irony-c-headers
-    :ensure t
-    :after (company)
-    :config
-    (add-to-list 'company-backends '(company-irony-c-headers company-irony)))
-
-;; Enable Irony Mode
-(use-package irony
-    :ensure t
-    :config
-    (add-hook 'c++-mode-hook 'irony-mode)
-    (add-hook 'c-mode-hook 'irony-mode)
-    (add-hook 'objc-mode-hook 'irony-mode)
-    (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
-
-;; Eldoc indexing
-(use-package irony-eldoc
-    :ensure t
-    :hook irony-mode)
-
-(with-eval-after-load 'company
-  (add-hook 'c++-mode-hook 'company-mode)
-  (add-hook 'c-mode-hook 'company-mode))
-
-
-#+END_SRC
-** Flycheck-Irony Linter 
- #+BEGIN_SRC emacs-lisp
-(use-package flycheck-irony
-    :ensure t
-    :after (flycheck)
-    :hook (flycheck-mode . flycheck-irony-setup))
-#+END_SRC
 * Python
 ** Version
 #+BEGIN_SRC emacs-lisp
@@ -523,10 +521,10 @@
 #+END_SRC
 ** Elpy
 #+BEGIN_SRC emacs-lisp
-(use-package elpy
-   :ensure t
-   :config 
-   (elpy-enable))
+;;(use-package elpy
+;;   :ensure t
+;;   :config 
+;;   (elpy-enable))
 #+END_SRC
 ** Virtualenv
 #+BEGIN_SRC emacs-lisp
@@ -539,19 +537,6 @@
 ;;   :config)
 ;;   ;;(venv-initialize-interactive-shells)
 ;;   ;;(venv-initialize-eshell))
-#+END_SRC
-** Company-Jedi IntelliSense
-#+BEGIN_SRC emacs-lisp
-(use-package company-jedi
-    :ensure t
-    :config
-    (add-hook 'python-mode-hook 'jedi:setup))
-
-(defun add-intellisense-hook ()
-  "Finish add jedi intellisense."
-  (add-to-list 'company-backends 'company-jedi))
-
-(add-hook 'python-mode-hook 'add-intellisense-hook)
 #+END_SRC
 * Web-Development 
 ** Web-Mode
@@ -660,43 +645,4 @@
 (use-package xref-js2
     :ensure t)
 
-#+END_SRC
-** Company-tern IntelliSense
-#+BEGIN_SRC emacs-lisp
-(use-package company-tern
-  :ensure t
-  :ensure tern
-  :config
-  (add-to-list 'company-backends 'company-tern)
-  (add-hook 'js2-mode-hook (lambda ()
-                          (tern-mode)
-                          (company-mode)))               
-   ;; Disable completion keybindings, as we use xref-js2 instead
-   (define-key tern-mode-keymap (kbd "M-.") nil)
-   (define-key tern-mode-keymap (kbd "M-,") nil)
-   ;; Js-mode (which js2 is based on) binds "M-." which conflicts with xref, so
-   ;; unbind it.
-   (define-key js-mode-map (kbd "M-.") nil)
-   (add-hook 'js2-mode-hook (lambda ()
-(add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))))
-#+END_SRC
-** Es-lint
-#+BEGIN_SRC emacs-lisp
-(eval-after-load 'js-mode
-  '(add-hook 'js-mode-hook #'add-node-modules-path))
-
-(flycheck-add-mode 'javascript-eslint 'web-mode)
-
-(setq-default flycheck-disabled-checkers 
-    (append flycheck-disabled-checkers 
-    '(json-jsonlist)))
-
-;; Disable jshint and enable es-lint
-(setq-default flycheck-disabled-checkers
-  (append flycheck-disabled-checkers
-    '(javascript-jshint)))
-
-;; Use eslint with web-mode for jsx files
-(flycheck-add-mode 'javascript-eslint 'web-mode)
-(flycheck-add-mode 'javascript-eslint 'javascript-mode)
 #+END_SRC
