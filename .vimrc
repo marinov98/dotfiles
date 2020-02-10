@@ -12,6 +12,7 @@ Plug 'https://github.com/altercation/vim-colors-solarized'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'https://github.com/nanotech/jellybeans.vim'
 Plug 'croaker/mustang-vim'
+Plug 'liuchengxu/space-vim-dark'
 """"""""""""""""""""""
 """"""" File Managment
 """"""""""""""""""""""
@@ -112,7 +113,7 @@ set signcolumn=yes
 
 " Modeline
 let g:lightline = {
-  \ 'colorscheme': 'jellybeans'	,
+  \ 'colorscheme': 'one'	,
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
     \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -167,7 +168,7 @@ set nocompatible
 
 " Color theme
 set background=dark
-colorscheme palenight
+colorscheme space-vim-dark
 
 " Indentation
 set tabstop=4
