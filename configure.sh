@@ -40,7 +40,7 @@ echo "emacs finished"
 echo "setting up Vim..."
 cp .vimrc ~/
 mkdir -p ~/.vim
-cp .vim/.ycm_extra_conf.py ~/.vim/
+cp .vim/coc-settings.json ~/.vim/
 echo "vim finished"
 
 # i3wn 
