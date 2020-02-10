@@ -20,7 +20,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 """"""" CODING
 """"""""""""""""""""""
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'dense-analysis/ale'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
@@ -28,7 +27,7 @@ Plug 'https://github.com/rhysd/vim-clang-format'
 Plug 'https://github.com/scrooloose/nerdtree'
 Plug 'https://github.com/jiangmiao/auto-pairs'
 Plug 'ervandew/supertab'
-Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'https://github.com/gcmt/taboo.vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
 """"""""""""""""""""""
@@ -50,32 +49,13 @@ Plug 'https://github.com/hail2u/vim-css3-syntax'
 Plug 'alvan/vim-closetag'
 Plug 'mattn/emmet-vim'
 Plug 'https://github.com/ap/vim-css-color'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 """"""""""""""""""""""
 """"""" GITHUB
 """"""""""""""""""""""
 Plug 'https://github.com/itchyny/vim-gitbranch'
 call plug#end()
-
-
-""""""""""""""""""""""
-""""""" LINTER
-""""""""""""""""""""""
-let g:ale_linters = {
-\   'javascript': ['eslint'],
-\   'python': ['flake8','pylint']
-\}
-
-let g:ale_linters_explicit = 1
-let g:ale_sign_error = '●' " Less aggressive than the default '>>'
-let g:ale_sign_warning = '.'
-let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
-let g:ale_open_list = 0
-let g:ale_pattern_options = {
-\ '\.min\.js$': {'ale_linters': [], 'ale_fixers': []},
-\ '\.min\.css$': {'ale_linters': [], 'ale_fixers': []},
-\}
-let g:ale_lint_delay = 500
-let g:ale_lint_on_text_changed = 'normal'
 
 """"""""""""""""""""""
 """"""" PRETTIER 
@@ -100,18 +80,35 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 """"""""""""""""""""""
 """"""" AUTO-COMPLETE 
 """"""""""""""""""""""
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-let g:ycm_enable_diagnostic_signs = 0 
-
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-
 " better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+""""""""" COC CONFIG
+let g:coc_global_extensions = [
+			\ 'coc-eslint', 'coc-prettier',
+			\ 'coc-tsserver', 'coc-tslint','coc-html',
+			\'coc-css', 'coc-json', 'coc-python', 'coc-yaml']
+" if hidden is not set, TextEdit might fail.
+set hidden
+
+" Some servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
+
+" Better display for messages
+set cmdheight=2
+
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+"""""""""""
 
 " Modeline
 let g:lightline = {
