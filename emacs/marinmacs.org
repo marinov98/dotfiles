@@ -368,6 +368,8 @@
     :config
     (setq company-idle-delay 0) ;; faster autcompletion
     (setq company-minimum-prefix-length 3) ;; show completions after 3 chars
+    (setq company-selection-wrap-around t)
+    (company-tng-configure-default) ;; tab to select options
     (setq global-company-mode t)) 
 #+END_SRC
 
