@@ -1,0 +1,32 @@
+[user]
+	name = Marin Pavlinov Marinov
+	username = marinov98
+	email = Marin.Marinov38@myhunter.cuny.edu
+
+[core]	
+	editor = vim
+	excludesfile = ~/.gitignore	
+
+[color]
+	ui = auto
+
+[color "status"]
+	added = green bold
+	changed = yellow bold
+	untracked = red bold
+
+[alias]
+	co = checkout
+	br = branch
+	c = commit
+	cl = clone
+	st = status
+	m = merge
+	#############
+	pl = pull
+	pb = pull --rebase
+	#############
+	ps = push
+	psf = push -f
+	psu = push -u
+	pst = push --tags
