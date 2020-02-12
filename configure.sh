@@ -10,50 +10,49 @@ echo "Certain bash configurations will be copied based on the system"
 if [[ $(uname -s) == Linux ]]
 then
     echo "machine found to be linux"
-    \cp .bashrc ~/
-    \cp .profile ~/
-    \cp .xprofile ~/
+    \cp terminal/.bashrc ~/
+    \cp terminal/.profile ~/
+    \cp keyboard/.xprofile ~/
 else
     echo "Machine found to not be linux "
-    \cp .bash_profile ~/
+    \cp terminal/.bash_profile ~/
 fi
 echo "bash done"
 
 echo "copying git autocompletions"
-cp git-completion.bash ~/
+cp git/git-completion.bash ~/
 
 # FORMATTERS
 echo "Copying formatters,tmux..."
-cp .clang-format ~/
-cp .prettierrc ~/
-cp .jsbeautifyrc ~/
-cp .tmux.conf ~/
+cp code-formatters/.clang-format ~/
+cp code-formatters/.prettierrc ~/
+cp tmux/.tmux.conf ~/
 echo "formatters & tmux done"
 
 # EMACS
 echo "setting up emacs..."
 mkdir -p ~/.emacs.d
-cp .emacs.d/* ~/.emacs.d/
+cp emacs/* ~/.emacs.d/
 echo "emacs finished"
 
 # Vim
 echo "setting up Vim..."
-cp .vimrc ~/
+cp vim/.vimrc ~/
 mkdir -p ~/.vim
-cp .vim/coc-settings.json ~/.vim/
+cp vim/.vim/coc-settings.json ~/.vim/
 echo "vim finished"
 
 # i3wn 
 echo "setting up i3 window manager,powerline-shell,and ranger ..."
 mkdir -p ~/.config/{i3,i3status,powerline-shell,ranger}
-cp .config/i3/config ~/.config/i3/
-cp .config/i3status/config ~/.config/i3status/
-cp .config/powerline-shell/config.json ~/.config/powerline-shell/
-cp .config/ranger/rc.conf ~/.config/ranger/
+cp config/i3/config ~/.config/i3/
+cp config/i3status/config ~/.config/i3status/
+cp config/powerline-shell/config.json ~/.config/powerline-shell/
+cp config/ranger/rc.conf ~/.config/ranger/
 echo "finished"
 
 echo "setting up compton..."
-cp .config/compton.conf  ~/.config/
+cp config/compton.conf  ~/.config/
 echo "Config transfer complete"
 
 # XORG
