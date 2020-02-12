@@ -1,7 +1,7 @@
 # dotfiles
 All my dot files
 
-### Deeper div into emacs and vim
+### Deeper dive into emacs and vim
 - My [**Emacs**](https://github.com/marinov98/My_Emacs-Detailed_Guide) guide
 
 - My [**Vim**](https://github.com/marinov98/My-Vim) guide
