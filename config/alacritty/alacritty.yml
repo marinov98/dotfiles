@@ -14,7 +14,7 @@ env:
 colors:
   cursor:
     text: '0xfefff2'
-    cursor: '0xf0cc09'
+    cursor: '0xd60b49'
 
   selection:
     text: '0xb5b5b5'
