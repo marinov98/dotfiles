@@ -1,0 +1,64 @@
+
+env:
+  # TERM env customization.
+  #
+  # If this property is not set, alacritty will set it to xterm-256color.
+  #
+  # Note that some xterm terminfo databases don't declare support for italics.
+  # You can verify this by checking for the presence of `smso` and `sitm` in
+  # `infocmp xterm-256color`.
+  TERM: xterm-256color
+
+
+
+colors:
+  cursor:
+    text: '0xfefff2'
+    cursor: '0xf0cc09'
+
+  selection:
+    text: '0xb5b5b5'
+    background: '0x18354f'
+
+  primary:
+    background: '0x132738'
+    foreground: '0xffffff'
+
+  normal:
+    black:   '0x000000'
+    red:     '0xff0000'
+    green:   '0x38de21'
+    yellow:  '0xffe50a'
+    blue:    '0x1460d2'
+    magenta: '0xff005d'
+    cyan:    '0x00bbbb'
+    white:   '0xbbbbbb'
+
+  bright:
+    black:   '0x555555'
+    red:     '0xf40e17'
+    green:   '0x3bd01d'
+    yellow:  '0xedc809'
+    blue:    '0x5555ff'
+    magenta: '0xff55ff'
+    cyan:    '0x6ae3fa'
+    white:   '0xffffff'
+
+# Background opacity
+background_opacity: 0.8
+
+
+font:
+  # Normal (roman) font face
+  size: 10.0
+  normal:
+    # Font family
+    #
+    # Default:
+    #   - (macOS) Menlo
+    #   - (Linux) monospace
+    #   - (Windows) Consolas
+    family: 'Fira Code'
+
+    # The `style` can be specified to pick a specific face.
+    style: Regular
