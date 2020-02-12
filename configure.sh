@@ -39,7 +39,7 @@ echo "emacs finished"
 echo "setting up Vim..."
 cp vim/.vimrc ~/
 mkdir -p ~/.vim
-cp vim/.vim/coc-settings.json ~/.vim/
+cp vim/coc-settings.json ~/.vim/
 echo "vim finished"
 
 # i3wn 
