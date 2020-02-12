@@ -21,6 +21,7 @@ echo "bash done"
 
 echo "copying git autocompletions"
 cp git/git-completion.bash ~/
+cp git/.gitconfig ~/
 
 # FORMATTERS
 echo "Copying formatters,tmux..."
