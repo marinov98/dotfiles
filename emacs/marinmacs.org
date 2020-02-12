@@ -138,6 +138,10 @@
     
 ;; (use-package poet-theme
 ;;    :ensure t)
+
+;;(use-package monokai-theme
+;;    :ensure t
+;;    :config (load-theme 'monokai t))
  
 (use-package spacemacs-common
     :ensure spacemacs-theme
@@ -170,7 +174,7 @@
 ;;(load-theme 'zerodark t)
 ;;(zerodark-setup-modeline-format)
 #+END_SRC
-* Mode Line
+* Modeline
 #+BEGIN_SRC emacs-lisp
   ;;  You can pick one of these, simply uncomment the one you want to try and comment the rest  
    
@@ -202,6 +206,7 @@
    (spaceline-highlight-face-evil-state) ;; evil mode only
    (spaceline-spacemacs-theme))
     
+;; lightweight doom theme
 ;(use-package doom-modeline
 ;      :ensure t
 ;      :hook (after-init . doom-modeline-mode))
@@ -571,7 +576,7 @@
 	   ("vue" . (ac-source-words-in-buffer ac-source-abbrev))
            ("html" . (ac-source-words-in-buffer ac-source-abbrev))))
 	 ;; Emmet
-	 (add-hook 'web-mode-hook 'emmet-mode)
+	 (add-hook 'web-mode-hook 'emmet-mode) ;; triggers with C-RET
 	 ;; Indentation
 	 (setq web-mode-markup-indent-offset 4)
 	 (setq web-mode-code-indent-offset 4)
@@ -579,6 +584,8 @@
 	 ;; Auto-closing
 	 (setq web-mode-enable-auto-closing t)
 	 (setq web-mode-enable-auto-quoting t)
+	 (with-eval-after-load 'web-mode
+	 (define-key web-mode-map (kbd "C-c h") 'web-mode-element-close)) ;; auto-close tag help
 	 ;; Highlighting
 	 (setq web-mode-enable-current-column-highlight t)
 	 (setq web-mode-enable-current-element-highlight t))
