@@ -9,14 +9,8 @@
 #+BEGIN_SRC emacs-lisp
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 #+END_SRC
-* Restart-Emacs & Linum-Relative
+* Restart-Emacs
 #+BEGIN_SRC emacs-lisp
-(use-package linum-relative
-    :ensure t
-    :config
-    (linum-relative-global-mode 1)) ;; relative line numbers
-;;  (global-linum-mode 1) uncomment this if you want normal line numbers
-
 (use-package restart-emacs
     :ensure t
     :config
@@ -33,7 +27,6 @@
 (setq default-frame-alist '((font . "Fira code-14")))
 ;; syntax highlighthing & auto-close braces
 (global-font-lock-mode 1)  ;; syntax highlighting
-(setq font-lock-maximum-decoration t)
 (electric-pair-mode)       ;; auto closing brackets
 
 ;; Quick y/n prompt & Disable menu bars
@@ -349,7 +342,11 @@
 (use-package yasnippet
     :ensure t
     :init 
-    (yas-global-mode 1))
+    (yas-global-mode 1)
+    (define-key yas-minor-mode-map (kbd "<tab>") nil)
+    (define-key yas-minor-mode-map (kbd "TAB") nil)
+    (define-key yas-minor-mode-map (kbd "C-c o") yas-maybe-expand)
+    (define-key yas-minor-mode-map (kbd "C-c y") #'yas-expand))
 
 (use-package yasnippet-snippets 
     :ensure t)
@@ -469,22 +466,22 @@
   (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")))
   
 (use-package lsp-ui
-  :requires lsp-mode flycheck
-  :ensure t
-  :config
-  (setq lsp-ui-doc-enable t
-        lsp-ui-doc-use-childframe t
-        lsp-ui-doc-position 'top
-        lsp-ui-doc-include-signature t
-        lsp-ui-sideline-enable nil
-        lsp-ui-flycheck-enable t
-        lsp-ui-flycheck-list-position 'right
-        lsp-ui-flycheck-live-reporting t
-        lsp-ui-peek-enable t
-        lsp-ui-peek-list-width 60
-        lsp-ui-peek-peek-height 25)
+ :requires lsp-mode flycheck
+ :ensure t
+ :config
+ (setq lsp-ui-doc-enable t
+       lsp-ui-doc-use-childframe t
+       lsp-ui-doc-position 'top
+       lsp-ui-doc-include-signature t
+       lsp-ui-sideline-enable nil
+       lsp-ui-flycheck-enable t
+       lsp-ui-flycheck-list-position 'right
+       lsp-ui-flycheck-live-reporting t
+       lsp-ui-peek-enable t
+       lsp-ui-peek-list-width 60
+       lsp-ui-peek-peek-height 25)
 
-  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+ (add-hook 'lsp-mode-hook 'lsp-ui-mode))
   
 (use-package company-lsp
   :requires company
@@ -495,6 +492,7 @@
   (setq company-transformers nil
         company-lsp-async t
         company-lsp-cache-candidates nil
+	company-lsp-enable-snippet t
 	company-lsp-enable-recompletion t))
 
 #+END_SRC
