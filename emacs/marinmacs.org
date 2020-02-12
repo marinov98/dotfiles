@@ -193,13 +193,17 @@
 ;
 ;; Spaceline
   
- (use-package spaceline
-    :ensure t
-    :config
-    (require 'spaceline-config)
-    (setq powerline-default-separator (quote arrow))
-    (spaceline-highlight-face-evil-state) ;; evil mode only
-    (spaceline-spacemacs-theme))
+(use-package spaceline
+   :ensure t
+   :config
+   (require 'spaceline-config)
+   (setq powerline-default-separator (quote arrow))
+   (spaceline-highlight-face-evil-state) ;; evil mode only
+   (spaceline-spacemacs-theme))
+    
+;(use-package doom-modeline
+;      :ensure t
+;      :hook (after-init . doom-modeline-mode))
 
 ;; Powerline
 
@@ -362,11 +366,13 @@
 #+BEGIN_SRC emacs-lisp
 (use-package company
     :ensure t
+    :bind("C-n" . company-select-next)
     :config
+    (define-key company-active-map (kbd "M-n") nil)
+    (define-key company-active-map (kbd "<tab>") #'company-select-next)
     (setq company-idle-delay 0) ;; faster autcompletion
     (setq company-minimum-prefix-length 3) ;; show completions after 3 chars
     (setq company-selection-wrap-around t)
-    (company-tng-configure-default) ;; tab to select options
     (setq global-company-mode t)) 
 #+END_SRC
 
