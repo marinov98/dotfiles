@@ -55,6 +55,7 @@
 (global-set-key (kbd "s-r") 'compile) ;; compile code
 (global-set-key (kbd "C-c C-e") 'eval-buffer) ;; evaluate the buffer (mini reload)
 (global-set-key (kbd "C-c b") 'switch-to-prev-buffer)
+(global-set-key (kbd "C-c k") 'kill-current-buffer)
  
 ;; Commenting
 (global-set-key (kbd "C-?") 'comment-region) ;; comment
@@ -368,8 +369,8 @@
     :ensure t
     :bind("C-n" . company-select-next)
     :config
-    (define-key company-active-map (kbd "M-n") nil)
-    (define-key company-active-map (kbd "<tab>") #'company-select-next)
+    (define-key company-active-map (kbd "M-n") nil) ; old selection key
+    (define-key company-active-map (kbd "<tab>") #'company-select-next) ; make tab new selection key
     (setq company-idle-delay 0) ;; faster autcompletion
     (setq company-minimum-prefix-length 3) ;; show completions after 3 chars
     (setq company-selection-wrap-around t)
