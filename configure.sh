@@ -44,11 +44,12 @@ cp vim/coc-settings.json ~/.vim/
 echo "vim finished"
 
 # i3wn 
-echo "setting up i3 window manager,powerline-shell,and ranger ..."
-mkdir -p ~/.config/{i3,i3status,powerline-shell,ranger}
+echo "setting up i3 window manager,powerline-shell,alacritty and ranger ..."
+mkdir -p ~/.config/{i3,i3status,powerline-shell,alacritty,ranger}
 cp config/i3/config ~/.config/i3/
 cp config/i3status/config ~/.config/i3status/
 cp config/powerline-shell/config.json ~/.config/powerline-shell/
+cp config/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
 cp config/ranger/rc.conf ~/.config/ranger/
 echo "finished"
 
