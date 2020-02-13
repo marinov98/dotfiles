@@ -472,6 +472,9 @@
 (use-package lsp-mode
   :ensure t
   :config
+  (setq gc-cons-threshold 100000000)
+  (setq read-process-output-max (* 1024 1024)) ;; 1mb
+  (setq lsp-idle-delay 0.250)
   (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error"))
   (add-hook 'c++-mode-hook #'lsp)
   (add-hook 'python-mode-hook #'lsp)
