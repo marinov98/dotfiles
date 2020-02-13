@@ -32,8 +32,7 @@ sudo snap install emacs --classic
 sudo apt install auctex
 
 echo "vim installation..."
-sudo apt install vim vim-gtk vim-addon-manager
-vim-addon-manager install youcompleteme
+sudo apt install vim vim-gtk
 
 echo "battery management..."
 sudo apt install tlp && sudo apt install tlpui
