@@ -1,4 +1,4 @@
-#+TITLE: MarinMacs Config File
+#+TITLE: MarinMacs Configuration File
 #+AUTHOR: Marin P. Marinov  
 #+EMAIL: marin.marinov@macaulay.cuny.edu
 #+LANGUAGE: en
