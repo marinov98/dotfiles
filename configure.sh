@@ -78,4 +78,6 @@ sudo chown -R $(whoami) /user/lib/node_modules
 sudo chown -R $(whoami) /usr/local/lib/node_modules
 
 
-npm i -g netlify-cli prettier @angular/cli http-server requirejs ngrok typescript-language-server
+npm i -g netlify-cli prettier @angular/cli http-server requirejs ngrok 
+echo "installing language servers..."
+npm i -g typescript-language-server vscode-json-languageserver vscode-html-languageserver-bin yaml-language-server vscode-css-languageserver-bin bash-language-server
