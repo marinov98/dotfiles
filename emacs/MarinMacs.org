@@ -589,6 +589,8 @@
 	 (setq web-mode-code-indent-offset 4)
 	 (setq web-mode-css-indent-offset 4)
 	 ;; Auto-closing
+	 (setq web-mode-auto-close-style 2)
+	 (setq web-mode-tag-auto-close-style 2)
 	 (setq web-mode-enable-auto-closing t)
 	 (setq web-mode-enable-auto-quoting t)
 	 (with-eval-after-load 'web-mode
