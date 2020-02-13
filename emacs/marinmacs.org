@@ -1,4 +1,4 @@
-#+TITLE: The Marinov Init File
+#+TITLE: MarinMacs Config File
 #+AUTHOR: Marin P. Marinov  
 #+EMAIL: marin.marinov@macaulay.cuny.edu
 #+LANGUAGE: en
@@ -472,10 +472,14 @@
 (use-package lsp-mode
   :ensure t
   :config
+  (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error"))
   (add-hook 'c++-mode-hook #'lsp)
   (add-hook 'python-mode-hook #'lsp)
   (add-hook 'js2-mode-hook #'lsp)
-  (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")))
+  (add-hook 'json-mode-hook #'lsp)
+  (add-hook 'web-mode-hook #'lsp)
+  (add-hook 'yaml-mode-hook #'lsp)
+  (add-hook 'typescript-mode-hook #'lsp))
   
 (use-package lsp-ui
  :requires lsp-mode flycheck
@@ -602,6 +606,20 @@
     (add-hook 'web-mode-hook 'prettier-js-mode))
 
 #+END_SRC
+** Modes
+#+BEGIN_SRC emacs-lisp
+(use-package rjsx-mode
+    :ensure t)
+    
+(use-package json-mode
+    :ensure t)
+
+(use-package yaml-mode
+    :ensure t)
+    
+(use-package dockerfile-mode
+    :ensure t)
+#+END_SRC
 ** Skewer
 #+BEGIN_SRC emacs-lisp
 (use-package skewer-mode
@@ -628,10 +646,9 @@
     (add-hook 'css-mode-hook  'emmet-mode)) ;; enable Emmet's css abbreviation.)
 #+END_SRC
 
-* JavaScript
+* JavaScript/TypeScript
 ** Node Path
 #+BEGIN_SRC emacs-lisp
-
 (use-package add-node-modules-path
    :ensure t
    :config
@@ -641,10 +658,6 @@
 #+END_SRC
 ** Js2-mode
 #+BEGIN_SRC emacs-lisp
-(use-package rjsx-mode
-    :ensure t)
-    
-
 (use-package js2-mode
     :ensure t
     :config
@@ -661,4 +674,28 @@
 (use-package xref-js2
     :ensure t)
 
+#+END_SRC
+** TIDE
+#+BEGIN_SRC emacs-lisp
+;; enable typescript in emacs
+(use-package typescript-mode
+    :ensure t)
+
+;; typescript integrated development environment
+(use-package tide
+    :ensure t
+    :config
+    (defun setup-tide-mode ()
+    (interactive)
+    (tide-setup)
+    (flycheck-mode +1)
+    (setq flycheck-check-syntax-automatically '(save mode-enabled))
+    (eldoc-mode +1)
+    (tide-hl-identifier-mode +1)
+    (company-mode +1))
+    ;; aligns annotation to the right hand side
+    (setq company-tooltip-align-annotations t)
+    ;; formats the buffer before saving
+    (add-hook 'before-save-hook 'tide-format-before-save)
+    (add-hook 'typescript-mode-hook #'setup-tide-mode))
 #+END_SRC
