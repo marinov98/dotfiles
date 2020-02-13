@@ -18,13 +18,13 @@
 #+END_SRC
 * General Settings
 #+BEGIN_SRC emacs-lisp
-
 ;; Indententation 
+(setq-default indent-tabs-mode nil) ;; disable default 8 
+(setq-default tab-width 4) ;; default tab width 4 
+(setq indent-line-function 'insert-tab)
 (setq c-basic-offset 4)       ;; indents 4 chars
-(setq tab-width 4)            ;; and 4 char wide for TAB
-(setq indent-tabs-mode nil)   ;; And force use of spaces
 (setq sgml-quick-keys 'close) ;; html autoclose
-(setq default-frame-alist '((font . "Fira code-14")))
+(setq default-frame-alist '((font . "Fira code-14"))) ;; set font and font size
 ;; syntax highlighthing & auto-close braces
 (global-font-lock-mode 1)  ;; syntax highlighting
 (electric-pair-mode)       ;; auto closing brackets
@@ -577,7 +577,8 @@
 	   (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 	   (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
 	   (setq web-mode-engines-alist
-		 '(("django"    . "\\.html\\'")))
+		 '(("django"    . "\\.html\\'")
+		   ("ejs"  . "\\.ejs\\.")))
 	   (setq web-mode-ac-sources-alist
 	   '(("css" . (ac-source-css-property))
 	   ("vue" . (ac-source-words-in-buffer ac-source-abbrev))
@@ -585,9 +586,9 @@
 	 ;; Emmet
 	 (add-hook 'web-mode-hook 'emmet-mode) ;; triggers with C-RET
 	 ;; Indentation
-	 (setq web-mode-markup-indent-offset 4)
-	 (setq web-mode-code-indent-offset 4)
-	 (setq web-mode-css-indent-offset 4)
+	 (setq web-mode-markup-indent-offset 2)
+	 (setq web-mode-code-indent-offset 2)
+	 (setq web-mode-css-indent-offset 2)
 	 ;; Auto-closing
 	 (setq web-mode-auto-close-style 2)
 	 (setq web-mode-tag-auto-close-style 2)
