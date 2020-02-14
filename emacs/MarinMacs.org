@@ -5,6 +5,12 @@
 #+TAGS: Emacs
 #+DESCRIPTION: My emacs config for software development
 
+* Quelpa
+#+BEGIN_SRC emacs-lisp
+(use-package quelpa-use-package
+    :ensure t)
+    
+#+END_SRC
 * Org-Archive
 #+BEGIN_SRC emacs-lisp
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
@@ -373,6 +379,7 @@
 (use-package company
     :ensure t
     :bind("C-n" . company-select-next)
+    :init
     :config
     (define-key company-active-map (kbd "M-n") nil) ; old selection key
     (define-key company-active-map (kbd "<tab>") #'company-select-next) ; make tab new selection key
@@ -380,6 +387,16 @@
     (setq company-minimum-prefix-length 3) ;; show completions after 3 chars
     (setq company-selection-wrap-around t)
     (setq global-company-mode t)) 
+
+
+    ;; elisp autocomplete
+    (defun my-elisp-mode-hook ()
+    "Hook for `emacs-lisp-mode'"
+    (set (make-local-variable 'company-backends)
+    '((company-capf company-elisp company-dabbrev-code company-yasnippet company-files))))
+    
+    (add-hook 'emacs-lisp-mode-hook 'my-elisp-mode-hook)
+    (add-hook 'emacs-lisp-mode-hook 'company-mode)
 #+END_SRC
 
 ** Undo-Tree
@@ -402,6 +419,11 @@
     :ensure t
     :config
     (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
+
+(defun add-pcomplete-to-capf ()
+  (add-hook 'completion-at-point-functions 'pcomplete-completions-at-point nil t))
+
+(add-hook 'org-mode-hook #'add-pcomplete-to-capf)
 #+END_SRC
 ** Latex 
 #+BEGIN_SRC emacs-lisp
@@ -526,13 +548,20 @@
 ** Clang-Format
 #+BEGIN_SRC emacs-lisp
 (use-package clang-format 
-    :ensure t
-    :bind 
-    (("C-c u" . clang-format-region) ;; format current line
-    ("C-c f" . clang-format-buffer)) ;; format entire file
-    :config
-    (setq clang-format-style-option ".clang-format")) 
+   :ensure t
+   :bind 
+   (("C-c u" . clang-format-region) ;; format current line
+   ("C-c f" . clang-format-buffer)) ;; format entire file
+   :config
+   (setq clang-format-style-option ".clang-format")) 
  ;; (setq clang-format-style-option "llvm")) use this option if you do not have a .clang-format file
+ (use-package clang-format+
+  :quelpa (clang-format+
+           :fetcher github
+           :repo "SavchenkoValeriy/emacs-clang-format-plus")
+           :config
+           (add-hook 'c-mode-common-hook #'clang-format+-mode))
+
 #+END_SRC
 * Python
 ** Version
