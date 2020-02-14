@@ -141,6 +141,7 @@ alias .5='cd ../../../../../'               # Go back 5 directory levels
 alias .6='cd ../../../../../../'            # Go back 6 directory levels
 
 alias v='vim'                               # v:            Opens any file in vim editor
+alias emt='emacs -nw'                       # emt:          Open emacs in terminal
 alias c='code .'                            # c:            Open VS Code
 alias rr='ranger'                           # ra:           Opens ranger
 alias t='tmux'                              # t:            Opens tmux
@@ -186,9 +187,6 @@ stty -ixon
 ####### POWERLINE SHELL PS1
 ###################################
 
-# Git autocompletetion
-source ~/git-completion.bash
-
 function _update_ps1() {
     PS1=$(powerline-shell $?)
 }
@@ -198,3 +196,5 @@ if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
 fi
 
 neofetch
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
