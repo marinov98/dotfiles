@@ -49,22 +49,23 @@
 * Personal Keybindings
 #+BEGIN_SRC emacs-lisp
 
-;;;; My personal keybindings, you change these anyway you like 
+  ;;;; My personal keybindings, you change these anyway you like 
 
-;; Movement (DISABLED if evil-mode is on)
-(global-set-key (kbd "C-S-p") 'beginning-of-buffer) ;; top of file DISABLED by evil 
-(global-set-key (kbd "C-S-n") 'end-of-buffer) ;; end of file DISABLED by evil 
-(global-set-key (kbd "M-m") 'move-beginning-of-line) ;; moves beginning of the line DISABLED by evil
-(global-set-key (kbd "C-a") 'back-to-indentation) ;; moves beginning of the first char DISABLED by evil
+  ;; Movement (DISABLED if evil-mode is on)
+  (global-set-key (kbd "C-S-p") 'beginning-of-buffer) ;; top of file DISABLED by evil 
+  (global-set-key (kbd "C-S-n") 'end-of-buffer) ;; end of file DISABLED by evil 
+  (global-set-key (kbd "M-m") 'move-beginning-of-line) ;; moves beginning of the line DISABLED by evil
+  (global-set-key (kbd "C-a") 'back-to-indentation) ;; moves beginning of the first char DISABLED by evil
 
-;; Compiling and Buffers
-(global-set-key (kbd "s-r") 'compile) ;; compile code
-(global-set-key (kbd "C-c C-e") 'eval-buffer) ;; evaluate the buffer (mini reload)
-(global-set-key (kbd "C-c b") 'switch-to-prev-buffer)
-(global-set-key (kbd "C-c k") 'kill-current-buffer)
- 
-;; Commenting
-(global-set-key (kbd "C-?") 'comment-region) ;; comment
+  ;; Compiling and Buffers
+  (global-set-key (kbd "s-r") 'compile) ;; compile code
+  (global-set-key (kbd "C-c C-e") 'eval-buffer) ;; evaluate the buffer (mini reload)
+  (global-set-key (kbd "C-c b") 'switch-to-prev-buffer)
+  (global-set-key (kbd "C-c n") 'switch-to-next-buffer)
+  (global-set-key (kbd "C-c k") 'kill-current-buffer)
+
+  ;; Commenting
+  (global-set-key (kbd "C-?") 'comment-region) ;; comment
 #+END_SRC
 * Dashboard 
 #+BEGIN_SRC emacs-lisp
