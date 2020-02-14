@@ -51,7 +51,7 @@
 
   ;;;; My personal keybindings, you change these anyway you like 
 
-  ;; Movement (DISABLED if evil-mode is on)
+  ;; Movement (some might be disabled by evil mode)
   (global-set-key (kbd "C-S-p") 'beginning-of-buffer) ;; top of file DISABLED by evil 
   (global-set-key (kbd "C-S-n") 'end-of-buffer) ;; end of file DISABLED by evil 
   (global-set-key (kbd "M-m") 'move-beginning-of-line) ;; moves beginning of the line DISABLED by evil
