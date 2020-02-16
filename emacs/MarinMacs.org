@@ -31,6 +31,7 @@
 (setq c-basic-offset 4)       ;; indents 4 chars
 (setq sgml-quick-keys 'close) ;; html autoclose
 (setq default-frame-alist '((font . "Fira code-14"))) ;; set font and font size
+(setq visible-bell t) ;; disable annoying end of buffer sounds
 ;; syntax highlighthing & auto-close braces
 (global-font-lock-mode 1)  ;; syntax highlighting
 (electric-pair-mode)       ;; auto closing brackets
