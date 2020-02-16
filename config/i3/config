@@ -153,6 +153,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 ###### CUSTOM SHORTCUTS
 #########################################
 bindsym $mod+Shift+w exec emacsclient -a "" -c
+bindsym $mod+Shift+t exec trash-empty
 
 
 ################################
