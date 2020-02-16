@@ -24,28 +24,28 @@
 #+END_SRC
 * General Settings
 #+BEGIN_SRC emacs-lisp
-;; Indententation 
-(setq-default indent-tabs-mode nil) ;; disable default 8 
-(setq-default tab-width 4) ;; default tab width 4 
-(setq indent-line-function 'insert-tab)
-(setq c-basic-offset 4)       ;; indents 4 chars
-(setq sgml-quick-keys 'close) ;; html autoclose
-(setq default-frame-alist '((font . "Fira code-14"))) ;; set font and font size
-(setq visible-bell t) ;; disable annoying end of buffer sounds
-;; syntax highlighthing & auto-close braces
-(global-font-lock-mode 1)  ;; syntax highlighting
-(electric-pair-mode)       ;; auto closing brackets
+  ;; Indententation 
+  (setq-default indent-tabs-mode nil) ;; disable default 8 
+  (setq-default tab-width 4) ;; default tab width 4 
+  (setq indent-line-function 'insert-tab)
+  (setq c-basic-offset 4)       ;; indents 4 chars
+  (setq sgml-quick-keys 'close) ;; html autoclose
+  (setq default-frame-alist '((font . "Fira Code-12"))) ;; set font and font size
+  (setq visible-bell t) ;; disable annoying end of buffer sounds
+  ;; syntax highlighthing & auto-close braces
+  (global-font-lock-mode 1)  ;; syntax highlighting
+  (electric-pair-mode)       ;; auto closing brackets
 
-;; Quick y/n prompt & Disable menu bars
-(fset 'yes-or-no-p 'y-or-n-p) ;; change yes or no to y or n
-(menu-bar-mode -1) ;; disable menu bar
-(toggle-scroll-bar -1) ;; disable scroll bar
-(tool-bar-mode -1) ;; disable tool bar
+  ;; Quick y/n prompt & Disable menu bars
+  (fset 'yes-or-no-p 'y-or-n-p) ;; change yes or no to y or n
+  (menu-bar-mode -1) ;; disable menu bar
+  (toggle-scroll-bar -1) ;; disable scroll bar
+  (tool-bar-mode -1) ;; disable tool bar
 
-;; Disable annoying back up files (comment if you want to enable backup files) 
-(setq make-backup-files nil) ;; stop creating backup~ files
-(setq auto-save-default nil) ;; stop creating autosave# files
-(setq create-lockfiles nil)  ;; stop creating any # files
+  ;; Disable annoying back up files (comment if you want to enable backup files) 
+  (setq make-backup-files nil) ;; stop creating backup~ files
+  (setq auto-save-default nil) ;; stop creating autosave# files
+  (setq create-lockfiles nil)  ;; stop creating any # files
 #+END_SRC
 * Personal Keybindings
 #+BEGIN_SRC emacs-lisp
@@ -261,6 +261,9 @@
 #+END_SRC
 ** Ivy-Integration 
 #+BEGIN_SRC emacs-lisp
+;; Pretty Icons
+(use-package all-the-icons
+    :ensure t)
 
 ;; Ivy
 (use-package ivy
@@ -306,6 +309,15 @@
     (setq ivy-display-style 'fancy)
     (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)))
 
+ 
+(use-package all-the-icons-ivy
+  :ensure t
+  :after (all-the-icons ivy)
+  :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup)
+  :config
+  (add-to-list 'all-the-icons-ivy-file-commands 'counsel-dired-jump)
+  (add-to-list 'all-the-icons-ivy-file-commands 'counsel-find-library))
+
 
 #+END_SRC
 ** Ranger
@@ -316,6 +328,13 @@
     :config
     (ranger-override-dired-mode t)
     (global-set-key (kbd "C-c r") 'ranger)) ;; start ranger from file
+    
+
+(use-package all-the-icons-dired
+    :ensure t
+    :after (ranger)
+    :config
+    (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
 #+END_SRC
 * Project Management
 #+BEGIN_SRC emacs-lisp
@@ -451,10 +470,6 @@
 #+END_SRC
 ** Neotree
 #+BEGIN_SRC emacs-lisp
-;; Pretty Icons
-(use-package all-the-icons
-    :ensure t)
-
 ;; Neotree
 (use-package neotree
     :ensure t
@@ -493,50 +508,52 @@
 * LSP
 ** config
 #+BEGIN_SRC emacs-lisp  
-(use-package lsp-mode
-  :ensure t
-  :config
-  (setq gc-cons-threshold 100000000)
-  (setq read-process-output-max (* 1024 1024)) ;; 1mb
-  (setq lsp-idle-delay 0.250)
-  (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error"))
-  (add-hook 'c++-mode-hook #'lsp)
-  (add-hook 'python-mode-hook #'lsp)
-  (add-hook 'js2-mode-hook #'lsp)
-  (add-hook 'json-mode-hook #'lsp)
-  (add-hook 'web-mode-hook #'lsp)
-  (add-hook 'yaml-mode-hook #'lsp)
-  (add-hook 'typescript-mode-hook #'lsp))
-  
-(use-package lsp-ui
- :requires lsp-mode flycheck
- :ensure t
- :config
- (setq lsp-ui-doc-enable t
-       lsp-ui-doc-use-childframe t
-       lsp-ui-doc-position 'top
-       lsp-ui-doc-include-signature t
-       lsp-ui-sideline-enable nil
-       lsp-ui-flycheck-enable t
-       lsp-ui-flycheck-list-position 'right
-       lsp-ui-flycheck-live-reporting t
-       lsp-ui-peek-enable t
-       lsp-ui-peek-list-width 60
-       lsp-ui-peek-peek-height 25)
+  (use-package lsp-mode
+    :ensure t
+    :config
+    (setq gc-cons-threshold 100000000)
+    (setq read-process-output-max (* 1024 1024)) ;; 1mb
+    (setq lsp-idle-delay 0.250)
+    (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error"))
+    (add-hook 'c++-mode-hook #'lsp)
+    (add-hook 'python-mode-hook #'lsp)
+    (add-hook 'js2-mode-hook #'lsp)
+    (add-hook 'json-mode-hook #'lsp)
+    (add-hook 'web-mode-hook #'lsp)
+    (add-hook 'shell-mode-hook #'lsp)
+    (add-hook 'sh-mode-hook #'lsp)
+    (add-hook 'yaml-mode-hook #'lsp)
+    (add-hook 'typescript-mode-hook #'lsp))
 
- (add-hook 'lsp-mode-hook 'lsp-ui-mode))
-  
-(use-package company-lsp
-  :requires company
-  :ensure t
-  :config
-  (push 'company-lsp company-backends)
-   ;; Disable client-side cache because the LSP server does a better job.
-  (setq company-transformers nil
-        company-lsp-async t
-        company-lsp-cache-candidates nil
-	company-lsp-enable-snippet t
-	company-lsp-enable-recompletion t))
+  (use-package lsp-ui
+   :requires lsp-mode flycheck
+   :ensure t
+   :config
+   (setq lsp-ui-doc-enable t
+         lsp-ui-doc-use-childframe t
+         lsp-ui-doc-position 'top
+         lsp-ui-doc-include-signature t
+         lsp-ui-sideline-enable nil
+         lsp-ui-flycheck-enable t
+         lsp-ui-flycheck-list-position 'right
+         lsp-ui-flycheck-live-reporting t
+         lsp-ui-peek-enable t
+         lsp-ui-peek-list-width 60
+         lsp-ui-peek-peek-height 25)
+
+   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+
+  (use-package company-lsp
+    :requires company
+    :ensure t
+    :config
+    (push 'company-lsp company-backends)
+     ;; Disable client-side cache because the LSP server does a better job.
+    (setq company-transformers nil
+          company-lsp-async t
+          company-lsp-cache-candidates nil
+      company-lsp-enable-snippet t
+      company-lsp-enable-recompletion t))
 
 #+END_SRC
 * C++
