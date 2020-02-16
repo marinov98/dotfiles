@@ -30,7 +30,7 @@
   (setq indent-line-function 'insert-tab)
   (setq c-basic-offset 4)       ;; indents 4 chars
   (setq sgml-quick-keys 'close) ;; html autoclose
-  (setq default-frame-alist '((font . "Fira Code-12"))) ;; set font and font size
+  (setq default-frame-alist '((font . "Fira Code-14"))) ;; set font and font size
   (setq visible-bell t) ;; disable annoying end of buffer sounds
   ;; syntax highlighthing & auto-close braces
   (global-font-lock-mode 1)  ;; syntax highlighting
@@ -327,6 +327,7 @@
    '((left-fringe . 10)
    (right-fringe . 10)))
    (setq ivy-posframe-border-width 1)
+   (put 'ivy-posframe 'face-alias 'default)
    (ivy-posframe-mode 1))
 
    
