@@ -263,9 +263,11 @@
 #+END_SRC
 ** Ivy-Integration 
 #+BEGIN_SRC emacs-lisp
+
    ;; Pretty Icons
    (use-package all-the-icons
        :ensure t)
+
 
    ;; Ivy
    (use-package ivy
@@ -276,18 +278,10 @@
        (setq ivy-use-virtual-buffers t)
        (setq enable-recursive-minibuffers t))
 
-   ;; icons for ivy
-   (use-package all-the-icons-ivy
-     :ensure t
-     :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup)
-     :config
-     (setq all-the-icons-ivy-file-commands
-     '(counsel-find-file counsel-file-jump counsel-recentf counsel-projectile counsel-projectile-switch-to-buffer counsel-projectile-grep counsel-projectile-git-grep counsel-projectile-switch-project counsel-projectile-find-file counsel-projectile-find-file-dwin counsel-projectile-find-dir)))
 
    ;; Counsel
    (use-package counsel
        :ensure t
-       :after ivy
        :bind
        (("M-y" . counsel-yank-pop)
        :map ivy-minibuffer-map
@@ -303,7 +297,6 @@
    ;; Swiper 
    (use-package swiper
        :ensure t
-       :after ivy
        :bind 
        (("C-s" . swiper)
        ("C-r" . swiper)
@@ -319,27 +312,45 @@
        (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)))
 
   ;; postFrame
-  (use-package ivy-posframe
-    :ensure t
-    :config
-    (setq ivy-posframe-display-functions-alist
-        '((swiper          . ivy-posframe-display-at-frame-top-center)
-          (counsel-find-file . ivy-posframe-display-at-window-center)
-          (counsel-M-x     . ivy-posframe-display-at-window-center)
-          (counsel-projectile . ivy-posframe-display-at-window-center)
-          (counsel-projectile-find-file . ivy-posframe-display-at-window-center)
-          (counsel-projectile-find-file-dwin . ivy-posframe-display-at-window-center)
-          (counsel-projectile-grep . ivy-postframe-display-at-window-center)
-          (counsel-projectile-git-grep . ivy-posframe-display-at-window-center)
-          (counsel-projectile-swith-to-buffer . ivy-posframe-display-at-window-center)
-          (counsel-projectile-switch-project . ivy-posframe-display-at-window-center)
-          (t . ivy-posframe-display)))
-    (setq ivy-posframe-parameters
-    '((left-fringe . 10)
-    (right-fringe . 10)))
-    (setq ivy-posframe-border-width 1)
-    (put 'ivy-posframe 'face-alias 'default)
-    (ivy-posframe-mode 1))
+ (use-package ivy-posframe
+   :ensure t
+   :config
+   (setq ivy-posframe-display-functions-alist
+       '((swiper          . ivy-posframe-display-at-frame-top-center)
+         (counsel-find-file . ivy-posframe-display-at-window-center)
+         (counsel-M-x     . ivy-posframe-display-at-window-center)
+         (counsel-projectile . ivy-posframe-display-at-window-center)
+         (counsel-projectile-find-file . ivy-posframe-display-at-window-center)
+         (counsel-projectile-find-file-dwin . ivy-posframe-display-at-window-center)
+         (counsel-projectile-grep . ivy-postframe-display-at-window-center)
+         (counsel-projectile-git-grep . ivy-posframe-display-at-window-center)
+         (counsel-projectile-swith-to-buffer . ivy-posframe-display-at-window-center)
+         (counsel-projectile-switch-project . ivy-posframe-display-at-window-center)
+         (t . ivy-posframe-display-at-window-center)))
+   (setq ivy-posframe-parameters
+   '((left-fringe . 10)
+   (right-fringe . 10)))
+   (setq ivy-posframe-border-width 1)
+   (put 'ivy-posframe 'face-alias 'default)
+   (ivy-posframe-mode 1))
+
+(use-package all-the-icons-ivy
+  :ensure t
+  :after (all-the-icons ivy)
+  :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup)
+  :config
+  (setq all-the-icons-ivy-file-commands
+  '(counsel-find-file 
+   counsel-file-jump 
+   counsel-recentf 
+   counsel-projectile 
+   counsel-projectile-switch-to-buffer 
+   counsel-projectile-grep 
+   counsel-projectile-git-grep 
+   counsel-projectile-switch-project 
+   counsel-projectile-find-file 
+   counsel-projectile-find-file-dwin 
+   counsel-projectile-find-dir)))
 #+END_SRC
 ** Ranger
 #+BEGIN_SRC emacs-lisp
@@ -360,23 +371,24 @@
 * Project Management
 #+BEGIN_SRC emacs-lisp
   ;; Projectile-mode NOTE: s stands for command on MacOS, windows button for Windows
-  (use-package projectile
-      :ensure t
-      :config
-      (projectile-mode 1)
-      (setq projectile-sort-order 'recently-active)
-      (setq projectile-completion-system 'ivy))
+ (use-package projectile
+     :ensure t
+     :config
+     (setq projectile-sort-order 'recently-active)
+     (setq projectile-completion-system 'ivy)
+     (projectile-mode 1))
 
-  ;; Counsel-Projectile
-   (use-package counsel-projectile
-      :ensure t
-      :bind (("C-c p SPC" . counsel-projectile)
-             ("C-c p p" . counsel-projectile-switch-project)
-             ("C-c p f" . counsel-projectile-find-file)
-             ("C-c p F" . counsel-projectile-find-file-dwin)
-             ("C-c p b" . counsel-projectile-switch-to-buffer)
-             ("C-c p g" . counsel-projectile-grep)
-             ("C-c p G" . counsel-projectile-git-grep)))
+ ;; Counsel-Projectile
+(use-package counsel-projectile
+   :ensure t
+   :bind (("C-c p" . projectile-command-map)
+         ("C-c p SPC" . counsel-projectile)
+         ("C-c p p" . counsel-projectile-switch-project)
+         ("C-c p f" . counsel-projectile-find-file)
+         ("C-c p F" . counsel-projectile-find-file-dwin)
+         ("C-c p b" . counsel-projectile-switch-to-buffer)
+         ("C-c p g" . counsel-projectile-grep)
+         ("C-c p G" . counsel-projectile-git-grep)))
 #+END_SRC
 * Shell
    #+BEGIN_SRC emacs-lisp
@@ -510,7 +522,7 @@
 #+BEGIN_SRC emacs-lisp
 (use-package dumb-jump
     :bind 
-    (("C-M-g" . dumb-jump-go-other-window)
+    (("M-g o" . dumb-jump-go-other-window)
     ("M-g j" . dumb-jump-go)
     ("M-g b" . dumb-jump-back)
     ("M-g i" . dumb-jump-go-prompt)
