@@ -322,7 +322,14 @@
        '((swiper          . ivy-posframe-display-at-frame-top-center)
          (counsel-find-file . ivy-posframe-display-at-window-center)
          (counsel-M-x     . ivy-posframe-display-at-window-center)
-         (t               . ivy-posframe-display)))
+         (counsel-projectile . ivy-posframe-display-at-window-center)
+         (counsel-projectile-find-file . ivy-posframe-display-at-window-center)
+         (counsel-projectile-find-file-dwin . ivy-posframe-display-at-window-center)
+         (counsel-projectile-grep . ivy-postframe-display-at-window-center)
+         (counsel-projectile-git-grep . ivy-posframe-display-at-window-center)
+         (counsel-projectile-swith-to-buffer . ivy-posframe-display-at-window-center)
+         (counsel-projectile-switch-project . ivy-posframe-display-at-window-center)
+         (t . ivy-posframe-display)))
    (setq ivy-posframe-parameters
    '((left-fringe . 10)
    (right-fringe . 10)))
@@ -344,10 +351,10 @@
 #+BEGIN_SRC emacs-lisp
 ;; Ranger
 (use-package ranger
-    :ensure t
-    :config
-    (ranger-override-dired-mode t)
-    (global-set-key (kbd "C-c r") 'ranger)) ;; start ranger from file
+   :ensure t
+   :config
+   (ranger-override-dired-mode t)
+   (global-set-key (kbd "C-c r") 'ranger)) ;; start ranger from file
     
 
 (use-package all-the-icons-dired
@@ -358,22 +365,24 @@
 #+END_SRC
 * Project Management
 #+BEGIN_SRC emacs-lisp
-;; Projectile-mode NOTE: s stands for command on MacOS, windows button for Windows
-(use-package projectile
-    :ensure t
-    :bind
-    (("C-c p" . projectile-command-map)
-    ("s-d" . projectile-find-dir)
-    ("s-f" . projectile-find-file)
-    ("s-g" . projectile-grep))
-    :config
-    (setq projectile-completion-system 'ivy)
-    (projectile-mode +1))
+  ;; Projectile-mode NOTE: s stands for command on MacOS, windows button for Windows
+  (use-package projectile
+      :ensure t
+      :config
+      (projectile-mode 1)
+      (setq projectile-sort-order 'recently-active)
+      (setq projectile-completion-system 'ivy))
 
-;; Counsel-Projectile
- (use-package counsel-projectile
-    :ensure t)
-
+  ;; Counsel-Projectile
+   (use-package counsel-projectile
+      :ensure t
+      :bind (("C-c p SPC" . counsel-projectile)
+             ("C-c p p" . counsel-projectile-switch-project)
+             ("C-c p f" . counsel-projectile-find-file)
+             ("C-c p F" . counsel-projectile-find-file-dwin)
+             ("C-c p b" . counsel-projectile-switch-to-buffer)
+             ("C-c p g" . counsel-projectile-grep)
+             ("C-c p G" . counsel-projectile-git-grep)))
 #+END_SRC
 * Shell
    #+BEGIN_SRC emacs-lisp
