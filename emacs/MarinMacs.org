@@ -802,7 +802,9 @@ All for typescript
 #+BEGIN_SRC emacs-lisp
 ;; enable typescript in emacs
 (use-package typescript-mode
-    :ensure t)
+    :ensure t
+    :mode (("\\.ts\\'" . typescript-mode)
+          ("\\.tsx\\'" . typescript-mode)))
 
 ;; typescript integrated development environment
 (use-package tide
