@@ -6,6 +6,13 @@ All my dot files
 
 - My [**Vim**](https://github.com/marinov98/My-Vim) guide
 
+### Quick Start
+- Clone this repo: `git clone https://github.com/marinov98/dotfiles.git`
+- cd into it `cd dotfiles/`
+- 2 options
+  - pick a one of the Os-specfic scripts `./OS-SCRIPT-GOES-HERE` 
+  - Only copy the files to your home directory. `./configure.sh`
+ 
 ### Shell script for Arch and Arch-based distros using the pacman package manager: 
   - [pacman.sh](https://github.com/marinov98/dotfiles/blob/master/pacman.sh)
 ### Shell script for Ubuntu using apt package manager: 
