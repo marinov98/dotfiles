@@ -523,6 +523,7 @@ My personal keybindings, you change these anyway you like
 ** MarkDown
 #+BEGIN_SRC emacs-lisp
 (use-package markdown-mode
+  :ensure t
   :mode
   ("\\.\\(md\\|markdown\\)\\'" . markdown-mode))
 #+END_SRC
@@ -576,7 +577,8 @@ A jump to definition package that just works. Love this one!
     
 (use-package gitignore-mode
   :ensure t
-  :mode "\\.gitignore\\'")
+  :mode (("\\.gitignore\\'" . gitignore-mode)
+        ("\\.dockerignore\\'" . gitignore-mode))) ;; syntax from gitignore is more or less identical to that of .dockerignore
 
 (use-package gitconfig-mode
   :ensure t
@@ -752,7 +754,9 @@ A jump to definition package that just works. Love this one!
     :ensure t)
 
 (use-package yaml-mode
-    :ensure t)
+    :ensure t
+    :mode (("\\.yml\\'" . yaml-mode)
+         ("\\.yaml\\'" . yaml-mode)))
     
 (use-package dockerfile-mode
     :ensure t)
