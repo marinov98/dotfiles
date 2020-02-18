@@ -100,7 +100,7 @@ My personal keybindings, you change these anyway you like
 (use-package evil-mc
   :ensure t
   :config
-  (global-evil-mc-mode  1))
+  (global-evil-mc-mode 1))
 
  ; NeoTree Override, package (neotree) is shown further in the config
  (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
@@ -657,14 +657,12 @@ A jump to definition package that just works. Love this one!
    (setq clang-format-style-option ".clang-format")) 
  ;; (setq clang-format-style-option "llvm")) use this option if you do not have a .clang-format file
  
-
  (use-package clang-format+
   :quelpa (clang-format+
            :fetcher github
            :repo "SavchenkoValeriy/emacs-clang-format-plus")
            :config
            (add-hook 'c-mode-common-hook #'clang-format+-mode))
-
 #+END_SRC
 * Python
 ** Version
@@ -709,7 +707,7 @@ A jump to definition package that just works. Love this one!
 	   (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
 	   (setq web-mode-engines-alist
 		 '(("django"    . "\\.html\\'")
-		   ("ejs"  . "\\.ejs\\'")))
+		   ("ejs"  . "\\.ejs\\.")))
 	   (setq web-mode-ac-sources-alist
 	   '(("css" . (ac-source-css-property))
 	   ("vue" . (ac-source-words-in-buffer ac-source-abbrev))
