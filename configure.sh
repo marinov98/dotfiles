@@ -54,7 +54,7 @@ cp config/ranger/rc.conf ~/.config/ranger/
 echo "finished"
 
 echo "setting up compton..."
-cp config/compton.conf  ~/.config/
+cp config/compton/compton.conf  ~/.config/
 echo "Config transfer complete"
 
 # XORG
