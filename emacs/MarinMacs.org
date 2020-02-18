@@ -381,13 +381,16 @@ My personal keybindings, you change these anyway you like
   ;; Projectile-mode NOTE: s stands for command on MacOS, windows button for Windows
  (use-package projectile
      :ensure t
+     :custom 
+     (projectile-project-search-path '("~/Projects/"))
      :config
      (setq projectile-sort-order 'recently-active)
      (setq projectile-completion-system 'ivy)
-     (projectile-mode 1))
+     (projectile-mode t))
 
  ;; Counsel-Projectile
 (use-package counsel-projectile
+   :requires projectile
    :ensure t
    :bind (("C-c p" . projectile-command-map)
          ("C-c p SPC" . counsel-projectile)
@@ -562,7 +565,7 @@ A jump to definition package that just works. Love this one!
     :ensure)
 #+END_SRC
 * Git
-- Amazing git interface I have yet to get used to...
+- Magit is an amazing git interface I have yet to master...
 - Official Site: https://magit.vc/
 #+BEGIN_SRC emacs-lisp
 (use-package magit
@@ -571,6 +574,14 @@ A jump to definition package that just works. Love this one!
     (("C-x g" . magit-status)
     ("C-x M-g" . magit-dispatch-popup)))
     
+(use-package gitignore-mode
+  :ensure t
+  :mode "\\.gitignore\\'")
+
+(use-package gitconfig-mode
+  :ensure t
+  :mode "\\.gitconfig\\'")
+
 ;; smerge mode deals with merge conflicts in git. Prefix mapping is C-c v
 (setq smerge-command-prefix "\C-cv")
 #+END_SRC
@@ -698,7 +709,7 @@ A jump to definition package that just works. Love this one!
 	   (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
 	   (setq web-mode-engines-alist
 		 '(("django"    . "\\.html\\'")
-		   ("ejs"  . "\\.ejs\\.")))
+		   ("ejs"  . "\\.ejs\\'")))
 	   (setq web-mode-ac-sources-alist
 	   '(("css" . (ac-source-css-property))
 	   ("vue" . (ac-source-words-in-buffer ac-source-abbrev))
