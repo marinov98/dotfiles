@@ -9,13 +9,13 @@
 #+BEGIN_SRC emacs-lisp
 (use-package quelpa-use-package
     :ensure t)
-    
 #+END_SRC
 * Org-Archive
 #+BEGIN_SRC emacs-lisp
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 #+END_SRC
 * Restart-Emacs
+I think I have actually used this package the most... 
 #+BEGIN_SRC emacs-lisp
 (use-package restart-emacs
     :ensure t
@@ -27,14 +27,12 @@
   ;; Indententation 
   (setq-default indent-tabs-mode nil) ;; disable default 8 
   (setq-default tab-width 4) ;; default tab width 4 
+  (setq-default c-basic-offset 4);; indents 4 chars
   (setq indent-line-function 'insert-tab)
-  (setq c-basic-offset 4)       ;; indents 4 chars
   (setq sgml-quick-keys 'close) ;; html autoclose
   (setq default-frame-alist '((font . "Fira Code-12"))) ;; set font and font size
   (setq visible-bell t) ;; disable annoying end of buffer sounds
-  ;; syntax highlighthing & auto-close braces
-  (global-font-lock-mode 1)  ;; syntax highlighting
-  (electric-pair-mode)       ;; auto closing brackets
+  (electric-pair-mode)  ;; auto closing brackets
 
   ;; Quick y/n prompt & Disable menu bars
   (fset 'yes-or-no-p 'y-or-n-p) ;; change yes or no to y or n
@@ -48,15 +46,13 @@
   (setq create-lockfiles nil)  ;; stop creating any # files
 #+END_SRC
 * Personal Keybindings
+My personal keybindings, you change these anyway you like 
 #+BEGIN_SRC emacs-lisp
-
-  ;;;; My personal keybindings, you change these anyway you like 
-
   ;; Movement (some might be disabled by evil mode)
-  (global-set-key (kbd "C-S-p") 'beginning-of-buffer) ;; top of file DISABLED by evil 
+  (global-set-key (kbd "C-S-p") 'beginning-of-buffer) ;; top of file 
   (global-set-key (kbd "C-S-n") 'end-of-buffer) ;; end of file DISABLED by evil 
-  (global-set-key (kbd "M-m") 'move-beginning-of-line) ;; moves beginning of the line DISABLED by evil
-  (global-set-key (kbd "C-a") 'back-to-indentation) ;; moves beginning of the first char DISABLED by evil
+  (global-set-key (kbd "M-m") 'move-beginning-of-line) ;; moves beginning of the line 
+  (global-set-key (kbd "C-a") 'back-to-indentation) ;; moves beginning of the first char 
 
   ;; Compiling and Buffers
   (global-set-key (kbd "s-r") 'compile) ;; compile code
@@ -69,6 +65,8 @@
   (global-set-key (kbd "C-?") 'comment-region) ;; comment
 #+END_SRC
 * Dashboard 
+- This package is displayed when you start up emacs without selecting a file. 
+- Learn how to customize it by going here: https://github.com/emacs-dashboard/emacs-dashboard
 #+BEGIN_SRC emacs-lisp
 (use-package dashboard 
     :ensure t
@@ -83,19 +81,15 @@
 			               (agenda . 5)
                            (projects . 5))))
 #+END_SRC
-
 * Evil-Mode
+ - Packages needed to emulate vim inside Emacs. 
+ - Official Repo for Evil Mode: https://github.com/emacs-evil/evil
 #+BEGIN_SRC emacs-lisp
-;;;; Package needed to enable vim bindings...
-
 (use-package evil
   :ensure t
   :config
   (evil-mode 1))
  
-
-;;;; Evil Support packages
-
 ;; Surround
 (use-package evil-surround
   :ensure t
@@ -108,18 +102,18 @@
   :config
   (global-evil-mc-mode  1))
 
- ; NERD Tree Overrid
+ ; NeoTree Override, package (neotree) is shown further in the config
  (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
-    (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
-    (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-    (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
-    (evil-define-key 'normal neotree-mode-map (kbd "g") 'neotree-refresh)
-    (evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-next-line)
-    (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
-    (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
-    (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
+ (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
+ (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
+ (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
+ (evil-define-key 'normal neotree-mode-map (kbd "g") 'neotree-refresh)
+ (evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-next-line)
+ (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
+ (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
+ (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
     
-  ; Evil magit
+  ; Evil magit, package (magit) is shown further in the config
  (use-package evil-magit
       :ensure t)
 #+END_SRC
@@ -185,10 +179,12 @@
 ;;(zerodark-setup-modeline-format)
 #+END_SRC
 * Modeline
+ You can pick one of these, simply uncomment the one you want to try and comment the rest  
 #+BEGIN_SRC emacs-lisp
-  ;;  You can pick one of these, simply uncomment the one you want to try and comment the rest  
-   
-  ;;  Telephone-line
+
+;;;;;;;;;;;;;;;;;;;;;;   
+;;  Telephone-line
+;;;;;;;;;;;;;;;;;;;;;;   
    
 ;(use-package telephone-line
 ;    :ensure t
@@ -206,8 +202,12 @@
 ;           (evil   . (telephone-line-airline-position-segment))))
 ;    telephone-line-mode 1)
 ;
+
+
+;;;;;;;;;;;;;;;;;;;;;;   
 ;; Spaceline
-  
+;;;;;;;;;;;;;;;;;;;;;;   
+
 (use-package spaceline
    :ensure t
    :config
@@ -216,12 +216,17 @@
    (spaceline-highlight-face-evil-state) ;; evil mode only
    (spaceline-spacemacs-theme))
     
+;;;;;;;;;;;;;;;;;;;;;;   
 ;; lightweight doom theme
+;;;;;;;;;;;;;;;;;;;;;;   
+
 ;(use-package doom-modeline
 ;      :ensure t
 ;      :hook (after-init . doom-modeline-mode))
 
+;;;;;;;;;;;;;;;;;;;;;;   
 ;; Powerline
+;;;;;;;;;;;;;;;;;;;;;;   
 
   ;;  (use-package powerline
   ;;        :ensure t
@@ -237,7 +242,6 @@
   ;;     (powerline-nano-theme)
 
 #+END_SRC
-
 * Emacs Enhancements 
 ** Which-Key
 #+BEGIN_SRC emacs-lisp
@@ -262,6 +266,7 @@
 (setq  gdb-show-main t )  ;; Non-nil means display source file containing the main routine at startup
 #+END_SRC
 ** Ivy-Integration 
+ Ivy Reference manual: https://oremacs.com/swiper/
 #+BEGIN_SRC emacs-lisp
 
    ;; Pretty Icons
@@ -369,6 +374,7 @@
     (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
 #+END_SRC
 * Project Management
+Amazing tool for managing projects! HomePage:https://projectile.readthedocs.io/en/latest/ Counsel-Projectile:https://github.com/ericdanan/counsel-projectile 
 #+BEGIN_SRC emacs-lisp
   ;; Projectile-mode NOTE: s stands for command on MacOS, windows button for Windows
  (use-package projectile
@@ -407,9 +413,8 @@
 ;; Eshell 
 (global-set-key (kbd "C-~") 'eshell) ;; terminal alternative in emacs
    #+END_SRC
-
-* Global Convenience
-** Yasnippet
+* Globals
+** Snippets
 #+BEGIN_SRC emacs-lisp
 (use-package yasnippet
     :ensure t
@@ -422,15 +427,26 @@
 
 (use-package yasnippet-snippets 
     :ensure t)
+    
+;; snippets for React.js
+(use-package react-snippets
+  :requires yasnippet
+  :ensure t)
 #+END_SRC 
 ** FlyCheck
 #+BEGIN_SRC emacs-lisp
 (use-package flycheck
      :ensure t
-     :init
-     (global-flycheck-mode t))
+     :config
+     (setq flycheck-check-syntax-automatically '(mode-enabled save)); run flycheck only on save
+     (global-flycheck-mode t)) 
+     
+;; disable other checkers
+(setq-default flycheck-disabled-checkers '(c/c++-clang c/c++-cppcheck c/c++-gcc))
 #+END_SRC
 ** Company
+- The framework I use for my autocomplete. 
+- Official Site: http://company-mode.github.io/
 #+BEGIN_SRC emacs-lisp
 (use-package company
     :ensure t
@@ -456,6 +472,7 @@
 #+END_SRC
 
 ** Undo-Tree
+ You MUST have this for evil mode to work
 #+BEGIN_SRC emacs-lisp
 (use-package undo-tree
   :ensure t
@@ -483,6 +500,7 @@
 #+END_SRC
 ** Latex 
 #+BEGIN_SRC emacs-lisp
+;; for reference, may be utilized in the future
 ;(use-package tex
 ;    :ensure auctex)
 
@@ -494,6 +512,12 @@
 ;; Spellchecker and Linter for Latex
 (add-hook 'LaTeX-mode-hook 'turn-on-flyspell)
 (add-hook 'LaTeX-mode-hook 'flycheck-mode)
+#+END_SRC
+** MarkDown
+#+BEGIN_SRC emacs-lisp
+(use-package markdown-mode
+  :mode
+  ("\\.\\(md\\|markdown\\)\\'" . markdown-mode))
 #+END_SRC
 * Coding Productivity 
 ** Beacon 
@@ -532,24 +556,30 @@
     (setq dumb-jump-selector 'ivy) 
     :ensure)
 #+END_SRC
-* Github Integration
+* Git
+Amazing git interface I have yet to get used to. Official Site:https://magit.vc/
 #+BEGIN_SRC emacs-lisp
 (use-package magit
     :ensure t
     :bind
     (("C-x g" . magit-status)
     ("C-x M-g" . magit-dispatch-popup)))
+    
+;; smerge mode deals with merge conflicts in git
+(setq smerge-command-prefix "\C-cv")
 #+END_SRC
 * LSP
+  - LSP stands for Language Server Protocal and makes setting up autocompletion easy. 
+  - Official Repo: https://github.com/emacs-lsp/lsp-mode 
 ** config
 #+BEGIN_SRC emacs-lisp  
-  (use-package lsp-mode
+ (use-package lsp-mode
     :ensure t
     :config
     (setq gc-cons-threshold 100000000)
     (setq read-process-output-max (* 1024 1024)) ;; 1mb
-    (setq lsp-idle-delay 0.250)
     (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error"))
+    (setq lsp-prefer-flymake nil) ; we are using flycheck and not flymake
     (add-hook 'c++-mode-hook #'lsp)
     (add-hook 'python-mode-hook #'lsp)
     (add-hook 'js2-mode-hook #'lsp)
@@ -560,10 +590,12 @@
     (add-hook 'yaml-mode-hook #'lsp)
     (add-hook 'typescript-mode-hook #'lsp))
 
-  (use-package lsp-ui
+ (use-package lsp-ui
    :requires lsp-mode flycheck
    :ensure t
+   :hook (lsp-mode . lsp-ui-mode)
    :config
+   (setq lsp-ui-flycheck-live-reporting nil) ;; allows our previous flycheck setting to only check syntax on save to work
    (setq lsp-ui-doc-enable t
          lsp-ui-doc-use-childframe t
          lsp-ui-doc-position 'top
@@ -571,12 +603,9 @@
          lsp-ui-sideline-enable nil
          lsp-ui-flycheck-enable t
          lsp-ui-flycheck-list-position 'right
-         lsp-ui-flycheck-live-reporting t
          lsp-ui-peek-enable t
          lsp-ui-peek-list-width 60
-         lsp-ui-peek-peek-height 25)
-
-   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+         lsp-ui-peek-peek-height 25))
 
   (use-package company-lsp
     :requires company
@@ -587,8 +616,8 @@
     (setq company-transformers nil
           company-lsp-async t
           company-lsp-cache-candidates nil
-      company-lsp-enable-snippet t
-      company-lsp-enable-recompletion t))
+          company-lsp-enable-snippet t
+          company-lsp-enable-recompletion t))
 
 #+END_SRC
 * C++
@@ -600,6 +629,7 @@
     (modern-c++-font-lock-global-mode t))
 #+END_SRC
 ** Clang-Format
+ The only package that utilizes quelpa at the moment :))
 #+BEGIN_SRC emacs-lisp
 (use-package clang-format 
    :ensure t
@@ -609,6 +639,8 @@
    :config
    (setq clang-format-style-option ".clang-format")) 
  ;; (setq clang-format-style-option "llvm")) use this option if you do not have a .clang-format file
+ 
+
  (use-package clang-format+
   :quelpa (clang-format+
            :fetcher github
@@ -624,6 +656,7 @@
 (setq python-shell-interpreter "python3")
 #+END_SRC
 ** Elpy
+ No longer need it because of LSP but keeping it for reference
 #+BEGIN_SRC emacs-lisp
 ;;(use-package elpy
 ;;   :ensure t
@@ -631,11 +664,8 @@
 ;;   (elpy-enable))
 #+END_SRC
 ** Virtualenv
+ Uncomment if you need it, I have yet to develop seriously in Python
 #+BEGIN_SRC emacs-lisp
-;; Uncomment if you need them
-;;(use-package virtualenv
-;;   :ensure t)
-;;
 ;;(use-package virtualenvwrapper
 ;;   :ensure t
 ;;   :config)
@@ -644,10 +674,11 @@
 #+END_SRC
 * Web-Development 
 ** Web-Mode
+ - Autonomous emacs major-mode for editing web templates. 
+ - Official Website: http://web-mode.org/
 #+BEGIN_SRC emacs-lisp
 (use-package web-mode
     :ensure t
-    :after (add-node-modules-path)
     :config
 	   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 	   (add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
@@ -698,7 +729,9 @@
 ** Modes
 #+BEGIN_SRC emacs-lisp
 (use-package rjsx-mode
-    :ensure t)
+    :ensure t
+    :init
+    (setq-default rjsx-basic-offset 2))
     
 (use-package json-mode
     :ensure t)
@@ -727,42 +760,36 @@
        :ensure t)  
    #+END_SRC
 ** Emmet 
+More on emmet: https://www.emmet.io/
 #+BEGIN_SRC emacs-lisp
 (use-package emmet-mode
     :ensure t
-    :config
-    (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
-    (add-hook 'css-mode-hook  'emmet-mode)) ;; enable Emmet's css abbreviation.)
+    :hook
+    ((css-mode  . emmet-mode)
+    (php-mode  . emmet-mode)
+    (sgml-mode . emmet-mode)
+    (rjsx-mode . emmet-mode)
+    (web-mode  . emmet-mode)))
 #+END_SRC
-
 * JavaScript/TypeScript
 ** Node Path
 #+BEGIN_SRC emacs-lisp
+;; Adds the node_modules/.bin directory to the buffer exec_path.
 (use-package add-node-modules-path
    :ensure t
-   :config
-   ;; automatically run the function when web-mode starts
-   (eval-after-load 'web-mode
-     '(add-hook 'web-mode-hook 'add-node-modules-path)))
+   :hook 
+   ((web-mode . add-node-modules-path)
+   (rjsx-mode . add-node-modules-path)))
 #+END_SRC
 ** Js2-mode
 #+BEGIN_SRC emacs-lisp
 (use-package js2-mode
     :ensure t
-    :config
-    (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
     :hook (j2-mode. js2-imenu-extras-mode))
-
-(use-package js2-refactor
-    :ensure t
-    :hook (js2-mode . js2-refactor-mode)
-    :config
-    (js2r-add-keybindings-with-prefix "C-c C-r")
-    (define-key js2-mode-map (kbd "C-k") #'js2r-kill))
-
-(use-package xref-js2
-    :ensure t)
-
+    :config ;; disable annoying warnings
+    (setq js2-strict-missing-semi-warning nil)
+    (setq js2-basic-offset 2) ;; set indentation to 2
+    (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 #+END_SRC
 ** TIDE
 #+BEGIN_SRC emacs-lisp
