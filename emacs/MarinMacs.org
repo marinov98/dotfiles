@@ -374,7 +374,9 @@ My personal keybindings, you change these anyway you like
     (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
 #+END_SRC
 * Project Management
-Amazing tool for managing projects! HomePage:https://projectile.readthedocs.io/en/latest/ Counsel-Projectile:https://github.com/ericdanan/counsel-projectile 
+- Amazing tool for managing projects! 
+- Projectile Homepage: https://projectile.readthedocs.io/en/latest/ 
+- Counsel-Projectile: https://github.com/ericdanan/counsel-projectile 
 #+BEGIN_SRC emacs-lisp
   ;; Projectile-mode NOTE: s stands for command on MacOS, windows button for Windows
  (use-package projectile
@@ -434,6 +436,8 @@ Amazing tool for managing projects! HomePage:https://projectile.readthedocs.io/e
   :ensure t)
 #+END_SRC 
 ** FlyCheck
+- Checking syntax...basically 
+- Official Site: https://www.flycheck.org/en/latest/
 #+BEGIN_SRC emacs-lisp
 (use-package flycheck
      :ensure t
@@ -499,6 +503,7 @@ Amazing tool for managing projects! HomePage:https://projectile.readthedocs.io/e
 (add-hook 'org-mode-hook #'add-pcomplete-to-capf)
 #+END_SRC
 ** Latex 
+ I still actually prefer Overleaf for latex editing...Hoping to just use emacs for it one day
 #+BEGIN_SRC emacs-lisp
 ;; for reference, may be utilized in the future
 ;(use-package tex
@@ -543,6 +548,7 @@ Amazing tool for managing projects! HomePage:https://projectile.readthedocs.io/e
     :bind (("C-c c" . iedit-mode)))
 #+END_SRC
 ** Dump-Jump
+A jump to definition package that just works. Love this one!
 #+BEGIN_SRC emacs-lisp
 (use-package dumb-jump
     :bind 
@@ -557,7 +563,7 @@ Amazing tool for managing projects! HomePage:https://projectile.readthedocs.io/e
     :ensure)
 #+END_SRC
 * Git
-Amazing git interface I have yet to get used to. Official Site:https://magit.vc/
+Amazing git interface I have yet to get used to. Official Site: https://magit.vc/
 #+BEGIN_SRC emacs-lisp
 (use-package magit
     :ensure t
@@ -565,7 +571,7 @@ Amazing git interface I have yet to get used to. Official Site:https://magit.vc/
     (("C-x g" . magit-status)
     ("C-x M-g" . magit-dispatch-popup)))
     
-;; smerge mode deals with merge conflicts in git
+;; smerge mode deals with merge conflicts in git. Prefix mapping is C-c v
 (setq smerge-command-prefix "\C-cv")
 #+END_SRC
 * LSP
@@ -773,8 +779,8 @@ More on emmet: https://www.emmet.io/
 #+END_SRC
 * JavaScript/TypeScript
 ** Node Path
+Adds the node_modules/.bin directory to the buffer exec_path.
 #+BEGIN_SRC emacs-lisp
-;; Adds the node_modules/.bin directory to the buffer exec_path.
 (use-package add-node-modules-path
    :ensure t
    :hook 
@@ -792,6 +798,7 @@ More on emmet: https://www.emmet.io/
     (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 #+END_SRC
 ** TIDE
+All for typescript
 #+BEGIN_SRC emacs-lisp
 ;; enable typescript in emacs
 (use-package typescript-mode
