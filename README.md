@@ -1,7 +1,7 @@
 # dotfiles
 All my dot files
 
-### Deeper dive into emacs and vim
+### Deeper dive into emacs and/or vim
 - My [**Emacs**](https://github.com/marinov98/MarinMacs) guide
 
 - My [**Vim**](https://github.com/marinov98/My-Vim) guide
@@ -9,7 +9,7 @@ All my dot files
 ### Quick Start
 - Clone this repo: `git clone https://github.com/marinov98/dotfiles.git`
 - cd into it `cd dotfiles/`
-- 2 options
+- 2 options (Make sure to make the scripts executable with `sudo chmod +x SCRIPT`
   - pick a one of the Os-specfic scripts `./OS-SCRIPT-GOES-HERE` 
   - Only copy the files to your home directory. `./configure.sh`
  
