@@ -30,7 +30,7 @@ I think I have actually used this package the most...
   (setq-default c-basic-offset 4);; indents 4 chars
   (setq indent-line-function 'insert-tab)
   (setq sgml-quick-keys 'close) ;; html autoclose
-  (setq default-frame-alist '((font . "Fira Code-12"))) ;; set font and font size
+  (setq default-frame-alist '((font . "Fira Code-14"))) ;; set font and font size
   (setq visible-bell t) ;; disable annoying end of buffer sounds
   (electric-pair-mode)  ;; auto closing brackets
 
@@ -452,27 +452,26 @@ My personal keybindings, you change these anyway you like
 - The framework I use for my autocomplete. 
 - Official Site: http://company-mode.github.io/
 #+BEGIN_SRC emacs-lisp
-(use-package company
-    :ensure t
-    :bind("C-n" . company-select-next)
-    :init
-    :config
-    (define-key company-active-map (kbd "M-n") nil) ; old selection key
-    (define-key company-active-map (kbd "<tab>") #'company-select-next) ; make tab new selection key
-    (setq company-idle-delay 0) ;; faster autcompletion
-    (setq company-minimum-prefix-length 3) ;; show completions after 3 chars
-    (setq company-selection-wrap-around t)
-    (setq global-company-mode t)) 
+  (use-package company
+      :ensure t
+      :config
+      (setq company-tooltip-limit 5) ; show 5 candidates at one time
+      (define-key company-active-map (kbd "M-n") nil) ; old selection key
+      (define-key company-active-map (kbd "<tab>") #'company-select-next) ; make tab new selection key
+      (setq company-idle-delay 0) ;; faster autcompletion
+      (setq company-minimum-prefix-length 3) ;; show completions after 3 chars
+      (setq company-selection-wrap-around t)
+      (setq global-company-mode t)) 
 
 
-    ;; elisp autocomplete
-    (defun my-elisp-mode-hook ()
-    "Hook for `emacs-lisp-mode'"
-    (set (make-local-variable 'company-backends)
-    '((company-capf company-elisp company-dabbrev-code company-yasnippet company-files))))
+      ;; elisp autocomplete
+      (defun my-elisp-mode-hook ()
+      "Hook for `emacs-lisp-mode'"
+      (set (make-local-variable 'company-backends)
+      '((company-capf company-elisp company-dabbrev-code company-yasnippet company-files))))
     
-    (add-hook 'emacs-lisp-mode-hook 'my-elisp-mode-hook)
-    (add-hook 'emacs-lisp-mode-hook 'company-mode)
+      (add-hook 'emacs-lisp-mode-hook 'my-elisp-mode-hook)
+      (add-hook 'emacs-lisp-mode-hook 'company-mode)
 #+END_SRC
 
 ** Undo-Tree
@@ -563,7 +562,8 @@ A jump to definition package that just works. Love this one!
     :ensure)
 #+END_SRC
 * Git
-Amazing git interface I have yet to get used to. Official Site: https://magit.vc/
+- Amazing git interface I have yet to get used to...
+- Official Site: https://magit.vc/
 #+BEGIN_SRC emacs-lisp
 (use-package magit
     :ensure t
