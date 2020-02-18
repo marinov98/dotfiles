@@ -25,44 +25,44 @@ I think I have actually used this package the most...
 * General Settings
 #+BEGIN_SRC emacs-lisp
   ;; Indententation 
-  (setq-default indent-tabs-mode nil) ;; disable default 8 
-  (setq-default tab-width 4) ;; default tab width 4 
-  (setq-default c-basic-offset 4);; indents 4 chars
+  (setq-default indent-tabs-mode nil)                    ;; disable default 8 tabs width
+  (setq-default tab-width 4)                             ;; set default tab width 4 
+  (setq-default c-basic-offset 4)                        ;; indents 4 chars for C-based languages
   (setq indent-line-function 'insert-tab)
-  (setq sgml-quick-keys 'close) ;; html autoclose
-  (setq default-frame-alist '((font . "Fira Code-14"))) ;; set font and font size
-  (setq visible-bell t) ;; disable annoying end of buffer sounds
-  (electric-pair-mode)  ;; auto closing brackets
+  (setq default-frame-alist '((font . "Fira Code-14")))  ;; set font and font size
+  (setq visible-bell t)                                  ;; disable annoying end of buffer sounds
+  (electric-pair-mode)                                   ;; auto closing brackets
 
   ;; Quick y/n prompt & Disable menu bars
-  (fset 'yes-or-no-p 'y-or-n-p) ;; change yes or no to y or n
-  (menu-bar-mode -1) ;; disable menu bar
-  (toggle-scroll-bar -1) ;; disable scroll bar
-  (tool-bar-mode -1) ;; disable tool bar
+  (fset 'yes-or-no-p 'y-or-n-p)                          ;; change yes or no to y or n
+  (menu-bar-mode -1)                                     ;; disable menu bar
+  (toggle-scroll-bar -1)                                 ;; disable scroll bar
+  (tool-bar-mode -1)                                     ;; disable tool bar
 
   ;; Disable annoying back up files (comment if you want to enable backup files) 
-  (setq make-backup-files nil) ;; stop creating backup~ files
-  (setq auto-save-default nil) ;; stop creating autosave# files
-  (setq create-lockfiles nil)  ;; stop creating any # files
+  (setq make-backup-files nil)                           ;; stop creating backup~ files
+  (setq auto-save-default nil)                           ;; stop creating autosave# files
+  (setq create-lockfiles nil)                            ;; stop creating any # files
 #+END_SRC
 * Personal Keybindings
 My personal keybindings, you change these anyway you like 
 #+BEGIN_SRC emacs-lisp
   ;; Movement (some might be disabled by evil mode)
-  (global-set-key (kbd "C-S-p") 'beginning-of-buffer) ;; top of file 
-  (global-set-key (kbd "C-S-n") 'end-of-buffer) ;; end of file DISABLED by evil 
+  (global-set-key (kbd "C-S-p") 'beginning-of-buffer)  ;; top of file 
+  (global-set-key (kbd "C-S-n") 'end-of-buffer)        ;; end of file DISABLED by evil 
   (global-set-key (kbd "M-m") 'move-beginning-of-line) ;; moves beginning of the line 
-  (global-set-key (kbd "C-a") 'back-to-indentation) ;; moves beginning of the first char 
+  (global-set-key (kbd "C-a") 'back-to-indentation)    ;; moves beginning of the first char 
 
   ;; Compiling and Buffers
-  (global-set-key (kbd "s-r") 'compile) ;; compile code
-  (global-set-key (kbd "C-c C-e") 'eval-buffer) ;; evaluate the buffer (mini reload)
+  ;; NOTE: s stands for command on MacOS, windows button for Windows
+  (global-set-key (kbd "s-r") 'compile)                ;; compile code
+  (global-set-key (kbd "C-c C-e") 'eval-buffer)        ;; evaluate the buffer (mini reload)
   (global-set-key (kbd "C-c b") 'switch-to-prev-buffer)
   (global-set-key (kbd "C-c n") 'switch-to-next-buffer)
   (global-set-key (kbd "C-c k") 'kill-current-buffer)
 
   ;; Commenting
-  (global-set-key (kbd "C-?") 'comment-region) ;; comment
+  (global-set-key (kbd "C-?") 'comment-region)         ;; comment large areas of text
 #+END_SRC
 * Dashboard 
 - This package is displayed when you start up emacs without selecting a file. 
@@ -378,7 +378,7 @@ My personal keybindings, you change these anyway you like
 - Projectile Homepage: https://projectile.readthedocs.io/en/latest/ 
 - Counsel-Projectile: https://github.com/ericdanan/counsel-projectile 
 #+BEGIN_SRC emacs-lisp
-  ;; Projectile-mode NOTE: s stands for command on MacOS, windows button for Windows
+  ;; Projectile-mode 
  (use-package projectile
      :ensure t
      :custom 
