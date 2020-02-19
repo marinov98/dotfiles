@@ -720,7 +720,7 @@ A jump to definition package that just works. Love this one!
 	   (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
 	   (setq web-mode-engines-alist
 		 '(("django"    . "\\.html\\'")
-		   ("ejs"  . "\\.ejs\\.")))
+		   ("ejs"  . "\\.ejs\\'")))
 	   (setq web-mode-ac-sources-alist
 	   '(("css" . (ac-source-css-property))
 	   ("vue" . (ac-source-words-in-buffer ac-source-abbrev))
