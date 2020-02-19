@@ -447,7 +447,7 @@ My personal keybindings, you change these anyway you like
      (setq flycheck-check-syntax-automatically '(mode-enabled save)); run flycheck only on save
      (global-flycheck-mode t)) 
      
-;; disable other checkers
+;; disable other checkers, we are using clangd language server
 (setq-default flycheck-disabled-checkers '(c/c++-clang c/c++-cppcheck c/c++-gcc))
 #+END_SRC
 ** Company
@@ -528,6 +528,7 @@ My personal keybindings, you change these anyway you like
 #+END_SRC
 * Coding Productivity 
 ** Beacon 
+I never lose where my cursor is thanks to this
 #+BEGIN_SRC emacs-lisp
 (use-package beacon
     :ensure t
@@ -535,13 +536,14 @@ My personal keybindings, you change these anyway you like
     (beacon-mode 1))
 #+END_SRC
 ** Neotree
+I want to try treemacs in the future, but this has been amazing for file browsing
 #+BEGIN_SRC emacs-lisp
 ;; Neotree
 (use-package neotree
     :ensure t
     :defer t
     :bind ("C-c t" . neotree-toggle)
-    :config (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
+    :config (setq neo-theme (if (display-graphic-p) 'icons 'arrow))) ; add icons
 #+END_SRC
 ** Iedit
 #+BEGIN_SRC emacs-lisp
@@ -587,7 +589,7 @@ A jump to definition package that just works. Love this one!
 (setq smerge-command-prefix "\C-cv")
 #+END_SRC
 * LSP
-  - LSP stands for Language Server Protocal and makes setting up autocompletion easy. 
+  - LSP stands for Language Server Protocal and makes setting up autocompletion and syntax checking easy. 
   - Official Repo: https://github.com/emacs-lsp/lsp-mode 
 ** config
 #+BEGIN_SRC emacs-lisp  
@@ -668,7 +670,7 @@ A jump to definition package that just works. Love this one!
            (add-hook 'c-mode-common-hook #'clang-format+-mode))
 #+END_SRC
 * Python
-** Version and Indentation
+** Version and indentation
 #+BEGIN_SRC emacs-lisp
   ;; indentation
   (setq py-python-command "python3")
