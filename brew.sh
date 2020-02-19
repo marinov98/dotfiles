@@ -2,15 +2,15 @@
 echo "installing xcode tools"
 xcode-select --install
 
-
 echo "Installing brew"
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null
 
 echo "installing packages with brew now"
 
 echo "installing terminal essentials..."
-brew install curl cask ranger tmux
+brew install curl ranger tmux
 brew install reattach-to-user-namespace
+brew tap caskroom/cask
 
 echo "installing programming essentials..."
 brew install --with-toolchain llvm
@@ -23,12 +23,10 @@ brew tap heroku/brew && brew install heroku
 
 echo "installing latex packages"
 brew install tap
-brew tap caskroom/cask
 brew cask install mactex
 
 echo "installing emacs and vim "
-brew tap d12frosted/emacs-plus
-brew install emacs-plus 
+brew cask install emacs
 brew install vim
 brew unlink vim
 brew install macvim
