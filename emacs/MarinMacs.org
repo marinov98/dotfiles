@@ -460,7 +460,7 @@ My personal keybindings, you change these anyway you like
       (setq company-tooltip-limit 5) ; show 5 candidates at one time
       (define-key company-active-map (kbd "M-n") nil) ; old selection key
       (define-key company-active-map (kbd "<tab>") #'company-select-next) ; make tab new selection key
-      (setq company-idle-delay 0) ;; faster autcompletion
+      (setq company-idle-delay 0.3) ;; slightly delay for optimal performance
       (setq company-minimum-prefix-length 3) ;; show completions after 3 chars
       (setq company-selection-wrap-around t)
       (setq global-company-mode t)) 
