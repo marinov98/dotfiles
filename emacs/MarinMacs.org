@@ -25,10 +25,9 @@ I think I have actually used this package the most...
 * General Settings
 #+BEGIN_SRC emacs-lisp
   ;; Indententation 
-  (setq-default indent-tabs-mode nil)                    ;; disable default 8 tabs width
+  (setq-default indent-tabs-mode nil)                    ;; disable tabs and use spaces
   (setq-default tab-width 4)                             ;; set default tab width 4 
-  (setq-default c-basic-offset 4)                        ;; indents 4 chars for C-based languages
-  (setq indent-line-function 'insert-tab)
+  (setq backward-delete-char-untabify-method 'hungry)    ;; backspaces entire tab instead of one space at a time
   (setq default-frame-alist '((font . "Fira Code-14")))  ;; set font and font size
   (setq visible-bell t)                                  ;; disable annoying end of buffer sounds
   (electric-pair-mode)                                   ;; auto closing brackets
@@ -639,9 +638,11 @@ A jump to definition package that just works. Love this one!
           company-lsp-enable-recompletion t))
 
 #+END_SRC
-* C++
+* C/C++
 ** Modern Font Lock
 #+BEGIN_SRC emacs-lisp
+(setq-default c-basic-offset 4) ;; indents 4 chars for C-based languages
+
 (use-package modern-cpp-font-lock
     :ensure t
     :config
@@ -667,10 +668,17 @@ A jump to definition package that just works. Love this one!
            (add-hook 'c-mode-common-hook #'clang-format+-mode))
 #+END_SRC
 * Python
-** Version
+** Version and Indentation
 #+BEGIN_SRC emacs-lisp
-(setq py-python-command "python3")
-(setq python-shell-interpreter "python3")
+  ;; indentation
+  (setq py-python-command "python3")
+  (setq python-shell-interpreter "python3")
+
+  ;; indentation
+  (setq-default python-basic-offset 4) ;; default 4
+  (setq-default python-indent-offset 4) ;; indent by 4
+  (setq python-indent-guess-indent-offset t) ;; allow emacs to guess offset
+  (setq python-indent-guess-indent-offset-verbose nil) ;; remove annoying warning
 #+END_SRC
 ** Elpy
  No longer need it because of LSP but keeping it for reference
@@ -807,7 +815,7 @@ Adds the node_modules/.bin directory to the buffer exec_path.
     :hook (j2-mode. js2-imenu-extras-mode))
     :config ;; disable annoying warnings
     (setq js2-strict-missing-semi-warning nil)
-    (setq js2-basic-offset 2) ;; set indentation to 2
+    (setq-default js2-basic-offset 2) ;; set indentation to 2
     (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 #+END_SRC
 ** TIDE
@@ -817,7 +825,9 @@ All for typescript
 (use-package typescript-mode
     :ensure t
     :mode (("\\.ts\\'" . typescript-mode)
-          ("\\.tsx\\'" . typescript-mode)))
+          ("\\.tsx\\'" . typescript-mode))
+    :config
+    (setq-default typescript-indent-level 2)) ;; indent 2 spaces by default
 
 ;; typescript integrated development environment
 (use-package tide
