@@ -33,4 +33,4 @@ fi
 
 npm config set prefix ~/.npm  
 export PATH=$HOME/.npm/bin:$PATH  
-
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
