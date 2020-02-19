@@ -24,7 +24,7 @@ I think I have actually used this package the most...
 #+END_SRC
 * General Settings
 #+BEGIN_SRC emacs-lisp
-  ;; Indententation 
+  ;; Indentation 
   (setq-default indent-tabs-mode nil)                    ;; disable tabs and use spaces
   (setq-default tab-width 4)                             ;; set default tab width 4 
   (setq backward-delete-char-untabify-method 'hungry)    ;; backspaces entire tab instead of one space at a time
@@ -117,8 +117,8 @@ My personal keybindings, you change these anyway you like
       :ensure t)
 #+END_SRC
 * Themes
+You can uncomment any themes that you like here
 #+BEGIN_SRC emacs-lisp
-;; You can uncomment any themes that you like
 ;; BE AWARE: emacs can have multiple themes on at the same time
 ;; Multiple themes can mix into a super theme
 ;; Some themes do not mix well which is why I commented some themes
@@ -243,6 +243,7 @@ My personal keybindings, you change these anyway you like
 #+END_SRC
 * Emacs Enhancements 
 ** Which-Key
+ A cheat sheet that comes in only when you need it
 #+BEGIN_SRC emacs-lisp
 (use-package which-key
 	:ensure t 
