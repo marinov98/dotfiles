@@ -10,12 +10,12 @@ echo "Certain bash configurations will be copied based on the system"
 if [[ $(uname -s) == Linux ]]
 then
     echo "machine found to be linux"
-    \cp terminal/.bashrc ~/
-    \cp terminal/.profile ~/
+    \cp bash/.bashrc ~/
+    \cp bash/.profile ~/
     \cp keyboard/.xprofile ~/
 else
     echo "Machine found to not be linux "
-    \cp terminal/.bash_profile ~/
+    \cp bash/.bash_profile ~/
 fi
 echo "bash done"
 
