@@ -265,7 +265,7 @@ My personal keybindings, you change these anyway you like
 (setq  gdb-show-main t )  ;; Non-nil means display source file containing the main routine at startup
 #+END_SRC
 ** Ivy-Integration 
- Ivy Reference manual: https://oremacs.com/swiper/
+ Ivy manual: https://oremacs.com/swiper/
 #+BEGIN_SRC emacs-lisp
 
    ;; Pretty Icons
