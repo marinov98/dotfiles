@@ -594,7 +594,7 @@ A jump to definition package that just works. Love this one!
 (setq smerge-command-prefix "\C-cv")
 #+END_SRC
 * Hydra
-- I have yet to play around with this package, you can go pretty crazy here
+- I have yet to properly play around with this package, you can go pretty crazy here
 - Repo: https://github.com/abo-abo/hydra
 ** config
 #+BEGIN_SRC emacs-lisp
@@ -604,20 +604,52 @@ A jump to definition package that just works. Love this one!
     (setq hydra-is-helpful t)
     (setq hydra-hint-display-type 'lv))
 
-(use-package pretty-hydra
-    :ensure t
-    :requires hydra)
+;; for reference when I learn hydra better 
+;use-package pretty-hydra
+;   :ensure t
+;   :requires hydra)
 #+END_SRC
 ** Hydras
 - I hope to fill these up in the future
+- Customize as you see fit
 #+BEGIN_SRC emacs-lisp
-;; I actually find this first one pretty useful
-(defhydra hydra-zoom (global-map "<f2>")
-  "zoom"
-  ("k" text-scale-increase "in")
-  ("j" text-scale-decrease "out")
-  ("0" (text-scale-adjust 0) "reset")
-  ("q" nil "quit" :color blue))
+  ;; I actually find this first one pretty useful
+  (defhydra hydra-zoom (global-map "<f2>" :color pink)
+    "zoom"
+    ("k" text-scale-increase "in")
+    ("j" text-scale-decrease "out")
+    ("0" (text-scale-adjust 0) "reset")
+    ("q" nil "quit" :color blue))
+
+   ;; projectile
+  (defhydra hydra-projectile (global-map "S-SPC" :color pink)
+    "Counsel Projectile 🚀"
+    ("f" counsel-projectile-find-file "find")
+    ("F" counsel-projectile-find-file-dwin "find-dwin")
+    ("g" counsel-projectile-git-grep "git grep")
+    ("s" counsel-projectile-switch-project "switch project")
+    ("b" counsel-projectile-switch-to-buffer "buffer switch")
+    ("q" nil "quit" :color blue))
+
+  ;; finding and searching
+  (defhydra hydra-window (global-map "M-SPC" :color pink)
+   "⚡ Ivy/Windows ⚡"
+    ("f" counsel-find-file "find")
+    ("x" counsel-M-x "M-x")
+    ("s" swiper-isearch "search")
+    ;; splitting
+    ("v" split-window-right "v-split")
+    ("b" split-window-below "h-split")
+    ;; movement
+    ("h" windmove-left)
+    ("j" windmove-down)
+    ("k" windmove-up)
+    ("l" windmove-right)
+    ;; deletion and quitting
+    ("d" delete-window "delete window")
+    ("K" kill-this-buffer "kill buffer")
+    ("q" nil "quit" :color blue))
+
 #+END_SRC
 * LSP
   - LSP stands for Language Server Protocal and makes setting up autocompletion and syntax checking easy. 
