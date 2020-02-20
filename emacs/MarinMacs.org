@@ -35,7 +35,6 @@ My personal keybindings, you change these anyway you like
   (global-set-key (kbd "M-m") 'move-beginning-of-line) ;; moves beginning of the line 
 
   ;; Compiling and Buffers
-  ;; NOTE: s stands for command on MacOS, windows button for Windows
   (global-set-key (kbd "C-c e") 'compile)              ;; compile code
   (global-set-key (kbd "C-c C-e") 'eval-buffer)        ;; evaluate the buffer (mini reload)
   (global-set-key (kbd "C-c b") 'switch-to-prev-buffer)
@@ -281,8 +280,15 @@ Mainly for c-based languages
      (setq enable-recursive-minibuffers t)
      (setq ivy-use-virtual-buffers t))
 
+ ;; Swiper 
+ (use-package swiper
+     :ensure t
+     :bind 
+     (("C-s" . swiper-isearch)
+     ("C-a" . swiper-isearch-backward)
+     ("C-c C-r" . ivy-resume)))
 
-     ;; Counsel
+ ;; Counsel
  (use-package counsel
      :ensure t
      :bind
@@ -302,17 +308,10 @@ Mainly for c-based languages
      counsel-pt-base-command "pt -S --nocolor --nogroup -e %s"
      counsel-find-file-at-point t))
 
-     ;; Swiper 
- (use-package swiper
-     :ensure t
-     :bind 
-     (("C-s" . swiper-isearch)
-     ("C-a" . swiper-isearch-backward)
-     ("C-c C-r" . ivy-resume)))
-
     ;; postFrame
  (use-package ivy-posframe
      :ensure t
+     :requires ivy
      :config
      (setq ivy-posframe-display-functions-alist
      '((swiper-isearch . ivy-posframe-display-at-frame-top-center)
@@ -651,6 +650,25 @@ A jump to definition package that just works. Love this one!
            company-lsp-enable-recompletion t))
 
 #+END_SRC
+* DAP
+- DAP stands for Debug Adapter Protocal works similiarly to LSP but for debugging
+- This is purely experimental and will not be included in the guide until I feel like I know how to use it
+- Repo: https://github.com/emacs-lsp/dap-mode#configuration
+#+BEGIN_SRC emacs-lisp
+;; only installing because dap-mode requires it
+ (use-package posframe
+     :ensure t)
+
+ (use-package dap-mode
+     :ensure t
+     :hook
+     (lsp-mode . (lambda () (dap-mode t) (dap-ui-mode t) (dap-tooltip-mode 1) (tooltip-mode 1)))
+     :config
+     (dap-mode t)
+     (dap-ui-mode t)
+     (dap-tooltip-mode 1)
+     (tooltip-mode 1))
+#+END_SRC
 * C/C++
 ** Settings
 #+BEGIN_SRC emacs-lisp
@@ -664,6 +682,13 @@ A jump to definition package that just works. Love this one!
     :ensure t
     :config
     (modern-c++-font-lock-global-mode t))
+#+END_SRC
+** Debugging
+Experimental, not fully stable
+#+BEGIN_SRC emacs-lisp
+(use-package dap-gdb-lldb
+  :ensure nil
+  :requires dap-mode)
 #+END_SRC
 ** Clang-Format
  - The only package that utilizes quelpa at the moment :))
@@ -697,6 +722,22 @@ A jump to definition package that just works. Love this one!
   (setq-default python-indent-offset 4) 
   (setq python-indent-guess-indent-offset t) ;; allow emacs to guess offset
   (setq python-indent-guess-indent-offset-verbose nil) ;; remove annoying warning
+#+END_SRC
+** Debugging
+Experimental, not fully stable
+#+BEGIN_SRC emacs-lisp
+(use-package dap-python
+  :ensure nil
+  :requires dap-mode
+  :config
+  (dap-register-debug-template "My App"
+  (list :type "python"
+        :args "-i"
+        :cwd nil
+        :env '(("DEBUG" . "1"))
+        :target-module (expand-file-name "~/src/myapp/.env/bin/myapp")
+        :request "launch"
+        :name "My App")))
 #+END_SRC
 ** Elpy
  No longer need it because of LSP but keeping it for reference
@@ -843,6 +884,7 @@ Adds the node_modules/.bin directory to the buffer exec_path.
     (setq-default js2-basic-offset 2) ;; set indentation to 2
     (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 #+END_SRC
+
 ** TIDE
 All for typescript
 #+BEGIN_SRC emacs-lisp
@@ -871,4 +913,23 @@ All for typescript
     ;; formats the buffer before saving
     (add-hook 'before-save-hook 'tide-format-before-save)
     (add-hook 'typescript-mode-hook #'setup-tide-mode))
+#+END_SRC
+** Debugging
+Experimental, not fully stable
+*** Front-end
+#+BEGIN_SRC emacs-lisp
+;; debugging in chrome
+(use-package dap-chrome
+  :ensure nil
+  :requires dap-mode)
+  
+(use-package dap-firefox
+    :ensure nil
+    :requires dap-mode)
+#+END_SRC
+*** Back-end
+#+BEGIN_SRC emacs-lisp
+(use-package dap-node
+  :ensure nil
+  :requires dap-mode)
 #+END_SRC
