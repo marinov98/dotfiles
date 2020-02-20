@@ -448,8 +448,6 @@ You can uncomment any themes that you like here
      (setq flycheck-check-syntax-automatically '(mode-enabled save)); run flycheck only on save
      (global-flycheck-mode t)) 
      
-;; disable other checkers, we are using clangd language server
-(setq-default flycheck-disabled-checkers '(c/c++-clang c/c++-cppcheck c/c++-gcc))
 #+END_SRC
 ** Company
 - The framework I use for my autocomplete. 
@@ -539,12 +537,14 @@ I never lose where my cursor is thanks to this
 ** Neotree
 I want to try treemacs in the future, but this has been amazing for file browsing
 #+BEGIN_SRC emacs-lisp
-;; Neotree
-(use-package neotree
-    :ensure t
-    :defer t
-    :bind ("C-c t" . neotree-toggle)
-    :config (setq neo-theme (if (display-graphic-p) 'icons 'arrow))) ; add icons
+  ;; Neotree
+  (use-package neotree
+      :ensure t
+      :defer t
+      :bind ("C-c t" . neotree-toggle)
+      :config 
+      (setq neo-smart-open t)
+      (setq neo-theme (if (display-graphic-p) 'icons 'arrow))) ; add icons
 #+END_SRC
 ** Iedit
 #+BEGIN_SRC emacs-lisp
@@ -594,58 +594,65 @@ A jump to definition package that just works. Love this one!
   - Official Repo: https://github.com/emacs-lsp/lsp-mode 
 ** config
 #+BEGIN_SRC emacs-lisp  
- (use-package lsp-mode
-    :ensure t
-    :config
-    (setq gc-cons-threshold 100000000)
-    (setq read-process-output-max (* 1024 1024)) ;; 1mb
-    (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error"))
-    (setq lsp-prefer-flymake nil) ; we are using flycheck and not flymake
-    (add-hook 'c++-mode-hook #'lsp)
-    (add-hook 'python-mode-hook #'lsp)
-    (add-hook 'js2-mode-hook #'lsp)
-    (add-hook 'json-mode-hook #'lsp)
-    (add-hook 'web-mode-hook #'lsp)
-    (add-hook 'shell-mode-hook #'lsp)
-    (add-hook 'sh-mode-hook #'lsp)
-    (add-hook 'yaml-mode-hook #'lsp)
-    (add-hook 'typescript-mode-hook #'lsp))
+  (use-package lsp-mode
+     :ensure t
+     :config
+     (setq gc-cons-threshold 100000000)
+     (setq read-process-output-max (* 1024 1024)) ;; 1mb
+     (setq lsp-idle-delay 0.15) ; small delay for less strain
+     (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error"))
+     (setq lsp-prefer-flymake nil) ; we are using flycheck and not flymake
+     ;; hook your languages below
+     (add-hook 'c++-mode-hook #'lsp)
+     (add-hook 'python-mode-hook #'lsp)
+     (add-hook 'js2-mode-hook #'lsp)
+     (add-hook 'json-mode-hook #'lsp)
+     (add-hook 'web-mode-hook #'lsp)
+     (add-hook 'shell-mode-hook #'lsp)
+     (add-hook 'sh-mode-hook #'lsp)
+     (add-hook 'yaml-mode-hook #'lsp)
+     (add-hook 'typescript-mode-hook #'lsp))
 
- (use-package lsp-ui
-   :requires lsp-mode flycheck
-   :ensure t
-   :hook (lsp-mode . lsp-ui-mode)
-   :config
-   (setq lsp-ui-flycheck-live-reporting nil) ;; allows our previous flycheck setting to only check syntax on save to work
-   (setq lsp-ui-doc-enable t
-         lsp-ui-doc-use-childframe t
-         lsp-ui-doc-position 'top
-         lsp-ui-doc-include-signature t
-         lsp-ui-sideline-enable nil
-         lsp-ui-flycheck-enable t
-         lsp-ui-flycheck-list-position 'right
-         lsp-ui-peek-enable t
-         lsp-ui-peek-list-width 60
-         lsp-ui-peek-peek-height 25))
-
-  (use-package company-lsp
-    :requires company
+  (use-package lsp-ui
+    :requires lsp-mode flycheck
     :ensure t
+    :hook (lsp-mode . lsp-ui-mode)
     :config
-    (push 'company-lsp company-backends)
-     ;; Disable client-side cache because the LSP server does a better job.
-    (setq company-transformers nil
-          company-lsp-async t
-          company-lsp-cache-candidates nil
-          company-lsp-enable-snippet t
-          company-lsp-enable-recompletion t))
+    (setq lsp-ui-flycheck-live-reporting nil) ;; allows our previous flycheck setting to only check syntax on save to work
+    (setq eldoc-idle-delay 0.65) ;; delay eldoc for a little
+    ;; ui customization
+    (setq lsp-ui-doc-enable t
+          lsp-ui-doc-delay 0.65 ;; display doc after 6.5/10 of a second
+          lsp-ui-doc-use-childframe t
+          lsp-ui-doc-position 'top
+          lsp-ui-doc-include-signature t
+          lsp-ui-sideline-enable nil
+          lsp-ui-flycheck-enable t
+          lsp-ui-flycheck-list-position 'right
+          lsp-ui-peek-enable t
+          lsp-ui-peek-list-width 60
+          lsp-ui-peek-peek-height 25))
+
+   (use-package company-lsp
+     :requires company
+     :ensure t
+     :config
+     (push 'company-lsp company-backends)
+      ;; Disable client-side cache because the LSP server does a better job.
+     (setq company-transformers nil
+           company-lsp-async t
+           company-lsp-cache-candidates nil
+           company-lsp-enable-snippet t
+           company-lsp-enable-recompletion t))
 
 #+END_SRC
 * C/C++
-** Modern Font Lock
+** Settings
 #+BEGIN_SRC emacs-lisp
-(setq-default c-basic-offset 4) ;; indents 4 chars for C-based languages
+(setq-default c-basic-offset 4) ;; indentation for C-based languages
+(setq-default flycheck-disabled-checkers '(c/c++-clang c/c++-cppcheck c/c++-gcc)) ;; disable other checkers since we are using clangd
 
+;; enable modern font lock for >=c++11
 (use-package modern-cpp-font-lock
     :ensure t
     :config
@@ -671,15 +678,15 @@ A jump to definition package that just works. Love this one!
            (add-hook 'c-mode-common-hook #'clang-format+-mode))
 #+END_SRC
 * Python
-** Version and indentation
+** Settings
 #+BEGIN_SRC emacs-lisp
-  ;; indentation
+  ;; version 
   (setq py-python-command "python3")
   (setq python-shell-interpreter "python3")
 
   ;; indentation
-  (setq-default python-basic-offset 4) ;; default 4
-  (setq-default python-indent-offset 4) ;; indent by 4
+  (setq-default python-basic-offset 4) 
+  (setq-default python-indent-offset 4) 
   (setq python-indent-guess-indent-offset t) ;; allow emacs to guess offset
   (setq python-indent-guess-indent-offset-verbose nil) ;; remove annoying warning
 #+END_SRC
@@ -816,8 +823,9 @@ Adds the node_modules/.bin directory to the buffer exec_path.
 (use-package js2-mode
     :ensure t
     :hook (j2-mode. js2-imenu-extras-mode))
-    :config ;; disable annoying warnings
-    (setq js2-strict-missing-semi-warning nil)
+    :config 
+    (setq js2-strict-missing-semi-warning nil) ;; disable annoying warnings
+    (setq js2-mode-show-parse-errors nil) ;; do not parse errors, let langauage server do that
     (setq-default js2-basic-offset 2) ;; set indentation to 2
     (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 #+END_SRC
