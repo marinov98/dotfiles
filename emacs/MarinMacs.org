@@ -268,7 +268,7 @@ Mainly for c-based languages
  Ivy manual: https://oremacs.com/swiper/
 #+BEGIN_SRC emacs-lisp
 
-     ;; Ivy
+ ;; Ivy
  (use-package ivy
      :ensure t
      :diminish (ivy-mode)
@@ -308,7 +308,7 @@ Mainly for c-based languages
      counsel-pt-base-command "pt -S --nocolor --nogroup -e %s"
      counsel-find-file-at-point t))
 
-    ;; postFrame
+ ;; ivy-posframe
  (use-package ivy-posframe
      :ensure t
      :requires ivy
