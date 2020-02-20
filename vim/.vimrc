@@ -6,43 +6,38 @@ endif
 
 call plug#begin('~/.vim/plugged')
 """"""""""""""""""""""
-""""""" THEMES
+""""""" THEMES:
 """"""""""""""""""""""
-Plug 'https://github.com/altercation/vim-colors-solarized'
-Plug 'drewtempelmeyer/palenight.vim'
-Plug 'https://github.com/nanotech/jellybeans.vim'
-Plug 'croaker/mustang-vim'
+"Plug 'https://github.com/nanotech/jellybeans.vim'
 Plug 'liuchengxu/space-vim-dark'
 """"""""""""""""""""""
-""""""" File Managment
+""""""" File Search:
 """"""""""""""""""""""
 Plug 'ctrlpvim/ctrlp.vim'
 """"""""""""""""""""""
-""""""" CODING
+""""""" CODING:
 """"""""""""""""""""""
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'| Plug 'honza/vim-snippets'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plug 'https://github.com/rhysd/vim-clang-format'
-Plug 'https://github.com/scrooloose/nerdtree'
 Plug 'https://github.com/jiangmiao/auto-pairs'
 Plug 'ervandew/supertab'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'https://github.com/gcmt/taboo.vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
 """"""""""""""""""""""
-""""""" MODELINE
+""""""" MODELINE:
 """"""""""""""""""""""
 Plug 'itchyny/lightline.vim'
 """"""""""""""""""""""
-""""""" VIM UTILITY
+""""""" VIM UTILITY:
 """"""""""""""""""""""
 Plug 'https://github.com/tpope/vim-repeat'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
 """"""""""""""""""""""
-""""""" WEB-DEV
+""""""" WEB DEV:
 """"""""""""""""""""""
 Plug 'https://github.com/pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
@@ -53,13 +48,13 @@ Plug 'https://github.com/ap/vim-css-color'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 """"""""""""""""""""""
-""""""" GITHUB
+""""""" GITHUB:
 """"""""""""""""""""""
 Plug 'https://github.com/itchyny/vim-gitbranch'
 call plug#end()
 
 """"""""""""""""""""""
-""""""" PRETTIER 
+""""""" PRETTIER:
 """"""""""""""""""""""
 let g:prettier#exec_cmd_path = "~/.prettierrc"
 let g:prettier#quickfix_enabled = 0
@@ -69,17 +64,37 @@ autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.gra
 " Clang-Format
 autocmd FileType c,cpp,objc ClangFormatAutoEnable
 		
-" Nerd Tree
-map <C-t> :NERDTreeToggle<CR>
-map <C-f> :NERDTree<CR>
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-let NERDTreeAutoDeleteBuffer = 1
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
+" File Browsing netrw
+let g:netrw_banner=0 " Disable annoying banner
+let g:netrw_browse_split=4 " open in prior window
+let g:netrw_altv=1          " open splits to the right
+let g:netrw_liststyle=3     " tree view
+let g:netrw_winsize = 25    " take 25 % of window
+let g:netrw_list_hide=netrw_gitignore#Hide()
+let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+let g:NetrwIsOpen=0
+
+function! ToggleNetrw()
+    if g:NetrwIsOpen
+        let i = bufnr("$")
+        while (i >= 1)
+            if (getbufvar(i, "&filetype") == "netrw")
+                silent exe "bwipeout " . i 
+            endif
+            let i-=1
+        endwhile
+        let g:NetrwIsOpen=0
+    else
+        let g:NetrwIsOpen=1
+        silent Lexplore
+    endif
+endfunction
+
+" Add your own mapping. For example:
+noremap <silent> <C-T> :call ToggleNetrw()<CR>
 
 """"""""""""""""""""""
-""""""" AUTO-COMPLETE 
+""""""" AUTOCOMPLETE:
 """"""""""""""""""""""
 " better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
@@ -98,9 +113,6 @@ set hidden
 set nobackup
 set nowritebackup
 
-" Better display for messages
-set cmdheight=2
-
 " You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=300
 
@@ -113,7 +125,7 @@ set signcolumn=yes
 
 " Modeline
 let g:lightline = {
-  \ 'colorscheme': 'one'	,
+  \ 'colorscheme': 'jellybeans'	,
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
     \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -161,7 +173,7 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
  
 """"""""""""""""""""""
-""""""" BASICS
+""""""" BASICS:
 """"""""""""""""""""""
 syntax enable
 set nocompatible
@@ -199,11 +211,27 @@ set laststatus=2
 set noshowmode
 set t_Co=256
 
+
+" MODE SPECIFIC SETTINGS:
+autocmd FileType html setlocal ts=2 sts=2 sw=2
+autocmd FileType css setlocal ts=2 sts=2 sw=2
+autocmd FileType javascript setlocal ts=2 sts=2 sw=2
+autocmd FileType jsx setlocal ts=2 sts=2 sw=2
+autocmd FileType typescript setlocal ts=2 sts=2 sw=2
+autocmd FileType tsx setlocal ts=2 sts=2 sw=2
+
+
 " Don't offer to open certain files/directories
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
 set wildignore+=*.pdf,*.psd
 set wildignore+=node_modules/*,bower_components/*
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+
+" FINDING FILES:
+
+" Search down into subfolders
+" Provides tab-completion for all file-related tasks
+set path+=**
 
 augroup project
     autocmd!
