@@ -593,6 +593,32 @@ A jump to definition package that just works. Love this one!
 ;; smerge mode deals with merge conflicts in git. Prefix mapping is C-c v
 (setq smerge-command-prefix "\C-cv")
 #+END_SRC
+* Hydra
+- I have yet to play around with this package, you can go pretty crazy here
+- Repo: https://github.com/abo-abo/hydra
+** config
+#+BEGIN_SRC emacs-lisp
+(use-package hydra
+    :ensure t
+    :config
+    (setq hydra-is-helpful t)
+    (setq hydra-hint-display-type 'lv))
+
+(use-package pretty-hydra
+    :ensure t
+    :requires hydra)
+#+END_SRC
+** Hydras
+- I hope to fill these up in the future
+#+BEGIN_SRC emacs-lisp
+;; I actually find this first one pretty useful
+(defhydra hydra-zoom (global-map "<f2>")
+  "zoom"
+  ("k" text-scale-increase "in")
+  ("j" text-scale-decrease "out")
+  ("0" (text-scale-adjust 0) "reset")
+  ("q" nil "quit" :color blue))
+#+END_SRC
 * LSP
   - LSP stands for Language Server Protocal and makes setting up autocompletion and syntax checking easy. 
   - Official Repo: https://github.com/emacs-lsp/lsp-mode 
