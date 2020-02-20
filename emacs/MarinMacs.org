@@ -5,23 +5,6 @@
 #+TAGS: Emacs
 #+DESCRIPTION: My emacs config for software development
 
-* Quelpa
-#+BEGIN_SRC emacs-lisp
-(use-package quelpa-use-package
-    :ensure t)
-#+END_SRC
-* Org-Archive
-#+BEGIN_SRC emacs-lisp
-(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
-#+END_SRC
-* Restart-Emacs
-I think I have actually used this package the most... 
-#+BEGIN_SRC emacs-lisp
-(use-package restart-emacs
-    :ensure t
-    :config
-    (global-set-key (kbd "<f5>") 'restart-emacs)) ;; To restart emacs
-#+END_SRC
 * General Settings
 #+BEGIN_SRC emacs-lisp
   ;; Indentation 
@@ -60,6 +43,24 @@ My personal keybindings, you change these anyway you like
   (global-set-key (kbd "C-c n") 'switch-to-next-buffer)
   (global-set-key (kbd "C-c k") 'kill-current-buffer)
 
+#+END_SRC
+* Org-Archive
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
+#+END_SRC
+* Quelpa
+'Build and install your Emacs Lisp packages on-the-fly and directly from source.'
+#+BEGIN_SRC emacs-lisp
+(use-package quelpa-use-package
+    :ensure t)
+#+END_SRC
+* Restart-Emacs
+I think I have actually used this package the most... Does exactly what it says
+#+BEGIN_SRC emacs-lisp
+(use-package restart-emacs
+    :ensure t
+    :config
+    (global-set-key (kbd "<f5>") 'restart-emacs)) ;; To restart emacs
 #+END_SRC
 * Dashboard 
 - This package is displayed when you start up emacs without selecting a file. 
@@ -249,6 +250,7 @@ You can uncomment any themes that you like here
 	(which-key-mode))
 #+END_SRC
 ** Ace-Window
+Useful if you work on multiple windows and want an efficient way of switching between them
 #+BEGIN_SRC emacs-lisp
 (use-package ace-window
      :ensure t
@@ -257,6 +259,7 @@ You can uncomment any themes that you like here
      (setq aw-background nil))
 #+END_SRC
 ** Debugger
+Mainly for c-based languages
 #+BEGIN_SRC emacs-lisp
 ;; Debugger
 (global-set-key (kbd "C-c d") 'gdb)
@@ -267,18 +270,14 @@ You can uncomment any themes that you like here
  Ivy manual: https://oremacs.com/swiper/
 #+BEGIN_SRC emacs-lisp
 
-   ;; Pretty Icons
-   (use-package all-the-icons
-       :ensure t)
-
-
    ;; Ivy
-   (use-package ivy
+  (use-package ivy
        :ensure t
        :diminish (ivy-mode)
        :config
        (ivy-mode 1)
        (setq ivy-use-virtual-buffers t)
+       (setq ivy-display-style 'fancy)
        (setq enable-recursive-minibuffers t))
 
 
@@ -286,7 +285,11 @@ You can uncomment any themes that you like here
    (use-package counsel
        :ensure t
        :bind
-       (("M-y" . counsel-yank-pop)
+       (("M-x" . counsel-M-x)
+       ("C-x C-f" . counsel-find-file)
+       ("C-c g" . counsel-git)
+       ("C-c j" . counsel-git-grep)
+       ("M-y" . counsel-yank-pop)
        :map ivy-minibuffer-map
        ("M-y" . ivy-next-line))
        :config
@@ -298,64 +301,44 @@ You can uncomment any themes that you like here
        counsel-find-file-at-point t))
 
    ;; Swiper 
-   (use-package swiper
-       :ensure t
-       :bind 
-       (("C-s" . swiper)
-       ("C-r" . swiper)
-       ("M-x" . counsel-M-x)
-       ("C-c g" . counsel-git)
-       ("C-c C-r" . ivy-resume)
-       ("C-x C-f" . counsel-find-file))
-       :config
-       (progn
-       (ivy-mode 1)
-       (setq ivy-use-virtual-buffers t)
-       (setq ivy-display-style 'fancy)
-       (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)))
+ (use-package swiper
+     :ensure t
+     :bind 
+     (("C-s" . swiper)
+     ("C-c C-r" . ivy-resume))
+     :config
+     (progn
+     (ivy-mode 1)
+     (setq ivy-use-virtual-buffers t)
+     (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)))
 
   ;; postFrame
  (use-package ivy-posframe
-   :ensure t
-   :config
-   (setq ivy-posframe-display-functions-alist
-       '((swiper          . ivy-posframe-display-at-frame-top-center)
-         (counsel-find-file . ivy-posframe-display-at-window-center)
-         (counsel-M-x     . ivy-posframe-display-at-window-center)
-         (counsel-projectile . ivy-posframe-display-at-window-center)
-         (counsel-projectile-find-file . ivy-posframe-display-at-window-center)
-         (counsel-projectile-find-file-dwin . ivy-posframe-display-at-window-center)
-         (counsel-projectile-grep . ivy-postframe-display-at-window-center)
-         (counsel-projectile-git-grep . ivy-posframe-display-at-window-center)
-         (counsel-projectile-swith-to-buffer . ivy-posframe-display-at-window-center)
-         (counsel-projectile-switch-project . ivy-posframe-display-at-window-center)
-         (t . ivy-posframe-display-at-window-center)))
-   (setq ivy-posframe-parameters
-   '((left-fringe . 10)
-   (right-fringe . 10)))
-   (setq ivy-posframe-border-width 1)
-   (put 'ivy-posframe 'face-alias 'default)
-   (ivy-posframe-mode 1))
+     :ensure t
+     :config
+     (setq ivy-posframe-display-functions-alist
+     '((swiper          . ivy-posframe-display-at-frame-top-center)
+     (counsel-find-file . ivy-posframe-display-at-window-center)
+     (counsel-M-x     . ivy-posframe-display-at-window-center)
+     (counsel-projectile . ivy-posframe-display-at-window-center)
+     (counsel-projectile-find-file . ivy-posframe-display-at-window-center)
+     (counsel-projectile-find-file-dwin . ivy-posframe-display-at-window-center)
+     (counsel-projectile-grep . ivy-postframe-display-at-window-center)
+     (counsel-projectile-git-grep . ivy-posframe-display-at-window-center)
+     (counsel-projectile-swith-to-buffer . ivy-posframe-display-at-window-center)
+     (counsel-projectile-switch-project . ivy-posframe-display-at-window-center)
+     (t . ivy-posframe-display-at-window-center)))
+     (setq ivy-posframe-parameters
+     '((left-fringe . 10)
+     (right-fringe . 10)))
+     (setq ivy-posframe-border-width 1)
+     (put 'ivy-posframe 'face-alias 'default)
+     (ivy-posframe-mode 1))
 
-(use-package all-the-icons-ivy
-  :ensure t
-  :after (all-the-icons ivy)
-  :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup)
-  :config
-  (setq all-the-icons-ivy-file-commands
-  '(counsel-find-file 
-   counsel-file-jump 
-   counsel-recentf 
-   counsel-projectile 
-   counsel-projectile-switch-to-buffer 
-   counsel-projectile-grep 
-   counsel-projectile-git-grep 
-   counsel-projectile-switch-project 
-   counsel-projectile-find-file 
-   counsel-projectile-find-file-dwin 
-   counsel-projectile-find-dir)))
 #+END_SRC
 ** Ranger
+ - An alternative to dired.
+ - ranger file manager but in emacs, works the exact same way
 #+BEGIN_SRC emacs-lisp
 ;; Ranger
 (use-package ranger
@@ -363,13 +346,41 @@ You can uncomment any themes that you like here
    :config
    (ranger-override-dired-mode t)
    (global-set-key (kbd "C-c r") 'ranger)) ;; start ranger from file
-    
 
-(use-package all-the-icons-dired
-    :ensure t
-    :after ranger
-    :config
-    (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
+#+END_SRC
+** All-The-Icons
+- This is where the file icons come from
+- Make sure to run `M-x all-the-icons-install-fonts` if you want them to work!
+#+BEGIN_SRC emacs-lisp
+   ;; Pretty Icons
+ (use-package all-the-icons
+     :ensure t)
+
+ ;; icons for ivy
+ (use-package all-the-icons-ivy
+     :ensure t
+     :after (all-the-icons ivy)
+     :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup)
+     :config
+     (setq all-the-icons-ivy-file-commands
+     '(counsel-find-file 
+       counsel-file-jump 
+       counsel-recentf 
+       counsel-projectile 
+       counsel-projectile-switch-to-buffer 
+       counsel-projectile-grep 
+       counsel-projectile-git-grep 
+       counsel-projectile-switch-project 
+       counsel-projectile-find-file 
+       counsel-projectile-find-file-dwin 
+       counsel-projectile-find-dir)))
+   
+ ;; icons for dired/ranger mode
+ (use-package all-the-icons-dired
+     :ensure t
+     :after ranger
+     :config
+     (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
 #+END_SRC
 * Project Management
 - Amazing tool for managing projects! 
@@ -541,10 +552,12 @@ I want to try treemacs in the future, but this has been amazing for file browsin
       :defer t
       :bind ("C-c t" . neotree-toggle)
       :config 
-      (setq neo-smart-open t)
-      (setq neo-theme (if (display-graphic-p) 'icons 'arrow))) ; add icons
+      (setq neo-smart-open t) ; update every time its toggled
+      (setq neo-theme (if (display-graphic-p) 'icons 'arrow))) ; add icons (utilizes all-the-icons)
 #+END_SRC
 ** Iedit
+- Nice utility that finds all matches and replaces them with the user's choice
+- Very similiar to multiple cursors
 #+BEGIN_SRC emacs-lisp
 (use-package iedit
     :ensure t
@@ -708,6 +721,7 @@ A jump to definition package that just works. Love this one!
 * Web-Development 
 ** Web-Mode
  - Autonomous emacs major-mode for editing web templates. 
+ - Essential for web-development. Highlighting, auto-closing tags, just great.
  - Official Website: http://web-mode.org/
 #+BEGIN_SRC emacs-lisp
 (use-package web-mode
@@ -760,6 +774,7 @@ A jump to definition package that just works. Love this one!
 
 #+END_SRC
 ** Modes
+These are modes related to web-dev that I have worked with 
 #+BEGIN_SRC emacs-lisp
 (use-package rjsx-mode
     :ensure t
@@ -778,6 +793,7 @@ A jump to definition package that just works. Love this one!
     :ensure t)
 #+END_SRC
 ** Skewer
+'live web-development in emacs'
 #+BEGIN_SRC emacs-lisp
 (use-package skewer-mode
     :ensure t
@@ -790,6 +806,7 @@ A jump to definition package that just works. Love this one!
     
 #+END_SRC
 ** Impatient-Mode
+'See the effect of your HTML as you type it.'
    #+BEGIN_SRC emacs-lisp
    (use-package impatient-mode
        :ensure t)  
@@ -817,6 +834,8 @@ Adds the node_modules/.bin directory to the buffer exec_path.
    (rjsx-mode . add-node-modules-path)))
 #+END_SRC
 ** Js2-mode
+- A 'better' mode for editing javascript files. Can sometimes have performance issues depending on emacs version
+- There should be fixes in Emacs >= 27.05
 #+BEGIN_SRC emacs-lisp
 (use-package js2-mode
     :ensure t
