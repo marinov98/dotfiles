@@ -54,14 +54,12 @@ My personal keybindings, you change these anyway you like
 
   ;; Compiling and Buffers
   ;; NOTE: s stands for command on MacOS, windows button for Windows
-  (global-set-key (kbd "s-r") 'compile)                ;; compile code
+  (global-set-key (kbd "C-c e") 'compile)              ;; compile code
   (global-set-key (kbd "C-c C-e") 'eval-buffer)        ;; evaluate the buffer (mini reload)
   (global-set-key (kbd "C-c b") 'switch-to-prev-buffer)
   (global-set-key (kbd "C-c n") 'switch-to-next-buffer)
   (global-set-key (kbd "C-c k") 'kill-current-buffer)
 
-  ;; Commenting
-  (global-set-key (kbd "C-?") 'comment-region)         ;; comment large areas of text
 #+END_SRC
 * Dashboard 
 - This package is displayed when you start up emacs without selecting a file. 
