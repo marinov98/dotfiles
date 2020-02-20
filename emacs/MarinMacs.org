@@ -33,7 +33,6 @@ My personal keybindings, you change these anyway you like
   (global-set-key (kbd "C-S-p") 'beginning-of-buffer)  ;; top of file 
   (global-set-key (kbd "C-S-n") 'end-of-buffer)        ;; end of file DISABLED by evil 
   (global-set-key (kbd "M-m") 'move-beginning-of-line) ;; moves beginning of the line 
-  (global-set-key (kbd "C-a") 'back-to-indentation)    ;; moves beginning of the first char 
 
   ;; Compiling and Buffers
   ;; NOTE: s stands for command on MacOS, windows button for Windows
@@ -270,63 +269,56 @@ Mainly for c-based languages
  Ivy manual: https://oremacs.com/swiper/
 #+BEGIN_SRC emacs-lisp
 
-   ;; Ivy
-  (use-package ivy
-       :ensure t
-       :diminish (ivy-mode)
-       :config
-       (ivy-mode 1)
-       (setq ivy-use-virtual-buffers t)
-       (setq ivy-display-style 'fancy)
-       (setq enable-recursive-minibuffers t))
+     ;; Ivy
+ (use-package ivy
+     :ensure t
+     :diminish (ivy-mode)
+     :config
+     (ivy-mode 1)
+     (setq ivy-use-virtual-buffers t)
+     (setq ivy-display-style 'fancy)
+     (setq ivy-count-format "(%d/%d) ")
+     (setq enable-recursive-minibuffers t)
+     (setq ivy-use-virtual-buffers t))
 
 
-   ;; Counsel
-   (use-package counsel
-       :ensure t
-       :bind
-       (("M-x" . counsel-M-x)
-       ("C-x C-f" . counsel-find-file)
-       ("C-c g" . counsel-git)
-       ("C-c j" . counsel-git-grep)
-       ("M-y" . counsel-yank-pop)
-       :map ivy-minibuffer-map
-       ("M-y" . ivy-next-line))
-       :config
-       (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"
-       ;; Add smart-casing (-S) to default command arguments:
-       counsel-rg-base-command "rg -S --no-heading --line-number --color never %s ."
-       counsel-ag-base-command "ag -S --nocolor --nogroup %s"
-       counsel-pt-base-command "pt -S --nocolor --nogroup -e %s"
-       counsel-find-file-at-point t))
+     ;; Counsel
+ (use-package counsel
+     :ensure t
+     :bind
+     (("M-x" . counsel-M-x)
+     ("C-x C-f" . counsel-find-file)
+     ("C-c g" . counsel-git)
+     ("C-c j" . counsel-git-grep)
+     ("C-x b" . counsel-switch-buffer)
+     ("M-y" . counsel-yank-pop)
+     :map ivy-minibuffer-map
+     ("M-y" . ivy-next-line))
+     :config
+     (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"
+     ;; Add smart-casing (-S) to default command arguments:
+     counsel-rg-base-command "rg -S --no-heading --line-number --color never %s ."
+     counsel-ag-base-command "ag -S --nocolor --nogroup %s"
+     counsel-pt-base-command "pt -S --nocolor --nogroup -e %s"
+     counsel-find-file-at-point t))
 
-   ;; Swiper 
+     ;; Swiper 
  (use-package swiper
      :ensure t
      :bind 
-     (("C-s" . swiper)
-     ("C-c C-r" . ivy-resume))
-     :config
-     (progn
-     (ivy-mode 1)
-     (setq ivy-use-virtual-buffers t)
-     (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)))
+     (("C-s" . swiper-isearch)
+     ("C-a" . swiper-isearch-backward)
+     ("C-c C-r" . ivy-resume)))
 
-  ;; postFrame
+    ;; postFrame
  (use-package ivy-posframe
      :ensure t
      :config
      (setq ivy-posframe-display-functions-alist
-     '((swiper          . ivy-posframe-display-at-frame-top-center)
+     '((swiper-isearch . ivy-posframe-display-at-frame-top-center)
+     (swiper-isearch-backward . ivy-posframe-display-at-frame-top-center)
      (counsel-find-file . ivy-posframe-display-at-window-center)
-     (counsel-M-x     . ivy-posframe-display-at-window-center)
-     (counsel-projectile . ivy-posframe-display-at-window-center)
-     (counsel-projectile-find-file . ivy-posframe-display-at-window-center)
-     (counsel-projectile-find-file-dwin . ivy-posframe-display-at-window-center)
-     (counsel-projectile-grep . ivy-postframe-display-at-window-center)
-     (counsel-projectile-git-grep . ivy-posframe-display-at-window-center)
-     (counsel-projectile-swith-to-buffer . ivy-posframe-display-at-window-center)
-     (counsel-projectile-switch-project . ivy-posframe-display-at-window-center)
+     (counsel-M-x . ivy-posframe-display-at-window-center)
      (t . ivy-posframe-display-at-window-center)))
      (setq ivy-posframe-parameters
      '((left-fringe . 10)
@@ -464,10 +456,12 @@ Mainly for c-based languages
 #+BEGIN_SRC emacs-lisp
   (use-package company
       :ensure t
+      :bind
+      (:map company-active-map
+      ("M-n" . nil) ; old select next key
+      ("<tab>" . company-select-next)) ;; make tab our new select next key
       :config
       (setq company-tooltip-limit 5) ; show 5 candidates at one time
-      (define-key company-active-map (kbd "M-n") nil) ; old selection key
-      (define-key company-active-map (kbd "<tab>") #'company-select-next) ; make tab new selection key
       (setq company-idle-delay 0.3) ;; slightly delay for optimal performance
       (setq company-minimum-prefix-length 3) ;; show completions after 3 chars
       (setq company-selection-wrap-around t)
@@ -661,7 +655,9 @@ A jump to definition package that just works. Love this one!
 ** Settings
 #+BEGIN_SRC emacs-lisp
 (setq-default c-basic-offset 4) ;; indentation for C-based languages
-(setq-default flycheck-disabled-checkers '(c/c++-clang c/c++-cppcheck c/c++-gcc)) ;; disable other checkers since we are using clangd
+
+;; disable other checkers since we only want to utilize clangd language server
+(setq-default flycheck-disabled-checkers '(c/c++-clang c/c++-cppcheck c/c++-gcc)) 
 
 ;; enable modern font lock for >=c++11
 (use-package modern-cpp-font-lock
@@ -670,7 +666,8 @@ A jump to definition package that just works. Love this one!
     (modern-c++-font-lock-global-mode t))
 #+END_SRC
 ** Clang-Format
- The only package that utilizes quelpa at the moment :))
+ - The only package that utilizes quelpa at the moment :))
+ - Formats your C++ code
 #+BEGIN_SRC emacs-lisp
 (use-package clang-format 
    :ensure t
