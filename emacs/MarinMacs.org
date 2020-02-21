@@ -396,7 +396,7 @@ Mainly for c-based languages
          ("C-c p SPC" . counsel-projectile)
          ("C-c p p" . counsel-projectile-switch-project)
          ("C-c p f" . counsel-projectile-find-file)
-         ("C-c p F" . counsel-projectile-find-file-dwin)
+         ("C-c p F" . counsel-projectile-find-file-dwim)
          ("C-c p b" . counsel-projectile-switch-to-buffer)
          ("C-c p g" . counsel-projectile-grep)
          ("C-c p G" . counsel-projectile-git-grep)))
@@ -598,16 +598,16 @@ A jump to definition package that just works. Love this one!
 - Repo: https://github.com/abo-abo/hydra
 ** config
 #+BEGIN_SRC emacs-lisp
-(use-package hydra
-    :ensure t
-    :config
-    (setq hydra-is-helpful t)
-    (setq hydra-hint-display-type 'lv))
+  (use-package hydra
+      :ensure t
+      :config
+      (setq hydra-is-helpful t)
+      (setq hydra-hint-display-type 'lv))
 
-;; for reference when I learn hydra better 
-;use-package pretty-hydra
-;   :ensure t
-;   :requires hydra)
+  ;; for reference when I learn hydra better 
+; (use-package pretty-hydra
+;    :ensure t
+;    :requires hydra)
 #+END_SRC
 ** Hydras
 - I hope to fill these up in the future
@@ -621,21 +621,26 @@ A jump to definition package that just works. Love this one!
     ("0" (text-scale-adjust 0) "reset")
     ("q" nil "quit" :color blue))
 
-   ;; projectile
-  (defhydra hydra-projectile (global-map "S-SPC" :color pink)
-    "Counsel Projectile 🚀"
+   ;; projectile, I would change this hydras global key if I wasnt using vim bindings...
+  (defhydra hydra-projectile (global-map "C-SPC" :color pink :columns 2)
+    "🚀 Projectile 🚀"
     ("f" counsel-projectile-find-file "find")
-    ("F" counsel-projectile-find-file-dwin "find-dwin")
+    ("F" counsel-projectile-find-file-dwim "find-dwim")
     ("g" counsel-projectile-git-grep "git grep")
+    ("G" counsel-projectile-grep "grep")
     ("s" counsel-projectile-switch-project "switch project")
     ("b" counsel-projectile-switch-to-buffer "buffer switch")
+    ("r" projectile-recentf "recent files")
+    ;; counsel-projectile-switch-project has similiar functionality but this is much quicker
+    ("k" projectile-kill-buffers "kill project buffers")
     ("q" nil "quit" :color blue))
 
   ;; finding and searching
-  (defhydra hydra-window (global-map "M-SPC" :color pink)
-   "⚡ Ivy/Windows ⚡"
+  (defhydra hydra-window (global-map "M-SPC" :color pink :columns 3)
+   "⚡⚡ Ivy/Windows ⚡⚡"
     ("f" counsel-find-file "find")
     ("x" counsel-M-x "M-x")
+    ("B" counsel-switch-buffer "switch buffer")
     ("s" swiper-isearch "search")
     ;; splitting
     ("v" split-window-right "v-split")
@@ -649,7 +654,6 @@ A jump to definition package that just works. Love this one!
     ("d" delete-window "delete window")
     ("K" kill-this-buffer "kill buffer")
     ("q" nil "quit" :color blue))
-
 #+END_SRC
 * LSP
   - LSP stands for Language Server Protocal and makes setting up autocompletion and syntax checking easy. 
@@ -710,22 +714,29 @@ A jump to definition package that just works. Love this one!
 #+END_SRC
 * DAP
 - DAP stands for Debug Adapter Protocal works similiarly to LSP but for debugging
-- This is purely experimental and will not be included in the guide until I feel like I know how to use it
-- Repo: https://github.com/emacs-lsp/dap-mode#configuration
+- Repo: https://github.com/emacs-lsp/dap-mode (includes everything you need to install for your desired development language)
 #+BEGIN_SRC emacs-lisp
-;; only installing because dap-mode requires it
- (use-package posframe
-     :ensure t)
+   ;; enable hydra bindings in dap mode
+   (use-package dap-hydra
+       :ensure nil
+       :requires hydra)
 
- (use-package dap-mode
-     :ensure t
-     :hook
-     (lsp-mode . (lambda () (dap-mode t) (dap-ui-mode t) (dap-tooltip-mode 1) (tooltip-mode 1)))
-     :config
-     (dap-mode t)
-     (dap-ui-mode t)
-     (dap-tooltip-mode 1)
-     (tooltip-mode 1))
+  ;; only installing because dap-mode requires it
+   (use-package posframe
+       :ensure t)
+
+   (use-package dap-mode
+       :ensure t
+       :requires hydra
+       :bind
+       (("C-x c" . dap-debug)
+       ("C-c i" . dap-debug-edit-template))
+       :hook
+       (lsp-mode . (lambda () (dap-mode t) (dap-ui-mode t) (dap-tooltip-mode 1) (tooltip-mode 1)))
+       :config
+       (add-hook 'dap-stopped-hook
+       (lambda (arg) (call-interactively #'dap-hydra)))) ;; enable hydra on breakpoint stop
+
 #+END_SRC
 * C/C++
 ** Settings
@@ -742,11 +753,21 @@ A jump to definition package that just works. Love this one!
     (modern-c++-font-lock-global-mode t))
 #+END_SRC
 ** Debugging
-Experimental, not fully stable
+Still experimenting with this, native gdb in emacs is also really good (described in Emacs Enhancements -> Debugger section)
 #+BEGIN_SRC emacs-lisp
 (use-package dap-gdb-lldb
   :ensure nil
-  :requires dap-mode)
+  :requires dap-mode
+  :config
+  (dap-register-debug-template
+  "GDB config"
+  (list :type "gdb"
+        :request "launch"
+        :name "GDB::Run"
+        :target "test"
+        :program "test"
+        :cwd "/home/marin/Projects")))
+
 #+END_SRC
 ** Clang-Format
  - The only package that utilizes quelpa at the moment :))
@@ -782,7 +803,7 @@ Experimental, not fully stable
   (setq python-indent-guess-indent-offset-verbose nil) ;; remove annoying warning
 #+END_SRC
 ** Debugging
-Experimental, not fully stable
+Note: the template is meant to be edited to personal preferences
 #+BEGIN_SRC emacs-lisp
 (use-package dap-python
   :ensure nil
@@ -941,6 +962,7 @@ Adds the node_modules/.bin directory to the buffer exec_path.
     (setq js2-mode-show-parse-errors nil) ;; do not parse errors, let langauage server do that
     (setq-default js2-basic-offset 2) ;; set indentation to 2
     (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
 #+END_SRC
 
 ** TIDE
@@ -973,7 +995,7 @@ All for typescript
     (add-hook 'typescript-mode-hook #'setup-tide-mode))
 #+END_SRC
 ** Debugging
-Experimental, not fully stable
+ Any kind of setup can be found in the dap repo that was mentions previously...
 *** Front-end
 #+BEGIN_SRC emacs-lisp
 ;; debugging in chrome
