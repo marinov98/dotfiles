@@ -516,6 +516,7 @@ Useful if you work on multiple windows and want an efficient way of switching be
  :END:
  - An alternative to dired.
  - ranger file manager but in emacs, works the exact same way
+ - Repo: https://github.com/ralesi/ranger.el
 #+BEGIN_SRC emacs-lisp
 ;; Ranger
 (use-package ranger
