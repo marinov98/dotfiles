@@ -4,6 +4,7 @@
 #+LANGUAGE: en
 #+TAGS: Emacs
 #+DESCRIPTION: My emacs config for software development
+This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles repository]]
 
 * Contact
 - Email me if there are any issues/questions/things that can be better: marin.marinov@macaulay.cuny.edu
@@ -27,21 +28,20 @@
 - I just really like to have my stuff online in case event XYZ happens with my machine 
 * Notes-Before-Beginning
 - I include as much as I can, as I want this guide to be useful to both people who never touched emacs as well as emacs veterans
-- Any errors you get can be googled and every package can also be checked online 
 - Depending on how you installed emacs, certain packages might be preinstalled into it 
-- When you see ```RET``` it means hit the ENTER key
-- *In emacs C = ctrl, M = alt, S = shift and s (hyper key) = command key (MacOS) windows key(MS-Windows)*
-  - Example: ```M-x``` = alt + x  ```C-x C-f``` = ctrl + x ctrl + f
-- If you wish to browse through Emac's packages ```M-x package-list-packages RET``` will open up the package list
-  - Additionally, you can run ```M-x package-install RET package_name RET``` if you know the exact package that you want
-  - Generally , `use-package` (described below) takes care of automating package installation
+- *In emacs C = ctrl, M = alt, S = shift, s (hyper key) = command key (MacOS) windows key(MS-Windows), RET = enter key*
+  - Example: M-x = alt + x  C-x C-f = ctrl + x ctrl + f
+- If you wish to browse through Emac's packages `M-x package-list-packages RET` will open up the package list
+  - Additionally, you can run `M-x package-install RET package_name RET` if you know the exact package that you want
+  - Generally , *use-package* takes care of automating package installation
 - Once again, if you just want to get it over with, simply copy my *init.el* and *MarinMacs.org* (or whatever you want to name your org file) 
-- the files should be created inside the ```.emacs.d``` folder which you can create. 
+- the files should be created inside the *.emacs.d* folder which you can create. 
 - All the packages should install and configure automatically (power of use-package), *however* you would still have to install the *langauge servers* to enable autocomplete
+- You can open links present in the guide in a separate window with C-c C-o (assuming you are editing this file in emacs)
 * Possible-Issues 
 - After installing my config on a few different machines (Linux, MacOS, Ms-Windows), my config runs fine, but I have occasionally ran into small issues that can be quickly fixed.
 - Run emacs with '--debug-init' flag it should tell you where the error is
-- They are rare but they still happen so below are some solutions to them:
+- Errors are rare but they still happen so below are some solutions to them:
 ** Issue #1: Package cannot load 
 - *Possible Solution* run `M-x package-refresh-contents` , if that doesnt work and the package doesnt mean much to you, remove it from the config or look up the package to see if anything has changed, some packages get deleted over time or replaced or become native to emacs and do not to be specified in the config
 ** Issue #2 : (some word) is void 
@@ -53,9 +53,10 @@
 - [[#personal-keybindings][Personal Keybindings]]
 - [[#org-archive][Org-archive]]
 - [[#quelpa][Quelpa]]
+- [[#org-markdown][Org and Markdown]]
+- [[#evil-mode][Evil-mode]]
 - [[#restart-emacs][Restart-Emacs]]
 - [[#dashboard][Dashboard]]
-- [[#evil-mode][Evil-mode]]
 - [[#themes][Themes]]
 - [[#modeline][Modeline]]
 - [[#Emacs-Enhancements][Emacs Enhancements]]
@@ -72,8 +73,6 @@
   - [[#flycheck][Flycheck]]
   - [[#company][Company]]
   - [[#undo-tree][Undo Tree]]
-- [[#org-markdown][Org and Markdown]]
-- [[#latex][Latex]]
 - [[#coding-productivity][Coding Productivity]]
   - [[#beacon][Beacon]]
   - [[#neotree][neotree]]
@@ -87,6 +86,7 @@
 - [[#python][Python]]
 - [[#web-development][Web-Development]]
 - [[#JavaScript-TypeScript][JavaScript/TypeScript]]
+- [[#latex][Latex]]
 
 * General Settings 
  :PROPERTIES:
@@ -126,7 +126,6 @@ My personal keybindings, you change these anyway you like
 
   ;; Compiling and Buffers
   (global-set-key (kbd "C-c e") 'compile)              ;; compile code
-  (global-set-key (kbd "C-c C-e") 'eval-buffer)        ;; evaluate the buffer (mini reload)
   (global-set-key (kbd "C-c b") 'switch-to-prev-buffer)
   (global-set-key (kbd "C-c n") 'switch-to-next-buffer)
   (global-set-key (kbd "C-c k") 'kill-current-buffer)
@@ -148,44 +147,42 @@ My personal keybindings, you change these anyway you like
 (use-package quelpa-use-package
     :ensure t)
 #+END_SRC
-* Restart-Emacs
+* Org-Markdown
  :PROPERTIES:
- :CUSTOM_ID: restart-emacs
+ :CUSTOM_ID: org-markdown
  :END:
-I think I have actually used this package the most... Does exactly what it says
+** Enable Org-Mode
+ Org manual: https://orgmode.org/
 #+BEGIN_SRC emacs-lisp
-(use-package restart-emacs
-    :ensure t
-    :config
-    (global-set-key (kbd "<f5>") 'restart-emacs)) ;; To restart emacs
+(use-package org 
+   :ensure t
+   :pin org)
 #+END_SRC
-* Dashboard 
- :PROPERTIES:
- :CUSTOM_ID: dashboard
- :END:
-- This package is displayed when you start up emacs without selecting a file. 
-- Prerequisites: https://github.com/cask/cask
-- After installing cask, learn how to customize it by going here: https://github.com/emacs-dashboard/emacs-dashboard
-#+BEGIN_SRC emacs-lisp
-(use-package dashboard 
+** Org Bullets
+#+Begin_SRC emacs-lisp
+(use-package org-bullets
     :ensure t
     :config
-    (dashboard-setup-startup-hook)
-    (setq dashboard-banner-logo-title "MarinMacs")
-    (setq dashboard-set-heading-icons t)
-    (setq dashboard-set-file-icons t)
-    (setq dashboard-startup-banner 'logo)
-    (setq dashboard-items '((recents  . 5)
-                           (bookmarks . 5)
-			               (agenda . 5)
-                           (projects . 5))))
+    (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
+
+(defun add-pcomplete-to-capf ()
+  (add-hook 'completion-at-point-functions 'pcomplete-completions-at-point nil t))
+
+(add-hook 'org-mode-hook #'add-pcomplete-to-capf)
+#+END_SRC
+** MarkDown
+#+BEGIN_SRC emacs-lisp
+(use-package markdown-mode
+  :ensure t
+  :mode
+  ("\\.\\(md\\|markdown\\)\\'" . markdown-mode))
 #+END_SRC
 * Evil-Mode
  :PROPERTIES:
  :CUSTOM_ID: evil-mode
  :END:
  - Packages needed to emulate vim inside Emacs. 
- - Make sure you have [[#undo-tree][undo-tree]] installed 
+ - Make sure you have [[#undo-tree][undo-tree]] package installed 
  - Official Repo for Evil Mode: https://github.com/emacs-evil/evil
 #+BEGIN_SRC emacs-lisp
 (use-package evil
@@ -219,6 +216,38 @@ I think I have actually used this package the most... Does exactly what it says
   ; Evil magit overrides magit keybindings, package (magit) is shown further in the config
  (use-package evil-magit
       :ensure t)
+#+END_SRC
+* Restart-Emacs
+ :PROPERTIES:
+ :CUSTOM_ID: restart-emacs
+ :END:
+I think I have actually used this package the most... Does exactly what it says
+#+BEGIN_SRC emacs-lisp
+(use-package restart-emacs
+    :ensure t
+    :config
+    (global-set-key (kbd "<f5>") 'restart-emacs)) ;; To restart emacs
+#+END_SRC
+* Dashboard 
+ :PROPERTIES:
+ :CUSTOM_ID: dashboard
+ :END:
+- This package is displayed when you start up emacs without selecting a file. 
+- Prerequisites: https://github.com/cask/cask
+- After installing cask, learn how to customize it by going here: https://github.com/emacs-dashboard/emacs-dashboard
+#+BEGIN_SRC emacs-lisp
+(use-package dashboard 
+    :ensure t
+    :config
+    (dashboard-setup-startup-hook)
+    (setq dashboard-banner-logo-title "MarinMacs")
+    (setq dashboard-set-heading-icons t)
+    (setq dashboard-set-file-icons t)
+    (setq dashboard-startup-banner 'logo)
+    (setq dashboard-items '((recents  . 5)
+                           (bookmarks . 5)
+			               (agenda . 5)
+                           (projects . 5))))
 #+END_SRC
 * Themes
  :PROPERTIES:
@@ -530,6 +559,29 @@ Useful if you work on multiple windows and want an efficient way of switching be
      :config
      (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
 #+END_SRC
+* Shell
+ :PROPERTIES:
+ :CUSTOM_ID: shell
+ :END:
+- better-shell: https://github.com/killdash9/better-shell
+- exec-path-from-shell: https://github.com/purcell/exec-path-from-shell
+- Eshell: https://www.gnu.org/software/emacs/manual/html_mono/eshell.html
+   #+BEGIN_SRC emacs-lisp
+(use-package better-shell
+    :ensure t
+    :bind 
+    (("C-`" . better-shell-shell) ;; open terminal
+    ("C-;" . better-shell-remote-open)))
+
+(use-package exec-path-from-shell
+    :ensure t
+    :config
+    (when (memq window-system '(mac ns x)) ;; check if its mac
+    (exec-path-from-shell-initialize)))
+
+;; Eshell 
+(global-set-key (kbd "C-~") 'eshell) ;; terminal alternative in emacs
+   #+END_SRC
 * Projectile
  :PROPERTIES:
  :CUSTOM_ID: projectile
@@ -561,30 +613,21 @@ Useful if you work on multiple windows and want an efficient way of switching be
          ("C-c p g" . counsel-projectile-grep)
          ("C-c p G" . counsel-projectile-git-grep)))
 #+END_SRC
-* Shell
- :PROPERTIES:
- :CUSTOM_ID: shell
- :END:
-   #+BEGIN_SRC emacs-lisp
-(use-package better-shell
-    :ensure t
-    :bind 
-    (("C-`" . better-shell-shell) ;; open terminal
-    ("C-;" . better-shell-remote-open)))
-
-(use-package exec-path-from-shell
-    :ensure t
-    :config
-    (when (memq window-system '(mac ns x)) ;; check if its mac
-    (exec-path-from-shell-initialize)))
-
-;; Eshell 
-(global-set-key (kbd "C-~") 'eshell) ;; terminal alternative in emacs
-   #+END_SRC
 * Globals
  :PROPERTIES:
  :CUSTOM_ID: globals
  :END:
+** Undo-Tree
+ :PROPERTIES:
+ :CUSTOM_ID: undo-tree
+ :END:
+ You MUST have this for [[#evil-mode][Evil Mode]] to work
+#+BEGIN_SRC emacs-lisp
+(use-package undo-tree
+  :ensure t
+  :init
+  (global-undo-tree-mode))
+#+END_SRC
 ** Snippets
  :PROPERTIES:
  :CUSTOM_ID: snippets
@@ -611,7 +654,7 @@ Useful if you work on multiple windows and want an efficient way of switching be
  :PROPERTIES:
  :CUSTOM_ID: flycheck
  :END:
-- Checking syntax...basically 
+- Checking syntax on the fly...basically 
 - Official Site: https://www.flycheck.org/en/latest/
 #+BEGIN_SRC emacs-lisp
 (use-package flycheck
@@ -652,71 +695,6 @@ Useful if you work on multiple windows and want an efficient way of switching be
       (add-hook 'emacs-lisp-mode-hook 'company-mode)
 #+END_SRC
 
-** Undo-Tree
- :PROPERTIES:
- :CUSTOM_ID: undo-tree
- :END:
- You MUST have this for evil mode to work
-#+BEGIN_SRC emacs-lisp
-(use-package undo-tree
-  :ensure t
-  :init
-  (global-undo-tree-mode))
-#+END_SRC
-* Org-Markdown
- :PROPERTIES:
- :CUSTOM_ID: org-markdown
- :END:
-** Enable Org-Mode
-#+BEGIN_SRC emacs-lisp
-(use-package org 
-   :ensure t
-   :pin org)
-#+END_SRC
-** Org Bullets
-#+Begin_SRC emacs-lisp
-(use-package org-bullets
-    :ensure t
-    :config
-    (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
-
-(defun add-pcomplete-to-capf ()
-  (add-hook 'completion-at-point-functions 'pcomplete-completions-at-point nil t))
-
-(add-hook 'org-mode-hook #'add-pcomplete-to-capf)
-#+END_SRC
-** MarkDown
-#+BEGIN_SRC emacs-lisp
-(use-package markdown-mode
-  :ensure t
-  :mode
-  ("\\.\\(md\\|markdown\\)\\'" . markdown-mode))
-#+END_SRC
-* Latex 
- :PROPERTIES:
- :CUSTOM_ID: latex
- :END:
-- I still actually prefer Overleaf for latex editing...Hoping to just use emacs for it one day
-- *DEPRECIATED* Below writing packages are only kept for reverence
-  - auctex & tex (smoother latex editing)
-  - pdf-tools (pdf support in emacs)
-  - wc-mode (word counter)
-  - writegood-mode (sentence/word choice checker)
-#+BEGIN_SRC emacs-lisp
-;; Enable if you wish, kept for reference, may be utilized in the future
- (use-package tex
-    :disabled
-    :ensure auctex)
-
-;; Settings 
-(setq TeX-auto-save t)
-(setq TeX-parse-self t)
-(setq TeX-save-query nil)
-
-;; Spellchecker and Linter for Latex
-(add-hook 'LaTeX-mode-hook 'turn-on-flyspell)
-(add-hook 'LaTeX-mode-hook 'flycheck-mode)
-#+END_SRC
 * Coding-Productivity 
  :PROPERTIES:
  :CUSTOM_ID: coding-productivity
@@ -863,15 +841,16 @@ A jump to definition package that just works. Love this one!
     ("s" swiper-isearch "search")
     ;; splitting
     ("v" split-window-right "v-split")
-    ("b" split-window-below "h-split")
+    ("H" split-window-below "h-split")
     ;; movement
     ("h" windmove-left)
     ("j" windmove-down)
     ("k" windmove-up)
     ("l" windmove-right)
     ;; deletion and quitting
+    ("K" kill-current-buffer "kill current buffer")
     ("d" delete-window "delete window")
-    ("K" kill-this-buffer "kill buffer")
+    ("D" kill-this-buffer "kill buffer")
     ("q" nil "quit" :color blue))
 #+END_SRC
 * LSP
@@ -1274,4 +1253,52 @@ All for typescript
     ;; formats the buffer before saving
     (add-hook 'before-save-hook 'tide-format-before-save)
     (add-hook 'typescript-mode-hook #'setup-tide-mode))
+#+END_SRC
+* Latex 
+ :PROPERTIES:
+ :CUSTOM_ID: latex
+ :END:
+- I still actually prefer Overleaf for latex editing...Hoping to just use emacs for it one day
+- *DEPRECIATED* Below writing packages are only kept for reverence
+  - auctex & tex (smoother latex editing)
+  - pdf-tools (pdf support in emacs)
+  - wc-mode (word counter)
+  - writegood-mode (sentence/word choice checker)
+#+BEGIN_SRC emacs-lisp
+;; Enable any if you wish, kept for reference, may be utilized in the future
+
+ (use-package tex
+    :disabled
+    :ensure auctex)
+
+;; Settings 
+(setq TeX-auto-save t)
+(setq TeX-parse-self t)
+(setq TeX-save-query nil)
+
+;; Spellchecker and Linter for Latex
+(add-hook 'LaTeX-mode-hook 'turn-on-flyspell)
+(add-hook 'LaTeX-mode-hook 'flycheck-mode)
+
+;;;;;;;;;;;;;;;;;;
+;; PDF
+;;;;;;;;;;;;;;;;;;
+
+(use-package pdf-tools
+    :disabled
+    :ensure t)
+
+;;;;;;;;;;;;;;;;;;
+;; For the writers
+;;;;;;;;;;;;;;;;;;
+
+(use-package wc-mode
+    :disabled
+    :ensure t
+    (global-set-key "\C-cw" 'wc-mode))
+    
+(use-package writegood-mode
+    :disabled
+    :ensure t)
+
 #+END_SRC
