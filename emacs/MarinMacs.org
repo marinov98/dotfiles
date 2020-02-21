@@ -50,7 +50,7 @@
 - *Possible Solution #2 :* Make sure you have my init.el copied (fix any small indentention issues there) then run `M-x customize RET`, go to faces->basics faces->default change the size of the emacs screen to prevent it from indenting.
 * Table of Contents :TOC_3:
 - [[#general-settings][General Settings]]
-- [[#keybindings][Personal Keybindings]]
+- [[#personal-keybindings][Personal Keybindings]]
 - [[#org-archive][Org-archive]]
 - [[#quelpa][Quelpa]]
 - [[#restart][Restart-Emacs]]
@@ -83,7 +83,7 @@
 - [[#hydra][Hydra]]
 - [[#lsp][Language Server Protocal (lsp)]]
 - [[#dap][Debug Adapter Protocal (dap)]]
-- [[#cpp][C/C++]]
+- [[#c-cpp][C/C++]
 - [[#python][Python]]
 - [[#web-development][Web-Development]]
 - [[#JavaScript-TypeScript][JavaScript/TypeScript]]
@@ -113,9 +113,9 @@ I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
   (setq auto-save-default nil)                           ;; stop creating autosave# files
   (setq create-lockfiles nil)                            ;; stop creating any # files
 #+END_SRC
-* Personal Keybindings
+* Personal-Keybindings
  :PROPERTIES:
- :CUSTOM_ID: keybindings
+ :CUSTOM_ID: personal-keybindings
  :END:
 My personal keybindings, you change these anyway you like 
 #+BEGIN_SRC emacs-lisp
@@ -962,9 +962,9 @@ A jump to definition package that just works. Love this one!
        (lambda (arg) (call-interactively #'dap-hydra)))) ;; enable hydra on breakpoint stop
 
 #+END_SRC
-* C-C++
+* C-Cpp
  :PROPERTIES:
- :CUSTOM_ID: cpp
+ :CUSTOM_ID: c-cpp
  :END:
 - Clangd Language Server: https://clang.llvm.org/extra/clangd/Installation.html
 - Cpp extras (mostly optional)
@@ -1193,7 +1193,7 @@ More on emmet: https://www.emmet.io/
     (rjsx-mode . emmet-mode)
     (web-mode  . emmet-mode)))
 #+END_SRC
-* JavaScript/TypeScript
+* JavaScript-TypeScript
  :PROPERTIES:
  :CUSTOM_ID: JavaScript-TypeScript
  :END:
