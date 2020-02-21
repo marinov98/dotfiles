@@ -53,7 +53,7 @@
 - [[#personal-keybindings][Personal Keybindings]]
 - [[#org-archive][Org-archive]]
 - [[#quelpa][Quelpa]]
-- [[#restart][Restart-Emacs]]
+- [[#restart-emacs][Restart-Emacs]]
 - [[#dashboard][Dashboard]]
 - [[#evil-mode][Evil-mode]]
 - [[#themes][Themes]]
@@ -150,7 +150,7 @@ My personal keybindings, you change these anyway you like
 #+END_SRC
 * Restart-Emacs
  :PROPERTIES:
- :CUSTOM_ID: restart
+ :CUSTOM_ID: restart-emacs
  :END:
 I think I have actually used this package the most... Does exactly what it says
 #+BEGIN_SRC emacs-lisp
