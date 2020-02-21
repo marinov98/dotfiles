@@ -82,11 +82,11 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 - [[#hydra][Hydra]]
 - [[#lsp][Language Server Protocal (lsp)]]
 - [[#dap][Debug Adapter Protocal (dap)]]
+- [[#latex][Latex]]
 - [[#c-cpp][C/C++]]
 - [[#python][Python]]
 - [[#web-development][Web-Development]]
 - [[#JavaScript-TypeScript][JavaScript/TypeScript]]
-- [[#latex][Latex]]
 
 * General Settings 
  :PROPERTIES:
@@ -941,6 +941,54 @@ A jump to definition package that just works. Love this one!
        (lambda (arg) (call-interactively #'dap-hydra)))) ;; enable hydra on breakpoint stop
 
 #+END_SRC
+* Latex 
+ :PROPERTIES:
+ :CUSTOM_ID: latex
+ :END:
+- I still actually prefer Overleaf for latex editing...Hoping to just use emacs for it one day
+- *DEPRECIATED* Below writing packages are only kept for reference
+  - auctex & tex (smoother latex editing)
+  - pdf-tools (pdf support in emacs)
+  - wc-mode (word counter)
+  - writegood-mode (sentence/word choice checker)
+#+BEGIN_SRC emacs-lisp
+;; Enable any if you wish, kept for reference, may be utilized in the future
+
+ (use-package tex
+    :disabled
+    :ensure auctex)
+
+;; Settings 
+(setq TeX-auto-save t)
+(setq TeX-parse-self t)
+(setq TeX-save-query nil)
+
+;; Spellchecker and Linter for Latex
+(add-hook 'LaTeX-mode-hook 'turn-on-flyspell)
+(add-hook 'LaTeX-mode-hook 'flycheck-mode)
+
+;;;;;;;;;;;;;;;;;;
+;; PDF
+;;;;;;;;;;;;;;;;;;
+
+(use-package pdf-tools
+    :disabled
+    :ensure t)
+
+;;;;;;;;;;;;;;;;;;
+;; For the writers
+;;;;;;;;;;;;;;;;;;
+
+(use-package wc-mode
+    :disabled
+    :ensure t
+    (global-set-key "\C-cw" 'wc-mode))
+    
+(use-package writegood-mode
+    :disabled
+    :ensure t)
+
+#+END_SRC
 * C-Cpp
  :PROPERTIES:
  :CUSTOM_ID: c-cpp
@@ -1253,52 +1301,4 @@ All for typescript
     ;; formats the buffer before saving
     (add-hook 'before-save-hook 'tide-format-before-save)
     (add-hook 'typescript-mode-hook #'setup-tide-mode))
-#+END_SRC
-* Latex 
- :PROPERTIES:
- :CUSTOM_ID: latex
- :END:
-- I still actually prefer Overleaf for latex editing...Hoping to just use emacs for it one day
-- *DEPRECIATED* Below writing packages are only kept for reference
-  - auctex & tex (smoother latex editing)
-  - pdf-tools (pdf support in emacs)
-  - wc-mode (word counter)
-  - writegood-mode (sentence/word choice checker)
-#+BEGIN_SRC emacs-lisp
-;; Enable any if you wish, kept for reference, may be utilized in the future
-
- (use-package tex
-    :disabled
-    :ensure auctex)
-
-;; Settings 
-(setq TeX-auto-save t)
-(setq TeX-parse-self t)
-(setq TeX-save-query nil)
-
-;; Spellchecker and Linter for Latex
-(add-hook 'LaTeX-mode-hook 'turn-on-flyspell)
-(add-hook 'LaTeX-mode-hook 'flycheck-mode)
-
-;;;;;;;;;;;;;;;;;;
-;; PDF
-;;;;;;;;;;;;;;;;;;
-
-(use-package pdf-tools
-    :disabled
-    :ensure t)
-
-;;;;;;;;;;;;;;;;;;
-;; For the writers
-;;;;;;;;;;;;;;;;;;
-
-(use-package wc-mode
-    :disabled
-    :ensure t
-    (global-set-key "\C-cw" 'wc-mode))
-    
-(use-package writegood-mode
-    :disabled
-    :ensure t)
-
 #+END_SRC
