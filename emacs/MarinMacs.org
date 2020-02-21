@@ -1,4 +1,4 @@
-#+TITLE: MarinMacs Configuration File
+#+TITLE: MarinMacs Configuration Guide
 #+AUTHOR: Marin P. Marinov  
 #+EMAIL: marin.marinov@macaulay.cuny.edu
 #+LANGUAGE: en
@@ -8,7 +8,7 @@
 * Contact
 - Email me if there are any issues/questions/things that can be better: marin.marinov@macaulay.cuny.edu
 ** Inspiration:
-- I became inspired to write this after I configured my emacs init file to the point where I could comftorably write C++, Python, and JavaScript code as well as take notes in Org mode.
+- I became inspired to write this as an actual guide rather just a config reference file, after I configured my emacs to the point where I could comftorably write C++, Python, and JavaScript code as well as take notes in Org mode.
 ** Purpose:
 - Initially, I made this repo for myself to keep track of my configurations...
 - Now I want to make it more of a guide for anyone trying to switch to emacs whether its from another editor and/or is confused about what packages to install and how to configure.
