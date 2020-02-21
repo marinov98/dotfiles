@@ -2,11 +2,11 @@
 - I have a detailed [Emacs](<https://github.com/marinov98/dotfiles/blob/master/emacs/MarinMacs.org>) config guide where I use the more powerful extensibility of emacs and combine it with vim bindings. 
 
 ## Setup:
-1. Create a .vimrc file into your home directory
+1. create .vimrc file in home directory then copy my config, then exit and enter vim again and everything should install. If you prefer to do this manually continue to step 2
 2. Install [vim-plug](https://github.com/junegunn/vim-plug)
 3. Either copy what I have in my [.vimrc](<https://github.com/marinov98/dotfiles/blob/master/vim/.vimrc>) or take whatever you need 
 3. Save and quit .vimrc
-4. Go back into the .vimrc (it's okay if there are errors) and everything should install by itself, if not run `:PlugInstall`
+4. Go back into the .vimrc (it's okay if there are errors) and  run `:PlugInstall`
 6. Directions for autocompletion below 
 
 ## General settings
