@@ -1,5 +1,5 @@
 # My Vim configuration 
-- I have a detailed [Emacs](https://github.com/marinov98/My_Emacs-Detailed_Guide/blob/master/README.md) config guide where I use the more powerful extensibility of emacs and combine it with vim bindings. 
+- I have a detailed [Emacs](https://github.com/marinov98/dotfiles/blob/master/emacs/MarinMacs.org) config guide where I use the more powerful extensibility of emacs and combine it with vim bindings. 
 
 ## Setup:
 1. Create a .vimrc file into your home directory
