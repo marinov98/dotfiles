@@ -2,7 +2,7 @@
 All my dot files
 
 ### Deeper dive into emacs and/or vim
-- My [**Emacs**](https://github.com/marinov98/MarinMacs) guide
+- My [**Emacs**](https://github.com/marinov98/dotfiles/blob/master/emacs/MarinMacs.org) guide
 
 - My [**Vim**](https://github.com/marinov98/My-Vim) guide
 
