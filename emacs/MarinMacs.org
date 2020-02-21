@@ -83,7 +83,7 @@
 - [[#hydra][Hydra]]
 - [[#lsp][Language Server Protocal (lsp)]]
 - [[#dap][Debug Adapter Protocal (dap)]]
-- [[#c-cpp][C/C++]
+- [[#c-cpp][C/C++]]
 - [[#python][Python]]
 - [[#web-development][Web-Development]]
 - [[#JavaScript-TypeScript][JavaScript/TypeScript]]
