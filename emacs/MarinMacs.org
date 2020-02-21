@@ -793,11 +793,11 @@ A jump to definition package that just works. Love this one!
 - Repo: https://github.com/abo-abo/hydra (Has a video demo)
 ** config
 #+BEGIN_SRC emacs-lisp
-  (use-package hydra
-      :ensure t
-      :config
-      (setq hydra-is-helpful t)
-      (setq hydra-hint-display-type 'lv))
+ (use-package hydra
+     :ensure t
+     :config
+     (setq hydra-is-helpful t)
+     (setq hydra-hint-display-type 'lv))
 
  ;; for reference when I learn hydra better 
  ;; gives access to functions that make nice hydra UI
@@ -1259,7 +1259,7 @@ All for typescript
  :CUSTOM_ID: latex
  :END:
 - I still actually prefer Overleaf for latex editing...Hoping to just use emacs for it one day
-- *DEPRECIATED* Below writing packages are only kept for reverence
+- *DEPRECIATED* Below writing packages are only kept for reference
   - auctex & tex (smoother latex editing)
   - pdf-tools (pdf support in emacs)
   - wc-mode (word counter)
