@@ -28,22 +28,22 @@
 ### Coding Convenience
 - Vim-snippets
 - Vim-Utils
-- Nerdtree
-- Multiple-Cursor 
-- super tab
-- repeat-vim
-- clang-format
-- surround-vim
+- Nerdtree (file browser)
+- Multiple-Cursors (change multiple things at the same time) 
+- super tab (use tab for autocomplete)
+- vim-repeat (allows you to repeat commands)
+- vim-surround (amazing new keybindings)
+- clang-format (format c++ code)
 
 
 ### Web-dev
 - Emmet 
-- Css-color
+- Css-color 
 - vim-css
 - vim-javascript
 - vim-jsx
-- auto-close tag
-- Prettier
+- auto-close tag (for html)
+- Prettier (format js,ts,html,css code)
 
 ### Modeline
 - lightline
