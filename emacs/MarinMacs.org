@@ -49,7 +49,7 @@
 - Best thing to do is `C-s` and search for the word and either try to put it in the same line or delete it
 - *Possible Solution #2 :* Make sure you have my init.el copied (fix any small indentention issues there) then run `M-x customize RET`, go to faces->basics faces->default change the size of the emacs screen to prevent it from indenting.
 * Table of Contents :TOC_3:
-- [[#settings][General Settings]]
+- [[#general-settings][General Settings]]
 - [[#keybindings][Personal Keybindings]]
 - [[#org-archive][Org-archive]]
 - [[#quelpa][Quelpa]]
@@ -90,7 +90,7 @@
 
 * General Settings 
  :PROPERTIES:
- :CUSTOM_ID: settings
+ :CUSTOM_ID: general-settings
  :END:
 I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
