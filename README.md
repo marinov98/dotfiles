@@ -2,9 +2,9 @@
 All my dot files
 
 ### Deeper dive into emacs and/or vim
-- My [**Emacs**](https://github.com/marinov98/dotfiles/blob/master/emacs/MarinMacs.org) guide
+- My [**Emacs**](https://github.com/marinov98/dotfiles/blob/master/emacs/MarinMacs.org) config guide
 
-- My [**Vim**](https://github.com/marinov98/My-Vim) guide
+- My [**Vim**](https://github.com/marinov98/dotfiles/blob/master/vim/README.md) config guide
 
 ### Quick Start
 - Clone this repo: `git clone https://github.com/marinov98/dotfiles.git`
