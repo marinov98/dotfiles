@@ -995,7 +995,7 @@ All for typescript
     (add-hook 'typescript-mode-hook #'setup-tide-mode))
 #+END_SRC
 ** Debugging
- Any kind of setup can be found in the dap repo that was mentions previously...
+ Any kind of setup can be found in the dap repo that was mentioned previously...
 *** Front-end
 #+BEGIN_SRC emacs-lisp
 ;; debugging in chrome
@@ -1003,6 +1003,7 @@ All for typescript
   :ensure nil
   :requires dap-mode)
   
+;; debugging in firefox
 (use-package dap-firefox
     :ensure nil
     :requires dap-mode)
