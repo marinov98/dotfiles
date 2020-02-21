@@ -154,9 +154,12 @@ My personal keybindings, you change these anyway you like
 ** Enable Org-Mode
  Org manual: https://orgmode.org/
 #+BEGIN_SRC emacs-lisp
-(use-package org 
-   :ensure t
-   :pin org)
+  (use-package org 
+     :ensure t
+     :pin org)
+     
+ ;; allow easier snippet insertion  
+ (require 'org-tempo)
 #+END_SRC
 ** Org Bullets
 #+Begin_SRC emacs-lisp
