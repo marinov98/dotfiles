@@ -1085,7 +1085,7 @@ Note: the template is meant to be edited to personal preferences
  :END:
  Language servers install command (that I use): 
  #+BEGIN_SRC markdown
- `npm i -g typescript-language-server vscode-json-languageserver vscode-html-languageserver-bin yaml-language-server vscode-css-languageserver-bin bash-language-server`
+ npm i -g typescript-language-server vscode-json-languageserver vscode-html-languageserver-bin yaml-language-server vscode-css-languageserver-bin bash-language-server
  #+END_SRC
 ** Web-Mode
  - Autonomous emacs major-mode for editing web templates. 
