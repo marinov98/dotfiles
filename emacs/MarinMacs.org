@@ -832,7 +832,7 @@ A jump to definition package that just works. Love this one!
     ("k" projectile-kill-buffers "kill project buffers")
     ("q" nil "quit" :color blue))
 
-  ;; finding and searching
+  ;; My attempt at window management
   (defhydra hydra-window (global-map "M-SPC" :color pink :columns 3)
    "⚡⚡ Ivy/Windows ⚡⚡"
     ("f" counsel-find-file "find")
