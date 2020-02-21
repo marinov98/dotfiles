@@ -1,10 +1,10 @@
 # My Vim configuration 
-- I have a detailed [Emacs](https://github.com/marinov98/dotfiles/blob/master/emacs/MarinMacs.org) config guide where I use the more powerful extensibility of emacs and combine it with vim bindings. 
+- I have a detailed [Emacs](<https://github.com/marinov98/dotfiles/blob/master/emacs/MarinMacs.org>) config guide where I use the more powerful extensibility of emacs and combine it with vim bindings. 
 
 ## Setup:
 1. Create a .vimrc file into your home directory
 2. Install [vim-plug](https://github.com/junegunn/vim-plug)
-3. Either copy what I have in my [.vimrc](https://github.com/marinov98/dotfiles/blob/master/vim/.vimrc) or take whatever you need 
+3. Either copy what I have in my [.vimrc](<https://github.com/marinov98/dotfiles/blob/master/vim/.vimrc>) or take whatever you need 
 3. Save and quit .vimrc
 4. Go back into the .vimrc (it's okay if there are errors) and everything should install by itself, if not run `:PlugInstall`
 6. Directions for autocompletion below 
@@ -51,7 +51,7 @@
 
 ### Autocomplete
 - I use [Conqueror of Completion](<https://github.com/neoclide/coc.nvim>) as my auto-complete plugin which lets me use language servers for syntax checking and highlighting
-- While in vim, after you have installed all packages with `PlugInstall`, run `:CocConfig` and copy and past what you see in [coc-setting.json](<https://github.com/marinov98/My-Vim/blob/master/.vim/coc-settings.json>)
+- While in vim, after you have installed all packages with `PlugInstall`, run `:CocConfig` and copy and past what you see in [coc-setting.json](<https://github.com/marinov98/dotfiles/blob/master/vim/coc-settings.json>)
 - language servers I use (there are many others):
     - C++: Install [clangd](<https://clang.llvm.org/extra/clangd/Installation.html>)
     - Python: 
