@@ -679,7 +679,7 @@ Useful if you work on multiple windows and want an efficient way of switching be
       ("<tab>" . company-select-next)) ;; make tab our new select next key
       :config
       (setq company-tooltip-limit 5) ; show 5 candidates at one time
-      (setq company-idle-delay 0.5) ;; slightly delay for optimal performance
+      (setq company-idle-delay 0.4) ;; slightly delay completions
       (setq company-minimum-prefix-length 3) ;; show completions after 3 chars
       (setq company-selection-wrap-around t)
       (setq global-company-mode t)) 
