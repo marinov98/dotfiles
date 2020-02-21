@@ -4,7 +4,7 @@
 ## Setup:
 1. Create a .vimrc file into your home directory
 2. Install [vim-plug](https://github.com/junegunn/vim-plug)
-3. Either copy what I have in my [.vimrc](https://github.com/marinov98/My-Vim/blob/master/.vimrc) or take whatever you need 
+3. Either copy what I have in my [.vimrc](https://github.com/marinov98/dotfiles/blob/master/vim/.vimrc) or take whatever you need 
 3. Save and quit .vimrc
 4. Go back into the .vimrc (it's okay if there are errors) and everything should install by itself, if not run `:PlugInstall`
 6. Directions for autocompletion below 
@@ -28,6 +28,7 @@
 ### Coding Convenience
 - Vim-snippets
 - Vim-Utils
+- ctrlp (Fuzzy file, buffer, mru, tag, etc finder.)
 - Nerdtree (file browser)
 - Multiple-Cursors (change multiple things at the same time) 
 - super tab (use tab for autocomplete)
