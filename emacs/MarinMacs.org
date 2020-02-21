@@ -55,16 +55,16 @@
 - [[#quelpa][Quelpa]]
 - [[#restart][Restart-Emacs]]
 - [[#dashboard][Dashboard]]
-- [[#evil][Evil-mode]]
+- [[#evil-mode][Evil-mode]]
 - [[#themes][Themes]]
 - [[#modeline][Modeline]]
-- [[#enhancements][Emacs Enhancements]]
+- [[#Emacs-Enhancements][Emacs Enhancements]]
   - [[#which-key][Which-Key]]
   - [[#ace-window][Ace-Window]]
   - [[#gdb][GDB]]
-  - [[#ivy][Ivy integration]]
+  - [[#ivy-integration][Ivy integration]]
   - [[#ranger][Ranger]]
-  - [[#all-icons][All-the-icons]]
+  - [[#all-the-icons][All-the-icons]]
 - [[#projectile][Projectile]]
 - [[#shell][Shell]]
 - [[#globals][Globals]]
@@ -74,7 +74,7 @@
   - [[#undo-tree][Undo Tree]]
 - [[#org-markdown][Org and Markdown]]
 - [[#latex][Latex]]
-- [[#coding][Coding Productivity]]
+- [[#coding-productivity][Coding Productivity]]
   - [[#beacon][Beacon]]
   - [[#neotree][neotree]]
   - [[#iedit][iedit]]
@@ -85,8 +85,8 @@
 - [[#dap][Debug Adapter Protocal (dap)]]
 - [[#cpp][C/C++]]
 - [[#python][Python]]
-- [[#web-dev][Web-Development]]
-- [[#js][JavaScript/TypeScript]]
+- [[#web-development][Web-Development]]
+- [[#JavaScript-TypeScript][JavaScript/TypeScript]]
 
 * General Settings 
  :PROPERTIES:
@@ -182,7 +182,7 @@ I think I have actually used this package the most... Does exactly what it says
 #+END_SRC
 * Evil-Mode
  :PROPERTIES:
- :CUSTOM_ID: evil
+ :CUSTOM_ID: evil-mode
  :END:
  - Packages needed to emulate vim inside Emacs. 
  - Make sure you have [[#undo-tree][undo-tree]] installed 
@@ -373,9 +373,9 @@ You can uncomment any themes that you like here
   ;;     (powerline-nano-theme)
 
 #+END_SRC
-* Emacs Enhancements 
+* Emacs-Enhancements 
  :PROPERTIES:
- :CUSTOM_ID: enhancements
+ :CUSTOM_ID: Emacs-Enhancements
  :END:
 ** Which-Key
  :PROPERTIES:
@@ -414,7 +414,7 @@ Useful if you work on multiple windows and want an efficient way of switching be
 #+END_SRC
 ** Ivy-Integration 
  :PROPERTIES:
- :CUSTOM_ID: ivy
+ :CUSTOM_ID: ivy-integration
  :END:
  Ivy manual: https://oremacs.com/swiper/
 #+BEGIN_SRC emacs-lisp
@@ -495,7 +495,7 @@ Useful if you work on multiple windows and want an efficient way of switching be
 #+END_SRC
 ** All-The-Icons
  :PROPERTIES:
- :CUSTOM_ID: all-icons
+ :CUSTOM_ID: all-the-icons
  :END:
 - This is where the file icons come from
 - Make sure to run `M-x all-the-icons-install-fonts` if you want them to work!
@@ -663,7 +663,7 @@ Useful if you work on multiple windows and want an efficient way of switching be
   :init
   (global-undo-tree-mode))
 #+END_SRC
-* Org & Markdown
+* Org-Markdown
  :PROPERTIES:
  :CUSTOM_ID: org-markdown
  :END:
@@ -717,9 +717,9 @@ Useful if you work on multiple windows and want an efficient way of switching be
 (add-hook 'LaTeX-mode-hook 'turn-on-flyspell)
 (add-hook 'LaTeX-mode-hook 'flycheck-mode)
 #+END_SRC
-* Coding Productivity 
+* Coding-Productivity 
  :PROPERTIES:
- :CUSTOM_ID: coding
+ :CUSTOM_ID: coding-productivity
  :END:
 ** Beacon 
  :PROPERTIES:
@@ -962,7 +962,7 @@ A jump to definition package that just works. Love this one!
        (lambda (arg) (call-interactively #'dap-hydra)))) ;; enable hydra on breakpoint stop
 
 #+END_SRC
-* C/C++
+* C-C++
  :PROPERTIES:
  :CUSTOM_ID: cpp
  :END:
@@ -1081,7 +1081,7 @@ Note: the template is meant to be edited to personal preferences
  :END:
 * Web-Development 
  :PROPERTIES:
- :CUSTOM_ID: web-dev
+ :CUSTOM_ID: web-development
  :END:
  Language servers install command (that I use): 
  #+BEGIN_SRC markdown
@@ -1195,7 +1195,7 @@ More on emmet: https://www.emmet.io/
 #+END_SRC
 * JavaScript/TypeScript
  :PROPERTIES:
- :CUSTOM_ID: js
+ :CUSTOM_ID: JavaScript-TypeScript
  :END:
 - JavaScript/TypeScript language server: https://github.com/theia-ide/typescript-language-server
 - Select *ts-ls* when prompted which server to install 
