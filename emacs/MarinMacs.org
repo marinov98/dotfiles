@@ -8,14 +8,13 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 
 * Contact
 - Email me if there are any issues/questions/things that can be better: marin.marinov@macaulay.cuny.edu
-** Inspiration:
-- I became inspired to write this as an actual guide rather just a config reference file, after I configured my emacs to the point where I could comftorably write C++, Python, and JavaScript code as well as take notes in Org mode.
 ** Purpose:
 - Initially, I made this repo for myself to keep track of my configurations...
 - Now I want to make it more of a guide for anyone trying to switch to emacs whether its from another editor and/or is confused about what packages to install and how to configure.
 - Make a guide that welcomes anyone from any editor.
-** Who Is This for?
-- *Vim users* wanting to switch and use the power of emacs while keepings their vim keybindings
+- Achieve the divine workflow
+** Who this config might be useful to 
+- *Vim users* wanting to switch and use emacs while keepings their vim keybindings
 - Anyone wanting to use Emacs for its *own keybindings* and extensibility but hates configuring and wants an out of the box experience
 - People who want more productivity but are limited because of their current text editor
 - People who already use emacs and maybe want to see if there is anything new they can learn from my config
@@ -23,11 +22,10 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 ** Why Make This Into More Of A Guide?
 - Emacs is extremely powerful but has a ton of packages and it can be really confusing to pick the right ones, much less configure them
 - Installing each package requires going to different sites and/or blogs to see how each individual one works, its better to have all the information you need in one place 
-- Not everybody likes spending time customizing and configuring, they like things that work right out of the box. However, everybody likes speed and Emacs provides that and the configuration should not be what keeps people using editors such as emacs or vim
-- What if you are a *Vim user* looking to switch to emacs but keep the powerful vim bindings? My emacs works with evil-mode!
+- Not everybody likes spending time customizing and configuring, they like things that work right out of the box. Emacs provides a lot the configuration should not be what keeps people using editors such as emacs or vim
+- What if you are a *Vim user* looking to switch to emacs but want keep your vim bindings? My emacs works with evil-mode!
 - I just really like to have my stuff online in case event XYZ happens with my machine 
 * Notes-Before-Beginning
-- I include as much as I can, as I want this guide to be useful to both people who never touched emacs as well as emacs veterans
 - Depending on how you installed emacs, certain packages might be preinstalled into it 
 - *In emacs C = ctrl, M = alt, S = shift, s (hyper key) = command key (MacOS) windows key(MS-Windows), RET = enter key*
   - Example: M-x = alt + x  C-x C-f = ctrl + x ctrl + f
@@ -811,7 +809,7 @@ A jump to definition package that just works. Love this one!
     :requires hydra)
 #+END_SRC
 ** Hydras
-- I hope to fill these up in the future
+- Great hydras make for a great workflow (Let's hope they are great...)
 - Customize as you see fit
 #+BEGIN_SRC emacs-lisp
   ;; I actually find this first one pretty useful
@@ -823,15 +821,16 @@ A jump to definition package that just works. Love this one!
     ("q" nil "quit" :color blue))
 
    ;; projectile, I would change this hydras global key if I wasnt using vim bindings...
-  (defhydra hydra-projectile (global-map "C-SPC" :color pink :columns 2)
+  (defhydra hydra-projectile (global-map "C-SPC" :color pink :columns 3)
     "🚀 Projectile 🚀"
     ("f" counsel-projectile-find-file "find")
-    ("F" counsel-projectile-find-file-dwim "find-dwim")
-    ("g" counsel-projectile-git-grep "git grep")
+    ("w" counsel-projectile-find-file-dwim "find-dwim")
+    ("g" counsel-projectile-git-grep "git-grep")
     ("G" counsel-projectile-grep "grep")
+    ("r" counsel-projectile-rg "ripgrep") ;; need ripgrep installed!
     ("s" counsel-projectile-switch-project "switch project")
     ("b" counsel-projectile-switch-to-buffer "buffer switch")
-    ("r" projectile-recentf "recent files")
+    ("R" projectile-recentf "recent files")
     ;; counsel-projectile-switch-project has similiar functionality but this is much quicker
     ("k" projectile-kill-buffers "kill project buffers")
     ("q" nil "quit" :color blue))
@@ -841,7 +840,7 @@ A jump to definition package that just works. Love this one!
    "⚡⚡ Ivy/Windows ⚡⚡"
     ("f" counsel-find-file "find")
     ("x" counsel-M-x "M-x")
-    ("B" counsel-switch-buffer "switch buffer")
+    ("b" counsel-switch-buffer "switch buffer")
     ("s" swiper-isearch "search")
     ;; splitting
     ("v" split-window-right "v-split")
