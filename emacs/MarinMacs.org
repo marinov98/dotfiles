@@ -92,25 +92,34 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
  :END:
 I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
-  ;; Indentation 
-  (setq-default indent-tabs-mode nil)                    ;; disable tabs and use spaces
-  (setq-default tab-width 4)                             ;; set default tab width 4 
-  (setq backward-delete-char-untabify-method 'hungry)    ;; backspaces entire tab instead of one space at a time
-  (setq default-frame-alist '((font . "Fira Code-14")))  ;; set font and font size
-  (setq visible-bell t)                                  ;; disable annoying end of buffer sounds
-  (electric-pair-mode)                                   ;; auto closing brackets
+    ;; -*- lexical-binding: t; -*-
 
-  ;; Quick y/n prompt & Disable menu bars
-  (fset 'yes-or-no-p 'y-or-n-p)                          ;; change yes or no to y or n
-  (menu-bar-mode -1)                                     ;; disable menu bar
-  (toggle-scroll-bar -1)                                 ;; disable scroll bar
-  (tool-bar-mode -1)                                     ;; disable tool bar
+    ;; Indentation 
+    (setq-default indent-tabs-mode nil)                    ;; disable tabs and use spaces
+    (setq-default tab-width 4)                             ;; set default tab width 4 
+    (setq backward-delete-char-untabify-method 'hungry)    ;; backspaces entire tab instead of one space at a time
+    (setq default-frame-alist '((font . "Fira Code-14")))  ;; set font and font size
+    (setq visible-bell t)                                  ;; disable annoying end of buffer sounds
+    (electric-pair-mode)                                   ;; auto closing brackets
 
-  ;; Disable annoying back up files (comment if you want to enable backup files) 
-  (setq make-backup-files nil)                           ;; stop creating backup~ files
-  (setq auto-save-default nil)                           ;; stop creating autosave# files
-  (setq create-lockfiles nil)                            ;; stop creating any # files
+    ;; Quick y/n prompt & Disable menu bars
+    (fset 'yes-or-no-p 'y-or-n-p)                          ;; change yes or no to y or n
+    (menu-bar-mode -1)                                     ;; disable menu bar
+    (toggle-scroll-bar -1)                                 ;; disable scroll bar
+    (tool-bar-mode -1)                                     ;; disable tool bar
+
+    ;; Disable annoying back up files (comment if you want to enable backup files) 
+    (setq make-backup-files nil)                           ;; stop creating backup~ files
+    (setq auto-save-default nil)                           ;; stop creating autosave# files
+    (setq create-lockfiles nil)                            ;; stop creating any # files
   
+    ;; garbage collection settings
+
+    ;; start up (I have to thank Khinshan for this)
+    (eval-when-compile
+    (setq-local gc-cons-threshold most-positive-fixnum)
+    (setq-local gc-cons-percentage 0.6)
+    (setq-local file-name-handler-alist nil))
 #+END_SRC
 * Personal-Keybindings
  :PROPERTIES:
@@ -812,10 +821,10 @@ A jump to definition package that just works. Love this one!
 #+END_SRC
 ** Hydras
 - Great hydras make for a great workflow (Let's hope they are great...)
-- Customize as you see fit
+- Customize as you see fit (colors affect hydra behaivior!)
 #+BEGIN_SRC emacs-lisp
   ;; I actually find this first one pretty useful
-  (defhydra hydra-zoom (global-map "<f2>" :color pink)
+  (defhydra hydra-zoom (global-map "<f2>" :color red)
     "zoom"
     ("k" text-scale-increase "in")
     ("j" text-scale-decrease "out")
@@ -823,7 +832,7 @@ A jump to definition package that just works. Love this one!
     ("q" nil "quit" :color blue))
 
    ;; projectile, I would change this hydras global key if I wasnt using vim bindings...
-  (defhydra hydra-projectile (global-map "C-SPC" :color pink :columns 3)
+  (defhydra hydra-projectile (global-map "C-SPC" :color red :columns 3)
     "🚀 Projectile 🚀"
     ("f" counsel-projectile-find-file "find")
     ("w" counsel-projectile-find-file-dwim "find-dwim")
@@ -870,7 +879,6 @@ A jump to definition package that just works. Love this one!
   (use-package lsp-mode
      :ensure t
      :config
-     (setq gc-cons-threshold 100000000) ;; default is too low for lsp's needs
      (setq read-process-output-max (* 1024 1024)) ;; (1mb) Increase the amount of data which Emacs reads from the process
      (setq lsp-idle-delay 0.3) ; small delay for less strain
      (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error"))
