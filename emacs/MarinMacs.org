@@ -772,8 +772,8 @@ A jump to definition package that just works. Love this one!
  :CUSTOM_ID: git
  :END:
 - Magit: Amazing git interface I have yet to master...
+  - Official Site: https://magit.vc/
 - git-timemachine: flip through a file's full list of version. Revert to any given phase easily
-- Official Site: https://magit.vc/
 #+BEGIN_SRC emacs-lisp
 (use-package magit
     :ensure t
@@ -822,6 +822,13 @@ A jump to definition package that just works. Love this one!
 ** Hydras
 - Great hydras make for a great workflow (Let's hope they are great...)
 - Customize as you see fit (colors affect hydra behavior!)
+| color    | toggle                     |
+|----------+----------------------------|
+| red      |                            |
+| blue     | :exit t                    |
+| amaranth | :foreign-keys warn         |
+| teal     | :foreign-keys warn :exit t |
+| pink     | :foreign-keys run          |
 #+BEGIN_SRC emacs-lisp
    ;; I actually find this first one pretty useful
    (defhydra hydra-zoom (global-map "<f2>" :color red)
