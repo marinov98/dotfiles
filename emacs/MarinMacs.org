@@ -448,7 +448,7 @@ Useful if you work on multiple windows and want an efficient way of switching be
 - Its great that emacs has built-in native gdb 
 #+BEGIN_SRC emacs-lisp
 ;; Debugger
-(global-set-key (kbd "C-c d") 'gdb)
+(global-set-key (kbd "C-x c") 'gdb)
 (setq gdb-many-windows t) ;; have multiple windows when debugging
 (setq  gdb-show-main t )  ;; Non-nil means display source file containing the main routine at startup
 #+END_SRC
@@ -821,52 +821,69 @@ A jump to definition package that just works. Love this one!
 #+END_SRC
 ** Hydras
 - Great hydras make for a great workflow (Let's hope they are great...)
-- Customize as you see fit (colors affect hydra behaivior!)
+- Customize as you see fit (colors affect hydra behavior!)
 #+BEGIN_SRC emacs-lisp
-  ;; I actually find this first one pretty useful
-  (defhydra hydra-zoom (global-map "<f2>" :color red)
-    "zoom"
-    ("k" text-scale-increase "in")
-    ("j" text-scale-decrease "out")
-    ("0" (text-scale-adjust 0) "reset")
+   ;; I actually find this first one pretty useful
+   (defhydra hydra-zoom (global-map "<f2>" :color red)
+     "zoom 🞈 🞈"
+     ("k" text-scale-increase "in")
+     ("j" text-scale-decrease "out")
+     ("0" (text-scale-adjust 0) "reset")
+     ("q" nil "quit" :color blue))
+
+   ;; help
+   (defhydra hydra-describe (global-map "<f4>" :color red)
+     "Describe 🤓"
+     ("f" counsel-describe-function "func")
+     ("F" counsel-describe-face "face")
+     ("k" describe-key "key")
+     ("v" counsel-describe-variable "var")
+     ("m" which-key-show-major-mode "major mode")
+     ("q" nil "quit" :color blue))
+
+    ;; projectile, I would change this hydras global key if I wasn't using vim bindings...
+   (defhydra hydra-projectile (global-map "C-SPC" :color red :columns 3)
+     "🚀 Projectile 🚀"
+     ("f" counsel-projectile-find-file "find")
+     ("w" counsel-projectile-find-file-dwim "find-dwim")
+     ("d" counsel-projectile-find-dir "find-dir")
+     ("g" counsel-projectile-git-grep "git-grep")
+     ("G" counsel-projectile-grep "grep")
+     ("r" counsel-projectile-rg "ripgrep") ;; need ripgrep installed!
+     ("s" counsel-projectile-switch-project "switch project")
+     ("b" counsel-projectile-switch-to-buffer "buffer switch")
+     ("R" projectile-recentf "recent files")
+     ;; counsel-projectile-switch-project has similiar functionality but this is much quicker
+     ("k" projectile-kill-buffers "kill project buffers")
+     ("q" nil "quit" :color blue))
+
+   ;; My attempt at window management
+   (defhydra hydra-window (global-map "M-SPC" :color pink :columns 3)
+    "⚡⚡ Ivy + Windows ⚡⚡"
+     ("f" counsel-find-file "find")
+     ("x" counsel-M-x "M-x")
+     ("b" counsel-switch-buffer "switch buffer")
+     ;; splitting
+     ("2" split-window-right "v-split")
+     ("3" split-window-below "h-split")
+     ;; movement
+     ("h" windmove-left)
+     ("j" windmove-down)
+     ("k" windmove-up)
+     ("l" windmove-right)
+     ;; deletion and quitting
+     ("K" kill-current-buffer "kill current buffer")
+     ("d" delete-window "delete window")
+     ("D" kill-this-buffer "kill buffer")
+     ("q" nil "quit" :color blue))
+
+  ;; git 
+  (defhydra hydra-git (global-map "S-SPC" :color pink)
+    "⏳ Git ⏳"
+    ("g" magit "magit")
+    ("t" git-timemachine "timemachine")
     ("q" nil "quit" :color blue))
 
-   ;; projectile, I would change this hydras global key if I wasnt using vim bindings...
-  (defhydra hydra-projectile (global-map "C-SPC" :color red :columns 3)
-    "🚀 Projectile 🚀"
-    ("f" counsel-projectile-find-file "find")
-    ("w" counsel-projectile-find-file-dwim "find-dwim")
-    ("d" counsel-projectile-find-dir "find-dir")
-    ("g" counsel-projectile-git-grep "git-grep")
-    ("G" counsel-projectile-grep "grep")
-    ("r" counsel-projectile-rg "ripgrep") ;; need ripgrep installed!
-    ("s" counsel-projectile-switch-project "switch project")
-    ("b" counsel-projectile-switch-to-buffer "buffer switch")
-    ("R" projectile-recentf "recent files")
-    ;; counsel-projectile-switch-project has similiar functionality but this is much quicker
-    ("k" projectile-kill-buffers "kill project buffers")
-    ("q" nil "quit" :color blue))
-
-  ;; My attempt at window management
-  (defhydra hydra-window (global-map "M-SPC" :color pink :columns 3)
-   "⚡⚡ Ivy/Windows ⚡⚡"
-    ("f" counsel-find-file "find")
-    ("x" counsel-M-x "M-x")
-    ("b" counsel-switch-buffer "switch buffer")
-    ("s" swiper-isearch "search")
-    ;; splitting
-    ("v" split-window-right "v-split")
-    ("H" split-window-below "h-split")
-    ;; movement
-    ("h" windmove-left)
-    ("j" windmove-down)
-    ("k" windmove-up)
-    ("l" windmove-right)
-    ;; deletion and quitting
-    ("K" kill-current-buffer "kill current buffer")
-    ("d" delete-window "delete window")
-    ("D" kill-this-buffer "kill buffer")
-    ("q" nil "quit" :color blue))
 #+END_SRC
 * LSP
  :PROPERTIES:
@@ -945,7 +962,7 @@ A jump to definition package that just works. Love this one!
        :ensure t
        :requires hydra
        :bind
-       (("C-x c" . dap-debug)
+       (("C-c d" . dap-debug)
        ("C-c i" . dap-debug-edit-template))
        :hook
        (lsp-mode . (lambda () (dap-mode t) (dap-ui-mode t) (dap-tooltip-mode 1) (tooltip-mode 1)))
