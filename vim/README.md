@@ -31,9 +31,9 @@
 - Vim-Utils
 - ctrlp (Fuzzy file, buffer, mru, tag, etc finder.)
 - Nerdtree (file browser)
-- Multiple-Cursors (change multiple things at the same time) 
 - super tab (use tab for autocomplete)
 - vim-repeat (allows you to repeat commands)
+- vim-multiple-cursors (change multiple things at the same time) 
 - vim-surround (amazing new keybindings)
 - clang-format (format c++ code)
 
