@@ -29,7 +29,6 @@ Plug 'https://github.com/scrooloose/nerdtree'
 Plug 'https://github.com/jiangmiao/auto-pairs'
 Plug 'ervandew/supertab'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'https://github.com/gcmt/taboo.vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
 """"""""""""""""""""""
 """"""" MODELINE:
