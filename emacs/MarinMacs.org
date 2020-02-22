@@ -110,6 +110,7 @@ I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
   (setq make-backup-files nil)                           ;; stop creating backup~ files
   (setq auto-save-default nil)                           ;; stop creating autosave# files
   (setq create-lockfiles nil)                            ;; stop creating any # files
+  
 #+END_SRC
 * Personal-Keybindings
  :PROPERTIES:
@@ -869,8 +870,8 @@ A jump to definition package that just works. Love this one!
   (use-package lsp-mode
      :ensure t
      :config
-     (setq gc-cons-threshold 100000000)
-     (setq read-process-output-max (* 1024 1024)) ;; 1mb
+     (setq gc-cons-threshold 100000000) ;; default is too low for lsp's needs
+     (setq read-process-output-max (* 1024 1024)) ;; (1mb) Increase the amount of data which Emacs reads from the process
      (setq lsp-idle-delay 0.3) ; small delay for less strain
      (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error"))
      (setq lsp-prefer-flymake nil) ; we are using flycheck and not flymake
@@ -909,10 +910,9 @@ A jump to definition package that just works. Love this one!
      :ensure t
      :config
      (push 'company-lsp company-backends)
-      ;; Disable client-side cache because the LSP server does a better job.
      (setq company-transformers nil
            company-lsp-async t
-           company-lsp-cache-candidates nil
+           company-lsp-cache-candidates nil ;; Disable client-side cache because the LSP server does a better job.
            company-lsp-enable-snippet t
            company-lsp-enable-recompletion t))
 
