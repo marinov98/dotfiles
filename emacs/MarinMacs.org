@@ -84,6 +84,7 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 - [[#python][Python]]
 - [[#web-development][Web-Development]]
 - [[#JavaScript-TypeScript][JavaScript/TypeScript]]
+- [[#diminish][Diminish]]
 
 * General Settings 
  :PROPERTIES:
@@ -202,37 +203,37 @@ My personal keybindings, you change these anyway you like
  - Make sure you have [[#undo-tree][undo-tree]] package installed 
  - Official Repo for Evil Mode: https://github.com/emacs-evil/evil
 #+BEGIN_SRC emacs-lisp
-(use-package evil
-  :ensure t
-  :config
-  (evil-mode 1))
+  (use-package evil
+    :ensure t
+    :config
+    (evil-mode 1))
  
-;; Surround
-(use-package evil-surround
-  :ensure t
-  :config
-  (global-evil-surround-mode 1))
+  ;; Surround
+  (use-package evil-surround
+    :ensure t
+    :config
+    (global-evil-surround-mode 1))
 
-;; Evil multiple-cursors
-(use-package evil-mc
-  :ensure t
-  :config
-  (global-evil-mc-mode 1))
+  ;; Evil multiple-cursors
+  (use-package evil-mc
+    :ensure t
+    :config
+    (global-evil-mc-mode 1))
 
- ; NeoTree override keybindings, package (neotree) is shown further in the config
- (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
- (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
- (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
- (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
- (evil-define-key 'normal neotree-mode-map (kbd "g") 'neotree-refresh)
- (evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-next-line)
- (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
- (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
- (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
+   ; NeoTree override keybindings, package (neotree) is shown further in the config
+   (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
+   (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
+   (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
+   (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
+   (evil-define-key 'normal neotree-mode-map (kbd "g") 'neotree-refresh)
+   (evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-next-line)
+   (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
+   (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
+   (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
     
-  ; Evil magit overrides magit keybindings, package (magit) is shown further in the config
- (use-package evil-magit
-      :ensure t)
+    ; Evil magit overrides magit keybindings, package (magit) is shown further in the config
+   (use-package evil-magit
+        :ensure t)
 #+END_SRC
 * Restart-Emacs
  :PROPERTIES:
@@ -461,7 +462,6 @@ You can enable/disable any themes that you like here
 ;; Ivy
 (use-package ivy
     :ensure t
-    :diminish (ivy-mode)
     :config
     (ivy-mode 1)
     (setq ivy-use-virtual-buffers t)
@@ -846,81 +846,112 @@ I want to try treemacs in the future, but this has been amazing for file browsin
 | amaranth | :foreign-keys warn         |
 | teal     | :foreign-keys warn :exit t |
 | pink     | :foreign-keys run          |
+*** Zoom (actually find this first one pretty useful)
 #+BEGIN_SRC emacs-lisp
-   ;; I actually find this first one pretty useful
-   (defhydra hydra-zoom (global-map "<f2>" :color red)
-     "zoom 🞈 🞈"
-     ("k" text-scale-increase "in")
-     ("j" text-scale-decrease "out")
-     ("0" (text-scale-adjust 0) "reset")
-     ("q" nil "quit" :color blue))
+     ;; I actually find this first one pretty useful
+     (defhydra hydra-zoom (global-map "<f2>" :color red)
+       "zoom 🞈 🞈"
+       ("k" text-scale-increase "in")
+       ("j" text-scale-decrease "out")
+       ("0" (text-scale-adjust 0) "reset")
+       ("q" nil "quit" :color blue))
 
-   ;; help
-   (defhydra hydra-describe (global-map "C-c h" :color red :columns 2)
-     "Describe 🤓"
-     ("f" counsel-describe-function "func")
-     ("F" counsel-describe-face "face")
-     ("k" describe-key "key")
-     ("v" counsel-describe-variable "var")
-     ("m" which-key-show-major-mode "major mode")
-     ("t" describe-theme "theme")
-     ("q" nil "quit" :color blue))
+#+END_SRC
+*** describe (help describe anything and open up documentation)
+#+BEGIN_SRC emacs-lisp
+     ;; help
+     (defhydra hydra-describe (global-map "C-c h" :color red :columns 2)
+       "Describe 🤓"
+       ("f" counsel-describe-function "func")
+       ("F" counsel-describe-face "face")
+       ("k" describe-key "key")
+       ("v" counsel-describe-variable "var")
+       ("m" which-key-show-major-mode "major mode")
+       ("t" describe-theme "theme")
+       ("q" nil "quit" :color blue))
 
-    ;; projectile, I would change this hydras global key if I wasn't using vim bindings...
-   (defhydra hydra-projectile (global-map "C-SPC" :color red :columns 3)
-     "🚀 Projectile 🚀"
-     ("f" counsel-projectile-find-file "find")
-     ("w" counsel-projectile-find-file-dwim "find-dwim")
-     ("d" counsel-projectile-find-dir "find-dir")
-     ("g" counsel-projectile-git-grep "git-grep")
-     ("G" counsel-projectile-grep "grep")
-     ("r" counsel-projectile-rg "ripgrep") ;; need ripgrep installed!
-     ("s" counsel-projectile-switch-project "switch project")
-     ("b" counsel-projectile-switch-to-buffer "buffer switch")
-     ("R" projectile-recentf "recent files")
-     ;; counsel-projectile-switch-project has similiar functionality but this is much quicker
-     ("k" projectile-kill-buffers "kill project buffers")
-     ("q" nil "quit" :color blue))
+#+END_SRC
+*** mc (multiple cursor map more to my liking)
+#+BEGIN_SRC emacs-lisp
+  ;; multiple cursors
+   (defhydra hydra-mc (global-map "C-c m" :color pink :columns 3)
+       "Multiple cursors "
+      ("n"  evil-mc-make-and-goto-next-match "make next")
+      ("p"  evil-mc-make-and-goto-prev-match "make prev")
+      ("u"  evil-mc-undo-last-added-cursor "undo")
+      ("f"  evil-mc-make-and-goto-first-cursor "first cursor")
+      ("l"  evil-mc-make-and-goto-last-cursor "last cursor")
+      ("P"  evil-mc-make-and-goto-prev-cursor "go next")
+      ("N"  evil-mc-make-and-goto-next-cursor "go prev")
+      ("a"  evil-mc-make-all-cursors "all")
+      ("q"  evil-mc-undo-all-cursors "quit" :color blue))
+#+END_SRC
+*** projectile (utilize counsel projectile)
+#+BEGIN_SRC emacs-lisp
+      ;; projectile, I would change this hydras global key if I wasn't using vim bindings...
+     (defhydra hydra-projectile (global-map "C-SPC" :color red :columns 3)
+       "🚀 Projectile 🚀"
+       ("f" counsel-projectile-find-file "find")
+       ("w" counsel-projectile-find-file-dwim "find-dwim")
+       ("d" counsel-projectile-find-dir "find-dir")
+       ("g" counsel-projectile-git-grep "git-grep")
+       ("G" counsel-projectile-grep "grep")
+       ("r" counsel-projectile-rg "ripgrep") ;; need ripgrep installed!
+       ("s" counsel-projectile-switch-project "switch project")
+       ("b" counsel-projectile-switch-to-buffer "buffer switch")
+       ("R" projectile-recentf "recent files")
+       ;; counsel-projectile-switch-project has similiar functionality but this is much quicker
+       ("k" projectile-kill-buffers "kill project buffers")
+       ("q" nil "quit" :color blue))
 
-   ;; My attempt at window management
-   (defhydra hydra-window (global-map "M-SPC" :color pink :columns 3)
-    "⚡⚡ Ivy + Windows ⚡⚡"
-     ("f" counsel-find-file "find")
-     ("x" counsel-M-x "M-x")
-     ("b" counsel-switch-buffer "switch buffer")
-     ;; splitting
-     ("2" split-window-right "v-split")
-     ("3" split-window-below "h-split")
-     ;; movement
-     ("h" windmove-left)
-     ("j" windmove-down)
-     ("k" windmove-up)
-     ("l" windmove-right)
-     ;; deletion and quitting
-     ("K" kill-current-buffer "kill current buffer")
-     ("d" delete-window "delete window")
-     ("D" kill-this-buffer "kill buffer")
-     ("q" nil "quit" :color blue))
+#+END_SRC
+*** window (my attempt at window management)
+#+BEGIN_SRC emacs-lisp
+     ;; My attempt at window management
+     (defhydra hydra-window (global-map "M-SPC" :color pink :columns 3)
+      "⚡⚡ Ivy + Windows ⚡⚡"
+       ("f" counsel-find-file "find")
+       ("x" counsel-M-x "M-x")
+       ("b" counsel-switch-buffer "switch buffer")
+       ;; splitting
+       ("2" split-window-right "v-split")
+       ("3" split-window-below "h-split")
+       ;; movement
+       ("h" windmove-left)
+       ("j" windmove-down)
+       ("k" windmove-up)
+       ("l" windmove-right)
+       ;; deletion and quitting
+       ("K" kill-current-buffer "kill current buffer")
+       ("d" delete-window "delete window")
+       ("D" kill-this-buffer "kill buffer")
+       ("q" nil "quit" :color blue))
 
-  ;; git 
-  (defhydra hydra-git (global-map "S-SPC" :color pink)
-    "⏳ Git ⏳"
-    ("g" magit "magit")
-    ("d" magit-dispatch "dispatch")
-    ("t" git-timemachine "timemachine")
-    ("q" nil "quit" :color blue))
+#+END_SRC
+*** git (magit and timemachine)
+#+BEGIN_SRC emacs-lisp
+    ;; git 
+    (defhydra hydra-git (global-map "S-SPC" :color pink)
+      "⏳ Git ⏳"
+      ("g" magit "magit")
+      ("d" magit-dispatch "dispatch")
+      ("t" git-timemachine "timemachine")
+      ("q" nil "quit" :color blue))
 
 
-  ;; lsp
-  (defhydra hydra-lsp (global-map "M-g" :color red :columns 2)
-    "LSP"
-    ("j" lsp-ui-peek-find-definitions "peek-find")
-    ("r" lsp-ui-peek-find-references "peek-reference")
-    ("d" lsp-find-definition "find def")
-    ("t" lsp-find-type-definition "type def")
-    ("c" lsp-rename "rename")
-    ("l" lsp-ui-flycheck-list "list errors")
-    ("q" nil "quit" :color blue))
+#+END_SRC
+*** lsp (jump to definitions and references, list errors)
+#+BEGIN_SRC emacs-lisp
+    ;; lsp
+    (defhydra hydra-lsp (global-map "M-g" :color red :columns 2)
+      "LSP"
+      ("j" lsp-ui-peek-find-definitions "peek-find")
+      ("r" lsp-ui-peek-find-references "peek-reference")
+      ("d" lsp-find-definition "find def")
+      ("t" lsp-find-type-definition "type def")
+      ("c" lsp-rename "rename")
+      ("l" lsp-ui-flycheck-list "list errors")
+      ("q" nil "quit" :color blue))
 
 #+END_SRC
 * LSP
@@ -1370,3 +1401,26 @@ All for typescript
     (add-hook 'before-save-hook 'tide-format-before-save)
     (add-hook 'typescript-mode-hook #'setup-tide-mode))
 #+END_SRC
+* Diminish
+ :PROPERTIES:
+ :CUSTOM_ID: diminish
+ :END:
+This hides modes from your modeline, remove the specific mode you want to see in the modeline
+  #+begin_src emacs-lisp
+    (use-package diminish
+        :ensure t
+        :init
+        (diminish 'undo-tree-mode)
+        (diminish 'ivy-posframe-mode)
+        (diminish 'clang-format-mode)
+        (diminish 'company-mode)
+        (diminish 'modern-c++-font-lock-mode)
+        (diminish 'auto-revert-mode)
+        (diminish 'page-break-lines-mode)
+        (diminish 'evil-mc-mode)
+        (diminish 'eldoc-mode)
+        (diminish 'abbrev-mode)
+        (diminish 'beacon-mode)
+        (diminish 'yas-minor-mode)
+        (diminish 'which-key-mode))
+  #+end_src
