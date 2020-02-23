@@ -60,10 +60,9 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 - [[#Emacs-Enhancements][Emacs Enhancements]]
   - [[#which-key][Which-Key]]
   - [[#ace-window][Ace-Window]]
-  - [[#gdb][GDB]]
-  - [[#ivy-integration][Ivy integration]]
   - [[#ranger][Ranger]]
   - [[#all-the-icons][All-the-icons]]
+- [[#ivy][Ivy]]
 - [[#projectile][Projectile]]
 - [[#shell][Shell]]
 - [[#globals][Globals]]
@@ -75,6 +74,7 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
   - [[#beacon][Beacon]]
   - [[#neotree][neotree]]
   - [[#iedit][iedit]]
+  - [[#dump-jump][Dump-Jump]]
 - [[#git][Git]]
 - [[#hydra][Hydra]]
 - [[#lsp][Language Server Protocal (lsp)]]
@@ -92,6 +92,14 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
     ;; -*- lexical-binding: t; -*-
+
+    ;; garbage collection settings
+
+    ;; disable garbage collection on start up (I have to thank Khinshan for this)
+    (eval-when-compile
+    (setq-local gc-cons-threshold most-positive-fixnum)
+    (setq-local gc-cons-percentage 0.6)
+    (setq-local file-name-handler-alist nil))
 
     ;; Indentation 
     (setq-default indent-tabs-mode nil)                    ;; disable tabs and use spaces
@@ -111,14 +119,11 @@ I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
     (setq make-backup-files nil)                           ;; stop creating backup~ files
     (setq auto-save-default nil)                           ;; stop creating autosave# files
     (setq create-lockfiles nil)                            ;; stop creating any # files
+    
+    ;; GNU Debugger (GDB)
+    (setq gdb-many-windows t) ;; have multiple windows when debugging
+    (setq  gdb-show-main t )  ;; Non-nil means display source file containing the main routine at startup
   
-    ;; garbage collection settings
-
-    ;; start up (I have to thank Khinshan for this)
-    (eval-when-compile
-    (setq-local gc-cons-threshold most-positive-fixnum)
-    (setq-local gc-cons-percentage 0.6)
-    (setq-local file-name-handler-alist nil))
 #+END_SRC
 * Personal-Keybindings
  :PROPERTIES:
@@ -132,7 +137,8 @@ My personal keybindings, you change these anyway you like
   (global-set-key (kbd "M-m") 'move-beginning-of-line) ;; moves beginning of the line 
 
   ;; Compiling and Buffers
-  (global-set-key (kbd "C-c e") 'compile)              ;; compile code
+  (global-set-key (kbd "C-x g") 'gdb)                  ;; launch gdb
+  (global-set-key (kbd "C-c c") 'compile)              ;; compile code
   (global-set-key (kbd "C-c b") 'switch-to-prev-buffer)
   (global-set-key (kbd "C-c n") 'switch-to-next-buffer)
   (global-set-key (kbd "C-c k") 'kill-current-buffer)
@@ -184,6 +190,7 @@ My personal keybindings, you change these anyway you like
 #+BEGIN_SRC emacs-lisp
 (use-package markdown-mode
   :ensure t
+  :commands markdown-mode
   :mode
   ("\\.\\(md\\|markdown\\)\\'" . markdown-mode))
 #+END_SRC
@@ -349,30 +356,8 @@ You can uncomment any themes that you like here
  :PROPERTIES:
  :CUSTOM_ID: modeline
  :END:
- You can pick one of these, simply uncomment the one you want to try and comment the rest  
+ You can pick one of these, simply enable the one you want to try and disable the rest
 #+BEGIN_SRC emacs-lisp
-
-;;;;;;;;;;;;;;;;;;;;;;   
-;;  Telephone-line
-;;;;;;;;;;;;;;;;;;;;;;   
-   
-;(use-package telephone-line
-;    :ensure t
-;    :config
-;    (setq telephone-line-lhs
-;        '((evil   . (telephone-line-evil-tag-segment))
-;         (accent . (telephone-line-vc-segment
-;                    telephone-line-erc-modified-channels-segment
-;                    telephone-line-process-segment))
-;         (nil    . (telephone-line-minor-mode-segment
-;                    telephone-line-buffer-segment))))
-;    (setq telephone-line-rhs
-;          '((nil    . (telephone-line-misc-info-segment))
-;           (accent . (telephone-line-major-mode-segment))
-;           (evil   . (telephone-line-airline-position-segment))))
-;    telephone-line-mode 1)
-;
-
 
 ;;;;;;;;;;;;;;;;;;;;;;   
 ;; Spaceline
@@ -385,24 +370,52 @@ You can uncomment any themes that you like here
    (setq powerline-default-separator (quote arrow))
    (spaceline-highlight-face-evil-state) ;; evil mode only
    (spaceline-spacemacs-theme))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;   
+;;  Telephone-line
+;;;;;;;;;;;;;;;;;;;;;;   
+   
+(use-package telephone-line
+    :disabled
+    :ensure t
+    :config
+    (setq telephone-line-lhs
+        '((evil   . (telephone-line-evil-tag-segment))
+         (accent . (telephone-line-vc-segment
+                    telephone-line-erc-modified-channels-segment
+                    telephone-line-process-segment))
+         (nil    . (telephone-line-minor-mode-segment
+                    telephone-line-buffer-segment))))
+    (setq telephone-line-rhs
+          '((nil    . (telephone-line-misc-info-segment))
+           (accent . (telephone-line-major-mode-segment))
+           (evil   . (telephone-line-airline-position-segment))))
+    telephone-line-mode 1)
+
+
+
     
 ;;;;;;;;;;;;;;;;;;;;;;   
 ;; lightweight doom theme
 ;;;;;;;;;;;;;;;;;;;;;;   
 
-;(use-package doom-modeline
-;      :ensure t
-;      :hook (after-init . doom-modeline-mode))
+(use-package doom-modeline
+      :disabled
+      :ensure t
+      :hook (after-init . doom-modeline-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;   
 ;; Powerline
 ;;;;;;;;;;;;;;;;;;;;;;   
 
-  ;;  (use-package powerline
-  ;;        :ensure t
-  ;;        :config
-  ;;        (powerline-default theme))   
-  ;;   
+ (use-package powerline
+     :disabled
+     :ensure t
+     :config
+     (powerline-default theme))   
+     
 
 ;; Other themes with powerline
     
@@ -412,50 +425,11 @@ You can uncomment any themes that you like here
   ;;     (powerline-nano-theme)
 
 #+END_SRC
-* Emacs-Enhancements 
+* Ivy
  :PROPERTIES:
- :CUSTOM_ID: Emacs-Enhancements
+ :CUSTOM_ID: ivy
  :END:
-** Which-Key
- :PROPERTIES:
- :CUSTOM_ID: which-key
- :END:
- A cheat sheet that comes in only when you need it
-#+BEGIN_SRC emacs-lisp
-(use-package which-key
-	:ensure t 
-	:config
-	(which-key-mode))
-#+END_SRC
-** Ace-Window
- :PROPERTIES:
- :CUSTOM_ID: ace-window
- :END:
-Useful if you work on multiple windows and want an efficient way of switching between them
-#+BEGIN_SRC emacs-lisp
-(use-package ace-window
-     :ensure t
-     :init 
-     (global-set-key (kbd "M-o") 'ace-window)
-     (setq aw-background nil))
-#+END_SRC
-** GDB
- :PROPERTIES:
- :CUSTOM_ID: gdb
- :END:
-- Mainly for c-based languages
-- Its great that emacs has built-in native gdb 
-#+BEGIN_SRC emacs-lisp
-;; Debugger
-(global-set-key (kbd "C-x g") 'gdb)
-(setq gdb-many-windows t) ;; have multiple windows when debugging
-(setq  gdb-show-main t )  ;; Non-nil means display source file containing the main routine at startup
-#+END_SRC
-** Ivy-Integration 
- :PROPERTIES:
- :CUSTOM_ID: ivy-integration
- :END:
- Ivy manual: https://oremacs.com/swiper/
+ Ivy User Manual: https://oremacs.com/swiper/
 #+BEGIN_SRC emacs-lisp
 
  ;; Ivy
@@ -489,7 +463,8 @@ Useful if you work on multiple windows and want an efficient way of switching be
      ("C-x b" . counsel-switch-buffer)
      ("M-y" . counsel-yank-pop)
      :map ivy-minibuffer-map
-     ("M-y" . ivy-next-line))
+     ("C-j" . ivy-next-line)
+     ("C-k" . ivy-previous-line))
      :config
      (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"
      ;; Add smart-casing (-S) to default command arguments:
@@ -516,6 +491,33 @@ Useful if you work on multiple windows and want an efficient way of switching be
      (put 'ivy-posframe 'face-alias 'default)
      (ivy-posframe-mode 1))
 
+#+END_SRC
+* Emacs-Enhancements 
+ :PROPERTIES:
+ :CUSTOM_ID: Emacs-Enhancements
+ :END:
+** Which-Key
+ :PROPERTIES:
+ :CUSTOM_ID: which-key
+ :END:
+ A cheat sheet that comes in only when you need it
+#+BEGIN_SRC emacs-lisp
+(use-package which-key
+	:ensure t 
+	:config
+	(which-key-mode))
+#+END_SRC
+** Ace-Window
+ :PROPERTIES:
+ :CUSTOM_ID: ace-window
+ :END:
+Useful if you work on multiple windows and want an efficient way of switching between them
+#+BEGIN_SRC emacs-lisp
+(use-package ace-window
+     :ensure t
+     :init 
+     (global-set-key (kbd "M-o") 'ace-window)
+     (setq aw-background nil))
 #+END_SRC
 ** Ranger
  :PROPERTIES:
@@ -571,29 +573,6 @@ Useful if you work on multiple windows and want an efficient way of switching be
      :config
      (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
 #+END_SRC
-* Shell
- :PROPERTIES:
- :CUSTOM_ID: shell
- :END:
-- better-shell: https://github.com/killdash9/better-shell
-- exec-path-from-shell: https://github.com/purcell/exec-path-from-shell
-- Eshell: https://www.gnu.org/software/emacs/manual/html_mono/eshell.html
-   #+BEGIN_SRC emacs-lisp
-(use-package better-shell
-    :ensure t
-    :bind 
-    (("C-`" . better-shell-shell) ;; open terminal
-    ("C-;" . better-shell-remote-open)))
-
-(use-package exec-path-from-shell
-    :ensure t
-    :config
-    (when (memq window-system '(mac ns x)) ;; check if its mac
-    (exec-path-from-shell-initialize)))
-
-;; Eshell 
-(global-set-key (kbd "C-~") 'eshell) ;; terminal alternative in emacs
-   #+END_SRC
 * Projectile
  :PROPERTIES:
  :CUSTOM_ID: projectile
@@ -618,6 +597,29 @@ Useful if you work on multiple windows and want an efficient way of switching be
      :ensure t
      :bind ("C-c p" . projectile-command-map))
 #+END_SRC
+* Shell
+ :PROPERTIES:
+ :CUSTOM_ID: shell
+ :END:
+- better-shell: https://github.com/killdash9/better-shell
+- exec-path-from-shell: https://github.com/purcell/exec-path-from-shell
+- Eshell: https://www.gnu.org/software/emacs/manual/html_mono/eshell.html
+   #+BEGIN_SRC emacs-lisp
+(use-package better-shell
+    :ensure t
+    :bind 
+    (("C-`" . better-shell-shell) ;; open terminal
+    ("C-;" . better-shell-remote-open)))
+
+(use-package exec-path-from-shell
+    :ensure t
+    :config
+    (when (memq window-system '(mac ns x)) ;; check if its mac
+    (exec-path-from-shell-initialize)))
+
+;; Eshell 
+(global-set-key (kbd "C-~") 'eshell) ;; terminal alternative in emacs
+   #+END_SRC
 * Globals
  :PROPERTIES:
  :CUSTOM_ID: globals
@@ -736,11 +738,29 @@ I want to try treemacs in the future, but this has been amazing for file browsin
  :END:
 - Nice utility that finds all matches and replaces them with the user's choice
 - Very similiar to multiple cursors
+- *Depreciated* I use lsp-rename now 
 #+BEGIN_SRC emacs-lisp
 (use-package iedit
+    :disabled
     :ensure t
     :bind (("C-c c" . iedit-mode)))
 #+END_SRC
+** Dump-Jump
+*Depreciated* an old favorite , replaced by lsp
+   #+begin_src emacs-lisp
+   (use-package dumb-jump
+    :disabled
+    :bind 
+    (("M-g o" . dumb-jump-go-other-window)
+    ("M-g j" . dumb-jump-go)
+    ("M-g b" . dumb-jump-back)
+    ("M-g i" . dumb-jump-go-prompt)
+    ("M-g x" . dumb-jump-go-prefer-external)
+    ("M-g z" . dumb-jump-go-prefer-external-other-window))
+    :config 
+    (setq dumb-jump-selector 'ivy) 
+    :ensure)
+   #+end_src
 * Git
  :PROPERTIES:
  :CUSTOM_ID: git
@@ -888,7 +908,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
   (use-package lsp-mode
      :ensure t
      :config
-     (setq read-process-output-max (* 1024 1024)) ;; (1mb) Increase the amount of data which Emacs reads from the process
+     (setq-local read-process-output-max (* 1024 1024)) ;; (1mb) Increase the amount of data which Emacs reads from the process
      (setq lsp-idle-delay 0.3) ; small delay for less strain
      (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error"))
      (setq lsp-prefer-flymake nil) ; we are using flycheck and not flymake
@@ -955,7 +975,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
        :requires hydra
        :bind
        (("C-c d" . dap-debug)
-       ("C-c i" . dap-debug-edit-template))
+       ("C-c e" . dap-debug-edit-template))
        :hook
        (lsp-mode . (lambda () (dap-mode t) (dap-ui-mode t) (dap-tooltip-mode 1) (tooltip-mode 1)))
        :config
