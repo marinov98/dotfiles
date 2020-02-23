@@ -280,6 +280,7 @@ I think I have actually used this package the most... Does exactly what it says
 *** Colorful and visually pleasing    
 - Spacemacs-theme
 - Zerodark
+- modus-vivendi (amazing color contrast)
 
 *** Easy on the eyes
 - Gruvbox
@@ -292,65 +293,87 @@ I think I have actually used this package the most... Does exactly what it says
 *** For Org and any Markdown Language
 - Poet
 ** Customization
-You can uncomment any themes that you like here
+You can enable/disable any themes that you like here
 #+BEGIN_SRC emacs-lisp
 ;; BE AWARE: emacs can have multiple themes on at the same time
 ;; Multiple themes can mix into a super theme
 ;; Some themes do not mix well which is why I commented some themes
 
-;(use-package zerodark-theme
-;   :ensure t)
+;; current theme I am running
+ (use-package spacemacs-common
+     :ensure spacemacs-theme
+     :config (load-theme 'spacemacs-dark t))
+     
+;; others
+ (use-package zerodark-theme
+     :disabled
+     :ensure t)
  
-;(use-package minimal-theme
-;    :ensure t
-;    :config
-;    (load-theme 'minimal t))
+ (use-package minimal-theme
+     :disabled
+     :ensure t
+     :config
+     (load-theme 'minimal t))
    
-;use-package nord-theme
-; :ensure t
-; :config
-; (load-theme 'nord t))
+ (use-package nord-theme
+     :disabled
+     :ensure t
+     :config
+     (load-theme 'nord t))
 
-;; (use-package zenburn-theme
-;;   :ensure t)
+ (use-package zenburn-theme
+     :disabled
+     :ensure t)
     
-;; (use-package poet-theme
-;;    :ensure t)
+ (use-package poet-theme
+     :disabled
+     :ensure t)
 
-;;(use-package monokai-theme
-;;    :ensure t
-;;    :config (load-theme 'monokai t))
+ (use-package monokai-theme
+     :disabled
+     :ensure t
+     :config (load-theme 'monokai t))
  
-(use-package spacemacs-common
-    :ensure spacemacs-theme
-    :config (load-theme 'spacemacs-dark t))
 
-;; (use-package gruvbox-theme
-;;    :ensure t)
+ (use-package modus-vivendi-theme
+     :disabled
+     :ensure t
+     :config
+     (setq modus-vivendi-theme-bold-constructs t)
+     (load-theme 'modus-vivendi t))
 
-;;(use-package base16-theme
-;;  :ensure t
-;;  :config 
-;;  (load-theme 'base16-ocean t))
-
-;;(use-package jbeans-theme
-;;    :ensure t)
-;;    :config
-;;    (load-theme 'jbeans t))
-
-;; (use-package solarized-theme
-;;     :ensure t
-;;     :config
-;;     (load-theme 'solarized-dark t))
-
+ (use-package modus-operandi-theme
+     :disabled
+     :ensure t
+     :config (load-theme 'modus-operandi t))
  
-;;(use-package planet-theme
-;;   :ensure t)
-;;   :config 
-;;   (load-theme 'planet t))
+ (use-package gruvbox-theme
+     :disabled
+     :ensure t)
 
-;;(load-theme 'zerodark t)
-;;(zerodark-setup-modeline-format)
+ (use-package base16-theme
+     :disabled
+     :ensure t
+     :config 
+     (load-theme 'base16-ocean t))
+
+ (use-package jbeans-theme
+     :disabled
+     :ensure t
+     :config
+     (load-theme 'jbeans t))
+
+ (use-package solarized-theme
+     :disabled
+     :ensure t
+     :config
+     (load-theme 'solarized-dark t))
+ 
+ (use-package planet-theme
+     :disabled
+     :ensure t
+     :config 
+     (load-theme 'planet t))
 #+END_SRC
 * Modeline
  :PROPERTIES:
@@ -743,7 +766,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
 (use-package iedit
     :disabled
     :ensure t
-    :bind (("C-c c" . iedit-mode)))
+    :bind (("C-c a" . iedit-mode)))
 #+END_SRC
 ** Dump-Jump
 *Depreciated* an old favorite , replaced by lsp
@@ -831,13 +854,14 @@ I want to try treemacs in the future, but this has been amazing for file browsin
      ("q" nil "quit" :color blue))
 
    ;; help
-   (defhydra hydra-describe (global-map "<f4>" :color red)
+   (defhydra hydra-describe (global-map "C-c h" :color red :columns 2)
      "Describe 🤓"
      ("f" counsel-describe-function "func")
      ("F" counsel-describe-face "face")
      ("k" describe-key "key")
      ("v" counsel-describe-variable "var")
      ("m" which-key-show-major-mode "major mode")
+     ("t" describe-theme "theme")
      ("q" nil "quit" :color blue))
 
     ;; projectile, I would change this hydras global key if I wasn't using vim bindings...
@@ -886,7 +910,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
 
 
   ;; lsp
-  (defhydra hydra-lsp (global-map "M-g" :color red)
+  (defhydra hydra-lsp (global-map "M-g" :color red :columns 2)
     "LSP"
     ("j" lsp-ui-peek-find-definitions "peek-find")
     ("r" lsp-ui-peek-find-references "peek-reference")
