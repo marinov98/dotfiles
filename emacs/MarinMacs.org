@@ -749,24 +749,6 @@ I want to try treemacs in the future, but this has been amazing for file browsin
     :ensure t
     :bind (("C-c c" . iedit-mode)))
 #+END_SRC
-** Dump-Jump
- :PROPERTIES:
- :CUSTOM_ID: dump-jump
- :END:
-A jump to definition package that just works. Love this one!
-#+BEGIN_SRC emacs-lisp
-(use-package dumb-jump
-    :bind 
-    (("M-g o" . dumb-jump-go-other-window)
-    ("M-g j" . dumb-jump-go)
-    ("M-g b" . dumb-jump-back)
-    ("M-g i" . dumb-jump-go-prompt)
-    ("M-g x" . dumb-jump-go-prefer-external)
-    ("M-g z" . dumb-jump-go-prefer-external-other-window))
-    :config 
-    (setq dumb-jump-selector 'ivy) 
-    :ensure)
-#+END_SRC
 * Git
  :PROPERTIES:
  :CUSTOM_ID: git
@@ -889,6 +871,17 @@ A jump to definition package that just works. Love this one!
     "⏳ Git ⏳"
     ("g" magit "magit")
     ("t" git-timemachine "timemachine")
+    ("q" nil "quit" :color blue))
+
+
+  ;; lsp
+  (defhydra hydra-lsp (global-map "M-g" :color red :columns 2)
+    "LSP"
+    ("j" lsp-ui-peek-find-definitions "peek-find")
+    ("r" lsp-ui-peek-find-references "peek-reference")
+    ("d" lsp-find-definition "find def")
+    ("t" lsp-find-type-definition "type def")
+    ("c" lsp-rename "rename")
     ("q" nil "quit" :color blue))
 
 #+END_SRC
