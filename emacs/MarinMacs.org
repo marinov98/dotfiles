@@ -323,7 +323,9 @@ You can enable/disable any themes that you like here
 
  (use-package zenburn-theme
      :disabled
-     :ensure t)
+     :ensure t
+     :config
+     (load-theme 'zenburn t))
     
  (use-package poet-theme
      :disabled
@@ -349,7 +351,9 @@ You can enable/disable any themes that you like here
  
  (use-package gruvbox-theme
      :disabled
-     :ensure t)
+     :ensure t
+     :config
+     (load-theme 'gruvbox t))
 
  (use-package base16-theme
      :disabled
@@ -405,17 +409,17 @@ You can enable/disable any themes that you like here
     :ensure t
     :config
     (setq telephone-line-lhs
-        '((evil   . (telephone-line-evil-tag-segment))
-         (accent . (telephone-line-vc-segment
-                    telephone-line-erc-modified-channels-segment
-                    telephone-line-process-segment))
-         (nil    . (telephone-line-minor-mode-segment
-                    telephone-line-buffer-segment))))
+    '((evil   . (telephone-line-evil-tag-segment))
+        (accent . (telephone-line-vc-segment
+                   telephone-line-erc-modified-channels-segment
+                   telephone-line-process-segment))
+        (nil    . (telephone-line-minor-mode-segment
+                   telephone-line-buffer-segment))))
     (setq telephone-line-rhs
-          '((nil    . (telephone-line-misc-info-segment))
-           (accent . (telephone-line-major-mode-segment))
-           (evil   . (telephone-line-airline-position-segment))))
-    telephone-line-mode 1)
+      '((nil    . (telephone-line-misc-info-segment))
+        (accent . (telephone-line-major-mode-segment))
+        (evil   . (telephone-line-airline-position-segment))))
+    (telephone-line-mode 1))
 
 
 
@@ -454,66 +458,64 @@ You can enable/disable any themes that you like here
  :END:
  Ivy User Manual: https://oremacs.com/swiper/
 #+BEGIN_SRC emacs-lisp
+;; Ivy
+(use-package ivy
+    :ensure t
+    :diminish (ivy-mode)
+    :config
+    (ivy-mode 1)
+    (setq ivy-use-virtual-buffers t)
+    (setq ivy-display-style 'fancy)
+    (setq ivy-count-format "(%d/%d) ")
+    (setq enable-recursive-minibuffers t)
+    (setq ivy-use-virtual-buffers t))
 
- ;; Ivy
- (use-package ivy
-     :ensure t
-     :diminish (ivy-mode)
-     :config
-     (ivy-mode 1)
-     (setq ivy-use-virtual-buffers t)
-     (setq ivy-display-style 'fancy)
-     (setq ivy-count-format "(%d/%d) ")
-     (setq enable-recursive-minibuffers t)
-     (setq ivy-use-virtual-buffers t))
+;; Swiper 
+(use-package swiper
+    :ensure t
+    :bind 
+    (("C-s" . swiper-isearch)
+    ("C-a" . swiper-isearch-backward)
+    ("C-c C-r" . ivy-resume)))
 
- ;; Swiper 
- (use-package swiper
-     :ensure t
-     :bind 
-     (("C-s" . swiper-isearch)
-     ("C-a" . swiper-isearch-backward)
-     ("C-c C-r" . ivy-resume)))
+;; Counsel
+(use-package counsel
+    :ensure t
+    :bind
+    (("M-x" . counsel-M-x)
+    ("C-x C-f" . counsel-find-file)
+    ("C-c g" . counsel-git)
+    ("C-c j" . counsel-git-grep)
+    ("C-x b" . counsel-switch-buffer)
+    ("M-y" . counsel-yank-pop)
+    :map ivy-minibuffer-map
+    ("C-j" . ivy-next-line)
+    ("C-k" . ivy-previous-line))
+    :config
+    (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"
+    ;; Add smart-casing (-S) to default command arguments:
+    counsel-rg-base-command "rg -S --no-heading --line-number --color never %s ."
+    counsel-ag-base-command "ag -S --nocolor --nogroup %s"
+    counsel-pt-base-command "pt -S --nocolor --nogroup -e %s"
+    counsel-find-file-at-point t))
 
- ;; Counsel
- (use-package counsel
-     :ensure t
-     :bind
-     (("M-x" . counsel-M-x)
-     ("C-x C-f" . counsel-find-file)
-     ("C-c g" . counsel-git)
-     ("C-c j" . counsel-git-grep)
-     ("C-x b" . counsel-switch-buffer)
-     ("M-y" . counsel-yank-pop)
-     :map ivy-minibuffer-map
-     ("C-j" . ivy-next-line)
-     ("C-k" . ivy-previous-line))
-     :config
-     (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"
-     ;; Add smart-casing (-S) to default command arguments:
-     counsel-rg-base-command "rg -S --no-heading --line-number --color never %s ."
-     counsel-ag-base-command "ag -S --nocolor --nogroup %s"
-     counsel-pt-base-command "pt -S --nocolor --nogroup -e %s"
-     counsel-find-file-at-point t))
-
- ;; ivy-posframe
- (use-package ivy-posframe
-     :ensure t
-     :requires ivy
-     :config
-     (setq ivy-posframe-display-functions-alist
-     '((swiper-isearch . ivy-posframe-display-at-frame-top-center)
-     (swiper-isearch-backward . ivy-posframe-display-at-frame-top-center)
-     (counsel-find-file . ivy-posframe-display-at-window-center)
-     (counsel-M-x . ivy-posframe-display-at-window-center)
-     (t . ivy-posframe-display-at-window-center)))
-     (setq ivy-posframe-parameters
-     '((left-fringe . 10)
-     (right-fringe . 10)))
-     (setq ivy-posframe-border-width 1)
-     (put 'ivy-posframe 'face-alias 'default)
-     (ivy-posframe-mode 1))
-
+;; ivy-posframe
+(use-package ivy-posframe
+    :ensure t
+    :requires ivy
+    :config
+    (setq ivy-posframe-display-functions-alist
+    '((swiper-isearch . ivy-posframe-display-at-frame-top-center)
+    (swiper-isearch-backward . ivy-posframe-display-at-frame-top-center)
+    (counsel-find-file . ivy-posframe-display-at-window-center)
+    (counsel-M-x . ivy-posframe-display-at-window-center)
+    (t . ivy-posframe-display-at-window-center)))
+    (setq ivy-posframe-parameters
+    '((left-fringe . 10)
+    (right-fringe . 10)))
+    (setq ivy-posframe-border-width 1)
+    (put 'ivy-posframe 'face-alias 'default)
+    (ivy-posframe-mode 1))
 #+END_SRC
 * Emacs-Enhancements 
  :PROPERTIES:
