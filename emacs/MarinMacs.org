@@ -775,27 +775,27 @@ A jump to definition package that just works. Love this one!
   - Official Site: https://magit.vc/
 - git-timemachine: flip through a file's full list of version. Revert to any given phase easily
 #+BEGIN_SRC emacs-lisp
-(use-package magit
-    :ensure t
-    :bind
-    (("C-x g" . magit-status)
-    ("C-x M-g" . magit-dispatch-popup)))
+  (use-package magit
+      :ensure t
+      :bind
+      (("C-x g" . magit-status)
+      ("C-x M-g" . magit-dispatch)))
     
-(use-package gitignore-mode
-  :ensure t
-  :mode (("\\.gitignore\\'" . gitignore-mode)
-        ("\\.dockerignore\\'" . gitignore-mode))) ;; syntax from gitignore is more or less identical to that of .dockerignore
+  (use-package gitignore-mode
+    :ensure t
+    :mode (("\\.gitignore\\'" . gitignore-mode)
+          ("\\.dockerignore\\'" . gitignore-mode))) ;; syntax from gitignore is more or less identical to that of .dockerignore
 
-(use-package gitconfig-mode
-  :ensure t
-  :mode "\\.gitconfig\\'")
+  (use-package gitconfig-mode
+    :ensure t
+    :mode "\\.gitconfig\\'")
 
-(use-package git-timemachine
-  :ensure t
-  :commands git-timemachine)
+  (use-package git-timemachine
+    :ensure t
+    :commands git-timemachine)
 
-;; smerge mode deals with merge conflicts in git. Prefix mapping is C-c v
-(setq smerge-command-prefix "\C-cv")
+  ;; smerge mode deals with merge conflicts in git. Prefix mapping is C-c v
+  (setq smerge-command-prefix "\C-cv")
 #+END_SRC
 * Hydra
  :PROPERTIES:
