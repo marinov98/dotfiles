@@ -75,7 +75,6 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
   - [[#beacon][Beacon]]
   - [[#neotree][neotree]]
   - [[#iedit][iedit]]
-  - [[#dump-jump][Dump-Jump]]
 - [[#git][Git]]
 - [[#hydra][Hydra]]
 - [[#lsp][Language Server Protocal (lsp)]]
@@ -448,7 +447,7 @@ Useful if you work on multiple windows and want an efficient way of switching be
 - Its great that emacs has built-in native gdb 
 #+BEGIN_SRC emacs-lisp
 ;; Debugger
-(global-set-key (kbd "C-x c") 'gdb)
+(global-set-key (kbd "C-x g") 'gdb)
 (setq gdb-many-windows t) ;; have multiple windows when debugging
 (setq  gdb-show-main t )  ;; Non-nil means display source file containing the main routine at startup
 #+END_SRC
@@ -603,28 +602,21 @@ Useful if you work on multiple windows and want an efficient way of switching be
 - Projectile Homepage: https://projectile.readthedocs.io/en/latest/ 
 - Counsel-Projectile: https://github.com/ericdanan/counsel-projectile 
 #+BEGIN_SRC emacs-lisp
-  ;; Projectile-mode 
- (use-package projectile
-     :ensure t
-     :custom 
-     (projectile-project-search-path '("~/Projects/"))
-     :config
-     (setq projectile-sort-order 'recently-active)
-     (setq projectile-completion-system 'ivy)
-     (projectile-mode t))
+    ;; Projectile-mode 
+   (use-package projectile
+       :ensure t
+       :custom 
+       (projectile-project-search-path '("~/Projects/"))
+       :config
+       (setq projectile-sort-order 'recently-active)
+       (setq projectile-completion-system 'ivy)
+       (projectile-mode t))
 
- ;; Counsel-Projectile
-(use-package counsel-projectile
-   :requires projectile
-   :ensure t
-   :bind (("C-c p" . projectile-command-map)
-         ("C-c p SPC" . counsel-projectile)
-         ("C-c p p" . counsel-projectile-switch-project)
-         ("C-c p f" . counsel-projectile-find-file)
-         ("C-c p F" . counsel-projectile-find-file-dwim)
-         ("C-c p b" . counsel-projectile-switch-to-buffer)
-         ("C-c p g" . counsel-projectile-grep)
-         ("C-c p G" . counsel-projectile-git-grep)))
+   ;; Counsel-Projectile (I utilize counsel projectile bindings in my hydra-projectile)
+  (use-package counsel-projectile
+     :requires projectile
+     :ensure t
+     :bind ("C-c p" . projectile-command-map))
 #+END_SRC
 * Globals
  :PROPERTIES:
@@ -757,11 +749,9 @@ I want to try treemacs in the future, but this has been amazing for file browsin
   - Official Site: https://magit.vc/
 - git-timemachine: flip through a file's full list of version. Revert to any given phase easily
 #+BEGIN_SRC emacs-lisp
+  ;; hydra takes care of my magit bindings
   (use-package magit
-      :ensure t
-      :bind
-      (("C-x g" . magit-status)
-      ("C-x M-g" . magit-dispatch)))
+      :ensure t)
     
   (use-package gitignore-mode
     :ensure t
@@ -870,12 +860,13 @@ I want to try treemacs in the future, but this has been amazing for file browsin
   (defhydra hydra-git (global-map "S-SPC" :color pink)
     "⏳ Git ⏳"
     ("g" magit "magit")
+    ("d" magit-dispatch "dispatch")
     ("t" git-timemachine "timemachine")
     ("q" nil "quit" :color blue))
 
 
   ;; lsp
-  (defhydra hydra-lsp (global-map "M-g" :color red :columns 2)
+  (defhydra hydra-lsp (global-map "M-g" :color red)
     "LSP"
     ("j" lsp-ui-peek-find-definitions "peek-find")
     ("r" lsp-ui-peek-find-references "peek-reference")
