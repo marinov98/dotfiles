@@ -110,8 +110,10 @@ I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
     (setq backward-delete-char-untabify-method 'hungry)    ;; backspaces entire tab instead of one space at a time
     (setq default-frame-alist '((font . "Fira Code-14")))  ;; set font and font size
     (setq visible-bell t)                                  ;; disable annoying end of buffer sounds
+    (setq load-prefer-newer t)                             ;; Avoid the pitfall of “loading old bytecode instead of newer source”
     (electric-pair-mode)                                   ;; auto closing brackets
     (display-time-mode 1)                                  ;; display time in the modeline
+
 
 
     ;; Quick y/n prompt & Disable menu bars
