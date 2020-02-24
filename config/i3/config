@@ -39,9 +39,9 @@ bindsym $mod+d exec rofi -show run -lines 4 -display-run "exec " -padding 400 -o
 ################################
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus left
 bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
@@ -51,9 +51,9 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move left
 bindsym $mod+Shift+semicolon move right
 
 # alternatively, you can use the cursor keys:
@@ -147,7 +147,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 #########################################
 ###### Personal Keybindings
@@ -202,7 +202,7 @@ exec_always --no-startup-id xcape -e '#66=Escape'
 exec_always compton --config ~/.config/compton.conf -b
 
 # WALLPAPER
-exec_always --no-startup-id feh --bg-scale ~/Pictures/WhiteMountain.jpg
+exec_always --no-startup-id feh --bg-scale ~/Pictures/mountainView.jpg
 
 # XSET / BLUETOOTH
 
@@ -250,12 +250,12 @@ bar {
 		position top
 		
 		colors {
-			background #1A203A
-			separator  #BBBBBB
+			background #0D324D
+			separator  #6290CF
         #					 border         background      text
-			focused_workspace	 #00E0C2        #7B109B         #FFFFFF
-			inactive_workspace       #333333        #5F676A		#FFFFFF
-			urgent_workspace         #EA6213        #9E0000         #FFFFFF
+			focused_workspace	 #1985A1        #0D324D         #FFFFFF
+			inactive_workspace       #1C2321        #888888		#E0DFD5
+			urgent_workspace         #EA6213        #9E0000         #DCDCDD
 		}
 }
 
