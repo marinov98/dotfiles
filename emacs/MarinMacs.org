@@ -952,7 +952,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
       ("t" lsp-find-type-definition "type def")
       ("c" lsp-rename "rename")
       ("b" switch-to-prev-buffer "back")
-      ("n" switch-to-next-buffer "forward")
+      ("n" switch-to-next-buffer "next")
       ("l" lsp-ui-flycheck-list "list errors")
       ("q" nil "quit" :color blue))
 
