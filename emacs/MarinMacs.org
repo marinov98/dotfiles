@@ -863,7 +863,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
  :PROPERTIES:
  :CUSTOM_ID: Hydra
  :END:
-- I have yet to properly play around with this package, you can go pretty crazy here
+- You can go pretty crazy here
 - Allows you set up your own key maps where pressing one key instantly gives access to many other keybindings
 - Repo: https://github.com/abo-abo/hydra (Has a video demo)
 ** config
