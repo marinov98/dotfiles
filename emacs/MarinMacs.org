@@ -860,7 +860,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
        ("q" nil "quit" :color blue))
 
 #+END_SRC
-*** describe (help describe anything and open up documentation)
+*** Describe (help describe anything and open up documentation)
 #+BEGIN_SRC emacs-lisp
      ;; help
      (defhydra hydra-describe (global-map "C-c h" :color red :columns 2)
@@ -874,7 +874,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
        ("q" nil "quit" :color blue))
 
 #+END_SRC
-*** mc (multiple cursor map more to my liking)
+*** MC (multiple cursor map more to my liking)
 #+BEGIN_SRC emacs-lisp
   ;; multiple cursors
    (defhydra hydra-mc (global-map "C-c m" :color pink :columns 3)
@@ -889,7 +889,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
       ("C-a"  evil-mc-make-all-cursors "all")
       ("C-q"  evil-mc-undo-all-cursors "quit" :color blue))
 #+END_SRC
-*** projectile (project management)
+*** Projectile (project management)
 #+BEGIN_SRC emacs-lisp
       ;; projectile, I would change this hydras global key if I wasn't using vim bindings...
      (defhydra hydra-projectile (global-map "C-SPC" :color red :columns 3)
@@ -908,7 +908,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
        ("q" nil "quit" :color blue))
 
 #+END_SRC
-*** window (my attempt at window management)
+*** Window (my attempt at window management)
 #+BEGIN_SRC emacs-lisp
      ;; My attempt at window management
      (defhydra hydra-window (global-map "M-SPC" :color pink :columns 3)
@@ -931,7 +931,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
        ("q" nil "quit" :color blue))
 
 #+END_SRC
-*** git (magit and timemachine)
+*** Git (magit and timemachine)
 #+BEGIN_SRC emacs-lisp
     ;; git 
     (defhydra hydra-git (global-map "S-SPC" :color pink)
@@ -941,7 +941,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
       ("C-t" git-timemachine "timemachine")
       ("C-q" nil "quit" :color blue))
 #+END_SRC
-*** lsp (jump to definitions and references, list errors)
+*** LSP (jump to definitions and references, list errors)
 #+BEGIN_SRC emacs-lisp
     ;; lsp
     (defhydra hydra-lsp (global-map "M-g" :color red :columns 2)
@@ -954,6 +954,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
       ("b" switch-to-prev-buffer "back")
       ("n" switch-to-next-buffer "next")
       ("l" lsp-ui-flycheck-list "list errors")
+      ("i" lsp-ui-imenu "imenu")
       ("q" nil "quit" :color blue))
 
 #+END_SRC
