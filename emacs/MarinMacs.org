@@ -706,9 +706,13 @@ Useful if you work on multiple windows and want an efficient way of switching be
   (use-package company
       :ensure t
       :bind
+      ("C-x c" . company-complete) ;; for when I need completion at 1 or 2 chars
       (:map company-active-map
-      ("M-n" . nil) ; old select next key
-      ("<tab>" . company-select-next)) ;; make tab our new select next key
+      ("M-n" . nil) ;; old select next key
+      ("M-p" . nil) ;; old select prev key
+      ("<tab>" . company-select-next) ;; make tab our new select next key
+      ("C-j" . company-select-next)  ;; also make C-j new selection key
+      ("C-k"  . company-select-previous))
       :config
       (setq company-tooltip-limit 5) ; show 5 candidates at one time
       (setq company-idle-delay 0.4) ;; slightly delay completions
@@ -722,7 +726,7 @@ Useful if you work on multiple windows and want an efficient way of switching be
       "Hook for `emacs-lisp-mode'"
       (set (make-local-variable 'company-backends)
       '((company-capf company-elisp company-dabbrev-code company-yasnippet company-files))))
-    
+
       (add-hook 'emacs-lisp-mode-hook 'my-elisp-mode-hook)
       (add-hook 'emacs-lisp-mode-hook 'company-mode)
 #+END_SRC
