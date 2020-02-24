@@ -935,7 +935,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
       ("C-g" magit "magit")
       ("C-d" magit-dispatch "dispatch")
       ("C-t" git-timemachine "timemachine")
-      ("q" nil "quit" :color blue))
+      ("C-q" nil "quit" :color blue))
 #+END_SRC
 *** lsp (jump to definitions and references, list errors)
 #+BEGIN_SRC emacs-lisp
