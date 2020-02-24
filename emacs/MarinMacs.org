@@ -210,22 +210,16 @@ My personal keybindings, you change these anyway you like
  :PROPERTIES:
  :CUSTOM_ID: writing
  :END:
+  - flyspell (checking spelling on the fly)
   - wc-mode (word counter)
   - writegood-mode (sentence/word choice checker)
 #+BEGIN_SRC emacs-lisp
-  ;; flyspell checks spelling syntax on the fly for us
   (use-package flyspell
       :ensure t
       :config
       (add-hook 'LaTeX-mode-hook 'turn-on-flyspell)
-      (add-hook 'LaTeX-mode-hook 'flycheck-mode) ;; latex also needs flycheck for syntax checking
       (add-hook 'org-mode-hook 'turn-on-flyspell)
       (add-hook 'markdown-mode-hook 'turn-on-flyspell))
-
-
-  ;;;;;;;;;;;;;;;;;;
-  ;; For the writers
-  ;;;;;;;;;;;;;;;;;;
 
   (use-package wc-mode
       :ensure t
@@ -233,7 +227,11 @@ My personal keybindings, you change these anyway you like
       (global-set-key "\C-cw" 'wc-mode))
 
   (use-package writegood-mode
-      :ensure t)
+      :ensure t
+      :config
+      (add-hook 'LaTeX-mode-hook 'writegood-mode)
+      (add-hook 'org-mode-hook 'writegood-mode)
+      (add-hook 'markdown-mode-hook 'writegood-mode))
 
 #+END_SRC
 * Evil-Mode
@@ -609,35 +607,38 @@ Useful if you work on multiple windows and want an efficient way of switching be
 - Make sure to run `M-x all-the-icons-install-fonts` if you want them to work!
 - Repo: https://github.com/domtronn/all-the-icons.el
 #+BEGIN_SRC emacs-lisp
-   ;; Pretty Icons
- (use-package all-the-icons
-     :ensure t)
+    ;; Pretty Icons
+  (use-package all-the-icons
+      :ensure t)
 
- ;; icons for ivy
- (use-package all-the-icons-ivy
-     :ensure t
-     :after (all-the-icons ivy)
-     :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup)
-     :config
-     (setq all-the-icons-ivy-file-commands
-     '(counsel-find-file 
-       counsel-file-jump 
-       counsel-recentf 
-       counsel-projectile 
-       counsel-projectile-switch-to-buffer 
-       counsel-projectile-grep 
-       counsel-projectile-git-grep 
-       counsel-projectile-switch-project 
-       counsel-projectile-find-file 
-       counsel-projectile-find-file-dwin 
-       counsel-projectile-find-dir)))
-   
- ;; icons for dired/ranger mode
- (use-package all-the-icons-dired
-     :ensure t
-     :after ranger
-     :config
-     (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
+  ;; icons for ivy
+  (use-package all-the-icons-ivy
+      :ensure t
+      :after (all-the-icons ivy)
+      :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup)
+      :config
+      (setq all-the-icons-ivy-file-commands
+      '(counsel-find-file 
+        counsel-file-jump 
+        counsel-git
+        counsel-git-grep
+        counsel-recentf 
+        counsel-projectile 
+        counsel-projectile-switch-to-buffer 
+        counsel-projectile-grep 
+        counsel-projectile-git-grep 
+        counsel-projectile-rg
+        counsel-projectile-switch-project 
+        counsel-projectile-find-file 
+        counsel-projectile-find-file-dwin 
+        counsel-projectile-find-dir)))
+
+  ;; icons for dired/ranger mode
+  (use-package all-the-icons-dired
+      :ensure t
+      :after ranger
+      :config
+      (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
 #+END_SRC
 ** Beacon 
  :PROPERTIES:
@@ -1096,6 +1097,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
  :CUSTOM_ID: latex
  :END:
 - I still actually prefer Overleaf for latex editing...Hoping to just use emacs for it one day
+- I am also considering using org mode and then exporting to latex 
 - Below packages are kept for reference
   - tex (powerful text formatter)
   - auctex (extensible package for writing and formatting TeX files in Emacs)
@@ -1111,6 +1113,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
   (setq TeX-save-query nil)
+  (add-hook 'LaTeX-mode-hook 'flycheck-mode) ;; latex also needs flycheck for syntax checking
   
 
   ;;;;;;;;;;;;;;;;;;
