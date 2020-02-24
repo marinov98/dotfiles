@@ -848,7 +848,6 @@ I want to try treemacs in the future, but this has been amazing for file browsin
 | pink     | :foreign-keys run          |
 *** Zoom (actually find this first one pretty useful)
 #+BEGIN_SRC emacs-lisp
-     ;; I actually find this first one pretty useful
      (defhydra hydra-zoom (global-map "<f2>" :color red)
        "zoom 🞈 🞈"
        ("k" text-scale-increase "in")
@@ -961,6 +960,8 @@ I want to try treemacs in the future, but this has been amazing for file browsin
   - LSP stands for Language Server Protocal and makes setting up autocompletion and syntax checking easy. 
   - Check the [[https://github.com/emacs-lsp/lsp-mode][Official Repo]] to what to install for your preferred development language
 ** config
+ - You can increase garbage collection (gc-cons-threshold) for more responsiveness on the ui-doc
+   - *But* you run the risk of emacs being more laggy since it has to clean more garbage 
 #+BEGIN_SRC emacs-lisp  
   (use-package lsp-mode
      :ensure t
