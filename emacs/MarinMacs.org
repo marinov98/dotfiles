@@ -189,6 +189,12 @@ My personal keybindings, you change these anyway you like
     (add-hook 'completion-at-point-functions 'pcomplete-completions-at-point nil t))
 
 (add-hook 'org-mode-hook #'add-pcomplete-to-capf)
+
+;; Org custom settings
+(custom-set-variables
+         '(org-directory "~/org-notes")
+         '(org-default-notes-file (concat org-directory "/Personal/notes.org")))
+
 #+END_SRC
 ** Markdown
 #+BEGIN_SRC emacs-lisp
@@ -202,7 +208,6 @@ My personal keybindings, you change these anyway you like
  :PROPERTIES:
  :CUSTOM_ID: writing
  :END:
-  - pdf-tools (pdf support in emacs)
   - wc-mode (word counter)
   - writegood-mode (sentence/word choice checker)
 #+BEGIN_SRC emacs-lisp
