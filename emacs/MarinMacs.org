@@ -51,17 +51,20 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 - [[#personal-keybindings][Personal Keybindings]]
 - [[#org-archive][Org-archive]]
 - [[#quelpa][Quelpa]]
-- [[#org-markdown][Org and Markdown]]
+- [[#markup][Markup]]
+- [[#writing][Writing]]
 - [[#evil-mode][Evil-mode]]
 - [[#restart-emacs][Restart-Emacs]]
 - [[#dashboard][Dashboard]]
 - [[#themes][Themes]]
 - [[#modeline][Modeline]]
-- [[#Emacs-Enhancements][Emacs Enhancements]]
+- [[#enhancements][Emacs Enhancements]]
   - [[#which-key][Which-Key]]
   - [[#ace-window][Ace-Window]]
   - [[#ranger][Ranger]]
   - [[#all-the-icons][All-the-icons]]
+  - [[#beacon][Beacon]]
+  - [[#neotree][neotree]]
 - [[#ivy][Ivy]]
 - [[#projectile][Projectile]]
 - [[#shell][Shell]]
@@ -71,8 +74,6 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
   - [[#company][Company]]
   - [[#undo-tree][Undo Tree]]
 - [[#coding-productivity][Coding Productivity]]
-  - [[#beacon][Beacon]]
-  - [[#neotree][neotree]]
   - [[#iedit][iedit]]
   - [[#dump-jump][Dump-Jump]]
 - [[#git][Git]]
@@ -80,10 +81,11 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 - [[#lsp][Language Server Protocal (lsp)]]
 - [[#dap][Debug Adapter Protocal (dap)]]
 - [[#latex][Latex]]
-- [[#c-cpp][C/C++]]
-- [[#python][Python]]
-- [[#web-development][Web-Development]]
-- [[#JavaScript-TypeScript][JavaScript/TypeScript]]
+- [[#development][Development]]
+  - [[#c-cpp][C/C++]]
+  - [[#python][Python]]
+  - [[#web-development][Web-Development]]
+  - [[#JavaScript-TypeScript][JavaScript/TypeScript]]
 - [[#diminish][Diminish]]
 
 * General Settings 
@@ -109,6 +111,8 @@ I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
     (setq default-frame-alist '((font . "Fira Code-14")))  ;; set font and font size
     (setq visible-bell t)                                  ;; disable annoying end of buffer sounds
     (electric-pair-mode)                                   ;; auto closing brackets
+    (display-time-mode 1)                                  ;; display time in the modeline
+
 
     ;; Quick y/n prompt & Disable menu bars
     (fset 'yes-or-no-p 'y-or-n-p)                          ;; change yes or no to y or n
@@ -161,11 +165,11 @@ My personal keybindings, you change these anyway you like
 (use-package quelpa-use-package
     :ensure t)
 #+END_SRC
-* Org-Markdown
+* Markup
  :PROPERTIES:
- :CUSTOM_ID: org-markdown
+ :CUSTOM_ID: markup
  :END:
-** Enable Org-Mode
+** Org
  Org manual: https://orgmode.org/
 #+BEGIN_SRC emacs-lisp
   (use-package org 
@@ -174,26 +178,56 @@ My personal keybindings, you change these anyway you like
      
  ;; allow easier snippet insertion  
  (require 'org-tempo)
-#+END_SRC
-** Org Bullets
-#+Begin_SRC emacs-lisp
-(use-package org-bullets
+ 
+ ;; bullets
+ (use-package org-bullets
     :ensure t
     :config
     (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
 
-(defun add-pcomplete-to-capf ()
-  (add-hook 'completion-at-point-functions 'pcomplete-completions-at-point nil t))
+  (defun add-pcomplete-to-capf ()
+    (add-hook 'completion-at-point-functions 'pcomplete-completions-at-point nil t))
 
 (add-hook 'org-mode-hook #'add-pcomplete-to-capf)
 #+END_SRC
-** MarkDown
+** Markdown
 #+BEGIN_SRC emacs-lisp
 (use-package markdown-mode
   :ensure t
   :commands markdown-mode
   :mode
   ("\\.\\(md\\|markdown\\)\\'" . markdown-mode))
+#+END_SRC
+** Writing
+ :PROPERTIES:
+ :CUSTOM_ID: writing
+ :END:
+  - pdf-tools (pdf support in emacs)
+  - wc-mode (word counter)
+  - writegood-mode (sentence/word choice checker)
+#+BEGIN_SRC emacs-lisp
+  ;; flyspell checks spelling syntax on the fly for us
+  (use-package flyspell
+      :ensure t
+      :config
+      (add-hook 'LaTeX-mode-hook 'turn-on-flyspell)
+      (add-hook 'LaTeX-mode-hook 'flycheck-mode) ;; latex also needs flycheck for syntax checking
+      (add-hook 'org-mode-hook 'turn-on-flyspell)
+      (add-hook 'markdown-mode-hook 'turn-on-flyspell))
+
+
+  ;;;;;;;;;;;;;;;;;;
+  ;; For the writers
+  ;;;;;;;;;;;;;;;;;;
+
+  (use-package wc-mode
+      :ensure t
+      :config
+      (global-set-key "\C-cw" 'wc-mode))
+
+  (use-package writegood-mode
+      :ensure t)
+
 #+END_SRC
 * Evil-Mode
  :PROPERTIES:
@@ -459,67 +493,67 @@ You can enable/disable any themes that you like here
  :END:
  Ivy User Manual: https://oremacs.com/swiper/
 #+BEGIN_SRC emacs-lisp
-;; Ivy
-(use-package ivy
-    :ensure t
-    :config
-    (ivy-mode 1)
-    (setq ivy-use-virtual-buffers t)
-    (setq ivy-display-style 'fancy)
-    (setq ivy-count-format "(%d/%d) ")
-    (setq enable-recursive-minibuffers t)
-    (setq ivy-use-virtual-buffers t))
+  ;; Ivy
+  (use-package ivy
+      :ensure t
+      :config
+      (ivy-mode 1)
+      (setq ivy-use-virtual-buffers t)
+      (setq ivy-display-style 'fancy)
+      (setq ivy-count-format "(%d/%d) ")
+      (setq enable-recursive-minibuffers t)
+      (setq ivy-use-virtual-buffers t))
 
-;; Swiper 
-(use-package swiper
-    :ensure t
-    :bind 
-    (("C-s" . swiper-isearch)
-    ("C-a" . swiper-isearch-backward)
-    ("C-c C-r" . ivy-resume)))
+  ;; Swiper 
+  (use-package swiper
+      :ensure t
+      :bind 
+      (("C-s" . swiper-isearch)
+      ("C-a" . swiper-isearch-backward)
+      ("C-c C-r" . ivy-resume)))
 
-;; Counsel
-(use-package counsel
-    :ensure t
-    :bind
-    (("M-x" . counsel-M-x)
-    ("C-x C-f" . counsel-find-file)
-    ("C-c g" . counsel-git)
-    ("C-c j" . counsel-git-grep)
-    ("C-x b" . counsel-switch-buffer)
-    ("M-y" . counsel-yank-pop)
-    :map ivy-minibuffer-map
-    ("C-j" . ivy-next-line)
-    ("C-k" . ivy-previous-line)) ;; when in switch buffer mode this kills the selected buffer!
-    :config
-    (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"
-    ;; Add smart-casing (-S) to default command arguments:
-    counsel-rg-base-command "rg -S --no-heading --line-number --color never %s ."
-    counsel-ag-base-command "ag -S --nocolor --nogroup %s"
-    counsel-pt-base-command "pt -S --nocolor --nogroup -e %s"
-    counsel-find-file-at-point t))
+  ;; Counsel
+  (use-package counsel
+      :ensure t
+      :bind
+      (("M-x" . counsel-M-x)
+      ("C-x C-f" . counsel-find-file)
+      ("C-c g" . counsel-git)
+      ("C-c j" . counsel-git-grep)
+      ("C-x b" . counsel-switch-buffer)
+      ("M-y" . counsel-yank-pop)
+      :map ivy-minibuffer-map
+      ("C-j" . ivy-next-line)
+      ("C-k" . ivy-previous-line)) ;; when in switch buffer mode this kills the selected buffer!
+      :config
+      (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"
+      ;; Add smart-casing (-S) to default command arguments:
+      counsel-rg-base-command "rg -S --no-heading --line-number --color never %s ."
+      counsel-ag-base-command "ag -S --nocolor --nogroup %s"
+      counsel-pt-base-command "pt -S --nocolor --nogroup -e %s"
+      counsel-find-file-at-point t))
 
-;; ivy-posframe
-(use-package ivy-posframe
-    :ensure t
-    :requires ivy
-    :config
-    (setq ivy-posframe-display-functions-alist
-    '((swiper-isearch . nil) ;; swiper gets a big laggy with ivy-posframe
-    (swiper-isearch-backward . nil)
-    (counsel-find-file . ivy-posframe-display-at-window-center)
-    (counsel-M-x . ivy-posframe-display-at-window-center)
-    (t . ivy-posframe-display-at-window-center)))
-    (setq ivy-posframe-parameters
-    '((left-fringe . 10)
-    (right-fringe . 10)))
-    (setq ivy-posframe-border-width 1)
-    (put 'ivy-posframe 'face-alias 'default)
-    (ivy-posframe-mode 1))
+  ;; ivy-posframe
+  (use-package ivy-posframe
+      :ensure t
+      :requires ivy
+      :config
+      (setq ivy-posframe-display-functions-alist
+      '((swiper-isearch . nil) ;; swiper gets a big laggy with ivy-posframe
+      (swiper-isearch-backward . nil)
+      (counsel-find-file . ivy-posframe-display-at-window-center)
+      (counsel-M-x . ivy-posframe-display-at-window-center)
+      (t . ivy-posframe-display-at-window-center)))
+      (setq ivy-posframe-parameters
+      '((left-fringe . 10)
+      (right-fringe . 10)))
+      (setq ivy-posframe-border-width 1)
+      (put 'ivy-posframe 'face-alias 'default)
+      (ivy-posframe-mode 1))
 #+END_SRC
-* Emacs-Enhancements 
+* Enhancements 
  :PROPERTIES:
- :CUSTOM_ID: Emacs-Enhancements
+ :CUSTOM_ID: enhancements
  :END:
 ** Which-Key
  :PROPERTIES:
@@ -597,6 +631,32 @@ Useful if you work on multiple windows and want an efficient way of switching be
      :after ranger
      :config
      (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
+#+END_SRC
+** Beacon 
+ :PROPERTIES:
+ :CUSTOM_ID: beacon
+ :END:
+I never lose where my cursor is thanks to this
+#+BEGIN_SRC emacs-lisp
+(use-package beacon
+    :ensure t
+    :config
+    (beacon-mode 1))
+#+END_SRC
+** Neotree
+ :PROPERTIES:
+ :CUSTOM_ID: neotree
+ :END:
+I want to try treemacs in the future, but this has been amazing for file browsing
+#+BEGIN_SRC emacs-lisp
+  ;; Neotree
+  (use-package neotree
+      :ensure t
+      :defer t
+      :bind ("C-c t" . neotree-toggle)
+      :config 
+      (setq neo-smart-open t) ; update every time its toggled
+      (setq neo-theme (if (display-graphic-p) 'icons 'arrow))) ; add icons (utilizes all-the-icons)
 #+END_SRC
 * Projectile
  :PROPERTIES:
@@ -735,32 +795,6 @@ Useful if you work on multiple windows and want an efficient way of switching be
  :PROPERTIES:
  :CUSTOM_ID: coding-productivity
  :END:
-** Beacon 
- :PROPERTIES:
- :CUSTOM_ID: beacon
- :END:
-I never lose where my cursor is thanks to this
-#+BEGIN_SRC emacs-lisp
-(use-package beacon
-    :ensure t
-    :config
-    (beacon-mode 1))
-#+END_SRC
-** Neotree
- :PROPERTIES:
- :CUSTOM_ID: neotree
- :END:
-I want to try treemacs in the future, but this has been amazing for file browsing
-#+BEGIN_SRC emacs-lisp
-  ;; Neotree
-  (use-package neotree
-      :ensure t
-      :defer t
-      :bind ("C-c t" . neotree-toggle)
-      :config 
-      (setq neo-smart-open t) ; update every time its toggled
-      (setq neo-theme (if (display-graphic-p) 'icons 'arrow))) ; add icons (utilizes all-the-icons)
-#+END_SRC
 ** Iedit
  :PROPERTIES:
  :CUSTOM_ID: iedit
@@ -1055,50 +1089,36 @@ I want to try treemacs in the future, but this has been amazing for file browsin
  :CUSTOM_ID: latex
  :END:
 - I still actually prefer Overleaf for latex editing...Hoping to just use emacs for it one day
-- *DEPRECIATED* Below writing packages are only kept for reference
-  - auctex & tex (smoother latex editing)
-  - pdf-tools (pdf support in emacs)
-  - wc-mode (word counter)
-  - writegood-mode (sentence/word choice checker)
+- Below package is kept for reference
+  - tex (powerful text formatter)
+  - auctex (extensible package for writing and formatting TeX files in Emacs)
+  - pdf-tools (pdf utility in Emacs)
 #+BEGIN_SRC emacs-lisp
-;; Enable any if you wish, kept for reference, may be utilized in the future
+  ;; Enable any if you wish, may be utilized in the future
 
- (use-package tex
-    :disabled
-    :ensure auctex)
+   (use-package tex
+      :disabled
+      :ensure auctex)
 
-;; Settings 
-(setq TeX-auto-save t)
-(setq TeX-parse-self t)
-(setq TeX-save-query nil)
+  ;; Settings 
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+  (setq TeX-save-query nil)
+  
 
-;; Spellchecker and Linter for Latex
-(add-hook 'LaTeX-mode-hook 'turn-on-flyspell)
-(add-hook 'LaTeX-mode-hook 'flycheck-mode)
+  ;;;;;;;;;;;;;;;;;;
+  ;; PDF
+  ;;;;;;;;;;;;;;;;;;
 
-;;;;;;;;;;;;;;;;;;
-;; PDF
-;;;;;;;;;;;;;;;;;;
-
-(use-package pdf-tools
-    :disabled
-    :ensure t)
-
-;;;;;;;;;;;;;;;;;;
-;; For the writers
-;;;;;;;;;;;;;;;;;;
-
-(use-package wc-mode
-    :disabled
-    :ensure t
-    (global-set-key "\C-cw" 'wc-mode))
-    
-(use-package writegood-mode
-    :disabled
-    :ensure t)
-
+  (use-package pdf-tools
+      :disabled
+      :ensure t)
 #+END_SRC
-* C-Cpp
+* Development
+ :PROPERTIES:
+ :CUSTOM_ID: development
+ :END:
+** C-Cpp
  :PROPERTIES:
  :CUSTOM_ID: c-cpp
  :END:
@@ -1107,7 +1127,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
   - [[https://www.google.com/search?q=cmake&oq=cmake&aqs=chrome..69i57j0l6j69i65.645j0j4&client=ubuntu&sourceid=chrome&ie=UTF-8][Cmake]]
   - [[https://llvm.org/][llvm]]
   - [[https://clang.llvm.org/][Clang]]
-** Settings
+*** Settings
 #+BEGIN_SRC emacs-lisp
 (setq-default c-basic-offset 4) ;; indentation for C-based languages
 
@@ -1120,7 +1140,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
     :config
     (modern-c++-font-lock-global-mode t))
 #+END_SRC
-** Debugging
+*** Debugging
 Still experimenting with this, native gdb in emacs is also really good (described in [[#gdb][GDB]] section of this config file)
 #+BEGIN_SRC emacs-lisp
 (use-package dap-gdb-lldb
@@ -1137,7 +1157,7 @@ Still experimenting with this, native gdb in emacs is also really good (describe
         :cwd "/home/marin/Projects")))
 
 #+END_SRC
-** Clang-Format
+*** Clang-Format
  - The only package that utilizes quelpa at the moment :))
  - Formats your C++ code
  - Documentation: https://clang.llvm.org/docs/ClangFormat.html
@@ -1159,13 +1179,13 @@ Still experimenting with this, native gdb in emacs is also really good (describe
            :config
            (add-hook 'c-mode-common-hook #'clang-format+-mode))
 #+END_SRC
-* Python
+** Python
  :PROPERTIES:
  :CUSTOM_ID: python
  :END:
 - Python-pip: https://pip.pypa.io/en/stable/
 - Python Language Server: https://pypi.org/project/python-language-server/
-** Settings
+*** Settings
 #+BEGIN_SRC emacs-lisp
   ;; version 
   (setq py-python-command "python3")
@@ -1177,7 +1197,7 @@ Still experimenting with this, native gdb in emacs is also really good (describe
   (setq python-indent-guess-indent-offset t) ;; allow emacs to guess offset
   (setq python-indent-guess-indent-offset-verbose nil) ;; remove annoying warning
 #+END_SRC
-** Debugging
+*** Debugging
 Note: the template is meant to be edited to personal preferences
 #+BEGIN_SRC emacs-lisp
 (use-package dap-python
@@ -1193,7 +1213,7 @@ Note: the template is meant to be edited to personal preferences
         :request "launch"
         :name "My App")))
 #+END_SRC
-** Elpy
+*** Elpy
  No longer need it because of LSP but keeping it for reference
 #+BEGIN_SRC emacs-lisp
 (use-package elpy
@@ -1202,7 +1222,7 @@ Note: the template is meant to be edited to personal preferences
    :config 
    (elpy-enable))
 #+END_SRC
-** Virtualenv
+*** Virtualenv
  Remove disabled if you need it, I have yet to develop seriously in Python
 #+BEGIN_SRC emacs-lisp
 (use-package virtualenvwrapper
@@ -1215,7 +1235,7 @@ Note: the template is meant to be edited to personal preferences
  :PROPERTIES:
  :CUSTOM_ID: python
  :END:
-* Web-Development 
+** Web-Development 
  :PROPERTIES:
  :CUSTOM_ID: web-development
  :END:
@@ -1223,7 +1243,7 @@ Note: the template is meant to be edited to personal preferences
  #+BEGIN_SRC markdown
  npm i -g typescript-language-server vscode-json-languageserver vscode-html-languageserver-bin yaml-language-server vscode-css-languageserver-bin bash-language-server
  #+END_SRC
-** Web-Mode
+*** Web-Mode
  - Autonomous emacs major-mode for editing web templates. 
  - Essential for web-development. Highlighting, auto-closing tags, just great.
  - Official Website: http://web-mode.org/
@@ -1279,7 +1299,7 @@ Note: the template is meant to be edited to personal preferences
     (add-hook 'web-mode-hook 'prettier-js-mode))
 
 #+END_SRC
-** Modes
+*** Modes
 These are modes related to web-dev that I have worked with 
 #+BEGIN_SRC emacs-lisp
 (use-package rjsx-mode
@@ -1298,7 +1318,7 @@ These are modes related to web-dev that I have worked with
 (use-package dockerfile-mode
     :ensure t)
 #+END_SRC
-** Skewer
+*** Skewer
 'live web-development in emacs'
 #+BEGIN_SRC emacs-lisp
 (use-package skewer-mode
@@ -1311,13 +1331,13 @@ These are modes related to web-dev that I have worked with
     (skewer-setup))
     
 #+END_SRC
-** Impatient-Mode
+*** Impatient-Mode
 'See the effect of your HTML as you type it.'
    #+BEGIN_SRC emacs-lisp
    (use-package impatient-mode
        :ensure t)  
    #+END_SRC
-** Emmet 
+*** Emmet 
 More on emmet: https://www.emmet.io/
 #+BEGIN_SRC emacs-lisp
 (use-package emmet-mode
@@ -1329,13 +1349,13 @@ More on emmet: https://www.emmet.io/
     (rjsx-mode . emmet-mode)
     (web-mode  . emmet-mode)))
 #+END_SRC
-* JavaScript-TypeScript
+** JavaScript-TypeScript
  :PROPERTIES:
  :CUSTOM_ID: JavaScript-TypeScript
  :END:
 - JavaScript/TypeScript language server: https://github.com/theia-ide/typescript-language-server
 - Select *ts-ls* when prompted which server to install 
-** Node Path
+*** Node Path
 Adds the node_modules/.bin directory to the buffer exec_path.
 #+BEGIN_SRC emacs-lisp
 (use-package add-node-modules-path
@@ -1344,7 +1364,7 @@ Adds the node_modules/.bin directory to the buffer exec_path.
    ((web-mode . add-node-modules-path)
    (rjsx-mode . add-node-modules-path)))
 #+END_SRC
-** Debugging
+*** Debugging
  Any kind of setup can be found in the dap repo that was mentioned previously...
 *** Front-end
 #+BEGIN_SRC emacs-lisp
@@ -1364,7 +1384,7 @@ Adds the node_modules/.bin directory to the buffer exec_path.
   :ensure nil
   :requires dap-mode)
 #+END_SRC
-** Js2-mode
+*** Js2-mode
 - A 'better' mode for editing javascript files. Can sometimes have performance issues depending on emacs version
 - There should be fixes in Emacs >= 27.05
 #+BEGIN_SRC emacs-lisp
@@ -1382,7 +1402,7 @@ Adds the node_modules/.bin directory to the buffer exec_path.
  :PROPERTIES:
  :CUSTOM_ID: ts
  :END:
-** TIDE
+*** TIDE
 All for typescript
 #+BEGIN_SRC emacs-lisp
 ;; enable typescript in emacs
