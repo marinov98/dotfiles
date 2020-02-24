@@ -194,7 +194,7 @@ My personal keybindings, you change these anyway you like
 
 ;; Org custom settings
 (custom-set-variables
-         '(org-directory "~/org-notes")
+         '(org-directory "~/Projects/org")
          '(org-default-notes-file (concat org-directory "/Personal/notes.org")))
 
 #+END_SRC
