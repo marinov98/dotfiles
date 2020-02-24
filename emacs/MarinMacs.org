@@ -609,7 +609,7 @@ Useful if you work on multiple windows and want an efficient way of switching be
     ;; Projectile-mode 
    (use-package projectile
        :ensure t
-       :bind ;; for some reason all-the-icons ivy works when I have these bindings...
+       :bind ;; for some reason all-the-icons ivy works when I bind the command map in projectile and not counsel projectile
        (("C-c p" . projectile-command-map))
        :custom 
        (projectile-project-search-path '("~/Projects/"))
