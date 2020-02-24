@@ -51,9 +51,8 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 - [[#personal-keybindings][Personal Keybindings]]
 - [[#org-archive][Org-archive]]
 - [[#quelpa][Quelpa]]
-- [[#markup][Markup]]
-- [[#writing][Writing]]
 - [[#evil-mode][Evil-mode]]
+- [[#markup][Markup]]
 - [[#restart-emacs][Restart-Emacs]]
 - [[#dashboard][Dashboard]]
 - [[#themes][Themes]]
@@ -167,6 +166,46 @@ My personal keybindings, you change these anyway you like
 (use-package quelpa-use-package
     :ensure t)
 #+END_SRC
+* Evil-Mode
+ :PROPERTIES:
+ :CUSTOM_ID: evil-mode
+ :END:
+ - Packages needed to emulate vim inside Emacs. 
+ - Make sure you have [[#undo-tree][undo-tree]] package installed 
+ - Official Repo for Evil Mode: https://github.com/emacs-evil/evil
+#+BEGIN_SRC emacs-lisp
+  (use-package evil
+    :ensure t
+    :config
+    (evil-mode 1))
+ 
+  ;; Surround
+  (use-package evil-surround
+    :ensure t
+    :config
+    (global-evil-surround-mode 1))
+
+  ;; Evil multiple-cursors
+  (use-package evil-mc
+    :ensure t
+    :config
+    (global-evil-mc-mode 1))
+
+   ; NeoTree override keybindings, package (neotree) is shown further in the config
+   (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
+   (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
+   (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
+   (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
+   (evil-define-key 'normal neotree-mode-map (kbd "g") 'neotree-refresh)
+   (evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-next-line)
+   (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
+   (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
+   (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
+    
+    ; Evil magit overrides magit keybindings, package (magit) is shown further in the config
+   (use-package evil-magit
+        :ensure t)
+#+END_SRC
 * Markup
  :PROPERTIES:
  :CUSTOM_ID: markup
@@ -233,46 +272,6 @@ My personal keybindings, you change these anyway you like
       (add-hook 'org-mode-hook 'writegood-mode)
       (add-hook 'markdown-mode-hook 'writegood-mode))
 
-#+END_SRC
-* Evil-Mode
- :PROPERTIES:
- :CUSTOM_ID: evil-mode
- :END:
- - Packages needed to emulate vim inside Emacs. 
- - Make sure you have [[#undo-tree][undo-tree]] package installed 
- - Official Repo for Evil Mode: https://github.com/emacs-evil/evil
-#+BEGIN_SRC emacs-lisp
-  (use-package evil
-    :ensure t
-    :config
-    (evil-mode 1))
- 
-  ;; Surround
-  (use-package evil-surround
-    :ensure t
-    :config
-    (global-evil-surround-mode 1))
-
-  ;; Evil multiple-cursors
-  (use-package evil-mc
-    :ensure t
-    :config
-    (global-evil-mc-mode 1))
-
-   ; NeoTree override keybindings, package (neotree) is shown further in the config
-   (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
-   (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
-   (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-   (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
-   (evil-define-key 'normal neotree-mode-map (kbd "g") 'neotree-refresh)
-   (evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-next-line)
-   (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
-   (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
-   (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
-    
-    ; Evil magit overrides magit keybindings, package (magit) is shown further in the config
-   (use-package evil-magit
-        :ensure t)
 #+END_SRC
 * Restart-Emacs
  :PROPERTIES:
