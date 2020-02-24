@@ -505,8 +505,8 @@ You can enable/disable any themes that you like here
     :requires ivy
     :config
     (setq ivy-posframe-display-functions-alist
-    '((swiper-isearch . ivy-posframe-display-at-frame-top-center)
-    (swiper-isearch-backward . ivy-posframe-display-at-frame-top-center)
+    '((swiper-isearch . nil) ;; swiper gets a big laggy with ivy-posframe
+    (swiper-isearch-backward . nil)
     (counsel-find-file . ivy-posframe-display-at-window-center)
     (counsel-M-x . ivy-posframe-display-at-window-center)
     (t . ivy-posframe-display-at-window-center)))
