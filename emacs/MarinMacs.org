@@ -944,7 +944,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
 *** LSP (jump to definitions and references, list errors)
 #+BEGIN_SRC emacs-lisp
     ;; lsp
-    (defhydra hydra-lsp (global-map "M-g" :color red :columns 2)
+    (defhydra hydra-lsp (global-map "M-g" :color red :columns 3)
       "📡 LSP 📡"
       ("j" lsp-ui-peek-find-definitions "peek-find")
       ("r" lsp-ui-peek-find-references "peek-reference")
