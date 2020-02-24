@@ -610,10 +610,7 @@ Useful if you work on multiple windows and want an efficient way of switching be
    (use-package projectile
        :ensure t
        :bind ;; for some reason all-the-icons ivy works when I have these bindings...
-       (("C-c p" . projectile-command-map)
-       ("s-d" . projectile-find-dir)
-       ("s-f" . projectile-find-file)
-       ("s-g" . projectile-grep))
+       (("C-c p" . projectile-command-map))
        :custom 
        (projectile-project-search-path '("~/Projects/"))
        :config
@@ -892,7 +889,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
       ("C-a"  evil-mc-make-all-cursors "all")
       ("C-q"  evil-mc-undo-all-cursors "quit" :color blue))
 #+END_SRC
-*** projectile (utilize counsel projectile)
+*** projectile (project management)
 #+BEGIN_SRC emacs-lisp
       ;; projectile, I would change this hydras global key if I wasn't using vim bindings...
      (defhydra hydra-projectile (global-map "C-SPC" :color red :columns 3)
