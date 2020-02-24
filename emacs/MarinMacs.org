@@ -490,7 +490,7 @@ You can enable/disable any themes that you like here
     ("M-y" . counsel-yank-pop)
     :map ivy-minibuffer-map
     ("C-j" . ivy-next-line)
-    ("C-k" . ivy-previous-line))
+    ("C-k" . ivy-previous-line)) ;; when in switch buffer mode this kills the selected buffer!
     :config
     (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"
     ;; Add smart-casing (-S) to default command arguments:
@@ -609,6 +609,11 @@ Useful if you work on multiple windows and want an efficient way of switching be
     ;; Projectile-mode 
    (use-package projectile
        :ensure t
+       :bind ;; for some reason all-the-icons ivy works when I have these bindings...
+       (("C-c p" . projectile-command-map)
+       ("s-d" . projectile-find-dir)
+       ("s-f" . projectile-find-file)
+       ("s-g" . projectile-grep))
        :custom 
        (projectile-project-search-path '("~/Projects/"))
        :config
@@ -618,9 +623,7 @@ Useful if you work on multiple windows and want an efficient way of switching be
 
    ;; Counsel-Projectile (I utilize counsel projectile bindings in my hydra-projectile)
   (use-package counsel-projectile
-     :requires projectile
-     :ensure t
-     :bind ("C-c p" . projectile-command-map))
+     :ensure t)
 #+END_SRC
 * Shell
  :PROPERTIES:
@@ -951,6 +954,8 @@ I want to try treemacs in the future, but this has been amazing for file browsin
       ("d" lsp-find-definition "find def")
       ("t" lsp-find-type-definition "type def")
       ("c" lsp-rename "rename")
+      ("b" switch-to-prev-buffer "back")
+      ("n" switch-to-next-buffer "forward")
       ("l" lsp-ui-flycheck-list "list errors")
       ("q" nil "quit" :color blue))
 
@@ -985,6 +990,10 @@ I want to try treemacs in the future, but this has been amazing for file browsin
   (use-package lsp-ui
     :requires lsp-mode flycheck
     :ensure t
+    :bind
+    (:map lsp-ui-peek-mode-map
+    ("C-j" . lsp-ui-peek--select-next)
+    ("C-k" . lsp-ui-peek--select-prev))
     :hook (lsp-mode . lsp-ui-mode)
     :config
     (setq lsp-ui-flycheck-live-reporting nil) ;; allows our previous flycheck setting to only check syntax on save to work
