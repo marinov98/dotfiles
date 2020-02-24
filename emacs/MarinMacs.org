@@ -875,15 +875,15 @@ I want to try treemacs in the future, but this has been amazing for file browsin
   ;; multiple cursors
    (defhydra hydra-mc (global-map "C-c m" :color pink :columns 3)
        "▮ Multiple cursors ▮"
-      ("n"  evil-mc-make-and-goto-next-match "make next")
-      ("p"  evil-mc-make-and-goto-prev-match "make prev")
-      ("u"  evil-mc-undo-last-added-cursor "undo")
-      ("f"  evil-mc-make-and-goto-first-cursor "first cursor")
-      ("l"  evil-mc-make-and-goto-last-cursor "last cursor")
-      ("P"  evil-mc-make-and-goto-prev-cursor "go next")
-      ("N"  evil-mc-make-and-goto-next-cursor "go prev")
-      ("a"  evil-mc-make-all-cursors "all")
-      ("q"  evil-mc-undo-all-cursors "quit" :color blue))
+      ("C-n"  evil-mc-make-and-goto-next-match "make next")
+      ("C-p"  evil-mc-make-and-goto-prev-match "make prev")
+      ("C-u"  evil-mc-undo-last-added-cursor "undo")
+      ("C-f"  evil-mc-make-and-goto-first-cursor "first cursor")
+      ("C-l"  evil-mc-make-and-goto-last-cursor "last cursor")
+      ("M-p"  evil-mc-make-and-goto-prev-cursor "go next")
+      ("M-n"  evil-mc-make-and-goto-next-cursor "go prev")
+      ("C-a"  evil-mc-make-all-cursors "all")
+      ("C-q"  evil-mc-undo-all-cursors "quit" :color blue))
 #+END_SRC
 *** projectile (utilize counsel projectile)
 #+BEGIN_SRC emacs-lisp
@@ -932,12 +932,10 @@ I want to try treemacs in the future, but this has been amazing for file browsin
     ;; git 
     (defhydra hydra-git (global-map "S-SPC" :color pink)
       "⏳ Git ⏳"
-      ("g" magit "magit")
-      ("d" magit-dispatch "dispatch")
-      ("t" git-timemachine "timemachine")
+      ("C-g" magit "magit")
+      ("C-d" magit-dispatch "dispatch")
+      ("C-t" git-timemachine "timemachine")
       ("q" nil "quit" :color blue))
-
-
 #+END_SRC
 *** lsp (jump to definitions and references, list errors)
 #+BEGIN_SRC emacs-lisp
