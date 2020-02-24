@@ -1096,7 +1096,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
  :CUSTOM_ID: latex
  :END:
 - I still actually prefer Overleaf for latex editing...Hoping to just use emacs for it one day
-- Below packages is kept for reference
+- Below packages are kept for reference
   - tex (powerful text formatter)
   - auctex (extensible package for writing and formatting TeX files in Emacs)
   - pdf-tools (pdf utility in Emacs)
