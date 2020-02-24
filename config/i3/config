@@ -255,9 +255,9 @@ bar {
 			background #0D324D
 			separator  #6290CF
         #					 border         background      text
-			focused_workspace	 #1985A1        #0D324D         #FFFFFF
-			inactive_workspace       #1C2321        #888888		#E0DFD5
-			urgent_workspace         #EA6213        #9E0000         #DCDCDD
+			focused_workspace	 #DA4167        #3D2645         #FFFFFF
+			inactive_workspace       #1C2321        #666666		#FFFFFF
+			urgent_workspace         #EA6213        #9E0000         #FFFFFF
 		}
 }
 
