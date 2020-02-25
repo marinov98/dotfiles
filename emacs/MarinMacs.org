@@ -112,6 +112,8 @@ I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
     (setq load-prefer-newer t)                             ;; Avoid the pitfall of “loading old bytecode instead of newer source”
     (electric-pair-mode)                                   ;; auto closing brackets
     (display-time-mode 1)                                  ;; display time in the modeline
+    (setq browse-url-browser-function 'browse-url-generic  ;; set default browser
+    browse-url-generic-program "chromium-browser")
 
 
 
@@ -1004,6 +1006,22 @@ I want to try treemacs in the future, but this has been amazing for file browsin
       ("q" nil "quit" :color blue))
 
 #+END_SRC
+*** Launch (launch stuff)
+  #+BEGIN_SRC emacs-lisp
+ (setq
+ browse-url-browser-function
+ '(("https://www.netflix.com/" . browse-url-firefox) ;; firefox deals better with video players
+ ("." . browse-url-chromium)))
+
+  (defhydra hydra-launcher (global-map "C-c l" :color red :columns 2)
+   "Launch"
+   ("h" man "man")
+   ("g" (browse-url "https://www.google.com/") "google")
+   ("G" (browse-url "https://github.com/marinov98") "my GitHub")
+   ("r" (browse-url "https://www.netflix.com/") "netflix")
+   ("s" better-shell-shell "shell")
+   ("q" nil "quit"))
+  #+END_SRC
 * LSP
  :PROPERTIES:
  :CUSTOM_ID: lsp
