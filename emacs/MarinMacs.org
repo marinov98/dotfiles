@@ -756,12 +756,17 @@ I want to try treemacs in the future, but this has been amazing for file browsin
 - Checking syntax on the fly...basically 
 - Official Site: https://www.flycheck.org/en/latest/
 #+BEGIN_SRC emacs-lisp
-(use-package flycheck
-     :ensure t
-     :config
-     (setq flycheck-check-syntax-automatically '(mode-enabled save)); run flycheck only on save
-     (global-flycheck-mode t)) 
-     
+  (use-package flycheck
+       :ensure t
+       :custom-face
+       (flycheck-info ((t (:underline (:style line :color "#9500ff")))))
+       (flycheck-warning ((t (:underline (:style line :color "#fbff00")))))
+       (flycheck-error ((t (:underline (:style line :color "##ff0000")))))
+       :config
+       (setq flycheck-check-syntax-automatically '(mode-enabled save)); run flycheck only on save
+       (global-flycheck-mode t)
+       :bind
+       ("C-c C-f" . 'flycheck-buffer)) ;; explicitly run flycheck
 #+END_SRC
 ** Company
  :PROPERTIES:
