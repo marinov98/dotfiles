@@ -995,8 +995,8 @@ I want to try treemacs in the future, but this has been amazing for file browsin
     ("d" lsp-find-definition "find def")
     ("t" lsp-find-type-definition "type def")
     ("c" lsp-rename "rename")
-    ("b" lsp-ui-peek-jump-backward "back")
-    ("f" lsp-ui-peek-jump-forward "forward")
+    ("b" switch-to-prev-buffer "back") ;; better consistancy than lsp-ui-peek-jump-backward
+    ("n" switch-to-next-buffer "next") ;; better than lsp-ui-peek-jump-forward
     ("l" lsp-ui-flycheck-list "list errors")
     ("i" lsp-ui-imenu "imenu")
     ("q" nil "quit" :color blue))
