@@ -978,9 +978,9 @@ I want to try treemacs in the future, but this has been amazing for file browsin
     (defhydra hydra-git (global-map "S-SPC" :color pink)
       "⏳ Git ⏳"
       ("g" magit "magit")
-      ("C-d" magit-dispatch "dispatch")
-      ("C-t" git-timemachine "timemachine")
-      ("C-q" nil "quit" :color blue))
+      ("d" magit-dispatch "dispatch")
+      ("t" git-timemachine "timemachine")
+      ("q" nil "quit" :color blue))
 #+END_SRC
 *** LSP (jump to definitions and references, list errors)
 #+BEGIN_SRC emacs-lisp
