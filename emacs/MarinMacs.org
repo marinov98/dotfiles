@@ -1015,6 +1015,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
    ("g" (browse-url "https://www.google.com/") "google")
    ("G" (browse-url "https://github.com/marinov98") "my GitHub")
    ("r" (browse-url "https://www.netflix.com/") "netflix")
+   ("y" (browse-url "https://www.youtube.com/") "YouTube")
    ("s" better-shell-shell "shell")
    ("q" nil "quit"))
   #+END_SRC
