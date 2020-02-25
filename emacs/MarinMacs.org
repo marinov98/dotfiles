@@ -112,10 +112,6 @@ I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
     (setq load-prefer-newer t)                             ;; Avoid the pitfall of “loading old bytecode instead of newer source”
     (electric-pair-mode)                                   ;; auto closing brackets
     (display-time-mode 1)                                  ;; display time in the modeline
-    (setq browse-url-browser-function 'browse-url-generic  ;; set default browser
-    browse-url-generic-program "chromium-browser")
-
-
 
     ;; Quick y/n prompt & Disable menu bars
     (fset 'yes-or-no-p 'y-or-n-p)                          ;; change yes or no to y or n
