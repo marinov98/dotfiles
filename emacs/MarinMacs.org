@@ -126,7 +126,7 @@ I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
     
     ;; GNU Debugger (GDB)
     (setq gdb-many-windows t) ;; have multiple windows when debugging
-    (setq  gdb-show-main t )  ;; Non-nil means display source file containing the main routine at startup
+    (setq gdb-show-main t)  ;; Non-nil means display source file containing the main routine at startup
   
 #+END_SRC
 ** Goto Config
