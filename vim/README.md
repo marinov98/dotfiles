@@ -2,7 +2,7 @@
 - I have a detailed [Emacs](<https://github.com/marinov98/dotfiles/blob/master/emacs/MarinMacs.org>) config guide where I use the more powerful extensibility of emacs and combine it with vim bindings. 
 
 ## Prereqs 
-- [Nodejs](<https://nodejs.org/en/>) (need this to setup auto-complete, if you dont want it you can skip this part)
+- [Nodejs](<https://nodejs.org/en/>) (need this to setup auto-complete, you can skip this part if you don't want it)
 
 ## Setup:
 1. create .vimrc file in home directory then copy my config, then exit and enter vim again and everything should install. If you prefer to do this manually continue to step 2. 
