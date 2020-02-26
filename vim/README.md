@@ -30,7 +30,7 @@
 - super tab (allows you to use <Tab> for all your insert completion needs)
 - vim-repeat (allows you to repeat commands)
 - vim-multiple-cursors (change multiple things at the same time) 
-- vim-surround (amazing new keybindings)
+- vim-surround (new keybindings all about "surroundings": parentheses, brackets, quotes, XML tags,etc.)
 - clang-format (format c++ code)
 
 
