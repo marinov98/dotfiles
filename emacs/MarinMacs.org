@@ -244,11 +244,6 @@ My personal keybindings, you change these anyway you like
     :config
     (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
 
-  (defun add-pcomplete-to-capf ()
-    (add-hook 'completion-at-point-functions 'pcomplete-completions-at-point nil t))
-
-(add-hook 'org-mode-hook #'add-pcomplete-to-capf)
-
 ;; Org custom settings
 (custom-set-variables
          '(org-directory "~/Projects/org")
@@ -273,6 +268,9 @@ My personal keybindings, you change these anyway you like
 #+BEGIN_SRC emacs-lisp
   (use-package flyspell
       :ensure t
+      :bind
+      (:map flyspell-mode-map
+      ("C-M-i" . nil)) ;; messes with org autocomplete
       :config
       (add-hook 'LaTeX-mode-hook 'turn-on-flyspell)
       (add-hook 'org-mode-hook 'turn-on-flyspell)
@@ -285,9 +283,9 @@ My personal keybindings, you change these anyway you like
 
   (use-package writegood-mode
       :ensure t
+      :bind ("C-x w" . writegood-mode) ;; messes with org snippets dont enable by default in org
       :config
       (add-hook 'LaTeX-mode-hook 'writegood-mode)
-      (add-hook 'org-mode-hook 'writegood-mode)
       (add-hook 'markdown-mode-hook 'writegood-mode))
 
 #+END_SRC
