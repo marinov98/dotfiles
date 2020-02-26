@@ -91,43 +91,48 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
  :PROPERTIES:
  :CUSTOM_ID: general-settings
  :END:
-I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
+Garbage collection and Lexical binding
 #+BEGIN_SRC emacs-lisp
     ;; -*- lexical-binding: t; -*-
 
-    ;; garbage collection settings
-
-    ;; disable garbage collection on start up (I have to thank Khinshan for this)
+    ;; disable garbage collection on start up 
     (eval-when-compile
     (setq-local gc-cons-threshold most-positive-fixnum)
     (setq-local gc-cons-percentage 0.6)
     (setq-local file-name-handler-alist nil))
-
-    ;; Indentation 
+#+END_SRC
+Indentation 
+#+BEGIN_SRC emacs-lisp
     (setq-default indent-tabs-mode nil)                    ;; disable tabs and use spaces
     (setq-default tab-width 4)                             ;; set default tab width 4 
     (setq backward-delete-char-untabify-method 'hungry)    ;; backspaces entire tab instead of one space at a time
+#+END_SRC
+- display,parenthesis, time
+- I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
+#+BEGIN_SRC emacs-lisp
     (setq default-frame-alist '((font . "Fira Code-14")))  ;; set font and font size
     (setq visible-bell t)                                  ;; disable annoying end of buffer sounds
     (setq load-prefer-newer t)                             ;; Avoid the pitfall of “loading old bytecode instead of newer source”
     (electric-pair-mode)                                   ;; auto closing brackets
     (display-time-mode 1)                                  ;; display time in the modeline
-
-    ;; Quick y/n prompt & Disable menu bars
+#+END_SRC
+Quick y/n prompt & Disable menu bars
+#+BEGIN_SRC emacs-lisp
     (fset 'yes-or-no-p 'y-or-n-p)                          ;; change yes or no to y or n
     (menu-bar-mode -1)                                     ;; disable menu bar
     (toggle-scroll-bar -1)                                 ;; disable scroll bar
     (tool-bar-mode -1)                                     ;; disable tool bar
-
-    ;; Disable annoying back up files (comment if you want to enable backup files) 
+#+END_SRC
+Disable back up files (comment if you want to enable backup files) 
+#+BEGIN_SRC emacs-lisp
     (setq make-backup-files nil)                           ;; stop creating backup~ files
     (setq auto-save-default nil)                           ;; stop creating autosave# files
     (setq create-lockfiles nil)                            ;; stop creating any # files
-    
-    ;; GNU Debugger (GDB)
-    (setq gdb-many-windows t) ;; have multiple windows when debugging
-    (setq gdb-show-main t)  ;; Non-nil means display source file containing the main routine at startup
-  
+#+END_SRC
+GNU Debugger (GDB)
+#+BEGIN_SRC emacs-lisp
+    (setq gdb-many-windows t)                              ;; have multiple windows when debugging
+    (setq gdb-show-main t)                                 ;; Non-nil means display source file containing the main routine at startup
 #+END_SRC
 ** Goto Config
   #+begin_src emacs-lisp
