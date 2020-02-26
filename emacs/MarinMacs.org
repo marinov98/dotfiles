@@ -171,25 +171,25 @@ I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
  - I have mapped my caps lock to both esc and ctrl to utilize both vim and emacs bindings
  - Official Repo for Evil Mode: https://github.com/emacs-evil/evil
 #+BEGIN_SRC emacs-lisp
-  (use-package evil-leader
-      :ensure t
-      :config
-      (global-evil-leader-mode t)
-      (evil-leader/set-leader "<SPC>")
-      (evil-leader/set-key
-        "SPC" 'hydra-projectile/body
-        "m" 'hydra-mc/body
-        "w" 'hydra-window/body
-        "z" 'hydra-zoom/body
-        "l" 'hydra-lsp/body
-        "d" 'hydra-describe/body
-        "g" 'hydra-git/body
-        "f" 'counsel-find-file
-        "b" 'counsel-switch-buffer
-        "q" 'delete-window
-        "k" 'kill-current-buffer
-        "t" 'neotree-toggle
-        "r" 'ranger))
+ (use-package evil-leader
+     :ensure t
+     :config
+     (global-evil-leader-mode t)
+     (evil-leader/set-leader "<SPC>")
+     (evil-leader/set-key
+       "SPC" 'hydra-projectile/body
+       "m" 'hydra-mc/body
+       "w" 'hydra-window/body
+       "z" 'hydra-zoom/body
+       "l" 'hydra-lsp/body
+       "d" 'hydra-describe/body
+       "g" 'hydra-git/body
+       "f" 'counsel-find-file
+       "b" 'counsel-switch-buffer
+       "q" 'delete-window
+       "k" 'kill-current-buffer
+       "t" 'neotree-toggle
+       "r" 'ranger))
 
 
     (use-package evil
@@ -754,11 +754,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
 (use-package yasnippet
     :ensure t
     :init 
-    (yas-global-mode 1)
-    (define-key yas-minor-mode-map (kbd "<tab>") nil)
-    (define-key yas-minor-mode-map (kbd "TAB") nil)
-    (define-key yas-minor-mode-map (kbd "C-c o") yas-maybe-expand)
-    (define-key yas-minor-mode-map (kbd "C-c y") #'yas-expand))
+    (yas-global-mode 1))
 
 (use-package yasnippet-snippets 
     :ensure t)
@@ -1063,6 +1059,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
      (add-hook 'js2-mode-hook #'lsp)
      (add-hook 'json-mode-hook #'lsp)
      (add-hook 'web-mode-hook #'lsp)
+     (add-hook 'css-mode-hook #'lsp)
      (add-hook 'yaml-mode-hook #'lsp)
      (add-hook 'typescript-mode-hook #'lsp))
 
@@ -1304,40 +1301,32 @@ Note: the template is meant to be edited to personal preferences
 #+BEGIN_SRC emacs-lisp
   (use-package web-mode
       :ensure t
+      :mode
+      (("\\.html?\\'"      . web-mode)
+      ("\\.phtml\\'"       . web-mode)
+      ("\\.tpl\\.php\\'"   . web-mode)
+      ("\\.blade\\.php\\'" . web-mode)
+      ("\\.[agj]sp\\'"     . web-mode)
+      ("\\.as[cp]x\\'"     . web-mode)
+      ("\\.erb\\'"         . web-mode)
+      ("\\.mustache\\'"    . web-mode)
+      ("\\.djhtml\\'"      . web-mode)
+      ("\\.jsx\\'"         . web-mode))
+      :custom-face
+      (web-mode-doctype ((t (:foreground "#4A8ACA"))))
+      (web-mode-html-tag ((t (:foreground "#4A8ACA"))))
       :config
-         (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-         (add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
-         (add-to-list 'auto-mode-alist '("\\.jsx?$\\'" . web-mode))
-         (add-to-list 'auto-mode-alist '("\\.vue?\\'" . web-mode))
-         (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-         (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-         (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-         (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-         (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-         (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
-         (setq web-mode-engines-alist
-           '(("django"    . "\\.html\\'")
-             ("ejs"  . "\\.ejs\\'")))
-         (setq web-mode-ac-sources-alist
-         '(("css" . (ac-source-css-property))
-         ("vue" . (ac-source-words-in-buffer ac-source-abbrev))
-             ("html" . (ac-source-words-in-buffer ac-source-abbrev))))
-       ;; Emmet
-       (add-hook 'web-mode-hook 'emmet-mode) ;; triggers with C-RET
-       ;; Indentation
-       (setq web-mode-markup-indent-offset 2)
-       (setq web-mode-code-indent-offset 2)
-       (setq web-mode-css-indent-offset 2)
-       ;; Auto-closing
-       (setq web-mode-auto-close-style 2)
-       (setq web-mode-tag-auto-close-style 2)
-       (setq web-mode-enable-auto-closing t)
-       (setq web-mode-enable-auto-quoting t)
-       (with-eval-after-load 'web-mode
-       (define-key web-mode-map (kbd "C-c h") 'web-mode-element-close)) ;; auto-close tag help
-       ;; Highlighting
-       (setq web-mode-enable-current-column-highlight t)
-       (setq web-mode-enable-current-element-highlight t))
+      ;; Indentation
+      (setq web-mode-attr-indent-offset 2)
+      (setq web-mode-markup-indent-offset 2)
+      (setq web-mode-code-indent-offset 2)
+      (setq web-mode-css-indent-offset 2)
+      ;; Auto-closing
+      (setq web-mode-enable-auto-pairing t)
+      (setq web-mode-enable-auto-quoting t)
+      ;; Highlighting
+      (setq web-mode-enable-current-column-highlight t)
+      (setq web-mode-enable-current-element-highlight t))
 
 
   ;; visually display hex values as colors
@@ -1351,6 +1340,7 @@ Note: the template is meant to be edited to personal preferences
   (use-package prettier-js
       :ensure t
       :config 
+      (add-hook 'typescript-mode-hook 'prettier-js-mode)
       (add-hook 'js2-mode-hook 'prettier-js-mode)
       (add-hook 'web-mode-hook 'prettier-js-mode))
 
