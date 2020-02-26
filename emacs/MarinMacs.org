@@ -1002,7 +1002,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
     ("q" nil "quit" :color blue))
 
 #+END_SRC
-*** Launch (launch stuff)
+*** Launcher (launch stuff)
   #+BEGIN_SRC emacs-lisp
  (setq
  browse-url-browser-function
