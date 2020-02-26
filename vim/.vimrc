@@ -50,6 +50,9 @@ Plug 'sheerun/vim-polyglot'
 Plug 'https://github.com/itchyny/vim-gitbranch'
 call plug#end()
 
+"Leader key
+let mapleader = ","
+
 """"""""""""""""""""""
 """"""" PRETTIER:
 """"""""""""""""""""""
@@ -109,6 +112,7 @@ set hidden
 " Some servers have issues with backup files, see #649
 set nobackup
 set nowritebackup
+set showcmd
 
 " You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=300
@@ -132,7 +136,7 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 " Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
+nmap <leader>m <Plug>(coc-rename)
 """""""""""
 
 " Modeline
@@ -185,10 +189,11 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
  
 """"""""""""""""""""""
-""""""" BASICS:
+""""""" SETTINGS:
 """"""""""""""""""""""
 syntax enable
 set nocompatible
+
 
 " Color theme
 set background=dark
