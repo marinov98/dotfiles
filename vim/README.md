@@ -29,6 +29,7 @@
 ### Coding Convenience
 - Vim-snippets
 - Vim-Utils
+- vim-polygot (langauage pack for syntax highlighting)
 - ctrlp (Fuzzy file, buffer, mru, tag, etc finder.)
 - Nerdtree (file browser)
 - super tab (use tab for autocomplete)
@@ -42,8 +43,6 @@
 - Emmet 
 - Css-color 
 - vim-css
-- vim-javascript
-- vim-jsx
 - auto-close tag (for html)
 - Prettier (format js,ts,html,css code)
 
