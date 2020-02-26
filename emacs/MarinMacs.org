@@ -1311,10 +1311,8 @@ Note: the template is meant to be edited to personal preferences
       ("\\.erb\\'"         . web-mode)
       ("\\.mustache\\'"    . web-mode)
       ("\\.djhtml\\'"      . web-mode)
-      ("\\.jsx\\'"         . web-mode))
-      :custom-face
-      (web-mode-doctype ((t (:foreground "#4A8ACA"))))
-      (web-mode-html-tag ((t (:foreground "#4A8ACA"))))
+      ("\\.jsx\\'"         . web-mode)
+      ("\\.tsx\\'"         . web-mode))
       :config
       (setq web-mode-enable-engine-detection t)
       ;; Indentation
@@ -1322,6 +1320,8 @@ Note: the template is meant to be edited to personal preferences
       (setq web-mode-markup-indent-offset 2)
       (setq web-mode-code-indent-offset 2)
       ;; Auto-closing
+      (setq web-mode-auto-close-style 2)
+      (setq web-mode-tag-auto-close-style 2)
       (setq web-mode-enable-auto-pairing t)
       (setq web-mode-enable-auto-quoting t)
       ;; Highlighting
