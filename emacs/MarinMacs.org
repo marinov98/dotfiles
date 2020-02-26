@@ -107,7 +107,7 @@ Indentation
     (setq-default tab-width 4)                             ;; set default tab width 4 
     (setq backward-delete-char-untabify-method 'hungry)    ;; backspaces entire tab instead of one space at a time
 #+END_SRC
-- display,parenthesis, time
+- options, display, parenthesis, time-mode
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
     (setq default-frame-alist '((font . "Fira Code-14")))  ;; set font and font size
@@ -118,21 +118,22 @@ Indentation
 #+END_SRC
 Quick y/n prompt & Disable menu bars
 #+BEGIN_SRC emacs-lisp
-    (fset 'yes-or-no-p 'y-or-n-p)                          ;; change yes or no to y or n
-    (menu-bar-mode -1)                                     ;; disable menu bar
-    (toggle-scroll-bar -1)                                 ;; disable scroll bar
-    (tool-bar-mode -1)                                     ;; disable tool bar
+    (fset 'yes-or-no-p 'y-or-n-p)            ;; change yes or no to y or n
+    (menu-bar-mode -1)                       ;; disable menu bar
+    (toggle-scroll-bar -1)                   ;; disable scroll bar
+    (tool-bar-mode -1)                       ;; disable tool bar
 #+END_SRC
 Disable back up files (comment if you want to enable backup files) 
 #+BEGIN_SRC emacs-lisp
-    (setq make-backup-files nil)                           ;; stop creating backup~ files
-    (setq auto-save-default nil)                           ;; stop creating autosave# files
-    (setq create-lockfiles nil)                            ;; stop creating any # files
+    (setq make-backup-files nil)             ;; stop creating backup~ files
+    (setq auto-save-default nil)             ;; stop creating autosave# files
+    (setq create-lockfiles nil)              ;; stop creating any # files
 #+END_SRC
 GNU Debugger (GDB)
 #+BEGIN_SRC emacs-lisp
-    (setq gdb-many-windows t)                              ;; have multiple windows when debugging
-    (setq gdb-show-main t)                                 ;; Non-nil means display source file containing the main routine at startup
+    (setq gdb-many-windows t)                ;; have multiple windows when debugging
+    (setq gdb-show-main t)                   ;; Non-nil means display source file containing the main routine at startup
+    (global-set-key (kbd "C-x g") 'gdb)      ;; launch gdb
 #+END_SRC
 ** Goto Config
   #+begin_src emacs-lisp
@@ -1169,9 +1170,8 @@ I want to try treemacs in the future, but this has been amazing for file browsin
  :PROPERTIES:
  :CUSTOM_ID: development
  :END:
- These bindings have been quite useful
+ Keybinding to compile code:
  #+begin_src  emacs-lisp
-  (global-set-key (kbd "C-x g") 'gdb)                  ;; launch gdb
   (global-set-key (kbd "C-c c") 'compile)              ;; compile code
  #+end_src
 ** C-Cpp
