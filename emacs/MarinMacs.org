@@ -183,9 +183,12 @@ My personal keybindings, you change these anyway you like
         "f" 'counsel-find-file
         "b" 'counsel-switch-buffer
         "p" 'switch-to-prev-buffer
-        "q" 'delete-window
         "n" 'switch-to-next-buffer
         "x" 'counsel-M-x
+        "q" 'delete-window
+        "k" 'kill-current-buffer
+        "t" 'neotree-toggle
+        "r" 'ranger
         "s" 'swiper-isearch))
 
 
@@ -608,12 +611,12 @@ Useful if you work on multiple windows and want an efficient way of switching be
  - ranger file manager but in emacs, works the exact same way
  - Repo: https://github.com/ralesi/ranger.el
 #+BEGIN_SRC emacs-lisp
-;; Ranger
-(use-package ranger
-   :ensure t
-   :config
-   (ranger-override-dired-mode t)
-   (global-set-key (kbd "C-c r") 'ranger)) ;; start ranger from file
+  ;; Ranger
+  (use-package ranger
+     :ensure t
+  ;; :bind ("C-c r" . ranger)
+     :config
+     (ranger-override-dired-mode t))
 
 #+END_SRC
 ** All-The-Icons
@@ -678,7 +681,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
   (use-package neotree
       :ensure t
       :defer t
-      :bind ("C-c t" . neotree-toggle)
+   ;; :bind ("C-c t" . neotree-toggle)
       :config 
       (setq neo-smart-open t) ; update every time its toggled
       (setq neo-theme (if (display-graphic-p) 'icons 'arrow))) ; add icons (utilizes all-the-icons)
@@ -691,21 +694,21 @@ I want to try treemacs in the future, but this has been amazing for file browsin
 - Projectile Homepage: https://projectile.readthedocs.io/en/latest/ 
 - Counsel-Projectile: https://github.com/ericdanan/counsel-projectile 
 #+BEGIN_SRC emacs-lisp
-    ;; Projectile-mode 
-   (use-package projectile
-       :ensure t
-       :bind ;; for some reason all-the-icons ivy works when I bind the command map in projectile and not counsel projectile
-       (("C-c p" . projectile-command-map))
-       :custom 
-       (projectile-project-search-path '("~/Projects/"))
-       :config
-       (setq projectile-sort-order 'recently-active)
-       (setq projectile-completion-system 'ivy)
-       (projectile-mode t))
+     ;; Projectile-mode 
+    (use-package projectile
+        :ensure t
+        :bind ;; for some reason all-the-icons ivy works when I bind the command map in projectile and not counsel projectile
+        (("C-c p" . projectile-command-map))
+        :custom 
+        (projectile-project-search-path '("~/Projects/"))
+        :config
+        (setq projectile-sort-order 'recently-active)
+        (setq projectile-completion-system 'ivy)
+        (projectile-mode t))
 
-   ;; Counsel-Projectile (I utilize counsel projectile bindings in my hydra-projectile)
- (use-package counsel-projectile
-    :ensure t)
+    ;; Counsel-Projectile (I utilize counsel projectile bindings in my hydra-projectile)
+  (use-package counsel-projectile
+     :ensure t)
 #+END_SRC
 * Shell
  :PROPERTIES:
@@ -779,7 +782,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
        :custom-face
        (flycheck-info ((t (:underline (:style line :color "#9500ff")))))
        (flycheck-warning ((t (:underline (:style line :color "#fbff00")))))
-       (flycheck-error ((t (:underline (:style line :color "##ff0000")))))
+       (flycheck-error ((t (:underline (:style line :color "#ff0000")))))
        :config
        (setq flycheck-check-syntax-automatically '(mode-enabled save)); run flycheck only on save
        (global-flycheck-mode t)
@@ -865,7 +868,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
   ;; hydra takes care of my magit bindings
   (use-package magit
       :ensure t)
-    
+
   (use-package gitignore-mode
     :ensure t
     :mode (("\\.gitignore\\'" . gitignore-mode)
@@ -891,18 +894,18 @@ I want to try treemacs in the future, but this has been amazing for file browsin
 - Repo: https://github.com/abo-abo/hydra (Has a video demo)
 ** config
 #+BEGIN_SRC emacs-lisp
- (use-package hydra
-     :ensure t
-     :config
-     (setq hydra-is-helpful t)
-     (setq hydra-hint-display-type 'lv))
+  (use-package hydra
+      :ensure t
+      :config
+      (setq hydra-is-helpful t)
+      (setq hydra-hint-display-type 'lv))
 
- ;; for reference when I learn hydra better 
- ;; gives access to functions that make nice hydra UI
- (use-package pretty-hydra
-    :disabled
-    :ensure t
-    :requires hydra)
+  ;; for reference when I learn hydra better 
+  ;; gives access to functions that make nice hydra UI
+  (use-package pretty-hydra
+     :disabled
+     :ensure t
+     :requires hydra)
 #+END_SRC
 ** Hydras
 - Great hydras make for a great workflow (Let's hope they are great...)
