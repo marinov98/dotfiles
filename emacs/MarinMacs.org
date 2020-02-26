@@ -1,4 +1,4 @@
-#+TITLE: MarinMacs Configuration Guide
+#+TITLE: MarinMacs Configuration 
 #+AUTHOR: Marin P. Marinov  
 #+EMAIL: marin.marinov@macaulay.cuny.edu
 #+LANGUAGE: en
@@ -135,11 +135,6 @@ I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
  :END:
 My personal keybindings, you change these anyway you like 
 #+BEGIN_SRC emacs-lisp
-  ;; Movement (some might be disabled by evil mode)
-  (global-set-key (kbd "C-S-p") 'beginning-of-buffer)  ;; top of file 
-  (global-set-key (kbd "C-S-n") 'end-of-buffer)        ;; end of file DISABLED by evil 
-  (global-set-key (kbd "M-m") 'move-beginning-of-line) ;; moves beginning of the line 
-
   ;; Compiling and Buffers
   (global-set-key (kbd "C-x g") 'gdb)                  ;; launch gdb
   (global-set-key (kbd "C-c c") 'compile)              ;; compile code
@@ -172,37 +167,59 @@ My personal keybindings, you change these anyway you like
  - Make sure you have [[#undo-tree][undo-tree]] package installed 
  - Official Repo for Evil Mode: https://github.com/emacs-evil/evil
 #+BEGIN_SRC emacs-lisp
-  (use-package evil
-    :ensure t
-    :config
-    (evil-mode 1))
- 
-  ;; Surround
-  (use-package evil-surround
-    :ensure t
-    :config
-    (global-evil-surround-mode 1))
+  (use-package evil-leader
+      :ensure t
+      :config
+      (global-evil-leader-mode t)
+      (evil-leader/set-leader "<SPC>")
+      (evil-leader/set-key
+        "SPC" 'hydra-projectile/body
+        "m" 'hydra-mc/body
+        "w" 'hydra-window/body
+        "z" 'hydra-zoom/body
+        "l" 'hydra-lsp/body
+        "d" 'hydra-describe/body
+        "g" 'hydra-git/body
+        "f" 'counsel-find-file
+        "b" 'counsel-switch-buffer
+        "p" 'switch-to-prev-buffer
+        "q" 'delete-window
+        "n" 'switch-to-next-buffer
+        "x" 'counsel-M-x
+        "s" 'swiper-isearch))
 
-  ;; Evil multiple-cursors
-  (use-package evil-mc
-    :ensure t
-    :config
-    (global-evil-mc-mode 1))
 
-   ; NeoTree override keybindings, package (neotree) is shown further in the config
-   (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
-   (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
-   (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-   (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
-   (evil-define-key 'normal neotree-mode-map (kbd "g") 'neotree-refresh)
-   (evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-next-line)
-   (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
-   (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
-   (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
-    
-    ; Evil magit overrides magit keybindings, package (magit) is shown further in the config
-   (use-package evil-magit
-        :ensure t)
+    (use-package evil
+      :ensure t
+      :config
+      (evil-mode 1))
+
+    ;; Surround
+    (use-package evil-surround
+      :ensure t
+      :config
+      (global-evil-surround-mode 1))
+
+    ;; Evil multiple-cursors
+    (use-package evil-mc
+      :ensure t
+      :config
+      (global-evil-mc-mode 1))
+
+     ; NeoTree override keybindings, package (neotree) is shown further in the config
+     (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
+     (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
+     (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
+     (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
+     (evil-define-key 'normal neotree-mode-map (kbd "g") 'neotree-refresh)
+     (evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-next-line)
+     (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
+     (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
+     (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
+
+      ; Evil magit overrides magit keybindings, package (magit) is shown further in the config
+     (use-package evil-magit
+          :ensure t)
 #+END_SRC
 * Markup
  :PROPERTIES:
@@ -278,6 +295,7 @@ My personal keybindings, you change these anyway you like
 I think I have actually used this package the most... Does exactly what it says
 #+BEGIN_SRC emacs-lisp
 (use-package restart-emacs
+    :disabled
     :ensure t
     :config
     (global-set-key (kbd "<f5>") 'restart-emacs)) ;; To restart emacs
@@ -335,6 +353,7 @@ You can enable/disable any themes that you like here
 ;; BE AWARE: emacs can have multiple themes on at the same time
 ;; Multiple themes can mix into a super theme
 ;; Some themes do not mix well which is why I commented some themes
+
 
 ;; current theme I am running
  (use-package spacemacs-common
@@ -495,47 +514,47 @@ You can enable/disable any themes that you like here
  :END:
  Ivy User Manual: https://oremacs.com/swiper/
 #+BEGIN_SRC emacs-lisp
-  ;; Ivy
-  (use-package ivy
-      :ensure t
-      :config
-      (ivy-mode 1)
-      (setq ivy-use-virtual-buffers t)
-      (setq ivy-display-style 'fancy)
-      (setq ivy-count-format "(%d/%d) ")
-      (setq enable-recursive-minibuffers t)
-      (setq ivy-use-virtual-buffers t))
+   ;; Ivy
+   (use-package ivy
+       :ensure t
+       :config
+       (ivy-mode 1)
+       (setq ivy-use-virtual-buffers t)
+       (setq ivy-display-style 'fancy)
+       (setq ivy-count-format "(%d/%d) ")
+       (setq enable-recursive-minibuffers t)
+       (setq ivy-use-virtual-buffers t))
 
-  ;; Swiper 
-  (use-package swiper
-      :ensure t
-      :bind 
-      (("C-s" . swiper-isearch)
-      ("C-a" . swiper-isearch-backward)
-      ("C-c C-r" . ivy-resume)))
+   ;; Swiper 
+   (use-package swiper
+       :ensure t
+       :bind 
+       (("C-s" . swiper-isearch)
+       ("C-a" . swiper-isearch-backward)
+       ("C-c C-r" . ivy-resume)))
 
-  ;; Counsel
-  (use-package counsel
-      :ensure t
-      :bind
-      (("M-x" . counsel-M-x)
-      ("C-x C-f" . counsel-find-file)
-      ("C-c g" . counsel-git)
-      ("C-c j" . counsel-git-grep)
-      ("C-x b" . counsel-switch-buffer)
-      ("M-y" . counsel-yank-pop)
-      :map ivy-minibuffer-map
-      ("C-j" . ivy-next-line)
-      ("C-k" . ivy-previous-line)) ;; when in switch buffer mode this kills the selected buffer!
-      :config
-      (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"
-      ;; Add smart-casing (-S) to default command arguments:
-      counsel-rg-base-command "rg -S --no-heading --line-number --color never %s ."
-      counsel-ag-base-command "ag -S --nocolor --nogroup %s"
-      counsel-pt-base-command "pt -S --nocolor --nogroup -e %s"
-      counsel-find-file-at-point t))
+   ;; Counsel
+   (use-package counsel
+       :ensure t
+       :bind
+       (("M-x" . counsel-M-x)
+       ("C-x C-f" . counsel-find-file)
+       ("C-c g" . counsel-git)
+       ("C-c j" . counsel-git-grep)
+       ("C-x b" . counsel-switch-buffer)
+       ("M-y" . counsel-yank-pop)
+       :map ivy-minibuffer-map
+       ("C-j" . ivy-next-line)
+       ("C-k" . ivy-previous-line)) ;; when in switch buffer mode this kills the selected buffer!
+       :config
+       (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"
+       ;; Add smart-casing (-S) to default command arguments:
+       counsel-rg-base-command "rg -S --no-heading --line-number --color never %s ."
+       counsel-ag-base-command "ag -S --nocolor --nogroup %s"
+       counsel-pt-base-command "pt -S --nocolor --nogroup -e %s"
+       counsel-find-file-at-point t))
 
-  ;; ivy-posframe
+   ;; ivy-posframe
   (use-package ivy-posframe
       :ensure t
       :requires ivy
@@ -575,6 +594,7 @@ You can enable/disable any themes that you like here
 Useful if you work on multiple windows and want an efficient way of switching between them
 #+BEGIN_SRC emacs-lisp
 (use-package ace-window
+     :disabled
      :ensure t
      :init 
      (global-set-key (kbd "M-o") 'ace-window)
@@ -684,8 +704,8 @@ I want to try treemacs in the future, but this has been amazing for file browsin
        (projectile-mode t))
 
    ;; Counsel-Projectile (I utilize counsel projectile bindings in my hydra-projectile)
-  (use-package counsel-projectile
-     :ensure t)
+ (use-package counsel-projectile
+    :ensure t)
 #+END_SRC
 * Shell
  :PROPERTIES:
@@ -811,7 +831,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
  :END:
 - Nice utility that finds all matches and replaces them with the user's choice
 - Very similiar to multiple cursors
-- *Depreciated* I use lsp-rename now 
+- *Depreciated* lsp and multiple-cursors do the job best
 #+BEGIN_SRC emacs-lisp
 (use-package iedit
     :disabled
@@ -896,18 +916,18 @@ I want to try treemacs in the future, but this has been amazing for file browsin
 | pink     | :foreign-keys run          |
 *** Zoom (actually find this first one pretty useful)
 #+BEGIN_SRC emacs-lisp
-     (defhydra hydra-zoom (global-map "<f2>" :color red)
-       "zoom 🞈 🞈"
-       ("k" text-scale-increase "in")
-       ("j" text-scale-decrease "out")
-       ("0" (text-scale-adjust 0) "reset")
-       ("q" nil "quit" :color blue))
+  (defhydra hydra-zoom (:color red)
+    "zoom 🞈 🞈"
+    ("k" text-scale-increase "in")
+    ("j" text-scale-decrease "out")
+    ("0" (text-scale-adjust 0) "reset")
+    ("q" nil "quit" :color blue))
 
 #+END_SRC
 *** Describe (help describe anything and open up documentation)
 #+BEGIN_SRC emacs-lisp
      ;; help
-     (defhydra hydra-describe (global-map "C-c h" :color red :columns 2)
+     (defhydra hydra-describe (:color red :columns 2)
        "Describe 🤓"
        ("f" counsel-describe-function "func")
        ("F" counsel-describe-face "face")
@@ -921,7 +941,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
 *** MC (multiple cursor map more to my liking)
 #+BEGIN_SRC emacs-lisp
   ;; multiple cursors
-   (defhydra hydra-mc (global-map "C-c m" :color pink :columns 3)
+   (defhydra hydra-mc (:color pink :columns 3)
        "▮ Multiple cursors ▮"
       ("C-n"  evil-mc-make-and-goto-next-match "make next")
       ("C-p"  evil-mc-make-and-goto-prev-match "make prev")
@@ -936,7 +956,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
 *** Projectile (project management)
 #+BEGIN_SRC emacs-lisp
       ;; projectile, I would change this hydra's global key if I wasn't using vim bindings...
-     (defhydra hydra-projectile (global-map "C-SPC" :color red :columns 3)
+     (defhydra hydra-projectile (:color red :columns 3)
        "🚀 Projectile 🚀"
        ("f" counsel-projectile-find-file "find")
        ("w" counsel-projectile-find-file-dwim "find-dwim")
@@ -955,7 +975,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
 *** Window (my attempt at window management)
 #+BEGIN_SRC emacs-lisp
      ;; My attempt at window management
-     (defhydra hydra-window (global-map "M-SPC" :color pink :columns 3)
+     (defhydra hydra-window (:color pink :columns 3)
       "⚡⚡ Ivy + Windows ⚡⚡"
        ("f" counsel-find-file "find")
        ("x" counsel-M-x "M-x")
@@ -978,7 +998,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
 *** Git (magit and timemachine)
 #+BEGIN_SRC emacs-lisp
     ;; git 
-    (defhydra hydra-git (global-map "S-SPC" :color pink)
+    (defhydra hydra-git (:color pink)
       "⏳ Git ⏳"
       ("g" magit "magit")
       ("d" magit-dispatch "dispatch")
@@ -988,7 +1008,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
 *** LSP (jump to definitions and references, list errors)
 #+BEGIN_SRC emacs-lisp
   ;; lsp
-  (defhydra hydra-lsp (global-map "M-g" :color red :columns 3)
+  (defhydra hydra-lsp (:color red :columns 3)
     "📡 LSP 📡"
     ("j" lsp-ui-peek-find-definitions "peek-find")
     ("r" lsp-ui-peek-find-references "peek-reference")
@@ -1025,7 +1045,6 @@ I want to try treemacs in the future, but this has been amazing for file browsin
  :END:
   - LSP stands for Language Server Protocal and makes setting up autocompletion and syntax checking easy. 
   - Check the [[https://github.com/emacs-lsp/lsp-mode][Official Repo]] to what to install for your preferred development language
-** config
  - You can increase garbage collection (gc-cons-threshold) for more responsiveness on the ui-doc
    - *But* you run the risk of emacs being more laggy since it has to clean more garbage 
 #+BEGIN_SRC emacs-lisp  
@@ -1351,6 +1370,7 @@ These are modes related to web-dev that I have worked with
 'live web-development in emacs'
 #+BEGIN_SRC emacs-lisp
 (use-package skewer-mode
+    :disabled
     :ensure t
     :commands skewer-mode run-skewer
     :config
@@ -1364,6 +1384,7 @@ These are modes related to web-dev that I have worked with
 'See the effect of your HTML as you type it.'
    #+BEGIN_SRC emacs-lisp
    (use-package impatient-mode
+       :disabled
        :ensure t)  
    #+END_SRC
 *** Emmet 
