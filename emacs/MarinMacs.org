@@ -48,7 +48,7 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 - *Possible Solution #2 :* Make sure you have my init.el copied (fix any small indentention issues there) then run `M-x customize RET`, go to faces->basics faces->default change the size of the emacs screen to prevent it from indenting.
 * Table of Contents :TOC_3:
 - [[#general-settings][General Settings]]
-- [[#personal-keybindings][Personal Keybindings]]
+- [[#Buffer-Switching][Buffer-Switching]]
 - [[#org-archive][Org-archive]]
 - [[#quelpa][Quelpa]]
 - [[#evil-mode][Evil-mode]]
@@ -129,19 +129,22 @@ I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
     (setq  gdb-show-main t )  ;; Non-nil means display source file containing the main routine at startup
   
 #+END_SRC
-* Personal-Keybindings
+** Goto Config
+  #+begin_src emacs-lisp
+    (defun goto-MarinMacs ()
+      (interactive)
+      (find-file "~/.emacs.d/MarinMacs.org")) 
+    (global-set-key (kbd "C-c m") 'goto-MarinMacs)
+  #+end_src
+* Buffer-Switching
  :PROPERTIES:
- :CUSTOM_ID: personal-keybindings
+ :CUSTOM_ID: Buffer-Switching
  :END:
-My personal keybindings, you change these anyway you like 
+ Default bindings use arrow keys, these new ones feel much smoother
 #+BEGIN_SRC emacs-lisp
   ;; Compiling and Buffers
-  (global-set-key (kbd "C-x g") 'gdb)                  ;; launch gdb
-  (global-set-key (kbd "C-c c") 'compile)              ;; compile code
   (global-set-key (kbd "C-c b") 'switch-to-prev-buffer)
   (global-set-key (kbd "C-c n") 'switch-to-next-buffer)
-  (global-set-key (kbd "C-c k") 'kill-current-buffer)
-
 #+END_SRC
 * Org-Archive
  :PROPERTIES:
@@ -165,6 +168,7 @@ My personal keybindings, you change these anyway you like
  :END:
  - Packages needed to emulate vim inside Emacs. 
  - Make sure you have [[#undo-tree][undo-tree]] package installed 
+ - I have mapped my caps lock to both esc and ctrl to utilize both vim and emacs bindings
  - Official Repo for Evil Mode: https://github.com/emacs-evil/evil
 #+BEGIN_SRC emacs-lisp
   (use-package evil-leader
@@ -182,14 +186,10 @@ My personal keybindings, you change these anyway you like
         "g" 'hydra-git/body
         "f" 'counsel-find-file
         "b" 'counsel-switch-buffer
-        "p" 'switch-to-prev-buffer
-        "n" 'switch-to-next-buffer
-        "x" 'counsel-M-x
         "q" 'delete-window
         "k" 'kill-current-buffer
         "t" 'neotree-toggle
-        "r" 'ranger
-        "s" 'swiper-isearch))
+        "r" 'ranger))
 
 
     (use-package evil
@@ -1167,6 +1167,11 @@ I want to try treemacs in the future, but this has been amazing for file browsin
  :PROPERTIES:
  :CUSTOM_ID: development
  :END:
+ These bindings have been quite useful
+ #+begin_src  emacs-lisp
+  (global-set-key (kbd "C-x g") 'gdb)                  ;; launch gdb
+  (global-set-key (kbd "C-c c") 'compile)              ;; compile code
+ #+end_src
 ** C-Cpp
  :PROPERTIES:
  :CUSTOM_ID: c-cpp
@@ -1297,55 +1302,57 @@ Note: the template is meant to be edited to personal preferences
  - Essential for web-development. Highlighting, auto-closing tags, just great.
  - Official Website: http://web-mode.org/
 #+BEGIN_SRC emacs-lisp
-(use-package web-mode
-    :ensure t
-    :config
-	   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-	   (add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
-	   (add-to-list 'auto-mode-alist '("\\.jsx?$\\'" . web-mode))
-	   (add-to-list 'auto-mode-alist '("\\.vue?\\'" . web-mode))
-	   (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-	   (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-	   (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-	   (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-	   (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-	   (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
-	   (setq web-mode-engines-alist
-		 '(("django"    . "\\.html\\'")
-		   ("ejs"  . "\\.ejs\\'")))
-	   (setq web-mode-ac-sources-alist
-	   '(("css" . (ac-source-css-property))
-	   ("vue" . (ac-source-words-in-buffer ac-source-abbrev))
-           ("html" . (ac-source-words-in-buffer ac-source-abbrev))))
-	 ;; Emmet
-	 (add-hook 'web-mode-hook 'emmet-mode) ;; triggers with C-RET
-	 ;; Indentation
-	 (setq web-mode-markup-indent-offset 2)
-	 (setq web-mode-code-indent-offset 2)
-	 (setq web-mode-css-indent-offset 2)
-	 ;; Auto-closing
-	 (setq web-mode-auto-close-style 2)
-	 (setq web-mode-tag-auto-close-style 2)
-	 (setq web-mode-enable-auto-closing t)
-	 (setq web-mode-enable-auto-quoting t)
-	 (with-eval-after-load 'web-mode
-	 (define-key web-mode-map (kbd "C-c h") 'web-mode-element-close)) ;; auto-close tag help
-	 ;; Highlighting
-	 (setq web-mode-enable-current-column-highlight t)
-	 (setq web-mode-enable-current-element-highlight t))
+  (use-package web-mode
+      :ensure t
+      :config
+         (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+         (add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
+         (add-to-list 'auto-mode-alist '("\\.jsx?$\\'" . web-mode))
+         (add-to-list 'auto-mode-alist '("\\.vue?\\'" . web-mode))
+         (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+         (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+         (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+         (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+         (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+         (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
+         (setq web-mode-engines-alist
+           '(("django"    . "\\.html\\'")
+             ("ejs"  . "\\.ejs\\'")))
+         (setq web-mode-ac-sources-alist
+         '(("css" . (ac-source-css-property))
+         ("vue" . (ac-source-words-in-buffer ac-source-abbrev))
+             ("html" . (ac-source-words-in-buffer ac-source-abbrev))))
+       ;; Emmet
+       (add-hook 'web-mode-hook 'emmet-mode) ;; triggers with C-RET
+       ;; Indentation
+       (setq web-mode-markup-indent-offset 2)
+       (setq web-mode-code-indent-offset 2)
+       (setq web-mode-css-indent-offset 2)
+       ;; Auto-closing
+       (setq web-mode-auto-close-style 2)
+       (setq web-mode-tag-auto-close-style 2)
+       (setq web-mode-enable-auto-closing t)
+       (setq web-mode-enable-auto-quoting t)
+       (with-eval-after-load 'web-mode
+       (define-key web-mode-map (kbd "C-c h") 'web-mode-element-close)) ;; auto-close tag help
+       ;; Highlighting
+       (setq web-mode-enable-current-column-highlight t)
+       (setq web-mode-enable-current-element-highlight t))
 
-;; enable css coloring
-(use-package rainbow-mode 
-    :ensure t
-    :mode "\\.css\\'")
 
-;; format code
-;; need to run 'npm i -g prettier' in order for this to work (Locally should work too)
-(use-package prettier-js
-    :ensure t
-    :config 
-    (add-hook 'js2-mode-hook 'prettier-js-mode)
-    (add-hook 'web-mode-hook 'prettier-js-mode))
+  ;; visually display hex values as colors
+  (use-package rainbow-mode 
+      :ensure t
+      :init 
+      (rainbow-mode 1))
+
+  ;; format code
+  ;; need to run 'npm i -g prettier' in order for this to work (Locally should work too)
+  (use-package prettier-js
+      :ensure t
+      :config 
+      (add-hook 'js2-mode-hook 'prettier-js-mode)
+      (add-hook 'web-mode-hook 'prettier-js-mode))
 
 #+END_SRC
 *** Modes
