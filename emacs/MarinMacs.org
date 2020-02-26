@@ -1316,11 +1316,11 @@ Note: the template is meant to be edited to personal preferences
       (web-mode-doctype ((t (:foreground "#4A8ACA"))))
       (web-mode-html-tag ((t (:foreground "#4A8ACA"))))
       :config
+      (setq web-mode-enable-engine-detection t)
       ;; Indentation
       (setq web-mode-attr-indent-offset 2)
       (setq web-mode-markup-indent-offset 2)
       (setq web-mode-code-indent-offset 2)
-      (setq web-mode-css-indent-offset 2)
       ;; Auto-closing
       (setq web-mode-enable-auto-pairing t)
       (setq web-mode-enable-auto-quoting t)
@@ -1328,6 +1328,7 @@ Note: the template is meant to be edited to personal preferences
       (setq web-mode-enable-current-column-highlight t)
       (setq web-mode-enable-current-element-highlight t))
 
+   (setq-default css-indent-offset 2) ;; web mode for some reason cancels css autocomplete so I have to configure css separately
 
   ;; visually display hex values as colors
   (use-package rainbow-mode 
