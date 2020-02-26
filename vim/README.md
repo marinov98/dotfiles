@@ -22,20 +22,12 @@
 
 ## Packages
 
-### Themes
-- solarized
-- palenight
-- jellybeans
-- space-theme
-
-
 ### Coding Convenience
-- Vim-snippets
-- Vim-Utils
+- Vim-snippets (snippets)
+- Vim-Utils (more snippet support)
 - vim-polygot (langauage pack for syntax highlighting)
 - ctrlp (Fuzzy file, buffer, mru, tag, etc finder.)
-- Nerdtree (file browser)
-- super tab (use tab for autocomplete)
+- super tab (allows you to use <Tab> for all your insert completion needs)
 - vim-repeat (allows you to repeat commands)
 - vim-multiple-cursors (change multiple things at the same time) 
 - vim-surround (amazing new keybindings)
@@ -43,9 +35,9 @@
 
 
 ### Web-dev
-- Emmet 
-- Css-color 
-- vim-css
+- Emmet (set of plug-ins for text editors that allow for high-speed coding and editing in HTML, XML, XSL, and other structured code formats via content assist.)
+- Css-color (display hex values with color)
+- vim-css (css syntax)
 - auto-close tag (for html)
 - Prettier (format js,ts,html,css code)
 
