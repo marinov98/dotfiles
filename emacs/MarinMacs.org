@@ -1299,8 +1299,8 @@ Note: the template is meant to be edited to personal preferences
  #+BEGIN_SRC markdown
  npm i -g typescript-language-server vscode-json-languageserver vscode-html-languageserver-bin yaml-language-server vscode-css-languageserver-bin bash-language-server
  #+END_SRC
-*** Web-Mode
- - Autonomous emacs major-mode for editing web templates. 
+*** Web-Dev Essentials
+ - Web-mode is an Autonomous emacs major-mode for editing web templates. 
  - Essential for web-development. Highlighting, auto-closing tags, just great.
  - Official Website: http://web-mode.org/
 #+BEGIN_SRC emacs-lisp
@@ -1334,22 +1334,23 @@ Note: the template is meant to be edited to personal preferences
       (setq web-mode-enable-current-element-highlight t))
 
    (setq-default css-indent-offset 2) ;; web mode for some reason cancels css autocomplete so I have to configure css separately
-
-  ;; visually display hex values as colors
+#+END_SRC
+visually display hex values as colors
+#+BEGIN_SRC emacs-lisp
   (use-package rainbow-mode 
       :ensure t
       :init 
       (rainbow-mode 1))
-
-  ;; format code
-  ;; need to run 'npm i -g prettier' in order for this to work (Locally should work too)
+#+END_SRC
+- This is what I like to use to format my code
+- need to run 'npm i -g prettier' in order for this to work (Locally should work too)
+#+BEGIN_SRC emacs-lisp
   (use-package prettier-js
       :ensure t
       :config 
       (add-hook 'typescript-mode-hook 'prettier-js-mode)
       (add-hook 'js2-mode-hook 'prettier-js-mode)
       (add-hook 'web-mode-hook 'prettier-js-mode))
-
 #+END_SRC
 *** Modes
 These are modes related to web-dev that I have worked with 
