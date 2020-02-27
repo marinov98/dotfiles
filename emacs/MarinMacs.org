@@ -1042,7 +1042,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
       ("G" (browse-url "https://github.com/marinov98") "my GitHub")
       ("n" (browse-url "https://www.netflix.com/") "netflix")
       ("y" (browse-url "https://www.youtube.com/") "YouTube")
-      ("m" (browse-url "https://www.messenger.com/") "Messanger")
+      ("m" (browse-url "https://www.messenger.com/") "Messenger")
       ("s" better-shell-shell "shell")
       ("q" nil "quit"))
   #+END_SRC
