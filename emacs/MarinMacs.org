@@ -929,16 +929,19 @@ I want to try treemacs in the future, but this has been amazing for file browsin
 #+END_SRC
 *** Describe (help describe anything and open up documentation)
 #+BEGIN_SRC emacs-lisp
-     ;; help
-     (defhydra hydra-describe (:color red :columns 2)
-       "Describe 🤓"
-       ("f" counsel-describe-function "func")
-       ("F" counsel-describe-face "face")
-       ("k" describe-key "key")
-       ("v" counsel-describe-variable "var")
-       ("m" which-key-show-major-mode "major mode")
-       ("t" describe-theme "theme")
-       ("q" nil "quit" :color blue))
+  ;; help
+  (defhydra hydra-describe (:color red :columns 2)
+    "Describe 🤓"
+    ("f" counsel-describe-function "func")
+    ("F" counsel-describe-face "face")
+    ("k" describe-key "key")
+    ("v" counsel-describe-variable "var")
+    ("p" describe-package "package")
+    ("s" describe-symbol "symbol")
+    ("m" which-key-show-major-mode "major mode")
+    ("M" describe-mode "modes")
+    ("t" describe-theme "theme")
+    ("q" nil "quit" :color blue))
 
 #+END_SRC
 *** MC (multiple cursor map more to my liking)
@@ -953,7 +956,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
       ("C-l"  evil-mc-make-and-goto-last-cursor "last cursor")
       ("M-p"  evil-mc-make-and-goto-prev-cursor "go next")
       ("M-n"  evil-mc-make-and-goto-next-cursor "go prev")
-      ("C-a"  evil-mc-make-all-cursors "all")
+      ("C-a"  evil-mc-make-all-cursors "make all")
       ("C-q"  evil-mc-undo-all-cursors "quit" :color blue))
 #+END_SRC
 *** Projectile (project management)
@@ -977,25 +980,25 @@ I want to try treemacs in the future, but this has been amazing for file browsin
 #+END_SRC
 *** Window (my attempt at window management)
 #+BEGIN_SRC emacs-lisp
-     ;; My attempt at window management
-     (defhydra hydra-window (:color pink :columns 3)
-      "⚡⚡ Ivy + Windows ⚡⚡"
-       ("f" counsel-find-file "find")
-       ("x" counsel-M-x "M-x")
-       ("b" counsel-switch-buffer "switch buffer")
-       ;; splitting
-       ("2" split-window-right "v-split")
-       ("3" split-window-below "h-split")
-       ;; movement
-       ("h" windmove-left)
-       ("j" windmove-down)
-       ("k" windmove-up)
-       ("l" windmove-right)
-       ;; deletion and quitting
-       ("K" kill-current-buffer "kill current buffer")
-       ("d" delete-window "delete window")
-       ("D" kill-this-buffer "kill buffer")
-       ("q" nil "quit" :color blue))
+  ;; My attempt at window management
+  (defhydra hydra-window (:color pink :columns 4)
+   "⚡⚡ Ivy + Windows ⚡⚡"
+    ("f" counsel-find-file "find")
+    ("x" counsel-M-x "M-x")
+    ("b" counsel-switch-buffer "switch buffer")
+    ;; splitting
+    ("2" split-window-right "v-split")
+    ("3" split-window-below "h-split")
+    ;; deletion and quitting
+    ("K" kill-current-buffer "kill current buffer")
+    ("d" delete-window "delete window")
+    ("D" kill-this-buffer "kill buffer")
+    ;; movement
+    ("h" windmove-left "left")
+    ("j" windmove-down "down")
+    ("k" windmove-up "up")
+    ("l" windmove-right "right")
+    ("q" nil "quit" :color blue))
 
 #+END_SRC
 *** Git (magit and timemachine)
@@ -1013,14 +1016,14 @@ I want to try treemacs in the future, but this has been amazing for file browsin
   ;; lsp
   (defhydra hydra-lsp (:color red :columns 3)
     "📡 LSP 📡"
-    ("j" lsp-ui-peek-find-definitions "peek-find")
-    ("r" lsp-ui-peek-find-references "peek-reference")
-    ("d" lsp-find-definition "find def")
-    ("t" lsp-find-type-definition "type def")
+    ("j" lsp-ui-peek-find-definitions "peek-def")
+    ("r" lsp-ui-peek-find-references "peek-ref")
     ("c" lsp-rename "rename")
+    ("f" lsp-find-definition "find-def")
+    ("t" lsp-find-type-definition "find-type-def")
+    ("l" lsp-ui-flycheck-list "list errors")
     ("b" switch-to-prev-buffer "back") ;; better consistancy than lsp-ui-peek-jump-backward
     ("n" switch-to-next-buffer "next") ;; better than lsp-ui-peek-jump-forward
-    ("l" lsp-ui-flycheck-list "list errors")
     ("i" lsp-ui-imenu "imenu")
     ("q" nil "quit" :color blue))
 
