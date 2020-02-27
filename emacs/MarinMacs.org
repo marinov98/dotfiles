@@ -519,7 +519,10 @@ You can enable/disable any themes that you like here
  :PROPERTIES:
  :CUSTOM_ID: ivy
  :END:
- Ivy User Manual: https://oremacs.com/swiper/
+- Ivy: an interactive interface for completion in Emacs
+- Swiper: an alternative to emacs's native isearch that uses ivy to show an overview of all matches.
+- Counsel: extra functions and features that use ivy
+- Ivy User Manual: https://oremacs.com/swiper/
 #+BEGIN_SRC emacs-lisp
    ;; Ivy
    (use-package ivy
@@ -710,9 +713,9 @@ I want to try treemacs in the future, but this has been amazing for file browsin
         (setq projectile-completion-system 'ivy)
         (projectile-mode t))
 
-    ;; Counsel-Projectile (I utilize counsel projectile bindings in my hydra-projectile)
-  (use-package counsel-projectile
-     :ensure t)
+     ;; Counsel-Projectile (I utilize counsel projectile bindings in my hydra-projectile)
+    (use-package counsel-projectile
+        :ensure t)
 #+END_SRC
 * Shell
  :PROPERTIES:
@@ -1151,9 +1154,9 @@ I want to try treemacs in the future, but this has been amazing for file browsin
 #+BEGIN_SRC emacs-lisp
   ;; Enable any if you wish, may be utilized in the future
 
-   (use-package tex
-      :disabled
-      :ensure auctex)
+  (use-package tex
+     :disabled
+     :ensure auctex)
 
   ;; Settings 
   (setq TeX-auto-save t)
@@ -1429,8 +1432,8 @@ Adds the node_modules/.bin directory to the buffer exec_path.
 #+BEGIN_SRC emacs-lisp
 ;; debugging in chrome
 (use-package dap-chrome
-  :ensure nil
-  :requires dap-mode)
+    :ensure nil
+    :requires dap-mode)
   
 ;; debugging in firefox
 (use-package dap-firefox
@@ -1440,8 +1443,8 @@ Adds the node_modules/.bin directory to the buffer exec_path.
 *** Back-end
 #+BEGIN_SRC emacs-lisp
 (use-package dap-node
-  :ensure nil
-  :requires dap-mode)
+    :ensure nil
+    :requires dap-mode)
 #+END_SRC
 *** Js2-mode
 - A 'better' mode for editing javascript files. Can sometimes have performance issues depending on emacs version
