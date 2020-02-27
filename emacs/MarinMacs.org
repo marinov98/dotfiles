@@ -1197,7 +1197,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
     (modern-c++-font-lock-global-mode t))
 #+END_SRC
 *** Debugging
-Still experimenting with this, native gdb in emacs is also really good (described in [[#gdb][GDB]] section of this config file)
+Still experimenting with this, native gdb in emacs is also really good 
 #+BEGIN_SRC emacs-lisp
 (use-package dap-gdb-lldb
   :ensure nil
