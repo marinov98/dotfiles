@@ -1038,9 +1038,9 @@ I want to try treemacs in the future, but this has been amazing for file browsin
      (defhydra hydra-launcher (global-map "C-c l" :color red :columns 2)
       "Launch"
       ("h" man "man")
-      ("g" (browse-url "https://www.google.com/") "google")
-      ("G" (browse-url "https://github.com/marinov98") "my GitHub")
-      ("n" (browse-url "https://www.netflix.com/") "netflix")
+      ("g" (browse-url "https://www.google.com/") "Google")
+      ("G" (browse-url "https://github.com/marinov98") "GitHub")
+      ("n" (browse-url "https://www.netflix.com/") "Netflix")
       ("y" (browse-url "https://www.youtube.com/") "YouTube")
       ("m" (browse-url "https://www.messenger.com/") "Messenger")
       ("s" better-shell-shell "shell")
