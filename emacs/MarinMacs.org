@@ -131,9 +131,9 @@ Disable back up files (comment if you want to enable backup files)
 #+END_SRC
 GNU Debugger (GDB)
 #+BEGIN_SRC emacs-lisp
-    (setq gdb-many-windows t)                ;; have multiple windows when debugging
-    (setq gdb-show-main t)                   ;; Non-nil means display source file containing the main routine at startup
-    (global-set-key (kbd "C-x g") 'gdb)      ;; launch gdb
+  (setq gdb-many-windows t)                ;; have multiple windows when debugging
+  (setq gdb-show-main t)                   ;; Non-nil means display source file containing the main routine at startup
+  (global-set-key (kbd "C-c a") 'gdb)      ;; launch gdb
 #+END_SRC
 ** Goto Config
   #+begin_src emacs-lisp
