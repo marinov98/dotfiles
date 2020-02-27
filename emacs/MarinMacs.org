@@ -1030,20 +1030,21 @@ I want to try treemacs in the future, but this has been amazing for file browsin
 #+END_SRC
 *** Launcher (launch stuff)
   #+BEGIN_SRC emacs-lisp
- (setq
- browse-url-browser-function
- '(("https://www.netflix.com/" . browse-url-firefox) ;; firefox deals better with video players
- ("." . browse-url-chromium)))
+    (setq
+    browse-url-browser-function
+    '(("https://www.netflix.com/" . browse-url-firefox) ;; firefox deals better with video players
+    ("." . browse-url-chromium)))
 
-  (defhydra hydra-launcher (global-map "C-c l" :color red :columns 2)
-   "Launch"
-   ("h" man "man")
-   ("g" (browse-url "https://www.google.com/") "google")
-   ("G" (browse-url "https://github.com/marinov98") "my GitHub")
-   ("r" (browse-url "https://www.netflix.com/") "netflix")
-   ("y" (browse-url "https://www.youtube.com/") "YouTube")
-   ("s" better-shell-shell "shell")
-   ("q" nil "quit"))
+     (defhydra hydra-launcher (global-map "C-c l" :color red :columns 2)
+      "Launch"
+      ("h" man "man")
+      ("g" (browse-url "https://www.google.com/") "google")
+      ("G" (browse-url "https://github.com/marinov98") "my GitHub")
+      ("n" (browse-url "https://www.netflix.com/") "netflix")
+      ("y" (browse-url "https://www.youtube.com/") "YouTube")
+      ("m" (browse-url "https://www.messenger.com/") "Messanger")
+      ("s" better-shell-shell "shell")
+      ("q" nil "quit"))
   #+END_SRC
 * LSP
  :PROPERTIES:
