@@ -67,10 +67,10 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 - [[#projectile][Projectile]]
 - [[#shell][Shell]]
 - [[#globals][Globals]]
-  - [[#snippets][Snippets]]
+  - [[#undo-tree][Undo Tree]]
+  - [[#Yasnippet][Yasnippet]]
   - [[#flycheck][Flycheck]]
   - [[#company][Company]]
-  - [[#undo-tree][Undo Tree]]
 - [[#git][Git]]
 - [[#hydra][Hydra]]
 - [[#lsp][Language Server Protocal (lsp)]]
@@ -98,7 +98,6 @@ Indentation
 #+BEGIN_SRC emacs-lisp
     (setq default-frame-alist '((font . "Fira Code-14")))  ;; set font and font size
     (setq visible-bell t)                                  ;; disable annoying end of buffer sounds
-    (setq load-prefer-newer t)                             ;; Avoid the pitfall of “loading old bytecode instead of newer source”
     (electric-pair-mode)                                   ;; auto closing brackets
     (display-time-mode 1)                                  ;; display time in the modeline
 #+END_SRC
@@ -723,10 +722,11 @@ I want to try treemacs in the future, but this has been amazing for file browsin
   :init
   (global-undo-tree-mode))
 #+END_SRC
-** Snippets
+** Yasnippet
  :PROPERTIES:
- :CUSTOM_ID: snippets
+ :CUSTOM_ID: Yasnippet
  :END:
+all the packages related to snippets
 #+BEGIN_SRC emacs-lisp
 (use-package yasnippet
     :ensure t
