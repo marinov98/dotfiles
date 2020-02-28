@@ -53,7 +53,6 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 - [[#quelpa][Quelpa]]
 - [[#evil-mode][Evil-mode]]
 - [[#markup][Markup]]
-- [[#restart-emacs][Restart-Emacs]]
 - [[#dashboard][Dashboard]]
 - [[#themes][Themes]]
 - [[#modeline][Modeline]]
@@ -72,9 +71,6 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
   - [[#flycheck][Flycheck]]
   - [[#company][Company]]
   - [[#undo-tree][Undo Tree]]
-- [[#coding-productivity][Coding Productivity]]
-  - [[#iedit][iedit]]
-  - [[#dump-jump][Dump-Jump]]
 - [[#git][Git]]
 - [[#hydra][Hydra]]
 - [[#lsp][Language Server Protocal (lsp)]]
@@ -91,16 +87,6 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
  :PROPERTIES:
  :CUSTOM_ID: general-settings
  :END:
-Garbage collection and Lexical binding
-#+BEGIN_SRC emacs-lisp
-    ;; -*- lexical-binding: t; -*-
-
-    ;; disable garbage collection on start up 
-    (eval-when-compile
-    (setq-local gc-cons-threshold most-positive-fixnum)
-    (setq-local gc-cons-percentage 0.6)
-    (setq-local file-name-handler-alist nil))
-#+END_SRC
 Indentation 
 #+BEGIN_SRC emacs-lisp
     (setq-default indent-tabs-mode nil)                    ;; disable tabs and use spaces
@@ -131,9 +117,9 @@ Disable back up files (comment if you want to enable backup files)
 #+END_SRC
 GNU Debugger (GDB)
 #+BEGIN_SRC emacs-lisp
-  (setq gdb-many-windows t)                ;; have multiple windows when debugging
-  (setq gdb-show-main t)                   ;; Non-nil means display source file containing the main routine at startup
-  (global-set-key (kbd "C-c a") 'gdb)      ;; launch gdb
+    (setq gdb-many-windows t)                ;; have multiple windows when debugging
+    (setq gdb-show-main t)                   ;; Non-nil means display source file containing the main routine at startup
+    (global-set-key (kbd "C-c a") 'gdb)      ;; launch gdb
 #+END_SRC
 ** Goto Config
   #+begin_src emacs-lisp
@@ -294,18 +280,6 @@ GNU Debugger (GDB)
       (add-hook 'LaTeX-mode-hook 'writegood-mode)
       (add-hook 'markdown-mode-hook 'writegood-mode))
 
-#+END_SRC
-* Restart-Emacs
- :PROPERTIES:
- :CUSTOM_ID: restart-emacs
- :END:
-I think I have actually used this package the most... Does exactly what it says
-#+BEGIN_SRC emacs-lisp
-(use-package restart-emacs
-    :disabled
-    :ensure t
-    :config
-    (global-set-key (kbd "<f5>") 'restart-emacs)) ;; To restart emacs
 #+END_SRC
 * Dashboard 
  :PROPERTIES:
@@ -563,24 +537,6 @@ You can enable/disable any themes that you like here
        counsel-ag-base-command "ag -S --nocolor --nogroup %s"
        counsel-pt-base-command "pt -S --nocolor --nogroup -e %s"
        counsel-find-file-at-point t))
-
-   ;; ivy-posframe
-  (use-package ivy-posframe
-      :ensure t
-      :requires ivy
-      :config
-      (setq ivy-posframe-display-functions-alist
-      '((swiper-isearch . nil) ;; swiper gets a big laggy with ivy-posframe
-      (swiper-isearch-backward . nil)
-      (counsel-find-file . ivy-posframe-display-at-window-center)
-      (counsel-M-x . ivy-posframe-display-at-window-center)
-      (t . ivy-posframe-display-at-window-center)))
-      (setq ivy-posframe-parameters
-      '((left-fringe . 10)
-      (right-fringe . 10)))
-      (setq ivy-posframe-border-width 1)
-      (put 'ivy-posframe 'face-alias 'default)
-      (ivy-posframe-mode 1))
 #+END_SRC
 * Enhancements 
  :PROPERTIES:
@@ -827,39 +783,6 @@ I want to try treemacs in the future, but this has been amazing for file browsin
       (add-hook 'emacs-lisp-mode-hook 'company-mode)
 #+END_SRC
 
-* Coding-Productivity 
- :PROPERTIES:
- :CUSTOM_ID: coding-productivity
- :END:
-** Iedit
- :PROPERTIES:
- :CUSTOM_ID: iedit
- :END:
-- Nice utility that finds all matches and replaces them with the user's choice
-- Very similiar to multiple cursors
-- *Depreciated* lsp and multiple-cursors do the job best
-#+BEGIN_SRC emacs-lisp
-(use-package iedit
-    :disabled
-    :ensure t
-    :bind (("C-c a" . iedit-mode)))
-#+END_SRC
-** Dump-Jump
-*Depreciated* an old favorite , replaced by lsp
-   #+begin_src emacs-lisp
-   (use-package dumb-jump
-    :disabled
-    :bind 
-    (("M-g o" . dumb-jump-go-other-window)
-    ("M-g j" . dumb-jump-go)
-    ("M-g b" . dumb-jump-back)
-    ("M-g i" . dumb-jump-go-prompt)
-    ("M-g x" . dumb-jump-go-prefer-external)
-    ("M-g z" . dumb-jump-go-prefer-external-other-window))
-    :config 
-    (setq dumb-jump-selector 'ivy) 
-    :ensure)
-   #+end_src
 * Git
  :PROPERTIES:
  :CUSTOM_ID: git
