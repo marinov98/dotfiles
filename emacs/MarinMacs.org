@@ -289,18 +289,18 @@ GNU Debugger (GDB)
 - Prerequisites: https://github.com/cask/cask
 - After installing cask, learn how to customize it by going here: https://github.com/emacs-dashboard/emacs-dashboard
 #+BEGIN_SRC emacs-lisp
-(use-package dashboard 
-    :ensure t
-    :config
-    (dashboard-setup-startup-hook)
-    (setq dashboard-banner-logo-title "MarinMacs")
-    (setq dashboard-set-heading-icons t)
-    (setq dashboard-set-file-icons t)
-    (setq dashboard-startup-banner 'logo)
-    (setq dashboard-items '((recents  . 5)
-                           (bookmarks . 5)
-			               (agenda . 5)
-                           (projects . 5))))
+  (use-package dashboard 
+      :ensure t
+      :config
+      (dashboard-setup-startup-hook)
+      (setq dashboard-banner-logo-title "MarinMacs")
+      (setq dashboard-set-heading-icons t)
+      (setq dashboard-set-file-icons t)
+      (setq dashboard-startup-banner 'logo)
+      (setq dashboard-items '((recents  . 5)
+                             (bookmarks . 5)
+                             (agenda . 5)
+                             (projects . 5))))
 #+END_SRC
 * Themes
  :PROPERTIES:
@@ -677,24 +677,36 @@ I want to try treemacs in the future, but this has been amazing for file browsin
  :PROPERTIES:
  :CUSTOM_ID: shell
  :END:
-- better-shell: https://github.com/killdash9/better-shell
 - exec-path-from-shell: https://github.com/purcell/exec-path-from-shell
 - Eshell: https://www.gnu.org/software/emacs/manual/html_mono/eshell.html
    #+BEGIN_SRC emacs-lisp
-(use-package better-shell
-    :ensure t
-    :bind 
-    (("C-`" . better-shell-shell) ;; open terminal
-    ("C-;" . better-shell-remote-open)))
+       (use-package exec-path-from-shell
+           :ensure t
+           :config
+           (when (memq window-system '(mac ns x)) ;; check if its mac
+           (exec-path-from-shell-initialize)))
 
-(use-package exec-path-from-shell
-    :ensure t
-    :config
-    (when (memq window-system '(mac ns x)) ;; check if its mac
-    (exec-path-from-shell-initialize)))
+     ;; Eshell 
+     ;; configuration found from this link: https://superuser.com/questions/890937/how-to-show-git-branch-in-emacs-shell
+       (defun git-prompt-branch-name ()
+           "Get current git branch name"
+           (let ((args '("symbolic-ref" "HEAD" "--short")))
+             (with-temp-buffer
+               (apply #'process-file "git" nil (list t nil) nil args)
+               (unless (bobp)
+                 (goto-char (point-min))
+                 (buffer-substring-no-properties (point) (line-end-position))))))
 
-;; Eshell 
-(global-set-key (kbd "C-~") 'eshell) ;; terminal alternative in emacs
+        (defun 4lex1v:eshell-prompt ()
+           (let ((branch-name (git-prompt-branch-name)))
+             (concat
+              "\n# " (user-login-name) " in " (abbreviate-file-name (eshell/pwd)) "\n"
+              (if branch-name (format "git:(%s) >> " branch-name) ">> ")
+              )))         
+
+        (setq eshell-prompt-function #'4lex1v:eshell-prompt
+               eshell-prompt-regexp ".*>>+ ")
+       (global-set-key (kbd "C-`") 'eshell) ;; terminal alternative in emacs
    #+END_SRC
 * Globals
  :PROPERTIES:
@@ -970,7 +982,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
       ("n" (browse-url "https://www.netflix.com/") "Netflix")
       ("y" (browse-url "https://www.youtube.com/") "YouTube")
       ("m" (browse-url "https://www.messenger.com/") "Messenger")
-      ("s" better-shell-shell "shell")
+      ("s" eshell "shell")
       ("q" nil "quit"))
   #+END_SRC
 * LSP
@@ -985,7 +997,8 @@ I want to try treemacs in the future, but this has been amazing for file browsin
   (use-package lsp-mode
      :ensure t
      :config
-     (setq-local read-process-output-max (* 1024 1024)) ;; (1mb) Increase the amount of data which Emacs reads from the process
+     (setq gc-cons-threshold (* 1024 1024 100)) ;; 100 mb client-server generates a lot of garbage so we want to be able to have more room for garbage
+     (setq read-process-output-max (* 1024 1024)) ;; (1mb) Increase the amount of data which Emacs reads from the process
      (setq lsp-idle-delay 0.15) ; small delay for less strain
      (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error"))
      (setq lsp-prefer-flymake nil) ; we are using flycheck and not flymake
