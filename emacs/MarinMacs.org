@@ -227,7 +227,7 @@ GNU Debugger (GDB)
      :pin org)
      
  ;; allow easier snippet insertion  
- (require 'org-tempo)
+; (require 'org-tempo)
  
  ;; bullets
  (use-package org-bullets
