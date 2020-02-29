@@ -152,7 +152,7 @@ GNU Debugger (GDB)
  :END:
  - Default bindings use arrow keys, these new ones feel much smoother. 
  - These bindings are geared more towards non-vim users as further ahead I have other bindings to these commands with the evil leader key.
- - Still a used these for a while as a vim user before I discovered the evil leader package.
+ - Still I used these for a while as a vim user before I discovered the evil leader package.
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-c b") 'switch-to-prev-buffer)
   (global-set-key (kbd "C-c n") 'switch-to-next-buffer)
@@ -812,7 +812,7 @@ all the packages related to snippets
       ("M-n" . nil) ;; old select next key
       ("M-p" . nil) ;; old select prev key
       ("<tab>" . company-select-next) ;; make tab our new select next key
-      ("M-j" . company-select-next)  ;; also make C-j new selection key
+      ("M-j" . company-select-next)  ;; also make M-j new selection key
       ("M-k"  . company-select-previous))
       :config
       (setq company-tooltip-limit 5) ; show 5 candidates at one time
