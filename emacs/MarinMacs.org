@@ -266,7 +266,7 @@ GNU Debugger (GDB)
      :pin org)
      
  ;; allow easier snippet insertion  
- ;(require 'org-tempo)
+ (require 'org-tempo)
  
  ;; bullets
  (use-package org-bullets
@@ -823,6 +823,7 @@ all the packages related to snippets
       (setq company-idle-delay 0.25) ;; slightly delay completions
       (setq company-minimum-prefix-length 3) ;; show completions after 3 chars
       (setq company-selection-wrap-around t)
+      (setq company-require-match 'never) ;; dont need to pick a choice 
       (setq global-company-mode t)) 
 
 
