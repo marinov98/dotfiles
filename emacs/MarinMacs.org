@@ -162,58 +162,71 @@ GNU Debugger (GDB)
  - I have mapped my caps lock to both esc and ctrl to utilize both vim and emacs bindings
  - Official Repo for Evil Mode: https://github.com/emacs-evil/evil
 #+BEGIN_SRC emacs-lisp
- (use-package evil-leader
-     :ensure t
-     :config
-     (global-evil-leader-mode t)
-     (evil-leader/set-leader "<SPC>")
-     (evil-leader/set-key
-       "SPC" 'hydra-projectile/body
-       "m" 'hydra-mc/body
-       "w" 'hydra-window/body
-       "z" 'hydra-zoom/body
-       "l" 'hydra-lsp/body
-       "d" 'hydra-describe/body
-       "g" 'hydra-git/body
-       "f" 'counsel-find-file
-       "b" 'counsel-switch-buffer
-       "q" 'delete-window
-       "k" 'kill-current-buffer
-       "t" 'neotree-toggle
-       "r" 'ranger))
-
-
-    (use-package evil
+  (use-package evil-leader
       :ensure t
       :config
-      (evil-mode 1))
+      (global-evil-leader-mode t)
+      (evil-leader/set-leader "<SPC>")
+      (evil-leader/set-key
+        ;; hydras
+        "SPC" 'hydra-projectile/body
+        "m" 'hydra-mc/body
+        "w" 'hydra-window/body
+        "z" 'hydra-zoom/body
+        "l" 'hydra-lsp/body
+        "d" 'hydra-describe/body
+        "g" 'hydra-git/body
+        ;; file finding
+        "f" 'counsel-find-file
+        "a" 'counsel-ag ;; silversearcher-ag needs to be installed!
+        ;; buffers
+        "s" 'counsel-switch-buffer
+        "b" 'switch-to-prev-buffer
+        "n" 'switch-to-next-buffer
+        ;; deletion
+        "q" 'delete-window
+        "k" 'kill-current-buffer
+        ;; package-specific
+        "t" 'neotree-toggle
+        "r" 'ranger))
 
-    ;; Surround
-    (use-package evil-surround
-      :ensure t
-      :config
-      (global-evil-surround-mode 1))
 
-    ;; Evil multiple-cursors
-    (use-package evil-mc
-      :ensure t
-      :config
-      (global-evil-mc-mode 1))
+     (use-package evil
+       :ensure t
+       :config
+       (evil-mode 1)
+       ;; make switching windows much easier
+       (define-key evil-motion-state-map (kbd "M-h") 'evil-window-left)
+       (define-key evil-motion-state-map (kbd "M-j") 'evil-window-down)
+       (define-key evil-motion-state-map (kbd "M-k") 'evil-window-up)
+       (define-key evil-motion-state-map (kbd "M-l") 'evil-window-right))
 
-     ; NeoTree override keybindings, package (neotree) is shown further in the config
-     (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
-     (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
-     (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-     (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
-     (evil-define-key 'normal neotree-mode-map (kbd "g") 'neotree-refresh)
-     (evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-next-line)
-     (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
-     (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
-     (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
+     ;; Surround
+     (use-package evil-surround
+       :ensure t
+       :config
+       (global-evil-surround-mode 1))
 
-      ; Evil magit overrides magit keybindings, package (magit) is shown further in the config
-     (use-package evil-magit
-          :ensure t)
+     ;; Evil multiple-cursors
+     (use-package evil-mc
+       :ensure t
+       :config
+       (global-evil-mc-mode 1))
+
+      ; NeoTree override keybindings, package (neotree) is shown further in the config
+      (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
+      (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
+      (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
+      (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
+      (evil-define-key 'normal neotree-mode-map (kbd "g") 'neotree-refresh)
+      (evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-next-line)
+      (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
+      (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
+      (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
+
+       ; Evil magit overrides magit keybindings, package (magit) is shown further in the config
+      (use-package evil-magit
+           :ensure t)
 #+END_SRC
 * Markup
  :PROPERTIES:
@@ -227,7 +240,7 @@ GNU Debugger (GDB)
      :pin org)
      
  ;; allow easier snippet insertion  
- ;(require 'org-tempo)
+; (require 'org-tempo)
  
  ;; bullets
  (use-package org-bullets
@@ -523,7 +536,6 @@ You can enable/disable any themes that you like here
        (("M-x" . counsel-M-x)
        ("C-x C-f" . counsel-find-file)
        ("C-c g" . counsel-git)
-       ("C-c j" . counsel-git-grep)
        ("C-x b" . counsel-switch-buffer)
        ("M-y" . counsel-yank-pop)
        :map ivy-minibuffer-map
@@ -857,7 +869,7 @@ all the packages related to snippets
 | pink     | :foreign-keys run          |
 *** Zoom (actually find this first one pretty useful)
 #+BEGIN_SRC emacs-lisp
-  (defhydra hydra-zoom (:color red)
+  (defhydra hydra-zoom (:color pink)
     "zoom 🞈 🞈"
     ("k" text-scale-increase "in")
     ("j" text-scale-decrease "out")
@@ -882,21 +894,6 @@ all the packages related to snippets
     ("q" nil "quit" :color blue))
 
 #+END_SRC
-*** MC (multiple cursor map more to my liking)
-#+BEGIN_SRC emacs-lisp
-  ;; multiple cursors
-   (defhydra hydra-mc (:color pink :columns 3)
-       "▮ Multiple cursors ▮"
-      ("C-n"  evil-mc-make-and-goto-next-match "make next")
-      ("C-p"  evil-mc-make-and-goto-prev-match "make prev")
-      ("C-u"  evil-mc-undo-last-added-cursor "undo")
-      ("C-f"  evil-mc-make-and-goto-first-cursor "first cursor")
-      ("C-l"  evil-mc-make-and-goto-last-cursor "last cursor")
-      ("M-p"  evil-mc-make-and-goto-prev-cursor "go next")
-      ("M-n"  evil-mc-make-and-goto-next-cursor "go prev")
-      ("C-a"  evil-mc-make-all-cursors "make all")
-      ("C-q"  evil-mc-undo-all-cursors "quit" :color blue))
-#+END_SRC
 *** Projectile (project management)
 #+BEGIN_SRC emacs-lisp
       ;; projectile, I would change this hydra's global key if I wasn't using vim bindings...
@@ -906,7 +903,7 @@ all the packages related to snippets
        ("w" counsel-projectile-find-file-dwim "find-dwim")
        ("d" counsel-projectile-find-dir "find-dir")
        ("g" counsel-projectile-git-grep "git-grep")
-       ("G" counsel-projectile-grep "grep")
+       ("a" counsel-projectile-ag "ag") ;; need silversearcher-ag installed!
        ("r" counsel-projectile-rg "ripgrep") ;; need ripgrep installed!
        ("s" counsel-projectile-switch-project "switch project")
        ("b" counsel-projectile-switch-to-buffer "buffer switch")
@@ -943,7 +940,7 @@ all the packages related to snippets
 *** Git (magit and timemachine)
 #+BEGIN_SRC emacs-lisp
     ;; git 
-    (defhydra hydra-git (:color pink)
+    (defhydra hydra-git (:color red)
       "⏳ Git ⏳"
       ("g" magit "magit")
       ("d" magit-dispatch "dispatch")
