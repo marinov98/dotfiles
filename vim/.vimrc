@@ -261,3 +261,9 @@ command! W :w
  " Search stops highlighting after you press ESC twice
 nnoremap <C-s> :noh<return>
 nnoremap Y y$
+
+"easier window management
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-l> <C-W>l
+nnoremap <C-h> <C-W>h
