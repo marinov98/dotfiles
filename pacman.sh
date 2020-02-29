@@ -12,7 +12,8 @@ echo "installing neofetch,tmux,htop..."
 sudo pacman -S neofetch tmux htop
 
 echo "installing version control, debuggers and file mamagers.."
-sudo pacman -S git gdb curl ranger wireless_tools gnupg wget the_silver_searcher
+sudo pacman -S git gdb curl ranger wireless_tools gnupg wget 
+sudo pacman -S the_silver_searcher ripgrep
 
 echo "power management"
 # pamac stuff to be done when OS is installed
