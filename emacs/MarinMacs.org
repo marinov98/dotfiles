@@ -32,8 +32,8 @@ once again but I felt it was bloated and I liked having my own configuration and
 * Notes-Before-Beginning
 ** Bindings
 - this config utilizes *evil mode* which emulates vim inside emacs
-  - if you like everything about the config except that it uses vim bindings, simply *erase the section titled 'Evil-Mode'*
-    - this will however mean you have to map the hydras to new keybindings (if you don't know what that is, ignore this part or google 'emacs hydra')
+  - if you like everything about the config except that it uses vim bindings, simply erase the section titled 'Evil-Mode'
+    - this will ,however, mean you have to map the hydras to new keybindings (if you don't know what that is, ignore this part or google 'emacs hydra')
     - despite a lot of the bindings being geared towards vim, there are alternatives that are more vanilla emacs friendly. They are there because as mentioned
       previously, I did at one point use vanilla emacs without vim bindings and they don't interfere with the more vim-like bindings
   - if you are a vim user, you should feel right at home; if not, no problem — everyone has their preferences.
