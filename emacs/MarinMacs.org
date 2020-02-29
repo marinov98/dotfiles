@@ -13,6 +13,10 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 - Now I want to make it more of a guide for anyone trying to switch to emacs whether its from another editor and/or is confused about what packages to install and how to configure.
 - Make a guide that welcomes anyone from any editor.
 - Achieve the divine workflow
+** How I got here
+I actually started off with spacemacs (not really knowing what vim was), switched to vanilla emacs for a while and began building this config.
+I then decided to learn vim and used that for a while. I concluded that I liked the vim keybindings more than the emacs ones. I tried spacemacs
+once again but I felt it was bloated and I liked having my own configuration and that is how I got here. 
 ** Who this config might be useful to 
 - *Vim users* wanting to switch and use emacs while keepings their vim keybindings
 - Anyone wanting to use Emacs for its *own keybindings* and extensibility but hates configuring and wants an out of the box experience
@@ -26,16 +30,31 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 - What if you are a *Vim user* looking to switch to emacs but want keep your vim bindings? My emacs works with evil-mode!
 - I just really like to have my stuff online in case event XYZ happens with my machine 
 * Notes-Before-Beginning
+** Bindings
+- this config utilizes *evil mode* which emulates vim inside emacs
+  - if you like everything about the config except that it uses vim bindings, simply *erase the section titled 'Evil-Mode'
+    - this will however mean you have to map the hydras to new keybindings (if you don't know what that is, ignore this part or google 'emacs hydra')
+    - despite a lot of the bindings being geared towards vim, there are alternatives that are more vanilla emacs friendly. They are there because as mentioned
+      previously, I did at one point use vanilla emacs without vim bindings and they don't interfere with the more vim-like bindings
+  - if you are a vim user, you should feel right at home; if not, no problem — everyone has their preferences.
+** Some things to be aware of 
 - Depending on how you installed emacs, certain packages might be preinstalled into it 
 - *In emacs C = ctrl, M = alt, S = shift, s (hyper key) = command key (MacOS) windows key(MS-Windows), RET = enter key*
   - Example: M-x = alt + x  C-x C-f = ctrl + x ctrl + f
 - If you wish to browse through Emac's packages `M-x package-list-packages RET` will open up the package list
   - Additionally, you can run `M-x package-install RET package_name RET` if you know the exact package that you want
   - Generally , *use-package* takes care of automating package installation
-- Once again, if you just want to get it over with, simply copy my *init.el* and *MarinMacs.org* (or whatever you want to name your org file) 
+- If you just want to get it over with, simply copy my *init.el* and *MarinMacs.org* (or whatever you want to name your org file) 
 - the files should be created inside the *.emacs.d* folder which you can create. 
 - All the packages should install and configure automatically (power of use-package), *however* you would still have to install the *langauge servers* to enable autocomplete
 - You can open links present in the guide in a separate window with C-c C-o (assuming you are editing this file in emacs)
+* Getting the best out of this configuration
+- This config is centered around **vim bindings** but also occasionally utilizes emacs bindings
+  - to get the smoothest experience (in my opinion), map your caps lock to escape when tapped and caps lock when pressed down
+- If you are new to emacs and are looking to learn, I tried my best to document packages and what certain settings do
+- My advice is rather copying my entire config, learn the basics of emacs without any configuration and just know the difference between buffers, windows, and frames
+  - afterwords copy my config little by little, research the packages further and see if you actually like using them
+- If you are here to just inspect my config and see how it differs from yours, welcome and I hope something here gives you insight or is of some help
 * Possible-Issues 
 - After installing my config on a few different machines (Linux, MacOS, Ms-Windows), my config runs fine, but I have occasionally ran into small issues that can be quickly fixed.
 - Run emacs with '--debug-init' flag it should tell you where the error is
@@ -131,9 +150,10 @@ GNU Debugger (GDB)
  :PROPERTIES:
  :CUSTOM_ID: Buffer-Switching
  :END:
- Default bindings use arrow keys, these new ones feel much smoother
+ - Default bindings use arrow keys, these new ones feel much smoother. 
+ - These bindings are geared more towards non-vim users as further ahead I have other bindings to these commands with the evil leader key.
+ - Still a used these for a while as a vim user before I discovered the evil leader package.
 #+BEGIN_SRC emacs-lisp
-  ;; Compiling and Buffers
   (global-set-key (kbd "C-c b") 'switch-to-prev-buffer)
   (global-set-key (kbd "C-c n") 'switch-to-next-buffer)
 #+END_SRC
@@ -160,6 +180,7 @@ GNU Debugger (GDB)
  - Packages needed to emulate vim inside Emacs. 
  - Make sure you have [[#undo-tree][undo-tree]] package installed 
  - I have mapped my caps lock to both esc and ctrl to utilize both vim and emacs bindings
+ - I placed all the evil packages in one place so that if this section gets deleted any alias to evil mode will be gone
  - Official Repo for Evil Mode: https://github.com/emacs-evil/evil
 #+BEGIN_SRC emacs-lisp
   (use-package evil-leader
@@ -179,16 +200,20 @@ GNU Debugger (GDB)
         ;; file finding
         "f" 'counsel-find-file
         "a" 'counsel-ag ;; silversearcher-ag needs to be installed!
+        "j" 'counsel-git ;; need git installed!
         ;; buffers
-        "s" 'counsel-switch-buffer
-        "b" 'switch-to-prev-buffer
+        "s" 'save-buffer
+        "b" 'counsel-switch-buffer
+        "p" 'switch-to-prev-buffer
         "n" 'switch-to-next-buffer
         ;; deletion
         "q" 'delete-window
         "k" 'kill-current-buffer
         ;; package-specific
         "t" 'neotree-toggle
-        "r" 'ranger))
+        "r" 'ranger
+        "c c" 'company-complete
+        "c f" 'flycheck-buffer))
 
 
      (use-package evil
@@ -539,8 +564,8 @@ You can enable/disable any themes that you like here
        ("C-x b" . counsel-switch-buffer)
        ("M-y" . counsel-yank-pop)
        :map ivy-minibuffer-map
-       ("C-j" . ivy-next-line)
-       ("C-k" . ivy-previous-line)) ;; when in switch buffer mode this kills the selected buffer!
+       ("M-j" . ivy-next-line)
+       ("M-k" . ivy-previous-line)) 
        :config
        (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"
        ;; Add smart-casing (-S) to default command arguments:
@@ -787,8 +812,8 @@ all the packages related to snippets
       ("M-n" . nil) ;; old select next key
       ("M-p" . nil) ;; old select prev key
       ("<tab>" . company-select-next) ;; make tab our new select next key
-      ("C-j" . company-select-next)  ;; also make C-j new selection key
-      ("C-k"  . company-select-previous))
+      ("M-j" . company-select-next)  ;; also make C-j new selection key
+      ("M-k"  . company-select-previous))
       :config
       (setq company-tooltip-limit 5) ; show 5 candidates at one time
       (setq company-idle-delay 0.25) ;; slightly delay completions
@@ -895,6 +920,9 @@ all the packages related to snippets
 
 #+END_SRC
 *** Projectile (project management)
+  - Projectile also has support for popular search tools:
+    - [[https://github.com/BurntSushi/ripgrep][ripgrep]]
+    - [[https://github.com/ggreer/the_silver_searcher][the silver searcher(ag)]]
 #+BEGIN_SRC emacs-lisp
       ;; projectile, I would change this hydra's global key if I wasn't using vim bindings...
      (defhydra hydra-projectile (:color red :columns 3)
@@ -902,12 +930,11 @@ all the packages related to snippets
        ("f" counsel-projectile-find-file "find")
        ("w" counsel-projectile-find-file-dwim "find-dwim")
        ("d" counsel-projectile-find-dir "find-dir")
-       ("g" counsel-projectile-git-grep "git-grep")
        ("a" counsel-projectile-ag "ag") ;; need silversearcher-ag installed!
-       ("r" counsel-projectile-rg "ripgrep") ;; need ripgrep installed!
+       ("g" counsel-projectile-rg "ripgrep") ;; need ripgrep installed!
        ("s" counsel-projectile-switch-project "switch project")
        ("b" counsel-projectile-switch-to-buffer "buffer switch")
-       ("R" projectile-recentf "recent files")
+       ("r" projectile-recentf "recent files")
        ;; counsel-projectile-switch-project has similiar functionality but this is much quicker
        ("k" projectile-kill-buffers "kill project buffers")
        ("q" nil "quit" :color blue))
