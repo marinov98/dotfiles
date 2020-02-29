@@ -191,17 +191,17 @@ GNU Debugger (GDB)
       (evil-leader/set-key
         ;; hydras
         "SPC" 'hydra-projectile/body
-        "m" 'hydra-mc/body
         "w" 'hydra-window/body
         "z" 'hydra-zoom/body
         "l" 'hydra-lsp/body
         "d" 'hydra-describe/body
         "g" 'hydra-git/body
-        ;; file finding and searching
+        ;; file finding, searching, and compiling
         "f" 'counsel-find-file
         "a" 'counsel-ag ;; silversearcher-ag needs to be installed!
         "j" 'counsel-git ;; need git installed!
         "i" 'swiper-isearch
+        "c" 'compile
         ;; buffers
         "s" 'save-buffer
         "b" 'counsel-switch-buffer
@@ -213,8 +213,8 @@ GNU Debugger (GDB)
         ;; package-specific
         "t" 'neotree-toggle
         "r" 'ranger
-        "c c" 'company-complete
-        "c f" 'flycheck-buffer))
+        "m c" 'company-complete
+        "m f" 'flycheck-buffer))
 
 
      (use-package evil
@@ -266,7 +266,7 @@ GNU Debugger (GDB)
      :pin org)
      
  ;; allow easier snippet insertion  
-; (require 'org-tempo)
+ ;(require 'org-tempo)
  
  ;; bullets
  (use-package org-bullets
