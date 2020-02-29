@@ -9,6 +9,7 @@ echo "installing packages with brew now"
 
 echo "installing terminal essentials..."
 brew install curl ranger tmux
+brew install the_silver_searcher ripgrep
 brew install reattach-to-user-namespace
 brew tap caskroom/cask
 
