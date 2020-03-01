@@ -50,8 +50,10 @@ Plug 'sheerun/vim-polyglot'
 Plug 'https://github.com/itchyny/vim-gitbranch'
 call plug#end()
 
-"Leader key
-map <Space> <Leader>
+""""""""""""""""""""""
+"""""" LEADER KEY:
+""""""""""""""""""""""
+map <SPACE> <Leader>
 
 """"""""""""""""""""""
 """"""" PRETTIER:
@@ -201,6 +203,9 @@ if executable('ag')
 
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+" bind \ (backward slash) to grep shortcut
+command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+nnoremap <Bslash> :Ag<SPACE>
 endif
  
 """"""""""""""""""""""
@@ -238,7 +243,6 @@ set tags=tags
 set bs=2
 set mouse=a
 set clipboard=unnamedplus
-set winwidth=125
 set laststatus=2
 set noshowmode
 set t_Co=256
@@ -278,8 +282,17 @@ command! W :w
 nnoremap <C-s> :noh<return>
 nnoremap Y y$
 
-"easier window management
+"""""""""""""""""""""""
+" WINDOW MANAGEMENT:
+"""""""""""""""""""""""
+" Fix splitting
+set splitbelow splitright
+
 nnoremap <leader>j <C-W>j
 nnoremap <leader>k <C-W>k
 nnoremap <leader>l <C-W>l
 nnoremap <leader>h <C-W>h
+
+" Shortcut split opening
+nnoremap <leader>2 :split<CR>
+nnoremap <leader>3 :vsplit<CR>>
