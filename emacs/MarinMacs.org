@@ -26,20 +26,19 @@ once again but I felt it was bloated and I liked having my own configuration and
 ** Why Make This Into More Of A Guide?
 - Emacs is extremely powerful but has a ton of packages and it can be really confusing to pick the right ones, much less configure them
 - Installing each package requires going to different sites and/or blogs to see how each individual one works, its better to have all the information you need in one place 
-- Not everybody likes spending time customizing and configuring, they like things that work right out of the box. Emacs provides a lot the configuration should not be what keeps people using editors such as emacs or vim
-- What if you are a *Vim user* looking to switch to emacs but want keep your vim bindings? My emacs works with evil-mode!
-- I just really like to have my stuff online in case event XYZ happens with my machine 
+- Not everybody likes spending time customizing and configuring, they like things that work right out of the box. They also like a place they can reference
+- Emacs provides a lot and the configuration should not be what keeps people using editors such as emacs or vim
 * Notes-Before-Beginning
 ** Bindings
 - this config utilizes *evil mode* which emulates vim inside emacs
   - if you like everything about the config except that it uses vim bindings, simply erase the section titled 'Evil-Mode'
     - this will , however, mean you have to map the hydras to new keybindings (if you don't know what that is, ignore this part or google 'emacs hydra')
     - despite a lot of the bindings being geared towards vim, there are alternatives that are more vanilla emacs friendly. They are there because as mentioned
-      previously, I did at one point use vanilla emacs without vim bindings and they don't interfere with the more vim-like bindings
+      previously, I did at one point use vanilla emacs without vim bindings and they don't interfere with the more vim-like bindings anyways
   - if you are a vim user, you should feel right at home; if not, no problem — everyone has their preferences.
 ** Some things to be aware of 
 - Depending on how you installed emacs, certain packages might be preinstalled into it 
-- *In emacs C = ctrl, M = alt, S = shift, s (hyper key) = command key (MacOS) windows key(MS-Windows), RET = enter key*
+- *In emacs C = ctrl, M = alt, S = shift, s (hyper key) = command key (MacOS) windows key(MS-Windows), RET = enter key SPC = space*
   - Example: M-x = alt + x  C-x C-f = ctrl + x ctrl + f
 - If you wish to browse through Emac's packages `M-x package-list-packages RET` will open up the package list
   - Additionally, you can run `M-x package-install RET package_name RET` if you know the exact package that you want
