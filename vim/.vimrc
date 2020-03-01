@@ -51,7 +51,7 @@ Plug 'https://github.com/itchyny/vim-gitbranch'
 call plug#end()
 
 "Leader key
-let mapleader = ","
+map <Space> <Leader>
 
 """"""""""""""""""""""
 """"""" PRETTIER:
@@ -91,7 +91,7 @@ function! ToggleNetrw()
 endfunction
 
 " Add your own mapping. For example:
-noremap <silent> <C-T> :call ToggleNetrw()<CR>
+noremap <silent> <leader>t :call ToggleNetrw()<CR>
 
 """"""""""""""""""""""
 """"""" AUTOCOMPLETE:
@@ -136,7 +136,7 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 " Symbol renaming.
-nmap <leader>m <Plug>(coc-rename)
+nmap <leader>c <Plug>(coc-rename)
 """""""""""
 
 " Modeline
@@ -179,7 +179,7 @@ let g:AutoPairsFlyMode = 0
 let g:AutoPairsShortcutBackInsert = '<M-b>'
 
 "CtrlP
-let g:ctrlp_map = '<C-a>'
+let g:ctrlp_map = '<leader>f'
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
@@ -201,10 +201,6 @@ if executable('ag')
 
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-
-" bind \ (backward slash) to grep shortcut
-command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-nnoremap \ :Ag<SPACE>
 endif
  
 """"""""""""""""""""""
@@ -249,6 +245,7 @@ set t_Co=256
 
 
 " MODE SPECIFIC SETTINGS:
+autocmd BufEnter *.tsx set filetype=typescript
 autocmd FileType html setlocal ts=2 sts=2 sw=2
 autocmd FileType css setlocal ts=2 sts=2 sw=2
 autocmd FileType javascript setlocal ts=2 sts=2 sw=2
@@ -282,7 +279,7 @@ nnoremap <C-s> :noh<return>
 nnoremap Y y$
 
 "easier window management
-nnoremap <C-j> <C-W>j
-nnoremap <C-k> <C-W>k
-nnoremap <C-l> <C-W>l
-nnoremap <C-h> <C-W>h
+nnoremap <leader>j <C-W>j
+nnoremap <leader>k <C-W>k
+nnoremap <leader>l <C-W>l
+nnoremap <leader>h <C-W>h
