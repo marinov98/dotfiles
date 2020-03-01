@@ -628,7 +628,7 @@ Useful if you work on multiple windows and want an efficient way of switching be
   ;; Ranger
   (use-package ranger
      :ensure t
-  ;; :bind ("C-c r" . ranger)
+     :bind ("C-c r" . ranger) ;; vanilla emacs alternative to SPC-r
      :config
      (ranger-override-dired-mode t))
 
@@ -697,7 +697,7 @@ I never lose where my cursor is thanks to this
   (use-package neotree
       :ensure t
       :defer t
-   ;; :bind ("C-c t" . neotree-toggle)
+      :bind ("C-c t" . neotree-toggle) ;; vanilla emacs alternative to SPC-t
       :config 
       (setq neo-smart-open t) ; update every time its toggled
       (setq neo-theme (if (display-graphic-p) 'icons 'arrow))) ; add icons (utilizes all-the-icons)
@@ -1045,7 +1045,7 @@ I never lose where my cursor is thanks to this
  :CUSTOM_ID: lsp
  :END:
  - LSP stands for Language Server Protocal and makes setting up autocompletion and syntax checking easy. 
- - Check the [[https://github.com/emacs-lsp/lsp-mode][Official Repo]] to what to install for your preferred development language
+ - Check the [[https://github.com/emacs-lsp/lsp-mode][Official Repo]] to see what to install for your preferred development language
  - lsp-ui (UI integrations for lsp-mode)
  - company-lsp (this is the company completion backend)
 #+BEGIN_SRC emacs-lisp  
@@ -1269,7 +1269,8 @@ Note: the template is meant to be edited to personal preferences
         :name "My App")))
 #+END_SRC
 *** Elpy
- No longer need it because of LSP but keeping it for reference
+ - No longer need it because of LSP but keeping it for reference
+ - Documentation: https://elpy.readthedocs.io/en/latest/
 #+BEGIN_SRC emacs-lisp
 (use-package elpy
    :disabled
