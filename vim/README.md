@@ -1,5 +1,5 @@
 # My Vim configuration 
-- I have a detailed [Emacs](<https://github.com/marinov98/dotfiles/blob/master/emacs/MarinMacs.org>) config guide where I use the more powerful extensibility of emacs and combine it with vim bindings. 
+- I also have a detailed [Emacs](<https://github.com/marinov98/dotfiles/blob/master/emacs/MarinMacs.org>) configuration guide with evil-mode
 
 ## Prereqs 
 - [Nodejs](<https://nodejs.org/en/>) (need this to setup auto-complete, you can skip this part if you don't want it)
