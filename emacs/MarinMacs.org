@@ -778,7 +778,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
     ("<tab>" . nil) ;; there are conflicts here with autocomplete
     ("<C-tab>" . yas-next-field-or-maybe-expand))
     (:map yas-minor-mode-map
-    ("<tab>" . nil) ;; while this is convinient, it clashes with auto-complete and jump-to-definitions
+    ("<tab>" . nil) ;; while this is convenient, it clashes with auto-complete and jump-to-definitions
     ("<C-tab>" . yas-expand)))
     :init 
     (yas-global-mode 1))
@@ -830,7 +830,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
       ("M-k"  . company-select-previous))
       :config
       (setq company-tooltip-limit 5) ; show 5 candidates at one time
-      (setq company-idle-delay 0.15) ;; slightly delay completions
+      (setq company-idle-delay 0.15) ;; delay (in seconds) when candidates are shown, change if you need to, potentially cpu intensive on older machines if set to 0
       (setq company-minimum-prefix-length 3) ;; show completions after 3 chars
       (setq company-selection-wrap-around t)
       (setq company-require-match 'never) ;; dont need to pick a choice 
