@@ -180,8 +180,11 @@ GNU Debugger (GDB)
  - Packages needed to emulate vim inside Emacs. 
  - Make sure you have [[#undo-tree][undo-tree]] package installed 
  - I have mapped my caps lock to both esc and ctrl to utilize both vim and emacs bindings
- - I placed all the evil packages in one place so that if this section gets deleted any alias to evil mode will be gone
- - Official Repo for Evil Mode: https://github.com/emacs-evil/evil
+ - I placed all the evil packages here so that if this section gets deleted any alias to evil mode will be gone
+** Essentials
+ - Evil mode grants us vim bindings and evil-leader allows us to create a <leader> key which creates limitless possibilities for keybindings
+ - Official repository for Evil Mode: https://github.com/emacs-evil/evil
+ - Evil Leader repository: https://github.com/cofi/evil-leader 
 #+BEGIN_SRC emacs-lisp
   (use-package evil-leader
       :ensure t
@@ -237,6 +240,10 @@ GNU Debugger (GDB)
        (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
        (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle))
 
+#+END_SRC
+** Evil utility 
+- Below evil packages are extras that enhance the evil-mode experience in emacs
+#+BEGIN_SRC emacs-lisp
      ;; like tpope's vim-surround
      (use-package evil-surround
        :ensure t
@@ -259,7 +266,8 @@ GNU Debugger (GDB)
  :CUSTOM_ID: markup
  :END:
 ** Org
- Org manual: https://orgmode.org/
+ - 'Org mode is for keeping notes, maintaining TODO lists, planning projects, and authoring documents with a fast and effective plain-text system.'  
+ - Org manual: https://orgmode.org/
 #+BEGIN_SRC emacs-lisp
   (use-package org 
      :ensure t
@@ -458,7 +466,9 @@ You can enable/disable any themes that you like here
  :PROPERTIES:
  :CUSTOM_ID: modeline
  :END:
- You can pick one of these, simply enable the one you want to try and disable the rest
+- Modelines are at the bottom of the window, they  describes what is going on in the current buffer
+  - they display modes, times,filenames, and even line numbers
+- You can pick one of these modeline themes, simply enable the one you want to try and disable the rest
 #+BEGIN_SRC emacs-lisp
 
 ;;;;;;;;;;;;;;;;;;;;;;   
@@ -678,7 +688,9 @@ I never lose where my cursor is thanks to this
  :PROPERTIES:
  :CUSTOM_ID: neotree
  :END:
-I want to try treemacs in the future, but this has been amazing for file browsing
+- 'A emacs tree plugin like NerdTree for Vim.'
+- Amazing file browser, I do , however, want to test out treemacs one day 
+- repo: https://github.com/jaypei/emacs-neotree
 #+BEGIN_SRC emacs-lisp
   ;; Neotree
   (use-package neotree
@@ -752,11 +764,15 @@ I want to try treemacs in the future, but this has been amazing for file browsin
  :PROPERTIES:
  :CUSTOM_ID: globals
  :END:
+ The below packages provide minor modes that will be enabled every buffer (hence the global)
 ** Undo-Tree
  :PROPERTIES:
  :CUSTOM_ID: undo-tree
  :END:
- You MUST have this for [[#evil-mode][Evil Mode]] to work
+ - You MUST have this for [[#evil-mode][Evil Mode]] to work
+ - replaces Emacs' undo system with a system that treats undo history as what it is: a branching tree of changes. 
+ - Even if you are using emacs without this evil-mode, this package can prove useful
+ - Documentation: https://elpa.gnu.org/packages/undo-tree.html
 #+BEGIN_SRC emacs-lisp
 (use-package undo-tree
   :ensure t
@@ -768,8 +784,10 @@ I want to try treemacs in the future, but this has been amazing for file browsin
  :CUSTOM_ID: Yasnippet
  :END:
 - all the packages related to snippets
-- Remapped some bindings to make them work better with autocomplete
+- *YASnippet* is a template system for Emacs. It allows you to type an abbreviation and automatically expand it into function templates.
+- I Remapped some bindings to make them work better with autocomplete
 - The new bindings are just as convenient if your caps lock is both esc and ctrl or even just ctrl
+- repo: https://github.com/joaotavora/yasnippet
 #+BEGIN_SRC emacs-lisp
 (use-package yasnippet
     :ensure t
@@ -814,7 +832,9 @@ I want to try treemacs in the future, but this has been amazing for file browsin
  :PROPERTIES:
  :CUSTOM_ID: company
  :END:
-- The framework I use for my autocomplete. 
+- This is one of the major completion engines in Emacs
+- By itself it does not do much, you need to add backends to it for your specific development language to get autocomplete
+  - In my case I add the company-lsp(seen further in the config) backend which allows for language servers to take care of my auto-complete
 - Official Site: http://company-mode.github.io/
 #+BEGIN_SRC emacs-lisp
   (use-package company
@@ -1029,6 +1049,8 @@ I want to try treemacs in the future, but this has been amazing for file browsin
   - Check the [[https://github.com/emacs-lsp/lsp-mode][Official Repo]] to what to install for your preferred development language
  - You can increase garbage collection (gc-cons-threshold) for more responsiveness on the ui-doc
    - *But* you run the risk of emacs being more laggy since it has to clean more garbage 
+ - lsp-ui (UI integrations for lsp-mode)
+ - company-lsp (this is the company completion backend)
 #+BEGIN_SRC emacs-lisp  
   (use-package lsp-mode
      :ensure t
@@ -1150,7 +1172,7 @@ I want to try treemacs in the future, but this has been amazing for file browsin
  :PROPERTIES:
  :CUSTOM_ID: development
  :END:
- Keybinding to compile code:
+ vanilla-emacs friendly keybinding to compile code (alternative more vim-like keybinding I made is SPC-c) :
  #+begin_src  emacs-lisp
   (global-set-key (kbd "C-c c") 'compile)              ;; compile code
  #+end_src
