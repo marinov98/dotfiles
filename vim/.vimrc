@@ -278,12 +278,18 @@ augroup END
 " Commands
 command! W :w
 
- " Search stops highlighting after you press ESC twice
-nnoremap <C-s> :noh<return>
-nnoremap Y y$
 
 """""""""""""""""""""""
-" WINDOW MANAGEMENT:
+""""" PERSONAL BINDINGS:
+"""""""""""""""""""""""
+nnoremap <leader>n :noh<CR>
+nnoremap Y y$
+nnoremap <leader>s :w<CR>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>Q :q!<CR>
+
+"""""""""""""""""""""""
+""""" WINDOW MANAGEMENT:
 """""""""""""""""""""""
 " Fix splitting
 set splitbelow splitright
