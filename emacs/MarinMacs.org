@@ -468,7 +468,7 @@ You can enable/disable any themes that you like here
  :CUSTOM_ID: modeline
  :END:
 - The modeline is at the bottom of the window, it describes what is going on in the current buffer
-  - it can display modes, time,filenames, and even line numbers
+  - it can display modes, time, filenames, and even line numbers
 - You can pick one of these modeline themes, simply enable the one you want to try and disable the rest
 #+BEGIN_SRC emacs-lisp
 
@@ -1092,16 +1092,16 @@ I never lose where my cursor is thanks to this
           lsp-ui-peek-list-width 60
           lsp-ui-peek-peek-height 25))
 
-   (use-package company-lsp
-     :requires company
-     :ensure t
-     :config
-     (push 'company-lsp company-backends)
-     (setq company-transformers nil
-           company-lsp-async t
-           company-lsp-cache-candidates nil ;; Disable client-side cache because the LSP server does a better job.
-           company-lsp-enable-snippet t
-           company-lsp-enable-recompletion t))
+  (use-package company-lsp
+    :requires company
+    :ensure t
+    :config
+    (push 'company-lsp company-backends)
+    (setq company-transformers nil
+          company-lsp-async t
+          company-lsp-cache-candidates nil ;; Disable client-side cache because the LSP server does a better job.
+          company-lsp-enable-snippet t
+          company-lsp-enable-recompletion t))
 
 #+END_SRC
 * DAP
@@ -1240,6 +1240,10 @@ Still experimenting with this, native gdb in emacs is also really good
  :END:
 - Python-pip: https://pip.pypa.io/en/stable/
 - Python Language Server: https://pypi.org/project/python-language-server/
+pip installs (useful packages for python development) 
+ #+BEGIN_SRC markdown
+pip3 install rope jedi pylint flake8 autopep8 yapf pygments virtualenv virtualenvwrapper powerline-shell pynvim
+ #+END_SRC
 *** Settings
 #+BEGIN_SRC emacs-lisp
   ;; version 
