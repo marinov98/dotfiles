@@ -689,7 +689,7 @@ I never lose where my cursor is thanks to this
  :CUSTOM_ID: neotree
  :END:
 - 'A emacs tree plugin like NerdTree for Vim.'
-- Amazing file browser, I do , however, want to test out treemacs one day 
+- Amazing file browser. I do , however, want to test out treemacs one day 
 - repo: https://github.com/jaypei/emacs-neotree
 #+BEGIN_SRC emacs-lisp
   ;; Neotree
@@ -764,14 +764,14 @@ I never lose where my cursor is thanks to this
  :PROPERTIES:
  :CUSTOM_ID: globals
  :END:
- The below packages provide minor modes that will be enabled every buffer (hence the global)
+ The below packages provide minor modes that will be enabled in every buffer (hence the global)
 ** Undo-Tree
  :PROPERTIES:
  :CUSTOM_ID: undo-tree
  :END:
  - You MUST have this for [[#evil-mode][Evil Mode]] to work
  - replaces Emacs' undo system with a system that treats undo history as what it is: a branching tree of changes. 
- - Even if you are using emacs without this evil-mode, this package can prove useful
+ - Even if you are using emacs without evil-mode, this package can prove useful
  - Documentation: https://elpa.gnu.org/packages/undo-tree.html
 #+BEGIN_SRC emacs-lisp
 (use-package undo-tree
