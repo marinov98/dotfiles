@@ -266,7 +266,7 @@ GNU Debugger (GDB)
      :pin org)
      
  ;; allow easier snippet insertion  
- ;; (require 'org-tempo)
+ (require 'org-tempo)
  
  ;; bullets
  (use-package org-bullets
@@ -767,10 +767,19 @@ I want to try treemacs in the future, but this has been amazing for file browsin
  :PROPERTIES:
  :CUSTOM_ID: Yasnippet
  :END:
-all the packages related to snippets
+- all the packages related to snippets
+- Remapped some bindings to make them work better with autocomplete
+- The new bindings are just as convenient if your caps lock is both esc and ctrl or even just ctrl
 #+BEGIN_SRC emacs-lisp
 (use-package yasnippet
     :ensure t
+    :bind 
+    ((:map yas-keymap
+    ("<tab>" . nil) ;; there are conflicts here with autocomplete
+    ("<C-tab>" . yas-next-field-or-maybe-expand))
+    (:map yas-minor-mode-map
+    ("<tab>" . nil) ;; while this is convinient, it clashes with auto-complete and jump-to-definitions
+    ("<C-tab>" . yas-expand)))
     :init 
     (yas-global-mode 1))
 
@@ -813,6 +822,7 @@ all the packages related to snippets
       :bind
       ("C-x c" . company-complete) ;; for when I need completion at 1 or 2 chars
       (:map company-active-map
+      ("<tab>" . nil) ;; I will use this for a different purpose shown below
       ("M-n" . nil) ;; old select next key
       ("M-p" . nil) ;; old select prev key
       ("<tab>" . company-select-next) ;; make tab our new select next key
@@ -820,7 +830,7 @@ all the packages related to snippets
       ("M-k"  . company-select-previous))
       :config
       (setq company-tooltip-limit 5) ; show 5 candidates at one time
-      (setq company-idle-delay 0.25) ;; slightly delay completions
+      (setq company-idle-delay 0.15) ;; slightly delay completions
       (setq company-minimum-prefix-length 3) ;; show completions after 3 chars
       (setq company-selection-wrap-around t)
       (setq company-require-match 'never) ;; dont need to pick a choice 
