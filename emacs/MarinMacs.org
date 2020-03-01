@@ -106,6 +106,7 @@ once again but I felt it was bloated and I liked having my own configuration and
  :PROPERTIES:
  :CUSTOM_ID: general-settings
  :END:
+** Preferences
 Indentation 
 #+BEGIN_SRC emacs-lisp
     (setq-default indent-tabs-mode nil)                    ;; disable tabs and use spaces
@@ -140,6 +141,7 @@ GNU Debugger (GDB)
     (global-set-key (kbd "C-c a") 'gdb)      ;; launch gdb
 #+END_SRC
 ** Goto Config
+A nice and quick way to view/edit my configuration at any time
   #+begin_src emacs-lisp
     (defun goto-MarinMacs ()
       (interactive)
@@ -333,7 +335,7 @@ GNU Debugger (GDB)
  :END:
 - This package is displayed when you start up emacs without selecting a file. 
 - Prerequisites: https://github.com/cask/cask
-- After installing cask, learn how to customize it by going here: https://github.com/emacs-dashboard/emacs-dashboard
+- After installing cask, learn how to customize the dashboard by going here: https://github.com/emacs-dashboard/emacs-dashboard
 #+BEGIN_SRC emacs-lisp
   (use-package dashboard 
       :ensure t
@@ -379,7 +381,7 @@ You can enable/disable any themes that you like here
 #+BEGIN_SRC emacs-lisp
 ;; BE AWARE: emacs can have multiple themes on at the same time
 ;; Multiple themes can mix into a super theme
-;; Some themes do not mix well which is why I commented some themes
+;; Some themes do not mix well which is why I disable themes
 
 
 ;; current theme I am running
@@ -466,8 +468,8 @@ You can enable/disable any themes that you like here
  :PROPERTIES:
  :CUSTOM_ID: modeline
  :END:
-- Modelines are at the bottom of the window, they  describes what is going on in the current buffer
-  - they display modes, times,filenames, and even line numbers
+- The modeline is at the bottom of the window, it describes what is going on in the current buffer
+  - it can display modes, time,filenames, and even line numbers
 - You can pick one of these modeline themes, simply enable the one you want to try and disable the rest
 #+BEGIN_SRC emacs-lisp
 
@@ -786,7 +788,7 @@ I never lose where my cursor is thanks to this
 - all the packages related to snippets
 - *YASnippet* is a template system for Emacs. It allows you to type an abbreviation and automatically expand it into function templates.
 - I Remapped some bindings to make them work better with autocomplete
-- The new bindings are just as convenient if your caps lock is both esc and ctrl or even just ctrl
+  - The new bindings are just as convenient if your caps lock is both esc and ctrl or even just ctrl
 - repo: https://github.com/joaotavora/yasnippet
 #+BEGIN_SRC emacs-lisp
 (use-package yasnippet
@@ -834,7 +836,6 @@ I never lose where my cursor is thanks to this
  :END:
 - This is one of the major completion engines in Emacs
 - By itself it does not do much, you need to add backends to it for your specific development language to get autocomplete
-  - In my case I add the company-lsp(seen further in the config) backend which allows for language servers to take care of my auto-complete
 - Official Site: http://company-mode.github.io/
 #+BEGIN_SRC emacs-lisp
   (use-package company
@@ -871,8 +872,7 @@ I never lose where my cursor is thanks to this
  :PROPERTIES:
  :CUSTOM_ID: git
  :END:
-- Magit: Amazing git interface I have yet to master...
-  - Official Site: https://magit.vc/
+- [[https://magit.vc/][Magit]] is a great git interface I have yet to master...
 - git-timemachine: flip through a file's full list of version. Revert to any given phase easily
 #+BEGIN_SRC emacs-lisp
   ;; hydra takes care of my magit bindings
@@ -1045,10 +1045,8 @@ I never lose where my cursor is thanks to this
  :PROPERTIES:
  :CUSTOM_ID: lsp
  :END:
-  - LSP stands for Language Server Protocal and makes setting up autocompletion and syntax checking easy. 
-  - Check the [[https://github.com/emacs-lsp/lsp-mode][Official Repo]] to what to install for your preferred development language
- - You can increase garbage collection (gc-cons-threshold) for more responsiveness on the ui-doc
-   - *But* you run the risk of emacs being more laggy since it has to clean more garbage 
+ - LSP stands for Language Server Protocal and makes setting up autocompletion and syntax checking easy. 
+ - Check the [[https://github.com/emacs-lsp/lsp-mode][Official Repo]] to what to install for your preferred development language
  - lsp-ui (UI integrations for lsp-mode)
  - company-lsp (this is the company completion backend)
 #+BEGIN_SRC emacs-lisp  
@@ -1492,13 +1490,12 @@ All for typescript
  :PROPERTIES:
  :CUSTOM_ID: diminish
  :END:
-This hides modes from your modeline, remove the specific mode you want to see in the modeline
+This hides modes from your modeline, add the specific mode you do not want to see in the modeline
   #+begin_src emacs-lisp
     (use-package diminish
         :ensure t
         :init
         (diminish 'undo-tree-mode)
-        (diminish 'ivy-posframe-mode)
         (diminish 'clang-format-mode)
         (diminish 'company-mode)
         (diminish 'modern-c++-font-lock-mode)
