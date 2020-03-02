@@ -50,20 +50,11 @@ once again but I felt it was bloated and I liked having my own configuration and
 * Getting the best out of this configuration
 - This config is centered around *vim bindings* but also occasionally utilizes emacs bindings
   - to get the smoothest experience (in my opinion), map your caps lock to escape when tapped and caps lock when pressed down
+  - mapping caps to esc should also feel relatively smooth
 - If you are new to emacs and are looking to learn, I tried my best to document packages and what certain settings do
 - My advice is rather copying my entire config, learn the basics of emacs without any configuration and just know the difference between buffers, windows, and frames
   - afterwords copy my config little by little, research the packages further and see if you actually like using them
 - If you are here to just inspect my config and see how it differs from yours, welcome and I hope something here gives you insight or is of some help
-* Possible-Issues 
-- After installing my config on a few different machines (Linux, MacOS, Ms-Windows), my config runs fine, but I have occasionally ran into small issues that can be quickly fixed.
-- Run emacs with '--debug-init' flag it should tell you where the error is
-- Errors are rare but they still happen so below are some solutions to them:
-** Issue #1: Package cannot load 
-- *Possible Solution* run `M-x package-refresh-contents` , if that doesnt work and the package doesnt mean much to you, remove it from the config or look up the package to see if anything has changed, some packages get deleted over time or replaced or become native to emacs and do not to be specified in the config
-** Issue #2 : (some word) is void 
-- *Possible Solution #1 :* my config is tested, so there should not be anything that stops your emacs file from loading, however sometimes because my config has long lines of code and emacs default size is not that big, emacs indents and the piece of code goes on a new line and is not part of anything so it looks like an error 
-- Best thing to do is `C-s` and search for the word and either try to put it in the same line or delete it
-- *Possible Solution #2 :* Make sure you have my init.el copied (fix any small indentention issues there) then run `M-x customize RET`, go to faces->basics faces->default change the size of the emacs screen to prevent it from indenting.
 * Table of Contents :TOC_3:
 - [[#general-settings][General Settings]]
 - [[#Buffer-Switching][Buffer-Switching]]
@@ -218,7 +209,11 @@ A nice and quick way to view/edit my configuration at any time
         "t" 'neotree-toggle
         "r" 'ranger
         "m c" 'company-complete
-        "m f" 'flycheck-buffer))
+        "m f" 'flycheck-buffer
+        "m F" 'flyspell-buffer
+        ;; personal
+        "m m" 'goto-MarinMacs
+        "m s" 'ansi-term))
 
 
      (use-package evil
@@ -307,25 +302,25 @@ A nice and quick way to view/edit my configuration at any time
 #+BEGIN_SRC emacs-lisp
   (use-package flyspell
       :ensure t
+      :commands (ispell-change-dictionary
+                 ispell-word
+                 flyspell-buffer
+                 flyspell-mode
+                 flyspell-region)
       :bind
       (:map flyspell-mode-map
-      ("C-M-i" . nil)) ;; messes with org autocomplete
-      :config
-      (add-hook 'LaTeX-mode-hook 'turn-on-flyspell)
-      (add-hook 'org-mode-hook 'turn-on-flyspell)
-      (add-hook 'markdown-mode-hook 'turn-on-flyspell))
+      ("C-M-i" . nil))) ;; messes with org autocomplete
 
   (use-package wc-mode
       :ensure t
+      :commands wc-mode
       :config
       (global-set-key "\C-cw" 'wc-mode))
 
   (use-package writegood-mode
       :ensure t
-      :bind ("C-x w" . writegood-mode) ;; messes with org snippets dont enable by default in org
-      :config
-      (add-hook 'LaTeX-mode-hook 'writegood-mode)
-      (add-hook 'markdown-mode-hook 'writegood-mode))
+      :commands writegood-mode
+      :bind ("C-x w" . writegood-mode)) ;; messes with org snippets dont enable by default in org
 
 #+END_SRC
 * Dashboard 
@@ -628,6 +623,7 @@ Useful if you work on multiple windows and want an efficient way of switching be
   ;; Ranger
   (use-package ranger
      :ensure t
+     :commands ranger
      :bind ("C-c r" . ranger) ;; vanilla emacs alternative to SPC-r
      :config
      (ranger-override-dired-mode t))
@@ -788,6 +784,7 @@ I never lose where my cursor is thanks to this
 - *YASnippet* is a template system for Emacs. It allows you to type an abbreviation and automatically expand it into function templates.
 - I Remapped some bindings to make them work better with autocomplete
   - The new bindings are just as convenient if your caps lock is both esc and ctrl or even just ctrl
+- While you can enable this globally, I prefer to only map to certain modes
 - repo: https://github.com/joaotavora/yasnippet
 #+BEGIN_SRC emacs-lisp
 (use-package yasnippet
@@ -799,8 +796,15 @@ I never lose where my cursor is thanks to this
     (:map yas-minor-mode-map
     ("<tab>" . nil) ;; while this is convenient, it clashes with auto-complete and jump-to-definitions
     ("<C-tab>" . yas-expand)))
-    :init 
-    (yas-global-mode 1))
+    :config
+    (yas-reload-all)
+    :hook
+    ((c++-mode . yas-minor-mode)
+    (c-mode . yas-minor-mode)
+    (python-mode . yas-minor-mode)
+    (js2-mode . yas-minor-mode)
+    (rjsx-mode . yas-minor-mode)
+    (web-mode . yas-minor-mode)))
 
 (use-package yasnippet-snippets 
     :ensure t)
