@@ -1261,6 +1261,9 @@ pip3 install rope jedi pylint flake8 autopep8 yapf pygments virtualenv virtualen
   (setq-default python-indent-offset 4) 
   (setq python-indent-guess-indent-offset t) ;; allow emacs to guess offset
   (setq python-indent-guess-indent-offset-verbose nil) ;; remove annoying warning
+  
+  ;; warnings
+  (setq lsp-pyls-plugins-pycodestyle-enabled nil) ;; comment if you want code style warnings everywhere
 #+END_SRC
 *** Debugging
 Note: the template is meant to be edited to personal preferences
