@@ -191,6 +191,7 @@ A nice and quick way to view/edit my configuration at any time
         "l" 'hydra-lsp/body
         "d" 'hydra-describe/body
         "g" 'hydra-git/body
+        "TAB" 'hydra-launcher/body
         ;; file finding, searching, and compiling
         "f" 'counsel-find-file
         "a" 'counsel-ag ;; silversearcher-ag needs to be installed!
@@ -212,8 +213,7 @@ A nice and quick way to view/edit my configuration at any time
         "m f" 'flycheck-buffer
         "m F" 'flyspell-buffer
         ;; personal
-        "m m" 'goto-MarinMacs
-        "m s" 'ansi-term))
+        "m m" 'goto-MarinMacs))
 
 
      (use-package evil
@@ -1021,6 +1021,8 @@ I never lose where my cursor is thanks to this
     ("c" lsp-rename "rename")
     ("f" lsp-find-definition "find-def")
     ("t" lsp-find-type-definition "find-type-def")
+    ("e" flycheck-next-error "next error")
+    ("p" flycheck-previous-error "prev error")
     ("l" lsp-ui-flycheck-list "list errors")
     ("b" switch-to-prev-buffer "back") ;; better consistancy than lsp-ui-peek-jump-backward
     ("n" switch-to-next-buffer "next") ;; better than lsp-ui-peek-jump-forward
@@ -1035,7 +1037,7 @@ I never lose where my cursor is thanks to this
     '(("https://www.netflix.com/" . browse-url-firefox) ;; firefox deals better with video players
     ("." . browse-url-chromium)))
 
-     (defhydra hydra-launcher (global-map "C-c l" :color red :columns 2)
+     (defhydra hydra-launcher (:color red :columns 2)
       "Launch"
       ("h" man "man")
       ("g" (browse-url "https://www.google.com/") "Google")
@@ -1044,6 +1046,7 @@ I never lose where my cursor is thanks to this
       ("y" (browse-url "https://www.youtube.com/") "YouTube")
       ("m" (browse-url "https://www.messenger.com/") "Messenger")
       ("s" eshell "shell")
+      ("a" ansi-term "ansi-term")
       ("q" nil "quit"))
   #+END_SRC
 * LSP
@@ -1062,7 +1065,7 @@ I never lose where my cursor is thanks to this
      (setq read-process-output-max (* 1024 1024)) ;; (1mb) Increase the amount of data which Emacs reads from the process
      (setq lsp-idle-delay 0.15) ; small delay for less strain
      (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error"))
-     (setq lsp-prefer-flymake nil) ; we are using flycheck and not flymake
+     (setq lsp-flycheck-live-reporting nil) ;; allows our previous flycheck setting to only check syntax on save to work
      ;; hook your languages below
      (add-hook 'c++-mode-hook #'lsp)
      (add-hook 'c-mode-hook #'lsp)
@@ -1083,7 +1086,6 @@ I never lose where my cursor is thanks to this
     ("M-k" . lsp-ui-peek--select-prev))
     :hook (lsp-mode . lsp-ui-mode)
     :config
-    (setq lsp-ui-flycheck-live-reporting nil) ;; allows our previous flycheck setting to only check syntax on save to work
     (setq eldoc-idle-delay 0.65) ;; delay eldoc for 6.5/10 second
     ;; ui customization
     (setq lsp-ui-doc-enable t
@@ -1092,7 +1094,6 @@ I never lose where my cursor is thanks to this
           lsp-ui-doc-position 'top
           lsp-ui-doc-include-signature t
           lsp-ui-sideline-enable nil
-          lsp-ui-flycheck-enable t
           lsp-ui-flycheck-list-position 'right
           lsp-ui-peek-enable t
           lsp-ui-peek-list-width 60
@@ -1157,10 +1158,10 @@ I never lose where my cursor is thanks to this
      :ensure auctex)
 
   ;; Settings 
-  (setq TeX-auto-save t)
-  (setq TeX-parse-self t)
-  (setq TeX-save-query nil)
-  (add-hook 'LaTeX-mode-hook 'flycheck-mode) ;; latex also needs flycheck for syntax checking
+; (setq TeX-auto-save t)
+; (setq TeX-parse-self t)
+; (setq TeX-save-query nil)
+; (add-hook 'LaTeX-mode-hook 'flycheck-mode) ;; latex also needs flycheck for syntax checking
   
 
   ;;;;;;;;;;;;;;;;;;
@@ -1228,9 +1229,9 @@ Still experimenting with this, native gdb in emacs is also really good
    :ensure t
    :bind 
    (("C-c u" . clang-format-region) ;; format current line
-   ("C-c f" . clang-format-buffer)) ;; format entire file
-   :config
-   (setq clang-format-style-option ".clang-format")) 
+   ("C-c f" . clang-format-buffer))) ;; format entire file
+;  :config
+;  (setq clang-format-style-option ".clang-format")) 
  ;; (setq clang-format-style-option "llvm")) use this option if you do not have a .clang-format file
  
  (use-package clang-format+
@@ -1339,7 +1340,6 @@ Note: the template is meant to be edited to personal preferences
       (setq web-mode-code-indent-offset 2)
       ;; Auto-closing
       (setq web-mode-auto-close-style 2)
-      (setq web-mode-tag-auto-close-style 2)
       (setq web-mode-enable-auto-pairing t)
       (setq web-mode-enable-auto-quoting t)
       ;; Highlighting
@@ -1406,7 +1406,7 @@ These are modes related to web-dev that I have worked with
        :ensure t)  
    #+END_SRC
 *** Emmet 
-More on emmet: https://www.emmet.io/
+- More on emmet: https://www.emmet.io/
 #+BEGIN_SRC emacs-lisp
 (use-package emmet-mode
     :ensure t
