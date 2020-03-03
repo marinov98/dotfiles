@@ -473,6 +473,8 @@ You can enable/disable any themes that you like here
 
 (use-package spaceline
    :ensure t
+   :custom
+   (spaceline-toggle-flycheck-info-off)
    :config
    (require 'spaceline-config)
    (setq powerline-default-separator (quote arrow))
@@ -1505,7 +1507,8 @@ This hides modes from your modeline, add the specific mode you do not want to se
         :init
         (diminish 'undo-tree-mode)
         (diminish 'clang-format-mode)
-        (diminish 'company-mode)
+        (diminish 'lsp-mode)
+        (diminish 'clang-format+-mode)
         (diminish 'modern-c++-font-lock-mode)
         (diminish 'auto-revert-mode)
         (diminish 'page-break-lines-mode)
@@ -1516,3 +1519,4 @@ This hides modes from your modeline, add the specific mode you do not want to se
         (diminish 'yas-minor-mode)
         (diminish 'which-key-mode))
   #+end_src
+  
