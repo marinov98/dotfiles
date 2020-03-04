@@ -19,22 +19,20 @@ I then decided to learn vim and used that for a while. I concluded that I liked 
 once again but I felt it was bloated and I liked having my own configuration and that is how I got here. 
 ** Who this config might be useful to 
 - *Vim users* wanting to switch and use emacs while keepings their vim keybindings
-- Anyone wanting to use Emacs for its *own keybindings* and extensibility but hates configuring and wants an out of the box experience
+- Anyone wanting to use Emacs for its *own keybindings* and extensibility but hates configuring
 - People who want more productivity but are limited because of their current text editor
 - People who already use emacs and maybe want to see if there is anything new they can learn from my config
 - Me whenever I forget or want to reference something
 ** Why Make This Into More Of A Guide?
 - Emacs is extremely powerful but has a ton of packages and it can be really confusing to pick the right ones, much less configure them
 - Installing each package requires going to different sites and/or blogs to see how each individual one works, its better to have all the information you need in one place 
-- Not everybody likes spending time customizing and configuring, they like things that work right out of the box. They also like a place they can reference
+- Not everybody likes spending time customizing and configuring. They also like a place they can reference
 - Emacs provides a lot and the configuration should not be what keeps people using editors such as emacs or vim
 * Notes-Before-Beginning
 ** Bindings
 - this config utilizes *evil mode* which emulates vim inside emacs
   - if you like everything about the config except that it uses vim bindings, simply erase the section titled 'Evil-Mode'
-    - this will , however, mean you have to map the hydras to new keybindings (if you don't know what that is, ignore this part or google 'emacs hydra')
-    - despite a lot of the bindings being geared towards vim, there are alternatives that are more vanilla emacs friendly. They are there because as mentioned
-      previously, I did at one point use vanilla emacs without vim bindings and they don't interfere with the more vim-like bindings anyways
+    - this will , however, mean you have to do some key mappings for the certain package(s)/hydras you want to use
   - if you are a vim user, you should feel right at home; if not, no problem — everyone has their preferences.
 ** Some things to be aware of 
 - Depending on how you installed emacs, certain packages might be preinstalled into it 
@@ -138,17 +136,6 @@ A nice and quick way to view/edit my configuration at any time
       (find-file "~/.emacs.d/MarinMacs.org")) 
     (global-set-key (kbd "C-c m") 'goto-MarinMacs)
   #+end_src
-* Buffer-Switching
- :PROPERTIES:
- :CUSTOM_ID: Buffer-Switching
- :END:
- - Default bindings use arrow keys, these new ones feel much smoother. 
- - These bindings are geared more towards non-vim users as further ahead I have other bindings to these commands with the evil leader key.
- - Still I used these for a while as a vim user before I discovered the evil leader package.
-#+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-c b") 'switch-to-prev-buffer)
-  (global-set-key (kbd "C-c n") 'switch-to-next-buffer)
-#+END_SRC
 * Org-Archive
  :PROPERTIES:
  :CUSTOM_ID: org-archive
@@ -193,12 +180,12 @@ A nice and quick way to view/edit my configuration at any time
         "g" 'hydra-git/body
         "TAB" 'hydra-launcher/body
         "v" 'hydra-writing/body
-        ;; file finding, searching, and compiling
+        "m" 'hydra-marinov/body
+        ;; file finding, searching, and yanking
         "f" 'counsel-find-file
-        "a" 'counsel-ag ;; silversearcher-ag needs to be installed!
         "j" 'counsel-git ;; need git installed!
         "i" 'swiper-isearch
-        "c" 'compile
+        "y" 'counsel-yank-pop
         ;; buffers
         "s" 'save-buffer
         "b" 'counsel-switch-buffer
@@ -207,13 +194,9 @@ A nice and quick way to view/edit my configuration at any time
         ;; deletion
         "q" 'delete-window
         "k" 'kill-current-buffer
+        "o" 'delete-other-windows
         ;; package-specific
-        "t" 'neotree-toggle
-        "r" 'ranger
-        "m c" 'company-complete
-        "m f" 'flycheck-buffer
-        ;; personal
-        "m m" 'goto-MarinMacs))
+        "t" 'neotree-toggle))
 
 
      (use-package evil
@@ -572,7 +555,6 @@ You can enable/disable any themes that you like here
        :bind
        (("M-x" . counsel-M-x)
        ("C-x C-f" . counsel-find-file)
-       ("C-c g" . counsel-git)
        ("C-x b" . counsel-switch-buffer)
        ("M-y" . counsel-yank-pop)
        :map ivy-minibuffer-map
@@ -626,7 +608,6 @@ Useful if you work on multiple windows and want an efficient way of switching be
   (use-package ranger
      :ensure t
      :commands ranger
-     :bind ("C-c r" . ranger) ;; vanilla emacs alternative to SPC-r
      :config
      (ranger-override-dired-mode t))
 
@@ -695,7 +676,6 @@ I never lose where my cursor is thanks to this
   (use-package neotree
       :ensure t
       :defer t
-      :bind ("C-c t" . neotree-toggle) ;; vanilla emacs alternative to SPC-t
       :config 
       (setq neo-smart-open t) ; update every time its toggled
       (setq neo-theme (if (display-graphic-p) 'icons 'arrow))) ; add icons (utilizes all-the-icons)
@@ -846,7 +826,7 @@ I never lose where my cursor is thanks to this
   (use-package company
       :ensure t
       :bind
-      ("C-x c" . company-complete) ;; for when I need completion at 1 or 2 chars
+      ("C-c c" . company-complete) ;; for when I need completion at 1 or 2 chars
       (:map company-active-map
       ("<tab>" . nil) ;; I will use this for a different purpose shown below
       ("M-n" . nil) ;; old select next key
@@ -1062,6 +1042,20 @@ I never lose where my cursor is thanks to this
       ("w" writegood-mode "writegood mode")
       ("q" nil "quit"))
 #+END_SRC
+*** Marinov (my own personal one)
+#+BEGIN_SRC emacs-lisp
+     (defhydra hydra-marinov (:color red :columns 2)
+      "😎Marinov😎"
+      ("m" goto-MarinMacs "goto config")
+      ("d" dap-debug "dap debug")
+      ("i" dap-debug-edit-template "debug template")
+      ("s" counsel-ag "silver-searcher")
+      ("g" counsel-rg "ripgrep")
+      ("f" flycheck-buffer "flycheck buffer")
+      ("r" ranger "ranger")
+      ("c" compile "compile")
+      ("q" nil "quit"))
+#+END_SRC
 * LSP
  :PROPERTIES:
  :CUSTOM_ID: lsp
@@ -1189,10 +1183,6 @@ I never lose where my cursor is thanks to this
  :PROPERTIES:
  :CUSTOM_ID: development
  :END:
- vanilla-emacs friendly keybinding to compile code (alternative more vim-like keybinding I made is SPC-c) :
- #+begin_src  emacs-lisp
-  (global-set-key (kbd "C-c c") 'compile)              ;; compile code
- #+end_src
 ** C-Cpp
  :PROPERTIES:
  :CUSTOM_ID: c-cpp
