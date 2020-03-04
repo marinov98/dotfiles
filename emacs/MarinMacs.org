@@ -1049,10 +1049,10 @@ I never lose where my cursor is thanks to this
       ("a" ansi-term "ansi-term")
       ("q" nil "quit"))
   #+END_SRC
-*** writing (taking notes, and writing)
+*** Writing (taking notes, and writing)
 #+BEGIN_SRC emacs-lisp
      (defhydra hydra-writing (:color red :columns 2)
-      "✓ Writing and spelling ✓"
+      "✓ Writing and Spelling ✓"
       ("d" ispell-change-dictionary "change dict")
       ("s" ispell-word "spell word")
       ("f" flyspell-buffer "flyspell buffer")
