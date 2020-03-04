@@ -192,6 +192,7 @@ A nice and quick way to view/edit my configuration at any time
         "d" 'hydra-describe/body
         "g" 'hydra-git/body
         "TAB" 'hydra-launcher/body
+        "v" 'hydra-writing/body
         ;; file finding, searching, and compiling
         "f" 'counsel-find-file
         "a" 'counsel-ag ;; silversearcher-ag needs to be installed!
@@ -211,7 +212,6 @@ A nice and quick way to view/edit my configuration at any time
         "r" 'ranger
         "m c" 'company-complete
         "m f" 'flycheck-buffer
-        "m s" 'flyspell-buffer
         ;; personal
         "m m" 'goto-MarinMacs))
 
@@ -1049,6 +1049,19 @@ I never lose where my cursor is thanks to this
       ("a" ansi-term "ansi-term")
       ("q" nil "quit"))
   #+END_SRC
+*** writing (taking notes, and writing)
+#+BEGIN_SRC emacs-lisp
+     (defhydra hydra-writing (:color red :columns 2)
+      "✓ Writing and spelling ✓"
+      ("d" ispell-change-dictionary "change dict")
+      ("s" ispell-word "spell word")
+      ("f" flyspell-buffer "flyspell buffer")
+      ("m" flyspell-mode "flyspell mode")
+      ("r" flyspell-region "flyspell region")
+      ("n" flyspell-goto-next-error "next error")
+      ("w" writegood-mode "writegood mode")
+      ("q" nil "quit"))
+#+END_SRC
 * LSP
  :PROPERTIES:
  :CUSTOM_ID: lsp
