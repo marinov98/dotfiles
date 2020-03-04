@@ -1230,9 +1230,6 @@ Still experimenting with this, native gdb in emacs is also really good
    :bind 
    (("C-c u" . clang-format-region) ;; format current line
    ("C-c f" . clang-format-buffer))) ;; format entire file
-;  :config
-;  (setq clang-format-style-option ".clang-format")) 
- ;; (setq clang-format-style-option "llvm")) use this option if you do not have a .clang-format file
  
  (use-package clang-format+
   :quelpa (clang-format+
@@ -1406,7 +1403,7 @@ These are modes related to web-dev that I have worked with
        :ensure t)  
    #+END_SRC
 *** Emmet 
-- More on emmet: https://www.emmet.io/
+ More on emmet: https://www.emmet.io/
 #+BEGIN_SRC emacs-lisp
 (use-package emmet-mode
     :ensure t
