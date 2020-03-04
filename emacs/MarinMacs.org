@@ -211,7 +211,7 @@ A nice and quick way to view/edit my configuration at any time
         "r" 'ranger
         "m c" 'company-complete
         "m f" 'flycheck-buffer
-        "m F" 'flyspell-buffer
+        "m s" 'flyspell-buffer
         ;; personal
         "m m" 'goto-MarinMacs))
 
