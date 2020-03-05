@@ -122,11 +122,10 @@ Disable back up files (comment if you want to enable backup files)
     (setq auto-save-default nil)             ;; stop creating autosave# files
     (setq create-lockfiles nil)              ;; stop creating any # files
 #+END_SRC
-GNU Debugger (GDB)
+Emacs has native support for the GNU Debugger (GDB), and we can make it a little better
 #+BEGIN_SRC emacs-lisp
     (setq gdb-many-windows t)                ;; have multiple windows when debugging
     (setq gdb-show-main t)                   ;; Non-nil means display source file containing the main routine at startup
-    (global-set-key (kbd "C-c a") 'gdb)      ;; launch gdb
 #+END_SRC
 ** Goto Config
 A nice and quick way to view/edit my configuration at any time
@@ -134,7 +133,7 @@ A nice and quick way to view/edit my configuration at any time
     (defun goto-MarinMacs ()
       (interactive)
       (find-file "~/.emacs.d/MarinMacs.org")) 
-    (global-set-key (kbd "C-c m") 'goto-MarinMacs)
+    (global-set-key (kbd "C-c m") 'goto-MarinMacs) ;; secondary binding is SPC m m 
   #+end_src
 * Org-Archive
  :PROPERTIES:
@@ -1044,12 +1043,13 @@ I never lose where my cursor is thanks to this
 #+END_SRC
 *** Marinov (my own personal one)
 #+BEGIN_SRC emacs-lisp
-     (defhydra hydra-marinov (:color red :columns 2)
+     (defhydra hydra-marinov (:color red :columns 3)
       "😎Marinov😎"
       ("m" goto-MarinMacs "goto config")
+      ("b" gdb "gdb")
       ("d" dap-debug "dap debug")
       ("i" dap-debug-edit-template "debug template")
-      ("s" counsel-ag "silver-searcher")
+      ("a" counsel-ag "ag")
       ("g" counsel-rg "ripgrep")
       ("f" flycheck-buffer "flycheck buffer")
       ("r" ranger "ranger")
@@ -1137,9 +1137,6 @@ I never lose where my cursor is thanks to this
    (use-package dap-mode
        :ensure t
        :requires hydra
-       :bind
-       (("C-c d" . dap-debug)
-       ("C-c e" . dap-debug-edit-template))
        :hook
        (lsp-mode . (lambda () (dap-mode t) (dap-ui-mode t) (dap-tooltip-mode 1) (tooltip-mode 1)))
        :config
