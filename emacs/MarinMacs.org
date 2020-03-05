@@ -1066,7 +1066,7 @@ I never lose where my cursor is thanks to this
 *** Marinov (my own personal one)
 #+BEGIN_SRC emacs-lisp
      (defhydra hydra-marinov (:color red :columns 3)
-      "😎Marinov😎"
+      "😎 Marinov 😎"
       ("m" goto-MarinMacs "goto config")
       ("b" gdb "gdb")
       ("d" dap-debug "dap debug")
