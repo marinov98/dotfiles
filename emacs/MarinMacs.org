@@ -64,6 +64,7 @@ once again but I felt it was bloated and I liked having my own configuration and
 - [[#themes][Themes]]
 - [[#modeline][Modeline]]
 - [[#enhancements][Emacs Enhancements]]
+  - [[#avy][Avy]]
   - [[#which-key][Which-Key]]
   - [[#ace-window][Ace-Window]]
   - [[#ranger][Ranger]]
@@ -180,6 +181,7 @@ A nice and quick way to view/edit my configuration at any time
         "TAB" 'hydra-launcher/body
         "v" 'hydra-writing/body
         "m" 'hydra-marinov/body
+        "a" 'hydra-avy/body
         ;; file finding, searching, and yanking
         "f" 'counsel-find-file
         "j" 'counsel-git ;; need git installed!
@@ -196,7 +198,6 @@ A nice and quick way to view/edit my configuration at any time
         "o" 'delete-other-windows
         ;; package-specific
         "t" 'neotree-toggle))
-
 
      (use-package evil
        :ensure t
@@ -570,6 +571,14 @@ You can enable/disable any themes that you like here
  :PROPERTIES:
  :CUSTOM_ID: enhancements
  :END:
+** Avy
+ :PROPERTIES:
+ :CUSTOM_ID: avy
+ :END:
+Jumping around text, keybindings utilized in a hydra
+#+BEGIN_SRC emacs-lisp
+  (use-package avy :ensure t)
+#+END_SRC
 ** Which-Key
  :PROPERTIES:
  :CUSTOM_ID: which-key
@@ -1007,6 +1016,20 @@ I never lose where my cursor is thanks to this
     ("i" lsp-ui-imenu "imenu")
     ("q" nil "quit" :color blue))
 
+#+END_SRC
+*** Avy (jumping around text)
+#+BEGIN_SRC emacs-lisp
+
+  (defhydra hydra-avy (:color red :columns 3)
+    " Avy "
+    ("c" avy-goto-char "goto char")
+    ("C" avy-goto-char-2 "goto char 2")
+    ("t" avy-goto-char-timer "timed char")
+    ("w" avy-goto-word-1 "goto word")
+    ("W" avy-goto-word-0 "goto word 0")
+    ("l" avy-goto-line "goto line")
+    ("r" avy-resume "resume")
+    ("q" nil "quit" :color blue))
 #+END_SRC
 *** Launcher (launch stuff)
   #+BEGIN_SRC emacs-lisp
