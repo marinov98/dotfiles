@@ -545,7 +545,6 @@ You can enable/disable any themes that you like here
        :ensure t
        :bind 
        (("C-s" . swiper-isearch)
-       ("C-a" . swiper-isearch-backward)
        ("C-c C-r" . ivy-resume)))
 
    ;; Counsel
