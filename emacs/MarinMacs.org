@@ -258,7 +258,7 @@ A nice and quick way to view/edit my configuration at any time
      :pin org)
      
  ;; allow easier snippet insertion  
- (require 'org-tempo)
+ ;; (require 'org-tempo)
  
  ;; bullets
  (use-package org-bullets
