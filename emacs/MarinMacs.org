@@ -102,15 +102,20 @@ Indentation
     (setq-default tab-width 4)                             ;; set default tab width 4 
     (setq backward-delete-char-untabify-method 'hungry)    ;; backspaces entire tab instead of one space at a time
 #+END_SRC
-- options, display, parenthesis, time-mode
+- options, display, parenthesis, time-mode, line numbers
+- *IMPORTANT* I am experimenting with line numbers
+  - I say this because I am not sure if all packages work with them properly, but so far everything works
+  - relative line numbers are very useful when combined with vim bingsing as they help you see how far you need to jump to get where you want to 
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
     (setq default-frame-alist '((font . "Fira Code-14")))  ;; set font and font size
     (setq visible-bell t)                                  ;; disable annoying end of buffer sounds
     (electric-pair-mode)                                   ;; auto closing brackets
     (display-time-mode 1)                                  ;; display time in the modeline
+    (when (version<= "26.0.50" emacs-version )         
+      (setq display-line-numbers-type 'relative)           ;; relative line numbers help you see how far you need to jump to get where you want to 
+      (global-display-line-numbers-mode))                  ;; display line numbers in every buffer
 #+END_SRC
-Quick y/n prompt & Disable menu bars
 #+BEGIN_SRC emacs-lisp
     (fset 'yes-or-no-p 'y-or-n-p)            ;; change yes or no to y or n
     (menu-bar-mode -1)                       ;; disable menu bar
@@ -253,7 +258,7 @@ A nice and quick way to view/edit my configuration at any time
      :pin org)
      
  ;; allow easier snippet insertion  
- ;; (require 'org-tempo)
+ (require 'org-tempo)
  
  ;; bullets
  (use-package org-bullets
