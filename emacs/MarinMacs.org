@@ -773,7 +773,8 @@ I never lose where my cursor is thanks to this
 - *YASnippet* is a template system for Emacs. It allows you to type an abbreviation and automatically expand it into function templates.
 - I Remapped some bindings to make them work better with autocomplete
   - The new bindings are just as convenient if your caps lock is both esc and ctrl or even just ctrl
-- While you can enable this globally, I prefer to only map to certain modes
+  - after some testing you can still actually use tab to insert snippets, but you will have to do it before company triggers
+    - when company triggers, you can use Ctrl + Tab to insert a snippet
 - repo: https://github.com/joaotavora/yasnippet
 #+BEGIN_SRC emacs-lisp
 (use-package yasnippet
@@ -785,15 +786,10 @@ I never lose where my cursor is thanks to this
     (:map yas-minor-mode-map
     ("<tab>" . nil) ;; while this is convenient, it clashes with auto-complete and jump-to-definitions
     ("<C-tab>" . yas-expand)))
+    :init
+    (yas-global-mode 1)
     :config
-    (yas-reload-all)
-    :hook
-    ((c++-mode . yas-minor-mode)
-    (c-mode . yas-minor-mode)
-    (python-mode . yas-minor-mode)
-    (js2-mode . yas-minor-mode)
-    (rjsx-mode . yas-minor-mode)
-    (web-mode . yas-minor-mode)))
+    (yas-reload-all))
 
 (use-package yasnippet-snippets 
     :ensure t)
