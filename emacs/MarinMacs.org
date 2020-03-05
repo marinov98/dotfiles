@@ -812,7 +812,7 @@ I never lose where my cursor is thanks to this
        (setq flycheck-check-syntax-automatically '(mode-enabled save)); run flycheck only on save
        (global-flycheck-mode t)
        :bind
-       ("C-c C-f" . 'flycheck-buffer)) ;; explicitly run flycheck
+       ("C-c f" . 'flycheck-buffer)) ;; explicitly run flycheck
 #+END_SRC
 ** Company
  :PROPERTIES:
@@ -1051,6 +1051,7 @@ I never lose where my cursor is thanks to this
       ("i" dap-debug-edit-template "debug template")
       ("a" counsel-ag "ag")
       ("g" counsel-rg "ripgrep")
+      ("z" counsel-fzf "fzf")
       ("f" flycheck-buffer "flycheck buffer")
       ("r" ranger "ranger")
       ("c" compile "compile")
@@ -1228,8 +1229,8 @@ Still experimenting with this, native gdb in emacs is also really good
 (use-package clang-format 
    :ensure t
    :bind 
-   (("C-c u" . clang-format-region) ;; format current line
-   ("C-c f" . clang-format-buffer))) ;; format entire file
+   (("C-c R" . clang-format-region) ;; format current line
+   ("C-c F" . clang-format-buffer))) ;; format entire file
  
  (use-package clang-format+
   :quelpa (clang-format+
