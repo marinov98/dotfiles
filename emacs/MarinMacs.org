@@ -1071,11 +1071,12 @@ I never lose where my cursor is thanks to this
       ("b" gdb "gdb")
       ("d" dap-debug "dap debug")
       ("i" dap-debug-edit-template "debug template")
+      ("r" counsel-recentf "recent files")
       ("a" counsel-ag "ag")
       ("g" counsel-rg "ripgrep")
       ("z" counsel-fzf "fzf")
       ("f" flycheck-buffer "flycheck buffer")
-      ("r" ranger "ranger")
+      ("R" ranger "ranger")
       ("c" compile "compile")
       ("q" nil "quit"))
 #+END_SRC
