@@ -9,6 +9,7 @@ echo 'installing packages via scoop'
 scoop install git gcc yarn nodejs vim vimtutor curl make
 scoop install cmake
 scoop install ripgrep 
+scoop install fzf
 
 # uncomment if you need these installs
 # echo 'installing global yarn packages'
