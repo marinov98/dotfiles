@@ -114,6 +114,9 @@ Indentation
     (display-time-mode 1)                                  ;; display time in the modeline
     (when (version<= "26.0.50" emacs-version )         
       (setq display-line-numbers-type 'relative)           ;; relative line numbers help you see how far you need to jump to get where you want to 
+      (setq display-line-numbers-current-absolute t)
+      (setq display-line-numbers-width 2)
+      (setq display-line-numbers-widen t)
       (global-display-line-numbers-mode))                  ;; display line numbers in every buffer
 #+END_SRC
 #+BEGIN_SRC emacs-lisp
@@ -1352,8 +1355,7 @@ Note: the template is meant to be edited to personal preferences
       ("\\.erb\\'"         . web-mode)
       ("\\.mustache\\'"    . web-mode)
       ("\\.djhtml\\'"      . web-mode)
-      ("\\.jsx\\'"         . web-mode)
-      ("\\.tsx\\'"         . web-mode))
+      ("\\.js\\'"          . web-mode))
       :config
       (setq web-mode-enable-engine-detection t)
       ;; Indentation
@@ -1392,6 +1394,8 @@ These are modes related to web-dev that I have worked with
 #+BEGIN_SRC emacs-lisp
 (use-package rjsx-mode
     :ensure t
+    :mode
+    (("\\.jsx\\'"  . rjsx-mode))
     :init
     (setq-default rjsx-basic-offset 2))
     
@@ -1477,15 +1481,13 @@ Adds the node_modules/.bin directory to the buffer exec_path.
 *** Js2-mode
 - A 'better' mode for editing javascript files. Can sometimes have performance issues depending on emacs version
 - There should be fixes in Emacs >= 27.05
+- I am using web mode for js files now and it seems to be a bit better for syntax highlighting at least 
 #+BEGIN_SRC emacs-lisp
 (use-package js2-mode
     :ensure t
-    :hook (j2-mode. js2-imenu-extras-mode))
     :config 
     (setq js2-strict-missing-semi-warning nil) ;; disable annoying warnings
-    (setq js2-mode-show-parse-errors nil) ;; do not parse errors, let langauage server do that
-    (setq-default js2-basic-offset 2) ;; set indentation to 2
-    (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+    (setq-default js2-basic-offset 2)) ;; set indentation to 2
 
 #+END_SRC
 
