@@ -18,6 +18,7 @@ brew install --with-toolchain llvm
 brew install python3
 brew install clang-format gcc ctags aspell 
 brew install yarn 
+brew install fzf
 brew install cmake node npm gdb neofetch 
 brew install pyenv pyenv-virtualenv pyenv-virtualenvwrapper
 brew tap heroku/brew && brew install heroku
