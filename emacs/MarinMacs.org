@@ -1021,7 +1021,7 @@ I never lose where my cursor is thanks to this
 #+BEGIN_SRC emacs-lisp
 
   (defhydra hydra-avy (:color red :columns 3)
-    " Avy "
+    "↵ Avy ↵"
     ("c" avy-goto-char "goto char")
     ("C" avy-goto-char-2 "goto char 2")
     ("t" avy-goto-char-timer "timed char")
