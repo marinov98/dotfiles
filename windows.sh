@@ -17,6 +17,7 @@ scoop install fzf
 
 echo 'installing choco`
 Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-choco install poshgit ag
+choco install poshgit 
+choco install ag
 
 
