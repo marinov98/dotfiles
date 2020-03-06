@@ -8,7 +8,6 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 
 * Table of Contents :TOC_3:
 - [[#general-settings][General Settings]]
-- [[#org-archive][Org-archive]]
 - [[#quelpa][Quelpa]]
 - [[#evil-mode][Evil-mode]]
 - [[#markup][Markup]]
@@ -96,13 +95,6 @@ A nice and quick way to view/edit my configuration at any time
       (find-file "~/.emacs.d/MarinMacs.org")) 
     (global-set-key (kbd "C-c m") 'goto-MarinMacs) ;; secondary binding is SPC m m 
   #+end_src
-* Org-Archive
- :PROPERTIES:
- :CUSTOM_ID: org-archive
- :END:
-#+BEGIN_SRC emacs-lisp
-(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
-#+END_SRC
 * Quelpa
  :PROPERTIES:
  :CUSTOM_ID: quelpa
