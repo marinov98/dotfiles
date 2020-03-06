@@ -42,7 +42,7 @@ bindsym $mod+d exec rofi -show run -lines 4 -display-run "exec " -padding 400 -o
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus left
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -63,7 +63,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+Shift+h split h
 
 # split in vertical orientation
 bindsym $mod+v split v
