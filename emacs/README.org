@@ -1,0 +1,51 @@
+* Contact
+- Email me if there are any issues/questions/things that can be better: marin.marinov@macaulay.cuny.edu
+** Purpose:
+- Initially, I made this repo for myself to keep track of my configurations...
+- Now I want to make it more of a guide for anyone trying to switch to emacs whether its from another editor and/or is confused about what packages to install and how to configure.
+- Make a guide that welcomes anyone from any editor.
+- Achieve the divine workflow
+** How I got here
+I actually started off with spacemacs (not really knowing what vim was), switched to vanilla emacs for a while and began building this config.
+I then decided to learn vim and used that for a while. I concluded that I liked the vim keybindings more than the emacs ones. I tried spacemacs
+once again but I felt it was bloated and I liked having my own configuration and that is how I got here. 
+** Who this config might be useful to 
+- *Vim users* wanting to switch and use emacs while keepings their vim keybindings
+- Anyone wanting to use Emacs for its *own keybindings* and extensibility but hates configuring
+- People who want more productivity but are limited because of their current text editor
+- People who already use emacs and maybe want to see if there is anything new they can learn from my config
+- Me whenever I forget or want to reference something
+** Why Make This Into More Of A Guide?
+- Emacs is extremely powerful but has a ton of packages and it can be really confusing to pick the right ones, much less configure them
+- Installing each package requires going to different sites and/or blogs to see how each individual one works, its better to have all the information you need in one place 
+- Not everybody likes spending time customizing and configuring. They also like a place they can reference
+- Emacs provides a lot and the configuration should not be what keeps people using editors such as emacs or vim
+* Setup
+When Emacs is started, it normally tries to load a Lisp program from an initialization file, or init file for short. 
+This file, if it exists, specifies how to initialize Emacs for you.  Emacs looks for your init file using the filenames ~/.emacs, ~/.emacs.el, or ~/.emacs.d/init.el;
+- In my case the file is *init.el* which will launch my *MarinMacs.org* file. Both should be made inside the *.emacs.d* directory
+* Notes-Before-Beginning
+** Bindings
+- My setup utilizes *evil mode* which emulates vim inside emacs
+  - if you like everything about the config except that it uses vim bindings, simply erase the section titled 'Evil-Mode'
+    - this will , however, mean you have to do some key mappings for the certain package(s)/hydras you want to use
+  - if you are a vim user, you should feel right at home; if not, no problem — everyone has their preferences.
+** Some things to be aware of 
+- Depending on how you installed emacs, certain packages might be preinstalled into it 
+- *In emacs C = ctrl, M = alt, S = shift, s (hyper key) = command key (MacOS) windows key(MS-Windows), RET = enter key SPC = space*
+  - Example: M-x = alt + x  C-x C-f = ctrl + x ctrl + f
+- If you wish to browse through Emac's packages `M-x package-list-packages RET` will open up the package list
+  - Additionally, you can run `M-x package-install RET package_name RET` if you know the exact package that you want
+  - Generally , *use-package* takes care of automating package installation
+- If you just want to get it over with, simply copy my *init.el* and *MarinMacs.org* (or whatever you want to name your org file) 
+- Once again, the files should be created inside the *.emacs.d* folder which you can create. 
+- All the packages should install and configure automatically (power of use-package), *however* you would still have to install the *langauge servers* to enable autocomplete
+- You can open links present in the guide in a separate window with C-c C-o (assuming you are editing this file in emacs)
+* Getting the best out of this configuration
+- This config is centered around *vim bindings* but also occasionally utilizes emacs bindings
+  - to get the smoothest experience (in my opinion), map your caps lock to escape when tapped and caps lock when pressed down
+  - mapping caps lock to esc should also feel relatively smooth
+- *If you are new to emacs* and are looking to learn, I tried my best to document packages and what certain settings do
+- My advice is rather copying my entire config, learn the basics of emacs without any configuration and just know the *difference between buffers, windows, and frames*
+  - afterwords copy my config little by little, research the packages further and see if you actually like using them
+- If you are here to just inspect my config and see how it differs from yours, welcome and I hope something here gives you insight or is of some help
