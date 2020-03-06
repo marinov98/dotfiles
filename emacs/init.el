@@ -37,9 +37,11 @@
 (add-to-list 'package-archives
 	     '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'package-archives
-	     '("melpa2" . "http://www.mirrorservice.org/sites/melpa.org/packages/"))
+	     '("melpa-stable" . "http://stable.melpa.org/packages/"))
 (add-to-list 'package-archives
-	     '("melpa3" . "http://www.mirrorservice.org/sites/stable.melpa.org/packages/"))
+	     '("melpa-stable2" . "http://melpa-stable.milkbox.net/packages/"))
+(add-to-list 'package-archives
+	     '("org" . "https://orgmode.org/elpa/"))
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
@@ -54,5 +56,6 @@
 
 
 (org-babel-load-file (expand-file-name "~/.emacs.d/MarinMacs.org"))
+
 
 ;;; init.el ends here
