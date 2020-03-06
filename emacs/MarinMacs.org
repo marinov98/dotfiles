@@ -1069,7 +1069,7 @@ I never lose where my cursor is thanks to this
 #+END_SRC
 *** Marinov (my own personal one)
 #+BEGIN_SRC emacs-lisp
-     (defhydra hydra-marinov (:color red :columns 3)
+     (defhydra hydra-marinov (:color red :columns 4)
       "😎 Marinov 😎"
       ("m" goto-MarinMacs "goto config")
       ("b" gdb "gdb")
@@ -1082,6 +1082,8 @@ I never lose where my cursor is thanks to this
       ("f" flycheck-buffer "flycheck buffer")
       ("R" ranger "ranger")
       ("c" compile "compile")
+      ("w" web-mode "web-mode")
+      ("j" rjsx-mode "rjsx-mode")
       ("q" nil "quit"))
 #+END_SRC
 * LSP
@@ -1393,8 +1395,9 @@ visually display hex values as colors
 #+END_SRC
 *** Modes
 - These are modes related to web-dev that I have worked with 
-- If you are a *react.js* developer, I *highly recommend* hooking rjsx mode to .js files as well
-  - if you are a node.js developer and/or vanilla js developer, the current setup with web mode is better for syntax highlighting
+- If you are a *react.js* developer, I *highly recommend* hooking *rjsx-mode* to *.js* files as well
+  - if you are a *node.js* developer and/or *vanilla js* developer, the current setup with web mode is better for syntax highlighting
+  - in *hydra-marinov* located in the [[#hydra][Hydra]] section there are keybindings to switch between rjsx and web mode easily
 #+BEGIN_SRC emacs-lisp
 (use-package rjsx-mode
     :ensure t
