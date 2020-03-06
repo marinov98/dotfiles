@@ -33,7 +33,8 @@ echo "formatters & tmux done"
 # EMACS
 echo "setting up emacs..."
 mkdir -p ~/.emacs.d
-cp emacs/* ~/.emacs.d/
+cp emacs/MarinMacs.org ~/.emacs.d/
+cp emacs/init.el ~/.emacs.d/
 echo "emacs finished"
 
 # Vim
