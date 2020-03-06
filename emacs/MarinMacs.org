@@ -8,7 +8,6 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 
 * Table of Contents :TOC_3:
 - [[#general-settings][General Settings]]
-- [[#Buffer-Switching][Buffer-Switching]]
 - [[#org-archive][Org-archive]]
 - [[#quelpa][Quelpa]]
 - [[#evil-mode][Evil-mode]]
