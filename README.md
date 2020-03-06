@@ -7,8 +7,8 @@ All my dot files
 - My [**Vim**](https://github.com/marinov98/dotfiles/blob/master/vim/README.md) config guide
 
 ### Quick Start
-- Clone this repo: `git clone https://github.com/marinov98/dotfiles.git`
-- cd into it `cd dotfiles/`
+- Clone this repo: `git clone https://github.com/marinov98/dotfiles.git ~/`
+- cd into it `cd ~/dotfiles/`
 - 2 options (Make sure to make the scripts executable with `sudo chmod +x SCRIPT`
   - pick a one of the Os-specfic scripts `./OS-SCRIPT-GOES-HERE` 
   - Only copy the files to your home directory. `./configure.sh`
