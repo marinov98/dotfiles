@@ -1392,7 +1392,9 @@ visually display hex values as colors
       (rjsx-mode . prettier-js-mode)))
 #+END_SRC
 *** Modes
-These are modes related to web-dev that I have worked with 
+- These are modes related to web-dev that I have worked with 
+- If you are a *react.js* developer, I *highly recommend* hooking rjsx mode to .js files as well
+  - if you are a node.js developer and/or vanilla js developer, the current setup with web mode is better for syntax highlighting
 #+BEGIN_SRC emacs-lisp
 (use-package rjsx-mode
     :ensure t
