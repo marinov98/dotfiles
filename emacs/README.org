@@ -1,5 +1,10 @@
 #+ATTR_HTML: :style margin-left: auto; margin-right: auto;
 [[./Homepage.png]]
+* Setup
+When Emacs is started, it normally tries to load a Lisp program from an initialization file, or init file for short. 
+This file, if it exists, specifies how to initialize Emacs for you.  Emacs looks for your init file using the filenames ~/.emacs, ~/.emacs.el, or ~/.emacs.d/init.el; - GNU Emacs Manual
+- In my case the file is *init.el* which will launch my *MarinMacs.org* file. Both should be made inside the *.emacs.d* directory
+- You can automate this if you cloned my dotfiles and ran the configure.sh script
 * Contact
 - Email me if there are any issues/questions/things that can be better: marin.marinov@macaulay.cuny.edu
 ** Purpose:
@@ -22,10 +27,6 @@ once again but I felt it was bloated and I liked having my own configuration and
 - Installing each package requires going to different sites and/or blogs to see how each individual one works, its better to have all the information you need in one place 
 - Not everybody likes spending time customizing and configuring. They also like a place they can reference
 - Emacs provides a lot and the configuration should not be what keeps people using editors such as emacs or vim
-* Setup
-When Emacs is started, it normally tries to load a Lisp program from an initialization file, or init file for short. 
-This file, if it exists, specifies how to initialize Emacs for you.  Emacs looks for your init file using the filenames ~/.emacs, ~/.emacs.el, or ~/.emacs.d/init.el; - GNU Emacs Manual
-- In my case the file is *init.el* which will launch my *MarinMacs.org* file. Both should be made inside the *.emacs.d* directory
 * Notes-Before-Beginning
 ** Bindings
 - My setup utilizes *evil mode* which emulates vim inside emacs
