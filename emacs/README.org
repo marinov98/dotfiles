@@ -22,7 +22,7 @@ once again but I felt it was bloated and I liked having my own configuration and
 - Emacs provides a lot and the configuration should not be what keeps people using editors such as emacs or vim
 * Setup
 When Emacs is started, it normally tries to load a Lisp program from an initialization file, or init file for short. 
-This file, if it exists, specifies how to initialize Emacs for you.  Emacs looks for your init file using the filenames ~/.emacs, ~/.emacs.el, or ~/.emacs.d/init.el;
+This file, if it exists, specifies how to initialize Emacs for you.  Emacs looks for your init file using the filenames ~/.emacs, ~/.emacs.el, or ~/.emacs.d/init.el; - GNU Emacs Manual
 - In my case the file is *init.el* which will launch my *MarinMacs.org* file. Both should be made inside the *.emacs.d* directory
 * Notes-Before-Beginning
 ** Bindings
