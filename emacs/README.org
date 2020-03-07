@@ -43,7 +43,7 @@ once again but I felt it was bloated and I liked having my own configuration and
 - If you just want to get it over with, simply copy my *init.el* and *MarinMacs.org* (or whatever you want to name your org file) 
 - Once again, the files should be created inside the *.emacs.d* folder which you can create. 
 - All the packages should install and configure automatically (power of use-package), *however* you would still have to install the *langauge servers* to enable autocomplete
-- You can open links present in the guide in a separate window with C-c C-o (assuming you are editing this file in emacs)
+- You can open links present in the MarinMacs.org file in a separate window with C-c C-o (assuming you are editing this file in emacs)
 * Getting the best out of this configuration
 - This config is centered around *vim bindings* but also occasionally utilizes emacs bindings
   - to get the smoothest experience (in my opinion), map your caps lock to escape when tapped and caps lock when pressed down
