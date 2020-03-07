@@ -59,9 +59,10 @@ Indentation
   - relative line numbers are very useful when combined with vim bindings as they help you see how far you need to jump to get where you want to 
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
-    (setq default-frame-alist '((font . "Fira Code-14")))  ;; set font and font size
+    (setq default-frame-alist '((font . "Fira Code-10")))  ;; set font and font size
     (setq visible-bell t)                                  ;; disable annoying end of buffer sounds
     (electric-pair-mode)                                   ;; auto closing brackets
+    (show-paren-mode 1)                                    ;; highlight matching parenthesis
     (display-time-mode 1)                                  ;; display time in the modeline
     (when (version<= "26.0.50" emacs-version )         
       (setq display-line-numbers-type 'relative)           ;; relative line numbers help you see how far you need to jump to get where you want to 
