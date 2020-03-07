@@ -605,7 +605,6 @@ Useful if you work on multiple windows and want an efficient way of switching be
         counsel-recentf 
         counsel-projectile 
         counsel-projectile-switch-to-buffer 
-        counsel-projectile-rg
         counsel-projectile-switch-project 
         counsel-projectile-find-file 
         counsel-projectile-find-file-dwin 
