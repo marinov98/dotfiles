@@ -22,15 +22,17 @@ echo "installing programming essentials..."
 sudo apt install gummi gcc build-essential exuberant-ctags clang libclang-dev lldb ctags libncurses5-dev libncursesw5-dev cmake ranger clang-format python3-pip
 sudo apt install python3 
 sudo apt install silversearcher-ag ripgrep
-sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-8 100
+
 
 echo "javascript..."
 sudo apt install nodejs npm 
 sudo apt install postgresql-10 postgresql postgresql-contrib
 
 echo "emacs installation..."
-sudo snap install emacs --classic
-sudo apt install auctex
+sudo add-apt-repository ppa:ubuntu-elisp/ppa
+sudo apt update
+sudo apt install emacs-snapshot
+
 
 echo "vim installation..."
 sudo apt install vim vim-gtk
