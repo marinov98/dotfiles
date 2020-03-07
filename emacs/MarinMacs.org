@@ -53,7 +53,7 @@ Indentation
     (setq-default tab-width 4)                             ;; set default tab width 4 
     (setq backward-delete-char-untabify-method 'hungry)    ;; backspaces entire tab instead of one space at a time
 #+END_SRC
-- Options, display, parenthesis, line numbers
+- Options, display, parenthesis 
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
     (setq default-frame-alist '((font . "Fira Code-14")))  ;; set font and font size
