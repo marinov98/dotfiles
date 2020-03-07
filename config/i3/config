@@ -155,7 +155,8 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3? This will end your 
 bindsym $mod+Shift+w exec emacsclient -a "" -c # run emacs as a daemon and open
 bindsym $mod+Shift+t exec trash-empty # empty recycling bin
 bindsym $mod+Shift+n exec nm-connection-editor # wifi editor
-bindsym $mod+Shift+f exec nautilus # or whatever file manager the system has
+bindsym $mod+Shift+f exec nautilus # Specific file manager
+bindsym $mod+Shift+u exec ubuntu-software # Specific software center to check for updates
 
 
 
