@@ -30,7 +30,7 @@
 (add-hook 'after-init-hook #'marinov/reset-file-name-handler-alist)
 
 
-(setq load-prefer-newer t) ;; Avoid the pitfall of ¡°loading old bytecode instead of newer source¡±
+(setq load-prefer-newer t) ;; Avoid the pitfall of loading old bytecode instead of newer source
 
 (require 'package)
 (setq package-enable-at-startup nil)
