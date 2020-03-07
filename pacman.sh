@@ -44,6 +44,7 @@ curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 
 echo "preparation for i3 configuring..."
 sudo pacman -S feh compton i3-gaps i3status i3lock dmenu rofi trash-cli
+sudo pacman -S alacritty
 
 echo "Latex setup"
 # sudo pacman -S texlive-core texline-bin biber texlive-fontsextra texlive-bibtexextra texlive-formatsextra texlive-science
