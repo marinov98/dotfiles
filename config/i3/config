@@ -273,8 +273,8 @@ bar {
 for_window [class="^.*"] border pixel 0
 
 smart_gaps on
-gaps inner 5
-gaps outer 0
+gaps inner 7
+gaps outer 3
 
 mode "gaps" {
         bindsym t gaps inner all set 20
