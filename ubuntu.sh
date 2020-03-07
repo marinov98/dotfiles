@@ -48,6 +48,9 @@ sudo snap install --classic heroku
 echo "i3..."
 sudo apt install i3 i3status i3lock suckless-tools rofi
 
+sudo add-apt-repository ppa:mmstick76/alacritty
+sudo apt install alacritty
+
 echo "Package install complete, transfering appropriate files now"
 sudo chmod +x configure.sh
 ./configure.sh
