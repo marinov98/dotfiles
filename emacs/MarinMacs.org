@@ -57,7 +57,7 @@ Indentation
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
     (setq default-frame-alist '((font . "Fira Code-14")))  ;; set font and font size
-    (setq visible-bell t)                                  ;; disable annoying end of buffer sounds
+    (setq visible-bell t)                                  ;; disable end of buffer sounds
     (electric-pair-mode)                                   ;; auto closing brackets
     (show-paren-mode 1)                                    ;; highlight matching parenthesis
     (global-hl-line-mode 1)                                ;; highlight current line 
@@ -602,12 +602,9 @@ Useful if you work on multiple windows and want an efficient way of switching be
       '(counsel-find-file 
         counsel-file-jump 
         counsel-git
-        counsel-git-grep
         counsel-recentf 
         counsel-projectile 
         counsel-projectile-switch-to-buffer 
-        counsel-projectile-grep 
-        counsel-projectile-git-grep 
         counsel-projectile-rg
         counsel-projectile-switch-project 
         counsel-projectile-find-file 
