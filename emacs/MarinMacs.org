@@ -76,7 +76,6 @@ Indentation
 Displaying time and date in emacs
 #+BEGIN_SRC emacs-lisp
     (setq display-time-24hr-format t)
-    (setq display-time-format "%H:%M - %d %B %Y")
     (display-time-mode 1)                                  ;; display time in the modeline
 #+END_SRC
 Convenient yes or no and disable bars
