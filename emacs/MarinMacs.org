@@ -79,6 +79,7 @@ Displaying time and date in emacs
     (setq display-time-format "%H:%M - %d %B %Y")
     (display-time-mode 1)                                  ;; display time in the modeline
 #+END_SRC
+Convinient yes or no and disable bars
 #+BEGIN_SRC emacs-lisp
     (fset 'yes-or-no-p 'y-or-n-p)            ;; change yes or no to y or n
     (menu-bar-mode -1)                       ;; disable menu bar
