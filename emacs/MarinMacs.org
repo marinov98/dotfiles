@@ -53,7 +53,8 @@ Indentation
     (setq-default tab-width 4)                             ;; set default tab width 4 
     (setq backward-delete-char-untabify-method 'hungry)    ;; backspaces entire tab instead of one space at a time
 #+END_SRC
- Options, display, parenthesis, line numbers
+- Options, display, parenthesis, line numbers
+- I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
     (setq default-frame-alist '((font . "Fira Code-14")))  ;; set font and font size
     (setq visible-bell t)                                  ;; disable annoying end of buffer sounds
@@ -64,7 +65,6 @@ Indentation
 - Line numbers
   - I am not sure if all packages work with line numbers properly, but so far everything works
   - relative line numbers are very useful when combined with vim bindings as they help you see how far you need to jump to get where you want to 
-- I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
     (when (version<= "26.0.50" emacs-version )         
       (setq display-line-numbers-type 'relative)           ;; relative line numbers help you see how far you need to jump to get where you want to 
