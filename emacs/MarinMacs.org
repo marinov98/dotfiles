@@ -1232,7 +1232,7 @@ pip3 install rope jedi pylint flake8 autopep8 yapf pygments virtualenv virtualen
   (setq-default python-basic-offset 4) 
   (setq-default python-indent-offset 4) 
   (setq python-indent-guess-indent-offset t) ;; allow emacs to guess offset
-  (setq python-indent-guess-indent-offset-verbose nil) ;; remove annoying warning
+  (setq python-indent-guess-indent-offset-verbose nil) ;; remove indent warning because we already set indents
   
   ;; warnings
   (setq lsp-pyls-plugins-pycodestyle-enabled nil) ;; comment if you want code style warnings everywhere
@@ -1456,7 +1456,7 @@ Adds the node_modules/.bin directory to the buffer exec_path.
   (use-package js2-mode
       :ensure t
       :config 
-      (setq js2-strict-missing-semi-warning nil) ;; disable annoying warnings
+      (setq js2-strict-missing-semi-warning nil) 
       (setq-default js2-basic-offset 2)) ;; set indentation to 2
 
 #+END_SRC
