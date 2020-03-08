@@ -494,13 +494,14 @@ You can enable/disable any themes that you like here
    ;; Ivy
    (use-package ivy
        :ensure t
+       :custom
+       (ivy-use-virtual-buffers t)
+       (ivy-display-style 'fancy)
+       (ivy-count-format "(%d/%d) ")
+       (enable-recursive-minibuffers t)
+       (ivy-use-virtual-buffers t)
        :config
-       (ivy-mode 1)
-       (setq ivy-use-virtual-buffers t)
-       (setq ivy-display-style 'fancy)
-       (setq ivy-count-format "(%d/%d) ")
-       (setq enable-recursive-minibuffers t)
-       (setq ivy-use-virtual-buffers t))
+       (ivy-mode))
 
    ;; Swiper 
    (use-package swiper
@@ -792,16 +793,28 @@ I never lose where my cursor is thanks to this
       ("M-n" . nil) ;; old select next key
       ("M-p" . nil) ;; old select prev key
       ("<tab>" . company-select-next) ;; make tab our new select next key
-      ("M-j" . company-select-next)  ;; also make M-j new selection key
+      ("M-j" . company-select-next)  ;; also make M-j new select next key
       ("M-k"  . company-select-previous))
+      :custom
+      (company-tooltip-limit 5) ; show 5 candidates at one time
+      (company-idle-delay 0.15) ;; delay (in seconds) when candidates are shown, change if you need to, potentially cpu intensive on older machines if set to 0
+      (company-minimum-prefix-length 3) ;; show completions after 3 chars
+      (company-selection-wrap-around t) ;; goes to start of selection if you reached the bottom 
+      (company-require-match 'never) ;; dont need to pick a choice 
       :config
-      (setq company-tooltip-limit 5) ; show 5 candidates at one time
-      (setq company-idle-delay 0.15) ;; delay (in seconds) when candidates are shown, change if you need to, potentially cpu intensive on older machines if set to 0
-      (setq company-minimum-prefix-length 3) ;; show completions after 3 chars
-      (setq company-selection-wrap-around t)
-      (setq company-require-match 'never) ;; dont need to pick a choice 
-      (setq global-company-mode t)) 
-
+      (global-company-mode t)) 
+      
+#+END_SRC 
+This is a company front-end that has icons for company
+#+BEGIN_SRC emacs-lisp
+  (use-package company-box
+      :ensure t
+      :requires company
+      :hook
+      (company-mode . company-box-mode))
+#+END_SRC
+Add Company backends to enable elisp autocomplete
+#+BEGIN_SRC emacs-lisp
 
       ;; elisp autocomplete
       (defun my-elisp-mode-hook ()
