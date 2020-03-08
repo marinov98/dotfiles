@@ -19,7 +19,7 @@ echo "displays..."
 sudo apt install xrandr arandr
 
 echo "installing programming essentials..."
-sudo apt install gummi gcc build-essential exuberant-ctags clang libclang-dev lldb ctags libncurses5-dev libncursesw5-dev cmake ranger clang-format python3-pip
+sudo apt install gcc exuberant-ctags clang libclang-dev ctags libncurses5-dev libncursesw5-dev cmake ranger clang-format python3-pip
 sudo apt install python3 
 sudo apt install silversearcher-ag ripgrep
 
