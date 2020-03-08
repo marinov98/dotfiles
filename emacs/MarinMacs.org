@@ -1307,6 +1307,7 @@ Note: the template is meant to be edited to personal preferences
       (web-mode-attr-indent-offset 2)
       (web-mode-markup-indent-offset 2)
       (web-mode-code-indent-offset 2)
+      (web-mode-css-indent-offset 2)
       ;; Auto-closing
       (web-mode-auto-close-style 2)
       (web-mode-enable-auto-pairing t)
@@ -1341,7 +1342,7 @@ visually display hex values as colors
 *** Modes
 - These are modes related to web-dev that I have worked with 
 - If you are a *react.js* developer, I *highly recommend* hooking *rjsx-mode* to *.js* files as well
-  - if you are a *node.js* developer and/or *vanilla js* developer, the current setup with web mode is better for syntax highlighting
+  - if you are a *node.js* developer and/or *vanilla js* developer, I found the current setup with web mode to be better for syntax highlighting
   - in *hydra-marinov* located in the [[#hydra][Hydra]] section there are keybindings to switch between rjsx and web mode easily
 #+BEGIN_SRC emacs-lisp
   (use-package rjsx-mode
@@ -1434,9 +1435,10 @@ Adds the node_modules/.bin directory to the buffer exec_path.
       :requires dap-mode)
 #+END_SRC
 *** Js2-mode
-- A 'better' mode for editing javascript files. Can sometimes have performance issues depending on emacs version
-- There should be fixes in Emacs >= 27.05
+- A 'better' mode for editing javascript files. Can have performance issues and errors 
 - I am using web mode for js files now and it seems to be a bit better for syntax highlighting at least 
+- Consider also using *js-mode* as it supports a lot more features in Emacs versions >= 27.05
+- Repo to keep track of how the mode is doing: https://github.com/mooz/js2-mode
 #+BEGIN_SRC emacs-lisp
   (use-package js2-mode
       :ensure t
