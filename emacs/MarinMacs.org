@@ -155,6 +155,7 @@ A nice and quick way to view/edit my configuration at any time
         "n" 'switch-to-next-buffer
         ;; deletion
         "q" 'delete-window
+        "Q" 'save-buffers-kill-terminal
         "k" 'kill-current-buffer
         "o" 'delete-other-windows
         ;; package-specific
@@ -498,9 +499,9 @@ You can enable/disable any themes that you like here
        (ivy-use-virtual-buffers t)
        (ivy-display-style 'fancy)
        (ivy-count-format "(%d/%d) ")
-       (enable-recursive-minibuffers t)
        (ivy-use-virtual-buffers t)
        :config
+       (setq enable-recursive-minibuffers t)
        (ivy-mode))
 
    ;; Swiper 
@@ -656,13 +657,13 @@ I never lose where my cursor is thanks to this
      ;; Projectile-mode 
     (use-package projectile
         :ensure t
-        :bind ;; for some reason all-the-icons ivy works when I bind the command map in projectile and not counsel projectile
+        :bind 
         (("C-c p" . projectile-command-map))
         :custom 
         (projectile-project-search-path '("~/Projects/"))
+        (projectile-sort-order 'recently-active)
+        (projectile-completion-system 'ivy)
         :config
-        (setq projectile-sort-order 'recently-active)
-        (setq projectile-completion-system 'ivy)
         (projectile-mode t))
 
      ;; Counsel-Projectile (I utilize counsel projectile bindings in my hydra-projectile)
@@ -766,15 +767,16 @@ I never lose where my cursor is thanks to this
 #+BEGIN_SRC emacs-lisp
   (use-package flycheck
        :ensure t
+       :bind
+       ("C-c f" . 'flycheck-buffer) ;; explicitly run flycheck
        :custom-face
        (flycheck-info ((t (:underline (:style line :color "#9500ff")))))
        (flycheck-warning ((t (:underline (:style line :color "#fbff00")))))
        (flycheck-error ((t (:underline (:style line :color "#ff0000")))))
+       :custom
+       (flycheck-check-syntax-automatically '(mode-enabled save)); run flycheck only on save
        :config
-       (setq flycheck-check-syntax-automatically '(mode-enabled save)); run flycheck only on save
-       (global-flycheck-mode t)
-       :bind
-       ("C-c f" . 'flycheck-buffer)) ;; explicitly run flycheck
+       (global-flycheck-mode t))
 #+END_SRC
 ** Company
  :PROPERTIES:
@@ -817,7 +819,6 @@ Add Company backends to enable elisp autocomplete
       (add-hook 'emacs-lisp-mode-hook 'my-elisp-mode-hook)
       (add-hook 'emacs-lisp-mode-hook 'company-mode)
 #+END_SRC
-
 * Git
  :PROPERTIES:
  :CUSTOM_ID: git
@@ -830,17 +831,17 @@ Add Company backends to enable elisp autocomplete
       :ensure t)
 
   (use-package gitignore-mode
-    :ensure t
-    :mode (("\\.gitignore\\'" . gitignore-mode)
-          ("\\.dockerignore\\'" . gitignore-mode))) ;; syntax from gitignore is more or less identical to that of .dockerignore
+      :ensure t
+      :mode (("\\.gitignore\\'" . gitignore-mode)
+             ("\\.dockerignore\\'" . gitignore-mode))) ;; syntax from gitignore is more or less identical to that of .dockerignore
 
   (use-package gitconfig-mode
-    :ensure t
-    :mode "\\.gitconfig\\'")
+      :ensure t
+      :mode "\\.gitconfig\\'")
 
   (use-package git-timemachine
-    :ensure t
-    :commands git-timemachine)
+      :ensure t
+      :commands git-timemachine)
 
   ;; smerge mode deals with merge conflicts in git. Prefix mapping is C-c v
   (setq smerge-command-prefix "\C-cv")
@@ -849,23 +850,15 @@ Add Company backends to enable elisp autocomplete
  :PROPERTIES:
  :CUSTOM_ID: Hydra
  :END:
-- You can go pretty crazy here
+- You can go pretty crazy here, this package is one of my favorites
 - Allows you set up your own key maps where pressing one key instantly gives access to many other keybindings
 - Repo: https://github.com/abo-abo/hydra (Has a video demo)
-** config
 #+BEGIN_SRC emacs-lisp
   (use-package hydra
       :ensure t
       :config
       (setq hydra-is-helpful t)
       (setq hydra-hint-display-type 'lv))
-
-  ;; for reference when I learn hydra better 
-  ;; gives access to functions that make nice hydra UI
-  (use-package pretty-hydra
-     :disabled
-     :ensure t
-     :requires hydra)
 #+END_SRC
 ** Hydras
 - Great hydras make for a great workflow (Let's hope they are great...)
@@ -1317,21 +1310,22 @@ Note: the template is meant to be edited to personal preferences
       ("\\.mustache\\'"    . web-mode)
       ("\\.djhtml\\'"      . web-mode)
       ("\\.js\\'"          . web-mode))
-      :config
-      (setq web-mode-enable-engine-detection t)
+      :custom
       ;; Indentation
-      (setq web-mode-attr-indent-offset 2)
-      (setq web-mode-markup-indent-offset 2)
-      (setq web-mode-code-indent-offset 2)
+      (web-mode-attr-indent-offset 2)
+      (web-mode-markup-indent-offset 2)
+      (web-mode-code-indent-offset 2)
       ;; Auto-closing
-      (setq web-mode-auto-close-style 2)
-      (setq web-mode-enable-auto-pairing t)
-      (setq web-mode-enable-auto-quoting t)
+      (web-mode-auto-close-style 2)
+      (web-mode-enable-auto-pairing t)
+      (web-mode-enable-auto-quoting t)
       ;; Highlighting
-      (setq web-mode-enable-current-column-highlight t)
-      (setq web-mode-enable-current-element-highlight t))
+      (web-mode-enable-current-column-highlight t)
+      (web-mode-enable-current-element-highlight t)
+      :config
+      (setq web-mode-enable-engine-detection t))
 
-   (setq-default css-indent-offset 2) ;; web mode for some reason cancels css autocomplete so I have to configure css separately
+      (setq-default css-indent-offset 2) ;; web mode for some reason cancels css autocomplete so I have to configure css separately
 #+END_SRC
 visually display hex values as colors
 #+BEGIN_SRC emacs-lisp
@@ -1358,23 +1352,28 @@ visually display hex values as colors
   - if you are a *node.js* developer and/or *vanilla js* developer, the current setup with web mode is better for syntax highlighting
   - in *hydra-marinov* located in the [[#hydra][Hydra]] section there are keybindings to switch between rjsx and web mode easily
 #+BEGIN_SRC emacs-lisp
-(use-package rjsx-mode
-    :ensure t
-    :mode
-    (("\\.jsx\\'"  . rjsx-mode))
-    :init
-    (setq-default rjsx-basic-offset 2))
+  (use-package rjsx-mode
+      :ensure t
+      :mode
+      (("\\.jsx\\'"  . rjsx-mode))
+      :init
+      (setq-default rjsx-basic-offset 2))
     
-(use-package json-mode
-    :ensure t)
+  (use-package json-mode
+      :ensure t
+      :commands json-mode)
 
-(use-package yaml-mode
-    :ensure t
-    :mode (("\\.yml\\'" . yaml-mode)
-         ("\\.yaml\\'" . yaml-mode)))
+  (use-package yaml-mode
+      :ensure t
+      :commands yaml-mode
+      :mode (("\\.yml\\'" . yaml-mode)
+             ("\\.yaml\\'" . yaml-mode)))
     
-(use-package dockerfile-mode
-    :ensure t)
+  (use-package dockerfile-mode
+      :ensure t)
+    
+  (use-package csv-mode
+      :ensure t)
 #+END_SRC
 *** Skewer
 'live web-development in emacs'
