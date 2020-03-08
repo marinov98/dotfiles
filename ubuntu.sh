@@ -11,7 +11,8 @@ curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 
 echo "keyboard configurations..."
 sudo add-apt-repository universe
-sudo apt install gnome-tweak-tool xcape 
+sudo apt install xcape 
+sudo apt install fonts-firacode
 
 echo "fonts..."
 sudo apt install xlappearance fonts-font-awesome 
