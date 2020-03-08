@@ -805,14 +805,6 @@ I never lose where my cursor is thanks to this
       (global-company-mode t)) 
       
 #+END_SRC 
-This is a company front-end that has icons for company
-#+BEGIN_SRC emacs-lisp
-  (use-package company-box
-      :ensure t
-      :requires company
-      :hook
-      (company-mode . company-box-mode))
-#+END_SRC
 Add Company backends to enable elisp autocomplete
 #+BEGIN_SRC emacs-lisp
 
