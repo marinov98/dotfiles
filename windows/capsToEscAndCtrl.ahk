@@ -9,7 +9,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 Return
 
 *CapsLock up::
-    If ((A_TickCount-cDown)<400)  ; Modify press time as needed (milliseconds)
+    If ((A_TickCount-cDown)<200)  ; Modify press time as needed (milliseconds)
         Send {Blind}{Ctrl Up}{Esc}
     Else
         Send {Blind}{Ctrl Up}
