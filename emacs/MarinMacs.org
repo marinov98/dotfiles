@@ -210,22 +210,22 @@ A nice and quick way to view/edit my configuration at any time
  - Org manual: https://orgmode.org/
 #+BEGIN_SRC emacs-lisp
   (use-package org 
-     :ensure t
-     :pin org)
+      :ensure t
+      :pin org)
      
  ;; allow easier snippet insertion  
  ;; (require 'org-tempo)
  
- ;; bullets
- (use-package org-bullets
-    :ensure t
-    :config
-    (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
+  ;; bullets
+  (use-package org-bullets
+     :ensure t
+     :config
+     (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
 
-;; Org custom settings
-(custom-set-variables
-         '(org-directory "~/Projects/org")
-         '(org-default-notes-file (concat org-directory "/Personal/notes.org")))
+  ;; Org custom settings
+  (custom-set-variables
+           '(org-directory "~/Projects/org")
+           '(org-default-notes-file (concat org-directory "/Personal/notes.org")))
 
 #+END_SRC
 ** Markdown
