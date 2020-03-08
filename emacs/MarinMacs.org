@@ -161,46 +161,45 @@ A nice and quick way to view/edit my configuration at any time
         ;; package-specific
         "t" 'neotree-toggle))
 
-     (use-package evil
-       :ensure t
-       :config
-       (evil-mode 1)
-       ;; make switching windows much easier
-       (define-key evil-motion-state-map (kbd "M-h") 'evil-window-left)
-       (define-key evil-motion-state-map (kbd "M-j") 'evil-window-down)
-       (define-key evil-motion-state-map (kbd "M-k") 'evil-window-up)
-       (define-key evil-motion-state-map (kbd "M-l") 'evil-window-right)
-       ; NeoTree override keybindings, package (neotree) is shown further in the config
-       (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
-       (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
-       (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-       (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
-       (evil-define-key 'normal neotree-mode-map (kbd "g") 'neotree-refresh)
-       (evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-next-line)
-       (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
-       (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
-       (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle))
+  (use-package evil
+      :ensure t
+      :config
+      (evil-mode 1)
+      ;; make switching windows much easier
+      (define-key evil-motion-state-map (kbd "M-h") 'evil-window-left)
+      (define-key evil-motion-state-map (kbd "M-j") 'evil-window-down)
+      (define-key evil-motion-state-map (kbd "M-k") 'evil-window-up)
+      (define-key evil-motion-state-map (kbd "M-l") 'evil-window-right)
+      ; NeoTree override keybindings, package (neotree) is shown further in the config
+      (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
+      (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
+      (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
+      (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
+      (evil-define-key 'normal neotree-mode-map (kbd "g") 'neotree-refresh)
+      (evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-next-line)
+      (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
+      (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
+      (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle))
 
 #+END_SRC
 ** Evil utility 
 - Below evil packages are extras that enhance the evil-mode experience in emacs
 #+BEGIN_SRC emacs-lisp
-     ;; like tpope's vim-surround
-     (use-package evil-surround
-       :ensure t
-       :config
-       (global-evil-surround-mode 1))
+  ;; like tpope's vim-surround
+  (use-package evil-surround
+      :ensure t
+      :config
+      (global-evil-surround-mode 1))
 
-     ;; Evil multiple-cursors
-     (use-package evil-mc
-       :ensure t
-       :config
-       (global-evil-mc-mode 1))
+  ;; Evil multiple-cursors
+  (use-package evil-mc
+      :ensure t
+      :config
+      (global-evil-mc-mode 1))
 
 
-     ;; Evil magit overrides magit keybindings, package (magit) is shown further in the config
-     (use-package evil-magit
-           :ensure t)
+  ;; Evil magit overrides magit keybindings, package (magit) is shown further in the config
+  (use-package evil-magit :ensure t)
 #+END_SRC
 * Markup
  :PROPERTIES:
@@ -231,11 +230,11 @@ A nice and quick way to view/edit my configuration at any time
 #+END_SRC
 ** Markdown
 #+BEGIN_SRC emacs-lisp
-(use-package markdown-mode
-  :ensure t
-  :commands markdown-mode
-  :mode
-  ("\\.\\(md\\|markdown\\)\\'" . markdown-mode))
+  (use-package markdown-mode
+      :ensure t
+      :commands markdown-mode
+      :mode
+      ("\\.\\(md\\|markdown\\)\\'" . markdown-mode))
 #+END_SRC
 ** Writing
  :PROPERTIES:
@@ -416,15 +415,15 @@ You can enable/disable any themes that you like here
 ;; Spaceline
 ;;;;;;;;;;;;;;;;;;;;;;   
 
-(use-package spaceline
-   :ensure t
-   :custom
-   (spaceline-toggle-flycheck-info-off)
-   :config
-   (require 'spaceline-config)
-   (setq powerline-default-separator (quote arrow))
-   (spaceline-highlight-face-evil-state) ;; evil mode only
-   (spaceline-spacemacs-theme))
+  (use-package spaceline
+      :ensure t
+      :custom
+      (spaceline-toggle-flycheck-info-off)
+      :config
+      (require 'spaceline-config)
+      (setq powerline-default-separator (quote arrow))
+      (spaceline-highlight-face-evil-state) ;; evil mode only
+      (spaceline-spacemacs-theme))
 
 
 
@@ -432,22 +431,22 @@ You can enable/disable any themes that you like here
 ;;  Telephone-line
 ;;;;;;;;;;;;;;;;;;;;;;   
    
-(use-package telephone-line
-    :disabled
-    :ensure t
-    :config
-    (setq telephone-line-lhs
-    '((evil   . (telephone-line-evil-tag-segment))
+  (use-package telephone-line
+      :disabled
+      :ensure t
+      :config
+      (setq telephone-line-lhs
+      '((evil   . (telephone-line-evil-tag-segment))
         (accent . (telephone-line-vc-segment
                    telephone-line-erc-modified-channels-segment
                    telephone-line-process-segment))
         (nil    . (telephone-line-minor-mode-segment
                    telephone-line-buffer-segment))))
-    (setq telephone-line-rhs
+      (setq telephone-line-rhs
       '((nil    . (telephone-line-misc-info-segment))
         (accent . (telephone-line-major-mode-segment))
         (evil   . (telephone-line-airline-position-segment))))
-    (telephone-line-mode 1))
+        (telephone-line-mode 1))
 
 
 
@@ -456,7 +455,7 @@ You can enable/disable any themes that you like here
 ;; lightweight doom theme
 ;;;;;;;;;;;;;;;;;;;;;;   
 
-(use-package doom-modeline
+  (use-package doom-modeline
       :disabled
       :ensure t
       :hook (after-init . doom-modeline-mode))
@@ -465,19 +464,17 @@ You can enable/disable any themes that you like here
 ;; Powerline
 ;;;;;;;;;;;;;;;;;;;;;;   
 
- (use-package powerline
-     :disabled
-     :ensure t
-     :config
-     (powerline-default theme))   
-     
-
-;; Other themes with powerline
+  (use-package powerline
+      :disabled
+      :ensure t
+      :config
+      (powerline-default theme))   
+      ;; Other themes with powerline
     
-  ;;     (powerline-center-theme)
-  ;;     (powerline-vim-theme)
-  ;;     (powerline-center-evil-theme)
-  ;;     (powerline-nano-theme)
+      ;;     (powerline-center-theme)
+      ;;     (powerline-vim-theme)
+      ;;     (powerline-center-evil-theme)
+      ;;     (powerline-nano-theme)
 
 #+END_SRC
 * Ivy
@@ -625,10 +622,10 @@ Useful if you work on multiple windows and want an efficient way of switching be
  :END:
 I never lose where my cursor is thanks to this
 #+BEGIN_SRC emacs-lisp
-(use-package beacon
-    :ensure t
-    :config
-    (beacon-mode 1))
+  (use-package beacon
+      :ensure t
+      :config
+      (beacon-mode 1))
 #+END_SRC
 ** Neotree
  :PROPERTIES:
@@ -667,8 +664,7 @@ I never lose where my cursor is thanks to this
         (projectile-mode t))
 
      ;; Counsel-Projectile (I utilize counsel projectile bindings in my hydra-projectile)
-    (use-package counsel-projectile
-        :ensure t)
+    (use-package counsel-projectile :ensure t)
 #+END_SRC
 * Shell
  :PROPERTIES:
@@ -703,7 +699,7 @@ I never lose where my cursor is thanks to this
 
         (setq eshell-prompt-function #'4lex1v:eshell-prompt
                eshell-prompt-regexp ".*>>+ ")
-       (global-set-key (kbd "C-`") 'eshell) ;; terminal alternative in emacs
+       (global-set-key (kbd "C-`") 'eshell) 
    #+END_SRC
 * Globals
  :PROPERTIES:
@@ -719,10 +715,10 @@ I never lose where my cursor is thanks to this
  - Even if you are using emacs without evil-mode, this package can prove useful
  - Documentation: https://elpa.gnu.org/packages/undo-tree.html
 #+BEGIN_SRC emacs-lisp
-(use-package undo-tree
-  :ensure t
-  :init
-  (global-undo-tree-mode))
+  (use-package undo-tree
+      :ensure t
+      :init
+      (global-undo-tree-mode))
 #+END_SRC
 ** Yasnippet
  :PROPERTIES:
@@ -736,27 +732,26 @@ I never lose where my cursor is thanks to this
     - when company triggers, you can use Ctrl + Tab to insert a snippet
 - repo: https://github.com/joaotavora/yasnippet
 #+BEGIN_SRC emacs-lisp
-(use-package yasnippet
-    :ensure t
-    :bind 
-    ((:map yas-keymap
-    ("<tab>" . nil) ;; there are conflicts here with autocomplete
-    ("<C-tab>" . yas-next-field-or-maybe-expand))
-    (:map yas-minor-mode-map
-    ("<tab>" . nil) ;; while this is convenient, it clashes with auto-complete and jump-to-definitions
-    ("<C-tab>" . yas-expand)))
-    :init
-    (yas-global-mode 1)
-    :config
-    (yas-reload-all))
+  (use-package yasnippet
+      :ensure t
+      :bind 
+      ((:map yas-keymap
+      ("<tab>" . nil) ;; there are conflicts here with autocomplete
+      ("<C-tab>" . yas-next-field-or-maybe-expand))
+      (:map yas-minor-mode-map
+      ("<tab>" . nil) ;; while this is convenient, it clashes with auto-complete and jump-to-definitions
+      ("<C-tab>" . yas-expand)))
+      :init
+      (yas-global-mode 1)
+      :config
+      (yas-reload-all))
 
-(use-package yasnippet-snippets 
-    :ensure t)
+  (use-package yasnippet-snippets :ensure t)
     
-;; snippets for React.js
-(use-package react-snippets
-  :requires yasnippet
-  :ensure t)
+  ;; snippets for React.js
+  (use-package react-snippets
+      :requires yasnippet
+      :ensure t)
 #+END_SRC 
 ** FlyCheck
  :PROPERTIES:
@@ -827,8 +822,7 @@ Add Company backends to enable elisp autocomplete
 - git-timemachine: flip through a file's full list of version. Revert to any given phase easily
 #+BEGIN_SRC emacs-lisp
   ;; hydra takes care of my magit bindings
-  (use-package magit
-      :ensure t)
+  (use-package magit :ensure t)
 
   (use-package gitignore-mode
       :ensure t
@@ -1043,61 +1037,61 @@ Add Company backends to enable elisp autocomplete
  - company-lsp (this is the company completion backend)
 #+BEGIN_SRC emacs-lisp  
   (use-package lsp-mode
-     :ensure t
-     :commands lsp
-     :hook
-     ((c++-mode . lsp)
-     (c-mode . lsp)
-     (python-mode . lsp)
-     (css-mode . lsp)
-     (yaml-mode . lsp)
-     (json-mode . lsp)
-     (js2-mode . lsp)
-     (rjsx-mode . lsp)
-     (typescript-mode . lsp)
-     (web-mode . lsp))
-     :custom
-     (lsp-idle-delay 0.15)
-     (lsp-flycheck-live-reporting nil);; allows our previous flycheck setting to only check syntax on save to work
-     :config
-     (setq gc-cons-threshold (* 1024 1024 100)) ;; 100 mb client-server generates a lot of garbage so we want to be able to have more room for garbage
-     (setq read-process-output-max (* 1024 1024)) ;; (1mb) Increase the amount of data which Emacs reads from the process
-     (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")))
+      :ensure t
+      :commands lsp
+      :hook
+      ((c++-mode . lsp)
+      (c-mode . lsp)
+      (python-mode . lsp)
+      (css-mode . lsp)
+      (yaml-mode . lsp)
+      (json-mode . lsp)
+      (js2-mode . lsp)
+      (rjsx-mode . lsp)
+      (typescript-mode . lsp)
+      (web-mode . lsp))
+      :custom
+      (lsp-idle-delay 0.15)
+      (lsp-flycheck-live-reporting nil) ;; allows our previous flycheck setting to only check syntax on save to work
+      :config
+      (setq gc-cons-threshold (* 1024 1024 100)) ;; 100 mb client-server generates a lot of garbage so we want to be able to have more room for garbage
+      (setq read-process-output-max (* 1024 1024)) ;; (1mb) Increase the amount of data which Emacs reads from the process
+      (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")))
 
   (use-package lsp-ui
-    :after lsp-mode flycheck
-    :ensure t
-    :commands lsp-ui-mode
-    :hook (lsp-mode . lsp-ui-mode)
-    :bind
-    (:map lsp-ui-peek-mode-map
-    ("M-j" . lsp-ui-peek--select-next)
-    ("M-k" . lsp-ui-peek--select-prev))
-    :custom
-    (lsp-ui-doc-enable t)
-    (lsp-ui-doc-delay 0.65) ;; display doc after 6.5/10 of a second
-    (lsp-ui-doc-use-childframe t)
-    (lsp-ui-doc-position 'top)
-    (lsp-ui-doc-include-signature t)
-    (lsp-ui-sideline-enable nil)
-    (lsp-ui-flycheck-list-position 'right)
-    (lsp-ui-peek-enable t)
-    (lsp-ui-peek-list-width 60)
-    (lsp-ui-peek-peek-height 25)
-    :config
-    (setq eldoc-idle-delay 0.65)) ;; delay eldoc for 6.5/10 second
+      :after lsp-mode flycheck
+      :ensure t
+      :commands lsp-ui-mode
+      :hook (lsp-mode . lsp-ui-mode)
+      :bind
+      (:map lsp-ui-peek-mode-map
+      ("M-j" . lsp-ui-peek--select-next)
+      ("M-k" . lsp-ui-peek--select-prev))
+      :custom
+      (lsp-ui-doc-enable t)
+      (lsp-ui-doc-delay 0.65) ;; display doc after 6.5/10 of a second
+      (lsp-ui-doc-use-childframe t)
+      (lsp-ui-doc-position 'top)
+      (lsp-ui-doc-include-signature t)
+      (lsp-ui-sideline-enable nil)
+      (lsp-ui-flycheck-list-position 'right)
+      (lsp-ui-peek-enable t)
+      (lsp-ui-peek-list-width 60)
+      (lsp-ui-peek-peek-height 25)
+      :config
+      (setq eldoc-idle-delay 0.65)) ;; delay eldoc for 6.5/10 second
 
   (use-package company-lsp
-    :requires company
-    :ensure t
-    :custom
-    (company-transformers nil)
-    (company-lsp-async t)
-    (company-lsp-cache-candidates nil) ;; Disable client-side cache because the LSP server does a better job.
-    (company-lsp-enable-snippet t)
-    (company-lsp-enable-recompletion t)
-    :config
-    (push 'company-lsp company-backends))
+      :requires company
+      :ensure t
+      :custom
+      (company-transformers nil)
+      (company-lsp-async t)
+      (company-lsp-cache-candidates nil) ;; Disable client-side cache because the LSP server does a better job.
+      (company-lsp-enable-snippet t)
+      (company-lsp-enable-recompletion t)
+      :config
+      (push 'company-lsp company-backends))
 
 #+END_SRC
 * DAP
@@ -1112,9 +1106,8 @@ Add Company backends to enable elisp autocomplete
        :ensure nil
        :requires hydra)
 
-  ;; only installing because dap-mode requires it
-   (use-package posframe
-       :ensure t)
+   ;; only installing because dap-mode requires it
+   (use-package posframe :ensure t)
 
    (use-package dap-mode
        :ensure t
@@ -1132,23 +1125,21 @@ Add Company backends to enable elisp autocomplete
  :END:
 - I still actually prefer Overleaf for latex editing...Hoping to just use emacs for it one day
 - I am also considering using org mode and then exporting to latex 
+- Enable any if you wish, may be utilized in the future
 - Below packages are kept for reference
   - tex (powerful text formatter)
   - auctex (extensible package for writing and formatting TeX files in Emacs)
   - pdf-tools (pdf utility in Emacs)
 #+BEGIN_SRC emacs-lisp
-  ;; Enable any if you wish, may be utilized in the future
 
   (use-package tex
      :disabled
-     :ensure auctex)
+     :ensure auctex
+     :config
+     (setq TeX-auto-save t)
+     (setq TeX-parse-self t)
+     (setq TeX-save-query nil))
 
-  ;; Settings 
-; (setq TeX-auto-save t)
-; (setq TeX-parse-self t)
-; (setq TeX-save-query nil)
-; (add-hook 'LaTeX-mode-hook 'flycheck-mode) ;; latex also needs flycheck for syntax checking
-  
 
   ;;;;;;;;;;;;;;;;;;
   ;; PDF
@@ -1207,18 +1198,19 @@ Still experimenting with this, native gdb in emacs is also really good
  - Documentation: https://clang.llvm.org/docs/ClangFormat.html
  - You should also search how to install *clang-format* on your specific OS
 #+BEGIN_SRC emacs-lisp
-(use-package clang-format 
-   :ensure t
-   :bind 
-   (("C-c R" . clang-format-region) ;; format current line
-   ("C-c F" . clang-format-buffer))) ;; format entire file
+  (use-package clang-format 
+     :ensure t
+     :bind 
+     (("C-c R" . clang-format-region) ;; format current line
+     ("C-c F" . clang-format-buffer))) ;; format entire file
  
+ ;; formats file on save
  (use-package clang-format+
-  :quelpa (clang-format+
-           :fetcher github
-           :repo "SavchenkoValeriy/emacs-clang-format-plus")
-           :config
-           (add-hook 'c-mode-common-hook #'clang-format+-mode))
+     :quelpa (clang-format+
+              :fetcher github
+              :repo "SavchenkoValeriy/emacs-clang-format-plus")
+              :config
+              (add-hook 'c-mode-common-hook #'clang-format+-mode))
 #+END_SRC
 ** Python
  :PROPERTIES:
@@ -1369,44 +1361,42 @@ visually display hex values as colors
       :mode (("\\.yml\\'" . yaml-mode)
              ("\\.yaml\\'" . yaml-mode)))
     
-  (use-package dockerfile-mode
-      :ensure t)
+  (use-package dockerfile-mode :ensure t)
     
-  (use-package csv-mode
-      :ensure t)
+  (use-package csv-mode :ensure t)
 #+END_SRC
 *** Skewer
 'live web-development in emacs'
 #+BEGIN_SRC emacs-lisp
-(use-package skewer-mode
-    :disabled
-    :ensure t
-    :commands skewer-mode run-skewer
-    :config
-    (add-hook 'js2-mode-hook 'skewer-mode)
-    (add-hook 'css-mode-hook 'skewer-css-mode)
-    (add-hook 'html-mode-hook 'skewer-html-mode)
-    (skewer-setup))
+  (use-package skewer-mode
+      :disabled
+      :ensure t
+      :commands skewer-mode run-skewer
+      :config
+      (add-hook 'js2-mode-hook 'skewer-mode)
+      (add-hook 'css-mode-hook 'skewer-css-mode)
+      (add-hook 'html-mode-hook 'skewer-html-mode)
+      (skewer-setup))
     
 #+END_SRC
 *** Impatient-Mode
 'See the effect of your HTML as you type it.'
    #+BEGIN_SRC emacs-lisp
-   (use-package impatient-mode
-       :disabled
-       :ensure t)  
+  (use-package impatient-mode
+      :disabled
+      :ensure t)  
    #+END_SRC
 *** Emmet 
  More on emmet: https://www.emmet.io/
 #+BEGIN_SRC emacs-lisp
-(use-package emmet-mode
-    :ensure t
-    :hook
-    ((css-mode  . emmet-mode)
-    (php-mode  . emmet-mode)
-    (sgml-mode . emmet-mode)
-    (rjsx-mode . emmet-mode)
-    (web-mode  . emmet-mode)))
+  (use-package emmet-mode
+      :ensure t
+      :hook
+      ((css-mode  . emmet-mode)
+      (php-mode  . emmet-mode)
+      (sgml-mode . emmet-mode)
+      (rjsx-mode . emmet-mode)
+      (web-mode  . emmet-mode)))
 #+END_SRC
 ** JavaScript-TypeScript
  :PROPERTIES:
@@ -1417,42 +1407,42 @@ visually display hex values as colors
 *** Node Path
 Adds the node_modules/.bin directory to the buffer exec_path.
 #+BEGIN_SRC emacs-lisp
-(use-package add-node-modules-path
-   :ensure t
-   :hook 
-   ((web-mode . add-node-modules-path)
-   (rjsx-mode . add-node-modules-path)))
+  (use-package add-node-modules-path
+      :ensure t
+      :hook 
+      ((web-mode . add-node-modules-path)
+      (rjsx-mode . add-node-modules-path)))
 #+END_SRC
 *** Debugging
  Any kind of setup can be found in the dap repo that was mentioned previously...
 *** Front-end
 #+BEGIN_SRC emacs-lisp
-;; debugging in chrome
-(use-package dap-chrome
-    :ensure nil
-    :requires dap-mode)
+  ;; debugging in chrome
+  (use-package dap-chrome
+      :ensure nil
+      :requires dap-mode)
   
-;; debugging in firefox
-(use-package dap-firefox
-    :ensure nil
-    :requires dap-mode)
+  ;; debugging in firefox
+  (use-package dap-firefox
+      :ensure nil
+      :requires dap-mode)
 #+END_SRC
 *** Back-end
 #+BEGIN_SRC emacs-lisp
-(use-package dap-node
-    :ensure nil
-    :requires dap-mode)
+  (use-package dap-node
+      :ensure nil
+      :requires dap-mode)
 #+END_SRC
 *** Js2-mode
 - A 'better' mode for editing javascript files. Can sometimes have performance issues depending on emacs version
 - There should be fixes in Emacs >= 27.05
 - I am using web mode for js files now and it seems to be a bit better for syntax highlighting at least 
 #+BEGIN_SRC emacs-lisp
-(use-package js2-mode
-    :ensure t
-    :config 
-    (setq js2-strict-missing-semi-warning nil) ;; disable annoying warnings
-    (setq-default js2-basic-offset 2)) ;; set indentation to 2
+  (use-package js2-mode
+      :ensure t
+      :config 
+      (setq js2-strict-missing-semi-warning nil) ;; disable annoying warnings
+      (setq-default js2-basic-offset 2)) ;; set indentation to 2
 
 #+END_SRC
 
