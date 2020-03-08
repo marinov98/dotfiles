@@ -1462,31 +1462,26 @@ Adds the node_modules/.bin directory to the buffer exec_path.
 *** TIDE
 All for typescript
 #+BEGIN_SRC emacs-lisp
-;; enable typescript in emacs
-(use-package typescript-mode
-    :ensure t
-    :mode (("\\.ts\\'" . typescript-mode)
-          ("\\.tsx\\'" . typescript-mode))
-    :config
-    (setq-default typescript-indent-level 2)) ;; indent 2 spaces by default
+  ;; enable typescript in emacs
+  (use-package typescript-mode
+      :ensure t
+      :mode (("\\.ts\\'" . typescript-mode)
+             ("\\.tsx\\'" . typescript-mode))
+      :config
+      (setq-default typescript-indent-level 2)) ;; indent 2 spaces by default
 
-;; typescript integrated development environment
-(use-package tide
-    :ensure t
-    :config
-    (defun setup-tide-mode ()
-    (interactive)
-    (tide-setup)
-    (flycheck-mode +1)
-    (setq flycheck-check-syntax-automatically '(save mode-enabled))
-    (eldoc-mode +1)
-    (tide-hl-identifier-mode +1)
-    (company-mode +1))
-    ;; aligns annotation to the right hand side
-    (setq company-tooltip-align-annotations t)
-    ;; formats the buffer before saving
-    (add-hook 'before-save-hook 'tide-format-before-save)
-    (add-hook 'typescript-mode-hook #'setup-tide-mode))
+  ;; typescript integrated development environment
+  (use-package tide
+      :ensure t
+      :after
+      (typescript-mode company flycheck)
+      :hook
+      ((typscript-mode . tide-setup)
+      (typescript-mode . tide-hl-identifier-mode)
+      (before-save . tide-format-before-save))
+      :config
+      (flycheck-add-next-checker 'typescript-tide 'javascript-eslint)
+      (flycheck-add-next-checker 'tsx-tide 'javascript-eslint))
 #+END_SRC
 * Diminish
  :PROPERTIES:
