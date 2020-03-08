@@ -56,11 +56,12 @@ Indentation
 - Options, display, parenthesis 
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
-    (setq default-frame-alist '((font . "Fira Code-14")))  ;; set font and font size
+    (setq default-frame-alist '((font . "Fira Code-10")))  ;; set font and font size
     (setq visible-bell t)                                  ;; disable end of buffer sounds
     (electric-pair-mode)                                   ;; auto closing brackets
     (show-paren-mode 1)                                    ;; highlight matching parenthesis
     (global-hl-line-mode 1)                                ;; highlight current line 
+    (setq inhibit-startup-screen t)                        ;; disable startup screen
 #+END_SRC
 - Line numbers
   - I am not sure if all packages work with line numbers properly, but so far everything works
@@ -78,12 +79,13 @@ Displaying time and date in emacs
     (setq display-time-24hr-format t)
     (display-time-mode 1)                                  ;; display time in the modeline
 #+END_SRC
-Convenient yes or no and disable bars
+Convenient yes or no and disable bars/blinking cursor
 #+BEGIN_SRC emacs-lisp
     (fset 'yes-or-no-p 'y-or-n-p)            ;; change yes or no to y or n
     (menu-bar-mode -1)                       ;; disable menu bar
     (toggle-scroll-bar -1)                   ;; disable scroll bar
     (tool-bar-mode -1)                       ;; disable tool bar
+    (blink-cursor-mode -1)                   ;; make cursor stop blinking
 #+END_SRC
 Disable back up files (comment if you want to enable backup files) 
 #+BEGIN_SRC emacs-lisp
@@ -1054,8 +1056,6 @@ Add Company backends to enable elisp autocomplete
       (lsp-idle-delay 0.15)
       (lsp-flycheck-live-reporting nil) ;; allows our previous flycheck setting to only check syntax on save to work
       :config
-      (setq gc-cons-threshold (* 1024 1024 100)) ;; 100 mb client-server generates a lot of garbage so we want to be able to have more room for garbage
-      (setq read-process-output-max (* 1024 1024)) ;; (1mb) Increase the amount of data which Emacs reads from the process
       (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")))
 
   (use-package lsp-ui
