@@ -56,7 +56,7 @@ Indentation
 - Options, display, parenthesis 
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
-    (setq default-frame-alist '((font . "Fira Code-14")))  ;; set font and font size
+    (setq default-frame-alist '((font . "Fira Code-10")))  ;; set font and font size
     (setq visible-bell t)                                  ;; disable end of buffer sounds
     (electric-pair-mode)                                   ;; auto closing brackets
     (show-paren-mode 1)                                    ;; highlight matching parenthesis
@@ -1361,10 +1361,23 @@ visually display hex values as colors
       :commands yaml-mode
       :mode (("\\.yml\\'" . yaml-mode)
              ("\\.yaml\\'" . yaml-mode)))
+             
+  (use-package graphql-mode
+      :ensure t
+      :commands graphql-mode
+      :mode
+      (("\\.\\(gql\\|graphql\\)\\'" . graphql-mode)))
     
-  (use-package dockerfile-mode :ensure t)
+  (use-package dockerfile-mode 
+      :ensure t
+      :commands dockerfile-mode
+      :mode
+      (("Dockerfile'"       . dockerfile-mode)
+      ("\\.Dockerfile\\'"  . dockerfile-mode)))
     
-  (use-package csv-mode :ensure t)
+  (use-package csv-mode 
+      :ensure t
+      :commands csv-mode)
 #+END_SRC
 *** Skewer
 'live web-development in emacs'
