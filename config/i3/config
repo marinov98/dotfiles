@@ -193,7 +193,7 @@ exec_always killall feh
 # exec_always --no-startup-id sh .profile
 
 # LAYOUT
-exec_always "setxkbmap -model pc104 -layout us,es,bg -variant ,, -option grp:alt_shift_toggle"
+exec_always "setxkbmap -model pc104 -layout us,bg,es -variant ,phonetic,  -option grp:alt_shift_toggle"
 
 # Makes CAPS LOCK act as both CTRL and ESC
 exec_always --no-startup-id setxkbmap -option 'caps:ctrl_modifier'
