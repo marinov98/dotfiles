@@ -4,22 +4,26 @@
 
 ;; -*- lexical-binding: t; -*-
 
-;;; Temporarily reduce garbage collection during startup. Inspect `gcs-done'.
-;; Link to where I found the code: https://ambrevar.xyz/emacs2/
-(defun marinov/reset-gc-cons-threshold ()
-  "Reset garbage collection to default values after startup."
-  (setq gc-cons-threshold (car (get 'gc-cons-threshold 'standard-value)))
-  (setq gc-cons-percentage 0.1))
 
+;; maximize garbage threshold to boost startup time
 (setq gc-cons-threshold most-positive-fixnum)
 (setq gc-cons-percentage 0.6)
 
-(add-hook 'after-init-hook #'marinov/reset-gc-cons-threshold)
+;;; Function to reduce garbage collection threshold after initialization to avoid crashing
+(defun marinov/set-memory ()
+  "Set memory usage settings after start up."
+  (setq gc-cons-threshold (* 1024 1024 50)) ;; (50mb) default 800kb threshold is low by modern standards
+  (setq large-file-warning-threshold (* 1024 1024 80)) ;; (80mb) default 1mb threshold is low by modern standards
+  (setq read-process-output-max (* 1024 1024)) ;; (1mb) Increase the amount of data which Emacs reads from the process (recommended by lsp package)
+  (setq gc-cons-percentage 0.1))
+
+(add-hook 'after-init-hook #'marinov/set-memory)
 
 ;;; Temporarily disable the file name handler.
 (setq default-file-name-handler-alist file-name-handler-alist)
 (setq file-name-handler-alist nil)
 
+;; reset file name handler function
 (defun marinov/reset-file-name-handler-alist ()
   "Reset file name handlers."
   (setq file-name-handler-alist
