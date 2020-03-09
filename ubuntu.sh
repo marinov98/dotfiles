@@ -13,6 +13,7 @@ echo "keyboard configurations..."
 sudo add-apt-repository universe
 sudo apt install xcape 
 sudo apt install fonts-firacode
+sudo apt install fonts-inconsolata
 
 echo "fonts..."
 sudo apt install xlappearance fonts-font-awesome 
