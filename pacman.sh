@@ -24,7 +24,7 @@ echo "installing keyboard configuration tools..."
 sudo pacman -S xorg-xmodmap xkeycaps interception-caps2esc xcape xorg-xprop xorg-xrandr arandr xorg-xrefresh
 
 echo "installing tools for C++..."
-sudo pacman -S clang cmake llvm lldb ctags clang-format ncurses
+sudo pacman -S clang cmake llvm ctags clang-format ncurses
 
 echo "x stuff..."
 sudo pacman -S xf86-input-libinput xbacklight xf86-input-wacom xf86-video-fbdev xf86-video-intel xf86-video-vesa xfsprogs xorg-bdftopcf xorg-font-util xorg-fonts-encodings xorg-iceauth xorg-luit xorg-mkfontscale xorg-server xorg-sessreg
