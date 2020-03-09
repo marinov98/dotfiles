@@ -39,7 +39,7 @@ echo "installing browser and video players..."
 sudo pacman -S google-chrome chrome-widevine pepper-flash vlc blueman
 
 echo "installing emacs, vim, and cask"
-sudo pacman -S yarn emacs gvim # auctex
+sudo pacman -S yarn emacs gvim auctex
 curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 
 echo "preparation for i3 configuring..."
@@ -47,7 +47,7 @@ sudo pacman -S feh compton i3-gaps i3status i3lock dmenu rofi trash-cli
 sudo pacman -S alacritty
 
 echo "Latex setup"
-# sudo pacman -S texlive-core texline-bin biber texlive-fontsextra texlive-bibtexextra texlive-formatsextra texlive-science
+sudo pacman -S texlive-core texline-bin biber texlive-fontsextra texlive-bibtexextra texlive-formatsextra texlive-science
 
 echo "Package install complete, transfering appropriate files now"
 sudo chmod +x configure.sh
