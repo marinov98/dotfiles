@@ -25,8 +25,7 @@ bindsym $mod+Shift+q kill
 
 ###### ROFI
 
-bindsym $mod+d exec rofi -show run -lines 4 -display-run "exec " -padding 400 -opacity "85" -bg "#0D2F04" -fg "#0A9750"  -font "Hack 14" -theme Arc 
-# bindsym $mod+d exec rofi -show run -lines 4 -display-run "Find:" -theme Arc # bg '#0D2F04' -fg '#0A9750' 
+bindsym $mod+d exec rofi -show drun -display-drun "Launch:" -lines 5 -padding 400 -opacity "85" -bg "#0D2F04" -fg "#0A9750"  -font "Fira code 14" -theme gruvbox-dark-soft -show-icons
 
 ###### DMENU 
 
@@ -256,8 +255,8 @@ bar {
 		position top
 		
 		colors {
-			background #0D324D
-			separator  #6290CF
+			background #2a2a2a
+			separator  #FFFFFF
         #					 border         background      text
 			focused_workspace	 #DA4167        #3D2645         #FFFFFF
 			inactive_workspace       #1C2321        #666666		#FFFFFF
