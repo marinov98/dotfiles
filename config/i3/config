@@ -272,7 +272,7 @@ bar {
 for_window [class="^.*"] border pixel 0
 
 smart_gaps on
-gaps inner 8
+gaps inner 5
 gaps outer 3
 
 mode "gaps" {
