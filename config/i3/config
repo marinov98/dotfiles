@@ -25,7 +25,7 @@ bindsym $mod+Shift+q kill
 
 ###### ROFI
 
-bindsym $mod+d exec rofi -show drun -display-drun "Launch:" -lines 5 -padding 400 -opacity "85" -bg "#0D2F04" -fg "#0A9750"  -font "Fira code 14" -theme Arc -show-icons
+bindsym $mod+d exec rofi -show drun -display-drun "Launch" -show-icons
 
 ###### DMENU 
 
@@ -255,13 +255,13 @@ bar {
 		position top
 		
 		colors {
-			background #e3ded9 
-			statusline #243840
-			separator  #e3ded9
-        #					 border         background      text
-			focused_workspace	 #8aa4ab        #313853         #FFFFFF
-			inactive_workspace       #1C2321        #666666		#FFFFFF
-			urgent_workspace         #EA6213        #9E0000         #FFFFFF
+			background #383c4a 
+			statusline #ebebeb
+			separator  #383c4a
+        #					         border         background      text
+			focused_workspace	     #494d5e        #383c4a         #FFFFFF
+			inactive_workspace       #383c4a        #383c4a		    #a9a9a9
+			urgent_workspace         #bf0000        #bf0000         #FFFFFF      
 		}
 }
 
