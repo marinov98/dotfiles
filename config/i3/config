@@ -226,10 +226,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym j resize shrink height 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym h resize grow width 10 px or 10 ppt
+        bindsym l resize shrink width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -250,13 +250,13 @@ bindsym $mod+r mode "resize"
 ################################
 
 bar {
-        status_command i3status # i3blocks -c ~/.config/i3/i3blocks.conf
+        status_command i3status # i3blocks -c ~/.config/i3/i3blocks.conf # i3status 
 		tray_output primary
 		position top
 		
 		colors {
 			background #2a2a2a
-			separator  #FFFFFF
+			 separator  #2a2a2a
         #					 border         background      text
 			focused_workspace	 #DA4167        #3D2645         #FFFFFF
 			inactive_workspace       #1C2321        #666666		#FFFFFF
