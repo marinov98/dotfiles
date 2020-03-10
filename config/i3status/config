@@ -5,8 +5,8 @@
 general {
 	output_format = "i3bar"
 	colors = true
-	color_good = "#01C4FF"
-	color_degraded = "#e07b00"
+	color_good = "#2a6a85"
+	color_degraded = "#4e1b5e"
 	color_bad = "#FF0000"
 	interval = 5
 }
@@ -93,5 +93,5 @@ run_watch VPN {
 }
 
 tztime local {
-	format = "📅 %h-%d-%Y  ⏰ %H:%M:%S"	
+	format = "  %h-%d-%Y  %H:%M:%S"	
 }
