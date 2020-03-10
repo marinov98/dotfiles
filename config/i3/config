@@ -207,7 +207,7 @@ exec_always --no-startup-id xcape -e '#66=Escape'
 exec_always compton --config ~/.config/compton.conf -b
 
 # WALLPAPER
-exec_always --no-startup-id feh --bg-scale ~/Pictures/blueUbuntu.png
+exec_always --no-startup-id feh --bg-scale ~/Pictures/mountainView.jpg
 
 # XSET / BLUETOOTH
 
