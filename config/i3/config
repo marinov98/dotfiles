@@ -25,7 +25,7 @@ bindsym $mod+Shift+q kill
 
 ###### ROFI
 
-bindsym $mod+d exec rofi -show drun -display-drun "Launch:" -lines 5 -padding 400 -opacity "85" -bg "#0D2F04" -fg "#0A9750"  -font "Fira code 14" -theme gruvbox-dark-soft -show-icons
+bindsym $mod+d exec rofi -show drun -display-drun "Launch:" -lines 5 -padding 400 -opacity "85" -bg "#0D2F04" -fg "#0A9750"  -font "Fira code 14" -theme Arc -show-icons
 
 ###### DMENU 
 
@@ -91,12 +91,12 @@ bindsym $mod+a focus parent
 ###### WORKSPACE MODIFICATIONS
 ####################################
 
-set $workspace1 "1: Code 🚀"
+set $workspace1 "1: Code "
 set $workspace2 "2: Browser  "
 set $workspace5 "5: Slack  "
 set $workspace6 "6: Movies/TV "
 set $workspace7 "7: Discord 🗣"
-set $workspace10 "10: Music 🎧"
+set $workspace10 "10: Music "
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1 
@@ -207,7 +207,7 @@ exec_always --no-startup-id xcape -e '#66=Escape'
 exec_always compton --config ~/.config/compton.conf -b
 
 # WALLPAPER
-exec_always --no-startup-id feh --bg-scale ~/Pictures/mountainView.jpg
+exec_always --no-startup-id feh --bg-scale ~/Pictures/blueUbuntu.png
 
 # XSET / BLUETOOTH
 
@@ -255,10 +255,11 @@ bar {
 		position top
 		
 		colors {
-			background #2a2a2a
-			 separator  #2a2a2a
+			background #e3ded9 
+			statusline #243840
+			separator  #e3ded9
         #					 border         background      text
-			focused_workspace	 #DA4167        #3D2645         #FFFFFF
+			focused_workspace	 #8aa4ab        #313853         #FFFFFF
 			inactive_workspace       #1C2321        #666666		#FFFFFF
 			urgent_workspace         #EA6213        #9E0000         #FFFFFF
 		}
@@ -272,8 +273,8 @@ bar {
 for_window [class="^.*"] border pixel 0
 
 smart_gaps on
-gaps inner 7
-gaps outer 3
+gaps inner 8
+gaps outer 5
 
 mode "gaps" {
         bindsym t gaps inner all set 20
