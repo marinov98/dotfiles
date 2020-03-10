@@ -498,7 +498,6 @@ You can enable/disable any themes that you like here
        (ivy-use-virtual-buffers t)
        (ivy-display-style 'fancy)
        (ivy-count-format "(%d/%d) ")
-       (ivy-use-virtual-buffers t)
        :config
        (setq enable-recursive-minibuffers t)
        (ivy-mode))
