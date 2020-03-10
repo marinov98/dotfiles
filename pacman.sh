@@ -43,7 +43,7 @@ sudo pacman -S yarn emacs gvim auctex
 curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 
 echo "preparation for i3 configuring..."
-sudo pacman -S feh compton i3-gaps i3status i3lock dmenu rofi trash-cli
+sudo pacman -S feh compton i3-gaps i3status i3lock rofi trash-cli
 sudo pacman -S alacritty
 
 echo "Latex setup"
