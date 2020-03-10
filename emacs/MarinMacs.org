@@ -635,6 +635,8 @@ I never lose where my cursor is thanks to this
 #+BEGIN_SRC emacs-lisp
   (use-package beacon
       :ensure t
+      :custom
+      (beacon-color "#6b2594")
       :config
       (beacon-mode 1))
 #+END_SRC
