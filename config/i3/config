@@ -95,7 +95,7 @@ set $workspace1 "1: Code "
 set $workspace2 "2: Browser  "
 set $workspace5 "5: Slack  "
 set $workspace6 "6: Movies/TV "
-set $workspace7 "7: Discord 🗣"
+set $workspace7 "7: Discord "
 set $workspace10 "10: Music "
 
 # switch to workspace
