@@ -216,7 +216,7 @@ A nice and quick way to view/edit my configuration at any time
       :pin org)
      
  ;; allow easier snippet insertion  
- ;; (require 'org-tempo)
+ (require 'org-tempo)
  
   ;; bullets
   (use-package org-bullets
@@ -577,6 +577,15 @@ Useful if you work on multiple windows and want an efficient way of switching be
   (use-package ranger
      :ensure t
      :commands ranger
+     :custom
+     (ranger-parent-depth 1)
+     (ranger-hide-cursor t)
+     (ranger-show-hidden t)
+     (ranger-preview-file t)
+     (ranger-width-parents 0.2)
+     (ranger-width-preview 0.50)
+     (ranger-footer-delay 0.2)
+     (ranger-preview-delay 0.040)
      :config
      (ranger-override-dired-mode t))
 
@@ -1456,7 +1465,7 @@ Adds the node_modules/.bin directory to the buffer exec_path.
   (use-package js2-mode
       :ensure t
       :config 
-      (setq js2-strict-missing-semi-warning nil) 
+      (setq js2-strict-missing-semi-warning nil)
       (setq-default js2-basic-offset 2)) ;; set indentation to 2
 
 #+END_SRC
