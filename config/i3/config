@@ -25,8 +25,7 @@ bindsym $mod+Shift+q kill
 
 ###### ROFI
 
-bindsym $mod+d exec rofi -show drun -display-drun "Launch" -show-icons
-
+bindsym $mod+d exec rofi -show drun -display-drun "Launch" -show-icons -padding 0 -width 50
 ###### DMENU 
 
 # bindsym $mod+d exec "dmenu_run -l 5 -nf '#BBBBBB' -nb '#0D2F04' -sb '#0A9750' -sf '#FFFFFF' -fn 'monospace-12' -p 'Search:'"
