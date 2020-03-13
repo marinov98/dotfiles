@@ -56,12 +56,13 @@ Indentation
 - Options, display, parenthesis 
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
-    (setq default-frame-alist '((font . "Fira Code-14")))  ;; set font and font size
-    (setq visible-bell t)                                  ;; disable end of buffer sounds
-    (electric-pair-mode)                                   ;; auto closing brackets
-    (show-paren-mode 1)                                    ;; highlight matching parenthesis
-    (global-hl-line-mode 1)                                ;; highlight current line 
-    (setq inhibit-startup-screen t)                        ;; disable startup screen
+  (setq default-frame-alist '((font . "Fira Code-14")
+                              (cursor-color . "#ffc600"))) ;; set font, font size, and cursor color
+  (setq visible-bell t)                                    ;; disable end of buffer sounds
+  (electric-pair-mode)                                     ;; auto closing brackets
+  (show-paren-mode 1)                                      ;; highlight matching parenthesis
+  (global-hl-line-mode 1)                                  ;; highlight current line 
+  (setq inhibit-startup-screen t)                          ;; disable startup screen
 #+END_SRC
 - Line numbers
   - I am not sure if all packages work with line numbers properly, but so far everything works
