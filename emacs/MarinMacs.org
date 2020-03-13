@@ -38,7 +38,6 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 - [[#development][Development]]
   - [[#c-cpp][C/C++]]
   - [[#python][Python]]
-  - [[#web-development][Web-Development]]
   - [[#JavaScript-TypeScript][JavaScript/TypeScript]]
 - [[#diminish][Diminish]]
 
@@ -636,7 +635,7 @@ I never lose where my cursor is thanks to this
   (use-package beacon
       :ensure t
       :custom
-      (beacon-color "#6b2594")
+      (beacon-color "#ffc600")
       :config
       (beacon-mode 1))
 #+END_SRC
