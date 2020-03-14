@@ -102,6 +102,7 @@ Emacs has native support for the GNU Debugger (GDB), and we can make it a little
 A nice and quick way to view/edit my configuration at any time
   #+begin_src emacs-lisp
     (defun goto-MarinMacs ()
+      "Jump to configuration file"
       (interactive)
       (find-file "~/.emacs.d/MarinMacs.org")) 
     (global-set-key (kbd "C-c m") 'goto-MarinMacs) ;; secondary binding is SPC m m 
@@ -145,11 +146,16 @@ A nice and quick way to view/edit my configuration at any time
         "v" 'hydra-writing/body
         "m" 'hydra-marinov/body
         "a" 'hydra-avy/body
+        "r" 'hydra-org/body
         ;; file finding, searching, and yanking
         "f" 'counsel-find-file
         "j" 'counsel-git ;; need git installed!
         "i" 'swiper-isearch
+        "I" 'swiper-multi
+        "S" 'swiper-thing-at-point
         "y" 'counsel-yank-pop
+        "c" 'avy-goto-char-timer
+        "x" 'counsel-M-x
         ;; buffers
         "s" 'save-buffer
         "b" 'counsel-switch-buffer
@@ -492,43 +498,50 @@ You can enable/disable any themes that you like here
     - [[https://github.com/ggreer/the_silver_searcher][the silver searcher(ag)]]
 - Ivy User Manual: https://oremacs.com/swiper/
 #+BEGIN_SRC emacs-lisp
-   ;; Ivy
-   (use-package ivy
-       :ensure t
-       :diminish
-       :custom
-       (ivy-use-virtual-buffers t)
-       (ivy-display-style 'fancy)
-       (ivy-count-format "(%d/%d) ")
-       :config
-       (setq enable-recursive-minibuffers t)
-       (ivy-mode))
+  ;; Ivy
+  (use-package ivy
+      :ensure t
+      :diminish
+      :custom
+      (ivy-use-virtual-buffers t)
+      (ivy-display-style 'fancy)
+      (ivy-count-format "(%d/%d) ")
+      (ivy-format-function 'ivy-format-function-line)
+      :hook 
+      ((after-init . ivy-mode)
+      (ivy-occur-mode . hl-line-mode))
+      :config
+      (setq enable-recursive-minibuffers t))
 
-   ;; Swiper 
-   (use-package swiper
-       :ensure t
-       :bind 
-       (("C-s" . swiper-isearch)
-       ("C-c C-r" . ivy-resume)))
+  ;; Swiper 
+  (use-package swiper
+      :ensure t
+      :custom
+      (swiper-action-recenter t)
+      (swiper-goto-start-of-match t)
+      (swiper-include-line-number-in-search t)
+      :bind 
+      (("C-s" . swiper-isearch)
+      ("C-c C-r" . ivy-resume)))
 
-   ;; Counsel
-   (use-package counsel
-       :ensure t
-       :bind
-       (("M-x" . counsel-M-x)
-       ("C-x C-f" . counsel-find-file)
-       ("C-x b" . counsel-switch-buffer)
-       ("M-y" . counsel-yank-pop)
-       :map ivy-minibuffer-map
-       ("M-j" . ivy-next-line)
-       ("M-k" . ivy-previous-line)) 
-       :config
-       (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"
-       ;; Add smart-casing (-S) to default command arguments:
-       counsel-rg-base-command "rg -S --no-heading --line-number --color never %s ."
-       counsel-ag-base-command "ag -S --nocolor --nogroup %s"
-       counsel-pt-base-command "pt -S --nocolor --nogroup -e %s"
-       counsel-find-file-at-point t))
+  ;; Counsel
+  (use-package counsel
+      :ensure t
+      :bind
+      (("M-x" . counsel-M-x)
+      ("C-x C-f" . counsel-find-file)
+      ("C-x b" . counsel-switch-buffer)
+      ("M-y" . counsel-yank-pop)
+      :map ivy-minibuffer-map
+      ("M-j" . ivy-next-line)
+      ("M-k" . ivy-previous-line)) 
+      :config
+      (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"
+      ;; Add smart-casing (-S) to default command arguments:
+      counsel-rg-base-command "rg -S --no-heading --line-number --color never %s ."
+      counsel-ag-base-command "ag -S --nocolor --nogroup %s"
+      counsel-pt-base-command "pt -S --nocolor --nogroup -e %s"
+      counsel-find-file-at-point t))
 #+END_SRC
 * Enhancements 
  :PROPERTIES:
@@ -540,7 +553,10 @@ You can enable/disable any themes that you like here
  :END:
 Jumping around text, keybindings utilized in a hydra
 #+BEGIN_SRC emacs-lisp
-  (use-package avy :ensure t)
+  (use-package avy 
+      :ensure t
+      :custom
+      (avy-timeout-seconds 0.3))
 #+END_SRC
 ** Which-Key
  :PROPERTIES:
@@ -680,7 +696,8 @@ I never lose where my cursor is thanks to this
         (projectile-mode t))
 
      ;; Counsel-Projectile (I utilize counsel projectile bindings in my hydra-projectile)
-    (use-package counsel-projectile :ensure t)
+    (use-package counsel-projectile 
+        :ensure t)
 #+END_SRC
 * Shell
  :PROPERTIES:
@@ -1001,7 +1018,7 @@ Add Company backends to enable elisp autocomplete
     ("." . browse-url-chromium)))
 
      (defhydra hydra-launcher (:color red :columns 2)
-      "Launch"
+      " Launch "
       ("h" man "man")
       ("g" (browse-url "https://www.google.com/") "Google")
       ("G" (browse-url "https://github.com/marinov98") "GitHub")
@@ -1044,6 +1061,31 @@ Add Company backends to enable elisp autocomplete
       ("j" rjsx-mode "rjsx-mode")
       ("q" nil "quit"))
 #+END_SRC
+*** Org (for org mode)
+    #+begin_src emacs-lisp
+    (defun marinov/goto-org-directory ()
+      "goes to my org directory"
+      (interactive)
+      (find-file org-directory))
+      
+    (defun marinov/jump-to-notes ()
+      "go to notes file"
+      (interactive)
+      (find-file org-default-notes-file))
+
+     (defhydra hydra-org (:color blue :columns 4)
+      " ORG "
+      ("o" org-open-at-point "open link")
+      ("c" org-toggle-comment "comment")
+      ("i" org-time-stamp "time stamp")
+      ("p" org-priority "priority")
+      ("t" org-todo "todo state")
+      ("a" org-todo-list "agenda")
+      ("l" org-show-todo-tree "show todo tree")
+      ("n" marinov/jump-to-notes "goto notes")
+      ("d" marinov/goto-org-directory "goto org directory")
+      ("q" nil "quit"))
+    #+end_src
 * LSP
  :PROPERTIES:
  :CUSTOM_ID: lsp
