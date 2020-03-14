@@ -55,7 +55,7 @@ Indentation
 - Options, display, parenthesis 
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
-  (setq default-frame-alist '((font . "Fira Code-10")
+  (setq default-frame-alist '((font . "Fira Code-14")
                               (cursor-color . "#ffc600"))) ;; set font, font size, and cursor color
   (setq visible-bell t)                                    ;; disable end of buffer sounds
   (electric-pair-mode)                                     ;; auto closing brackets
@@ -150,7 +150,7 @@ A nice and quick way to view/edit my configuration at any time
         ;; file finding, searching, and yanking
         "f" 'helm-find-files
         "j" 'helm-browse-project ;; need git installed!
-        "i" 'swiper-isearch
+        "i" 'swiper-helm
         "I" 'swiper-multi
         "S" 'swiper-thing-at-point
         "y" 'helm-show-kill-ring
