@@ -5,6 +5,7 @@ When Emacs is started, it normally tries to load a Lisp program from an initiali
 This file, if it exists, specifies how to initialize Emacs for you.  Emacs looks for your init file using the filenames ~/.emacs, ~/.emacs.el, or ~/.emacs.d/init.el; - GNU Emacs Manual
 - In my case the file is *init.el* which will launch my *MarinMacs.org* file. Both should be made inside the *.emacs.d* directory
 - You can automate this if you cloned my dotfiles and ran the configure.sh script
+- Reference =alt-Configs= for either more minimal or alternative implementations of my config (I currently use Ivy but I have a helm version of my configuration as well)
 * Contact
 - Email me if there are any issues/questions/things that can be better: marin.marinov@macaulay.cuny.edu
 ** Purpose:
