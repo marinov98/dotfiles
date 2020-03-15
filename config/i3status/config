@@ -21,42 +21,42 @@ order += "disk /"
 order += "tztime local"
 
 volume master {
-	format = " : %volume" 
+	format = " : %volume  " 
 	device = "default"
 	mixer = "Master"
 	mixer_idx = 0
 }
 
 load {
-	format = "  %1min "
+	format = "  %1min  "
 }
 
 cpu_usage {
-	format = "CPU %usage "
+	format = "CPU %usage  "
 }
 
 cpu_temperature 0 {
 
-	format = "±  %degrees°"
+	format = "±  %degrees°  "
 
 	path = "/sys/class/hwmon/hwmon2/temp1_input"
 	max_threshold = 95
 }
 
 cpu_temperature 1 {
-	format = "%degrees°"
+	format = "%degrees° "
 	path = "/sys/class/hwmon/hwmon2/temp2_input"
 	max_threshold = 95
 }
 
 cpu_temperature 2 {
-	format = "%degrees°"
+	format = "%degrees° "
 	path = "/sys/class/hwmon/hwmon2/temp3_input"
 	max_threshold = 95
 }
 
 battery 0 {
-        format = "%status %percentage %remaining %emptytime"
+        format = "%status %percentage %remaining %emptytime  "
         format_down = ""
         status_chr = "⚡"
         status_bat = ""
@@ -67,15 +67,15 @@ battery 0 {
 }
 
 disk "/" {
-	format = " %avail" 
+	format = " %avail  " 
 }
 
 disk "/media/media" {
-	format = "%avail:m "
+	format = "%avail:m  "
 }
 
 wireless wlp1s0 {
-	format_up = "   %quality %essid" # %ip "
+	format_up = "  %quality %essid  " # %ip "
 	format_down = "No WiFi Connected "
 }
 
@@ -93,5 +93,5 @@ run_watch VPN {
 }
 
 tztime local {
-	format = "  %h-%d-%Y  %H:%M:%S"	
+	format = "  %h-%d-%Y  %H:%M:%S  "	
 }
