@@ -90,12 +90,12 @@ bindsym $mod+a focus parent
 ###### WORKSPACE MODIFICATIONS
 ####################################
 
-set $workspace1 "1: Code "
-set $workspace2 "2: Browser  "
-set $workspace5 "5: Slack  "
-set $workspace6 "6: Movies/TV "
-set $workspace7 "7: Discord "
-set $workspace10 "10: Music "
+set $workspace1 "1: "
+set $workspace2 "2:  "
+set $workspace5 "5:  "
+set $workspace6 "6: "
+set $workspace7 "7: "
+set $workspace10 "10: "
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1 
@@ -258,9 +258,9 @@ bar {
 			statusline #ebebeb
 			separator  #383c4a
         #					         border         background      text
-			focused_workspace	     #494d5e        #383c4a         #FFFFFF
+			focused_workspace	     #a83246        #872737         #FFFFFF
 			inactive_workspace       #383c4a        #383c4a		    #a9a9a9
-			urgent_workspace         #bf0000        #bf0000         #FFFFFF      
+			urgent_workspace         #FF0000        #FF0000         #FFFFFF      
 		}
 }
 
@@ -272,8 +272,8 @@ bar {
 for_window [class="^.*"] border pixel 0
 
 smart_gaps on
-gaps inner 5
-gaps outer 3
+gaps inner 10
+gaps outer 5
 
 mode "gaps" {
         bindsym t gaps inner all set 20
