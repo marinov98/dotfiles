@@ -763,7 +763,7 @@ Add Company backends to enable elisp autocomplete
   (defhydra hydra-window (:color pink :columns 4)
    "Windows"
     ("f" find-file "find")
-    ("b" switch-buffer "switch buffer")
+    ("b" switch-to-buffer "switch buffer")
     ;; splitting
     ("1" delete-other-windows "delete other windows")
     ("2" split-window-right "v-split")
