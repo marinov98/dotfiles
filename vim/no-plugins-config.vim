@@ -63,8 +63,8 @@ set noswapfile
 set tags=tags
 set bs=2
 set mouse=a
-set clipboard=unnamedplus
-set winwidth=125
+set clipboard=unnamed "Windows
+"set clipboard=unnamedplus " Linux and Mac
 set laststatus=2
 set noshowmode
 set t_Co=256
@@ -79,6 +79,36 @@ augroup project
      autocmd!
          autocmd BufRead,BufNewFile *.h,*.c set filetype=c.doxygen
          augroup END
+
+
+"" NETRW:
+let g:netrw_banner=0 " Disable annoying banner
+let g:netrw_browse_split=4 " open in prior window
+let g:netrw_altv=1          " open splits to the right
+let g:netrw_liststyle=3     " tree view
+let g:netrw_winsize = 25    " take 25 % of window
+let g:netrw_list_hide=netrw_gitignore#Hide()
+let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+let g:NetrwIsOpen=0
+
+function! ToggleNetrw()
+    if g:NetrwIsOpen
+        let i = bufnr("$")
+        while (i >= 1)
+            if (getbufvar(i, "&filetype") == "netrw")
+                silent exe "bwipeout " . i 
+            endif
+            let i-=1
+        endwhile
+        let g:NetrwIsOpen=0
+    else
+        let g:NetrwIsOpen=1
+        silent Lexplore
+    endif
+endfunction
+
+" Add your own mapping. For example:
+noremap <silent> <leader>t :call ToggleNetrw()<CR>
 
 " Commands
 command! W :w
