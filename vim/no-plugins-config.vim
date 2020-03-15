@@ -11,8 +11,13 @@ map <SPACE> <Leader>
 let g:AutoPairsFlyMode = 0
 let g:AutoPairsShortcutBackInsert = '<M-b>'
 
+" if hidden is not set, TextEdit might fail.
+set hidden
+
+" Some servers have issues with backup files, see #649
 set nobackup
 set nowritebackup
+set showcmd
 
 " Better display for messages
 set cmdheight=2
@@ -62,12 +67,24 @@ set wildmenu
 set noswapfile
 set tags=tags
 set bs=2
+set guicursor+=a:blinkon0
 set mouse=a
 set clipboard=unnamed "Windows
 "set clipboard=unnamedplus " Linux and Mac
 set laststatus=2
 set noshowmode
 set t_Co=256
+
+
+
+" MODE SPECIFIC SETTINGS:
+autocmd BufEnter *.tsx set filetype=typescript
+autocmd FileType html setlocal ts=2 sts=2 sw=2
+autocmd FileType css setlocal ts=2 sts=2 sw=2
+autocmd FileType javascript setlocal ts=2 sts=2 sw=2
+autocmd FileType jsx setlocal ts=2 sts=2 sw=2
+autocmd FileType typescript setlocal ts=2 sts=2 sw=2
+autocmd FileType tsx setlocal ts=2 sts=2 sw=2
 
 " Don't offer to open certain files/directories
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
