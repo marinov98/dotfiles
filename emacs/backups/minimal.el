@@ -2,12 +2,13 @@
 (setq-default tab-width 4)                             ;; set default tab width 4 
 (setq backward-delete-char-untabify-method 'hungry)    ;; backspaces entire tab instead of one space at a time
 
-(setq default-frame-alist '((font . "Fira Code-14")))  ;; set font and font size
-(setq visible-bell t)                                  ;; disable end of buffer sounds
-(electric-pair-mode)                                   ;; auto closing brackets
-(show-paren-mode 1)                                    ;; highlight matching parenthesis
-(global-hl-line-mode 1)                                ;; highlight current line 
-(setq inhibit-startup-screen t)                        ;; disable startup screen
+(setq default-frame-alist '((font . "Fira Code-14")
+                            (cursor-color . "#ffc600"))) ;; set font, font size, and cursor color
+(setq visible-bell t)                                    ;; disable end of buffer sounds
+(electric-pair-mode)                                     ;; auto closing brackets
+(show-paren-mode 1)                                      ;; highlight matching parenthesis
+(global-hl-line-mode 1)                                  ;; highlight current line 
+(setq inhibit-startup-screen t)                          ;; disable startup screen
 
 (when (version<= "26.0.50" emacs-version )         
   (setq display-line-numbers-type 'relative)           ;; relative line numbers help you see how far you need to jump to get where you want to 
@@ -56,14 +57,13 @@
       "v" 'hydra-writing/body
       "m" 'hydra-marinov/body
       "a" 'hydra-avy/body
-      ;; file finding, searching, and yanking
-      "f" 'counsel-find-file
-      "j" 'counsel-git ;; need git installed!
-      "i" 'swiper-isearch
-      "y" 'counsel-yank-pop
+      ;; file finding, and searching
+      "f" 'find-file
+      "i" 'isearch-forward
+      "x" 'execute-extended-command
       ;; buffers
       "s" 'save-buffer
-      "b" 'counsel-switch-buffer
+      "b" 'switch-to-buffer
       "p" 'switch-to-prev-buffer
       "n" 'switch-to-next-buffer
       ;; deletion
@@ -72,7 +72,8 @@
       "k" 'kill-current-buffer
       "o" 'delete-other-windows
       ;; package-specific
-      "t" 'neotree-toggle))
+      "t" 'neotree-toggle
+      "c" 'avy-goto-char-timer))
 
 (use-package evil
     :ensure t
@@ -158,16 +159,20 @@
 
 (use-package dashboard 
     :ensure t
+    :custom
+    (dashboard-banner-logo-title "MarinMacs")
+    (dashboard-set-heading-icons t)
+    (dashboard-set-init-info t)
+    (dashboard-set-file-icons t)
+    (dashboard-set-navigator t)
+    (dashboard-startup-banner 'logo)
+    (dashboard-footer-messages '("Maintained by Marin P. Marinov since 2018"))
     :config
     (dashboard-setup-startup-hook)
-    (setq dashboard-banner-logo-title "MarinMacs")
-    (setq dashboard-set-heading-icons t)
-    (setq dashboard-set-file-icons t)
-    (setq dashboard-startup-banner 'logo)
     (setq dashboard-items '((recents  . 5)
-                           (bookmarks . 5)
-                           (agenda . 5)
-                           (projects . 5))))
+                         (bookmarks . 5)
+                         (agenda . 5)
+                         (projects . 5))))
 
 ;; BE AWARE: emacs can have multiple themes on at the same time
 ;; Multiple themes can mix into a super theme
@@ -254,42 +259,25 @@
      :config 
      (load-theme 'planet t))
 
-;; Ivy
-(use-package ivy
-    :ensure t
-    :custom
-    (ivy-use-virtual-buffers t)
-    (ivy-display-style 'fancy)
-    (ivy-count-format "(%d/%d) ")
+(use-package minibuffer
     :config
-    (setq enable-recursive-minibuffers t)
-    (ivy-mode))
+    (setq completion-cycle-threshold 3)
+    (setq completion-flex-nospace nil)
+    (setq completion-pcm-complete-word-inserts-delimiters t))
 
-;; Swiper 
-(use-package swiper
-    :ensure t
-    :bind 
-    (("C-s" . swiper-isearch)
-    ("C-c C-r" . ivy-resume)))
-
-;; Counsel
-(use-package counsel
-    :ensure t
-    :bind
-    (("M-x" . counsel-M-x)
-    ("C-x C-f" . counsel-find-file)
-    ("C-x b" . counsel-switch-buffer)
-    ("M-y" . counsel-yank-pop)
-    :map ivy-minibuffer-map
-    ("M-j" . ivy-next-line)
-    ("M-k" . ivy-previous-line)) 
+(use-package icomplete
+    :demand
     :config
-    (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"
-    ;; Add smart-casing (-S) to default command arguments:
-    counsel-rg-base-command "rg -S --no-heading --line-number --color never %s ."
-    counsel-ag-base-command "ag -S --nocolor --nogroup %s"
-    counsel-pt-base-command "pt -S --nocolor --nogroup -e %s"
-    counsel-find-file-at-point t))
+    (setq icomplete-delay-completions-threshold 0)
+    (setq icomplete-max-delay-chars 0)
+    (setq icomplete-compute-delay 0)
+    (setq icomplete-show-matches-on-no-input t)
+    (setq icomplete-hide-common-prefix nil)
+    (setq icomplete-prospects-height 1)
+    (setq icomplete-separator " · ") 
+    (setq icomplete-with-completion-tables t)
+    (setq icomplete-in-buffer t)
+    (icomplete-mode 1))
 
 (use-package avy :ensure t)
 
@@ -302,37 +290,12 @@
 (use-package all-the-icons
     :ensure t)
 
-;; icons for ivy
-(use-package all-the-icons-ivy
-    :ensure t
-    :after (all-the-icons ivy)
-    :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup)
-    :config
-    (setq all-the-icons-ivy-file-commands
-    '(counsel-find-file 
-      counsel-file-jump 
-      counsel-git
-      counsel-recentf 
-      counsel-projectile 
-      counsel-projectile-switch-to-buffer 
-      counsel-projectile-switch-project 
-      counsel-projectile-find-file 
-      counsel-projectile-find-file-dwin 
-      counsel-projectile-find-dir)))
-
 ;; icons for dired/ranger mode
 (use-package all-the-icons-dired
     :ensure t
     :after ranger
     :config
     (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
-
-(use-package beacon
-    :ensure t
-    :custom
-    (beacon-color "#6b2594")
-    :config
-    (beacon-mode 1))
 
 ;; Neotree
 (use-package neotree
@@ -349,9 +312,6 @@
            ("M-g i" . dumb-jump-go-prompt)
            ("M-g x" . dumb-jump-go-prefer-external)
            ("M-g z" . dumb-jump-go-prefer-external-other-window))
-   :config 
-   (setq dumb-jump-selector 'ivy) 
-   ;; (setq dumb-jump-selector 'helm)
    :ensure)
 
 ;; Projectile-mode 
@@ -365,9 +325,6 @@
     (projectile-completion-system 'ivy)
     :config
     (projectile-mode t))
-
- ;; Counsel-Projectile (I utilize counsel projectile bindings in my hydra-projectile)
-(use-package counsel-projectile :ensure t)
 
 (use-package exec-path-from-shell
       :ensure t
@@ -491,7 +448,7 @@
     (setq hydra-hint-display-type 'lv))
 
 (defhydra hydra-zoom (:color pink)
-  "zoom 🞈 🞈"
+  "zoom"
   ("k" text-scale-increase "in")
   ("j" text-scale-decrease "out")
   ("0" (text-scale-adjust 0) "reset")
@@ -499,11 +456,11 @@
 
 ;; help
 (defhydra hydra-describe (:color red :columns 2)
-  "Describe 🤓"
-  ("f" counsel-describe-function "func")
-  ("F" counsel-describe-face "face")
+  "Describe"
+  ("f" describe-function "func")
+  ("F" describe-face "face")
   ("k" describe-key "key")
-  ("v" counsel-describe-variable "var")
+  ("v" describe-variable "var")
   ("p" describe-package "package")
   ("s" describe-symbol "symbol")
   ("m" which-key-show-major-mode "major mode")
@@ -513,24 +470,22 @@
 
 ;; projectile, I would change this hydra's global key if I wasn't using vim bindings...
 (defhydra hydra-projectile (:color red :columns 3)
-  "🚀 Projectile 🚀"
-  ("f" counsel-projectile-find-file "find")
-  ("w" counsel-projectile-find-file-dwim "find-dwim")
-  ("d" counsel-projectile-find-dir "find-dir")
-  ("a" counsel-projectile-ag "ag") ;; need silversearcher-ag installed!
-  ("g" counsel-projectile-rg "ripgrep") ;; need ripgrep installed!
-  ("s" counsel-projectile-switch-project "switch project")
-  ("b" counsel-projectile-switch-to-buffer "buffer switch")
+  "Projectile"
+  ("f" projectile-find-file "find")
+  ("w" projectile-find-file-dwim "find-dwim")
+  ("d" projectile-find-dir "find-dir")
+  ("a" projectile-ag "ag") ;; need silversearcher-ag installed!
+  ("s" projectile-switch-project "switch project")
+  ("b" projectile-switch-to-buffer "buffer switch")
   ("r" projectile-recentf "recent files")
-  ;; counsel-projectile-switch-project has similiar functionality but this is much quicker
   ("k" projectile-kill-buffers "kill project buffers")
   ("q" nil "quit" :color blue))
 
 ;; My attempt at window management
 (defhydra hydra-window (:color pink :columns 4)
- "⚡⚡ Ivy + Windows ⚡⚡"
-  ("f" counsel-find-file "find")
-  ("b" counsel-switch-buffer "switch buffer")
+ "Windows"
+  ("f" find-file "find")
+  ("b" switch-buffer "switch buffer")
   ;; splitting
   ("1" delete-other-windows "delete other windows")
   ("2" split-window-right "v-split")
@@ -544,19 +499,19 @@
   ("j" windmove-down "down")
   ("k" windmove-up "up")
   ("l" windmove-right "right")
-  ("x" counsel-M-x "M-x")
+  ("x" execute-extended-command "M-x")
   ("q" nil "quit" :color blue))
 
 ;; git 
 (defhydra hydra-git (:color red)
-  "⏳ Git ⏳"
+  "Git"
   ("g" magit "magit")
   ("d" magit-dispatch "dispatch")
   ("t" git-timemachine "timemachine")
   ("q" nil "quit" :color blue))
 
 (defhydra hydra-avy (:color red :columns 3)
-  "↵ Avy ↵"
+  "Avy"
   ("c" avy-goto-char "goto char")
   ("C" avy-goto-char-2 "goto char 2")
   ("t" avy-goto-char-timer "timed char")
@@ -584,7 +539,7 @@ browse-url-browser-function
   ("q" nil "quit"))
 
 (defhydra hydra-writing (:color red :columns 2)
- "✓ Writing and Spelling ✓"
+ "Writing and Spelling"
  ("d" ispell-change-dictionary "change dict")
  ("s" ispell-word "spell word")
  ("f" flyspell-buffer "flyspell buffer")
@@ -595,15 +550,9 @@ browse-url-browser-function
  ("q" nil "quit"))
 
 (defhydra hydra-marinov (:color red :columns 4)
- "😎 Marinov 😎"
+ "Marinov"
  ("m" goto-MarinMacs "goto config")
  ("b" gdb "gdb")
- ("d" dap-debug "dap debug")
- ("i" dap-debug-edit-template "debug template")
- ("r" counsel-recentf "recent files")
- ("a" counsel-ag "ag")
- ("g" counsel-rg "ripgrep")
- ("z" counsel-fzf "fzf")
  ("f" flycheck-buffer "flycheck buffer")
  ("R" ranger "ranger")
  ("c" compile "compile")
