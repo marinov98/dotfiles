@@ -850,6 +850,31 @@ Add Company backends to enable elisp autocomplete
       ("j" rjsx-mode "rjsx-mode")
       ("q" nil "quit"))
 #+END_SRC
+*** Org (for org mode)
+    #+begin_src emacs-lisp
+    (defun marinov/goto-org-directory ()
+      "goes to my org directory"
+      (interactive)
+      (find-file org-directory))
+      
+    (defun marinov/jump-to-notes ()
+      "go to notes file"
+      (interactive)
+      (find-file org-default-notes-file))
+
+     (defhydra hydra-org (:color blue :columns 4)
+      " ORG "
+      ("o" org-open-at-point "open link")
+      ("c" org-toggle-comment "comment")
+      ("i" org-time-stamp "time stamp")
+      ("p" org-priority "priority")
+      ("t" org-todo "todo state")
+      ("a" org-todo-list "agenda")
+      ("l" org-show-todo-tree "show todo tree")
+      ("n" marinov/jump-to-notes "goto notes")
+      ("d" marinov/goto-org-directory "goto org directory")
+      ("q" nil "quit"))
+    #+end_src
 * Latex 
  :PROPERTIES:
  :CUSTOM_ID: latex
