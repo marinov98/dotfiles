@@ -8,7 +8,6 @@ call plug#begin('~/.vim/plugged')
 """"""""""""""""""""""
 """"""" THEMES:
 """"""""""""""""""""""
-"Plug 'https://github.com/nanotech/jellybeans.vim'
 Plug 'liuchengxu/space-vim-dark'
 """"""""""""""""""""""
 """"""" File Search:
@@ -23,7 +22,6 @@ Plug 'prettier/vim-prettier', {
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plug 'https://github.com/rhysd/vim-clang-format'
 Plug 'https://github.com/jiangmiao/auto-pairs'
-"Plug 'https://github.com/scrooloose/nerdtree'"uncomment if you really need it
 Plug 'ervandew/supertab'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'octol/vim-cpp-enhanced-highlight'
@@ -133,7 +131,8 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
+" NOTE: use C-i and C-o to go back and forth after
+nmap <silent> gd <Plug>(coc-definition) 
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
@@ -244,7 +243,7 @@ set clipboard=unnamedplus
 set laststatus=2
 set noshowmode
 set t_Co=256
-
+set termguicolors
 
 " MODE SPECIFIC SETTINGS:
 autocmd BufEnter *.tsx set filetype=typescript
