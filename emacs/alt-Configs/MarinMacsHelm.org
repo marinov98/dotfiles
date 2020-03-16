@@ -161,12 +161,12 @@ A nice and quick way to view/edit my configuration at any time
         "b" 'helm-mini
         "p" 'switch-to-prev-buffer
         "n" 'switch-to-next-buffer
-	"/" 'comment-region
+        "/" 'comment-region
         ;; deletion
         "q" 'delete-window
         "Q" 'save-buffers-kill-terminal
         "k" 'kill-current-buffer
-	"K" 'kill-buffer
+	    "K" 'kill-buffer
         "o" 'delete-other-windows
         ;; package-specific
         "t" 'neotree-toggle
