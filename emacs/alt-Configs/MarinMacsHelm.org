@@ -55,7 +55,7 @@ Indentation
 - Options, display, parenthesis 
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
-  (setq default-frame-alist '((font . "Fira Code-14")
+  (setq default-frame-alist '((font . "Fira Code-11")
                               (cursor-color . "#ffc600"))) ;; set font, font size, and cursor color
   (setq visible-bell t)                                    ;; disable end of buffer sounds
   (electric-pair-mode)                                     ;; auto closing brackets
@@ -1081,6 +1081,7 @@ Add Company backends to enable elisp autocomplete
       ("t" org-todo "todo state")
       ("a" org-todo-list "agenda")
       ("l" org-show-todo-tree "show todo tree")
+      ("s" org-edit-special "edit special")
       ("n" marinov/jump-to-notes "goto notes")
       ("d" marinov/goto-org-directory "goto org directory")
       ("q" nil "quit"))
@@ -1564,4 +1565,3 @@ All for typescript
         (diminish 'eldoc-mode)
         (diminish 'abbrev-mode))
   #+end_src
-  
