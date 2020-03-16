@@ -161,6 +161,7 @@ A nice and quick way to view/edit my configuration at any time
         "b" 'counsel-switch-buffer
         "p" 'switch-to-prev-buffer
         "n" 'switch-to-next-buffer
+        "/" 'comment-region
         ;; deletion
         "q" 'delete-window
         "Q" 'save-buffers-kill-terminal
@@ -1027,24 +1028,24 @@ Add Company backends to enable elisp autocomplete
 #+END_SRC
 *** Utility (useful commands for me)
 #+BEGIN_SRC emacs-lisp
-     (defhydra hydra-utility (:color red :columns 4)
-      "😎 Utility 😎"
-      ("m" goto-MarinMacs "goto config")
-      ("b" gdb "gdb")
-      ("e" eval-buffer "eval-buffer")
-      ("d" dap-debug "dap debug")
-      ("i" dap-debug-edit-template "debug template")
-      ("r" counsel-recentf "recent files")
-      ("a" counsel-ag "ag")
-      ("g" counsel-rg "ripgrep")
-      ("z" counsel-fzf "fzf")
-      ("f" flycheck-buffer "flycheck buffer")
-      ("R" ranger "ranger")
-      ("c" compile "compile")
-      ("u" auto-fill-mode "auto-fill-mode")
-      ("w" web-mode "web-mode")
-      ("j" rjsx-mode "rjsx-mode")
-      ("q" nil "quit"))
+  (defhydra hydra-utility (:color red :columns 4)
+   "😎 Utility 😎"
+   ("m" goto-MarinMacs "goto config")
+   ("b" gdb "gdb")
+   ("e" eval-buffer "eval-buffer")
+   ("d" dap-debug "dap debug")
+   ("i" dap-debug-edit-template "debug template")
+   ("r" counsel-recentf "recent files")
+   ("a" counsel-ag "ag")
+   ("g" counsel-rg "ripgrep")
+   ("z" counsel-fzf "fzf")
+   ("f" flycheck-buffer "flycheck buffer")
+   ("R" ranger "ranger")
+   ("c" compile "compile")
+   ("u" auto-fill-mode "auto-fill-mode")
+   ("w" web-mode "web-mode")
+   ("j" rjsx-mode "rjsx-mode")
+   ("q" nil "quit"))
 #+END_SRC
 *** Org (for org mode)
     #+begin_src emacs-lisp
@@ -1553,4 +1554,4 @@ All for typescript
         (diminish 'eldoc-mode)
         (diminish 'abbrev-mode))
   #+end_src
-  
+ 
