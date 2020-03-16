@@ -748,8 +748,8 @@ Add Company backends to enable elisp autocomplete
   ;; My attempt at window management
   (defhydra hydra-window (:color pink :columns 4)
    "Windows"
-  ("f" helm-find-files "find")
-  ("b" helm-mini "switch buffer")
+  ("f" find-file "find")
+  ("b" switch-to-buffer "switch buffer")
   ;; splitting
   ("o" delete-other-windows "delete other windows")
   ("2" split-window-right "v-split")
@@ -769,7 +769,7 @@ Add Company backends to enable elisp autocomplete
   ("j" windmove-down "down")
   ("k" windmove-up "up")
   ("l" windmove-right "right")
-  ("x" helm-M-x "M-x")
+  ("x" execute-extended-command "M-x")
   ("q" nil "quit" :color blue))
 
 #+END_SRC
