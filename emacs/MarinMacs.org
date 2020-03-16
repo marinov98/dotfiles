@@ -144,7 +144,7 @@ A nice and quick way to view/edit my configuration at any time
         "g" 'hydra-git/body
         "TAB" 'hydra-launcher/body
         "v" 'hydra-writing/body
-        "m" 'hydra-marinov/body
+        "m" 'hydra-utility/body
         "a" 'hydra-avy/body
         "r" 'hydra-org/body
         ;; file finding, searching, and yanking
@@ -165,6 +165,7 @@ A nice and quick way to view/edit my configuration at any time
         "q" 'delete-window
         "Q" 'save-buffers-kill-terminal
         "k" 'kill-current-buffer
+        "K" 'kill-buffer
         "o" 'delete-other-windows
         ;; package-specific
         "t" 'neotree-toggle))
@@ -1003,10 +1004,10 @@ Add Company backends to enable elisp autocomplete
       ("w" writegood-mode "writegood mode")
       ("q" nil "quit"))
 #+END_SRC
-*** Marinov (my own personal one)
+*** Utility (useful commands for me)
 #+BEGIN_SRC emacs-lisp
-     (defhydra hydra-marinov (:color red :columns 4)
-      "😎 Marinov 😎"
+     (defhydra hydra-utility (:color red :columns 4)
+      "😎 Utility 😎"
       ("m" goto-MarinMacs "goto config")
       ("b" gdb "gdb")
       ("e" eval-buffer "eval-buffer")
@@ -1019,6 +1020,7 @@ Add Company backends to enable elisp autocomplete
       ("f" flycheck-buffer "flycheck buffer")
       ("R" ranger "ranger")
       ("c" compile "compile")
+      ("u" auto-fill-mode "auto-fill-mode")
       ("w" web-mode "web-mode")
       ("j" rjsx-mode "rjsx-mode")
       ("q" nil "quit"))
@@ -1040,6 +1042,7 @@ Add Company backends to enable elisp autocomplete
       ("o" org-open-at-point "open link")
       ("c" org-toggle-comment "comment")
       ("i" org-time-stamp "time stamp")
+      ("d" org-export-dispatch "export dispatch")
       ("p" org-priority "priority")
       ("t" org-todo "todo state")
       ("a" org-todo-list "agenda")
@@ -1047,7 +1050,7 @@ Add Company backends to enable elisp autocomplete
       ("s" org-edit-special "edit special")
       ("x" org-edit-src-exit "exit special")
       ("n" marinov/jump-to-notes "goto notes")
-      ("d" marinov/goto-org-directory "goto org directory")
+      ("D" marinov/goto-org-directory "goto org directory")
       ("q" nil "quit"))
     #+end_src
 * LSP
@@ -1529,4 +1532,4 @@ All for typescript
         (diminish 'eldoc-mode)
         (diminish 'abbrev-mode))
   #+end_src
- 
+  
