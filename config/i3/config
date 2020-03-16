@@ -150,6 +150,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3? This will end your 
 #########################################
 ###### Personal Keybindings
 #########################################
+
 bindsym $mod+Shift+w exec emacsclient -a "" -c # run emacs as a daemon and open
 bindsym $mod+Shift+t exec trash-empty # empty recycling bin
 bindsym $mod+Shift+n exec nm-connection-editor # wifi editor
@@ -178,6 +179,15 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
 
 
+###############################
+##### SCREENSHOT
+###############################
+# Multi-screen screenshots with scrot
+bindsym --release Print exec scrot 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`' # All screens
+
+# OSX-like area selection screenshots
+bindsym --release Shift+Print exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`' # Area selection
+
 ################################
 ##### KEYBOARD MODIFICATIONS
 ################################
@@ -185,10 +195,6 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightnes
 exec_always killall xcape
 exec_always killall compton
 exec_always killall feh
-
-# exec_always --no-startup-id setxkbmap -option "ctrl:swapcaps"
-# exec_always --no-startup-id xcape -e 'Caps_Lock=Escape'
-# exec_always --no-startup-id sh .profile
 
 # LAYOUT
 exec_always "setxkbmap -model pc104 -layout us,bg,es -variant ,phonetic,  -option grp:alt_shift_toggle"
