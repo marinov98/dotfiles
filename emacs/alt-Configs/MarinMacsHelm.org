@@ -161,6 +161,7 @@ A nice and quick way to view/edit my configuration at any time
         "b" 'helm-mini
         "p" 'switch-to-prev-buffer
         "n" 'switch-to-next-buffer
+	"/" 'comment-region
         ;; deletion
         "q" 'delete-window
         "Q" 'save-buffers-kill-terminal
