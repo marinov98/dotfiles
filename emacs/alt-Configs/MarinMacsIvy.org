@@ -144,7 +144,7 @@ A nice and quick way to view/edit my configuration at any time
         "g" 'hydra-git/body
         "TAB" 'hydra-launcher/body
         "v" 'hydra-writing/body
-        "m" 'hydra-marinov/body
+        "m" 'hydra-utility/body
         "a" 'hydra-avy/body
         "r" 'hydra-org/body
         ;; file finding, searching, and yanking
@@ -165,6 +165,7 @@ A nice and quick way to view/edit my configuration at any time
         "q" 'delete-window
         "Q" 'save-buffers-kill-terminal
         "k" 'kill-current-buffer
+        "K" 'kill-buffer
         "o" 'delete-other-windows
         ;; package-specific
         "t" 'neotree-toggle))
@@ -818,6 +819,21 @@ Add Company backends to enable elisp autocomplete
 #+BEGIN_SRC emacs-lisp
   ;; hydra takes care of my magit bindings
   (use-package magit :ensure t)
+  
+  (use-package git-commit
+      :after magit
+      :custom
+      (git-commit-summary-max-length 50) ;; in accordance with https://chris.beams.io/posts/git-commit/
+      :config
+      (setq git-commit-style-convention-checks
+            '(non-empty-second-line
+            overlong-summary-line)))
+            
+  (use-package magit-repos
+      :after magit
+      :commands magit-list-repositories
+      :custom
+      (magit-repository-directories '(("~/Projects" . 1))))
 
   (use-package gitignore-mode
       :ensure t
@@ -912,13 +928,19 @@ Add Company backends to enable elisp autocomplete
     ("f" counsel-find-file "find")
     ("b" counsel-switch-buffer "switch buffer")
     ;; splitting
-    ("1" delete-other-windows "delete other windows")
+    ("o" delete-other-windows "delete other windows")
     ("2" split-window-right "v-split")
     ("3" split-window-below "h-split")
     ;; deletion and quitting
     ("K" kill-current-buffer "kill current buffer")
     ("d" delete-window "delete window")
     ("D" kill-this-buffer "kill buffer")
+    ;; resizing
+    ("s" shrink-window "shrink window")
+    ("e" enlarge-window "enlarge window")
+    ("S" shrink-window-horizontally "shrink horizontally")
+    ("E" enlarge-window-horizontally "shrink horizontally")
+    ("B" balance-windows "balance windows")
     ;; movement
     ("h" windmove-left "left")
     ("j" windmove-down "down")
@@ -926,7 +948,6 @@ Add Company backends to enable elisp autocomplete
     ("l" windmove-right "right")
     ("x" counsel-M-x "M-x")
     ("q" nil "quit" :color blue))
-
 #+END_SRC
 *** Git (magit and timemachine)
 #+BEGIN_SRC emacs-lisp
@@ -935,6 +956,7 @@ Add Company backends to enable elisp autocomplete
       "⏳ Git ⏳"
       ("g" magit "magit")
       ("d" magit-dispatch "dispatch")
+      ("l" magit-list-repositories "list repos")
       ("t" git-timemachine "timemachine")
       ("q" nil "quit" :color blue))
 #+END_SRC
@@ -1003,10 +1025,10 @@ Add Company backends to enable elisp autocomplete
       ("w" writegood-mode "writegood mode")
       ("q" nil "quit"))
 #+END_SRC
-*** Marinov (my own personal one)
+*** Utility (useful commands for me)
 #+BEGIN_SRC emacs-lisp
-     (defhydra hydra-marinov (:color red :columns 4)
-      "😎 Marinov 😎"
+     (defhydra hydra-utility (:color red :columns 4)
+      "😎 Utility 😎"
       ("m" goto-MarinMacs "goto config")
       ("b" gdb "gdb")
       ("e" eval-buffer "eval-buffer")
@@ -1019,6 +1041,7 @@ Add Company backends to enable elisp autocomplete
       ("f" flycheck-buffer "flycheck buffer")
       ("R" ranger "ranger")
       ("c" compile "compile")
+      ("u" auto-fill-mode "auto-fill-mode")
       ("w" web-mode "web-mode")
       ("j" rjsx-mode "rjsx-mode")
       ("q" nil "quit"))
@@ -1040,6 +1063,7 @@ Add Company backends to enable elisp autocomplete
       ("o" org-open-at-point "open link")
       ("c" org-toggle-comment "comment")
       ("i" org-time-stamp "time stamp")
+      ("d" org-export-dispatch "export dispatch")
       ("p" org-priority "priority")
       ("t" org-todo "todo state")
       ("a" org-todo-list "agenda")
@@ -1047,7 +1071,7 @@ Add Company backends to enable elisp autocomplete
       ("s" org-edit-special "edit special")
       ("x" org-edit-src-exit "exit special")
       ("n" marinov/jump-to-notes "goto notes")
-      ("d" marinov/goto-org-directory "goto org directory")
+      ("D" marinov/goto-org-directory "goto org directory")
       ("q" nil "quit"))
     #+end_src
 * LSP
@@ -1117,7 +1141,7 @@ Add Company backends to enable elisp autocomplete
       (push 'company-lsp company-backends))
 
 #+END_SRC
-* DAP
+* COMMENT DAP
  :PROPERTIES:
  :CUSTOM_ID: dap
  :END:
@@ -1529,3 +1553,4 @@ All for typescript
         (diminish 'eldoc-mode)
         (diminish 'abbrev-mode))
   #+end_src
+ 
