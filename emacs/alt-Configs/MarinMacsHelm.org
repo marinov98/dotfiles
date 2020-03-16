@@ -452,7 +452,6 @@ You can enable/disable any themes that you like here
 - Swiper: an alternative to emacs’s native isearch that can ivy or helm to show an overview of matches
 - Helm-rg: uses ripgrep with helm frontend to find matches
 - Helm-ag: uses silversearcher with helm frontend to find matches
-- Helm-fzf: uses fuzzy file finding with helm frontend
 - Helm-ls-git: allows you search following your gitignore
 - Helm-swoop: listing line matches 
   #+begin_src emacs-lisp
