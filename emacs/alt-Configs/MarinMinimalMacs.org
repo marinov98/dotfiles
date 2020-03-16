@@ -13,12 +13,16 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 - [[#markup][Markup]]
 - [[#dashboard][Dashboard]]
 - [[#themes][Themes]]
-- [[#icomplete][Icomplete]]
+- [[#modeline][Modeline]]
 - [[#enhancements][Emacs Enhancements]]
   - [[#avy][Avy]]
   - [[#which-key][Which-Key]]
+  - [[#ace-window][Ace-Window]]
+  - [[#ranger][Ranger]]
   - [[#all-the-icons][All-the-icons]]
+  - [[#beacon][Beacon]]
   - [[#neotree][neotree]]
+- [[#helm][Helm]]
 - [[#projectile][Projectile]]
 - [[#shell][Shell]]
 - [[#globals][Globals]]
@@ -28,11 +32,12 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
   - [[#company][Company]]
 - [[#git][Git]]
 - [[#hydra][Hydra]]
+- [[#lsp][Language Server Protocal (lsp)]]
+- [[#dap][Debug Adapter Protocal (dap)]]
 - [[#latex][Latex]]
 - [[#development][Development]]
   - [[#c-cpp][C/C++]]
   - [[#python][Python]]
-  - [[#web-development][Web-Development]]
   - [[#JavaScript-TypeScript][JavaScript/TypeScript]]
 - [[#diminish][Diminish]]
 
@@ -50,7 +55,7 @@ Indentation
 - Options, display, parenthesis 
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
-  (setq default-frame-alist '((font . "Fira Code-14")
+  (setq default-frame-alist '((font . "Fira Code-12")
                               (cursor-color . "#ffc600"))) ;; set font, font size, and cursor color
   (setq visible-bell t)                                    ;; disable end of buffer sounds
   (electric-pair-mode)                                     ;; auto closing brackets
@@ -97,6 +102,7 @@ Emacs has native support for the GNU Debugger (GDB), and we can make it a little
 A nice and quick way to view/edit my configuration at any time
   #+begin_src emacs-lisp
     (defun goto-MarinMacs ()
+      "Jump to configuration file"
       (interactive)
       (find-file "~/.emacs.d/MarinMacs.org")) 
     (global-set-key (kbd "C-c m") 'goto-MarinMacs) ;; secondary binding is SPC m m 
@@ -133,19 +139,26 @@ A nice and quick way to view/edit my configuration at any time
         "SPC" 'hydra-projectile/body
         "w" 'hydra-window/body
         "z" 'hydra-zoom/body
+        "l" 'hydra-lsp/body
         "d" 'hydra-describe/body
         "g" 'hydra-git/body
         "TAB" 'hydra-launcher/body
         "v" 'hydra-writing/body
         "m" 'hydra-utility/body
         "a" 'hydra-avy/body
-        ;; file finding, and searching
-        "f" 'find-file
-        "i" 'isearch-forward
-        "x" 'execute-extended-command
+        "r" 'hydra-org/body
+        ;; file finding, searching, and yanking
+        "f" 'helm-find-files
+        "j" 'helm-browse-project ;; need git installed!
+        "i" 'swiper-helm
+        "I" 'swiper-multi
+        "S" 'swiper-thing-at-point
+        "y" 'helm-show-kill-ring
+        "c" 'avy-goto-char-timer
+        "x" 'helm-M-x
         ;; buffers
         "s" 'save-buffer
-        "b" 'switch-to-buffer
+        "b" 'helm-mini
         "p" 'switch-to-prev-buffer
         "n" 'switch-to-next-buffer
         ;; deletion
@@ -156,7 +169,8 @@ A nice and quick way to view/edit my configuration at any time
         "o" 'delete-other-windows
         ;; package-specific
         "t" 'neotree-toggle
-        "c" 'avy-goto-char-timer))
+        "h s" 'helm-swoop
+        "h a" 'helm-multi-swoop))
 
   (use-package evil
       :ensure t
@@ -191,6 +205,7 @@ A nice and quick way to view/edit my configuration at any time
   ;; Evil multiple-cursors
   (use-package evil-mc
       :ensure t
+      :diminish
       :config
       (global-evil-mc-mode 1))
 
@@ -285,9 +300,9 @@ A nice and quick way to view/edit my configuration at any time
       :config
       (dashboard-setup-startup-hook)
       (setq dashboard-items '((recents  . 5)
-                           (bookmarks . 5)
-                           (agenda . 5)
-                           (projects . 5))))
+                             (bookmarks . 5)
+                             (agenda . 5)
+                             (projects . 5))))
 #+END_SRC
 * Themes
  :PROPERTIES:
@@ -374,32 +389,148 @@ You can enable/disable any themes that you like here
          :config 
          (load-theme 'planet t))
 #+END_SRC
-* Icomplete
-Icomplete is a native Emacs global minor mode provides a convenient way to quickly select an element among the possible completions in a minibuffer. 
+* Modeline
  :PROPERTIES:
- :CUSTOM_ID: icomplete
+ :CUSTOM_ID: modeline
  :END:
- #+begin_src emacs-lisp
-   (use-package minibuffer
-       :config
-       (setq completion-cycle-threshold 3)
-       (setq completion-flex-nospace nil)
-       (setq completion-pcm-complete-word-inserts-delimiters t))
+- The modeline is at the bottom of the window, it describes what is going on in the current buffer
+  - it can display modes, time, filenames, and even line numbers
+- You can pick one of these modeline themes, simply enable the one you want to try and disable the rest
+#+BEGIN_SRC emacs-lisp
 
-   (use-package icomplete
-       :demand
-       :config
-       (setq icomplete-delay-completions-threshold 0)
-       (setq icomplete-max-delay-chars 0)
-       (setq icomplete-compute-delay 0)
-       (setq icomplete-show-matches-on-no-input t)
-       (setq icomplete-hide-common-prefix nil)
-       (setq icomplete-prospects-height 1)
-       (setq icomplete-separator " · ") 
-       (setq icomplete-with-completion-tables t)
-       (setq icomplete-in-buffer t)
-       (icomplete-mode 1))
- #+end_src
+  ;;;;;;;;;;;;;;;;;;;;;;   
+  ;; Spaceline
+  ;;;;;;;;;;;;;;;;;;;;;;   
+
+  (use-package spaceline
+      :ensure t
+      :custom-face
+      (spaceline-highlight-face ((t (:background "#ffc600" :foreground "black"))))
+      :custom
+      (spaceline-toggle-flycheck-info-off)
+      :config
+      (require 'spaceline-config)
+      (setq powerline-default-separator (quote arrow))
+      (spaceline-highlight-face-default) 
+      (spaceline-spacemacs-theme))
+
+  ;;;;;;;;;;;;;;;;;;;;;;   
+  ;;  Telephone-line
+  ;;;;;;;;;;;;;;;;;;;;;;   
+   
+    (use-package telephone-line
+        :disabled  
+        :ensure t
+        :config
+        (setq telephone-line-lhs
+        '((evil   . (telephone-line-evil-tag-segment))
+          (accent . (telephone-line-vc-segment
+                     telephone-line-erc-modified-channels-segment
+                     telephone-line-process-segment))
+          (nil    . (telephone-line-minor-mode-segment
+                     telephone-line-buffer-segment))))
+        (setq telephone-line-rhs
+        '((nil    . (telephone-line-misc-info-segment))
+          (accent . (telephone-line-major-mode-segment))
+          (evil   . (telephone-line-airline-position-segment))))
+          (telephone-line-mode 1))
+    
+  ;;;;;;;;;;;;;;;;;;;;;;   
+  ;; lightweight doom theme
+  ;;;;;;;;;;;;;;;;;;;;;;   
+
+    (use-package doom-modeline
+        :disabled
+        :ensure t
+        :hook (after-init . doom-modeline-mode))
+
+#+END_SRC
+* Helm
+ :PROPERTIES:
+ :CUSTOM_ID: helm
+ :END:
+- =Helm= is an Emacs framework for incremental completions and narrowing selections.
+- Official site: https://emacs-helm.github.io/helm/
+- Swiper: an alternative to emacs’s native isearch that can ivy or helm to show an overview of matches
+- Helm-rg: uses ripgrep with helm frontend to find matches
+- Helm-ag: uses silversearcher with helm frontend to find matches
+- Helm-ls-git: allows you search following your gitignore
+- Helm-swoop: listing line matches 
+  #+begin_src emacs-lisp
+    (use-package helm
+        :ensure t
+        :diminish
+        :custom
+        (helm-split-window-inside-p t)
+        (helm-move-to-line-cycle-in-source t)
+        (helm-autoresize-max-height 0)
+        (helm-autoresize-min-height 20)
+        (helm-M-x-fuzzy-match t)
+        (helm-buffers-fuzzy-matching t)
+        (helm-recentf-fuzzy-match t)
+        (helm-semantic-fuzzy-match t)
+        :bind
+        (("M-x" . helm-M-x)
+        ("C-x C-f" . helm-find-files)
+        ("M-y" . helm-show-kill-ring)
+        ("C-x b" . helm-mini)
+        :map helm-map
+        ("TAB" . helm-execute-persistent-action)
+        ("<tab>" . helm-execute-persistent-action)
+        ("C-z" . helm-select-action)
+        ("M-j" . helm-next-line)
+        ("M-k" . helm-previous-line))
+        :config
+        (require 'helm-config)
+        (helm-mode 1)
+        (helm-autoresize-mode 1))
+
+     ;; Swiper 
+     (use-package swiper
+         :ensure t
+         :custom
+         (swiper-action-recenter t)
+         (swiper-goto-start-of-match t)
+         (swiper-include-line-number-in-search t))
+
+
+     (use-package swiper-helm
+         :after (helm swiper)
+         :ensure t
+         :bind
+         ("C-s" . swiper-helm))
+
+     (use-package helm-rg 
+         :after helm
+         :ensure t
+         :config (setq helm-rg-default-directory 'git-root))
+
+     (use-package helm-ag
+         :after helm
+         :ensure t)
+
+     (use-package helm-ls-git 
+         :after helm
+         :ensure t)
+
+     (use-package helm-swoop
+         :after helm
+         :ensure t
+         :custom
+         (helm-swoop-split-with-multiple-windows nil)
+         (helm-swoop-split-direction 'split-window-vertically)
+         (helm-swoop-speed-or-color nil)
+         (helm-swoop-move-to-line-cycle t)
+         (helm-swoop-use-line-number-face t)
+         (helm-swoop-use-fuzzy-match t))
+  #+end_src
+Helm did not seem to provide fzf functionality and helm-fzf does not seem to exist anymore unlike counsel, so this was a workaround
+#+begin_src emacs-lisp
+  (use-package fzf
+      :ensure t)
+    ;; :init
+    ;; (setenv "FZF_DEFAULT_COMMAND" "fd --type f"))
+#+end_src
 * Enhancements 
  :PROPERTIES:
  :CUSTOM_ID: enhancements
@@ -410,7 +541,10 @@ Icomplete is a native Emacs global minor mode provides a convenient way to quick
  :END:
 Jumping around text, keybindings utilized in a hydra
 #+BEGIN_SRC emacs-lisp
-  (use-package avy :ensure t)
+  (use-package avy 
+      :ensure t
+      :custom
+      (avy-timeout-seconds 0.3))
 #+END_SRC
 ** Which-Key
  :PROPERTIES:
@@ -420,8 +554,47 @@ Jumping around text, keybindings utilized in a hydra
 #+BEGIN_SRC emacs-lisp
 (use-package which-key
 	:ensure t 
+    :diminish
 	:config
 	(which-key-mode))
+#+END_SRC
+** Ace-Window
+ :PROPERTIES:
+ :CUSTOM_ID: ace-window
+ :END:
+Useful if you work on multiple windows and want an efficient way of switching between them
+#+BEGIN_SRC emacs-lisp
+(use-package ace-window
+     :disabled
+     :ensure t
+     :init 
+     (global-set-key (kbd "M-o") 'ace-window)
+     (setq aw-background nil))
+#+END_SRC
+** Ranger
+ :PROPERTIES:
+ :CUSTOM_ID: ranger
+ :END:
+ - An alternative to dired.
+ - ranger file manager but in emacs, works the exact same way
+ - Repo: https://github.com/ralesi/ranger.el
+#+BEGIN_SRC emacs-lisp
+  ;; Ranger
+  (use-package ranger
+     :ensure t
+     :commands ranger
+     :custom
+     (ranger-parent-depth 1)
+     (ranger-hide-cursor t)
+     (ranger-show-hidden t)
+     (ranger-preview-file t)
+     (ranger-width-parents 0.2)
+     (ranger-width-preview 0.50)
+     (ranger-footer-delay 0.2)
+     (ranger-preview-delay 0.040)
+     :config
+     (ranger-override-dired-mode t))
+
 #+END_SRC
 ** All-The-Icons
  :PROPERTIES:
@@ -442,6 +615,20 @@ Jumping around text, keybindings utilized in a hydra
       :config
       (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
 #+END_SRC
+** Beacon 
+ :PROPERTIES:
+ :CUSTOM_ID: beacon
+ :END:
+I never lose where my cursor is thanks to this
+#+BEGIN_SRC emacs-lisp
+  (use-package beacon
+      :ensure t
+      :diminish
+      :custom
+      (beacon-color "#ffc600")
+      :config
+      (beacon-mode 1))
+#+END_SRC
 ** Neotree
  :PROPERTIES:
  :CUSTOM_ID: neotree
@@ -458,23 +645,13 @@ Jumping around text, keybindings utilized in a hydra
       (setq neo-smart-open t) ; update every time its toggled
       (setq neo-theme (if (display-graphic-p) 'icons 'arrow))) ; add icons (utilizes all-the-icons)
 #+END_SRC
-** Dump-jump
-   #+begin_src emacs-lisp
-   (use-package dumb-jump
-       :bind (("M-g o" . dumb-jump-go-other-window)
-              ("M-g j" . dumb-jump-go)
-              ("M-g b" . dumb-jump-back)
-              ("M-g i" . dumb-jump-go-prompt)
-              ("M-g x" . dumb-jump-go-prefer-external)
-              ("M-g z" . dumb-jump-go-prefer-external-other-window))
-      :ensure)
-   #+end_src
 * Projectile
  :PROPERTIES:
  :CUSTOM_ID: projectile
  :END:
 - Amazing tool for managing projects! 
 - Projectile Homepage: https://projectile.readthedocs.io/en/latest/ 
+- Helm-Projectile: https://github.com/bbatsov/helm-projectile
 #+BEGIN_SRC emacs-lisp
      ;; Projectile-mode 
     (use-package projectile
@@ -484,9 +661,14 @@ Jumping around text, keybindings utilized in a hydra
         :custom 
         (projectile-project-search-path '("~/Projects/"))
         (projectile-sort-order 'recently-active)
-        (projectile-completion-system 'ivy)
+        (projectile-completion-system 'helm)
         :config
         (projectile-mode t))
+
+    (use-package helm-projectile 
+        :ensure t
+        :config
+        (helm-projectile-on))
 #+END_SRC
 * Shell
  :PROPERTIES:
@@ -539,6 +721,7 @@ Jumping around text, keybindings utilized in a hydra
 #+BEGIN_SRC emacs-lisp
   (use-package undo-tree
       :ensure t
+      :diminish
       :init
       (global-undo-tree-mode))
 #+END_SRC
@@ -704,7 +887,7 @@ Add Company backends to enable elisp autocomplete
 *** Zoom (actually find this first one pretty useful)
 #+BEGIN_SRC emacs-lisp
   (defhydra hydra-zoom (:color pink)
-    "zoom"
+    "zoom 🞈 🞈"
     ("k" text-scale-increase "in")
     ("j" text-scale-decrease "out")
     ("0" (text-scale-adjust 0) "reset")
@@ -715,7 +898,7 @@ Add Company backends to enable elisp autocomplete
 #+BEGIN_SRC emacs-lisp
   ;; help
   (defhydra hydra-describe (:color red :columns 2)
-    "Describe"
+    "Describe 🤓"
     ("f" describe-function "func")
     ("F" describe-face "face")
     ("k" describe-key "key")
@@ -730,40 +913,48 @@ Add Company backends to enable elisp autocomplete
 #+END_SRC
 *** Projectile (project management)
 #+BEGIN_SRC emacs-lisp
-      ;; projectile, I would change this hydra's global key if I wasn't using vim bindings...
      (defhydra hydra-projectile (:color red :columns 3)
-       "Projectile"
-       ("f" projectile-find-file "find")
-       ("w" projectile-find-file-dwim "find-dwim")
-       ("d" projectile-find-dir "find-dir")
-       ("a" projectile-ag "ag") ;; need silversearcher-ag installed!
-       ("s" projectile-switch-project "switch project")
-       ("b" projectile-switch-to-buffer "buffer switch")
+       "🚀 Projectile 🚀"
+       ("h" helm-projectile "launch")
+       ("f" helm-projectile-find-file "find")
+       ("w" helm-projectile-find-file-dwim "find-dwim")
+       ("d" helm-projectile-find-dir "find-dir")
+       ("a" helm-projectile-ag "ag") ;; need silversearcher-ag installed!
+       ("g" helm-projectile-rg "ripgrep") ;; need ripgrep installed!
+       ("s" helm-projectile-switch-project "switch project")
+       ("b" helm-projectile-switch-to-buffer "buffer switch")
        ("r" projectile-recentf "recent files")
        ("k" projectile-kill-buffers "kill project buffers")
        ("q" nil "quit" :color blue))
+
 #+END_SRC
 *** Window (my attempt at window management)
 #+BEGIN_SRC emacs-lisp
   ;; My attempt at window management
-  (defhydra hydra-window (:color pink :columns 4)
-   "Windows"
-    ("f" find-file "find")
-    ("b" switch-to-buffer "switch buffer")
+  (defhydra hydra-window (:color pink :columns 5)
+   "⚡⚡ Helm + Windows ⚡⚡"
+    ("f" helm-find-files "find")
+    ("b" helm-mini "switch buffer")
     ;; splitting
-    ("1" delete-other-windows "delete other windows")
+    ("o" delete-other-windows "delete other windows")
     ("2" split-window-right "v-split")
     ("3" split-window-below "h-split")
     ;; deletion and quitting
     ("K" kill-current-buffer "kill current buffer")
     ("d" delete-window "delete window")
     ("D" kill-this-buffer "kill buffer")
+    ;; resizing
+    ("s" shrink-window "shrink window")
+    ("e" enlarge-window "enlarge window")
+    ("S" shrink-window-horizontally "shrink horizontally")
+    ("E" enlarge-window-horizontally "shrink horizontally")
+    ("B" balance-windows "balance windows")
     ;; movement
     ("h" windmove-left "left")
     ("j" windmove-down "down")
     ("k" windmove-up "up")
     ("l" windmove-right "right")
-    ("x" execute-extended-command "M-x")
+    ("x" helm-M-x "M-x")
     ("q" nil "quit" :color blue))
 
 #+END_SRC
@@ -771,18 +962,37 @@ Add Company backends to enable elisp autocomplete
 #+BEGIN_SRC emacs-lisp
     ;; git 
     (defhydra hydra-git (:color red)
-      "Git"
+      "⏳ Git ⏳"
       ("g" magit "magit")
       ("d" magit-dispatch "dispatch")
       ("l" magit-list-repositories "list repos")
       ("t" git-timemachine "timemachine")
       ("q" nil "quit" :color blue))
 #+END_SRC
+*** LSP (jump to definitions and references, list errors)
+#+BEGIN_SRC emacs-lisp
+  ;; lsp
+  (defhydra hydra-lsp (:color red :columns 3)
+    "📡 LSP 📡"
+    ("j" lsp-ui-peek-find-definitions "peek-def")
+    ("r" lsp-ui-peek-find-references "peek-ref")
+    ("c" lsp-rename "rename")
+    ("f" lsp-find-definition "find-def")
+    ("t" lsp-find-type-definition "find-type-def")
+    ("e" flycheck-next-error "next error")
+    ("p" flycheck-previous-error "prev error")
+    ("l" lsp-ui-flycheck-list "list errors")
+    ("b" switch-to-prev-buffer "back") ;; better consistancy than lsp-ui-peek-jump-backward
+    ("n" switch-to-next-buffer "next") ;; better than lsp-ui-peek-jump-forward
+    ("i" lsp-ui-imenu "imenu")
+    ("q" nil "quit" :color blue))
+
+#+END_SRC
 *** Avy (jumping around text)
 #+BEGIN_SRC emacs-lisp
 
   (defhydra hydra-avy (:color red :columns 3)
-    "Avy"
+    "↵ Avy ↵"
     ("c" avy-goto-char "goto char")
     ("C" avy-goto-char-2 "goto char 2")
     ("t" avy-goto-char-timer "timed char")
@@ -794,13 +1004,13 @@ Add Company backends to enable elisp autocomplete
 #+END_SRC
 *** Launcher (launch stuff)
   #+BEGIN_SRC emacs-lisp
-    (setq
-    browse-url-browser-function
-    '(("https://www.netflix.com/" . browse-url-firefox) ;; firefox deals better with video players
-    ("." . browse-url-chromium)))
+(setq
+  browse-url-browser-function
+  '(("https://www.netflix.com/" . browse-url-firefox) ;; firefox deals better with video players
+  ("." . browse-url-chromium)))
 
      (defhydra hydra-launcher (:color red :columns 2)
-      "Launch"
+      " Launch "
       ("h" man "man")
       ("g" (browse-url "https://www.google.com/") "Google")
       ("G" (browse-url "https://github.com/marinov98") "GitHub")
@@ -814,7 +1024,7 @@ Add Company backends to enable elisp autocomplete
 *** Writing (taking notes, and writing)
 #+BEGIN_SRC emacs-lisp
      (defhydra hydra-writing (:color red :columns 2)
-      "Writing and Spelling"
+      "✓ Writing and Spelling ✓"
       ("d" ispell-change-dictionary "change dict")
       ("s" ispell-word "spell word")
       ("f" flyspell-buffer "flyspell buffer")
@@ -827,12 +1037,18 @@ Add Company backends to enable elisp autocomplete
 *** Utility (useful commands for me)
 #+BEGIN_SRC emacs-lisp
      (defhydra hydra-utility (:color red :columns 4)
-      "Marinov"
+      "😎 Utility 😎"
       ("m" goto-MarinMacs "goto config")
       ("b" gdb "gdb")
       ("e" eval-buffer "eval buffer")
+      ("d" dap-debug "dap debug")
+      ("i" dap-debug-edit-template "debug template")
+      ("r" helm-recentf "recent files")
+      ("g" helm-rg "ripgrep")
+      ("a" helm-ag "ag")
+      ("z" fzf "fzf")
       ("f" flycheck-buffer "flycheck buffer")
-      ("r" ranger "ranger")
+      ("R" ranger "ranger")
       ("c" compile "compile")
       ("u" auto-fill-mode "auto-fill-mode")
       ("w" web-mode "web-mode")
@@ -841,32 +1057,124 @@ Add Company backends to enable elisp autocomplete
 #+END_SRC
 *** Org (for org mode)
     #+begin_src emacs-lisp
-    (defun marinov/goto-org-directory ()
-      "goes to my org directory"
-      (interactive)
-      (find-file org-directory))
-      
-    (defun marinov/jump-to-notes ()
-      "go to notes file"
-      (interactive)
-      (find-file org-default-notes-file))
+      (defun marinov/goto-org-directory ()
+        "goes to my org directory"
+        (interactive)
+        (find-file org-directory))
 
-     (defhydra hydra-org (:color blue :columns 4)
-      " ORG "
-      ("o" org-open-at-point "open link")
-      ("c" org-toggle-comment "comment")
-      ("i" org-time-stamp "time stamp")
-      ("d" org-export-dispatch "export dispatch")
-      ("p" org-priority "priority")
-      ("t" org-todo "todo state")
-      ("a" org-todo-list "agenda")
-      ("l" org-show-todo-tree "show todo tree")
-      ("s" org-edit-special "edit special")
-      ("x" org-edit-src-exit "exit special")
-      ("n" marinov/jump-to-notes "goto notes")
-      ("D" marinov/goto-org-directory "goto org directory")
-      ("q" nil "quit"))
+      (defun marinov/jump-to-notes ()
+        "go to notes file"
+        (interactive)
+        (find-file org-default-notes-file))
+
+       (defhydra hydra-org (:color blue :columns 4)
+        " ORG "
+        ("o" org-open-at-point "open link")
+        ("c" org-toggle-comment "comment")
+        ("i" org-time-stamp "time stamp")
+	("d" org-export-dispatch "export dispatch")
+        ("p" org-priority "priority")
+        ("t" org-todo "todo state")
+        ("a" org-todo-list "agenda")
+        ("l" org-show-todo-tree "show todo tree")
+        ("s" org-edit-special "edit special")
+        ("x" org-edit-src-exit "exit special")
+        ("n" marinov/jump-to-notes "goto notes")
+        ("D" marinov/goto-org-directory "goto org directory")
+        ("q" nil "quit"))
     #+end_src
+* LSP
+ :PROPERTIES:
+ :CUSTOM_ID: lsp
+ :END:
+ - LSP stands for Language Server Protocal and makes setting up autocompletion and syntax checking easy. 
+ - Check the [[https://github.com/emacs-lsp/lsp-mode][Official Repo]] to see what to install for your preferred development language
+ - lsp-ui (UI integrations for lsp-mode)
+ - company-lsp (this is the company completion backend)
+#+BEGIN_SRC emacs-lisp  
+  (use-package lsp-mode
+      :ensure t
+      :diminish
+      :commands lsp
+      :hook
+      ((c++-mode . lsp)
+      (c-mode . lsp)
+      (python-mode . lsp)
+      (css-mode . lsp)
+      (yaml-mode . lsp)
+      (json-mode . lsp)
+      (js2-mode . lsp)
+      (rjsx-mode . lsp)
+      (typescript-mode . lsp)
+      (web-mode . lsp))
+      :custom
+      (lsp-idle-delay 0.15)
+      (lsp-flycheck-live-reporting nil) ;; allows our previous flycheck setting to only check syntax on save to work
+      :config
+      (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")))
+
+  (use-package lsp-ui
+      :after lsp-mode flycheck
+      :ensure t
+      :diminish
+      :commands lsp-ui-mode
+      :hook (lsp-mode . lsp-ui-mode)
+      :bind
+      (:map lsp-ui-peek-mode-map
+      ("M-j" . lsp-ui-peek--select-next)
+      ("M-k" . lsp-ui-peek--select-prev))
+      :custom
+      (lsp-ui-doc-enable t)
+      (lsp-ui-doc-delay 0.65) ;; display doc after 6.5/10 of a second
+      (lsp-ui-doc-use-childframe t)
+      (lsp-ui-doc-position 'top)
+      (lsp-ui-doc-include-signature t)
+      (lsp-ui-sideline-enable nil)
+      (lsp-ui-flycheck-list-position 'right)
+      (lsp-ui-peek-enable t)
+      (lsp-ui-peek-list-width 60)
+      (lsp-ui-peek-peek-height 25)
+      :config
+      (setq eldoc-idle-delay 0.65)) ;; delay eldoc for 6.5/10 second
+
+  (use-package company-lsp
+      :requires company
+      :ensure t
+      :custom
+      (company-transformers nil)
+      (company-lsp-async t)
+      (company-lsp-cache-candidates nil) ;; Disable client-side cache because the LSP server does a better job.
+      (company-lsp-enable-snippet t)
+      (company-lsp-enable-recompletion t)
+      :config
+      (push 'company-lsp company-backends))
+
+#+END_SRC
+* DAP
+ :PROPERTIES:
+ :CUSTOM_ID: dap
+ :END:
+- DAP stands for Debug Adapter Protocal works similiarly to LSP but for debugging
+- Repo: https://github.com/emacs-lsp/dap-mode (includes everything you need to install for your desired development language)
+#+BEGIN_SRC emacs-lisp
+   ;; enable hydra bindings in dap mode
+   (use-package dap-hydra
+       :ensure nil
+       :requires hydra)
+
+   ;; only installing because dap-mode requires it
+   (use-package posframe :ensure t)
+
+   (use-package dap-mode
+       :ensure t
+       :requires hydra
+       :hook
+       (lsp-mode . (lambda () (dap-mode t) (dap-ui-mode t) (dap-tooltip-mode 1) (tooltip-mode 1)))
+       :config
+       (add-hook 'dap-stopped-hook
+       (lambda (arg) (call-interactively #'dap-hydra)))) ;; enable hydra on breakpoint stop
+
+#+END_SRC
 * Latex 
  :PROPERTIES:
  :CUSTOM_ID: latex
@@ -914,11 +1222,31 @@ Add Company backends to enable elisp autocomplete
 #+BEGIN_SRC emacs-lisp
 (setq-default c-basic-offset 4) ;; indentation for C-based languages
 
+;; disable other checkers since we only want to utilize clangd language server
+(setq-default flycheck-disabled-checkers '(c/c++-clang c/c++-cppcheck c/c++-gcc)) 
+
 ;; enable modern font lock for >=c++11
 (use-package modern-cpp-font-lock
     :ensure t
     :config
     (modern-c++-font-lock-global-mode t))
+#+END_SRC
+*** Debugging
+Still experimenting with this, native gdb in emacs is also really good 
+#+BEGIN_SRC emacs-lisp
+(use-package dap-gdb-lldb
+  :ensure nil
+  :requires dap-mode
+  :config
+  (dap-register-debug-template
+  "GDB config"
+  (list :type "gdb"
+        :request "launch"
+        :name "GDB::Run"
+        :target "test"
+        :program "test"
+        :cwd "/home/marin/Projects")))
+
 #+END_SRC
 *** Clang-Format
  - The only package that utilizes quelpa at the moment :))
@@ -928,6 +1256,7 @@ Add Company backends to enable elisp autocomplete
 #+BEGIN_SRC emacs-lisp
   (use-package clang-format 
      :ensure t
+     :diminish
      :bind 
      (("C-c R" . clang-format-region) ;; format current line
      ("C-c F" . clang-format-buffer))) ;; format entire file
@@ -964,6 +1293,32 @@ pip3 install rope jedi pylint flake8 autopep8 yapf pygments virtualenv virtualen
   
   ;; warnings
   (setq lsp-pyls-plugins-pycodestyle-enabled nil) ;; comment if you want code style warnings everywhere
+#+END_SRC
+*** Debugging
+Note: the template is meant to be edited to personal preferences
+#+BEGIN_SRC emacs-lisp
+(use-package dap-python
+  :ensure nil
+  :requires dap-mode
+  :config
+  (dap-register-debug-template "My App"
+  (list :type "python"
+        :args "-i"
+        :cwd nil
+        :env '(("DEBUG" . "1"))
+        :target-module (expand-file-name "~/src/myapp/.env/bin/myapp")
+        :request "launch"
+        :name "My App")))
+#+END_SRC
+*** Elpy
+ - No longer need it because of LSP but keeping it for reference
+ - Documentation: https://elpy.readthedocs.io/en/latest/
+#+BEGIN_SRC emacs-lisp
+(use-package elpy
+   :disabled
+   :ensure t
+   :config 
+   (elpy-enable))
 #+END_SRC
 *** Virtualenv
  Remove disabled if you need it, I have yet to develop seriously in Python
@@ -1081,6 +1436,27 @@ visually display hex values as colors
       :ensure t
       :commands csv-mode)
 #+END_SRC
+*** Skewer
+'live web-development in emacs'
+#+BEGIN_SRC emacs-lisp
+  (use-package skewer-mode
+      :disabled
+      :ensure t
+      :commands skewer-mode run-skewer
+      :config
+      (add-hook 'js2-mode-hook 'skewer-mode)
+      (add-hook 'css-mode-hook 'skewer-css-mode)
+      (add-hook 'html-mode-hook 'skewer-html-mode)
+      (skewer-setup))
+    
+#+END_SRC
+*** Impatient-Mode
+'See the effect of your HTML as you type it.'
+   #+BEGIN_SRC emacs-lisp
+  (use-package impatient-mode
+      :disabled
+      :ensure t)  
+   #+END_SRC
 *** Emmet 
  More on emmet: https://www.emmet.io/
 #+BEGIN_SRC emacs-lisp
@@ -1098,7 +1474,7 @@ visually display hex values as colors
  :CUSTOM_ID: JavaScript-TypeScript
  :END:
 - JavaScript/TypeScript language server: https://github.com/theia-ide/typescript-language-server
-- Select *ts-ls* when prompted which server to install 
+- Select =ts-ls= when prompted which server to install 
 *** Node Path
 Adds the node_modules/.bin directory to the buffer exec_path.
 #+BEGIN_SRC emacs-lisp
@@ -1107,6 +1483,26 @@ Adds the node_modules/.bin directory to the buffer exec_path.
       :hook 
       ((web-mode . add-node-modules-path)
       (rjsx-mode . add-node-modules-path)))
+#+END_SRC
+*** Debugging
+ Any kind of setup can be found in the dap repo that was mentioned previously...
+*** Front-end
+#+BEGIN_SRC emacs-lisp
+  ;; debugging in chrome
+  (use-package dap-chrome
+      :ensure nil
+      :requires dap-mode)
+  
+  ;; debugging in firefox
+  (use-package dap-firefox
+      :ensure nil
+      :requires dap-mode)
+#+END_SRC
+*** Back-end
+#+BEGIN_SRC emacs-lisp
+  (use-package dap-node
+      :ensure nil
+      :requires dap-mode)
 #+END_SRC
 *** Js2-mode
 - A 'better' mode for editing javascript files. Can have performance issues and errors 
@@ -1125,7 +1521,7 @@ Adds the node_modules/.bin directory to the buffer exec_path.
  :PROPERTIES:
  :CUSTOM_ID: ts
  :END:
-*** TypeScript
+*** TIDE
 All for typescript
 #+BEGIN_SRC emacs-lisp
   ;; enable typescript in emacs
@@ -1135,27 +1531,34 @@ All for typescript
              ("\\.tsx\\'" . typescript-mode))
       :config
       (setq-default typescript-indent-level 2)) ;; indent 2 spaces by default
+
+  ;; typescript integrated development environment
+  (use-package tide
+      :ensure t
+      :after
+      (typescript-mode company flycheck)
+      :hook
+      ((typscript-mode . tide-setup)
+      (typescript-mode . tide-hl-identifier-mode)
+      (before-save . tide-format-before-save))
+      :config
+      (flycheck-add-next-checker 'typescript-tide 'javascript-eslint)
+      (flycheck-add-next-checker 'tsx-tide 'javascript-eslint))
 #+END_SRC
 * Diminish
  :PROPERTIES:
  :CUSTOM_ID: diminish
  :END:
-This hides modes from your modeline, add the specific mode you do not want to see in the modeline
+- This hides modes from your modeline, add the specific mode you do not want to see in the modeline
+- Usually the =:diminish= keyword takes care of it, but some modes seem to only diminish if they are put here.
   #+begin_src emacs-lisp
     (use-package diminish
         :ensure t
         :init
-        (diminish 'undo-tree-mode)
-        (diminish 'clang-format-mode)
-        (diminish 'clang-format+-mode)
+        (diminish 'yas-minor-mode)
         (diminish 'modern-c++-font-lock-mode)
         (diminish 'auto-revert-mode)
         (diminish 'page-break-lines-mode)
-        (diminish 'evil-mc-mode)
         (diminish 'eldoc-mode)
-        (diminish 'abbrev-mode)
-        (diminish 'beacon-mode)
-        (diminish 'yas-minor-mode)
-        (diminish 'which-key-mode))
+        (diminish 'abbrev-mode))
   #+end_src
- 
