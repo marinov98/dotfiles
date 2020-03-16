@@ -55,8 +55,7 @@ Indentation
 - Options, display, parenthesis 
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
-  (setq default-frame-alist '((font . "Fira Code-11")
-                              (cursor-color . "#ffc600"))) ;; set font, font size, and cursor color
+  (setq default-frame-alist '((font . "Fira Code-12"))) ;; set font, font size, and cursor color
   (setq visible-bell t)                                    ;; disable end of buffer sounds
   (electric-pair-mode)                                     ;; auto closing brackets
   (show-paren-mode 1)                                      ;; highlight matching parenthesis
@@ -167,7 +166,9 @@ A nice and quick way to view/edit my configuration at any time
         "k" 'kill-current-buffer
         "o" 'delete-other-windows
         ;; package-specific
-        "t" 'neotree-toggle))
+        "t" 'neotree-toggle
+        "h s" 'helm-swoop
+        "h a" 'helm-multi-swoop))
 
   (use-package evil
       :ensure t
@@ -306,114 +307,94 @@ A nice and quick way to view/edit my configuration at any time
  :CUSTOM_ID: themes
  :END:
 ** Favorite-Themes
-*** Base16 (Contains 20+ themes but these are my top picks)
-- base16-ocean 
-- base16-oceanicnext 
-- base16-tomorrow-night
-- base16-solarized-dark/light
-
 *** Colorful and visually pleasing    
 - Spacemacs-theme
 - Zerodark
+- Doom-one
 - modus-vivendi (amazing color contrast)
-
 *** Easy on the eyes
-- Gruvbox
-- nord
+- doom-gruvbox
+- doom-solarized-dark
+- doom-nord
 - Zenburn
 - JellyBeans 
 - Planet
-- solarized-dark (from solarized-theme NOT base16)
-
 *** For Org and any Markdown Language
 - Poet
 ** Customization
 You can enable/disable any themes that you like here
 #+BEGIN_SRC emacs-lisp
-;; BE AWARE: emacs can have multiple themes on at the same time
-;; Multiple themes can mix into a super theme
-;; Some themes do not mix well which is why I disable themes
+  ;; BE AWARE: emacs can have multiple themes on at the same time
+  ;; Multiple themes can mix into a super theme
+  ;; Some themes do not mix well which is why I disable themes
 
 
-;; current theme I am running
- (use-package spacemacs-common
-     :ensure spacemacs-theme
-     :config (load-theme 'spacemacs-dark t))
-     
-;; others
- (use-package zerodark-theme
-     :disabled
-     :ensure t)
- 
- (use-package minimal-theme
-     :disabled
-     :ensure t
-     :config
-     (load-theme 'minimal t))
-   
- (use-package nord-theme
-     :disabled
-     :ensure t
-     :config
-     (load-theme 'nord t))
+   (use-package spacemacs-common
+       :disabled
+       :ensure spacemacs-theme
+       :config (load-theme 'spacemacs-dark t))
 
- (use-package zenburn-theme
-     :disabled
-     :ensure t
-     :config
-     (load-theme 'zenburn t))
-    
- (use-package poet-theme
-     :disabled
-     :ensure t)
+    (use-package doom-themes
+        :ensure t 
+        :config
+        ;; Global settings (defaults)
+        (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+              doom-themes-enable-italic t) ; if nil, italics is universally disabled
+        (load-theme 'doom-one t)
 
- (use-package monokai-theme
-     :disabled
-     :ensure t
-     :config (load-theme 'monokai t))
- 
+        ;; Enable flashing mode-line on errors
+        (doom-themes-visual-bell-config)
+        ;; Enable custom neotree theme (all-the-icons must be installed!)
+        (doom-themes-neotree-config)
+        ;; or for treemacs users
+        (setq doom-themes-treemacs-theme "doom-colors") ; use the colorful treemacs theme
+        (doom-themes-treemacs-config)
+        ;; Corrects (and improves) org-mode's native fontification.
+        (doom-themes-org-config))
 
- (use-package modus-vivendi-theme
-     :disabled
-     :ensure t
-     :config
-     (setq modus-vivendi-theme-bold-constructs t)
-     (load-theme 'modus-vivendi t))
+   (use-package zerodark-theme
+       :disabled
+       :ensure t)
 
- (use-package modus-operandi-theme
-     :disabled
-     :ensure t
-     :config (load-theme 'modus-operandi t))
- 
- (use-package gruvbox-theme
-     :disabled
-     :ensure t
-     :config
-     (load-theme 'gruvbox t))
+   (use-package minimal-theme
+       :disabled
+       :ensure t
+       :config
+       (load-theme 'minimal t))
 
- (use-package base16-theme
-     :disabled
-     :ensure t
-     :config 
-     (load-theme 'base16-ocean t))
+   (use-package zenburn-theme
+       :disabled
+       :ensure t
+       :config
+       (load-theme 'zenburn t))
 
- (use-package jbeans-theme
-     :disabled
-     :ensure t
-     :config
-     (load-theme 'jbeans t))
+   (use-package poet-theme
+       :disabled
+       :ensure t)
 
- (use-package solarized-theme
-     :disabled
-     :ensure t
-     :config
-     (load-theme 'solarized-dark t))
- 
- (use-package planet-theme
-     :disabled
-     :ensure t
-     :config 
-     (load-theme 'planet t))
+   (use-package modus-vivendi-theme
+       :disabled
+       :ensure t
+       :config
+       (setq modus-vivendi-theme-bold-constructs t)
+       (load-theme 'modus-vivendi t))
+
+   (use-package modus-operandi-theme
+       :disabled
+       :ensure t
+       :config (load-theme 'modus-operandi t))
+
+   (use-package jbeans-theme
+       :disabled
+       :ensure t
+       :config
+       (load-theme 'jbeans t))
+
+   (use-package planet-theme
+       :disabled
+       :ensure t
+       :config 
+       (load-theme 'planet t))
 #+END_SRC
 * Modeline
  :PROPERTIES:
@@ -424,70 +405,51 @@ You can enable/disable any themes that you like here
 - You can pick one of these modeline themes, simply enable the one you want to try and disable the rest
 #+BEGIN_SRC emacs-lisp
 
-;;;;;;;;;;;;;;;;;;;;;;   
-;; Spaceline
-;;;;;;;;;;;;;;;;;;;;;;   
+  ;;;;;;;;;;;;;;;;;;;;;;   
+  ;; Spaceline
+  ;;;;;;;;;;;;;;;;;;;;;;   
 
-  (use-package spaceline
-      :ensure t
-      :custom
-      (spaceline-toggle-flycheck-info-off)
-      :config
-      (require 'spaceline-config)
-      (setq powerline-default-separator (quote arrow))
-      (spaceline-highlight-face-evil-state) ;; evil mode only
-      (spaceline-spacemacs-theme))
+    (use-package spaceline
+        :disabled
+        :ensure t
+        :custom
+        (spaceline-toggle-flycheck-info-off)
+        :config
+        (require 'spaceline-config)
+        (setq powerline-default-separator (quote arrow))
+        (spaceline-highlight-face-evil-state) ;; evil mode only
+        (spaceline-spacemacs-theme))
 
 
 
-;;;;;;;;;;;;;;;;;;;;;;   
-;;  Telephone-line
-;;;;;;;;;;;;;;;;;;;;;;   
+  ;;;;;;;;;;;;;;;;;;;;;;   
+  ;;  Telephone-line
+  ;;;;;;;;;;;;;;;;;;;;;;   
    
-  (use-package telephone-line
-      :disabled
-      :ensure t
-      :config
-      (setq telephone-line-lhs
-      '((evil   . (telephone-line-evil-tag-segment))
-        (accent . (telephone-line-vc-segment
-                   telephone-line-erc-modified-channels-segment
-                   telephone-line-process-segment))
-        (nil    . (telephone-line-minor-mode-segment
-                   telephone-line-buffer-segment))))
-      (setq telephone-line-rhs
-      '((nil    . (telephone-line-misc-info-segment))
-        (accent . (telephone-line-major-mode-segment))
-        (evil   . (telephone-line-airline-position-segment))))
-        (telephone-line-mode 1))
-
-
-
+    (use-package telephone-line
+        :disabled  
+        :ensure t
+        :config
+        (setq telephone-line-lhs
+        '((evil   . (telephone-line-evil-tag-segment))
+          (accent . (telephone-line-vc-segment
+                     telephone-line-erc-modified-channels-segment
+                     telephone-line-process-segment))
+          (nil    . (telephone-line-minor-mode-segment
+                     telephone-line-buffer-segment))))
+        (setq telephone-line-rhs
+        '((nil    . (telephone-line-misc-info-segment))
+          (accent . (telephone-line-major-mode-segment))
+          (evil   . (telephone-line-airline-position-segment))))
+          (telephone-line-mode 1))
     
-;;;;;;;;;;;;;;;;;;;;;;   
-;; lightweight doom theme
-;;;;;;;;;;;;;;;;;;;;;;   
+  ;;;;;;;;;;;;;;;;;;;;;;   
+  ;; lightweight doom theme
+  ;;;;;;;;;;;;;;;;;;;;;;   
 
-  (use-package doom-modeline
-      :disabled
-      :ensure t
-      :hook (after-init . doom-modeline-mode))
-
-;;;;;;;;;;;;;;;;;;;;;;   
-;; Powerline
-;;;;;;;;;;;;;;;;;;;;;;   
-
-  (use-package powerline
-      :disabled
-      :ensure t
-      :config
-      (powerline-default theme))   
-      ;; Other themes with powerline
-    
-      ;;     (powerline-center-theme)
-      ;;     (powerline-vim-theme)
-      ;;     (powerline-center-evil-theme)
-      ;;     (powerline-nano-theme)
+    (use-package doom-modeline
+        :ensure t
+        :hook (after-init . doom-modeline-mode))
 
 #+END_SRC
 * Helm
@@ -498,60 +460,73 @@ You can enable/disable any themes that you like here
 - Official site: https://emacs-helm.github.io/helm/
 - Swiper: an alternative to emacs’s native isearch that can ivy or helm to show an overview of matches
 - Helm-rg: uses ripgrep with helm frontend to find matches
+- Helm-ag: uses silversearcher with helm frontend to find matches
 - Helm-fzf: uses fuzzy file finding with helm frontend
 - Helm-ls-git: allows you search following your gitignore
+- Helm-swoop: listing line matches 
   #+begin_src emacs-lisp
- (use-package helm
-     :ensure t
-     :diminish
-     :custom
-     (helm-split-window-inside-p t)
-     (helm-move-to-line-cycle-in-source t)
-     (helm-autoresize-max-height 0)
-     (helm-autoresize-min-height 20)
-     :bind
-     (("M-x" . helm-M-x)
-     ("C-x C-f" . helm-find-files)
-     ("M-y" . helm-show-kill-ring)
-     ("C-x b" . helm-mini)
-     :map helm-map
-     ("TAB" . helm-execute-persistent-action)
-     ("<tab>" . helm-execute-persistent-action)
-     ("C-z" . helm-select-action)
-     ("M-j" . helm-next-line)
-     ("M-k" . helm-previous-line))
-     :config
-     (require 'helm-config)
-     (helm-mode 1)
-     (helm-autoresize-mode 1))
-  
-  ;; Swiper 
-  (use-package swiper
-      :ensure t
-      :custom
-      (swiper-action-recenter t)
-      (swiper-goto-start-of-match t)
-      (swiper-include-line-number-in-search t))
+    (use-package helm
+        :ensure t
+        :diminish
+        :custom
+        (helm-split-window-inside-p t)
+        (helm-move-to-line-cycle-in-source t)
+        (helm-autoresize-max-height 0)
+        (helm-autoresize-min-height 20)
+        :bind
+        (("M-x" . helm-M-x)
+        ("C-x C-f" . helm-find-files)
+        ("M-y" . helm-show-kill-ring)
+        ("C-x b" . helm-mini)
+        :map helm-map
+        ("TAB" . helm-execute-persistent-action)
+        ("<tab>" . helm-execute-persistent-action)
+        ("C-z" . helm-select-action)
+        ("M-j" . helm-next-line)
+        ("M-k" . helm-previous-line))
+        :config
+        (require 'helm-config)
+        (helm-mode 1)
+        (helm-autoresize-mode 1))
+
+     ;; Swiper 
+     (use-package swiper
+         :ensure t
+         :custom
+         (swiper-action-recenter t)
+         (swiper-goto-start-of-match t)
+         (swiper-include-line-number-in-search t))
 
 
-  (use-package swiper-helm
-      :after (helm swiper)
-      :ensure t
-      :bind
-      ("C-s" . swiper-helm))
+     (use-package swiper-helm
+         :after (helm swiper)
+         :ensure t
+         :bind
+         ("C-s" . swiper-helm))
 
-  (use-package helm-rg 
-      :after helm
-      :ensure t
-      :config (setq helm-rg-default-directory 'git-root))
+     (use-package helm-rg 
+         :after helm
+         :ensure t
+         :config (setq helm-rg-default-directory 'git-root))
 
-  (use-package helm-ag
-      :after helm
-      :ensure t)
-  
-  (use-package helm-ls-git 
-      :after helm
-      :ensure t)
+     (use-package helm-ag
+         :after helm
+         :ensure t)
+
+     (use-package helm-ls-git 
+         :after helm
+         :ensure t)
+
+     (use-package helm-swoop
+         :after helm
+         :ensure t
+         :custom
+         (helm-swoop-split-with-multiple-windows nil)
+         (helm-swoop-split-direction 'split-window-vertically)
+         (helm-swoop-speed-or-color nil)
+         (helm-swoop-move-to-line-cycle t)
+         (helm-swoop-use-line-number-face t)
+         (helm-swoop-use-fuzzy-match t))
   #+end_src
 Helm did not seem to provide fzf functionality and helm-fzf does not seem to exist anymore unlike counsel, so this was a workaround
 #+begin_src emacs-lisp
@@ -653,8 +628,6 @@ I never lose where my cursor is thanks to this
   (use-package beacon
       :ensure t
       :diminish
-      :custom
-      (beacon-color "#ffc600")
       :config
       (beacon-mode 1))
 #+END_SRC
@@ -1047,6 +1020,7 @@ Add Company backends to enable elisp autocomplete
       "😎 Marinov 😎"
       ("m" goto-MarinMacs "goto config")
       ("b" gdb "gdb")
+      ("e" eval-buffer "eval buffer")
       ("d" dap-debug "dap debug")
       ("i" dap-debug-edit-template "debug template")
       ("r" helm-recentf "recent files")
@@ -1062,29 +1036,30 @@ Add Company backends to enable elisp autocomplete
 #+END_SRC
 *** Org (for org mode)
     #+begin_src emacs-lisp
-    (defun marinov/goto-org-directory ()
-      "goes to my org directory"
-      (interactive)
-      (find-file org-directory))
-      
-    (defun marinov/jump-to-notes ()
-      "go to notes file"
-      (interactive)
-      (find-file org-default-notes-file))
+      (defun marinov/goto-org-directory ()
+        "goes to my org directory"
+        (interactive)
+        (find-file org-directory))
 
-     (defhydra hydra-org (:color blue :columns 4)
-      " ORG "
-      ("o" org-open-at-point "open link")
-      ("c" org-toggle-comment "comment")
-      ("i" org-time-stamp "time stamp")
-      ("p" org-priority "priority")
-      ("t" org-todo "todo state")
-      ("a" org-todo-list "agenda")
-      ("l" org-show-todo-tree "show todo tree")
-      ("s" org-edit-special "edit special")
-      ("n" marinov/jump-to-notes "goto notes")
-      ("d" marinov/goto-org-directory "goto org directory")
-      ("q" nil "quit"))
+      (defun marinov/jump-to-notes ()
+        "go to notes file"
+        (interactive)
+        (find-file org-default-notes-file))
+
+       (defhydra hydra-org (:color blue :columns 4)
+        " ORG "
+        ("o" org-open-at-point "open link")
+        ("c" org-toggle-comment "comment")
+        ("i" org-time-stamp "time stamp")
+        ("p" org-priority "priority")
+        ("t" org-todo "todo state")
+        ("a" org-todo-list "agenda")
+        ("l" org-show-todo-tree "show todo tree")
+        ("s" org-edit-special "edit special")
+        ("x" org-edit-src-exit "exit special")
+        ("n" marinov/jump-to-notes "goto notes")
+        ("d" marinov/goto-org-directory "goto org directory")
+        ("q" nil "quit"))
     #+end_src
 * LSP
  :PROPERTIES:
@@ -1565,3 +1540,4 @@ All for typescript
         (diminish 'eldoc-mode)
         (diminish 'abbrev-mode))
   #+end_src
+ 
