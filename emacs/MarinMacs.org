@@ -1086,6 +1086,7 @@ Add Company backends to enable elisp autocomplete
       ("t" org-todo "todo state")
       ("a" org-todo-list "agenda")
       ("l" org-show-todo-tree "show todo tree")
+      ("s" org-edit-special "edit special")
       ("n" marinov/jump-to-notes "goto notes")
       ("d" marinov/goto-org-directory "goto org directory")
       ("q" nil "quit"))
