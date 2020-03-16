@@ -55,7 +55,8 @@ Indentation
 - Options, display, parenthesis 
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
-  (setq default-frame-alist '((font . "Fira Code-12"))) ;; set font, font size, and cursor color
+  (setq default-frame-alist '((font . "Fira Code-12")
+                              (cursor-color . "#ffc600"))) ;; set font, font size, and cursor color
   (setq visible-bell t)                                    ;; disable end of buffer sounds
   (electric-pair-mode)                                     ;; auto closing brackets
   (show-paren-mode 1)                                      ;; highlight matching parenthesis
@@ -400,18 +401,17 @@ You can enable/disable any themes that you like here
   ;; Spaceline
   ;;;;;;;;;;;;;;;;;;;;;;   
 
-    (use-package spaceline
-        :disabled
-        :ensure t
-        :custom
-        (spaceline-toggle-flycheck-info-off)
-        :config
-        (require 'spaceline-config)
-        (setq powerline-default-separator (quote arrow))
-        (spaceline-highlight-face-evil-state) ;; evil mode only
-        (spaceline-spacemacs-theme))
-
-
+  (use-package spaceline
+      :ensure t
+      :custom-face
+      (spaceline-highlight-face ((t (:background "#ffc600" :foreground "black"))))
+      :custom
+      (spaceline-toggle-flycheck-info-off)
+      :config
+      (require 'spaceline-config)
+      (setq powerline-default-separator (quote arrow))
+      (spaceline-highlight-face-default) 
+      (spaceline-spacemacs-theme))
 
   ;;;;;;;;;;;;;;;;;;;;;;   
   ;;  Telephone-line
@@ -439,6 +439,7 @@ You can enable/disable any themes that you like here
   ;;;;;;;;;;;;;;;;;;;;;;   
 
     (use-package doom-modeline
+        :disabled
         :ensure t
         :hook (after-init . doom-modeline-mode))
 
@@ -622,6 +623,8 @@ I never lose where my cursor is thanks to this
   (use-package beacon
       :ensure t
       :diminish
+      :custom
+      (beacon-color "#ffc600")
       :config
       (beacon-mode 1))
 #+END_SRC
@@ -1534,3 +1537,4 @@ All for typescript
         (diminish 'eldoc-mode)
         (diminish 'abbrev-mode))
   #+end_src
+  
