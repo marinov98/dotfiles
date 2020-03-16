@@ -295,114 +295,85 @@ A nice and quick way to view/edit my configuration at any time
  :CUSTOM_ID: themes
  :END:
 ** Favorite-Themes
-*** Base16 (Contains 20+ themes but these are my top picks)
-- base16-ocean 
-- base16-oceanicnext 
-- base16-tomorrow-night
-- base16-solarized-dark/light
-
 *** Colorful and visually pleasing    
 - Spacemacs-theme
 - Zerodark
+- Doom-one
 - modus-vivendi (amazing color contrast)
-
 *** Easy on the eyes
-- Gruvbox
-- nord
+- doom-gruvbox
+- doom-solarized-dark
+- doom-nord
 - Zenburn
 - JellyBeans 
 - Planet
-- solarized-dark (from solarized-theme NOT base16)
-
 *** For Org and any Markdown Language
 - Poet
 ** Customization
 You can enable/disable any themes that you like here
 #+BEGIN_SRC emacs-lisp
-;; BE AWARE: emacs can have multiple themes on at the same time
-;; Multiple themes can mix into a super theme
-;; Some themes do not mix well which is why I disable themes
+    ;; BE AWARE: emacs can have multiple themes on at the same time
+    ;; Multiple themes can mix into a super theme
+    ;; Some themes do not mix well which is why I disable themes
 
+     (use-package spacemacs-common
+         :disabled
+         :ensure spacemacs-theme
+         :config (load-theme 'spacemacs-dark t))
 
-;; current theme I am running
- (use-package spacemacs-common
-     :ensure spacemacs-theme
-     :config (load-theme 'spacemacs-dark t))
-     
-;; others
- (use-package zerodark-theme
-     :disabled
-     :ensure t)
- 
- (use-package minimal-theme
-     :disabled
-     :ensure t
-     :config
-     (load-theme 'minimal t))
-   
- (use-package nord-theme
-     :disabled
-     :ensure t
-     :config
-     (load-theme 'nord t))
+     (use-package doom-themes
+         :ensure t 
+         :custom
+         (doom-themes-enable-bold t)
+         (doom-themes-enable-italic t)
+         :config
+         (load-theme 'doom-one t)
+         (doom-themes-visual-bell-config) ;; Enable flashing mode-line on errors
+         (doom-themes-org-config)) ;; Corrects (and improves) org-mode's native fontification.
 
- (use-package zenburn-theme
-     :disabled
-     :ensure t
-     :config
-     (load-theme 'zenburn t))
-    
- (use-package poet-theme
-     :disabled
-     :ensure t)
+     (use-package zerodark-theme
+         :disabled
+         :ensure t)
 
- (use-package monokai-theme
-     :disabled
-     :ensure t
-     :config (load-theme 'monokai t))
- 
+     (use-package minimal-theme
+         :disabled
+         :ensure t
+         :config
+         (load-theme 'minimal t))
 
- (use-package modus-vivendi-theme
-     :disabled
-     :ensure t
-     :config
-     (setq modus-vivendi-theme-bold-constructs t)
-     (load-theme 'modus-vivendi t))
+     (use-package zenburn-theme
+         :disabled
+         :ensure t
+         :config
+         (load-theme 'zenburn t))
 
- (use-package modus-operandi-theme
-     :disabled
-     :ensure t
-     :config (load-theme 'modus-operandi t))
- 
- (use-package gruvbox-theme
-     :disabled
-     :ensure t
-     :config
-     (load-theme 'gruvbox t))
+     (use-package poet-theme
+         :disabled
+         :ensure t)
 
- (use-package base16-theme
-     :disabled
-     :ensure t
-     :config 
-     (load-theme 'base16-ocean t))
+     (use-package modus-vivendi-theme
+         :disabled
+         :ensure t
+         :config
+         (setq modus-vivendi-theme-bold-constructs t)
+         (load-theme 'modus-vivendi t))
 
- (use-package jbeans-theme
-     :disabled
-     :ensure t
-     :config
-     (load-theme 'jbeans t))
+     (use-package modus-operandi-theme
+         :disabled
+         :ensure t
+         :config (load-theme 'modus-operandi t))
 
- (use-package solarized-theme
-     :disabled
-     :ensure t
-     :config
-     (load-theme 'solarized-dark t))
- 
- (use-package planet-theme
-     :disabled
-     :ensure t
-     :config 
-     (load-theme 'planet t))
+     (use-package jbeans-theme
+         :disabled
+         :ensure t
+         :config
+         (load-theme 'jbeans t))
+
+     (use-package planet-theme
+         :disabled
+         :ensure t
+         :config 
+         (load-theme 'planet t))
 #+END_SRC
 * Icomplete
 Icomplete is a native Emacs global minor mode provides a convenient way to quickly select an element among the possible completions in a minibuffer. 
