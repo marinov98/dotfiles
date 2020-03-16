@@ -15,7 +15,6 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 - [[#enhancements][Emacs Enhancements]]
   - [[#avy][Avy]]
   - [[#which-key][Which-Key]]
-  - [[#all-the-icons][All-the-icons]]
   - [[#neotree][neotree]]
 - [[#projectile][Projectile]]
 - [[#shell][Shell]]
