@@ -13,7 +13,6 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 - [[#markup][Markup]]
 - [[#dashboard][Dashboard]]
 - [[#themes][Themes]]
-- [[#modeline][Modeline]]
 - [[#icomplete][Icomplete]]
 - [[#enhancements][Emacs Enhancements]]
   - [[#avy][Avy]]
