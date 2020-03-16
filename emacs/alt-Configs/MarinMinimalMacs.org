@@ -859,7 +859,7 @@ Add Company backends to enable elisp autocomplete
       (find-file org-default-notes-file))
 
      (defhydra hydra-org (:color blue :columns 4)
-      " ORG "
+      "ORG"
       ("o" org-open-at-point "open link")
       ("c" org-toggle-comment "comment")
       ("i" org-time-stamp "time stamp")
