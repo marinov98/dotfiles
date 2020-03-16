@@ -819,6 +819,21 @@ Add Company backends to enable elisp autocomplete
 #+BEGIN_SRC emacs-lisp
   ;; hydra takes care of my magit bindings
   (use-package magit :ensure t)
+  
+  (use-package git-commit
+      :after magit
+      :custom
+      (git-commit-summary-max-length 50) ;; in accordance with https://chris.beams.io/posts/git-commit/
+      :config
+      (setq git-commit-style-convention-checks
+            '(non-empty-second-line
+            overlong-summary-line)))
+            
+  (use-package magit-repos
+      :after magit
+      :commands magit-list-repositories
+      :custom
+      (magit-repository-directories '(("~/Projects" . 1))))
 
   (use-package gitignore-mode
       :ensure t
@@ -936,6 +951,7 @@ Add Company backends to enable elisp autocomplete
       "⏳ Git ⏳"
       ("g" magit "magit")
       ("d" magit-dispatch "dispatch")
+      ("l" magit-list-repositories "list repos")
       ("t" git-timemachine "timemachine")
       ("q" nil "quit" :color blue))
 #+END_SRC
