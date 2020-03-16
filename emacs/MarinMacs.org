@@ -1052,6 +1052,7 @@ Add Company backends to enable elisp autocomplete
       "😎 Marinov 😎"
       ("m" goto-MarinMacs "goto config")
       ("b" gdb "gdb")
+      ("e" eval-buffer "eval buffer")
       ("d" dap-debug "dap debug")
       ("i" dap-debug-edit-template "debug template")
       ("r" counsel-recentf "recent files")
@@ -1087,6 +1088,7 @@ Add Company backends to enable elisp autocomplete
       ("a" org-todo-list "agenda")
       ("l" org-show-todo-tree "show todo tree")
       ("s" org-edit-special "edit special")
+      ("x" org-edit-src-exit "exit special")
       ("n" marinov/jump-to-notes "goto notes")
       ("d" marinov/goto-org-directory "goto org directory")
       ("q" nil "quit"))
