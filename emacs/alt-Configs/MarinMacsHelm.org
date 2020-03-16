@@ -464,6 +464,9 @@ You can enable/disable any themes that you like here
         (helm-move-to-line-cycle-in-source t)
         (helm-autoresize-max-height 0)
         (helm-autoresize-min-height 20)
+        (helm-buffers-fuzzy-matching t)
+        (helm-recentf-fuzzy-match t)
+        (helm-semantic-fuzzy-match t)
         :bind
         (("M-x" . helm-M-x)
         ("C-x C-f" . helm-find-files)
@@ -1531,3 +1534,4 @@ All for typescript
         (diminish 'eldoc-mode)
         (diminish 'abbrev-mode))
   #+end_src
+ 
