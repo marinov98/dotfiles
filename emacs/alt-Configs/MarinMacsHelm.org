@@ -931,18 +931,24 @@ Add Company backends to enable elisp autocomplete
 *** Window (my attempt at window management)
 #+BEGIN_SRC emacs-lisp
   ;; My attempt at window management
-  (defhydra hydra-window (:color pink :columns 4)
+  (defhydra hydra-window (:color pink :columns 5)
    "⚡⚡ Helm + Windows ⚡⚡"
     ("f" helm-find-files "find")
     ("b" helm-mini "switch buffer")
     ;; splitting
-    ("1" delete-other-windows "delete other windows")
+    ("o" delete-other-windows "delete other windows")
     ("2" split-window-right "v-split")
     ("3" split-window-below "h-split")
     ;; deletion and quitting
     ("K" kill-current-buffer "kill current buffer")
     ("d" delete-window "delete window")
     ("D" kill-this-buffer "kill buffer")
+    ;; resizing
+    ("s" shrink-window "shrink window")
+    ("e" enlarge-window "enlarge window")
+    ("S" shrink-window-horizontally "shrink horizontally")
+    ("E" enlarge-window-horizontally "shrink horizontally")
+    ("B" balance-windows "balance windows")
     ;; movement
     ("h" windmove-left "left")
     ("j" windmove-down "down")
