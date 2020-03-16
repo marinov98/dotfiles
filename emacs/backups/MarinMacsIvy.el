@@ -57,7 +57,7 @@
       "g" 'hydra-git/body
       "TAB" 'hydra-launcher/body
       "v" 'hydra-writing/body
-      "m" 'hydra-marinov/body
+      "m" 'hydra-utility/body
       "a" 'hydra-avy/body
       "r" 'hydra-org/body
       ;; file finding, searching, and yanking
@@ -74,10 +74,12 @@
       "b" 'counsel-switch-buffer
       "p" 'switch-to-prev-buffer
       "n" 'switch-to-next-buffer
+      "/" 'comment-region
       ;; deletion
       "q" 'delete-window
       "Q" 'save-buffers-kill-terminal
       "k" 'kill-current-buffer
+      "K" 'kill-buffer
       "o" 'delete-other-windows
       ;; package-specific
       "t" 'neotree-toggle))
@@ -186,44 +188,40 @@
 ;; Multiple themes can mix into a super theme
 ;; Some themes do not mix well which is why I disable themes
 
-
-;; current theme I am running
  (use-package spacemacs-common
+     :disabled
      :ensure spacemacs-theme
      :config (load-theme 'spacemacs-dark t))
-     
-;; others
+
+ (use-package doom-themes
+     :ensure t 
+     :custom
+     (doom-themes-enable-bold t)
+     (doom-themes-enable-italic t)
+     :config
+     (load-theme 'doom-one t)
+     (doom-themes-visual-bell-config) ;; Enable flashing mode-line on errors
+     (doom-themes-org-config)) ;; Corrects (and improves) org-mode's native fontification.
+
  (use-package zerodark-theme
      :disabled
      :ensure t)
- 
+
  (use-package minimal-theme
      :disabled
      :ensure t
      :config
      (load-theme 'minimal t))
-   
- (use-package nord-theme
-     :disabled
-     :ensure t
-     :config
-     (load-theme 'nord t))
 
  (use-package zenburn-theme
      :disabled
      :ensure t
      :config
      (load-theme 'zenburn t))
-    
+
  (use-package poet-theme
      :disabled
      :ensure t)
-
- (use-package monokai-theme
-     :disabled
-     :ensure t
-     :config (load-theme 'monokai t))
- 
 
  (use-package modus-vivendi-theme
      :disabled
@@ -236,18 +234,6 @@
      :disabled
      :ensure t
      :config (load-theme 'modus-operandi t))
- 
- (use-package gruvbox-theme
-     :disabled
-     :ensure t
-     :config
-     (load-theme 'gruvbox t))
-
- (use-package base16-theme
-     :disabled
-     :ensure t
-     :config 
-     (load-theme 'base16-ocean t))
 
  (use-package jbeans-theme
      :disabled
@@ -255,12 +241,6 @@
      :config
      (load-theme 'jbeans t))
 
- (use-package solarized-theme
-     :disabled
-     :ensure t
-     :config
-     (load-theme 'solarized-dark t))
- 
  (use-package planet-theme
      :disabled
      :ensure t
@@ -273,12 +253,14 @@
 
   (use-package spaceline
       :ensure t
+      :custom-face
+      (spaceline-highlight-face ((t (:background "#ffc600" :foreground "black"))))
       :custom
       (spaceline-toggle-flycheck-info-off)
       :config
       (require 'spaceline-config)
       (setq powerline-default-separator (quote arrow))
-      (spaceline-highlight-face-evil-state) ;; evil mode only
+      (spaceline-highlight-face-default) 
       (spaceline-spacemacs-theme))
 
 
@@ -315,22 +297,6 @@
       :disabled
       :ensure t
       :hook (after-init . doom-modeline-mode))
-
-;;;;;;;;;;;;;;;;;;;;;;   
-;; Powerline
-;;;;;;;;;;;;;;;;;;;;;;   
-
-  (use-package powerline
-      :disabled
-      :ensure t
-      :config
-      (powerline-default theme))   
-      ;; Other themes with powerline
-    
-      ;;     (powerline-center-theme)
-      ;;     (powerline-vim-theme)
-      ;;     (powerline-center-evil-theme)
-      ;;     (powerline-nano-theme)
 
 ;; Ivy
 (use-package ivy
@@ -572,6 +538,21 @@
 ;; hydra takes care of my magit bindings
 (use-package magit :ensure t)
 
+(use-package git-commit
+    :after magit
+    :custom
+    (git-commit-summary-max-length 50) ;; in accordance with https://chris.beams.io/posts/git-commit/
+    :config
+    (setq git-commit-style-convention-checks
+          '(non-empty-second-line
+          overlong-summary-line)))
+
+(use-package magit-repos
+    :after magit
+    :commands magit-list-repositories
+    :custom
+    (magit-repository-directories '(("~/Projects" . 1))))
+
 (use-package gitignore-mode
     :ensure t
     :mode (("\\.gitignore\\'" . gitignore-mode)
@@ -636,13 +617,19 @@
   ("f" counsel-find-file "find")
   ("b" counsel-switch-buffer "switch buffer")
   ;; splitting
-  ("1" delete-other-windows "delete other windows")
+  ("o" delete-other-windows "delete other windows")
   ("2" split-window-right "v-split")
   ("3" split-window-below "h-split")
   ;; deletion and quitting
   ("K" kill-current-buffer "kill current buffer")
   ("d" delete-window "delete window")
   ("D" kill-this-buffer "kill buffer")
+  ;; resizing
+  ("s" shrink-window "shrink window")
+  ("e" enlarge-window "enlarge window")
+  ("S" shrink-window-horizontally "shrink horizontally")
+  ("E" enlarge-window-horizontally "shrink horizontally")
+  ("B" balance-windows "balance windows")
   ;; movement
   ("h" windmove-left "left")
   ("j" windmove-down "down")
@@ -656,6 +643,7 @@
   "⏳ Git ⏳"
   ("g" magit "magit")
   ("d" magit-dispatch "dispatch")
+  ("l" magit-list-repositories "list repos")
   ("t" git-timemachine "timemachine")
   ("q" nil "quit" :color blue))
 
@@ -714,10 +702,11 @@
  ("w" writegood-mode "writegood mode")
  ("q" nil "quit"))
 
-(defhydra hydra-marinov (:color red :columns 4)
- "😎 Marinov 😎"
+(defhydra hydra-utility (:color red :columns 4)
+ "😎 Utility 😎"
  ("m" goto-MarinMacs "goto config")
  ("b" gdb "gdb")
+ ("e" eval-buffer "eval-buffer")
  ("d" dap-debug "dap debug")
  ("i" dap-debug-edit-template "debug template")
  ("r" counsel-recentf "recent files")
@@ -727,6 +716,7 @@
  ("f" flycheck-buffer "flycheck buffer")
  ("R" ranger "ranger")
  ("c" compile "compile")
+ ("u" auto-fill-mode "auto-fill-mode")
  ("w" web-mode "web-mode")
  ("j" rjsx-mode "rjsx-mode")
  ("q" nil "quit"))
@@ -746,12 +736,15 @@
   ("o" org-open-at-point "open link")
   ("c" org-toggle-comment "comment")
   ("i" org-time-stamp "time stamp")
+  ("d" org-export-dispatch "export dispatch")
   ("p" org-priority "priority")
   ("t" org-todo "todo state")
   ("a" org-todo-list "agenda")
   ("l" org-show-todo-tree "show todo tree")
+  ("s" org-edit-special "edit special")
+  ("x" org-edit-src-exit "exit special")
   ("n" marinov/jump-to-notes "goto notes")
-  ("d" marinov/goto-org-directory "goto org directory")
+  ("D" marinov/goto-org-directory "goto org directory")
   ("q" nil "quit"))
 
 (use-package lsp-mode
