@@ -243,7 +243,7 @@ set clipboard=unnamedplus
 set laststatus=2
 set noshowmode
 set t_Co=256
-set termguicolors
+
 
 " MODE SPECIFIC SETTINGS:
 autocmd BufEnter *.tsx set filetype=typescript
