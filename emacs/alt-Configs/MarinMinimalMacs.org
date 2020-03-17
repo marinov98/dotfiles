@@ -16,6 +16,8 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
   - [[#avy][Avy]]
   - [[#which-key][Which-Key]]
   - [[#neotree][neotree]]
+  - [[#ranger][ranger]]
+  - [[#dump-jump][dump-jump]]
 - [[#projectile][Projectile]]
 - [[#shell][Shell]]
 - [[#globals][Globals]]
@@ -437,7 +439,34 @@ Jumping around text, keybindings utilized in a hydra
       :config 
       (setq neo-smart-open t)) ; update every time its toggled
 #+END_SRC
-** Dump-jump
+** Ranger
+ :PROPERTIES:
+ :CUSTOM_ID: ranger
+ :END:
+ - An alternative to dired.
+ - ranger file manager but in emacs, works the exact same way
+ - Repo: https://github.com/ralesi/ranger.el
+ #+begin_src emacs-lisp
+ (use-package ranger
+   :ensure t
+   :commands ranger
+   :custom
+   (ranger-parent-depth 1)
+   (ranger-hide-cursor t)
+   (ranger-show-hidden t)
+   (ranger-preview-file t)
+   (ranger-width-parents 0.2)
+   (ranger-width-preview 0.50)
+   (ranger-footer-delay 0.2)
+   (ranger-preview-delay 0.040)
+   :config
+   (ranger-override-dired-mode t))
+ #+end_src
+** Dump-Jump
+ :PROPERTIES:
+ :CUSTOM_ID: dump-jump
+ :END:
+A jump to definition package that just works, love this one!
    #+begin_src emacs-lisp
    (use-package dumb-jump
        :bind (("M-g o" . dumb-jump-go-other-window)
@@ -1143,4 +1172,3 @@ This hides modes from your modeline, add the specific mode you do not want to se
         (diminish 'yas-minor-mode)
         (diminish 'which-key-mode))
   #+end_src
- 
