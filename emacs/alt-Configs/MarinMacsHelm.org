@@ -150,9 +150,8 @@ A nice and quick way to view/edit my configuration at any time
         ;; file finding, searching, and yanking
         "f" 'helm-find-files
         "j" 'helm-browse-project ;; need git installed!
-        "i" 'swiper-helm
-        "m" 'swiper-multi
-        "S" 'swiper-thing-at-point
+        "i" 'helm-swoop ;; think of it as isearch counsin to remember keybinding 
+        "m" 'helm-multi-swoop
         "y" 'helm-show-kill-ring
         "c" 'avy-goto-char-timer
         "x" 'helm-M-x
@@ -169,9 +168,7 @@ A nice and quick way to view/edit my configuration at any time
         "K" 'kill-buffer
         "o" 'delete-other-windows
         ;; package-specific
-        "t" 'neotree-toggle
-        "h s" 'helm-swoop
-        "h a" 'helm-multi-swoop))
+        "t" 'neotree-toggle))
 
   (use-package evil
       :ensure t
@@ -182,8 +179,6 @@ A nice and quick way to view/edit my configuration at any time
       (define-key evil-motion-state-map (kbd "M-j") 'evil-window-down)
       (define-key evil-motion-state-map (kbd "M-k") 'evil-window-up)
       (define-key evil-motion-state-map (kbd "M-l") 'evil-window-right)
-      ;; replace evil search with swiper-isearch
-      (define-key evil-motion-state-map (kbd "/") 'swiper-isearch)
       ; NeoTree override keybindings, package (neotree) is shown further in the config
       (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
       (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
@@ -454,11 +449,10 @@ You can enable/disable any themes that you like here
  :END:
 - =Helm= is an Emacs framework for incremental completions and narrowing selections.
 - Official site: https://emacs-helm.github.io/helm/
-- Swiper: an alternative to emacs’s native isearch that can ivy or helm to show an overview of matches
-- Helm-rg: uses ripgrep with helm frontend to find matches
+- Helm-rg: uses ripgrep with helm frontend to find matches (has errors so I am using deadgrep instead)
 - Helm-ag: uses silversearcher with helm frontend to find matches
 - Helm-ls-git: allows you search following your gitignore
-- Helm-swoop: listing line matches 
+- Helm-swoop: listing line matches similiar to swiper
   #+begin_src emacs-lisp
     (use-package helm
         :ensure t
@@ -488,25 +482,17 @@ You can enable/disable any themes that you like here
         (helm-mode 1)
         (helm-autoresize-mode 1))
 
-     ;; Swiper 
-     (use-package swiper
-         :ensure t
-         :custom
-         (swiper-action-recenter t)
-         (swiper-goto-start-of-match t)
-         (swiper-include-line-number-in-search t))
-
-
-     (use-package swiper-helm
-         :after (helm swiper)
-         :ensure t
-         :bind
-         ("C-s" . swiper-helm))
 
      (use-package helm-rg 
+         :disabled
          :after helm
          :ensure t
-         :config (setq helm-rg-default-directory 'git-root))
+         :config 
+         (setq helm-rg-default-directory 'git-root))
+
+      ;; helm-rg alternative
+     (use-package deadgrep
+         :ensure t)
 
      (use-package helm-ag
          :after helm
@@ -519,6 +505,14 @@ You can enable/disable any themes that you like here
      (use-package helm-swoop
          :after helm
          :ensure t
+         :bind
+         (("C-s" . helm-swoop)
+         :map helm-swoop-map
+         ("M-j" . helm-next-line)
+         ("M-k" . helm-previous-line)
+         :map helm-multi-swoop-map
+         ("M-j" . helm-next-line)
+         ("M-k" . helm-previous-line))
          :custom
          (helm-swoop-split-with-multiple-windows nil)
          (helm-swoop-split-direction 'split-window-vertically)
@@ -527,13 +521,6 @@ You can enable/disable any themes that you like here
          (helm-swoop-use-line-number-face t)
          (helm-swoop-use-fuzzy-match t))
   #+end_src
-Helm did not seem to provide fzf functionality and helm-fzf does not seem to exist anymore unlike counsel, so this was a workaround
-#+begin_src emacs-lisp
-  (use-package fzf
-      :ensure t)
-    ;; :init
-    ;; (setenv "FZF_DEFAULT_COMMAND" "fd --type f"))
-#+end_src
 * Enhancements 
  :PROPERTIES:
  :CUSTOM_ID: enhancements
@@ -1047,7 +1034,7 @@ Add Company backends to enable elisp autocomplete
       ("d" dap-debug "dap debug")
       ("i" dap-debug-edit-template "debug template")
       ("r" helm-recentf "recent files")
-      ("g" helm-rg "ripgrep")
+      ("g" deadgrep "ripgrep")
       ("a" helm-ag "ag")
       ("z" fzf "fzf")
       ("f" flycheck-buffer "flycheck buffer")
