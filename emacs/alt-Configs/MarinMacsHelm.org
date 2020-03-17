@@ -150,7 +150,7 @@ A nice and quick way to view/edit my configuration at any time
         ;; file finding, searching, and yanking
         "f" 'helm-find-files
         "j" 'helm-browse-project ;; need git installed!
-        "i" 'helm-swoop ;; think of it as isearch counsin to remember keybinding 
+        "i" 'helm-swoop ;; think of it as isearch cousin to remember keybinding 
         "m" 'helm-multi-swoop
         "y" 'helm-show-kill-ring
         "c" 'avy-goto-char-timer
