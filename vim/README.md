@@ -33,6 +33,7 @@
 - vim-multiple-cursors (change multiple things at the same time) 
 - vim-surround (new keybindings all about "surroundings": parentheses, brackets, quotes, XML tags,etc.)
 - clang-format (format c++ code)
+- vim-easymotion (makes moving around text even faster)
 
 
 ### Web-dev
