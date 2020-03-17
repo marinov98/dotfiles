@@ -144,14 +144,14 @@ A nice and quick way to view/edit my configuration at any time
         "g" 'hydra-git/body
         "TAB" 'hydra-launcher/body
         "v" 'hydra-writing/body
-        "m" 'hydra-utility/body
+        "u" 'hydra-utility/body
         "a" 'hydra-avy/body
         "r" 'hydra-org/body
         ;; file finding, searching, and yanking
         "f" 'counsel-find-file
         "j" 'counsel-git ;; need git installed!
         "i" 'swiper-isearch
-        "I" 'swiper-multi
+        "m" 'swiper-multi
         "S" 'swiper-thing-at-point
         "y" 'counsel-yank-pop
         "c" 'avy-goto-char-timer
