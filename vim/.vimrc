@@ -16,6 +16,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 """"""""""""""""""""""
 """"""" CODING:
 """"""""""""""""""""""
+Plug 'easymotion/vim-easymotion'
 Plug 'SirVer/ultisnips'| Plug 'honza/vim-snippets'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
@@ -75,19 +76,19 @@ let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 let g:NetrwIsOpen=0
 
 function! ToggleNetrw()
-    if g:NetrwIsOpen
-        let i = bufnr("$")
-        while (i >= 1)
-            if (getbufvar(i, "&filetype") == "netrw")
-                silent exe "bwipeout " . i 
-            endif
-            let i-=1
-        endwhile
-        let g:NetrwIsOpen=0
-    else
-        let g:NetrwIsOpen=1
-        silent Lexplore
-    endif
+   if g:NetrwIsOpen
+       let i = bufnr("$")
+       while (i >= 1)
+           if (getbufvar(i, "&filetype") == "netrw")
+               silent exe "bwipeout " . i 
+           endif
+           let i-=1
+       endwhile
+       let g:NetrwIsOpen=0
+   else
+       let g:NetrwIsOpen=1
+       silent Lexplore
+   endif
 endfunction
 
 " Add your own mapping. For example:
@@ -137,8 +138,20 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 " Symbol renaming.
-nmap <leader>c <Plug>(coc-rename)
+nmap <leader>r <Plug>(coc-rename)
 """""""""""
+
+" Easy Motion:
+map  <Leader>c <Plug>(easymotion-bd-f)
+nmap <Leader>c <Plug>(easymotion-overwin-f)
+
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
 
 " Modeline
 let g:lightline = {
@@ -243,7 +256,7 @@ set clipboard=unnamedplus
 set laststatus=2
 set noshowmode
 set t_Co=256
-
+"set termguicolors
 
 " MODE SPECIFIC SETTINGS:
 autocmd BufEnter *.tsx set filetype=typescript
