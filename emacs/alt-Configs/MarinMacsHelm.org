@@ -144,14 +144,14 @@ A nice and quick way to view/edit my configuration at any time
         "g" 'hydra-git/body
         "TAB" 'hydra-launcher/body
         "v" 'hydra-writing/body
-        "m" 'hydra-utility/body
+        "u" 'hydra-utility/body
         "a" 'hydra-avy/body
         "r" 'hydra-org/body
         ;; file finding, searching, and yanking
         "f" 'helm-find-files
         "j" 'helm-browse-project ;; need git installed!
         "i" 'swiper-helm
-        "I" 'swiper-multi
+        "m" 'swiper-multi
         "S" 'swiper-thing-at-point
         "y" 'helm-show-kill-ring
         "c" 'avy-goto-char-timer
@@ -166,7 +166,7 @@ A nice and quick way to view/edit my configuration at any time
         "q" 'delete-window
         "Q" 'save-buffers-kill-terminal
         "k" 'kill-current-buffer
-	    "K" 'kill-buffer
+        "K" 'kill-buffer
         "o" 'delete-other-windows
         ;; package-specific
         "t" 'neotree-toggle
@@ -182,6 +182,8 @@ A nice and quick way to view/edit my configuration at any time
       (define-key evil-motion-state-map (kbd "M-j") 'evil-window-down)
       (define-key evil-motion-state-map (kbd "M-k") 'evil-window-up)
       (define-key evil-motion-state-map (kbd "M-l") 'evil-window-right)
+      ;; replace evil search with swiper-isearch
+      (define-key evil-motion-state-map (kbd "/") 'swiper-isearch)
       ; NeoTree override keybindings, package (neotree) is shown further in the config
       (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
       (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
