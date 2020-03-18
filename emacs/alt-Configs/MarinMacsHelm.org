@@ -149,7 +149,7 @@ A nice and quick way to view/edit my configuration at any time
         "r" 'hydra-org/body
         ;; file finding, coding, searching, and yanking
         "f" 'helm-find-files
-        "j" 'helm-browse-project ;; need git installed!
+        "/" 'helm-browse-project ;; need git installed!
         "i" 'helm-swoop-without-pre-input ;; think of it as isearch's cousin to remember keybinding 
         "m" 'helm-multi-swoop
         "*" 'helm-swoop
