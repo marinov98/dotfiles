@@ -470,6 +470,8 @@ You can enable/disable any themes that you like here
         (helm-buffers-fuzzy-matching t)
         (helm-recentf-fuzzy-match t)
         (helm-semantic-fuzzy-match t)
+        (helm-imenu-fuzzy-match t)
+        (helm-imenu-fuzzy-match t)
         :bind
         (("M-x" . helm-M-x)
         ("C-x C-f" . helm-find-files)
@@ -479,6 +481,8 @@ You can enable/disable any themes that you like here
         ("TAB" . helm-execute-persistent-action)
         ("<tab>" . helm-execute-persistent-action)
         ("C-z" . helm-select-action)
+        ("M-S-j" . helm-next-source)
+        ("M-S-k" . helm-previous-source)
         ("M-j" . helm-next-line)
         ("M-k" . helm-previous-line))
         :config
@@ -1026,23 +1030,24 @@ Unlike with original Projectile, you need to launch first before using other com
 #+END_SRC
 *** Utility (useful commands for me)
 #+BEGIN_SRC emacs-lisp
-     (defhydra hydra-utility (:color red :columns 4)
-      "😎 Utility 😎"
-      ("m" goto-MarinMacs "goto config")
-      ("b" gdb "gdb")
-      ("e" eval-buffer "eval buffer")
-      ("d" dap-debug "dap debug")
-      ("i" dap-debug-edit-template "debug template")
-      ("r" helm-recentf "recent files")
-      ("g" helm-ag "ripgrep") ;; forced ag to use ripgrep
-      ("z" fzf "fzf")
-      ("f" flycheck-buffer "flycheck buffer")
-      ("R" ranger "ranger")
-      ("c" compile "compile")
-      ("u" auto-fill-mode "auto-fill-mode")
-      ("w" web-mode "web-mode")
-      ("j" rjsx-mode "rjsx-mode")
-      ("q" nil "quit"))
+  (defhydra hydra-utility (:color red :columns 4)
+   "😎 Utility 😎"
+   ("m" goto-MarinMacs "goto config")
+   ("b" gdb "gdb")
+   ("e" eval-buffer "eval buffer")
+   ("d" dap-debug "dap debug")
+   ("i" dap-debug-edit-template "debug template")
+   ("r" helm-recentf "recent files")
+   ("g" helm-ag "ripgrep") ;; forced ag to use ripgrep
+   ("l" helm-locate "locate")
+   ("z" helm-find "fuzzy-find")
+   ("f" flycheck-buffer "flycheck buffer")
+   ("R" ranger "ranger")
+   ("c" compile "compile")
+   ("u" auto-fill-mode "auto-fill-mode")
+   ("w" web-mode "web-mode")
+   ("j" rjsx-mode "rjsx-mode")
+   ("q" nil "quit"))
 #+END_SRC
 *** Org (for org mode)
     #+begin_src emacs-lisp
