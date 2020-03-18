@@ -492,7 +492,7 @@ You can enable/disable any themes that you like here
      (use-package helm-ag
          :after helm
          :custom
-         (helm-ag-base-command "rg --vimgrep --no-heading --smart-case") ;; force use of ripgrep
+         (helm-ag-base-command "rg --vimgrep --no-heading --smart-case") ;; force use of ripgrep, delete this customization to go back to ag
          :ensure t)
          
      (use-package helm-ls-git 
@@ -911,7 +911,7 @@ Unlike with original Projectile, you need to launch first before using other com
     ("o" helm-projectile-find-other-file "find other")
     ("w" helm-projectile-find-file-dwim "find-dwim")
     ("d" helm-projectile-find-dir "find-dir")
-    ("g" helm-ag "ripgrep") ;; need ripgrep installed!
+    ("g" helm-ag "ripgrep") ;; I forced ag to be so you need ripgrep installed!
     ("s" helm-projectile-switch-project "switch project")
     ("b" helm-projectile-switch-to-buffer "buffer switch")
     ("r" projectile-recentf "recent files")
