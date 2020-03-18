@@ -149,7 +149,7 @@ A nice and quick way to view/edit my configuration at any time
         "r" 'hydra-org/body
         ;; file finding, coding, searching, and yanking
         "f" 'counsel-find-file
-        "j" 'counsel-git ;; need git installed!
+        "/" 'counsel-git ;; need git installed!
         "i" 'swiper-isearch
         "m" 'swiper-multi
         "*" 'swiper-thing-at-point
