@@ -742,6 +742,7 @@ Add Company backends to enable elisp autocomplete
      (defhydra hydra-projectile (:color red :columns 3)
        "Projectile"
        ("f" projectile-find-file "find")
+       ("o" projectile-find-other-file "find other")
        ("w" projectile-find-file-dwim "find-dwim")
        ("d" projectile-find-dir "find-dir")
        ("a" projectile-ag "ag") ;; need silversearcher-ag installed!
