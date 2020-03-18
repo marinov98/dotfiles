@@ -525,7 +525,7 @@ You can enable/disable any themes that you like here
  :END:
  I did not think anything of this package until I actively used it in my workflow. This package proved to be nothing but amazing for jumping around text. Its inspiration comes from 
 the vim package =easymotion=. This package really boosts your ability to fly around text even with the already fast motion vim keybindings. I utilize the keybindings in a hydra and 
-a personal keybinding just because its so good. 
+a personal keybinding just because its so good. Check the [[https://github.com/abo-abo/avy][official repository]] If you want to know more. 
 #+BEGIN_SRC emacs-lisp
   (use-package avy 
       :ensure t
