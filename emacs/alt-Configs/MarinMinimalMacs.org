@@ -494,7 +494,16 @@ A jump to definition package that just works, love this one!
         (projectile-sort-order 'recently-active)
         (projectile-completion-system 'ivy)
         :config
-        (projectile-mode t))
+        (projectile-mode t)
+	;; css files seem to be problematic when using projectile-find-other-file
+     	(add-to-list 'projectile-other-file-alist '("html" "js")) ;; switch from html -> js
+     	(add-to-list 'projectile-other-file-alist '("js" "html")) ;; switch from js -> html
+     	(add-to-list 'projectile-other-file-alist '("js" "css")) ;; switch from js -> css
+     	(add-to-list 'projectile-other-file-alist '("css" "js")) ;; switch from css -> js
+     	(add-to-list 'projectile-other-file-alist '("jsx" "css")) ;; switch from jsx -> css
+     	(add-to-list 'projectile-other-file-alist '("css" "jsx")) ;; switch from css -> jsx
+     	(add-to-list 'projectile-other-file-alist '("js" "html" "css"))
+     	(add-to-list 'projectile-other-file-alist '("jsx" "html" "css")))
 #+END_SRC
 * Shell
  :PROPERTIES:
