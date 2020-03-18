@@ -911,7 +911,7 @@ Unlike with original Projectile, you need to launch first before using other com
     ("o" helm-projectile-find-other-file "find other")
     ("w" helm-projectile-find-file-dwim "find-dwim")
     ("d" helm-projectile-find-dir "find-dir")
-    ("g" helm-ag "ripgrep") ;; I forced ag to be so you need ripgrep installed!
+    ("g" helm-ag "ripgrep") ;; I forced ag to be rg so you need ripgrep installed instead!
     ("s" helm-projectile-switch-project "switch project")
     ("b" helm-projectile-switch-to-buffer "buffer switch")
     ("r" projectile-recentf "recent files")
