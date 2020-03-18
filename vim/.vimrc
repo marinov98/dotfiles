@@ -9,7 +9,6 @@ call plug#begin('~/.vim/plugged')
 """"""" THEMES:
 """"""""""""""""""""""
 Plug 'liuchengxu/space-vim-dark'
-"Plug 'morhetz/gruvbox'
 """"""""""""""""""""""
 """"""" File Search:
 """"""""""""""""""""""
