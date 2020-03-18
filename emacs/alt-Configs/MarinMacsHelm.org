@@ -904,18 +904,19 @@ Add Company backends to enable elisp autocomplete
 *** Projectile (project management)
 Unlike with original Projectile, you need to launch first before using other commands
 #+BEGIN_SRC emacs-lisp
-     (defhydra hydra-projectile (:color red :columns 3)
-       "🚀 Projectile 🚀"
-       ("l" helm-projectile "launch")
-       ("f" helm-projectile-find-file "find")
-       ("w" helm-projectile-find-file-dwim "find-dwim")
-       ("d" helm-projectile-find-dir "find-dir")
-       ("g" helm-ag "ripgrep") ;; need ripgrep installed!
-       ("s" helm-projectile-switch-project "switch project")
-       ("b" helm-projectile-switch-to-buffer "buffer switch")
-       ("r" projectile-recentf "recent files")
-       ("k" projectile-kill-buffers "kill project buffers")
-       ("q" nil "quit" :color blue))
+  (defhydra hydra-projectile (:color red :columns 3)
+    "🚀 Projectile 🚀"
+    ("l" helm-projectile "launch")
+    ("f" helm-projectile-find-file "find")
+    ("o" helm-projectile-find-other-file "find other")
+    ("w" helm-projectile-find-file-dwim "find-dwim")
+    ("d" helm-projectile-find-dir "find-dir")
+    ("g" helm-ag "ripgrep") ;; need ripgrep installed!
+    ("s" helm-projectile-switch-project "switch project")
+    ("b" helm-projectile-switch-to-buffer "buffer switch")
+    ("r" projectile-recentf "recent files")
+    ("k" projectile-kill-buffers "kill project buffers")
+    ("q" nil "quit" :color blue))
 
 #+END_SRC
 *** Window (my attempt at window management)
