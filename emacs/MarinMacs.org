@@ -147,12 +147,12 @@ A nice and quick way to view/edit my configuration at any time
         "u" 'hydra-utility/body
         "a" 'hydra-avy/body
         "r" 'hydra-org/body
-        ;; file finding, searching, and yanking
+        ;; file finding, coding, searching, and yanking
         "f" 'counsel-find-file
         "j" 'counsel-git ;; need git installed!
         "i" 'swiper-isearch
         "m" 'swiper-multi
-        "S" 'swiper-thing-at-point
+        "*" 'swiper-thing-at-point
         "y" 'counsel-yank-pop
         "c" 'avy-goto-char-timer
         "x" 'counsel-M-x
@@ -161,7 +161,7 @@ A nice and quick way to view/edit my configuration at any time
         "b" 'counsel-switch-buffer
         "p" 'switch-to-prev-buffer
         "n" 'switch-to-next-buffer
-        "/" 'comment-region
+        "C" 'comment-region
         ;; deletion
         "q" 'delete-window
         "Q" 'save-buffers-kill-terminal
@@ -180,7 +180,7 @@ A nice and quick way to view/edit my configuration at any time
       (define-key evil-motion-state-map (kbd "M-j") 'evil-window-down)
       (define-key evil-motion-state-map (kbd "M-k") 'evil-window-up)
       (define-key evil-motion-state-map (kbd "M-l") 'evil-window-right)
-      ; NeoTree override keybindings, package (neotree) is shown further in the config
+      ;; NeoTree override keybindings, package (neotree) is shown further in the config
       (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
       (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
       (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
@@ -312,13 +312,13 @@ A nice and quick way to view/edit my configuration at any time
 - Spacemacs-theme
 - Zerodark
 - Doom-one
+- JellyBeans 
 - modus-vivendi (amazing color contrast)
 *** Easy on the eyes
 - doom-gruvbox
 - doom-solarized-dark
 - doom-nord
 - Zenburn
-- JellyBeans 
 - Planet
 *** For Org and any Markdown Language
 - Poet
@@ -454,9 +454,10 @@ You can enable/disable any themes that you like here
  :CUSTOM_ID: ivy
  :END:
 - Ivy: an interactive interface for completion in Emacs
+  - Alternatives to ivy include helm (heavier but more features) and ido (native to emacs)
 - Swiper: an alternative to emacs's native isearch that uses ivy to show an overview of all matches.
 - Counsel: extra functions and features that use ivy
-- Ivy and other packages that use ivy (including Projectile and the ones below) have support for popular search tools
+- Counsel and other packages that use ivy (Like counsel-projectile) have support for popular search tools
     - [[https://github.com/BurntSushi/ripgrep][ripgrep]]
     - [[https://github.com/ggreer/the_silver_searcher][the silver searcher(ag)]]
 - Ivy User Manual: https://oremacs.com/swiper/
@@ -514,7 +515,9 @@ You can enable/disable any themes that you like here
  :PROPERTIES:
  :CUSTOM_ID: avy
  :END:
-Jumping around text, keybindings utilized in a hydra
+ I did not think anything of this package until I actively used it in my workflow. This package proved to be nothing but amazing for jumping around text. Its inspiration comes from 
+the vim package =easymotion=. This package really boosts your ability to fly around text even with the already fast motion vim keybindings. I utilize the keybindings in a hydra and 
+a personal keybinding just because its so good. Check the [[https://github.com/abo-abo/avy][official repository]] If you want to know more.
 #+BEGIN_SRC emacs-lisp
   (use-package avy 
       :ensure t
@@ -991,6 +994,10 @@ Add Company backends to enable elisp autocomplete
     ("w" avy-goto-word-1 "goto word")
     ("W" avy-goto-word-0 "goto word 0")
     ("l" avy-goto-line "goto line")
+    ("L" avy-goto-end-of-line "goto eoline")
+    ("m" avy-move-line "move line")
+    ("k" avy-kill-whole-line "kill line")
+    ("y" avy-copy-line "yank line")
     ("r" avy-resume "resume")
     ("q" nil "quit" :color blue))
 #+END_SRC
