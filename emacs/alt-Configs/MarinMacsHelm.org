@@ -455,7 +455,7 @@ You can enable/disable any themes that you like here
 - Helm-ag: uses silversearcher with helm frontend to find matches (but you can force it to use ripgrep like I did)
   - This because helm-rg has not been working properly and I prefer a consistant interface rather than resort to packages like deadgrep or rg
   - Based on my experience and online sources ripgrep finds matches much faster than ag, which itself is praised for its speed
-- Helm-ls-git: provoides =helm-browse-projects= which allows you search following your gitignore
+- Helm-ls-git: provides =helm-browse-projects= which allows you search following your gitignore
 - Helm-swoop: listing line matches (similiar to swiper and isearch)
   #+begin_src emacs-lisp
     (use-package helm
