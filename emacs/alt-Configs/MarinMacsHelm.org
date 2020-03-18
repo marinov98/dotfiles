@@ -651,12 +651,15 @@ I never lose where my cursor is thanks to this
         (projectile-completion-system 'helm)
         :config
         (projectile-mode t)
-        (add-to-list 'projectile-other-file-alist '("html" "js")) ;; switch from html -> js
-        (add-to-list 'projectile-other-file-alist '("js" "html")) ;; switch from js -> html
-        (add-to-list 'projectile-other-file-alist '("js" "css")) ;; switch from js -> css
-        (add-to-list 'projectile-other-file-alist '("css" "js")) ;; switch from css -> js
-        (add-to-list 'projectile-other-file-alist '("jsx" "css")) ;; switch from jsx -> css
-        (add-to-list 'projectile-other-file-alist '("css" "jsx"))) ;; switch from css -> jsx
+        ;; css files seem to be problematic when using projectile-find-other-file
+     	(add-to-list 'projectile-other-file-alist '("html" "js")) ;; switch from html -> js
+     	(add-to-list 'projectile-other-file-alist '("js" "html")) ;; switch from js -> html
+     	(add-to-list 'projectile-other-file-alist '("js" "css")) ;; switch from js -> css
+     	(add-to-list 'projectile-other-file-alist '("css" "js")) ;; switch from css -> js
+     	(add-to-list 'projectile-other-file-alist '("jsx" "css")) ;; switch from jsx -> css
+     	(add-to-list 'projectile-other-file-alist '("css" "jsx")) ;; switch from css -> jsx
+     	(add-to-list 'projectile-other-file-alist '("js" "html" "css"))
+     	(add-to-list 'projectile-other-file-alist '("jsx" "html" "css")))
      
     (use-package helm-projectile 
         :ensure t
