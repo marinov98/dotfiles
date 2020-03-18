@@ -912,6 +912,7 @@ Add Company backends to enable elisp autocomplete
     "🚀 Projectile 🚀"
     ("l" counsel-projectile "launch") ;; dont really need this but for consistency with my helm workflow if I switch configs
     ("f" counsel-projectile-find-file "find")
+    ("o" projectile-find-other-file "find other")
     ("w" counsel-projectile-find-file-dwim "find-dwim")
     ("d" counsel-projectile-find-dir "find-dir")
     ("a" counsel-projectile-ag "ag") ;; need silversearcher-ag installed!
