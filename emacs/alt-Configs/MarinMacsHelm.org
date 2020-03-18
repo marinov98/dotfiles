@@ -480,8 +480,6 @@ You can enable/disable any themes that you like here
         ("TAB" . helm-execute-persistent-action)
         ("<tab>" . helm-execute-persistent-action)
         ("C-z" . helm-select-action)
-        ("M-S-j" . helm-next-source)
-        ("M-S-k" . helm-previous-source)
         ("M-j" . helm-next-line)
         ("M-k" . helm-previous-line))
         :config
