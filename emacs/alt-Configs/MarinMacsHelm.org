@@ -471,7 +471,6 @@ You can enable/disable any themes that you like here
         (helm-recentf-fuzzy-match t)
         (helm-semantic-fuzzy-match t)
         (helm-imenu-fuzzy-match t)
-        (helm-imenu-fuzzy-match t)
         :bind
         (("M-x" . helm-M-x)
         ("C-x C-f" . helm-find-files)
