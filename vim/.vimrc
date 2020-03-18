@@ -9,6 +9,7 @@ call plug#begin('~/.vim/plugged')
 """"""" THEMES:
 """"""""""""""""""""""
 Plug 'liuchengxu/space-vim-dark'
+"Plug 'morhetz/gruvbox'
 """"""""""""""""""""""
 """"""" File Search:
 """"""""""""""""""""""
@@ -194,25 +195,27 @@ let g:AutoPairsShortcutBackInsert = '<M-b>'
 
 "CtrlP
 let g:ctrlp_map = '<leader>f'
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
-" The Silver Searcher
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
+" Ripgrep 
+if executable('rg')
+	set grepprg=rg\ --color=never
+	let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+	let g:ctrlp_use_caching = 0
+elseif executable('ag') " Try The Silver Searcher if ripgrep not found
+	" Use ag over grep
+	set grepprg=ag\ --nogroup\ --nocolor
+	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+	 " ag is fast enough that CtrlP doesn't need to cache
+	let g:ctrlp_use_caching = 0
 
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-
+else " Else use old configuration
+	let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+	let g:ctrlp_custom_ignore = {
+		  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+		  \ 'file': '\v\.(exe|so|dll)$',
+		  \ 'link': 'some_bad_symbolic_links',
+		  \ }
+	let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 endif
  
 " bind K to grep word under cursor
@@ -250,13 +253,12 @@ set showmatch
 set wildmenu
 set noswapfile
 set tags=tags
-set bs=2
-set mouse=a
-set clipboard=unnamedplus
-set laststatus=2
+set bs=2 " make backspace work
+set mouse=a " use mouse in vim
+set clipboard=unnamedplus " allow copy and pasting anymore
+set laststatus=2 " show modeline
 set noshowmode
-set t_Co=256
-"set termguicolors
+set t_Co=256 " Make colors work with tmux
 
 " MODE SPECIFIC SETTINGS:
 autocmd BufEnter *.tsx set filetype=typescript
@@ -297,6 +299,7 @@ nnoremap Y y$
 nnoremap <leader>s :w<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>Q :q!<CR>
+nnoremap <leader>i /
 
 """""""""""""""""""""""
 """"" WINDOW MANAGEMENT:
