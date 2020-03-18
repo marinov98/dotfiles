@@ -649,32 +649,30 @@ I never lose where my cursor is thanks to this
 - Projectile Homepage: https://projectile.readthedocs.io/en/latest/ 
 - Counsel-Projectile: https://github.com/ericdanan/counsel-projectile 
 #+BEGIN_SRC emacs-lisp
-     ;; Projectile-mode 
-    (use-package projectile
-        :ensure t
-        :bind 
-        (("C-c p" . projectile-command-map))
-        :custom 
-        (projectile-project-search-path '("~/Projects/"))
-        (projectile-sort-order 'recently-active)
-        (projectile-completion-system 'ivy)
-        :config
-        (projectile-mode t)
-	;; css files seem to be problematic when using projectile-find-other-file
-      	(add-to-list 'projectile-other-file-alist '("html" "js")) ;; switch from html -> js
-      	(add-to-list 'projectile-other-file-alist '("js" "html")) ;; switch from js -> html
-      	(add-to-list 'projectile-other-file-alist '("js" "css")) ;; switch from js -> css
-      	(add-to-list 'projectile-other-file-alist '("css" "js")) ;; switch from css -> js
-      	(add-to-list 'projectile-other-file-alist '("jsx" "css")) ;; switch from jsx -> css
-      	(add-to-list 'projectile-other-file-alist '("css" "jsx")) ;; switch from css -> jsx
-      	(add-to-list 'projectile-other-file-alist '("js" "html" "css"))
-      	(add-to-list 'projectile-other-file-alist '("jsx" "html" "css")))
+   ;; Projectile-mode 
+  (use-package projectile
+      :ensure t
+      :bind 
+      (("C-c p" . projectile-command-map))
+      :custom 
+      (projectile-project-search-path '("~/Projects/"))
+      (projectile-sort-order 'recently-active)
+      (projectile-completion-system 'ivy)
+      :config
+      (projectile-mode t)
+      ;; css files seem to be problematic when using projectile-find-other-file
+      (add-to-list 'projectile-other-file-alist '("html" "js")) ;; switch from html -> js
+      (add-to-list 'projectile-other-file-alist '("js" "html")) ;; switch from js -> html
+      (add-to-list 'projectile-other-file-alist '("js" "css")) ;; switch from js -> css
+      (add-to-list 'projectile-other-file-alist '("css" "js")) ;; switch from css -> js
+      (add-to-list 'projectile-other-file-alist '("jsx" "css")) ;; switch from jsx -> css
+      (add-to-list 'projectile-other-file-alist '("css" "jsx")) ;; switch from css -> jsx
+      (add-to-list 'projectile-other-file-alist '("js" "html" "css"))
+      (add-to-list 'projectile-other-file-alist '("jsx" "html" "css")))
 
-
-
-     ;; Counsel-Projectile (I utilize counsel projectile bindings in my hydra-projectile)
-    (use-package counsel-projectile 
-        :ensure t)
+   ;; Counsel-Projectile (I utilize counsel projectile bindings in my hydra-projectile)
+  (use-package counsel-projectile 
+      :ensure t)
 #+END_SRC
 * Shell
  :PROPERTIES:
