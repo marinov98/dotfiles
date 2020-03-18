@@ -908,20 +908,21 @@ Add Company backends to enable elisp autocomplete
 #+END_SRC
 *** Projectile (project management)
 #+BEGIN_SRC emacs-lisp
-      ;; projectile, I would change this hydra's global key if I wasn't using vim bindings...
-     (defhydra hydra-projectile (:color red :columns 3)
-       "🚀 Projectile 🚀"
-       ("f" counsel-projectile-find-file "find")
-       ("w" counsel-projectile-find-file-dwim "find-dwim")
-       ("d" counsel-projectile-find-dir "find-dir")
-       ("a" counsel-projectile-ag "ag") ;; need silversearcher-ag installed!
-       ("g" counsel-projectile-rg "ripgrep") ;; need ripgrep installed!
-       ("s" counsel-projectile-switch-project "switch project")
-       ("b" counsel-projectile-switch-to-buffer "buffer switch")
-       ("r" projectile-recentf "recent files")
-       ;; counsel-projectile-switch-project has similiar functionality but this is much quicker
-       ("k" projectile-kill-buffers "kill project buffers")
-       ("q" nil "quit" :color blue))
+   ;; projectile, I would change this hydra's global key if I wasn't using vim bindings...
+  (defhydra hydra-projectile (:color red :columns 3)
+    "🚀 Projectile 🚀"
+    ("l" counsel-projectile "launch") ;; dont really need this but for consistancy with my helm workflow if I switch configs
+    ("f" counsel-projectile-find-file "find")
+    ("w" counsel-projectile-find-file-dwim "find-dwim")
+    ("d" counsel-projectile-find-dir "find-dir")
+    ("a" counsel-projectile-ag "ag") ;; need silversearcher-ag installed!
+    ("g" counsel-projectile-rg "ripgrep") ;; need ripgrep installed!
+    ("s" counsel-projectile-switch-project "switch project")
+    ("b" counsel-projectile-switch-to-buffer "buffer switch")
+    ("r" projectile-recentf "recent files")
+    ;; counsel-projectile-switch-project has similiar functionality but this is much quicker
+    ("k" projectile-kill-buffers "kill project buffers")
+    ("q" nil "quit" :color blue))
 
 #+END_SRC
 *** Window (my attempt at window management)
