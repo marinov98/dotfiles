@@ -147,11 +147,12 @@ A nice and quick way to view/edit my configuration at any time
         "u" 'hydra-utility/body
         "a" 'hydra-avy/body
         "r" 'hydra-org/body
-        ;; file finding, searching, and yanking
+        ;; file finding, coding, searching, and yanking
         "f" 'helm-find-files
         "j" 'helm-browse-project ;; need git installed!
-        "i" 'helm-swoop ;; think of it as isearch cousin to remember keybinding 
+        "i" 'helm-swoop-without-pre-input ;; think of it as isearch's cousin to remember keybinding 
         "m" 'helm-multi-swoop
+        "*" 'helm-swoop
         "y" 'helm-show-kill-ring
         "c" 'avy-goto-char-timer
         "x" 'helm-M-x
@@ -160,7 +161,7 @@ A nice and quick way to view/edit my configuration at any time
         "b" 'helm-mini
         "p" 'switch-to-prev-buffer
         "n" 'switch-to-next-buffer
-        "/" 'comment-region
+        "C" 'comment-region
         ;; deletion
         "q" 'delete-window
         "Q" 'save-buffers-kill-terminal
@@ -447,12 +448,15 @@ You can enable/disable any themes that you like here
  :PROPERTIES:
  :CUSTOM_ID: helm
  :END:
-- =Helm= is an Emacs framework for incremental completions and narrowing selections.
+- I cant lie, I didn't think I would love helm's interface as much as I like ivy's but hey you never know until you try (I think it's also because of the doom-one theme...)
+- =Helm= is an Emacs framework for incremental completions and narrowing selections. Probably the heaviest with the most features
+  - Other completion frameworks include ivy (lighter), ido (native to Emacs)
 - Official site: https://emacs-helm.github.io/helm/
-- Helm-rg: uses ripgrep with helm frontend to find matches (has errors so I am using deadgrep instead)
-- Helm-ag: uses silversearcher with helm frontend to find matches
-- Helm-ls-git: allows you search following your gitignore
-- Helm-swoop: listing line matches similiar to swiper
+- Helm-ag: uses silversearcher with helm frontend to find matches (but you can force it to use ripgrep like I did)
+  - This because helm-rg has not been working properly and I prefer a consistant interface rather than resort to packages like deadgrep or rg
+  - Based on my experience and online sources ripgrep finds matches much faster than ag, which itself is praised for its speed
+- Helm-ls-git: provoides =helm-browse-projects= which allows you search following your gitignore
+- Helm-swoop: listing line matches (similiar to swiper and isearch)
   #+begin_src emacs-lisp
     (use-package helm
         :ensure t
@@ -482,22 +486,12 @@ You can enable/disable any themes that you like here
         (helm-mode 1)
         (helm-autoresize-mode 1))
 
-
-     (use-package helm-rg 
-         :disabled
-         :after helm
-         :ensure t
-         :config 
-         (setq helm-rg-default-directory 'git-root))
-
-      ;; helm-rg alternative
-     (use-package deadgrep
-         :ensure t)
-
      (use-package helm-ag
          :after helm
+         :custom
+         (helm-ag-base-command "rg --vimgrep --no-heading --smart-case") ;; force use of ripgrep
          :ensure t)
-
+         
      (use-package helm-ls-git 
          :after helm
          :ensure t)
@@ -506,7 +500,7 @@ You can enable/disable any themes that you like here
          :after helm
          :ensure t
          :bind
-         (("C-s" . helm-swoop)
+         (("C-s" . helm-swoop-without-pre-input)
          :map helm-swoop-map
          ("M-j" . helm-next-line)
          ("M-k" . helm-previous-line)
@@ -529,7 +523,8 @@ You can enable/disable any themes that you like here
  :PROPERTIES:
  :CUSTOM_ID: avy
  :END:
-Jumping around text, keybindings utilized in a hydra
+ I did not think anything of this package until I actively used it in my workflow. This package proved to be nothing but amazing for jumping around text. Its inspiration comes from 
+the vim package =easymotion= really boosts your ability to fly around text even with vim keybindings. I utilize the keybinds in a hydra and a personal keybinding just becauses its soo good. 
 #+BEGIN_SRC emacs-lisp
   (use-package avy 
       :ensure t
@@ -902,15 +897,15 @@ Add Company backends to enable elisp autocomplete
 
 #+END_SRC
 *** Projectile (project management)
+Unlike with original Projectile, you need to launch first before using other commands
 #+BEGIN_SRC emacs-lisp
      (defhydra hydra-projectile (:color red :columns 3)
        "🚀 Projectile 🚀"
-       ("h" helm-projectile "launch")
+       ("l" helm-projectile "launch")
        ("f" helm-projectile-find-file "find")
        ("w" helm-projectile-find-file-dwim "find-dwim")
        ("d" helm-projectile-find-dir "find-dir")
-       ("a" helm-projectile-ag "ag") ;; need silversearcher-ag installed!
-       ("g" helm-projectile-rg "ripgrep") ;; need ripgrep installed!
+       ("g" helm-ag "ripgrep") ;; need ripgrep installed!
        ("s" helm-projectile-switch-project "switch project")
        ("b" helm-projectile-switch-to-buffer "buffer switch")
        ("r" projectile-recentf "recent files")
@@ -1034,8 +1029,7 @@ Add Company backends to enable elisp autocomplete
       ("d" dap-debug "dap debug")
       ("i" dap-debug-edit-template "debug template")
       ("r" helm-recentf "recent files")
-      ("g" deadgrep "ripgrep")
-      ("a" helm-ag "ag")
+      ("g" helm-ag "ripgrep") ;; forced ag to use ripgrep
       ("z" fzf "fzf")
       ("f" flycheck-buffer "flycheck buffer")
       ("R" ranger "ranger")
