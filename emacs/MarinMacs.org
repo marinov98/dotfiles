@@ -911,7 +911,7 @@ Add Company backends to enable elisp autocomplete
    ;; projectile, I would change this hydra's global key if I wasn't using vim bindings...
   (defhydra hydra-projectile (:color red :columns 3)
     "🚀 Projectile 🚀"
-    ("l" counsel-projectile "launch") ;; dont really need this but for consistancy with my helm workflow if I switch configs
+    ("l" counsel-projectile "launch") ;; dont really need this but for consistency with my helm workflow if I switch configs
     ("f" counsel-projectile-find-file "find")
     ("w" counsel-projectile-find-file-dwim "find-dwim")
     ("d" counsel-projectile-find-dir "find-dir")
