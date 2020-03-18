@@ -136,7 +136,7 @@ A nice and quick way to view/edit my configuration at any time
         "g" 'hydra-git/body
         "TAB" 'hydra-launcher/body
         "v" 'hydra-writing/body
-        "m" 'hydra-utility/body
+        "u" 'hydra-utility/body
         "a" 'hydra-avy/body
         "r" 'hydra-org/body
         ;; file finding, and searching
@@ -148,7 +148,7 @@ A nice and quick way to view/edit my configuration at any time
         "b" 'switch-to-buffer
         "p" 'switch-to-prev-buffer
         "n" 'switch-to-next-buffer
-	"/" 'comment-region
+	"C" 'comment-region
         ;; deletion
         "q" 'delete-window
         "Q" 'save-buffers-kill-terminal
