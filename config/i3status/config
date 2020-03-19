@@ -74,6 +74,7 @@ disk "/media/media" {
 	format = "%avail:m  "
 }
 
+# Run iwconfig to find out name of wireless card type 
 wireless wlp1s0 {
 	format_up = "  %quality %essid  " # %ip "
 	format_down = "No WiFi Connected "
