@@ -14,7 +14,7 @@ This file, if it exists, specifies how to initialize Emacs for you.  Emacs looks
 - Make a guide that welcomes anyone from any editor.
 - Achieve the divine workflow
 ** How I got here
-My first editor was Sublime Text, followed by Atom, followed by VScode (Tried Clion as well for a little bit). I then tried spacemacs using vanilla emacs keybindings(not really knowing what vim was), switched to vanilla emacs for a while and began building this configuration. I then decided to learn vim keybindings and used vim as my editor for a while. I concluded that I liked the vim keybindings more than the emacs ones. I tried spacemacs, this time with vim keybindings, once again but I felt it was bloated and I liked having my own configuration and that is how I got here. 
+My first editor was Sublime Text, followed by Atom, followed by VScode (Tried Clion as well for a little bit). I then tried spacemacs using vanilla emacs keybindings(not really knowing what vim was), switched to vanilla emacs for a while and began building this configuration. I then decided to learn vim keybindings and used vim as my editor for awhile. I concluded that I liked the vim keybindings more than the emacs ones. I tried spacemacs, this time with vim keybindings, once again but I felt it was bloated and I liked having my own configuration and that is how I got here. 
 ** Who this config might be useful to 
 - *Vim users* wanting to switch and use emacs while keepings their vim keybindings
 - Anyone wanting to use Emacs for its *own keybindings* and extensibility but hates configuring
