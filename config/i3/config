@@ -155,10 +155,10 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3? This will end your 
 bindsym $mod+Shift+w exec emacsclient -a "" -c # run emacs as a daemon and open
 bindsym $mod+Shift+t exec trash-empty # empty recycling bin
 bindsym $mod+Shift+n exec nm-connection-editor # wifi editor
-bindsym $mod+Shift+f exec nautilus # Specific file manager
+bindsym $mod+Shift+m exec nautilus # Specific file manager
 bindsym $mod+Shift+u exec ubuntu-software # Specific software center to check for updates
 # Terminal commands
-bindsym $mod+Shift+m exec $term -e ranger
+bindsym $mod+Shift+f exec $term -e ranger
 bindsym $mod+Shift+i exec $term -e vim ~/.config/i3/config 
 bindsym $mod+Shift+v exec $term -e vim ~/.vimrc
 bindsym $mod+Shift+b exec $term -e vim ~/.config/i3status/config
@@ -305,7 +305,7 @@ bindsym $mod+g mode "gaps"
 ##### EXTERNAL MONITOR(S)
 ################################
 
-set $displayMode "Set displamode [l]aptop  [h]DP2 [w]DP1"
+set $displayMode "Set display mode [l]aptop  [h]DP2 [w]DP1"
 bindsym $mod+x mode $displayMode
 
 mode $displayMode {
