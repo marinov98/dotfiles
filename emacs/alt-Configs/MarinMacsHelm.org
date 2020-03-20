@@ -38,6 +38,7 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 - [[#development][Development]]
   - [[#c-cpp][C/C++]]
   - [[#python][Python]]
+  - [[#web-development][Web-Development]]
   - [[#JavaScript-TypeScript][JavaScript/TypeScript]]
 - [[#diminish][Diminish]]
 
@@ -458,6 +459,7 @@ You can enable/disable any themes that you like here
   - Based on my experience and online sources ripgrep finds matches much faster than ag, which itself is praised for its speed
 - Helm-ls-git: provides =helm-browse-projects= which allows you search following your gitignore
 - Helm-swoop: listing line matches (similiar to swiper and isearch)
+- Helm-descbinds: Helm interface for describe bindings command
   #+begin_src emacs-lisp
     (use-package helm
         :ensure t
@@ -516,6 +518,11 @@ You can enable/disable any themes that you like here
          (helm-swoop-move-to-line-cycle t)
          (helm-swoop-use-line-number-face t)
          (helm-swoop-use-fuzzy-match t))
+         
+    (use-package helm-descbinds
+        :ensure t
+        :config
+        (helm-descbinds-mode))
   #+end_src
 * Enhancements 
  :PROPERTIES:
@@ -897,10 +904,8 @@ Smerge mode deals with merge conflicts in git.
   (defhydra hydra-describe (:color red :columns 3)
     "Describe 🤓"
     ("a" helm-apropos "apropos")
-    ("f" describe-function "func")
-    ("F" describe-face "face")
+    ("d" helm-descbinds "bindings")
     ("k" describe-key "key")
-    ("v" describe-variable "var")
     ("p" describe-package "package")
     ("s" describe-symbol "symbol")
     ("m" which-key-show-major-mode "major mode")
