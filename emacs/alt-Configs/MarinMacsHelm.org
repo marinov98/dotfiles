@@ -138,7 +138,6 @@ A nice and quick way to view/edit my configuration at any time
         ;; hydras
         "SPC" 'hydra-projectile/body
         "w" 'hydra-window/body
-        "z" 'hydra-zoom/body
         "l" 'hydra-lsp/body
         "d" 'hydra-describe/body
         "g" 'hydra-git/body
@@ -147,6 +146,7 @@ A nice and quick way to view/edit my configuration at any time
         "u" 'hydra-utility/body
         "a" 'hydra-avy/body
         "r" 'hydra-org/body
+        "S" 'hydra-smerge/body
         ;; file finding, coding, searching, and yanking
         "f" 'helm-find-files
         "j" 'helm-browse-project ;; need git installed!
@@ -891,15 +891,6 @@ Smerge mode deals with merge conflicts in git.
 | amaranth | :foreign-keys warn         |
 | teal     | :foreign-keys warn :exit t |
 | pink     | :foreign-keys run          |
-*** Zoom (actually find this first one pretty useful)
-#+BEGIN_SRC emacs-lisp
-    (defhydra hydra-zoom (:color pink)
-      "zoom 🞈 🞈"
-      ("k" text-scale-increase "in")
-      ("j" text-scale-decrease "out")
-      ("0" (text-scale-adjust 0) "reset")
-      ("q" nil "quit" :color blue))
-#+END_SRC
 *** Describe (help describe anything and open up documentation)
 #+BEGIN_SRC emacs-lisp
   ;; help
@@ -963,18 +954,17 @@ Unlike with original Projectile, you need to launch first before using other com
     ("k" windmove-up "up")
     ("l" windmove-right "right"))
 
-    "Switch"
-    (("s" helm-projectile-switch-project "switch project")
-    ("b" helm-projectile-switch-to-buffer "switch buffer")
-    ("r" projectile-recentf "recent files"))
-
     "Resizing"
     (("s" shrink-window "shrink window")
     ("e" enlarge-window "enlarge window")
     ("S" shrink-window-horizontally "shrink horizontally")
     ("E" enlarge-window-horizontally "shrink horizontally")
     ("B" balance-windows "balance windows"))
-
+    
+    "Zoom"
+    (("+" text-scale-increase "in")
+    ("-" text-scale-decrease "out")
+    ("0" (text-scale-adjust 0) "reset"))
 
     "Quit"
     (("K" kill-current-buffer "kill current buffer")
