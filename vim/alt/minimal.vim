@@ -11,6 +11,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 """"""""""""""""""""""
 """"""" CODING:
 """"""""""""""""""""""
+Plug 'easymotion/vim-easymotion'
 Plug 'https://github.com/jiangmiao/auto-pairs'
 Plug 'octol/vim-cpp-enhanced-highlight'
 """"""""""""""""""""""
@@ -204,6 +205,19 @@ endfunction
 
 " Add your own mapping. For example:
 noremap <silent> <leader>t :call ToggleNetrw()<CR>
+
+" Easy Motion:
+map  <Leader>c <Plug>(easymotion-bd-f)
+nmap <Leader>c <Plug>(easymotion-overwin-f)
+
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
+
 
 " Commands
 command! W :w
