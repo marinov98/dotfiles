@@ -1036,8 +1036,8 @@ Unlike with original Projectile, you need to launch first before using other com
     ("i" lsp-ui-imenu "imenu"))
 
     "Jump"
-    (("b" switch-to-prev-buffer "back") ;; better consistancy than lsp-ui-peek-jump-backward
-    ("n" switch-to-next-buffer "forward"))
+    (("b" switch-to-prev-buffer "back") ;; better consistency than lsp-ui-peek-jump-backward
+    ("n" switch-to-next-buffer "forward")) ;; better consistency than lsp-ui-peek-jump-forward
 
     "Refactor"
     (("c" lsp-rename "rename")
@@ -1046,7 +1046,7 @@ Unlike with original Projectile, you need to launch first before using other com
     "Errors"
     (("l" lsp-ui-flycheck-list "list errors")
     ("e" flycheck-next-error "next error")
-    ("p" flycheck-previous-error "prev error")))) ;; better than lsp-ui-peek-jump-forward
+    ("p" flycheck-previous-error "prev error")))) 
 #+END_SRC
 *** Avy (jumping around text)
 #+BEGIN_SRC emacs-lisp
