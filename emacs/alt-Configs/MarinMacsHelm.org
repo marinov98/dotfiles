@@ -149,7 +149,8 @@ A nice and quick way to view/edit my configuration at any time
         "r" 'hydra-org/body
         ;; file finding, coding, searching, and yanking
         "f" 'helm-find-files
-        "/" 'helm-browse-project ;; need git installed!
+        "j" 'helm-browse-project ;; need git installed!
+        "/" 'helm-ag
         "i" 'helm-swoop-without-pre-input ;; think of it as isearch's cousin to remember keybinding 
         "m" 'helm-multi-swoop
         "*" 'helm-swoop
@@ -492,7 +493,7 @@ You can enable/disable any themes that you like here
          :custom
          (helm-ag-base-command "rg --vimgrep --no-heading --smart-case") ;; force use of ripgrep, delete this customization to go back to ag
          :ensure t)
-         
+
      (use-package helm-ls-git 
          :after helm
          :ensure t)
@@ -1087,7 +1088,6 @@ Unlike with original Projectile, you need to launch first before using other com
    ("d" dap-debug "dap debug")
    ("i" dap-debug-edit-template "debug template")
    ("r" helm-recentf "recent files")
-   ("g" helm-ag "ripgrep") ;; forced ag to use ripgrep
    ("l" helm-locate "locate")
    ("z" helm-find "fuzzy-find")
    ("f" flycheck-buffer "flycheck buffer")
@@ -1605,3 +1605,4 @@ All for typescript
         (diminish 'eldoc-mode)
         (diminish 'abbrev-mode))
   #+end_src
+  
