@@ -14,4 +14,4 @@ These are just a quick preview of some of the things my emacs is capable of
 [[./emacs-ranger.png]]
 ** Old homepage
 #+ATTR_HTML: :style margin-left: auto; margin-right: auto;
-[[./spaceHomepage.png]]
+[[./spaceHompage.png]]
