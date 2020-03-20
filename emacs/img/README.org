@@ -9,3 +9,9 @@ These are just a quick preview of some of the things my emacs is capable of
 ** Python
 #+ATTR_HTML: :style margin-left: auto; margin-right: auto;
 [[./python.png]]
+** Ranger
+#+ATTR_HTML: :style margin-left: auto; margin-right: auto;
+[[./emacs-ranger.png]]
+** Old homepage
+#+ATTR_HTML: :style margin-left: auto; margin-right: auto;
+[[./spaceHomepage.png]]
