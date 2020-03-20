@@ -489,7 +489,7 @@ You can enable/disable any themes that you like here
       (("C-s" . swiper-isearch)
       ("C-c C-r" . ivy-resume)))
 
-  ;; Counsel
+    ;; Counsel
   (use-package counsel
       :ensure t
       :bind
@@ -500,13 +500,14 @@ You can enable/disable any themes that you like here
       :map ivy-minibuffer-map
       ("M-j" . ivy-next-line)
       ("M-k" . ivy-previous-line)) 
+      :custom
+      (counsel-rg-base-command "rg -S --no-heading --line-number --color never %s .")
+      (counsel-ag-base-command "ag -S --nocolor --nogroup %s")
+      (counsel-pt-base-command "pt -S --nocolor --nogroup -e %s")
+      (counsel-find-file-at-point t)
       :config
-      (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"
-      ;; Add smart-casing (-S) to default command arguments:
-      counsel-rg-base-command "rg -S --no-heading --line-number --color never %s ."
-      counsel-ag-base-command "ag -S --nocolor --nogroup %s"
-      counsel-pt-base-command "pt -S --nocolor --nogroup -e %s"
-      counsel-find-file-at-point t))
+      (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"))
+
 #+END_SRC
 * Enhancements 
  :PROPERTIES:
