@@ -98,7 +98,7 @@ A nice and quick way to view/edit my configuration at any time
     (defun goto-MarinMacs ()
       (interactive)
       (find-file "~/.emacs.d/MarinMacs.org")) 
-    (global-set-key (kbd "C-c m") 'goto-MarinMacs) ;; secondary binding is SPC m m 
+    (global-set-key (kbd "C-c m") 'goto-MarinMacs) ;; secondary binding is SPC u m 
   #+end_src
 * Quelpa
  :PROPERTIES:
