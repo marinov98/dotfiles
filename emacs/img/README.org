@@ -13,5 +13,6 @@ These are just a quick preview of some of the things my emacs is capable of
 #+ATTR_HTML: :style margin-left: auto; margin-right: auto;
 [[./emacs-ranger.png]]
 ** Old homepage
+This uses the spacemacs theme and spaceline modeline
 #+ATTR_HTML: :style margin-left: auto; margin-right: auto;
 [[./spaceHompage.png]]
