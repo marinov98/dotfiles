@@ -38,6 +38,7 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 - [[#development][Development]]
   - [[#c-cpp][C/C++]]
   - [[#python][Python]]
+  - [[#web-development][Web-development]]
   - [[#JavaScript-TypeScript][JavaScript/TypeScript]]
 - [[#diminish][Diminish]]
 
@@ -138,7 +139,7 @@ A nice and quick way to view/edit my configuration at any time
         ;; hydras
         "SPC" 'hydra-projectile/body
         "w" 'hydra-window/body
-        "z" 'hydra-zoom/body
+        "S" 'hydra-smerge/body
         "l" 'hydra-lsp/body
         "d" 'hydra-describe/body
         "g" 'hydra-git/body
@@ -149,7 +150,8 @@ A nice and quick way to view/edit my configuration at any time
         "r" 'hydra-org/body
         ;; file finding, coding, searching, and yanking
         "f" 'counsel-find-file
-        "/" 'counsel-git ;; need git installed!
+        "j" 'counsel-git ;; need git installed!
+        "/" 'counsel-rg ;; need ripgrep installed!
         "i" 'swiper-isearch
         "m" 'swiper-multi
         "*" 'swiper-thing-at-point
@@ -867,43 +869,9 @@ Smerge mode deals with merge conflicts in git.
   ;; I have to thank Professor Zamansky for this smerge hydra...
   (use-package smerge-mode
     :after hydra
-    :config
-    (defhydra unpackaged/smerge-hydra
-      (:color pink :hint nil :post (smerge-auto-leave))
-      "
-  ^Move^       ^Keep^               ^Diff^                 ^Other^
-  ^^-----------^^-------------------^^---------------------^^-------
-  _n_ext       _b_ase               _<_: upper/base        _C_ombine
-  _p_rev       _u_pper              _=_: upper/lower       _r_esolve
-  ^^           _l_ower              _>_: base/lower        _k_ill current
-  ^^           _a_ll                _R_efine
-  ^^           _RET_: current       _E_diff
-  "
-      ("n" smerge-next)
-      ("p" smerge-prev)
-      ("b" smerge-keep-base)
-      ("u" smerge-keep-upper)
-      ("l" smerge-keep-lower)
-      ("a" smerge-keep-all)
-      ("RET" smerge-keep-current)
-      ("\C-m" smerge-keep-current)
-      ("<" smerge-diff-base-upper)
-      ("=" smerge-diff-upper-lower)
-      (">" smerge-diff-base-lower)
-      ("R" smerge-refine)
-      ("E" smerge-ediff)
-      ("C" smerge-combine-with-next)
-      ("r" smerge-resolve)
-      ("k" smerge-kill-current)
-      ("ZZ" (lambda ()
-              (interactive)
-              (save-buffer)
-              (bury-buffer))
-       "Save and bury buffer" :color blue)
-      ("q" nil "cancel" :color blue))
     :hook (magit-diff-visit-file . (lambda ()
                                      (when smerge-mode
-                                       (unpackaged/smerge-hydra/body)))))
+                                       (hydra-smerge/body)))))
 #+END_SRC
 * Hydra
  :PROPERTIES:
@@ -918,6 +886,9 @@ Smerge mode deals with merge conflicts in git.
       :config
       (setq hydra-is-helpful t)
       (setq hydra-hint-display-type 'lv))
+      
+  (use-package pretty-hydra
+      :ensure t)
 #+END_SRC
 ** Hydras
 - Great hydras make for a great workflow (Let's hope they are great...)
@@ -929,21 +900,12 @@ Smerge mode deals with merge conflicts in git.
 | amaranth | :foreign-keys warn         |
 | teal     | :foreign-keys warn :exit t |
 | pink     | :foreign-keys run          |
-*** Zoom (actually find this first one pretty useful)
-#+BEGIN_SRC emacs-lisp
-  (defhydra hydra-zoom (:color pink)
-    "zoom 🞈 🞈"
-    ("k" text-scale-increase "in")
-    ("j" text-scale-decrease "out")
-    ("0" (text-scale-adjust 0) "reset")
-    ("q" nil "quit" :color blue))
-
-#+END_SRC
 *** Describe (help describe anything and open up documentation)
 #+BEGIN_SRC emacs-lisp
   ;; help
-  (defhydra hydra-describe (:color red :columns 2)
+  (defhydra hydra-describe (:color red :columns 3)
     "Describe 🤓"
+    ("d" counsel-descbinds "bindings")
     ("f" counsel-describe-function "func")
     ("F" counsel-describe-face "face")
     ("k" describe-key "key")
@@ -958,55 +920,66 @@ Smerge mode deals with merge conflicts in git.
 #+END_SRC
 *** Projectile (project management)
 #+BEGIN_SRC emacs-lisp
-  (defhydra hydra-projectile (:color red :columns 3)
-    "🚀 Projectile 🚀"
-    ("l" counsel-projectile "launch") ;; dont really need this but for consistency with my helm workflow if I switch configs
-    ("f" counsel-projectile-find-file "find")
+  (pretty-hydra-define hydra-projectile (:color red :title "🚀 Projectile 🚀" :quit-key "q") 
+    ("Finding"
+    (("f" counsel-projectile-find-file "find")
     ("o" projectile-find-other-file "find other")
     ("w" counsel-projectile-find-file-dwim "find-dwim")
-    ("d" counsel-projectile-find-dir "find-dir")
-    ("a" counsel-projectile-ag "ag") ;; need silversearcher-ag installed!
-    ("g" counsel-projectile-rg "ripgrep") ;; need ripgrep installed!
-    ("s" counsel-projectile-switch-project "switch project")
-    ("b" counsel-projectile-switch-to-buffer "buffer switch")
-    ("r" projectile-recentf "recent files")
-    ;; counsel-projectile-switch-project has similiar functionality but this is much quicker
-    ("k" projectile-kill-buffers "kill project buffers")
-    ("q" nil "quit" :color blue))
+    ("d" counsel-projectile-find-dir "find-dir"))
 
+    "Launch"
+    (("l" counsel-projectile "launch"))
+
+    "Text"
+    (("a" counsel-projectile-ag "ag") 
+    ("g" counsel-projectile-rg "rg"))
+
+    "Switch"
+    (("s" counsel-projectile-switch-project "switch project")
+    ("b" counsel-projectile-switch-to-buffer "switch buffer")
+    ("r" projectile-recentf "recent files"))
+
+    "Finish"
+    (("k" projectile-kill-buffers "kill project buffers"))))
 #+END_SRC
 *** Window (my attempt at window management)
 #+BEGIN_SRC emacs-lisp
-  ;; My attempt at window management
-  (defhydra hydra-window (:color pink :columns 4)
-   "⚡⚡ Ivy + Windows ⚡⚡"
-    ("f" counsel-find-file "find")
-    ("b" counsel-switch-buffer "switch buffer")
-    ;; splitting
-    ("o" delete-other-windows "delete other windows")
+  (pretty-hydra-define hydra-window (:color pink :title "⚡⚡ Ivy + Windows ⚡⚡" :quit-key "q") 
+    ("Ivy"
+    (("f" counsel-find-file "find")
+    ("x" counsel-M-x "M-x")
+    ("b" counsel-switch-buffer "switch buffer"))
+
+    "Splitting"
+    (("o" delete-other-windows "delete other windows")
     ("2" split-window-right "v-split")
-    ("3" split-window-below "h-split")
-    ;; deletion and quitting
-    ("K" kill-current-buffer "kill current buffer")
-    ("d" delete-window "delete window")
-    ("D" kill-this-buffer "kill buffer")
-    ;; resizing
-    ("s" shrink-window "shrink window")
+    ("3" split-window-below "h-split"))
+
+    "Move"
+    (("h" windmove-left "left")
+    ("j" windmove-down "down")
+    ("k" windmove-up "up")
+    ("l" windmove-right "right"))
+
+    "Resizing"
+    (("s" shrink-window "shrink window")
     ("e" enlarge-window "enlarge window")
     ("S" shrink-window-horizontally "shrink horizontally")
     ("E" enlarge-window-horizontally "shrink horizontally")
-    ("B" balance-windows "balance windows")
-    ;; movement
-    ("h" windmove-left "left")
-    ("j" windmove-down "down")
-    ("k" windmove-up "up")
-    ("l" windmove-right "right")
-    ("x" counsel-M-x "M-x")
-    ("q" nil "quit" :color blue))
+    ("B" balance-windows "balance windows"))
+
+    "Zoom"
+    (("+" text-scale-increase "in")
+    ("-" text-scale-decrease "out")
+    ("0" (text-scale-adjust 0) "reset"))
+
+    "Quit"
+    (("K" kill-current-buffer "kill current buffer")
+    ("d" delete-window "delete window")
+    ("D" kill-this-buffer "kill buffer"))))
 #+END_SRC
 *** Git (magit and timemachine)
 #+BEGIN_SRC emacs-lisp
-    ;; git 
     (defhydra hydra-git (:color red)
       "⏳ Git ⏳"
       ("g" magit "magit")
@@ -1015,42 +988,82 @@ Smerge mode deals with merge conflicts in git.
       ("t" git-timemachine "timemachine")
       ("q" nil "quit" :color blue))
 #+END_SRC
+*** Smerge (for handling merge conflicts)
+    #+begin_src emacs-lisp
+   (pretty-hydra-define hydra-smerge (:color pink :title "⚡ Smerge ⚡" :quit-key "q")
+     ("Move"
+     (("n" smerge-next)
+     ("p" smerge-prev))
+
+     "Keep"
+     (("b" smerge-keep-base)
+     ("u" smerge-keep-upper)
+     ("l" smerge-keep-lower)
+     ("a" smerge-keep-all)
+     ("RET" smerge-keep-current))
+
+     "Diff"
+     (("<" smerge-diff-base-upper)
+     ("=" smerge-diff-upper-lower)
+     (">" smerge-diff-base-lower)
+     ("R" smerge-refine)
+     ("E" smerge-ediff))
+
+
+     "Other"
+     (("C" smerge-combine-with-next)
+     ("r" smerge-resolve)
+     ("k" smerge-kill-current)
+     ("ZZ" (lambda ()
+            (interactive)
+            (save-buffer)
+            (bury-buffer))
+        "Save and bury buffer" :color blue)))) 
+    #+end_src
 *** LSP (jump to definitions and references, list errors)
 #+BEGIN_SRC emacs-lisp
-  ;; lsp
-  (defhydra hydra-lsp (:color red :columns 3)
-    "📡 LSP 📡"
-    ("j" lsp-ui-peek-find-definitions "peek-def")
+  (pretty-hydra-define hydra-lsp (:color red :title "📡 LSP 📡" :quit-key "q") 
+    ("Find"
+    (("j" lsp-ui-peek-find-definitions "peek-def")
     ("r" lsp-ui-peek-find-references "peek-ref")
-    ("c" lsp-rename "rename")
     ("f" lsp-find-definition "find-def")
     ("t" lsp-find-type-definition "find-type-def")
-    ("e" flycheck-next-error "next error")
-    ("p" flycheck-previous-error "prev error")
-    ("l" lsp-ui-flycheck-list "list errors")
-    ("b" switch-to-prev-buffer "back") ;; better consistancy than lsp-ui-peek-jump-backward
-    ("n" switch-to-next-buffer "next") ;; better than lsp-ui-peek-jump-forward
-    ("i" lsp-ui-imenu "imenu")
-    ("q" nil "quit" :color blue))
+    ("i" lsp-ui-imenu "imenu"))
 
+    "Jump"
+    (("b" switch-to-prev-buffer "back") ;; better consistency than lsp-ui-peek-jump-backward
+    ("n" switch-to-next-buffer "forward")) ;; better consistency than lsp-ui-peek-jump-forward
+
+    "Refactor"
+    (("c" lsp-rename "rename")
+    ("F" lsp-format-buffer "format"))
+
+    "Errors"
+    (("l" lsp-ui-flycheck-list "list errors")
+    ("e" flycheck-next-error "next error")
+    ("p" flycheck-previous-error "prev error")))) 
 #+END_SRC
 *** Avy (jumping around text)
 #+BEGIN_SRC emacs-lisp
-
-  (defhydra hydra-avy (:color red :columns 3)
-    "↵ Avy ↵"
-    ("c" avy-goto-char "goto char")
+  (pretty-hydra-define hydra-avy (:color red :title "↵ Avy ↵" :quit-key "q")
+    ("Char"
+    (("c" avy-goto-char "goto char")
     ("C" avy-goto-char-2 "goto char 2")
-    ("t" avy-goto-char-timer "timed char")
-    ("w" avy-goto-word-1 "goto word")
-    ("W" avy-goto-word-0 "goto word 0")
-    ("l" avy-goto-line "goto line")
+    ("t" avy-goto-char-timer "timed char"))
+
+    "Word"
+    (("w" avy-goto-word-1 "goto word")
+    ("W" avy-goto-word-0 "goto word 0"))
+
+    "Line"
+    (("l" avy-goto-line "goto line")
     ("L" avy-goto-end-of-line "goto eoline")
     ("m" avy-move-line "move line")
     ("k" avy-kill-whole-line "kill line")
-    ("y" avy-copy-line "yank line")
-    ("r" avy-resume "resume")
-    ("q" nil "quit" :color blue))
+    ("y" avy-copy-line "yank line"))
+
+    "Resume"
+    (("r" avy-resume "resume"))))
 #+END_SRC
 *** Launcher (launch stuff)
   #+BEGIN_SRC emacs-lisp
@@ -1086,24 +1099,28 @@ Smerge mode deals with merge conflicts in git.
 #+END_SRC
 *** Utility (useful commands for me)
 #+BEGIN_SRC emacs-lisp
-  (defhydra hydra-utility (:color red :columns 4)
-   "😎 Utility 😎"
-   ("m" goto-MarinMacs "goto config")
-   ("b" gdb "gdb")
-   ("e" eval-buffer "eval-buffer")
-   ("d" dap-debug "dap debug")
-   ("i" dap-debug-edit-template "debug template")
-   ("r" counsel-recentf "recent files")
-   ("a" counsel-ag "ag")
-   ("g" counsel-rg "ripgrep")
-   ("z" counsel-fzf "fzf")
-   ("f" flycheck-buffer "flycheck buffer")
-   ("R" ranger "ranger")
-   ("c" compile "compile")
-   ("u" auto-fill-mode "auto-fill-mode")
-   ("w" web-mode "web-mode")
-   ("j" rjsx-mode "rjsx-mode")
-   ("q" nil "quit"))
+  (pretty-hydra-define hydra-utility (:color red :title "😎 Utility 😎" :quit-key "q")
+    ("Search"
+    (("r" counsel-recentf "recent files")
+    ("l" counsel-ag "ag")
+    ("z" counsel-fzf "fuzzy-find"))
+
+    "Debugging"
+    (("b" gdb "gdb")
+    ("d" dap-debug "dap debug")
+    ("i" dap-debug-edit-template "debug template"))
+
+    "Modes"
+    (("u" auto-fill-mode "auto-fill-mode")
+    ("w" web-mode "web-mode")
+    ("j" rjsx-mode "rjsx-mode"))
+
+    "Personal"
+    (("m" goto-MarinMacs "goto config")
+    ("f" flycheck-buffer "flycheck buffer")
+    ("e" eval-buffer "eval buffer")
+    ("R" ranger "ranger")
+    ("c" compile "compile"))))
 #+END_SRC
 *** Org (for org mode)
     #+begin_src emacs-lisp
@@ -1207,17 +1224,12 @@ Smerge mode deals with merge conflicts in git.
 - DAP stands for Debug Adapter Protocal works similiarly to LSP but for debugging
 - Repo: https://github.com/emacs-lsp/dap-mode (includes everything you need to install for your desired development language)
 #+BEGIN_SRC emacs-lisp
-   ;; enable hydra bindings in dap mode
-   (use-package dap-hydra
-       :ensure nil
-       :requires hydra)
-
    ;; only installing because dap-mode requires it
    (use-package posframe :ensure t)
 
    (use-package dap-mode
        :ensure t
-       :requires hydra
+       :after hydra
        :hook
        (lsp-mode . (lambda () (dap-mode t) (dap-ui-mode t) (dap-tooltip-mode 1) (tooltip-mode 1)))
        :config
@@ -1286,7 +1298,7 @@ Still experimenting with this, native gdb in emacs is also really good
 #+BEGIN_SRC emacs-lisp
 (use-package dap-gdb-lldb
   :ensure nil
-  :requires dap-mode
+  :after dap-mode
   :config
   (dap-register-debug-template
   "GDB config"
@@ -1349,7 +1361,7 @@ Note: the template is meant to be edited to personal preferences
 #+BEGIN_SRC emacs-lisp
 (use-package dap-python
   :ensure nil
-  :requires dap-mode
+  :after dap-mode
   :config
   (dap-register-debug-template "My App"
   (list :type "python"
@@ -1406,6 +1418,7 @@ Note: the template is meant to be edited to personal preferences
       ("\\.[agj]sp\\'"     . web-mode)
       ("\\.as[cp]x\\'"     . web-mode)
       ("\\.erb\\'"         . web-mode)
+      ("\\.ejs\\'"         . web-mode)
       ("\\.mustache\\'"    . web-mode)
       ("\\.djhtml\\'"      . web-mode)
       ("\\.js\\'"          . web-mode))
@@ -1541,18 +1554,18 @@ Adds the node_modules/.bin directory to the buffer exec_path.
   ;; debugging in chrome
   (use-package dap-chrome
       :ensure nil
-      :requires dap-mode)
+      :after dap-mode)
   
   ;; debugging in firefox
   (use-package dap-firefox
       :ensure nil
-      :requires dap-mode)
+      :after dap-mode)
 #+END_SRC
 *** Back-end
 #+BEGIN_SRC emacs-lisp
   (use-package dap-node
       :ensure nil
-      :requires dap-mode)
+      :after dap-mode)
 #+END_SRC
 *** Js2-mode
 - A 'better' mode for editing javascript files. Can have performance issues and errors 
