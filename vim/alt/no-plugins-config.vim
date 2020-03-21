@@ -4,12 +4,8 @@
 map <SPACE> <Leader>
 
 """"""""""""""""""""""
-""""""" BASICS:
+"""""" SETTINGS:
 """"""""""""""""""""""
-
-" auto-close brackets
-let g:AutoPairsFlyMode = 0
-let g:AutoPairsShortcutBackInsert = '<M-b>'
 
 " if hidden is not set, TextEdit might fail.
 set hidden
@@ -19,10 +15,6 @@ set nobackup
 set nowritebackup
 set showcmd
 
-" Better display for messages
-set cmdheight=2
-
-" You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=300
 
 " don't give |ins-completion-menu| messages.
@@ -38,13 +30,6 @@ set nocompatible
 set background=dark
 colorscheme industry
 
-" Cursor line
-augroup CursorLine
-  au!
-  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  au WinLeave * setlocal nocursorline
-augroup END
-
 "indentation
 set tabstop=4
 set softtabstop=4
@@ -52,11 +37,11 @@ set shiftwidth=4
 set noexpandtab
 
 " line numbers and tabs
- set number relativenumber
- set nu rnu 
- set completeopt-=preview
- set guioptions-=e
- set sessionoptions+=tabpages,globals
+set number relativenumber
+set nu rnu 
+set completeopt-=preview
+set guioptions-=e
+set sessionoptions+=tabpages,globals
 
 " directory navigations and settings
 set foldenable
@@ -64,6 +49,7 @@ set incsearch
 set hlsearch
 set showmatch
 set wildmenu
+set cursorline
 set noswapfile
 set tags=tags
 set bs=2
@@ -74,7 +60,6 @@ set clipboard=unnamed "Windows
 set laststatus=2
 set noshowmode
 set t_Co=256
-
 
 
 " MODE SPECIFIC SETTINGS:
@@ -91,12 +76,10 @@ set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
 set wildignore+=*.pdf,*.psd
 set wildignore+=node_modules/*,bower_components/*
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-"
-augroup project
-     autocmd!
-         autocmd BufRead,BufNewFile *.h,*.c set filetype=c.doxygen
-         augroup END
 
+" Search down into subfolders
+" Provides tab-completion for all file-related tasks
+set path+=**
 
 "" NETRW:
 let g:netrw_banner=0 " Disable annoying banner
@@ -124,11 +107,7 @@ function! ToggleNetrw()
     endif
 endfunction
 
-" Add your own mapping. For example:
 noremap <silent> <leader>t :call ToggleNetrw()<CR>
-
-" Commands
-command! W :w
 
 """""""""""""""""""""""
 """"" PERSONAL BINDINGS:
