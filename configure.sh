@@ -12,7 +12,8 @@ then
     echo "machine found to be linux"
     \cp bash/.bashrc ~/
     \cp bash/.profile ~/
-    \cp keyboard/.xprofile ~/
+    \cp X/.xprofile ~/
+    \cp X/.Xresources ~/
 else
     echo "Machine found to not be linux "
     \cp bash/.bash_profile ~/
