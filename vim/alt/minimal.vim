@@ -106,6 +106,8 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set noexpandtab
+set smartindent
+set smartcase
 
 " line numbers and tabs
 set number relativenumber
@@ -131,8 +133,8 @@ set updatetime=300
 set tags=tags
 set bs=2
 set mouse=a
-set clipboard=unnamed "Windows
-"set clipboard=unnamedplus " Linux and Mac
+"set clipboard=unnamed "Windows
+set clipboard=unnamedplus " Linux and Mac
 set laststatus=2
 set noshowmode
 set t_Co=256
