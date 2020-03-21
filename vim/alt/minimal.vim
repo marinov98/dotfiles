@@ -4,6 +4,7 @@ Plug 'morhetz/gruvbox'
 """"""" File Search:
 Plug 'ctrlpvim/ctrlp.vim'
 """"""" CODING:
+Plug 'easymotion/vim-easymotion'
 Plug 'https://github.com/jiangmiao/auto-pairs'
 Plug 'octol/vim-cpp-enhanced-highlight'
 """"""" MODELINE:
@@ -64,6 +65,19 @@ endif
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
+
+""""""""" Easy Motion:
+map  <Leader>c <Plug>(easymotion-bd-f)
+nmap <Leader>c <Plug>(easymotion-overwin-f)
+
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
+
 """"""""""""""""""""""
 """"""" BASICS:
 """"""""""""""""""""""
@@ -123,7 +137,9 @@ set laststatus=2
 set noshowmode
 set t_Co=256
 
-
+" Search down into subfolders
+" Provides tab-completion for all file-related tasks
+set path+=**
 
 " MODE SPECIFIC SETTINGS:
 autocmd BufEnter *.tsx set filetype=typescript
