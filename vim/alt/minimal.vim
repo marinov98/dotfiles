@@ -1,42 +1,24 @@
 call plug#begin('~/.vim/plugged')
-
-""""""""""""""""""""""
 """"""" THEMES:
-""""""""""""""""""""""
 Plug 'morhetz/gruvbox'
-""""""""""""""""""""""
 """"""" File Search:
-""""""""""""""""""""""
 Plug 'ctrlpvim/ctrlp.vim'
-""""""""""""""""""""""
 """"""" CODING:
-""""""""""""""""""""""
-Plug 'easymotion/vim-easymotion'
 Plug 'https://github.com/jiangmiao/auto-pairs'
 Plug 'octol/vim-cpp-enhanced-highlight'
-""""""""""""""""""""""
 """"""" MODELINE:
-""""""""""""""""""""""
 Plug 'itchyny/lightline.vim'
-""""""""""""""""""""""
+""""""" GITHUB:
+Plug 'https://github.com/itchyny/vim-gitbranch'
 """"""" VIM UTILITY:
-""""""""""""""""""""""
 Plug 'https://github.com/tpope/vim-repeat'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
-""""""""""""""""""""""
 """"""" WEB DEV:
-""""""""""""""""""""""
 Plug 'alvan/vim-closetag'
 Plug 'mattn/emmet-vim'
 Plug 'sheerun/vim-polyglot'
-""""""""""""""""""""""
-""""""" GITHUB:
-""""""""""""""""""""""
-Plug 'https://github.com/itchyny/vim-gitbranch'
 call plug#end()
-
-
 
 """"""""""""""""""""""
 """""" LEADER KEY:
@@ -90,19 +72,6 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 let g:AutoPairsFlyMode = 0
 let g:AutoPairsShortcutBackInsert = '<M-b>'
 
-" if hidden is not set, TextEdit might fail.
-set hidden
-
-" Some servers have issues with backup files, see #649
-set nobackup
-set nowritebackup
-set showcmd
-
-" Better display for messages
-set cmdheight=2
-
-" You will have bad experience for diagnostic messages when it's default 4000.
-set updatetime=300
 
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
@@ -117,12 +86,6 @@ set nocompatible
 set background=dark
 colorscheme gruvbox
 
-" Cursor line
-augroup CursorLine
-  au!
-  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  au WinLeave * setlocal nocursorline
-augroup END
 
 "indentation
 set tabstop=4
@@ -131,25 +94,31 @@ set shiftwidth=4
 set noexpandtab
 
 " line numbers and tabs
- set number relativenumber
- set nu rnu 
- set completeopt-=preview
- set guioptions-=e
- set sessionoptions+=tabpages,globals
+set number relativenumber
+set nu rnu 
+set completeopt-=preview
+set guioptions-=e
+set sessionoptions+=tabpages,globals
 
 " directory navigations and settings
+set hidden
+set nobackup
+set nowritebackup
+set showcmd
+set cursorline
 set foldenable
 set incsearch
 set hlsearch
+set noerrorbells
 set showmatch
 set wildmenu
 set noswapfile
+set updatetime=300
 set tags=tags
 set bs=2
-set guicursor+=a:blinkon0
 set mouse=a
-"set clipboard=unnamed "Windows
-set clipboard=unnamedplus " Linux and Mac
+set clipboard=unnamed "Windows
+"set clipboard=unnamedplus " Linux and Mac
 set laststatus=2
 set noshowmode
 set t_Co=256
@@ -170,11 +139,6 @@ set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
 set wildignore+=*.pdf,*.psd
 set wildignore+=node_modules/*,bower_components/*
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-"
-augroup project
-     autocmd!
-         autocmd BufRead,BufNewFile *.h,*.c set filetype=c.doxygen
-         augroup END
 
 
 "" NETRW:
@@ -203,24 +167,7 @@ function! ToggleNetrw()
     endif
 endfunction
 
-" Add your own mapping. For example:
 noremap <silent> <leader>t :call ToggleNetrw()<CR>
-
-" Easy Motion:
-map  <Leader>c <Plug>(easymotion-bd-f)
-nmap <Leader>c <Plug>(easymotion-overwin-f)
-
-" Move to line
-map <Leader>L <Plug>(easymotion-bd-jk)
-nmap <Leader>L <Plug>(easymotion-overwin-line)
-
-" Move to word
-map  <Leader>w <Plug>(easymotion-bd-w)
-nmap <Leader>w <Plug>(easymotion-overwin-w)
-
-
-" Commands
-command! W :w
 
 """""""""""""""""""""""
 """"" PERSONAL BINDINGS:
