@@ -5,17 +5,11 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-""""""""""""""""""""""
 """"""" THEMES:
-""""""""""""""""""""""
 Plug 'liuchengxu/space-vim-dark'
-""""""""""""""""""""""
 """"""" File Search:
-""""""""""""""""""""""
 Plug 'ctrlpvim/ctrlp.vim'
-""""""""""""""""""""""
 """"""" CODING:
-""""""""""""""""""""""
 Plug 'easymotion/vim-easymotion'
 Plug 'SirVer/ultisnips'| Plug 'honza/vim-snippets'
 Plug 'prettier/vim-prettier', {
@@ -26,27 +20,19 @@ Plug 'https://github.com/jiangmiao/auto-pairs'
 Plug 'ervandew/supertab'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'octol/vim-cpp-enhanced-highlight'
-""""""""""""""""""""""
 """"""" MODELINE:
-""""""""""""""""""""""
 Plug 'itchyny/lightline.vim'
-""""""""""""""""""""""
+""""""" GITHUB:
+Plug 'https://github.com/itchyny/vim-gitbranch'
 """"""" VIM UTILITY:
-""""""""""""""""""""""
 Plug 'https://github.com/tpope/vim-repeat'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
-""""""""""""""""""""""
 """"""" WEB DEV:
-""""""""""""""""""""""
 Plug 'alvan/vim-closetag'
 Plug 'mattn/emmet-vim'
 Plug 'https://github.com/ap/vim-css-color'
 Plug 'sheerun/vim-polyglot'
-""""""""""""""""""""""
-""""""" GITHUB:
-""""""""""""""""""""""
-Plug 'https://github.com/itchyny/vim-gitbranch'
 call plug#end()
 
 """"""""""""""""""""""
@@ -54,9 +40,7 @@ call plug#end()
 """"""""""""""""""""""
 map <SPACE> <Leader>
 
-""""""""""""""""""""""
 """"""" PRETTIER:
-""""""""""""""""""""""
 let g:prettier#exec_cmd_path = "~/.prettierrc"
 let g:prettier#quickfix_enabled = 0
 let g:prettier#autoformat = 0
@@ -65,7 +49,7 @@ autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.gra
 " Clang-Format
 autocmd FileType c,cpp,objc ClangFormatAutoEnable
 		
-" File Browsing netrw
+"""""""  NETRW:
 let g:netrw_banner=0 " Disable annoying banner
 let g:netrw_browse_split=4 " open in prior window
 let g:netrw_altv=1          " open splits to the right
@@ -91,7 +75,6 @@ function! ToggleNetrw()
    endif
 endfunction
 
-" Add your own mapping. For example:
 noremap <silent> <leader>t :call ToggleNetrw()<CR>
 
 """"""""""""""""""""""
@@ -102,46 +85,40 @@ let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
-""""""""" COC CONFIG
+""""""""" COC CONFIG:
 let g:coc_global_extensions = [
 			\ 'coc-eslint', 'coc-prettier',
 			\ 'coc-tsserver', 'coc-tslint','coc-html',
 			\'coc-css', 'coc-json', 'coc-python', 'coc-yaml']
-" if hidden is not set, TextEdit might fail.
+
+" Below settings are reccommended by coc
 set hidden
 
-" Some servers have issues with backup files, see #649
 set nobackup
 set nowritebackup
 set showcmd
 
-" You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=300
-
-" don't give |ins-completion-menu| messages.
 set shortmess+=c
-
-" always show signcolumns
 set signcolumn=yes
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
-" Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
-" NOTE: use C-i and C-o to go back and forth after
 nmap <silent> gd <Plug>(coc-definition) 
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
 " Symbol renaming.
 nmap <leader>r <Plug>(coc-rename)
-"""""""""""
+""""""""""" AUTOCOMPLETE END
 
-" Easy Motion:
+""""""""""" Easy Motion:
 map  <Leader>c <Plug>(easymotion-bd-f)
 nmap <Leader>c <Plug>(easymotion-overwin-f)
 
@@ -153,7 +130,7 @@ nmap <Leader>L <Plug>(easymotion-overwin-line)
 map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
 
-" Modeline
+""""""""""" Modeline:
 let g:lightline = {
   \ 'colorscheme': 'jellybeans'	,
     \ 'active': {
@@ -165,21 +142,10 @@ let g:lightline = {
     \ },
     \ }
 
-" Multiple-cursors
-let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_start_word_key      = '<C-n>'
-let g:multi_cursor_select_all_word_key = '<A-n>'
-let g:multi_cursor_start_key           = 'g<C-n>'
-let g:multi_cursor_select_all_key      = 'g<A-n>'
-let g:multi_cursor_next_key            = '<C-n>'
-let g:multi_cursor_prev_key            = '<C-p>'
-let g:multi_cursor_skip_key            = '<C-x>'
-let g:multi_cursor_quit_key            = '<Esc>'
-
 " CSS and Emmet
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-" make it work for scss files
 autocmd BufNewFile,BufRead *.scss set ft=scss.css
+
 let g:user_emmet_settings = {
   \  'javascript.jsx' : {
     \      'extends' : 'jsx',
@@ -192,11 +158,11 @@ autocmd FileType html,js,jsx,css EmmetInstall
 let g:AutoPairsFlyMode = 0
 let g:AutoPairsShortcutBackInsert = '<M-b>'
 
-"CtrlP
+""""""""""" CtrlP:
 let g:ctrlp_map = '<leader>f'
 
-" Ripgrep 
 if executable('rg')
+	" Let ctrlp utilize ripgrep
 	set grepprg=rg\ --color=never
 	let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
 	let g:ctrlp_use_caching = 0
@@ -204,7 +170,6 @@ elseif executable('ag') " Try The Silver Searcher if ripgrep not found
 	" Use ag over grep
 	set grepprg=ag\ --nogroup\ --nocolor
 	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-	 " ag is fast enough that CtrlP doesn't need to cache
 	let g:ctrlp_use_caching = 0
 
 else " Else use old configuration
@@ -220,9 +185,7 @@ endif
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
-""""""""""""""""""""""
 """"""" SETTINGS:
-""""""""""""""""""""""
 syntax enable
 set nocompatible
 
@@ -231,35 +194,40 @@ set nocompatible
 set background=dark
 colorscheme space-vim-dark
 
-" Indentation
+""""" Indentation:
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set noexpandtab
+set smartindent
+set smartcase
 
-" line numbers and tabs
+"""" PREFFERED DEFAULTS:
+set foldenable
+set incsearch
+set hlsearch
+set showmatch
+set wildmenu
+
+set noswapfile
+set noerrorbells
+
+set tags=tags
+set bs=2 " make backspace work
+set mouse=a " use mouse in vim
+
+set cursorline " highlight current row
+set clipboard=unnamedplus " allow copy and pasting anymore
+set laststatus=2 " show modeline
+set noshowmode
+set t_Co=256 " Make colors work with tmux
 set number relativenumber
 set nu rnu 
 set completeopt-=preview
 set guioptions-=e
 set sessionoptions+=tabpages,globals
 
-" directory navigations and settings
-set foldenable
-set incsearch
-set hlsearch
-set showmatch
-set wildmenu
-set noswapfile
-set tags=tags
-set bs=2 " make backspace work
-set mouse=a " use mouse in vim
-set clipboard=unnamedplus " allow copy and pasting anymore
-set laststatus=2 " show modeline
-set noshowmode
-set t_Co=256 " Make colors work with tmux
-
-" MODE SPECIFIC SETTINGS:
+""""""" MODE SPECIFIC SETTINGS:
 autocmd BufEnter *.tsx set filetype=typescript
 autocmd FileType html setlocal ts=2 sts=2 sw=2
 autocmd FileType css setlocal ts=2 sts=2 sw=2
@@ -281,28 +249,13 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 " Provides tab-completion for all file-related tasks
 set path+=**
 
-augroup project
-    autocmd!
-    autocmd BufRead,BufNewFile *.h,*.c set filetype=c.doxygen
-augroup END
-
-" Commands
-command! W :w
-
-
-"""""""""""""""""""""""
 """"" PERSONAL BINDINGS:
-"""""""""""""""""""""""
 nnoremap <leader>n :noh<CR>
 nnoremap Y y$
 nnoremap <leader>s :w<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>Q :q!<CR>
 
-
-"""""""""""""""""""""""
-""""" WINDOW MANAGEMENT:
-"""""""""""""""""""""""
 " Fix splitting
 set splitbelow splitright
 
