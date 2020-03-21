@@ -880,6 +880,7 @@ Smerge mode deals with merge conflicts in git.
 - You can go pretty crazy here, this package is one of my favorites
 - Allows you set up your own key maps where pressing one key instantly gives access to many other keybindings
 - Repo: https://github.com/abo-abo/hydra (Has a video demo)
+- =pretty-hydra= provides a really nice macro =pretty-hydra-define= that takes columns of hydra heads and expands to defhydra calls with pretty docstrings generated from the heads.
 #+BEGIN_SRC emacs-lisp
   (use-package hydra
       :ensure t
