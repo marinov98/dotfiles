@@ -13,7 +13,7 @@ then
     \cp bash/.bashrc ~/
     \cp bash/.profile ~/
     \cp X/.xprofile ~/
-    \cp X/.Xresources ~/
+    # \cp X/.Xresources ~/
 else
     echo "Machine found to not be linux "
     \cp bash/.bash_profile ~/
