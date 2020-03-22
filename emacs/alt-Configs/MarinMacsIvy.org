@@ -56,8 +56,7 @@ Indentation
 - Options, display, parenthesis 
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
-  (setq default-frame-alist '((font . "Fira Code-14")
-                              (cursor-color . "#ffc600"))) ;; set font, font size, and cursor color
+  (setq default-frame-alist '((font . "Fira Code-12")))    ;; set font and font size
   (setq visible-bell t)                                    ;; disable end of buffer sounds
   (electric-pair-mode)                                     ;; auto closing brackets
   (show-paren-mode 1)                                      ;; highlight matching parenthesis
@@ -82,11 +81,12 @@ Displaying time and date in emacs
 #+END_SRC
 Convenient yes or no and disable bars/blinking cursor
 #+BEGIN_SRC emacs-lisp
-    (fset 'yes-or-no-p 'y-or-n-p)            ;; change yes or no to y or n
-    (menu-bar-mode -1)                       ;; disable menu bar
-    (toggle-scroll-bar -1)                   ;; disable scroll bar
-    (tool-bar-mode -1)                       ;; disable tool bar
-    (blink-cursor-mode -1)                   ;; make cursor stop blinking
+  (fset 'yes-or-no-p 'y-or-n-p)            ;; change yes or no to y or n
+  (menu-bar-mode -1)                       ;; disable menu bar
+  (scroll-bar-mode -1)                     ;; disable scroll bar
+  (toggle-scroll-bar -1)                   ;; disable scroll bar toggle
+  (tool-bar-mode -1)                       ;; disable tool bar
+  (blink-cursor-mode -1)                   ;; make cursor stop blinking
 #+END_SRC
 Disable back up files (comment if you want to enable backup files) 
 #+BEGIN_SRC emacs-lisp
@@ -232,14 +232,13 @@ A nice and quick way to view/edit my configuration at any time
   ;; bullets
   (use-package org-bullets
      :ensure t
-     :config
-     (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
+     :hook
+     (org-mode . org-bullets-mode))
 
   ;; Org custom settings
   (custom-set-variables
            '(org-directory "~/Projects/org")
            '(org-default-notes-file (concat org-directory "/Personal/notes.org")))
-
 #+END_SRC
 ** Markdown
 #+BEGIN_SRC emacs-lisp
@@ -327,68 +326,68 @@ A nice and quick way to view/edit my configuration at any time
 ** Customization
 You can enable/disable any themes that you like here
 #+BEGIN_SRC emacs-lisp
-    ;; BE AWARE: emacs can have multiple themes on at the same time
-    ;; Multiple themes can mix into a super theme
-    ;; Some themes do not mix well which is why I disable themes
+  ;; BE AWARE: emacs can have multiple themes on at the same time
+  ;; Multiple themes can mix into a super theme
+  ;; Some themes do not mix well which is why I disable themes
 
-     (use-package spacemacs-common
-         :disabled
-         :ensure spacemacs-theme
-         :config (load-theme 'spacemacs-dark t))
+   (use-package spacemacs-common
+       :disabled
+       :ensure spacemacs-theme
+       :config (load-theme 'spacemacs-dark t))
 
-     (use-package doom-themes
-         :ensure t 
-         :custom
-         (doom-themes-enable-bold t)
-         (doom-themes-enable-italic t)
-         :config
-         (load-theme 'doom-one t)
-         (doom-themes-visual-bell-config) ;; Enable flashing mode-line on errors
-         (doom-themes-org-config)) ;; Corrects (and improves) org-mode's native fontification.
+   (use-package doom-themes
+       :ensure t 
+       :custom
+       (doom-themes-enable-bold t)
+       (doom-themes-enable-italic t)
+       :config
+       (load-theme 'doom-one t)
+       (doom-themes-visual-bell-config) ;; Enable flashing mode-line on errors
+       (doom-themes-org-config)) ;; Corrects (and improves) org-mode's native fontification.
 
-     (use-package zerodark-theme
-         :disabled
-         :ensure t)
+   (use-package zerodark-theme
+       :disabled
+       :ensure t)
 
-     (use-package minimal-theme
-         :disabled
-         :ensure t
-         :config
-         (load-theme 'minimal t))
+   (use-package minimal-theme
+       :disabled
+       :ensure t
+       :config
+       (load-theme 'minimal t))
 
-     (use-package zenburn-theme
-         :disabled
-         :ensure t
-         :config
-         (load-theme 'zenburn t))
+   (use-package zenburn-theme
+       :disabled
+       :ensure t
+       :config
+       (load-theme 'zenburn t))
 
-     (use-package poet-theme
-         :disabled
-         :ensure t)
+   (use-package poet-theme
+       :disabled
+       :ensure t)
 
-     (use-package modus-vivendi-theme
-         :disabled
-         :ensure t
-         :config
-         (setq modus-vivendi-theme-bold-constructs t)
-         (load-theme 'modus-vivendi t))
+   (use-package modus-vivendi-theme
+       :disabled
+       :ensure t
+       :config
+       (setq modus-vivendi-theme-bold-constructs t)
+       (load-theme 'modus-vivendi t))
 
-     (use-package modus-operandi-theme
-         :disabled
-         :ensure t
-         :config (load-theme 'modus-operandi t))
+   (use-package modus-operandi-theme
+       :disabled
+       :ensure t
+       :config (load-theme 'modus-operandi t))
 
-     (use-package jbeans-theme
-         :disabled
-         :ensure t
-         :config
-         (load-theme 'jbeans t))
+   (use-package jbeans-theme
+       :disabled
+       :ensure t
+       :config
+       (load-theme 'jbeans t))
 
-     (use-package planet-theme
-         :disabled
-         :ensure t
-         :config 
-         (load-theme 'planet t))
+   (use-package planet-theme
+       :disabled
+       :ensure t
+       :config 
+       (load-theme 'planet t))
 #+END_SRC
 * Modeline
  :PROPERTIES:
@@ -404,6 +403,7 @@ You can enable/disable any themes that you like here
 ;;;;;;;;;;;;;;;;;;;;;;   
 
   (use-package spaceline
+      :disabled
       :ensure t
       :custom-face
       (spaceline-highlight-face ((t (:background "#ffc600" :foreground "black"))))
@@ -446,7 +446,6 @@ You can enable/disable any themes that you like here
 ;;;;;;;;;;;;;;;;;;;;;;   
 
   (use-package doom-modeline
-      :disabled
       :ensure t
       :hook (after-init . doom-modeline-mode))
 
@@ -475,7 +474,7 @@ You can enable/disable any themes that you like here
       (ivy-format-function 'ivy-format-function-line)
       :hook 
       ((after-init . ivy-mode)
-      (ivy-occur-mode . hl-line-mode))
+      (ivy-mode . counsel-mode))
       :config
       (setq enable-recursive-minibuffers t))
 
@@ -490,7 +489,7 @@ You can enable/disable any themes that you like here
       (("C-s" . swiper-isearch)
       ("C-c C-r" . ivy-resume)))
 
-   ;; Counsel
+    ;; Counsel
   (use-package counsel
       :ensure t
       :bind
@@ -508,6 +507,7 @@ You can enable/disable any themes that you like here
       (counsel-find-file-at-point t)
       :config
       (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"))
+
 #+END_SRC
 * Enhancements 
  :PROPERTIES:
@@ -752,16 +752,18 @@ I never lose where my cursor is thanks to this
       (:map yas-minor-mode-map
       ("<tab>" . nil) ;; while this is convenient, it clashes with auto-complete and jump-to-definitions
       ("<C-tab>" . yas-expand)))
-      :init
-      (yas-global-mode 1)
+      :hook
+      (after-init . yas-global-mode)
       :config
       (yas-reload-all))
 
-  (use-package yasnippet-snippets :ensure t)
+  (use-package yasnippet-snippets 
+      :after yasnippet
+      :ensure t)
     
   ;; snippets for React.js
   (use-package react-snippets
-      :requires yasnippet
+      :after yasnippet
       :ensure t)
 #+END_SRC 
 ** FlyCheck
@@ -809,8 +811,8 @@ I never lose where my cursor is thanks to this
       (company-minimum-prefix-length 3) ;; show completions after 3 chars
       (company-selection-wrap-around t) ;; goes to start of selection if you reached the bottom 
       (company-require-match 'never) ;; dont need to pick a choice 
-      :config
-      (global-company-mode t)) 
+      :hook
+      (after-init . global-company-mode))
       
 #+END_SRC 
 Add Company backends to enable elisp autocomplete
@@ -866,12 +868,11 @@ Add Company backends to enable elisp autocomplete
 #+END_SRC
 Smerge mode deals with merge conflicts in git.
 #+BEGIN_SRC emacs-lisp
-  ;; I have to thank Professor Zamansky for this smerge hydra...
   (use-package smerge-mode
-    :after hydra
-    :hook (magit-diff-visit-file . (lambda ()
-                                     (when smerge-mode
-                                       (hydra-smerge/body)))))
+      :after hydra
+      :hook (magit-diff-visit-file . (lambda ()
+                                      (when smerge-mode
+                                        (hydra-smerge/body)))))
 #+END_SRC
 * Hydra
  :PROPERTIES:
@@ -1113,8 +1114,8 @@ Smerge mode deals with merge conflicts in git.
 
     "Modes"
     (("u" auto-fill-mode "auto-fill-mode")
-    ("w" web-mode "web-mode")
-    ("j" rjsx-mode "rjsx-mode"))
+    ("W" web-mode "web-mode")
+    ("J" rjsx-mode "rjsx-mode"))
 
     "Personal"
     (("m" goto-MarinMacs "goto config")
@@ -1125,31 +1126,39 @@ Smerge mode deals with merge conflicts in git.
 #+END_SRC
 *** Org (for org mode)
     #+begin_src emacs-lisp
-    (defun marinov/goto-org-directory ()
-      "goes to my org directory"
-      (interactive)
-      (find-file org-directory))
-      
-    (defun marinov/jump-to-notes ()
-      "go to notes file"
-      (interactive)
-      (find-file org-default-notes-file))
+      (defun marinov/goto-org-directory ()
+        "goes to my org directory"
+        (interactive)
+        (find-file org-directory))
 
-     (defhydra hydra-org (:color blue :columns 4)
-      " ORG "
-      ("o" org-open-at-point "open link")
-      ("c" org-toggle-comment "comment")
-      ("i" org-time-stamp "time stamp")
-      ("d" org-export-dispatch "export dispatch")
-      ("p" org-priority "priority")
-      ("t" org-todo "todo state")
-      ("a" org-todo-list "agenda")
-      ("l" org-show-todo-tree "show todo tree")
-      ("s" org-edit-special "edit special")
-      ("x" org-edit-src-exit "exit special")
-      ("n" marinov/jump-to-notes "goto notes")
-      ("D" marinov/goto-org-directory "goto org directory")
-      ("q" nil "quit"))
+      (defun marinov/jump-to-notes ()
+        "go to notes file"
+        (interactive)
+        (find-file org-default-notes-file))
+
+      ;; sometimes I edit within org and I forget to enter src but I want to just go to src to evaluate
+      (defun marinov/enter-eval ()
+       "enter source, and evaluate the buffer"
+       (interactive)
+       (org-edit-special)
+       (eval-buffer))
+
+       (defhydra hydra-org (:color blue :columns 4)
+        " ORG "
+        ("o" org-open-at-point "open link")
+        ("c" org-toggle-comment "comment")
+        ("i" org-time-stamp "time stamp")
+        ("d" org-export-dispatch "export dispatch")
+        ("p" org-priority "priority")
+        ("t" org-todo "todo state")
+        ("a" org-todo-list "agenda")
+        ("l" org-show-todo-tree "show todo tree")
+        ("S" marinov/enter-eval "enter and eval")
+        ("s" org-edit-special "edit special")
+        ("x" org-edit-src-exit "exit special")
+        ("n" marinov/jump-to-notes "goto notes")
+        ("D" marinov/goto-org-directory "goto org directory")
+        ("q" nil "quit"))
     #+end_src
 * LSP
  :PROPERTIES:
