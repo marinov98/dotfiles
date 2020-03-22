@@ -26,7 +26,7 @@ bindsym $mod+Shift+q kill
 
 ###### ROFI
 
-bindsym $mod+d exec rofi -show drun -display-drun "Launch" -show-icons -padding 10 -width 40
+bindsym $mod+d exec rofi -show drun -display-drun "" -show-icons -padding 10 -width 40
 ###### DMENU 
 
 # bindsym $mod+d exec "dmenu_run -l 5 -nf '#BBBBBB' -nb '#0D2F04' -sb '#0A9750' -sf '#FFFFFF' -fn 'monospace-12' -p 'Search:'"
@@ -154,9 +154,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3? This will end your 
 
 bindsym $mod+Shift+w exec emacsclient -a "" -c # run emacs as a daemon and open
 bindsym $mod+Shift+t exec trash-empty # empty recycling bin
-bindsym $mod+Shift+n exec nm-connection-editor # wifi editor
 bindsym $mod+Shift+m exec nautilus # Specific file manager
-bindsym $mod+Shift+u exec ubuntu-software # Specific software center to check for updates
 # Terminal commands
 bindsym $mod+Shift+f exec $term -e ranger
 bindsym $mod+Shift+i exec $term -e vim ~/.config/i3/config 
