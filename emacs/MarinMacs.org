@@ -1033,8 +1033,8 @@ Smerge mode deals with merge conflicts in git.
     ("i" lsp-ui-imenu "imenu"))
 
     "Jump"
-    (("b" switch-to-prev-buffer "back") ;; better consistency than lsp-ui-peek-jump-backward
-    ("n" switch-to-next-buffer "forward")) ;; better consistency than lsp-ui-peek-jump-forward
+    (("p" switch-to-prev-buffer "prev") ;; better consistency than lsp-ui-peek-jump-backward
+    ("n" switch-to-next-buffer "next")) ;; better consistency than lsp-ui-peek-jump-forward
 
     "Refactor"
     (("c" lsp-rename "rename")
@@ -1042,8 +1042,9 @@ Smerge mode deals with merge conflicts in git.
 
     "Errors"
     (("l" lsp-ui-flycheck-list "list errors")
+    ("b" flycheck-buffer "flycheck buffer")
     ("e" flycheck-next-error "next error")
-    ("p" flycheck-previous-error "prev error")))) 
+    ("E" flycheck-previous-error "prev error")))) 
 #+END_SRC
 *** Avy (jumping around text)
 #+BEGIN_SRC emacs-lisp
@@ -1113,13 +1114,13 @@ Smerge mode deals with merge conflicts in git.
     ("i" dap-debug-edit-template "debug template"))
 
     "Modes"
-    (("u" auto-fill-mode "auto-fill-mode")
-    ("W" web-mode "web-mode")
-    ("J" rjsx-mode "rjsx-mode"))
+    (("u" auto-fill-mode "auto-fill mode")
+    ("W" web-mode "web mode")
+    ("J" rjsx-mode "rjsx mode"))
 
     "Personal"
     (("m" goto-MarinMacs "goto config")
-    ("f" flycheck-buffer "flycheck buffer")
+    ("s" set-fill-column "set-fill-column")
     ("e" eval-buffer "eval buffer")
     ("R" ranger "ranger")
     ("c" compile "compile"))))
