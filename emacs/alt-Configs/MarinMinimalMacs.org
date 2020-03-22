@@ -901,8 +901,8 @@ Smerge mode deals with merge conflicts in git.
       ("r" ranger "ranger")
       ("c" compile "compile")
       ("u" auto-fill-mode "auto-fill-mode")
-      ("w" web-mode "web-mode")
-      ("j" rjsx-mode "rjsx-mode")
+      ("W" web-mode "web-mode")
+      ("J" rjsx-mode "rjsx-mode")
       ("q" nil "quit"))
 #+END_SRC
 *** Org (for org mode)
