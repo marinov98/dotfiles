@@ -56,7 +56,7 @@ Indentation
 - Options, display, parenthesis 
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
-  (setq default-frame-alist '((font . "Fira Code-14")))    ;; set font and font size 
+  (setq default-frame-alist '((font . "Fira Code-12")))    ;; set font and font size
   (setq visible-bell t)                                    ;; disable end of buffer sounds
   (electric-pair-mode)                                     ;; auto closing brackets
   (show-paren-mode 1)                                      ;; highlight matching parenthesis
@@ -231,14 +231,13 @@ A nice and quick way to view/edit my configuration at any time
   ;; bullets
   (use-package org-bullets
      :ensure t
-     :config
-     (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
+     :hook
+     (org-mode . org-bullets-mode))
 
   ;; Org custom settings
   (custom-set-variables
            '(org-directory "~/Projects/org")
            '(org-default-notes-file (concat org-directory "/Personal/notes.org")))
-
 #+END_SRC
 ** Markdown
 #+BEGIN_SRC emacs-lisp
@@ -474,7 +473,7 @@ You can enable/disable any themes that you like here
       (ivy-format-function 'ivy-format-function-line)
       :hook 
       ((after-init . ivy-mode)
-      (ivy-occur-mode . hl-line-mode))
+      (ivy-mode . counsel-mode))
       :config
       (setq enable-recursive-minibuffers t))
 
@@ -752,16 +751,18 @@ I never lose where my cursor is thanks to this
       (:map yas-minor-mode-map
       ("<tab>" . nil) ;; while this is convenient, it clashes with auto-complete and jump-to-definitions
       ("<C-tab>" . yas-expand)))
-      :init
-      (yas-global-mode 1)
+      :hook
+      (after-init . yas-global-mode)
       :config
       (yas-reload-all))
 
-  (use-package yasnippet-snippets :ensure t)
+  (use-package yasnippet-snippets 
+      :after yasnippet
+      :ensure t)
     
   ;; snippets for React.js
   (use-package react-snippets
-      :requires yasnippet
+      :after yasnippet
       :ensure t)
 #+END_SRC 
 ** FlyCheck
@@ -809,8 +810,8 @@ I never lose where my cursor is thanks to this
       (company-minimum-prefix-length 3) ;; show completions after 3 chars
       (company-selection-wrap-around t) ;; goes to start of selection if you reached the bottom 
       (company-require-match 'never) ;; dont need to pick a choice 
-      :config
-      (global-company-mode t)) 
+      :hook
+      (after-init . global-company-mode))
       
 #+END_SRC 
 Add Company backends to enable elisp autocomplete
