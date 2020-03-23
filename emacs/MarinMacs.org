@@ -15,6 +15,7 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 - [[#themes][Themes]]
 - [[#modeline][Modeline]]
 - [[#enhancements][Emacs Enhancements]]
+  - [[#ibuffer][Ibuffer]]
   - [[#avy][Avy]]
   - [[#which-key][Which-Key]]
   - [[#ace-window][Ace-Window]]
@@ -49,9 +50,9 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 ** Preferences
 Indentation 
 #+BEGIN_SRC emacs-lisp
-    (setq-default indent-tabs-mode nil)                    ;; disable tabs and use spaces
-    (setq-default tab-width 4)                             ;; set default tab width 4 
-    (setq backward-delete-char-untabify-method 'hungry)    ;; backspaces entire tab instead of one space at a time
+  (setq-default indent-tabs-mode nil)                    ;; disable tabs and use spaces
+  (setq-default tab-width 4)                             ;; set default tab width 4 
+  (setq backward-delete-char-untabify-method 'hungry)    ;; backspaces entire tab instead of one space at a time
 #+END_SRC
 - Options, display, parenthesis 
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
@@ -67,17 +68,17 @@ Indentation
   - I am not sure if all packages work with line numbers properly, but so far everything works
   - relative line numbers are very useful when combined with vim bindings as they help you see how far you need to jump to get where you want to 
 #+BEGIN_SRC emacs-lisp
-    (when (version<= "26.0.50" emacs-version )         
-      (setq display-line-numbers-type 'relative)           ;; relative line numbers help you see how far you need to jump to get where you want to 
-      (setq display-line-numbers-current-absolute t)
-      (setq display-line-numbers-width 2)
-      (setq display-line-numbers-widen t)
-      (global-display-line-numbers-mode))                  ;; display line numbers in every buffer
+  (when (version<= "26.0.50" emacs-version )         
+    (setq display-line-numbers-type 'relative)           ;; relative line numbers help you see how far you need to jump to get where you want to 
+    (setq display-line-numbers-current-absolute t)
+    (setq display-line-numbers-width 2)
+    (setq display-line-numbers-widen t)
+    (global-display-line-numbers-mode))                  ;; display line numbers in every buffer
 #+END_SRC
 Displaying time and date in emacs
 #+BEGIN_SRC emacs-lisp
-    (setq display-time-24hr-format t)
-    (display-time-mode 1)                                  ;; display time in the modeline
+  (setq display-time-24hr-format t)
+  (display-time-mode 1)                                  ;; display time in the modeline
 #+END_SRC
 Convenient yes or no and disable bars/blinking cursor
 #+BEGIN_SRC emacs-lisp
@@ -90,20 +91,22 @@ Convenient yes or no and disable bars/blinking cursor
 #+END_SRC
 Disable back up files (comment if you want to enable backup files) 
 #+BEGIN_SRC emacs-lisp
-    (setq make-backup-files nil)             ;; stop creating backup~ files
-    (setq auto-save-default nil)             ;; stop creating autosave# files
-    (setq create-lockfiles nil)              ;; stop creating any # files
+  (setq make-backup-files nil)             ;; stop creating backup~ files
+  (setq auto-save-default nil)             ;; stop creating autosave# files
+  (setq create-lockfiles nil)              ;; stop creating any # files
 #+END_SRC
 Emacs has native support for the GNU Debugger (GDB), and we can make it a little better
 #+BEGIN_SRC emacs-lisp
-    (setq gdb-many-windows t)                ;; have multiple windows when debugging
-    (setq gdb-show-main t)                   ;; Non-nil means display source file containing the main routine at startup
+  (setq gdb-many-windows t)                ;; have multiple windows when debugging
+  (setq gdb-show-main t)                   ;; Non-nil means display source file containing the main routine at startup
 #+END_SRC
 The settings below are mainly for linux, you can edit this section if you want to change what browser emacs uses to open links
 #+begin_src emacs-lisp
   (when (string-equal system-type "gnu/linux") 
-    (setq browse-url-browser-function '(("https://www.netflix.com/" . browse-url-firefox) ;; firefox deals better with video players on linux
-                                      ("." . browse-url-chromium))))
+    (setq
+      browse-url-browser-function
+      '(("https://www.netflix.com/" . browse-url-firefox) ;; firefox deals better with video players on linux
+      ("." . browse-url-chromium))))
 #+end_src
 ** Goto Config
 A nice and quick way to view/edit my configuration at any time
@@ -169,6 +172,7 @@ A nice and quick way to view/edit my configuration at any time
         "s" 'save-buffer
         "b" 'ivy-switch-buffer
         "B" 'counsel-switch-buffer
+        "I" 'ibuffer
         "p" 'switch-to-prev-buffer
         "n" 'switch-to-next-buffer
         "C" 'comment-region
@@ -190,6 +194,9 @@ A nice and quick way to view/edit my configuration at any time
       (define-key evil-motion-state-map (kbd "M-j") 'evil-window-down)
       (define-key evil-motion-state-map (kbd "M-k") 'evil-window-up)
       (define-key evil-motion-state-map (kbd "M-l") 'evil-window-right)
+      ;; Fixes
+      (evil-set-initial-state 'ivy-occur-grep-mode 'normal) ;; wgrep and ivy temp fixes
+      (setq evil-emacs-state-modes (delq 'ibuffer-mode evil-emacs-state-modes)) ;; ibuffer start in evil mode instead of emacs mode
       ;; NeoTree override keybindings, package (neotree) is shown further in the config
       (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
       (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
@@ -239,9 +246,9 @@ A nice and quick way to view/edit my configuration at any time
  
   ;; bullets
   (use-package org-bullets
-     :ensure t
-     :hook
-     (org-mode . org-bullets-mode))
+      :ensure t
+      :hook
+      (org-mode . org-bullets-mode))
      
 #+END_SRC
 Org personal variables and functions
@@ -486,11 +493,6 @@ You can enable/disable any themes that you like here
  :END:
 - Ivy: an interactive interface for completion in Emacs
   - Alternatives to ivy include helm (heavier but more features) and ido (native to emacs)
-- Swiper: an alternative to emacs's native isearch that uses ivy to show an overview of all matches.
-- Counsel: extra functions and features that use ivy
-- Counsel and other packages that use ivy (Like counsel-projectile) have support for popular search tools
-    - [[https://github.com/BurntSushi/ripgrep][ripgrep]]
-    - [[https://github.com/ggreer/the_silver_searcher][the silver searcher(ag)]]
 - Ivy User Manual: https://oremacs.com/swiper/
 #+BEGIN_SRC emacs-lisp
   ;; Ivy
@@ -508,7 +510,13 @@ You can enable/disable any themes that you like here
       :config
       (setq enable-recursive-minibuffers t))
       
-
+#+END_SRC
+- Swiper: an alternative to emacs's native isearch that uses ivy to show an overview of all matches.
+- Counsel: extra functions and features that use ivy
+- Counsel and other packages that use ivy (Like counsel-projectile) have support for popular search tools
+    - [[https://github.com/BurntSushi/ripgrep][ripgrep]]
+    - [[https://github.com/ggreer/the_silver_searcher][the silver searcher(ag)]]
+#+BEGIN_SRC emacs-lisp
   ;; Swiper 
   (use-package swiper
       :ensure t
@@ -538,14 +546,76 @@ You can enable/disable any themes that you like here
       (counsel-find-file-at-point t)
       :config
       (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"))
-      
-      
 
 #+END_SRC
+wgrep combined counsel-rg and/or counsel-ag makes changing text in multiple places much easier
+#+begin_src emacs-lisp
+  (use-package wgrep :ensure t)
+#+end_src
 * Enhancements 
  :PROPERTIES:
  :CUSTOM_ID: enhancements
  :END:
+** Ibuffer
+ :PROPERTIES:
+ :CUSTOM_ID: ibuffer
+ :END:
+ Enhanced buffer management. This is a native Emacs feature 
+ #+begin_src emacs-lisp
+   (setq ibuffer-saved-filter-groups
+        (quote (("default"
+                ("Ranger" (mode . ranger-mode))
+                ("Org" (name . "^.*org$"))
+                ("Git" (or 
+                        (mode . gitignore-mode)               
+                        (mode . gitconfig-mode)               
+                        (mode . magit-mode)))
+                ("Shell" (or (mode . eshell-mode) (mode . shell-mode)))
+                ("Elisp" (mode . emacs-lisp-mode))
+                ("Programming" (or ;; I dont have all of these modes but just in case for the future...
+                                (mode . python-mode)
+                                (mode . go-mode)
+                                (mode . rust-mode)
+                                (mode . swift-mode)
+                                (mode . dart-mode)
+                                (mode . csharp-mode)
+                                (mode . scala-mode)
+                                (mode . clojure-mode)
+                                (mode . c-mode)
+                                (mode . c++-mode)))
+                ("Web Dev" (or
+                            (mode . web-mode)
+                            (mode . rjsx-mode)
+                            (mode . js-mode)
+                            (mode . typescript-mode)
+                            (mode . js2-mode)))
+                ("Data" (or
+                         (mode . csv-mode)
+                         (mode . json-mode)
+                         (mode . sql-mode)
+                         (mode . yaml-mode)
+                         (mode . graphql-mode)
+                         (mode . dockerfile-mode)))
+                ("Help" (or
+                         (name . "\*Help\*")
+                         (name . "\*info\*")))
+                ("Emacs" (or
+                          (name . "^\\*scratch\\*$")
+                          (name . "^\\*Messages\\*$")))))))
+
+
+
+   ;; Don't show filter groups if there are no buffers in that group
+   (setq ibuffer-show-empty-filter-groups nil)
+
+
+   (add-hook 'ibuffer-mode-hook
+             (lambda ()
+               (ibuffer-auto-mode 1)
+               (ibuffer-switch-to-saved-filter-groups "default")))
+
+
+ #+end_src
 ** Avy
  :PROPERTIES:
  :CUSTOM_ID: avy
@@ -706,8 +776,7 @@ I never lose where my cursor is thanks to this
       (add-to-list 'projectile-other-file-alist '("jsx" "html" "css")))
 
    ;; Counsel-Projectile (I utilize counsel projectile bindings in my hydra-projectile)
-  (use-package counsel-projectile 
-      :ensure t)
+  (use-package counsel-projectile :ensure t)
 #+END_SRC
 * Shell
  :PROPERTIES:
@@ -1250,7 +1319,7 @@ Smerge mode deals with merge conflicts in git.
       (push 'company-lsp company-backends))
 
 #+END_SRC
-* COMMENT DAP
+* DAP
  :PROPERTIES:
  :CUSTOM_ID: dap
  :END:
