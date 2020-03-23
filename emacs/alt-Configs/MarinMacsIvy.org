@@ -56,7 +56,7 @@ Indentation
 - Options, display, parenthesis 
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
-  (setq default-frame-alist '((font . "Fira Code-12")))    ;; set font and font size
+  (setq default-frame-alist '((font . "Fira Code-14")))    ;; set font and font size
   (setq visible-bell t)                                    ;; disable end of buffer sounds
   (electric-pair-mode)                                     ;; auto closing brackets
   (show-paren-mode 1)                                      ;; highlight matching parenthesis
@@ -101,11 +101,9 @@ Emacs has native support for the GNU Debugger (GDB), and we can make it a little
 #+END_SRC
 The settings below are mainly for linux, you can edit this section if you want to change what browser emacs uses to open links
 #+begin_src emacs-lisp
-  (when (eq system-type "gnu/linux") 
-    (setq
-      browse-url-browser-function
-      '(("https://www.netflix.com/" . browse-url-firefox) ;; firefox deals better with video players on linux
-      ("." . browse-url-chromium))))
+  (when (string-equal system-type "gnu/linux") 
+    (setq browse-url-browser-function '(("https://www.netflix.com/" . browse-url-firefox) ;; firefox deals better with video players on linux
+                                      ("." . browse-url-chromium))))
 #+end_src
 ** Goto Config
 A nice and quick way to view/edit my configuration at any time
@@ -1252,7 +1250,7 @@ Smerge mode deals with merge conflicts in git.
       (push 'company-lsp company-backends))
 
 #+END_SRC
-* DAP
+* COMMENT DAP
  :PROPERTIES:
  :CUSTOM_ID: dap
  :END:
