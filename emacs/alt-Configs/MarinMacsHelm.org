@@ -1066,11 +1066,9 @@ Unlike with original Projectile, you need to launch first before using other com
 #+END_SRC
 *** Launcher (launch stuff)
   #+BEGIN_SRC emacs-lisp
-  (when (eq system-type "gnu/linux") 
-    (setq
-      browse-url-browser-function
-      '(("https://www.netflix.com/" . browse-url-firefox) ;; firefox deals better with video players on linux
-      ("." . browse-url-chromium))))
+   (when (string-equal system-type "gnu/linux") 
+    (setq browse-url-browser-function '(("https://www.netflix.com/" . browse-url-firefox) ;; firefox deals better with video players on linux
+                                      ("." . browse-url-chromium))))
 
 
      (defhydra hydra-launcher (:color red :columns 2)
