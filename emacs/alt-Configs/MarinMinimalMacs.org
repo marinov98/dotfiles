@@ -601,8 +601,6 @@ A jump to definition package that just works, love this one!
 #+BEGIN_SRC emacs-lisp
   (use-package flycheck
        :ensure t
-       :bind
-       ("C-c f" . 'flycheck-buffer) ;; explicitly run flycheck
        :custom-face
        (flycheck-info ((t (:underline (:style line :color "#9500ff")))))
        (flycheck-warning ((t (:underline (:style line :color "#fbff00")))))
@@ -623,7 +621,7 @@ A jump to definition package that just works, love this one!
   (use-package company
       :ensure t
       :bind
-      ("C-c c" . company-complete) ;; for when I need completion at 1 or 2 chars
+      ("S-SPC" . company-complete) ;; for when I need completion at 1 or 2 chars
       (:map company-active-map
       ("<tab>" . nil) ;; I will use this for a different purpose shown below
       ("M-n" . nil) ;; old select next key
