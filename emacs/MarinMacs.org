@@ -236,15 +236,14 @@ A nice and quick way to view/edit my configuration at any time
       :ensure t
       :pin org)
      
- ;; allow easier snippet insertion  
- (require 'org-tempo)
+  ;; allow easier snippet insertion  
+  (require 'org-tempo)
  
   ;; bullets
   (use-package org-bullets
      :ensure t
      :hook
      (org-mode . org-bullets-mode))
- 
      
 #+END_SRC
 Org personal variables and functions
