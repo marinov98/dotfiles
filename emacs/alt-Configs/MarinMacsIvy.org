@@ -99,6 +99,14 @@ Emacs has native support for the GNU Debugger (GDB), and we can make it a little
     (setq gdb-many-windows t)                ;; have multiple windows when debugging
     (setq gdb-show-main t)                   ;; Non-nil means display source file containing the main routine at startup
 #+END_SRC
+The settings below are mainly for linux, you can edit this section if you want to change what browser emacs uses to open links
+#+begin_src emacs-lisp
+  (when (eq system-type "gnu/linux") 
+    (setq
+      browse-url-browser-function
+      '(("https://www.netflix.com/" . browse-url-firefox) ;; firefox deals better with video players on linux
+      ("." . browse-url-chromium))))
+#+end_src
 ** Goto Config
 A nice and quick way to view/edit my configuration at any time
   #+begin_src emacs-lisp
@@ -148,6 +156,7 @@ A nice and quick way to view/edit my configuration at any time
         "u" 'hydra-utility/body
         "a" 'hydra-avy/body
         "r" 'hydra-org/body
+        "RET" 'hydra-bookmark/body
         ;; file finding, coding, searching, and yanking
         "f" 'counsel-find-file
         "j" 'counsel-git ;; need git installed!
@@ -160,7 +169,8 @@ A nice and quick way to view/edit my configuration at any time
         "x" 'counsel-M-x
         ;; buffers
         "s" 'save-buffer
-        "b" 'counsel-switch-buffer
+        "b" 'ivy-switch-buffer
+        "B" 'counsel-switch-buffer
         "p" 'switch-to-prev-buffer
         "n" 'switch-to-next-buffer
         "C" 'comment-region
@@ -226,20 +236,42 @@ A nice and quick way to view/edit my configuration at any time
       :ensure t
       :pin org)
      
- ;; allow easier snippet insertion  
- (require 'org-tempo)
+  ;; allow easier snippet insertion  
+  (require 'org-tempo)
  
   ;; bullets
   (use-package org-bullets
      :ensure t
      :hook
      (org-mode . org-bullets-mode))
+     
+#+END_SRC
+Org personal variables and functions
+#+begin_src emacs-lisp
 
   ;; Org custom settings
   (custom-set-variables
            '(org-directory "~/Projects/org")
            '(org-default-notes-file (concat org-directory "/Personal/notes.org")))
-#+END_SRC
+           
+      (defun marinov/goto-org-directory ()
+        "goes to my org directory"
+        (interactive)
+        (find-file org-directory))
+
+      (defun marinov/jump-to-notes ()
+        "go to notes file"
+        (interactive)
+        (find-file org-default-notes-file))
+
+      ;; sometimes I edit within org and I forget to enter src but I want to just go to src to evaluate
+      (defun marinov/enter-eval ()
+       "enter source, and evaluate the buffer"
+       (interactive)
+       (org-edit-special)
+       (eval-buffer))
+
+#+end_src
 ** Markdown
 #+BEGIN_SRC emacs-lisp
   (use-package markdown-mode
@@ -477,6 +509,7 @@ You can enable/disable any themes that you like here
       (ivy-mode . counsel-mode))
       :config
       (setq enable-recursive-minibuffers t))
+      
 
   ;; Swiper 
   (use-package swiper
@@ -507,6 +540,8 @@ You can enable/disable any themes that you like here
       (counsel-find-file-at-point t)
       :config
       (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"))
+      
+      
 
 #+END_SRC
 * Enhancements 
@@ -1068,35 +1103,31 @@ Smerge mode deals with merge conflicts in git.
 #+END_SRC
 *** Launcher (launch stuff)
   #+BEGIN_SRC emacs-lisp
-(setq
-  browse-url-browser-function
-  '(("https://www.netflix.com/" . browse-url-firefox) ;; firefox deals better with video players
-  ("." . browse-url-chromium)))
 
-     (defhydra hydra-launcher (:color red :columns 2)
-      " Launch "
-      ("h" man "man")
-      ("g" (browse-url "https://www.google.com/") "Google")
-      ("G" (browse-url "https://github.com/marinov98") "GitHub")
-      ("n" (browse-url "https://www.netflix.com/") "Netflix")
-      ("y" (browse-url "https://www.youtube.com/") "YouTube")
-      ("m" (browse-url "https://www.messenger.com/") "Messenger")
-      ("s" eshell "shell")
-      ("a" ansi-term "ansi-term")
-      ("q" nil "quit"))
+  (defhydra hydra-launcher (:color red :columns 2)
+    " Launch "
+    ("h" man "man")
+    ("g" (browse-url "https://www.google.com/") "Google")
+    ("G" (browse-url "https://github.com/marinov98") "GitHub")
+    ("n" (browse-url "https://www.netflix.com/") "Netflix")
+    ("y" (browse-url "https://www.youtube.com/") "YouTube")
+    ("m" (browse-url "https://www.messenger.com/") "Messenger")
+    ("s" eshell "shell")
+    ("a" ansi-term "ansi-term")
+    ("q" nil "quit"))
   #+END_SRC
 *** Writing (taking notes, and writing)
 #+BEGIN_SRC emacs-lisp
-     (defhydra hydra-writing (:color red :columns 2)
-      "✓ Writing and Spelling ✓"
-      ("d" ispell-change-dictionary "change dict")
-      ("s" ispell-word "spell word")
-      ("f" flyspell-buffer "flyspell buffer")
-      ("m" flyspell-mode "flyspell mode")
-      ("r" flyspell-region "flyspell region")
-      ("n" flyspell-goto-next-error "next error")
-      ("w" writegood-mode "writegood mode")
-      ("q" nil "quit"))
+  (defhydra hydra-writing (:color red :columns 2)
+    "✓ Writing and Spelling ✓"
+    ("d" ispell-change-dictionary "change dict")
+    ("s" ispell-word "spell word")
+    ("f" flyspell-buffer "flyspell buffer")
+    ("m" flyspell-mode "flyspell mode")
+    ("r" flyspell-region "flyspell region")
+    ("n" flyspell-goto-next-error "next error")
+    ("w" writegood-mode "writegood mode")
+    ("q" nil "quit"))
 #+END_SRC
 *** Utility (useful commands for me)
 #+BEGIN_SRC emacs-lisp
@@ -1125,39 +1156,34 @@ Smerge mode deals with merge conflicts in git.
 #+END_SRC
 *** Org (for org mode)
     #+begin_src emacs-lisp
-      (defun marinov/goto-org-directory ()
-        "goes to my org directory"
-        (interactive)
-        (find-file org-directory))
 
-      (defun marinov/jump-to-notes ()
-        "go to notes file"
-        (interactive)
-        (find-file org-default-notes-file))
-
-      ;; sometimes I edit within org and I forget to enter src but I want to just go to src to evaluate
-      (defun marinov/enter-eval ()
-       "enter source, and evaluate the buffer"
-       (interactive)
-       (org-edit-special)
-       (eval-buffer))
-
-       (defhydra hydra-org (:color blue :columns 4)
-        " ORG "
-        ("o" org-open-at-point "open link")
-        ("c" org-toggle-comment "comment")
-        ("i" org-time-stamp "time stamp")
-        ("d" org-export-dispatch "export dispatch")
-        ("p" org-priority "priority")
-        ("t" org-todo "todo state")
-        ("a" org-todo-list "agenda")
-        ("l" org-show-todo-tree "show todo tree")
-        ("S" marinov/enter-eval "enter and eval")
-        ("s" org-edit-special "edit special")
-        ("x" org-edit-src-exit "exit special")
-        ("n" marinov/jump-to-notes "goto notes")
-        ("D" marinov/goto-org-directory "goto org directory")
-        ("q" nil "quit"))
+  (defhydra hydra-org (:color blue :columns 4)
+    " ORG "
+    ("o" org-open-at-point "open link")
+    ("c" org-toggle-comment "comment")
+    ("i" org-time-stamp "time stamp")
+    ("d" org-export-dispatch "export dispatch")
+    ("p" org-priority "priority")
+    ("t" org-todo "todo state")
+    ("a" org-todo-list "agenda")
+    ("l" org-show-todo-tree "show todo tree")
+    ("S" marinov/enter-eval "enter and eval")
+    ("s" org-edit-special "edit special")
+    ("x" org-edit-src-exit "exit special")
+    ("n" marinov/jump-to-notes "goto notes")
+    ("D" marinov/goto-org-directory "goto org directory")
+    ("q" nil "quit"))
+    #+end_src
+*** Bookmark (managing bookmarks)
+    #+begin_src emacs-lisp
+  (defhydra hydra-bookmark (:color blue :columns 2)
+    "📒 Bookmarks 📒"
+    ("c" counsel-bookmark "counsel")
+    ("j" bookmark-jump "jump")
+    ("l" bookmark-bmenu-list "list")
+    ("s" bookmark-set "set")
+    ("o" bookmark-set-no-overwrite "set no overwrite") 
+    ("q" nil "quit" :color blue))
     #+end_src
 * LSP
  :PROPERTIES:
