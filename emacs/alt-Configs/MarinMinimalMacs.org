@@ -775,6 +775,7 @@ Smerge mode deals with merge conflicts in git.
   ;; help
   (defhydra hydra-describe (:color red :columns 2)
     "Describe"
+    ("d" describe-bindings "bindings)
     ("f" describe-function "func")
     ("F" describe-face "face")
     ("k" describe-key "key")
@@ -901,6 +902,7 @@ Smerge mode deals with merge conflicts in git.
       ("r" ranger "ranger")
       ("c" compile "compile")
       ("u" auto-fill-mode "auto-fill-mode")
+      ("s" set-fill-column "set-fill-column")
       ("W" web-mode "web-mode")
       ("J" rjsx-mode "rjsx-mode")
       ("q" nil "quit"))
