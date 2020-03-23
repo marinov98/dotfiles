@@ -1132,7 +1132,7 @@ Smerge mode deals with merge conflicts in git.
   (pretty-hydra-define hydra-utility (:color red :title "😎 Utility 😎" :quit-key "q")
     ("Search"
     (("r" counsel-recentf "recent files")
-    ("l" counsel-ag "ag")
+    ("a" counsel-ag "ag")
     ("z" counsel-fzf "fuzzy-find"))
 
     "Debugging"
