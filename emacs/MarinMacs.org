@@ -148,6 +148,7 @@ A nice and quick way to view/edit my configuration at any time
         "u" 'hydra-utility/body
         "a" 'hydra-avy/body
         "r" 'hydra-org/body
+        "RET" 'hydra-bookmark/body
         ;; file finding, coding, searching, and yanking
         "f" 'counsel-find-file
         "j" 'counsel-git ;; need git installed!
@@ -160,7 +161,8 @@ A nice and quick way to view/edit my configuration at any time
         "x" 'counsel-M-x
         ;; buffers
         "s" 'save-buffer
-        "b" 'counsel-switch-buffer
+        "b" 'ivy-switch-buffer
+        "B" 'counsel-switch-buffer
         "p" 'switch-to-prev-buffer
         "n" 'switch-to-next-buffer
         "C" 'comment-region
@@ -477,6 +479,7 @@ You can enable/disable any themes that you like here
       (ivy-mode . counsel-mode))
       :config
       (setq enable-recursive-minibuffers t))
+      
 
   ;; Swiper 
   (use-package swiper
@@ -507,6 +510,8 @@ You can enable/disable any themes that you like here
       (counsel-find-file-at-point t)
       :config
       (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"))
+      
+      
 
 #+END_SRC
 * Enhancements 
@@ -1158,6 +1163,17 @@ Smerge mode deals with merge conflicts in git.
         ("n" marinov/jump-to-notes "goto notes")
         ("D" marinov/goto-org-directory "goto org directory")
         ("q" nil "quit"))
+    #+end_src
+*** Bookmark (managing bookmarks)
+    #+begin_src emacs-lisp
+  (defhydra hydra-bookmark (:color blue :columns 2)
+    "📒 Bookmarks 📒"
+    ("c" counsel-bookmark "counsel")
+    ("j" bookmark-jump "jump")
+    ("l" bookmark-bmenu-list "list")
+    ("s" bookmark-set "set")
+    ("o" bookmark-set-no-overwrite "set no overwrite") 
+    ("q" nil "quit" :color blue))
     #+end_src
 * LSP
  :PROPERTIES:
