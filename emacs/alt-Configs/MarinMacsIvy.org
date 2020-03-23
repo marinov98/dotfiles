@@ -15,6 +15,7 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 - [[#themes][Themes]]
 - [[#modeline][Modeline]]
 - [[#enhancements][Emacs Enhancements]]
+  - [[#ibuffer][Ibuffer]]
   - [[#avy][Avy]]
   - [[#which-key][Which-Key]]
   - [[#ace-window][Ace-Window]]
@@ -171,6 +172,7 @@ A nice and quick way to view/edit my configuration at any time
         "s" 'save-buffer
         "b" 'ivy-switch-buffer
         "B" 'counsel-switch-buffer
+        "I" 'ibuffer
         "p" 'switch-to-prev-buffer
         "n" 'switch-to-next-buffer
         "C" 'comment-region
@@ -192,8 +194,9 @@ A nice and quick way to view/edit my configuration at any time
       (define-key evil-motion-state-map (kbd "M-j") 'evil-window-down)
       (define-key evil-motion-state-map (kbd "M-k") 'evil-window-up)
       (define-key evil-motion-state-map (kbd "M-l") 'evil-window-right)
-      ;; wgrep and ivy temporary fixes
-      (evil-set-initial-state 'ivy-occur-grep-mode 'normal)  
+      ;; Fixes
+      (evil-set-initial-state 'ivy-occur-grep-mode 'normal) ;; wgrep and ivy temp fixes
+      (setq evil-emacs-state-modes (delq 'ibuffer-mode evil-emacs-state-modes)) ;; ibuffer start in evil mode instead of emacs mode
       ;; NeoTree override keybindings, package (neotree) is shown further in the config
       (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
       (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
@@ -243,9 +246,9 @@ A nice and quick way to view/edit my configuration at any time
  
   ;; bullets
   (use-package org-bullets
-     :ensure t
-     :hook
-     (org-mode . org-bullets-mode))
+      :ensure t
+      :hook
+      (org-mode . org-bullets-mode))
      
 #+END_SRC
 Org personal variables and functions
@@ -553,6 +556,66 @@ wgrep combined counsel-rg and/or counsel-ag makes changing text in multiple plac
  :PROPERTIES:
  :CUSTOM_ID: enhancements
  :END:
+** Ibuffer
+ :PROPERTIES:
+ :CUSTOM_ID: ibuffer
+ :END:
+ Enhanced buffer management. This is a native Emacs feature 
+ #+begin_src emacs-lisp
+   (setq ibuffer-saved-filter-groups
+        (quote (("default"
+                ("Ranger" (mode . ranger-mode))
+                ("Org" (name . "^.*org$"))
+                ("Git" (or 
+                        (mode . gitignore-mode)               
+                        (mode . gitconfig-mode)               
+                        (mode . magit-mode)))
+                ("Shell" (or (mode . eshell-mode) (mode . shell-mode)))
+                ("Elisp" (mode . emacs-lisp-mode))
+                ("Programming" (or ;; I dont have all of these modes but just in case for the future...
+                                (mode . python-mode)
+                                (mode . go-mode)
+                                (mode . rust-mode)
+                                (mode . swift-mode)
+                                (mode . dart-mode)
+                                (mode . csharp-mode)
+                                (mode . scala-mode)
+                                (mode . clojure-mode)
+                                (mode . c-mode)
+                                (mode . c++-mode)))
+                ("Web Dev" (or
+                            (mode . web-mode)
+                            (mode . rjsx-mode)
+                            (mode . js-mode)
+                            (mode . typescript-mode)
+                            (mode . js2-mode)))
+                ("Data" (or
+                         (mode . csv-mode)
+                         (mode . json-mode)
+                         (mode . sql-mode)
+                         (mode . yaml-mode)
+                         (mode . graphql-mode)
+                         (mode . dockerfile-mode)))
+                ("Help" (or
+                         (name . "\*Help\*")
+                         (name . "\*info\*")))
+                ("Emacs" (or
+                          (name . "^\\*scratch\\*$")
+                          (name . "^\\*Messages\\*$")))))))
+
+
+
+   ;; Don't show filter groups if there are no buffers in that group
+   (setq ibuffer-show-empty-filter-groups nil)
+
+
+   (add-hook 'ibuffer-mode-hook
+             (lambda ()
+               (ibuffer-auto-mode 1)
+               (ibuffer-switch-to-saved-filter-groups "default")))
+
+
+ #+end_src
 ** Avy
  :PROPERTIES:
  :CUSTOM_ID: avy
