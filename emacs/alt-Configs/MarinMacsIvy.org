@@ -61,7 +61,7 @@ Indentation
 - Options, display, parenthesis 
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
-  (setq default-frame-alist '((font . "Fira Code-12")))    ;; set font and font size
+  (setq default-frame-alist '((font . "Fira Code-14")))    ;; set font and font size
   (setq visible-bell t)                                    ;; disable end of buffer sounds
   (electric-pair-mode)                                     ;; auto closing brackets
   (show-paren-mode 1)                                      ;; highlight matching parenthesis
@@ -224,8 +224,8 @@ A nice and quick way to view/edit my configuration at any time
       :after evil
       :ensure t
       :custom
-      (evil-collection-company-use-tng nil) ;; I hacked this already
-      (evil-collection-setup-debugger-keys nil) ;; no need for this 
+      (evil-collection-company-use-tng nil) ;; I hacked this already (Personal preference)
+      (evil-collection-setup-debugger-keys nil) ;; no need for this (Again.. Personal preference)
       :config
       (evil-collection-init))
 
@@ -239,7 +239,7 @@ A nice and quick way to view/edit my configuration at any time
       :config
       (global-evil-surround-mode 1))
 
-  ;; Evil multiple-cursors
+  ;; Evil multiple-cursors (disabled already used in evil-collections)
   (use-package evil-mc
       :ensure t
       :diminish
