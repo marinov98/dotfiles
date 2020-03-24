@@ -177,11 +177,6 @@ A nice and quick way to view/edit my configuration at any time
       :ensure t
       :config
       (evil-mode 1)
-      ;; make switching windows much easier
-      (define-key evil-motion-state-map (kbd "M-h") 'evil-window-left)
-      (define-key evil-motion-state-map (kbd "M-j") 'evil-window-down)
-      (define-key evil-motion-state-map (kbd "M-k") 'evil-window-up)
-      (define-key evil-motion-state-map (kbd "M-l") 'evil-window-right)
       ; NeoTree override keybindings, package (neotree) is shown further in the config
       (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
       (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
