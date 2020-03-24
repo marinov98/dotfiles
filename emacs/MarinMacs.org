@@ -364,6 +364,7 @@ Org personal variables and functions
 - Enable any if you wish, may be utilized in the future
 - tex (powerful text formatter)
 - auctex (extensible package for writing and formatting TeX files in Emacs)
+- company-* packages you see are backends for the completion engine 'Company' which is shown further down in the config
 #+BEGIN_SRC emacs-lisp
   (use-package tex
       :disabled
