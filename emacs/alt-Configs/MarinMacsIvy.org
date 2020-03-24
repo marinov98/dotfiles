@@ -11,6 +11,11 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 - [[#quelpa][Quelpa]]
 - [[#evil-mode][Evil-mode]]
 - [[#markup][Markup]]
+  - [[#org][Org]]
+  - [[#markdown][MarkDown]]
+  - [[#writing][Writing]]
+  - [[#pdf][PDF]]
+  - [[#latex][Latex]]
 - [[#dashboard][Dashboard]]
 - [[#themes][Themes]]
 - [[#modeline][Modeline]]
@@ -35,7 +40,6 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 - [[#hydra][Hydra]]
 - [[#lsp][Language Server Protocal (lsp)]]
 - [[#dap][Debug Adapter Protocal (dap)]]
-- [[#latex][Latex]]
 - [[#development][Development]]
   - [[#c-cpp][C/C++]]
   - [[#python][Python]]
@@ -108,7 +112,7 @@ The settings below are mainly for linux, you can edit this section if you want t
       '(("https://www.netflix.com/" . browse-url-firefox) ;; firefox deals better with video players on linux
       ("." . browse-url-chromium))))
 #+end_src
-MS-Windows can be slow and can give a lot of issues. This setting below at least fixes the issue of it not recognizing unicode characters and not letting you save your file.
+MS-Windows can be slow and can give a lot of issues. This setting below at least fixes the issue of it not recognizing unicode characters and not letting your save your file.
 #+begin_src emacs-lisp
   (when (string-equal system-type "windows-nt")
    (prefer-coding-system 'utf-8)
@@ -202,6 +206,7 @@ A nice and quick way to view/edit my configuration at any time
       (define-key evil-motion-state-map (kbd "M-l") 'evil-window-right)
       ;; Fixes
       (evil-set-initial-state 'ivy-occur-grep-mode 'normal) ;; wgrep and ivy temp fixes
+      (evil-set-initial-state 'pdf-view-mode 'normal) ;; pdf mode starts in evil mode instead of emacs mode
       (setq evil-emacs-state-modes (delq 'ibuffer-mode evil-emacs-state-modes)) ;; ibuffer start in evil mode instead of emacs mode
       ;; NeoTree override keybindings, package (neotree) is shown further in the config
       (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
@@ -231,7 +236,6 @@ A nice and quick way to view/edit my configuration at any time
       :config
       (global-evil-mc-mode 1))
 
-
   ;; Evil magit overrides magit keybindings, package (magit) is shown further in the config
   (use-package evil-magit :ensure t)
 #+END_SRC
@@ -240,11 +244,17 @@ A nice and quick way to view/edit my configuration at any time
  :CUSTOM_ID: markup
  :END:
 ** Org
+ :PROPERTIES:
+ :CUSTOM_ID: org
+ :END:
  - 'Org mode is for keeping notes, maintaining TODO lists, planning projects, and authoring documents with a fast and effective plain-text system.'  
  - Org manual: https://orgmode.org/
 #+BEGIN_SRC emacs-lisp
   (use-package org 
       :ensure t
+      :custom
+      (org-file-apps
+        '(("\\.pdf\\(::[0-9]+\\)?\\'" . "epdfview %s")))
       :pin org)
      
   ;; allow easier snippet insertion  
@@ -284,6 +294,9 @@ Org personal variables and functions
 
 #+end_src
 ** Markdown
+ :PROPERTIES:
+ :CUSTOM_ID: markdown
+ :END:
 #+BEGIN_SRC emacs-lisp
   (use-package markdown-mode
       :ensure t
@@ -321,6 +334,59 @@ Org personal variables and functions
       :commands writegood-mode
       :bind ("C-x w" . writegood-mode)) ;; messes with org snippets dont enable by default in org
 
+#+END_SRC
+** PDF
+ :PROPERTIES:
+ :CUSTOM_ID: pdf
+ :END:
+- Emacs support library for pdf files. Enable if you wish
+- Look at the [[https://github.com/politza/pdf-tools][official repo]] for what you need to install and if your OS can support it
+- Make sure to run =M-x pdf-tools-install= If you decided to enable this package and use it 
+   #+begin_src emacs-lisp
+  (use-package pdf-view
+      :disabled
+      :ensure pdf-tools
+      :diminish (pdf-view-midnight-minor-mode pdf-view-printer-minor-mode)
+      :mode ("\\.[pP][dD][fF]\\'" . pdf-view-mode)
+      :magic ("%PDF" . pdf-view-mode)
+      :bind
+      (:map pdf-view-mode-map
+      ("C-s" . isearch-forward))
+      :init
+      (setq pdf-annot-activate-created-annotations t))
+   #+end_src
+** Latex 
+ :PROPERTIES:
+ :CUSTOM_ID: latex
+ :END:
+- I still actually prefer Overleaf for latex editing...Hoping to just use emacs for it one day
+- I am also considering using org mode and then exporting to latex 
+- Enable any if you wish, may be utilized in the future
+- tex (powerful text formatter)
+- auctex (extensible package for writing and formatting TeX files in Emacs)
+- company-* packages you see are backends for the completion engine 'Company' which is shown further down in the config
+#+BEGIN_SRC emacs-lisp
+  (use-package tex
+      :disabled
+      :ensure auctex
+      :mode
+      ("\\.tex\\'" . LaTeX-mode)
+      :config
+      (setq TeX-auto-save t)
+      (setq TeX-parse-self t)
+      (setq TeX-save-query nil))
+     
+  (use-package company-auctex
+      :disabled
+      :after (auctex company)
+      :config
+      (company-auctex-init))    
+
+  (use-package company-math
+      :disabled
+      :after (auctex company)
+      :config
+      (add-to-list 'company-backends 'company-math-symbols-unicode))    
 #+END_SRC
 * Dashboard 
  :PROPERTIES:
@@ -1344,36 +1410,6 @@ Smerge mode deals with merge conflicts in git.
        (add-hook 'dap-stopped-hook
        (lambda (arg) (call-interactively #'dap-hydra)))) ;; enable hydra on breakpoint stop
 
-#+END_SRC
-* Latex 
- :PROPERTIES:
- :CUSTOM_ID: latex
- :END:
-- I still actually prefer Overleaf for latex editing...Hoping to just use emacs for it one day
-- I am also considering using org mode and then exporting to latex 
-- Enable any if you wish, may be utilized in the future
-- Below packages are kept for reference
-  - tex (powerful text formatter)
-  - auctex (extensible package for writing and formatting TeX files in Emacs)
-  - pdf-tools (pdf utility in Emacs)
-#+BEGIN_SRC emacs-lisp
-
-  (use-package tex
-     :disabled
-     :ensure auctex
-     :config
-     (setq TeX-auto-save t)
-     (setq TeX-parse-self t)
-     (setq TeX-save-query nil))
-
-
-  ;;;;;;;;;;;;;;;;;;
-  ;; PDF
-  ;;;;;;;;;;;;;;;;;;
-
-  (use-package pdf-tools
-      :disabled
-      :ensure t)
 #+END_SRC
 * Development
  :PROPERTIES:
