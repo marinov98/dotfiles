@@ -638,6 +638,11 @@ wgrep combined counsel-rg and/or counsel-ag makes changing text in multiple plac
         (quote (("default"
                 ("Ranger" (mode . ranger-mode))
                 ("Org" (name . "^.*org$"))
+                ("Text" (or
+                          (mode . markdown-mode)
+                          (mode . text-mode)
+                          (mode . pdf-view-mode)
+                          (mode . LaTeX-mode)))
                 ("Git" (or 
                         (mode . gitignore-mode)               
                         (mode . gitconfig-mode)               
@@ -646,6 +651,7 @@ wgrep combined counsel-rg and/or counsel-ag makes changing text in multiple plac
                 ("Elisp" (mode . emacs-lisp-mode))
                 ("Programming" (or ;; I dont have all of these modes but just in case for the future...
                                 (mode . python-mode)
+                                (mode . ruby-mode)
                                 (mode . go-mode)
                                 (mode . rust-mode)
                                 (mode . swift-mode)
@@ -653,11 +659,13 @@ wgrep combined counsel-rg and/or counsel-ag makes changing text in multiple plac
                                 (mode . csharp-mode)
                                 (mode . scala-mode)
                                 (mode . clojure-mode)
+                                (mode . java-mode)
                                 (mode . c-mode)
                                 (mode . c++-mode)))
                 ("Web Dev" (or
                             (mode . web-mode)
                             (mode . rjsx-mode)
+                            (mode . css-mode)
                             (mode . js-mode)
                             (mode . typescript-mode)
                             (mode . js2-mode)))
