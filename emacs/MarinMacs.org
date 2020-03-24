@@ -61,7 +61,7 @@ Indentation
 - Options, display, parenthesis 
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
-  (setq default-frame-alist '((font . "Fira Code-12")))    ;; set font and font size
+  (setq default-frame-alist '((font . "Fira Code-14")))    ;; set font and font size
   (setq visible-bell t)                                    ;; disable end of buffer sounds
   (electric-pair-mode)                                     ;; auto closing brackets
   (show-paren-mode 1)                                      ;; highlight matching parenthesis
