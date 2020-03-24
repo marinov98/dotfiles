@@ -108,6 +108,12 @@ The settings below are mainly for linux, you can edit this section if you want t
       '(("https://www.netflix.com/" . browse-url-firefox) ;; firefox deals better with video players on linux
       ("." . browse-url-chromium))))
 #+end_src
+Windows can be slow and can give a lot of issues. This setting below at least fixes the issue of it not recognizing unicode characters and not letting you save your file.
+#+begin_src emacs-lisp
+  (when (string-equal system-type "windows-nt")
+   (prefer-coding-system 'utf-8)
+   (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
+#+end_src
 ** Goto Config
 A nice and quick way to view/edit my configuration at any time
   #+begin_src emacs-lisp
