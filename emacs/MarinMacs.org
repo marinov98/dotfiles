@@ -61,7 +61,7 @@ Indentation
 - Options, display, parenthesis 
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
-  (setq default-frame-alist '((font . "Fira Code-14")))    ;; set font and font size
+  (setq default-frame-alist '((font . "Fira Code-12")))    ;; set font and font size
   (setq visible-bell t)                                    ;; disable end of buffer sounds
   (electric-pair-mode)                                     ;; auto closing brackets
   (show-paren-mode 1)                                      ;; highlight matching parenthesis
@@ -148,9 +148,12 @@ A nice and quick way to view/edit my configuration at any time
  - Evil mode grants us vim bindings and evil-leader allows us to create a <leader> key which creates limitless possibilities for keybindings
  - Official repository for Evil Mode: https://github.com/emacs-evil/evil
  - Evil Leader repository: https://github.com/cofi/evil-leader 
+ - evil-collections: There were certain modes that open with vanilla emacs bindings, this package ensures every mode starts in evil mode
 #+BEGIN_SRC emacs-lisp
   (use-package evil-leader
       :ensure t
+      :init
+      (setq evil-want-keybinding nil)
       :config
       (global-evil-leader-mode t)
       (evil-leader/set-leader "<SPC>")
@@ -197,17 +200,10 @@ A nice and quick way to view/edit my configuration at any time
 
   (use-package evil
       :ensure t
+      :init
+      (setq evil-want-keybinding nil)
       :config
       (evil-mode 1)
-      ;; make switching windows much easier
-      (define-key evil-motion-state-map (kbd "M-h") 'evil-window-left)
-      (define-key evil-motion-state-map (kbd "M-j") 'evil-window-down)
-      (define-key evil-motion-state-map (kbd "M-k") 'evil-window-up)
-      (define-key evil-motion-state-map (kbd "M-l") 'evil-window-right)
-      ;; Fixes
-      (evil-set-initial-state 'ivy-occur-grep-mode 'normal) ;; wgrep and ivy temp fixes
-      (evil-set-initial-state 'pdf-view-mode 'normal) ;; pdf mode starts in evil mode instead of emacs mode
-      (setq evil-emacs-state-modes (delq 'ibuffer-mode evil-emacs-state-modes)) ;; ibuffer start in evil mode instead of emacs mode
       ;; NeoTree override keybindings, package (neotree) is shown further in the config
       (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
       (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
@@ -218,26 +214,38 @@ A nice and quick way to view/edit my configuration at any time
       (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
       (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
       (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle))
+ 
+  (use-package evil-collection
+      :after evil
+      :ensure t
+      :custom
+      (evil-collection-company-use-tng nil) ;; I hacked this already (Personal preference)
+      (evil-collection-setup-debugger-keys nil) ;; no need for this (Again.. Personal preference)
+      :config
+      (evil-collection-init))
 
 #+END_SRC
 ** Evil utility 
 - Below evil packages are extras that enhance the evil-mode experience in emacs
 #+BEGIN_SRC emacs-lisp
-  ;; like tpope's vim-surround
-  (use-package evil-surround
-      :ensure t
-      :config
-      (global-evil-surround-mode 1))
+   ;; like tpope's vim-surround
+   (use-package evil-surround
+       :ensure t
+       :config
+       (global-evil-surround-mode 1))
 
-  ;; Evil multiple-cursors
-  (use-package evil-mc
-      :ensure t
-      :diminish
-      :config
-      (global-evil-mc-mode 1))
+   (use-package evil-multiedit
+       :ensure t
+       :config
+       (evil-multiedit-default-keybinds))
 
-  ;; Evil magit overrides magit keybindings, package (magit) is shown further in the config
-  (use-package evil-magit :ensure t)
+   (use-package evil-mc
+       :ensure t
+       :config
+       (global-evil-mc-mode 1))
+
+   ;; Evil magit overrides magit keybindings, package (magit) is shown further in the config
+   (use-package evil-magit :ensure t)
 #+END_SRC
 * Markup
  :PROPERTIES:
