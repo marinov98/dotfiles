@@ -339,6 +339,9 @@ Org personal variables and functions
  :PROPERTIES:
  :CUSTOM_ID: pdf
  :END:
+- Emacs support library for pdf files. Enable if you wish
+- Look at the [[https://github.com/politza/pdf-tools][official repo]] for what you need to install and if your OS can support it
+- Make sure to run =M-x pdf-tools-install= If you decided to enable this package and use it 
    #+begin_src emacs-lisp
   (use-package pdf-view
       :disabled
