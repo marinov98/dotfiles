@@ -28,6 +28,7 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
   - [[#all-the-icons][All-the-icons]]
   - [[#beacon][Beacon]]
   - [[#neotree][neotree]]
+  - [[#treemacs][Treemacs]]
 - [[#ivy][Ivy]]
 - [[#projectile][Projectile]]
 - [[#shell][Shell]]
@@ -196,7 +197,10 @@ A nice and quick way to view/edit my configuration at any time
         "K" 'kill-buffer
         "o" 'delete-other-windows
         ;; package-specific
-        "t" 'neotree-toggle))
+        "t" 'neotree-toggle
+        "T" 'treemacs
+        "P" 'treemacs-projectile
+        "W" 'treemacs-select-window))
 
   (use-package evil
       :ensure t
@@ -216,7 +220,7 @@ A nice and quick way to view/edit my configuration at any time
       (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle))
  
   (use-package evil-collection
-      :after evil
+      :after evil 
       :ensure t
       :custom
       (evil-collection-company-use-tng nil) ;; I hacked this already (Personal preference)
@@ -237,7 +241,7 @@ A nice and quick way to view/edit my configuration at any time
    (use-package evil-multiedit
        :ensure t
        :bind
-       ("C-;" . iedit-mode) ;; this package uses iedit so I might as well use it
+       ("C-;" . iedit-mode)
        :config
        (evil-multiedit-default-keybinds))
 
@@ -826,17 +830,44 @@ I never lose where my cursor is thanks to this
  :CUSTOM_ID: neotree
  :END:
 - 'A emacs tree plugin like NerdTree for Vim.'
-- Amazing file browser. I do , however, want to test out treemacs one day 
+- Amazing file browser and explorer.
 - repo: https://github.com/jaypei/emacs-neotree
 #+BEGIN_SRC emacs-lisp
   ;; Neotree
   (use-package neotree
       :ensure t
-      :defer t
       :config 
       (setq neo-smart-open t) ; update every time its toggled
       (setq neo-theme (if (display-graphic-p) 'icons 'arrow))) ; add icons (utilizes all-the-icons)
 #+END_SRC
+** Treemacs
+ :PROPERTIES:
+ :CUSTOM_ID: treemacs
+ :END:
+- Treemacs is a project explorer. Unlike NeoTree, Treemacs only opens up and displays project roots
+- I did not think I would use it, but its a dependency for packages I use often (LSP) so I figured I would incorporate it into my workflow
+- Repo: https://github.com/Alexander-Miller/treemacs
+   #+begin_src emacs-lisp
+  (use-package treemacs 
+      :ensure t
+      :config
+      (setq treemacs-resize-icons 4))
+  
+  (use-package treemacs-evil 
+      :after treemacs
+      :ensure t)
+
+  (use-package lsp-treemacs
+      :init (lsp-treemacs-sync-mode 1))
+
+  (use-package treemacs-projectile
+      :after treemacs projectile
+      :ensure t)
+
+  (use-package treemacs-magit
+      :after treemacs magit
+      :ensure t)
+   #+end_src
 * Projectile
  :PROPERTIES:
  :CUSTOM_ID: projectile
