@@ -124,6 +124,8 @@ A nice and quick way to view/edit my configuration at any time
 #+BEGIN_SRC emacs-lisp
   (use-package evil-leader
       :ensure t
+      :init
+      (setq evil-want-keybinding nil)
       :config
       (global-evil-leader-mode t)
       (evil-leader/set-leader "<SPC>")
@@ -161,6 +163,8 @@ A nice and quick way to view/edit my configuration at any time
 
   (use-package evil
       :ensure t
+      :init
+      (setq evil-want-keybinding nil)												
       :config
       (evil-mode 1)
       ;; NeoTree override keybindings, package (neotree) is shown further in the config
