@@ -27,7 +27,7 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
   - [[#ranger][Ranger]]
   - [[#all-the-icons][All-the-icons]]
   - [[#beacon][Beacon]]
-  - [[#neotree][neotree]]
+  - [[#neotree][Neotree]]
   - [[#treemacs][Treemacs]]
 - [[#ivy][Ivy]]
 - [[#projectile][Projectile]]
