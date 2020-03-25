@@ -236,6 +236,8 @@ A nice and quick way to view/edit my configuration at any time
 
    (use-package evil-multiedit
        :ensure t
+       :bind
+       ("C-;" . iedit-mode) ;; this package uses iedit so I might as well use it
        :config
        (evil-multiedit-default-keybinds))
 
@@ -737,12 +739,11 @@ a personal keybinding just because its so good. Check the [[https://github.com/a
  :END:
 Useful if you work on multiple windows and want an efficient way of switching between them
 #+BEGIN_SRC emacs-lisp
-(use-package ace-window
-     :disabled
-     :ensure t
-     :init 
-     (global-set-key (kbd "M-o") 'ace-window)
-     (setq aw-background nil))
+  (use-package ace-window
+       :ensure t
+       :init 
+       (global-set-key (kbd "C-:") 'ace-window)
+       (setq aw-background nil))
 #+END_SRC
 ** Ranger
  :PROPERTIES:
