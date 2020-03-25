@@ -49,15 +49,14 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 ** Preferences
 Indentation 
 #+BEGIN_SRC emacs-lisp
-    (setq-default indent-tabs-mode nil)                    ;; disable tabs and use spaces
-    (setq-default tab-width 4)                             ;; set default tab width 4 
-    (setq backward-delete-char-untabify-method 'hungry)    ;; backspaces entire tab instead of one space at a time
+  (setq-default indent-tabs-mode nil)                    ;; disable tabs and use spaces
+  (setq-default tab-width 4)                             ;; set default tab width 4 
+  (setq backward-delete-char-untabify-method 'hungry)    ;; backspaces entire tab instead of one space at a time
 #+END_SRC
 - Options, display, parenthesis 
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
-  (setq default-frame-alist '((font . "Fira Code-12")
-                              (cursor-color . "#ffc600"))) ;; set font, font size, and cursor color
+  (setq default-frame-alist '((font . "Fira Code-14")))    ;; set font and font size
   (setq visible-bell t)                                    ;; disable end of buffer sounds
   (electric-pair-mode)                                     ;; auto closing brackets
   (show-paren-mode 1)                                      ;; highlight matching parenthesis
@@ -68,37 +67,52 @@ Indentation
   - I am not sure if all packages work with line numbers properly, but so far everything works
   - relative line numbers are very useful when combined with vim bindings as they help you see how far you need to jump to get where you want to 
 #+BEGIN_SRC emacs-lisp
-    (when (version<= "26.0.50" emacs-version )         
-      (setq display-line-numbers-type 'relative)           ;; relative line numbers help you see how far you need to jump to get where you want to 
-      (setq display-line-numbers-current-absolute t)
-      (setq display-line-numbers-width 2)
-      (setq display-line-numbers-widen t)
-      (global-display-line-numbers-mode))                  ;; display line numbers in every buffer
+  (when (version<= "26.0.50" emacs-version )         
+    (setq display-line-numbers-type 'relative)           ;; relative line numbers help you see how far you need to jump to get where you want to 
+    (setq display-line-numbers-current-absolute t)
+    (setq display-line-numbers-width 2)
+    (setq display-line-numbers-widen t)
+    (global-display-line-numbers-mode))                  ;; display line numbers in every buffer
 #+END_SRC
 Displaying time and date in emacs
 #+BEGIN_SRC emacs-lisp
-    (setq display-time-24hr-format t)
-    (display-time-mode 1)                                  ;; display time in the modeline
+  (setq display-time-24hr-format t)
+  (display-time-mode 1)                                  ;; display time in the modeline
 #+END_SRC
 Convenient yes or no and disable bars/blinking cursor
 #+BEGIN_SRC emacs-lisp
-    (fset 'yes-or-no-p 'y-or-n-p)            ;; change yes or no to y or n
-    (menu-bar-mode -1)                       ;; disable menu bar
-    (toggle-scroll-bar -1)                   ;; disable scroll bar
-    (tool-bar-mode -1)                       ;; disable tool bar
-    (blink-cursor-mode -1)                   ;; make cursor stop blinking
+  (fset 'yes-or-no-p 'y-or-n-p)            ;; change yes or no to y or n
+  (menu-bar-mode -1)                       ;; disable menu bar
+  (scroll-bar-mode -1)                     ;; disable scroll bar
+  (toggle-scroll-bar -1)                   ;; disable scroll bar toggle
+  (tool-bar-mode -1)                       ;; disable tool bar
+  (blink-cursor-mode -1)                   ;; make cursor stop blinking
 #+END_SRC
 Disable back up files (comment if you want to enable backup files) 
 #+BEGIN_SRC emacs-lisp
-    (setq make-backup-files nil)             ;; stop creating backup~ files
-    (setq auto-save-default nil)             ;; stop creating autosave# files
-    (setq create-lockfiles nil)              ;; stop creating any # files
+  (setq make-backup-files nil)             ;; stop creating backup~ files
+  (setq auto-save-default nil)             ;; stop creating autosave# files
+  (setq create-lockfiles nil)              ;; stop creating any # files
 #+END_SRC
 Emacs has native support for the GNU Debugger (GDB), and we can make it a little better
 #+BEGIN_SRC emacs-lisp
-    (setq gdb-many-windows t)                ;; have multiple windows when debugging
-    (setq gdb-show-main t)                   ;; Non-nil means display source file containing the main routine at startup
+  (setq gdb-many-windows t)                ;; have multiple windows when debugging
+  (setq gdb-show-main t)                   ;; Non-nil means display source file containing the main routine at startup
 #+END_SRC
+The settings below are mainly for linux, you can edit this section if you want to change what browser emacs uses to open links
+#+begin_src emacs-lisp
+  (when (string-equal system-type "gnu/linux") 
+    (setq
+      browse-url-browser-function
+      '(("https://www.netflix.com/" . browse-url-firefox) ;; firefox deals better with video players on linux
+      ("." . browse-url-chromium))))
+#+end_src
+MS-Windows can be slow and can give a lot of issues. This setting below at least fixes the issue of it not recognizing unicode characters and not letting your save your file.
+#+begin_src emacs-lisp
+  (when (string-equal system-type "windows-nt")
+   (prefer-coding-system 'utf-8)
+   (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
+#+end_src
 ** Goto Config
 A nice and quick way to view/edit my configuration at any time
   #+begin_src emacs-lisp
