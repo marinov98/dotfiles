@@ -173,6 +173,15 @@ A nice and quick way to view/edit my configuration at any time
       (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
       (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
       (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle))
+      
+  (use-package evil-collection
+      :after evil 
+      :ensure t
+      :custom
+      (evil-collection-company-use-tng nil) ;; I hacked this already (Personal preference)
+      (evil-collection-setup-debugger-keys nil) ;; no need for this (Again.. Personal preference)
+      :config
+      (evil-collection-init))
 
 #+END_SRC
 ** Evil utility 
@@ -184,12 +193,12 @@ A nice and quick way to view/edit my configuration at any time
       :config
       (global-evil-surround-mode 1))
 
-  ;; Evil multiple-cursors
-  (use-package evil-mc
+  (use-package evil-multiedit
       :ensure t
+      :bind
+      ("C-;" . iedit-mode)
       :config
-      (global-evil-mc-mode 1))
-
+      (evil-multiedit-default-keybinds))
 
   ;; Evil magit overrides magit keybindings, package (magit) is shown further in the config
   (use-package evil-magit :ensure t)
@@ -464,6 +473,7 @@ Jumping around text, keybindings utilized in a hydra
 A jump to definition package that just works, love this one!
    #+begin_src emacs-lisp
    (use-package dumb-jump
+       :disabled
        :bind (("M-g o" . dumb-jump-go-other-window)
               ("M-g j" . dumb-jump-go)
               ("M-g b" . dumb-jump-back)
