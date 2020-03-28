@@ -213,8 +213,6 @@ A nice and quick way to view/edit my configuration at any time
 
   (use-package evil-multiedit
       :ensure t
-      :bind
-      ("C-;" . iedit-mode)
       :config
       (evil-multiedit-default-keybinds))
 
