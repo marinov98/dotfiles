@@ -1595,7 +1595,8 @@ Below is are packages and settings related to autocomplete and formatting
             (add-to-list 'company-backends 'company-jedi)
             (define-key python-mode-map (kbd "C-c d") 'jedi:goto-definition)
             (define-key python-mode-map (kbd "C-c s") 'jedi:show-doc))
-
+	    
+          (add-hook 'python-mode-hook 'jedi:setup)
           (add-hook 'python-mode-hook 'marinov/add-completion))
     #+end_src
 *** Virtualenv
