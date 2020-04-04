@@ -1588,14 +1588,15 @@ Below is are packages and settings related to autocomplete and formatting
  Lightweight auto-completion alternative to =lsp= (python server seems to be slow) and =elpy= (a bit bloated in my opinion)
 - need to install =virtualenv= via pip for when you do =M-x jedi:install-server= to enable the completion
     #+begin_src emacs-lisp
-    (use-package company-jedi
-        :ensure t
-        :config
-        (defun marinov/add-completion ()
-          (add-to-list 'company-backends 'company-jedi)
-          (define-key python-mode-map (kbd C-c d) 'jedi:goto-definition))
+      (use-package company-jedi
+          :ensure t
+          :config
+          (defun marinov/add-completion ()
+            (add-to-list 'company-backends 'company-jedi)
+            (define-key python-mode-map (kbd "C-c d") 'jedi:goto-definition)
+            (define-key python-mode-map (kbd "C-c s") 'jedi:show-doc))
 
-        (add-hook 'python-mode-hook 'marinov/add-completion))
+          (add-hook 'python-mode-hook 'marinov/add-completion))
     #+end_src
 *** Virtualenv
  Remove disabled if you need it, I have yet to develop seriously in Python
