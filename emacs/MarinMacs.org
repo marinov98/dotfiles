@@ -268,16 +268,17 @@ A nice and quick way to view/edit my configuration at any time
       (org-file-apps
         '(("\\.pdf\\(::[0-9]+\\)?\\'" . "epdfview %s")))
       :pin org)
-     
+
   ;; allow easier snippet insertion  
-  (require 'org-tempo)
- 
+  (when (version<= "27.0.50" emacs-version)         
+    (require 'org-tempo))
+
   ;; bullets
   (use-package org-bullets
       :ensure t
       :hook
       (org-mode . org-bullets-mode))
-     
+
 #+END_SRC
 Org personal variables and functions
 #+begin_src emacs-lisp
@@ -1388,7 +1389,7 @@ Smerge mode deals with merge conflicts in git.
       :hook
       ((c++-mode . lsp)
       (c-mode . lsp)
-      (python-mode . lsp)
+;      (python-mode . lsp) ;; python server known to be slow and laggy 
       (css-mode . lsp)
       (yaml-mode . lsp)
       (json-mode . lsp)
@@ -1565,15 +1566,37 @@ Note: the template is meant to be edited to personal preferences
         :name "My App")))
 #+END_SRC
 *** Elpy
- - No longer need it because of LSP but keeping it for reference
+ - I typically prefer LSP but the python server has been unstable so this is an alternative
  - Documentation: https://elpy.readthedocs.io/en/latest/
 #+BEGIN_SRC emacs-lisp
-(use-package elpy
-   :disabled
-   :ensure t
-   :config 
-   (elpy-enable))
+  (use-package elpy
+      :disabled
+      :ensure t
+      :init 
+      (elpy-enable))
 #+END_SRC
+Below is are packages and settings related to autocomplete and formatting
+- You will need to install =autopep= for the below to work (this is for code formatting)
+#+begin_src emacs-lisp
+  (use-package py-autopep8
+      :disabled
+      :ensure t
+      :config
+      (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save))
+#+end_src
+*** Company-jedi
+ Lightweight auto-completion alternative to =lsp= (python server seems to be slow) and =elpy= (a bit bloated in my opinion)
+- need to install =virtualenv= via pip for when you do =M-x jedi:install-server= to enable the completion
+    #+begin_src emacs-lisp
+    (use-package company-jedi
+        :ensure t
+        :config
+        (defun marinov/add-completion ()
+          (add-to-list 'company-backends 'company-jedi)
+          (define-key python-mode-map (kbd C-c d) 'jedi:goto-definition))
+
+        (add-hook 'python-mode-hook 'marinov/add-completion))
+    #+end_src
 *** Virtualenv
  Remove disabled if you need it, I have yet to develop seriously in Python
 #+BEGIN_SRC emacs-lisp
