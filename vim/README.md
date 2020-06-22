@@ -4,10 +4,14 @@
 ## Prereqs 
 - [Nodejs](<https://nodejs.org/en/>) (need this to setup auto-complete, you can skip this part if you don't want it)
 
+## Options 
+ - If you want vim without plugins then copy what is inside `no-plugins-config.vim` in the `alt`
+ - For a more minimal configuration, copy `minimal.vim` located in the `alt` folder 
+ - For those who use or want to try **neovim** look inside the `nvim` folder
+
 ## Setup:
 1. create .vimrc file in home directory then copy my config, then exit and enter vim again and everything should install. If you prefer to do this manually continue to step 2. 
     - regardless of what you do, you still have to setup [autocomplete](#Autocomplete)
-    - If you want vim without plugins or more minimal then copy what is either inside `no-plugins-config.vim` or `minimal.vim` located in the `alt` folder 
 2. Install [vim-plug](https://github.com/junegunn/vim-plug)
 3. Either copy what I have in my [.vimrc](<https://github.com/marinov98/dotfiles/blob/master/vim/.vimrc>) or take whatever you need 
 3. Save and quit .vimrc
