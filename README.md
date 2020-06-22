@@ -4,7 +4,7 @@ All my dot files
 ### Deeper dive into emacs and/or vim
 - My [**Emacs**](https://github.com/marinov98/dotfiles/blob/master/emacs/) config guide
 
-- My [**Vim**](https://github.com/marinov98/dotfiles/blob/master/vim/) config guide
+- My [**Vim/Neovim**](https://github.com/marinov98/dotfiles/blob/master/vim/) config guide
 
 ### Quick Start
 - Clone this repo: `git clone https://github.com/marinov98/dotfiles.git `
