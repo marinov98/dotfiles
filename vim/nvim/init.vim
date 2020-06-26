@@ -28,6 +28,7 @@ Plug 'https://github.com/itchyny/vim-gitbranch'
 Plug 'https://github.com/tpope/vim-repeat'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-commentary'
 """"""" WEB DEV:
 Plug 'alvan/vim-closetag'
 Plug 'mattn/emmet-vim'
