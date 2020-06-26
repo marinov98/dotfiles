@@ -6,7 +6,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 """"""" THEMES:
-Plug 'liuchengxu/space-vim-dark'
+Plug 'morhetz/gruvbox'
 """"""" File Search:
 Plug 'ctrlpvim/ctrlp.vim'
 """"""" CODING:
@@ -28,6 +28,7 @@ Plug 'https://github.com/itchyny/vim-gitbranch'
 Plug 'https://github.com/tpope/vim-repeat'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-commentary'
 """"""" WEB DEV:
 Plug 'alvan/vim-closetag'
 Plug 'mattn/emmet-vim'
@@ -40,6 +41,92 @@ call plug#end()
 """"""""""""""""""""""
 map <SPACE> <Leader>
 
+""""" Indentation:
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set noexpandtab
+set smartindent
+set smartcase
+
+"""" PREFFERED DEFAULTS:
+set foldenable
+set incsearch
+set hlsearch
+set showmatch
+set wildmenu
+
+set noswapfile
+set noerrorbells
+
+set tags=tags
+set bs=2 " make backspace work
+set mouse=a " use mouse in vim
+
+set cursorline " highlight current row
+set clipboard=unnamedplus " allow copy and pasting anymore
+set laststatus=2 " show modeline
+set noshowmode
+set t_Co=256 " Make colors work with tmux
+set number relativenumber
+set nu rnu 
+set completeopt-=preview
+set guioptions-=e
+set sessionoptions+=tabpages,globals
+
+""""""" MODE SPECIFIC SETTINGS:
+autocmd BufEnter *.tsx set filetype=typescript
+autocmd FileType html setlocal ts=2 sts=2 sw=2
+autocmd FileType css setlocal ts=2 sts=2 sw=2
+autocmd FileType javascript setlocal ts=2 sts=2 sw=2
+autocmd FileType jsx setlocal ts=2 sts=2 sw=2
+autocmd FileType typescript setlocal ts=2 sts=2 sw=2
+autocmd FileType tsx setlocal ts=2 sts=2 sw=2
+
+
+" Don't offer to open certain files/directories
+set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
+set wildignore+=*.pdf,*.psd
+set wildignore+=node_modules/*,bower_components/*
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip " MacOSX/Linux
+
+" FINDING FILES:
+
+" Search down into subfolders
+" Provides tab-completion for all file-related tasks
+set path+=**
+
+""""""""""""""""""""""
+""""" PERSONAL BINDINGS:
+""""""""""""""""""""""
+nnoremap <leader>n :noh<CR>
+nnoremap Y y$
+nnoremap <leader>s :w<CR>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>Q :q!<CR>
+
+" Fix splitting
+set splitbelow splitright
+
+nnoremap <leader>j <C-W>j
+nnoremap <leader>k <C-W>k
+nnoremap <leader>l <C-W>l
+nnoremap <leader>h <C-W>h
+
+" Shortcut split opening
+nnoremap <leader>2 :split<CR>
+nnoremap <leader>3 :vsplit<CR>>
+
+""""""""""""""""""""""
+"""""" THEME:
+""""""""""""""""""""""
+set background=dark
+colorscheme gruvbox
+
+""""""""""""""""""""""
+"""""" PACKAGE CONFIG
+""""""""""""""""""""""
+
 """"""" PRETTIER:
 let g:prettier#exec_cmd_path = "~/.prettierrc"
 let g:prettier#quickfix_enabled = 0
@@ -48,7 +135,7 @@ autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.gra
 
 " Clang-Format
 autocmd FileType c,cpp,objc ClangFormatAutoEnable
-		
+
 """""""  NETRW:
 let g:netrw_banner=0 " Disable annoying banner
 let g:netrw_browse_split=4 " open in prior window
@@ -60,26 +147,28 @@ let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 let g:NetrwIsOpen=0
 
 function! ToggleNetrw()
-   if g:NetrwIsOpen
-       let i = bufnr("$")
-       while (i >= 1)
-           if (getbufvar(i, "&filetype") == "netrw")
-               silent exe "bwipeout " . i 
-           endif
-           let i-=1
-       endwhile
-       let g:NetrwIsOpen=0
-   else
-       let g:NetrwIsOpen=1
-       silent Lexplore
-   endif
+	if g:NetrwIsOpen
+		let i = bufnr("$")
+		while (i >= 1)
+			if (getbufvar(i, "&filetype") == "netrw")
+				silent exe "bwipeout " . i 
+			endif
+			let i-=1
+		endwhile
+		let g:NetrwIsOpen=0
+	else
+		let g:NetrwIsOpen=1
+		silent Lexplore
+	endif
 endfunction
 
 noremap <silent> <leader>t :call ToggleNetrw()<CR>
 
+
 """"""""""""""""""""""
 """"""" AUTOCOMPLETE:
 """"""""""""""""""""""
+
 " better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
@@ -171,99 +260,16 @@ elseif executable('ag') " Try The Silver Searcher if ripgrep not found
 	set grepprg=ag\ --nogroup\ --nocolor
 	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 	let g:ctrlp_use_caching = 0
-
-else " Else use old configuration
+else " Else use grep configuration
 	let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 	let g:ctrlp_custom_ignore = {
-		  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-		  \ 'file': '\v\.(exe|so|dll)$',
-		  \ 'link': 'some_bad_symbolic_links',
-		  \ }
+				  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+				  \ 'file': '\v\.(exe|so|dll)$',
+				  \ 'link': 'some_bad_symbolic_links',
+				  \ }
 	let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 endif
- 
+
+
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-
-""""""" SETTINGS:
-syntax enable
-set nocompatible
-
-
-" Color theme
-set background=dark
-colorscheme space-vim-dark
-
-""""" Indentation:
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set noexpandtab
-set smartindent
-set smartcase
-
-"""" PREFFERED DEFAULTS:
-set foldenable
-set incsearch
-set hlsearch
-set showmatch
-set wildmenu
-
-set noswapfile
-set noerrorbells
-
-set tags=tags
-set bs=2 " make backspace work
-set mouse=a " use mouse in vim
-
-set cursorline " highlight current row
-set clipboard=unnamedplus " allow copy and pasting anymore
-set laststatus=2 " show modeline
-set noshowmode
-set t_Co=256 " Make colors work with tmux
-set number relativenumber
-set nu rnu 
-set completeopt-=preview
-set guioptions-=e
-set sessionoptions+=tabpages,globals
-
-""""""" MODE SPECIFIC SETTINGS:
-autocmd BufEnter *.tsx set filetype=typescript
-autocmd FileType html setlocal ts=2 sts=2 sw=2
-autocmd FileType css setlocal ts=2 sts=2 sw=2
-autocmd FileType javascript setlocal ts=2 sts=2 sw=2
-autocmd FileType jsx setlocal ts=2 sts=2 sw=2
-autocmd FileType typescript setlocal ts=2 sts=2 sw=2
-autocmd FileType tsx setlocal ts=2 sts=2 sw=2
-
-
-" Don't offer to open certain files/directories
-set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
-set wildignore+=*.pdf,*.psd
-set wildignore+=node_modules/*,bower_components/*
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-
-" FINDING FILES:
-
-" Search down into subfolders
-" Provides tab-completion for all file-related tasks
-set path+=**
-
-""""" PERSONAL BINDINGS:
-nnoremap <leader>n :noh<CR>
-nnoremap Y y$
-nnoremap <leader>s :w<CR>
-nnoremap <leader>q :q<CR>
-nnoremap <leader>Q :q!<CR>
-
-" Fix splitting
-set splitbelow splitright
-
-nnoremap <leader>j <C-W>j
-nnoremap <leader>k <C-W>k
-nnoremap <leader>l <C-W>l
-nnoremap <leader>h <C-W>h
-
-" Shortcut split opening
-nnoremap <leader>2 :split<CR>
-nnoremap <leader>3 :vsplit<CR>>
