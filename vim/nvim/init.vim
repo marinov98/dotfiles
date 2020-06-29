@@ -106,6 +106,7 @@ nnoremap Y y$
 nnoremap <leader>s :w<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>Q :q!<CR>
+nnoremap <leader>b <C-^>
 
 " Fix splitting
 set splitbelow splitright
