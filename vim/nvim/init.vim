@@ -106,7 +106,6 @@ nnoremap Y y$
 nnoremap <leader>s :w<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>Q :q!<CR>
-nnoremap <leader>b <C-^>
 
 " Fix splitting
 set splitbelow splitright
@@ -115,6 +114,7 @@ nnoremap <leader>j <C-W>j
 nnoremap <leader>k <C-W>k
 nnoremap <leader>l <C-W>l
 nnoremap <leader>h <C-W>h
+nnoremap <leader>b <C-^>
 
 " Shortcut split opening
 nnoremap <leader>2 :split<CR>
@@ -123,6 +123,7 @@ nnoremap <leader>3 :vsplit<CR>>
 """"""""""""""""""""""
 """""" THEME:
 """"""""""""""""""""""
+let g:gruvbox_contrast_dark = 'hard'
 set background=dark
 colorscheme gruvbox
 
@@ -205,9 +206,11 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gs :CocSearch 
 
 " Symbol renaming.
 nmap <leader>r <Plug>(coc-rename)
+
 """"""""""" AUTOCOMPLETE END
 
 """"""""""" Easy Motion:
