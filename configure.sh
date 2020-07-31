@@ -16,7 +16,7 @@ then
     # \cp X/.Xresources ~/
 else
     echo "Machine found to not be linux "
-    \cp bash/.bash_profile ~/
+    \cp bash/.zshrc ~/
 fi
 echo "bash done"
 
