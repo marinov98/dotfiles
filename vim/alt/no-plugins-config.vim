@@ -28,7 +28,7 @@ set nocompatible
 
 "Color theme
 set background=dark
-colorscheme industry
+colorscheme slate
 
 "indentation
 set tabstop=4
@@ -59,7 +59,6 @@ set mouse=a
 "set clipboard=unnamed "Windows
 set clipboard=unnamedplus " Linux and Mac
 set laststatus=2
-set noshowmode
 set t_Co=256
 
 
@@ -133,3 +132,12 @@ nnoremap <leader>h <C-W>h
 " Shortcut split opening
 nnoremap <leader>2 :split<CR>
 nnoremap <leader>3 :vsplit<CR>>
+
+" Auto close braces
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O
