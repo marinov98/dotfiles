@@ -8,8 +8,8 @@ ZSH_THEME="robbyrussell"
 
 CASE_SENSITIVE="true"
 
-export EDITOR=nvim-osx64/bin/nvim
-export VISUAL=nvim-osx64/bin/nvim
+export EDITOR=~/nvim-osx64/bin/nvim
+export VISUAL=~/nvim-osx64/bin/nvim
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
