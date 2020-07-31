@@ -1,20 +1,15 @@
- Path to your oh-my-zsh installation.
+# Path to your oh-my-zsh installation.
 export ZSH="/Users/marinmarinov/.oh-my-zsh"
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
+###################################
+####### SETTINGS
+###################################
 ZSH_THEME="robbyrussell"
 
-# Uncomment the following line to use case-sensitive completion.
 CASE_SENSITIVE="true"
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+export EDITOR=nvim-osx64/bin/nvim
+export VISUAL=nvim-osx64/bin/nvim
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -30,7 +25,7 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 ###################################
-####### Aliases
+####### Aliases   
 ###################################
 
 alias ls='ls -GFh'
@@ -50,7 +45,7 @@ alias .4='cd ../../../../'                  # Go back 4 directory levels
 alias .5='cd ../../../../../'               # Go back 5 directory levels
 alias .6='cd ../../../../../../'            # Go back 6 directory levels
 
-alias v='vim'                               # v:            Opens any file in vim editor
+alias v='./nvim-osx64/bin/nvim'                               # v:            Opens any file in vim editor
 alias ec='emacsclient -n -c -a ""'          # ec:           Opens emacs server
 alias c='code .'                            # c:            Open VS Code
 alias rr='ranger'                           # ra:           Opens ranger
@@ -61,7 +56,7 @@ alias f='open -a Finder ./'                 # f:            Opens current direct
 alias ~="cd ~"                              # ~:            Go Home
 alias path='echo -e ${PATH//:/\\n}'         # path:         Echo all executable Paths
 alias show_options='shopt'                  # Show_options: display bash options settings
-lias fix_stty='stty sane'                  # fix_stty:     Restore terminal settings when screwed up
+alias fix_stty='stty sane'                  # fix_stty:     Restore terminal settings when screwed up
 alias cic='set completion-ignore-case On'   # cic:          Make tab-completion case-insensitive
 
 mcd () { mkdir -p "$1" && cd "$1"; }        # mcd:          Makes new Dir and jumps inside
@@ -69,3 +64,10 @@ trash () { command mv "$@" ~/.Trash ; }     # trash:        Moves a file to the 
 
 # Fix Vim C-s crash
 stty -ixon
+
+# FZF customization
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+alias fzfi='rg --files --hidden --follow --no-ignore-vcs -g "!{node_modules,.git}" | fzf'
+alias vz='v $(fzfi)'
