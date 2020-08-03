@@ -9,12 +9,11 @@ echo "installing packages with brew now"
 
 echo "installing terminal essentials..."
 brew install curl ranger tmux
-brew install the_silver_searcher ripgrep
+brew install ripgrep
 brew install reattach-to-user-namespace
-brew tap caskroom/cask
 
 echo "installing programming essentials..."
-brew install --with-toolchain llvm
+brew install llvm
 brew install python3
 brew install clang-format gcc ctags aspell 
 brew install yarn 
@@ -24,8 +23,8 @@ brew install pyenv pyenv-virtualenv pyenv-virtualenvwrapper
 brew tap heroku/brew && brew install heroku
 
 echo "installing latex packages"
-brew install tap
-brew cask install mactex
+# brew install tap
+# brew cask install mactex
 
 echo "installing emacs and vim "
 brew cask install emacs
