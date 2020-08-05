@@ -189,7 +189,7 @@ set nobackup
 set nowritebackup
 set showcmd
 
-set updatetime=300
+set updatetime=900
 set shortmess+=c
 set signcolumn=yes
 
