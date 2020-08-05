@@ -105,7 +105,8 @@ nnoremap Y y$
 nnoremap <leader>s :w<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>Q :q!<CR>
-nnoremap <leader>b <C-^>
+nnoremap <Leader>+ :vertical resize +5<CR>
+nnoremap <Leader>- :vertical resize -5<CR>
 
 " Fix splitting
 set splitbelow splitright
@@ -114,6 +115,8 @@ nnoremap <leader>j <C-W>j
 nnoremap <leader>k <C-W>k
 nnoremap <leader>l <C-W>l
 nnoremap <leader>h <C-W>h
+nnoremap <leader>b <C-^>
+nnoremap <leader>o <C-W>o
 
 " Shortcut split opening
 nnoremap <leader>2 :split<CR>
