@@ -62,4 +62,5 @@
     - Javascript/TypeScript: `npm i -g typescript-language-server`
     
 ### Git
-- git branch
+- git branch (show what branch you are on in the modeline)
+- vim-fugitive (Git wrapper)
