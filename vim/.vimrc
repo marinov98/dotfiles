@@ -276,3 +276,12 @@ endif
 
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+""""""""""" FUGITIVE:
+nmap <leader>gg :G<CR>
+nmap <leader>gs :Git
+nmap <leader>gc :Gcommit<CR>
+nmap <leader>gj :diffget //3<CR>
+nmap <leader>gf :diffget //2<CR>
+" You can change the below command to :Gpush if you don't have to type any credentials when pushing
+nmap <leader>gp :terminal git push
