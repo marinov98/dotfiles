@@ -1,9 +1,3 @@
-if empty(glob('~/.config/nvim/autoload/plug.vim'))
-  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
- " autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
 call plug#begin('~/.config/nvim/autoload/plugged')
 """"""" THEMES:
 Plug 'morhetz/gruvbox'
@@ -102,6 +96,8 @@ nnoremap Y y$
 nnoremap <leader>s :w<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>Q :q!<CR>
+nnoremap <Leader>+ :vertical resize +5<CR>
+nnoremap <Leader>- :vertical resize -5<CR>
 
 " Fix splitting
 set splitbelow splitright
@@ -111,6 +107,7 @@ nnoremap <leader>k <C-W>k
 nnoremap <leader>l <C-W>l
 nnoremap <leader>h <C-W>h
 nnoremap <leader>b <C-^>
+nnoremap <leader>o <C-W>o
 
 " Shortcut split opening
 nnoremap <leader>2 :split<CR>
