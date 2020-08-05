@@ -52,7 +52,7 @@ cp emacs/init.el ~/.emacs.d/
 echo "emacs finished"
 
 # Vim
-echo "setting up Vim/Neovim..."
+echo "setting up Vim..."
 cp vim/.vimrc ~/
 echo "vim finished"
 
