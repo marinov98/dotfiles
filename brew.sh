@@ -29,9 +29,6 @@ echo "installing latex packages"
 echo "installing emacs and vim "
 brew cask install emacs
 brew install vim
-brew unlink vim
-brew install macvim
-brew link macvim
 
 echo "Installing Postgres"
 brew uninstall --force posrgresql
