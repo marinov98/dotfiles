@@ -15,12 +15,11 @@ then
     # i3wn 
     echo "setting up i3 window manager,powerline-shell,alacritty and ranger ..."    
     mkdir -p ~/Pictures
-    mkdir -p ~/.config/{i3,i3status,powerline-shell,alacritty,ranger,rofi}
+    mkdir -p ~/.config/{i3,i3status,powerline-shell,alacritty,rofi}
     cp config/i3/config ~/.config/i3/
     cp config/i3status/config ~/.config/i3status/
     cp config/powerline-shell/config.json ~/.config/powerline-shell/
     cp config/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
-    cp config/ranger/rc.conf ~/.config/ranger/
     cp config/rofi/config ~/.config/rofi/config
     cp config/i3/img/* ~/Pictures/
     echo "finished"
@@ -38,7 +37,7 @@ cp git/git-completion.bash ~/
 cp git/.gitconfig ~/
 
 # FORMATTERS
-echo "Copying formatters,tmux..."
+echo "Copying formatters and tmux..."
 cp code-formatters/.clang-format ~/
 cp code-formatters/.prettierrc ~/
 cp tmux/.tmux.conf ~/
@@ -52,9 +51,11 @@ cp emacs/init.el ~/.emacs.d/
 echo "emacs finished"
 
 # Vim
-echo "setting up Vim..."
+echo "setting up Vim and Ranger..."
 cp vim/.vimrc ~/
-echo "vim finished"
+mkdir -p .config/ranger
+cp config/ranger/rc.conf ~/.config/ranger/
+echo "Vim and Ranger finished"
 
 # XORG
 # echo "creating xorg configuration..."
