@@ -15,25 +15,26 @@ Plug 'SirVer/ultisnips'| Plug 'honza/vim-snippets'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
-Plug 'https://github.com/rhysd/vim-clang-format'
-Plug 'https://github.com/jiangmiao/auto-pairs'
+Plug 'rhysd/vim-clang-format'
+Plug 'jiangmiao/auto-pairs'
 Plug 'ervandew/supertab'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'sheerun/vim-polyglot'
 """"""" MODELINE:
 Plug 'itchyny/lightline.vim'
 """"""" GITHUB:
-Plug 'https://github.com/itchyny/vim-gitbranch'
+Plug 'itchyny/vim-gitbranch'
+Plug 'tpope/vim-fugitive'
 """"""" VIM UTILITY:
-Plug 'https://github.com/tpope/vim-repeat'
-Plug 'https://github.com/tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-commentary'
 """"""" WEB DEV:
 Plug 'alvan/vim-closetag'
 Plug 'mattn/emmet-vim'
-Plug 'https://github.com/ap/vim-css-color'
-Plug 'sheerun/vim-polyglot'
+Plug 'ap/vim-css-color'
 call plug#end()
 
 source $HOME/.config/nvim/vim-plug/plugins.vim
@@ -274,3 +275,12 @@ endif
 
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+""""""""""" FUGITIVE:
+nmap <leader>gg :G<CR>
+nmap <leader>gs :Git
+nmap <leader>gc :Gcommit<CR>
+nmap <leader>gj :diffget //3<CR>
+nmap <leader>gf :diffget //2<CR>
+" You can change the below command to :Gpush if you don't have to type any credentials when pushing
+nmap <leader>gp :terminal git push
