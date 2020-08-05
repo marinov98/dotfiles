@@ -31,7 +31,7 @@ else
     echo "Machine found to not be linux "
     \cp shell/.zshrc ~/
 fi
-echo "bash done"
+echo "shell done"
 
 echo "copying git autocompletions"
 cp git/git-completion.bash ~/
