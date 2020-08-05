@@ -53,21 +53,16 @@ set smartcase
 
 """" PREFFERED DEFAULTS:
 set foldenable
-set incsearch
-set hlsearch
 set showmatch
-set wildmenu
 
 set noswapfile
 set noerrorbells
 
 set tags=tags
 set bs=2 " make backspace work
-set mouse=a " use mouse in vim
 
 set cursorline " highlight current row
-set clipboard=unnamedplus " allow copy and pasting anymore
-set laststatus=2 " show modeline
+set clipboard=unnamedplus " allow copy and pasting anywhere
 set noshowmode
 set t_Co=256 " Make colors work with tmux
 set number relativenumber
@@ -191,7 +186,7 @@ set nobackup
 set nowritebackup
 set showcmd
 
-set updatetime=300
+set updatetime=900
 set shortmess+=c
 set signcolumn=yes
 
