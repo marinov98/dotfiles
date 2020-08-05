@@ -45,7 +45,7 @@ alias .4='cd ../../../../'                  # Go back 4 directory levels
 alias .5='cd ../../../../../'               # Go back 5 directory levels
 alias .6='cd ../../../../../../'            # Go back 6 directory levels
 
-alias v='./nvim-osx64/bin/nvim'             # v:            Opens any file in vim editor
+alias v='~/./nvim-osx64/bin/nvim'             # v:            Opens any file in vim editor
 alias ec='emacsclient -n -c -a ""'          # ec:           Opens emacs server
 alias c='code .'                            # c:            Open VS Code
 alias rr='ranger'                           # rr:           Opens ranger
