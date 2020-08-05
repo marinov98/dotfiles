@@ -53,7 +53,7 @@ echo "emacs finished"
 # Vim
 echo "setting up Vim and Ranger..."
 cp vim/.vimrc ~/
-mkdir -p .config/ranger
+mkdir -p ~/.config/ranger
 cp config/ranger/rc.conf ~/.config/ranger/
 echo "Vim and Ranger finished"
 
