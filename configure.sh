@@ -1,12 +1,10 @@
-#!/bin/bash
-
 ## Script works best when directory is cloned in home not desktop
 
 ## IMPORTANT ensure appropriate packages are installed for terminal : neofetch, powerline shell, xcape before using script!
 
 # BASH profiles
-echo "Resolving bash configs..."
-echo "Certain bash configurations will be copied based on the system"
+echo "Resolving shell configs..."
+echo "Certain shell configurations will be copied based on the system"
 if [[ $(uname -s) == Linux ]]
 then
     echo "machine found to be linux"
@@ -14,6 +12,21 @@ then
     \cp shell/.profile ~/
     \cp X/.xprofile ~/
     # \cp X/.Xresources ~/
+    # i3wn 
+    echo "setting up i3 window manager,powerline-shell,alacritty and ranger ..."    
+    mkdir -p ~/Pictures
+    mkdir -p ~/.config/{i3,i3status,powerline-shell,alacritty,ranger,rofi}
+    cp config/i3/config ~/.config/i3/
+    cp config/i3status/config ~/.config/i3status/
+    cp config/powerline-shell/config.json ~/.config/powerline-shell/
+    cp config/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
+    cp config/ranger/rc.conf ~/.config/ranger/
+    cp config/rofi/config ~/.config/rofi/config
+    cp config/i3/img/* ~/Pictures/
+    echo "finished"
+    echo "setting up compton..."
+    cp config/compton/compton.conf  ~/.config/
+    echo "Config transfer complete"
 else
     echo "Machine found to not be linux "
     \cp shell/.zshrc ~/
@@ -39,28 +52,9 @@ cp emacs/init.el ~/.emacs.d/
 echo "emacs finished"
 
 # Vim
-echo "setting up Vim..."
+echo "setting up Vim/Neovim..."
 cp vim/.vimrc ~/
-mkdir -p ~/.vim
-cp vim/coc-settings.json ~/.vim/
 echo "vim finished"
-
-# i3wn 
-echo "setting up i3 window manager,powerline-shell,alacritty and ranger ..."
-mkdir -p ~/Pictures
-mkdir -p ~/.config/{i3,i3status,powerline-shell,alacritty,ranger,rofi}
-cp config/i3/config ~/.config/i3/
-cp config/i3status/config ~/.config/i3status/
-cp config/powerline-shell/config.json ~/.config/powerline-shell/
-cp config/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
-cp config/ranger/rc.conf ~/.config/ranger/
-cp config/rofi/config ~/.config/rofi/config
-cp config/i3/img/* ~/Pictures/
-echo "finished"
-
-echo "setting up compton..."
-cp config/compton/compton.conf  ~/.config/
-echo "Config transfer complete"
 
 # XORG
 # echo "creating xorg configuration..."
