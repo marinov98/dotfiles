@@ -4,10 +4,7 @@ pip3 install rope jedi pylint flake8 autopep8 yapf pygments virtualenv virtualen
 
 echo "npm installations..."
 
-sudo chown -R $(whoami) ~/.npm
-sudo chown -R $(whoami) /user/lib/node_modules
-sudo chown -R $(whoami) /usr/local/lib/node_modules
-
+sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
 
 npm i -g netlify-cli prettier @angular/cli http-server requirejs ngrok 
 echo "installing language servers..."
