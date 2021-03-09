@@ -6,9 +6,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 """"""" CODING:
 Plug 'easymotion/vim-easymotion'
 Plug 'SirVer/ultisnips'| Plug 'honza/vim-snippets'
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plug 'rhysd/vim-clang-format'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ervandew/supertab'
@@ -125,10 +122,7 @@ colorscheme gruvbox
 """"""""""""""""""""""
 
 """"""" PRETTIER:
-let g:prettier#exec_cmd_path = "~/.prettierrc"
-let g:prettier#quickfix_enabled = 0
-let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
 " Clang-Format
 autocmd FileType c,cpp,objc ClangFormatAutoEnable
