@@ -2,7 +2,7 @@
 "tsserver.enableJavascript": true,
 "suggest.echodocSupport": true,
 "suggest.maxCompleteItemCount": 5,
-"coc.preferences.formatOnSaveFiletypes": ["javascript", "typescript", "typescriptreact", "json", "javascriptreact"],
+"coc.preferences.formatOnSaveFiletypes": ["javascript", "typescript", "typescriptreact", "json", "markdown", "css", "javascriptreact", "graphql"],
 "diagnostic.errorSign": "•",
 "diagnostic.warningSign": "•",
 "diagnostic.infoSign": "•",
