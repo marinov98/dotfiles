@@ -4,7 +4,7 @@ export ZSH="/Users/marinmarinov/.oh-my-zsh"
 ###################################
 ####### SETTINGS
 ###################################
-ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="robbyrussell" # "powerlevel10k/powerlevel10k" if we are feeling extra
 
 CASE_SENSITIVE="true"
 
