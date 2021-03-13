@@ -14,8 +14,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'sheerun/vim-polyglot'
 """"""" MODELINE:
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 Plug 'edkolev/tmuxline.vim'
 """"""" GITHUB:
 Plug 'itchyny/vim-gitbranch'
@@ -202,29 +201,40 @@ let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 let g:NetrwIsOpen=0
 
 function! ToggleNetrw()
-		if g:NetrwIsOpen
-					let i = bufnr("$")
-					while (i >= 1)
-						if (getbufvar(i, "&filetype") == "netrw")
-							silent exe "bwipeout " . i 
-						endif
-						let i-=1
-					endwhile
-					let g:NetrwIsOpen=0
-		else
-			let g:NetrwIsOpen=1
-			silent Lexplore
-		endif
+	if g:NetrwIsOpen
+		let i = bufnr("$")
+		while (i >= 1)
+			if (getbufvar(i, "&filetype") == "netrw")
+				silent exe "bwipeout " . i 
+			endif
+			let i-=1
+		endwhile
+		let g:NetrwIsOpen=0
+	else
+		let g:NetrwIsOpen=1
+		silent Lexplore
+	endif
 endfunction
 
 noremap <silent> <leader>t :call ToggleNetrw()<CR>
 
 """" Modeline
+let g:lightline = {
+  \ 'colorscheme': 'one',
+  \ 'active': {
+    \   'left': [ [ 'mode', 'paste'  ],
+    \             [ 'gitbranch', 'readonly', 'filename', 'modified'  ] ]
+    \ 
+	\ },
+			\ 'component_function': {
+    \   'gitbranch': 'gitbranch#name'
+    \ 
+	\},
+    \ 
+	\}
 
-let g:airline_theme='one'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'default'
-let g:airline_powerline_fonts = 1
+let g:tmuxline_theme = 'lightline'
+let g:tmuxline_preset = 'tmux'
 
 """" Emmett
 
@@ -244,6 +254,7 @@ let g:AutoPairsFlyMode = 0
 let g:AutoPairsShortcutBackInsert = '<M-b>'
 
 """"""""""" FZF:
+let g:fzf_layout = { 'down': '~30%'  }
 nnoremap <silent> <leader>f :Files<CR>
 nnoremap <silent> <leader>/ :Rg<CR>
 
