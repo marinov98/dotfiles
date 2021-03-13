@@ -1,6 +1,5 @@
 echo "python tools using pip..."
-sudo chown -R $(whoami) /usr/local/bin/
-pip3 install rope jedi pylint flake8 autopep8 yapf pygments virtualenv virtualenvwrapper powerline-shell pynvim
+python -m pip install rope jedi pylint flake8 autopep8 yapf pygments virtualenv virtualenvwrapper powerline-shell pynvim
 
 echo "npm installations..."
 
