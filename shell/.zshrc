@@ -4,7 +4,7 @@ export ZSH="/Users/marinmarinov/.oh-my-zsh"
 ###################################
 ####### SETTINGS
 ###################################
-ZSH_THEME="robbyrussell"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 CASE_SENSITIVE="true"
 
@@ -17,7 +17,12 @@ export VISUAL=~/nvim-osx64/bin/nvim
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
-plugins=(git z)
+plugins=(
+  git 
+  z
+  zsh-syntax-highlighting
+  zsh-autosuggestions
+)
 
 source $ZSH/oh-my-zsh.sh
 
