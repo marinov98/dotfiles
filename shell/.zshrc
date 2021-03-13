@@ -78,3 +78,4 @@ alias fzfi='rg --files --hidden --follow --no-ignore-vcs -g "!{node_modules,.git
 alias vz='v $(fzfi)'
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240"  
+ZSH_HIGHLIGHT_STYLES[path]=fg=255   
