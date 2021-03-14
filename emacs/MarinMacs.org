@@ -249,7 +249,7 @@ A nice and quick way to view/edit my configuration at any time
        (global-evil-mc-mode 1))
 
    ;; Evil magit overrides magit keybindings, package (magit) is shown further in the config
-   (use-package evil-magit :ensure t)
+   (use-package evil-magit :disabled :ensure t)
 #+END_SRC
 * Markup
  :PROPERTIES:
@@ -357,7 +357,6 @@ Org personal variables and functions
 - Make sure to run =M-x pdf-tools-install= If you decided to enable this package and use it 
    #+begin_src emacs-lisp
   (use-package pdf-view
-      :disabled
       :ensure pdf-tools
       :diminish (pdf-view-midnight-minor-mode pdf-view-printer-minor-mode)
       :mode ("\\.[pP][dD][fF]\\'" . pdf-view-mode)
@@ -463,7 +462,7 @@ You can enable/disable any themes that you like here
        (doom-themes-enable-bold t)
        (doom-themes-enable-italic t)
        :config
-       (load-theme 'doom-one t)
+       (load-theme 'doom-dracula t)
        (doom-themes-visual-bell-config) ;; Enable flashing mode-line on errors
        (doom-themes-org-config)) ;; Corrects (and improves) org-mode's native fontification.
 
@@ -1396,6 +1395,7 @@ Smerge mode deals with merge conflicts in git.
       (js2-mode . lsp)
       (rjsx-mode . lsp)
       (js-mode . lsp)
+      (java-mode . lsp)
       (typescript-mode . lsp)
       (web-mode . lsp))
       :custom
@@ -1429,6 +1429,7 @@ Smerge mode deals with merge conflicts in git.
       (setq eldoc-idle-delay 0.65)) ;; delay eldoc for 6.5/10 second
 
   (use-package company-lsp
+      :disabled 
       :requires company
       :ensure t
       :custom
