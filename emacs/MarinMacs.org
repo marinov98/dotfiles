@@ -1329,7 +1329,8 @@ Smerge mode deals with merge conflicts in git.
     "Modes"
     (("u" auto-fill-mode "auto-fill mode")
     ("W" web-mode "web mode")
-    ("J" rjsx-mode "rjsx mode"))
+    ("X" rjsx-mode "rjsx mode")
+    ("J" js-mode "js mode"))
 
     "Personal"
     (("m" goto-MarinMacs "goto config")
@@ -1779,13 +1780,18 @@ All for typescript
   (use-package tide
       :ensure t
       :after
-      (typescript-mode company flycheck)
+      (typescript-mode company flycheck web-mode)
       :hook
       ((typscript-mode . tide-setup)
       (rjsx-mode . tide-setup)
       (typescript-mode . tide-hl-identifier-mode)
       (before-save . tide-format-before-save))
       :config
+      (add-hook 'web-mode-hook
+          (lambda ()
+            (when (string-equal "tsx" (file-name-extension buffer-file-name))
+              (tide-setup))))
+      (flycheck-add-mode 'typescript-tslint 'web-mode)
       (flycheck-add-next-checker 'typescript-tide 'javascript-eslint)
       (flycheck-add-next-checker 'tsx-tide 'javascript-eslint))
 #+END_SRC
