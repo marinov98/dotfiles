@@ -1521,7 +1521,7 @@ Still experimenting with this, native gdb in emacs is also really good
 - Python Language Server: https://pypi.org/project/python-language-server/
 pip installs (useful packages for python development) 
  #+BEGIN_SRC markdown
-pip3 install rope jedi pylint flake8 autopep8 yapf pygments virtualenv virtualenvwrapper pynvim
+python -m pip install rope jedi pylint flake8 autopep8 yapf pygments virtualenv virtualenvwrapper pynvim
  #+END_SRC
 *** Settings
 #+BEGIN_SRC emacs-lisp
