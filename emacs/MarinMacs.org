@@ -247,9 +247,6 @@ A nice and quick way to view/edit my configuration at any time
        :ensure t
        :config
        (global-evil-mc-mode 1))
-
-   ;; Evil magit overrides magit keybindings, package (magit) is shown further in the config
-   (use-package evil-magit :disabled :ensure t)
 #+END_SRC
 * Markup
  :PROPERTIES:
@@ -1379,7 +1376,7 @@ Smerge mode deals with merge conflicts in git.
  - LSP stands for Language Server Protocal and makes setting up autocompletion and syntax checking easy. 
  - Check the [[https://github.com/emacs-lsp/lsp-mode][Official Repo]] to see what to install for your preferred development language
  - lsp-ui (UI integrations for lsp-mode)
- - company-lsp (this is the company completion backend)
+ - lsp-java (java seems to require its own package for lsp)
 #+BEGIN_SRC emacs-lisp  
   (use-package lsp-mode
       :ensure t
@@ -1428,19 +1425,9 @@ Smerge mode deals with merge conflicts in git.
       :config
       (setq eldoc-idle-delay 0.65)) ;; delay eldoc for 6.5/10 second
 
-  (use-package company-lsp
-      :disabled 
-      :requires company
-      :ensure t
-      :custom
-      (company-transformers nil)
-      (company-lsp-async t)
-      (company-lsp-cache-candidates nil) ;; Disable client-side cache because the LSP server does a better job.
-      (company-lsp-enable-snippet t)
-      (company-lsp-enable-recompletion t)
-      :config
-      (push 'company-lsp company-backends))
-
+(use-package lsp-java 
+    :ensure t
+    :config (add-hook 'java-mode-hook 'lsp))      
 #+END_SRC
 * DAP
  :PROPERTIES:
