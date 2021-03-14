@@ -1594,6 +1594,7 @@ Below is are packages and settings related to autocomplete and formatting
       :mode
       (("\\.html?\\'"      . web-mode)
       ("\\.phtml\\'"       . web-mode)
+      ("\\.tsx\\'"         . web-mode)
       ("\\.tpl\\.php\\'"   . web-mode)
       ("\\.blade\\.php\\'" . web-mode)
       ("\\.[agj]sp\\'"     . web-mode)
@@ -1770,8 +1771,7 @@ All for typescript
   ;; enable typescript in emacs
   (use-package typescript-mode
       :ensure t
-      :mode (("\\.ts\\'" . typescript-mode)
-             ("\\.tsx\\'" . typescript-mode))
+      :mode (("\\.ts\\'" . typescript-mode))
       :config
       (setq-default typescript-indent-level 2)) ;; indent 2 spaces by default
 
@@ -1782,6 +1782,7 @@ All for typescript
       (typescript-mode company flycheck)
       :hook
       ((typscript-mode . tide-setup)
+      (rjsx-mode . tide-setup)
       (typescript-mode . tide-hl-identifier-mode)
       (before-save . tide-format-before-save))
       :config
