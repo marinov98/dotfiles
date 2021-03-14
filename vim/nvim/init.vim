@@ -64,14 +64,12 @@ set guioptions-=e
 set sessionoptions+=tabpages,globals
 
 """"""" MODE SPECIFIC SETTINGS:
-autocmd BufEnter *.tsx set filetype=typescript
 autocmd FileType html setlocal ts=2 sts=2 sw=2
 autocmd FileType css setlocal ts=2 sts=2 sw=2
 autocmd FileType javascript setlocal ts=2 sts=2 sw=2
 autocmd FileType jsx setlocal ts=2 sts=2 sw=2
 autocmd FileType typescript setlocal ts=2 sts=2 sw=2
 autocmd FileType tsx setlocal ts=2 sts=2 sw=2
-
 
 " Don't offer to open certain files/directories
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
