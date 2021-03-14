@@ -8,7 +8,7 @@ echo "Certain shell configurations will be copied based on the system"
 if [[ $(uname -s) == Linux ]]
 then
     echo "machine found to be linux"
-    \cp shell/.bashrc ~/
+    \cp shell/.zshrc ~/
     \cp shell/.profile ~/
     \cp X/.xprofile ~/
     # \cp X/.Xresources ~/
