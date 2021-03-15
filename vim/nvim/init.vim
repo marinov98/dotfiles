@@ -165,7 +165,7 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 """"""""" COC CONFIG:
 let g:coc_global_extensions = [
-			\ 'coc-eslint', 'coc-prettier',
+			\ 'coc-eslint', 'coc-prettier', 'coc-java',
 			\ 'coc-tsserver', 'coc-tslint','coc-html',
 			\'coc-css', 'coc-json', 'coc-python', 'coc-yaml']
 
