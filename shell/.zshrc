@@ -8,8 +8,8 @@ ZSH_THEME="robbyrussell" # "powerlevel10k/powerlevel10k" if we are feeling extra
 
 CASE_SENSITIVE="true"
 
-export EDITOR=~/nvim-osx64/bin/nvim
-export VISUAL=~/nvim-osx64/bin/nvim
+export EDITOR=vim
+export VISUAL=vim
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
