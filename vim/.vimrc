@@ -12,9 +12,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 """"""" CODING:
 Plug 'easymotion/vim-easymotion'
 Plug 'SirVer/ultisnips'| Plug 'honza/vim-snippets'
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plug 'rhysd/vim-clang-format'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ervandew/supertab'
@@ -76,7 +73,6 @@ set guioptions-=e
 set sessionoptions+=tabpages,globals
 
 """"""" MODE SPECIFIC SETTINGS:
-autocmd BufEnter *.tsx set filetype=typescript
 autocmd FileType html setlocal ts=2 sts=2 sw=2
 autocmd FileType css setlocal ts=2 sts=2 sw=2
 autocmd FileType javascript setlocal ts=2 sts=2 sw=2
@@ -131,12 +127,6 @@ colorscheme gruvbox
 """"""""""""""""""""""
 """""" PACKAGE CONFIG
 """"""""""""""""""""""
-
-""""""" PRETTIER:
-let g:prettier#exec_cmd_path = "~/.prettierrc"
-let g:prettier#quickfix_enabled = 0
-let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
 
 " Clang-Format
 autocmd FileType c,cpp,objc ClangFormatAutoEnable
