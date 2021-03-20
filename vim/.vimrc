@@ -127,6 +127,8 @@ colorscheme gruvbox
 """"""""""""""""""""""
 """""" PACKAGE CONFIG
 """"""""""""""""""""""
+""""""" PRETTIER:
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 
 " Clang-Format
 autocmd FileType c,cpp,objc ClangFormatAutoEnable
