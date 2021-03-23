@@ -303,17 +303,17 @@ bindsym $mod+g mode "gaps"
 ##### EXTERNAL MONITOR(S)
 ################################
 
-set $displayMode "Set display mode [l]aptop  [h]DP2 [w]DP1"
-bindsym $mod+x mode $displayMode
+#set $displayMode "Set display mode [l]aptop  [h]DP2 [w]DP1"
+#bindsym $mod+x mode $displayMode
 
-mode $displayMode {
-    bindsym w exec "~/.config/i3/scripts/home-display.sh";  \
-                mode "default"
-    bindsym h exec " ~/.config/i3/scripts/DP2-display.sh"; \
-                mode "default"
-    bindsym l exec " ~/.config/i3/scripts/laptop-display.sh"; \
-                mode "default"
+#mode $displayMode {
+#    bindsym w exec "~/.config/i3/scripts/home-display.sh";  \
+#                mode "default"
+#    bindsym h exec " ~/.config/i3/scripts/DP2-display.sh"; \
+#                mode "default"
+#    bindsym l exec " ~/.config/i3/scripts/laptop-display.sh"; \
+#                mode "default"
 
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
+#    bindsym Return mode "default"
+#    bindsym Escape mode "default"
+#}
