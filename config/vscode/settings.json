@@ -14,7 +14,6 @@
     "vim.easymotion": true,
     "vim.leader": "<space>",
     "vim.normalModeKeyBindings": [
-        // save file
         {
             "before": ["<leader>", "s"],
             "after": [],
@@ -25,7 +24,6 @@
                 }
             ] 
         },
-        // window navigation
         {
             "before": ["<leader>", "2"],
             "commands": ["workbench.action.splitEditor"]
