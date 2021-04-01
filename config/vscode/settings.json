@@ -1,0 +1,44 @@
+{
+    "workbench.colorTheme": "One Monokai",
+    "workbench.iconTheme": "vscode-icons",
+    "workbench.editorAssociations": [
+        {
+            "viewType": "jupyter.notebook.ipynb",
+            "filenamePattern": "*.ipynb"
+        }
+    ],
+    "vim.useSystemClipboard": true,
+    "vim.incsearch": true,
+    "vim.hlsearch": true,
+    "vim.sneak": true,
+    "vim.easymotion": true,
+    "vim.leader": "<space>",
+    "vim.normalModeKeyBindings": [
+        // save file
+        {
+            "before": ["<leader>", "s"],
+            "after": [],
+            "commands": [
+                {
+                    "command": "workbench.action.files.save",
+                    "args": []
+                }
+            ] 
+        },
+        // window navigation
+        {
+            "before": ["<leader>", "2"],
+            "commands": ["workbench.action.splitEditor"]
+        },
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+          "before": ["<leader>", "n"],
+          "commands": [":nohl"]
+        },
+        {
+          "before": ["<leader>", "q"],
+          "commands": [":q"]
+        },
+    ]
+}
