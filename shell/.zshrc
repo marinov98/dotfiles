@@ -74,8 +74,7 @@ stty -ixon
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-alias fzfi='rg --files --hidden --follow --no-ignore-vcs -g "!{node_modules,.git}" | fzf'
-alias vz='v $(fzfi)'
+alias vz='v $(fzf)'
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240"  
 ZSH_HIGHLIGHT_STYLES[path]=fg=255   
