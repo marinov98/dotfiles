@@ -21,7 +21,7 @@ sudo apt install xrandr arandr
 echo "installing programming essentials..."
 sudo apt install gcc exuberant-ctags clang libclang-dev ctags libncurses5-dev libncursesw5-dev cmake ranger clang-format
 sudo apt install python-is-python3
-sudo apt install ripgrep
+sudo apt install ripgrep fzf
 
 
 echo "vim installation..."
