@@ -10,8 +10,6 @@ sudo apt install curl git gdb net-tools neofetch feh compton trash-cli chromium-
 curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 
 echo "keyboard configurations..."
-sudo add-apt-repository universe
-sudo apt install xcape 
 sudo apt install fonts-firacode
 sudo apt install fonts-inconsolata
 
@@ -21,20 +19,9 @@ echo "displays..."
 sudo apt install xrandr arandr
 
 echo "installing programming essentials..."
-sudo apt install gcc exuberant-ctags clang libclang-dev ctags libncurses5-dev libncursesw5-dev cmake ranger clang-format python3-pip
-sudo apt install python3 
-sudo apt install silversearcher-ag ripgrep
-
-
-
-echo "javascript..."
-sudo apt install nodejs npm 
-sudo apt install postgresql-10 postgresql postgresql-contrib
-
-echo "emacs installation..."
-sudo add-apt-repository ppa:ubuntu-elisp/ppa
-sudo apt update
-sudo apt install emacs-snapshot
+sudo apt install gcc exuberant-ctags clang libclang-dev ctags libncurses5-dev libncursesw5-dev cmake ranger clang-format
+sudo apt install python-is-python3
+sudo apt install ripgrep
 
 
 echo "vim installation..."
@@ -42,17 +29,6 @@ sudo apt install vim vim-gtk
 
 echo "battery management..."
 sudo apt install tlp && sudo apt install tlpui
-
-echo "Browsing and music..."
-sudo apt install snapd snapd-xdg-open yarn
-sudo snap install spotify postman
-sudo snap install --classic heroku
-
-echo "i3..."
-sudo apt install i3 i3status i3lock rofi
-
-sudo add-apt-repository ppa:mmstick76/alacritty
-sudo apt install alacritty
 
 echo "Package install complete, transfering appropriate files now"
 sudo chmod +x configure.sh
