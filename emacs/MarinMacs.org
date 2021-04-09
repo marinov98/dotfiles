@@ -1028,22 +1028,11 @@ I never lose where my cursor is thanks to this
       (company-minimum-prefix-length 3) ;; show completions after 3 chars
       (company-selection-wrap-around t) ;; goes to start of selection if you reached the bottom 
       (company-require-match 'never) ;; dont need to pick a choice 
+      (company-backends '(company-capf company-elisp company-yasnippet company-files company-dabbrev-code))
       :hook
       (after-init . global-company-mode))
       
 #+END_SRC 
-Add Company backends to enable elisp autocomplete
-#+BEGIN_SRC emacs-lisp
-
-      ;; elisp autocomplete
-      (defun my-elisp-mode-hook ()
-      "Hook for `emacs-lisp-mode'"
-      (set (make-local-variable 'company-backends)
-      '((company-capf company-elisp company-dabbrev-code company-yasnippet company-files))))
-
-      (add-hook 'emacs-lisp-mode-hook 'my-elisp-mode-hook)
-      (add-hook 'emacs-lisp-mode-hook 'company-mode)
-#+END_SRC
 * Git
  :PROPERTIES:
  :CUSTOM_ID: git
