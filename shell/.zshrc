@@ -8,8 +8,15 @@ ZSH_THEME="robbyrussell" # "powerlevel10k/powerlevel10k" if we are feeling extra
 
 CASE_SENSITIVE="true"
 
-export EDITOR=vim
+export TERM="xterm-256color" 
+
+# vim/nvim option
+export EDITOR=vim # change to nvim if using neovim
 export VISUAL=vim
+
+# emacs option
+# export EDITOR="emacsclient -t -a ''"
+# export VISUAL="emacsclient -c -a emacs"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -50,7 +57,7 @@ alias .4='cd ../../../../'                  # Go back 4 directory levels
 alias .5='cd ../../../../../'               # Go back 5 directory levels
 alias .6='cd ../../../../../../'            # Go back 6 directory levels
 
-alias v='~/./nvim-osx64/bin/nvim'             # v:            Opens any file in vim editor
+alias v='vim'                               # v:            Opens any file in vim editor
 alias ec='emacsclient -n -c -a ""'          # ec:           Opens emacs server
 alias c='code .'                            # c:            Open VS Code
 alias rr='ranger'                           # rr:           Opens ranger
