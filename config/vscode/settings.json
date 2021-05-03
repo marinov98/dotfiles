@@ -74,5 +74,9 @@
           "before": ["<leader>", "q"],
           "commands": [":q"]
         },
+        {
+          "before": ["<leader>", "f"],
+          "commands": ["workbench.action.quickOpen"]
+        }
     ]
 }
