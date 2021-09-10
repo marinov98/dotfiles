@@ -52,6 +52,11 @@
             "editorGroupHeader.tabsBackground": "#282A36",
             "panel.background": "#282A35",
             "titleBar.activeBackground": "#282A35"
+        },
+         "[Dracula Soft]": {
+            "titleBar.activeBackground":"#343746",
+            "activityBar.foreground": "#FF79C9",
+            "sideBar.background": "#343746"
         }
       },
       "editor.tokenColorCustomizations": {
