@@ -1,6 +1,4 @@
 {
-    "workbench.colorTheme": "One Monokai",
-    "workbench.iconTheme": "vscode-icons",
     "workbench.editorAssociations": [
         {
             "viewType": "jupyter.notebook.ipynb",
@@ -286,5 +284,25 @@
               "before": ["<leader>", "f"],
               "commands": ["workbench.action.quickOpen"]
             }
-    ]
+    ],
+    "python.formatting.provider": "black",
+    "java.codeGeneration.toString.codeStyle": "STRING_BUILDER",
+    "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+    "java.format.settings.profile": "GoogleStyle",
+    "java.codeGeneration.generateComments": true,
+    "java.codeGeneration.hashCodeEquals.useJava7Objects": true,
+    "java.codeGeneration.hashCodeEquals.useInstanceof": true,
+    "javascript.format.semicolons": "insert",
+    "typescript.format.semicolons": "insert",
+    "editor.fontWeight": 500,
+    "editor.formatOnSave": true,
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
 }
