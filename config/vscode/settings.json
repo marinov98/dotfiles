@@ -249,6 +249,9 @@
           "variables": "#d3d3d3f6",
        }
       },
+       "editor.codeActionsOnSave": {
+        "source.organizeImports": true
+        },
         "vim.useSystemClipboard": true,
         "vim.incsearch": true,
         "vim.hlsearch": true,
