@@ -309,4 +309,6 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "editor.bracketPairColorization.enabled": true
+    "editor.guides.bracketPairs": "active",
+    "editor.tabSize": 2
 }
