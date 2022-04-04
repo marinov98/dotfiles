@@ -259,7 +259,6 @@
     "vim.easymotion": true,
     "vim.leader": "<space>",
     "vim.normalModeKeyBindings": [
-        // save file
         {
             "before": [
                 "<leader>",
@@ -273,7 +272,6 @@
                 }
             ]
         },
-        // window navigation
         {
             "before": [
                 "<leader>",
@@ -283,7 +281,6 @@
                 "workbench.action.splitEditor"
             ]
         },
-        // error navigation
         {
             "before": [
                 "]",
@@ -331,7 +328,6 @@
                 "workbench.action.quickOpen"
             ]
         },
-        // coding lookup
         {
             "before": [
                 "g",
