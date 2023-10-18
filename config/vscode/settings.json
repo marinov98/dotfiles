@@ -355,6 +355,10 @@
                 "editor.action.rename"
             ]
         },
+        {
+            "before": ["<leader>", "<leader>"],
+            "commands": ["projectManager.listProjects"]
+        }
     ],
     "python.formatting.provider": "black",
     "java.codeGeneration.toString.codeStyle": "STRING_BUILDER",
