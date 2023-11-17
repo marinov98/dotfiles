@@ -1,10 +1,4 @@
 {
-    "workbench.editorAssociations": [
-        {
-            "viewType": "jupyter.notebook.ipynb",
-            "filenamePattern": "*.ipynb"
-        }
-    ],
     "workbench.colorCustomizations": {
         "[Default Dark+]": {
           "editor.background": "#1d1d1d",
@@ -104,8 +98,8 @@
               "editorGutter.modifiedBackground": "#8be9fd80",
               "editorHoverWidget.background": "#282a36",
               "editorHoverWidget.border": "#7b7f8b",
-              "editorIndentGuide.activeBackground": "#ffffff45",
-              "editorIndentGuide.background": "#ffffff1a",
+              "editorIndentGuide.activeBackground1": "#ffffff45",
+              "editorIndentGuide.background1": "#ffffff1a",
               "editorLineNumber.foreground": "#7b7f8b",
               "editorLink.activeForeground": "#97e1f1",
               "editorMarkerNavigation.background": "#262626",
@@ -380,7 +374,8 @@
     "[json]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "editor.bracketPairColorization.enabled": true
+    "editor.bracketPairColorization.enabled": true,
     "editor.guides.bracketPairs": "active",
-    "editor.tabSize": 2
+    "editor.tabSize": 2,
+    "editor.fontLigatures": true
 }
