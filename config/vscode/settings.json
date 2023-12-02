@@ -385,6 +385,8 @@
     },
     "editor.bracketPairColorization.enabled": true,
     "editor.guides.bracketPairs": "active",
+    "workbench.activityBar.visible": false,
+    "window.menuBarVisibility": "compact",
     "editor.tabSize": 2,
     "editor.fontLigatures": true
 }
