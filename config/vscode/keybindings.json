@@ -19,6 +19,7 @@
         "command": "workbench.action.focusBelowGroup", 
         "when": "editorTextFocus && vim.active && vim.mode != 'Insert'"
     },
+    }
             "key": "ctrl+e",
         "command": "workbench.action.toggleSidebarVisibility",
     },
