@@ -359,7 +359,7 @@
             ]
         },
         {
-            "before": ["<leader>", "<leader>"],
+            "before": ["<leader>", "p"],
             "commands": ["projectManager.listProjects"]
         }
     ],
