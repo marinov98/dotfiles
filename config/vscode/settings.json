@@ -373,6 +373,9 @@
     "[css]": {
        "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
+    "[yaml]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
     "editor.bracketPairColorization.enabled": true,
     "editor.guides.bracketPairs": "active",
     "workbench.activityBar.visible": false,
