@@ -235,149 +235,113 @@
               "walkThrough.embeddedEditorBackground": "#262626",
         }
       },
-      "editor.tokenColorCustomizations": {
+    "editor.tokenColorCustomizations": {
         "[Default Dark+]": {
           "comments": "#8f9f9f"
         },
         "[Dracula Soft]": {
           "variables": "#d3d3d3f6",
        }
-      },
-       "editor.codeActionsOnSave": {
+    },
+    "editor.codeActionsOnSave": {
         "source.organizeImports": true
-        },
-           "vim.useSystemClipboard": true,
+    },
+    "vim.useSystemClipboard": true,
     "vim.incsearch": true,
     "vim.hlsearch": true,
     "vim.sneak": true,
     "vim.easymotion": true,
     "vim.leader": "<space>",
     "vim.normalModeKeyBindings": [
-        {
-            "before": [
-                "<leader>",
-                "s"
-            ],
-            "after": [],
-            "commands": [
-                {
-                    "command": "workbench.action.files.save",
-                    "args": []
-                }
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "2"
-            ],
-            "commands": [
-                "workbench.action.splitEditor"
-            ]
-        },
-        {
-            "before": [
-                "]",
-                "g"
-            ],
-            "commands": [
-                "editor.action.marker.next"
-            ]
-        },
-        {
-            "before": [
-                "[",
-                "g"
-            ],
-            "commands": [
-                "editor.action.marker.prev"
-            ]
-        }
-    ],
+    {
+     "before": ["<leader>", "s"],
+     "after": [],
+     "commands": [
+       {
+         "command": "workbench.action.files.save",
+         "args": []
+       }
+     ]
+   },
+   {
+     "before": ["<leader>", "2"],
+     "commands": ["workbench.action.splitEditor"]
+   },
+   {
+     "before": ["<leader>", "l", "e"],
+     "commands": ["editor.action.marker.next"]
+   },
+   {
+     "before": ["<leader>", "l", "E"],
+     "commands": ["editor.action.marker.prev"]
+   },
+   {
+     "before": ["<leader>", "l", "F"],
+     "commands": ["editor.action.formatDocument"]
+    }
+   ],
     "vim.normalModeKeyBindingsNonRecursive": [
-        {
-            "before": [
-                "<leader>",
-                "n"
-            ],
-            "commands": [
-                ":nohl"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "q"
-            ],
-            "commands": [
-                ":q"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "f"
-            ],
-            "commands": [
-                "workbench.action.quickOpen"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "t"
-            ],
-            "commands": [
-                "workbench.action.toggleSidebarVisibility"
-            ]
-        },
-        {
-            "before": [
-                "g",
-                "r"
-            ],
-            "commands": [
-                "editor.action.goToReferences"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "r"
-            ],
-            "commands": [
-                "editor.action.changeAll"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "R"
-            ],
-            "commands": [
-                "editor.action.rename"
-            ]
-        },
-                {
-            "before": [
-                "<leader>",
-                "P"
-            ],
-            "commands": [
-                "projectManager.listProjects"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "p"
-            ],
-            "commands": [
-                "extension.vim_ctrl+^"
-            ]
-        }
-    ],
-    "python.formatting.provider": "black",
+   {
+     "before": ["<leader>", "n"],
+     "commands": [":nohl"]
+   },
+   {
+     "before": ["<leader>", "q"],
+     "commands": [":q"]
+   },
+   {
+     "before": ["<leader>", "f"],
+     "commands": ["workbench.action.quickOpen"]
+   },
+   {
+     "before": ["<leader>", "t", "t"],
+     "commands": ["workbench.action.terminal.toggleTerminal"]
+   },
+   {
+     "before": ["<leader>", "t", "T"],
+     "commands": ["workbench.action.terminal.new"]
+   },
+   {
+     "before": ["<leader>", "l", "r"],
+     "commands": ["editor.action.goToReferences"]
+   },
+   {
+     "before": ["<leader>", "l", "t"],
+     "commands": ["editor.action.goToTypeDefinition"]
+   },
+   {
+     "before": ["<leader>", "l", "R"],
+     "commands": ["editor.action.refactor"]
+   },
+   {
+     "before": ["<leader>", "l", "a"],
+     "commands": ["editor.action.changeAll"]
+   },
+   {
+     "before": ["<leader>", "l", "c"],
+     "commands": ["editor.action.rename"]
+   },
+   {
+     "before": ["<leader>", "<leader>", "l"],
+     "commands": ["projectManager.listProjects"]
+   },
+   {
+     "before": ["<leader>", "e", "f"],
+     "commands": ["workbench.action.findInFiles"]
+   },
+   {
+     "before": ["<leader>", "e", "x"],
+     "commands": ["workbench.view.extensions"]
+   },
+   {
+     "before": ["<leader>", "b", "b"],
+     "commands": ["extension.vim_ctrl+^"]
+   },
+   {
+     "before": ["<leader>", "m"],
+     "commands": ["workbench.action.showCommands"]
+   }
+   ],
     "java.codeGeneration.toString.codeStyle": "STRING_BUILDER",
     "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
     "java.format.settings.profile": "GoogleStyle",
@@ -397,10 +361,25 @@
     "[json]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
+    "[jsonc]": {
+       "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[less]": {
+       "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[html]": {
+       "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[css]": {
+       "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
     "editor.bracketPairColorization.enabled": true,
     "editor.guides.bracketPairs": "active",
     "workbench.activityBar.visible": false,
     "window.menuBarVisibility": "compact",
     "editor.tabSize": 2,
-    "editor.fontLigatures": true
+    "editor.fontLigatures": true,
+    "workbench.activityBar.visible": false,
+    "errorLens.enabledDiagnosticLevels": ["warning", "info", "error"],
+    "editor.minimap.enabled": false,
 }
