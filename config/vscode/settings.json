@@ -358,9 +358,23 @@
                 "editor.action.rename"
             ]
         },
+                {
+            "before": [
+                "<leader>",
+                "P"
+            ],
+            "commands": [
+                "projectManager.listProjects"
+            ]
+        },
         {
-            "before": ["<leader>", "p"],
-            "commands": ["projectManager.listProjects"]
+            "before": [
+                "<leader>",
+                "p"
+            ],
+            "commands": [
+                "extension.vim_ctrl+^"
+            ]
         }
     ],
     "python.formatting.provider": "black",
