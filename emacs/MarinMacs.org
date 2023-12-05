@@ -163,6 +163,10 @@ A nice and quick way to view/edit my configuration at any time
         "SPC" 'hydra-projectile/body
         "w" 'hydra-window/body
         "S" 'hydra-smerge/body
+        "l" 'hydra-lsp/body        ;; hydras
+        "SPC" 'hydra-projectile/body
+        "w" 'hydra-window/body
+        "S" 'hydra-smerge/body
         "l" 'hydra-lsp/body
         "d" 'hydra-describe/body
         "g" 'hydra-git/body
@@ -174,21 +178,22 @@ A nice and quick way to view/edit my configuration at any time
         "RET" 'hydra-bookmark/body
         ;; file finding, coding, searching, and yanking
         "f" 'counsel-find-file
-        "j" 'counsel-git ;; need git installed!
         "/" 'counsel-rg ;; need ripgrep installed!
-        "i" 'swiper-isearch
-        "m" 'swiper-multi
+        "ig" 'counsel-git ;; need git installed!
+        "ii" 'swiper-isearch
+        "im" 'swiper-multi
+        "m" 'counsel-M-x
         "*" 'swiper-thing-at-point
         "y" 'counsel-yank-pop
         "c" 'avy-goto-char-timer
-        "x" 'counsel-M-x
         ;; buffers
         "s" 'save-buffer
-        "b" 'ivy-switch-buffer
-        "B" 'counsel-switch-buffer
+        "bi" 'ivy-switch-buffer
+        "bc" 'counsel-switch-buffer
         "I" 'ibuffer
-        "p" 'switch-to-prev-buffer
-        "n" 'switch-to-next-buffer
+        "be" 'evil-buffer
+        "bp" 'switch-to-prev-buffer
+        "bn" 'switch-to-next-buffer
         "C" 'comment-region
         ;; deletion
         "q" 'delete-window
@@ -197,10 +202,11 @@ A nice and quick way to view/edit my configuration at any time
         "K" 'kill-buffer
         "o" 'delete-other-windows
         ;; package-specific
-        "t" 'neotree-toggle
-        "e" 'treemacs
-        "P" 'treemacs-projectile
-        "W" 'treemacs-select-window))
+        "tn" 'neotree-toggle
+        "e" 'eshell
+        "te" 'treemacs
+        "tp" 'treemacs-projectile
+        "tw" 'treemacs-select-window))
 
   (use-package evil
       :ensure t
