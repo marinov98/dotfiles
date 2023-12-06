@@ -224,6 +224,10 @@ A nice and quick way to view/edit my configuration at any time
       (evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-next-line)
       (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
       (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
+      (evil-define-key 'normal neotree-mode-map (kbd "a") 'neotree-create-node)
+      (evil-define-key 'normal neotree-mode-map (kbd "d") 'neotree-delete-node)
+      (evil-define-key 'normal neotree-mode-map (kbd "r") 'neotree-rename-node)
+      (evil-define-key 'normal neotree-mode-map (kbd "c") 'neotree-copy-node)
       (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle))
 
   (use-package evil-collection
