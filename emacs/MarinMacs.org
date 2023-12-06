@@ -1371,7 +1371,7 @@ Smerge mode deals with merge conflicts in git.
         :commands (lsp lsp-deferred)
         :diminish
         :hook
-        ((c++-mode c-mode python-mode css-mode yaml-mode json-mode js-mode js2-mode rjsx-mode java-mode typescript-mode web-mode) . lsp-mode)
+        ((c++-mode c-mode python-mode css-mode yaml-mode json-mode js-mode js2-mode rjsx-mode java-mode typescript-mode web-mode) . lsp-deferred)
         :custom
         (lsp-idle-delay 0.1)
         :config
