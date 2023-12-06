@@ -1390,8 +1390,6 @@ Smerge mode deals with merge conflicts in git.
         (lsp-idle-delay 0.1)
         :config
         (lsp-enable-which-key-integration t)
-        ;; warnings
-        (setq lsp-pyls-plugins-pycodestyle-enabled nil) ;; comment if you want code style warnings everywhere
         (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")))
 
     (use-package lsp-ui
