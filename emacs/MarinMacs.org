@@ -165,7 +165,8 @@ A nice and quick way to view/edit my configuration at any time
       (evil-leader/set-key
         ;; hydras
         "SPC" 'hydra-projectile/body
-        "w" 'hydra-window/body
+        "w" 'hydra-nav/body
+        "W" 'hydra-window/body
         "S" 'hydra-smerge/body
         "l" 'hydra-lsp/body
         "d" 'hydra-describe/body
@@ -181,6 +182,9 @@ A nice and quick way to view/edit my configuration at any time
         "/" 'counsel-rg ;; need ripgrep installed!
         "ig" 'counsel-git ;; need git installed!
         "ii" 'swiper-isearch
+        "iwc" 'ivy-wgrep-change-to-wgrep-mode
+        "iwe" 'wgrep-exit
+        "iwf" 'wgrep-finish-edit
         "im" 'swiper-multi
         "m" 'counsel-M-x
         "*" 'swiper-thing-at-point
@@ -220,7 +224,7 @@ A nice and quick way to view/edit my configuration at any time
       (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
       (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
       (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
-      (evil-define-key 'normal neotree-mode-map (kbd "g") 'neotree-refresh)
+      (evil-define-key 'normal neotree-mode-map (kbd "R") 'neotree-refresh)
       (evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-next-line)
       (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
       (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
@@ -425,7 +429,7 @@ Org personal variables and functions
       (dashboard-set-file-icons t)
       (dashboard-set-navigator t)
       (dashboard-startup-banner 'logo)
-      (dashboard-footer-messages '("Maintained by Marin P. Marinov since 2018"))
+      (dashboard-footer-messages '("Maintained by Marin Marinov since 2018"))
       :config
       (dashboard-setup-startup-hook)
       (setq dashboard-items '((recents  . 5)
@@ -642,7 +646,10 @@ You can enable/disable any themes that you like here
 #+END_SRC
 wgrep combined counsel-rg and/or counsel-ag makes changing text in multiple places much easier
 #+begin_src emacs-lisp
-  (use-package wgrep :ensure t)
+  (use-package wgrep
+    :ensure t
+    :custom
+    (wgrep-change-readonly-file t))
 #+end_src
 * Enhancements 
  :PROPERTIES:
@@ -737,11 +744,11 @@ a personal keybinding just because its so good. Check the [[https://github.com/a
  :END:
  A cheat sheet that comes in only when you need it
 #+BEGIN_SRC emacs-lisp
-(use-package which-key
-	:ensure t 
+  (use-package which-key
+    :ensure t 
     :diminish
-	:config
-	(which-key-mode))
+    :config
+    (which-key-mode))
 #+END_SRC
 ** Ace-Window
  :PROPERTIES:
@@ -753,19 +760,20 @@ Useful if you work on multiple windows and want an efficient way of switching be
        :ensure t
        :init 
        (global-set-key (kbd "C-:") 'ace-window)
-       (setq aw-background nil))
+       (setq aw-background nil)
+       (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 #+END_SRC
 ** Ranger
  :PROPERTIES:
  :CUSTOM_ID: ranger
  :END:
- - An alternative to dired.
+ - An alternative to dired. (Probably will remove soon but use if you would like)
  - ranger file manager but in emacs, works the exact same way
  - Repo: https://github.com/ralesi/ranger.el
 #+BEGIN_SRC emacs-lisp
   ;; Ranger
   (use-package ranger
-     :ensure t
+     :disabled
      :commands ranger
      :custom
      (ranger-parent-depth 1)
@@ -775,9 +783,9 @@ Useful if you work on multiple windows and want an efficient way of switching be
      (ranger-width-parents 0.2)
      (ranger-width-preview 0.50)
      (ranger-footer-delay 0.2)
-     (ranger-preview-delay 0.040)
-     :config
-     (ranger-override-dired-mode t))
+     (ranger-preview-delay 0.040))
+     ;; :config
+     ;; (ranger-override-dired-mode t))
 
 #+END_SRC
 ** All-The-Icons
@@ -948,6 +956,8 @@ I never lose where my cursor is thanks to this
  - replaces Emacs' undo system with a system that treats undo history as what it is: a branching tree of changes. 
  - Even if you are using emacs without evil-mode, this package can prove useful
  - Documentation: https://elpa.gnu.org/packages/undo-tree.html
+ - Undo-fu is an alternative, lightweight alternative to Undo tree (because undo tree sometimes is too buggy due to Emacs version or new config)
+ - Undo-fu documentation [[https://github.com/emacsmirror/undo-fu]]
 #+BEGIN_SRC emacs-lisp
   (use-package undo-tree
       :disabled
@@ -964,10 +974,9 @@ I never lose where my cursor is thanks to this
     (global-set-key (kbd "C-z")   'undo-fu-only-undo)
     (global-set-key (kbd "C-S-z") 'undo-fu-only-redo)
     ;; On modern systems you may wish to use much higher limits.
-    ;; This example sets the limit to 64mb, 1.5x (96mb) for the strong limit and 10x (960mb) for the outer limit. Emacs uses 100x for the outer limit but this may be too high when using increased limits.
-    (setq undo-limit 67108864) ; 64mb.
-    (setq undo-strong-limit 100663296) ; 96mb.
-    (setq undo-outer-limit 1006632960)) ; 960mb
+    (setq undo-limit (* 1024 1024 32)) ; 32mb.
+    (setq undo-strong-limit (* 1024 1024 48)) ; 48mb.
+    (setq undo-outer-limit (* 1024 1024 480))) ; 480mb
 #+END_SRC
 ** Yasnippet
  :PROPERTIES:
@@ -1127,7 +1136,7 @@ Smerge mode deals with merge conflicts in git.
 #+BEGIN_SRC emacs-lisp
   ;; help
   (defhydra hydra-describe (:color red :columns 3)
-    "Describe ðŸ¤“"
+    "Describe 🤓"
     ("d" counsel-descbinds "bindings")
     ("f" counsel-describe-function "func")
     ("F" counsel-describe-face "face")
@@ -1143,7 +1152,7 @@ Smerge mode deals with merge conflicts in git.
 #+END_SRC
 *** Projectile (project management)
 #+BEGIN_SRC emacs-lisp
-  (pretty-hydra-define hydra-projectile (:color red :title "ðŸš€ Projectile ðŸš€" :quit-key "q") 
+  (pretty-hydra-define hydra-projectile (:color red :title "🚀 Projectile 🚀" :quit-key "q") 
     ("Finding"
     (("f" counsel-projectile-find-file "find")
     ("o" projectile-find-other-file "find other")
@@ -1153,9 +1162,11 @@ Smerge mode deals with merge conflicts in git.
     "Launch"
     (("l" counsel-projectile "launch"))
 
-    "Text"
+    "Search/Replace" ;; search and replace 
     (("a" counsel-projectile-ag "ag") 
-    ("g" counsel-projectile-rg "rg"))
+    ("g" counsel-projectile-rg "rg")
+    ("c" projectile-replace "replace")
+    ("x" projectile-replace-regexp "replace regex"))
 
     "Switch"
     (("s" counsel-projectile-switch-project "switch project")
@@ -1167,7 +1178,18 @@ Smerge mode deals with merge conflicts in git.
 #+END_SRC
 *** Window (my attempt at window management)
 #+BEGIN_SRC emacs-lisp
-  (pretty-hydra-define hydra-window (:color pink :title "âš¡âš¡ Ivy + Windows âš¡âš¡" :quit-key "q") 
+  (pretty-hydra-define hydra-nav (:color blue :title "⚡ Window Nav ⚡" :quit-key "q") 
+    ("Split"
+    (("2" split-window-right "v-split")
+    ("3" split-window-below "h-split"))
+
+    "Navigate"
+    (("h" windmove-left "left")
+    ("j" windmove-down "down")
+    ("k" windmove-up "up")
+    ("l" windmove-right "right"))))
+
+  (pretty-hydra-define hydra-window (:color pink :title "⚡⚡ Ivy + Windows ⚡⚡" :quit-key "q") 
     ("Ivy"
     (("f" counsel-find-file "find")
     ("x" counsel-M-x "M-x")
@@ -1182,7 +1204,9 @@ Smerge mode deals with merge conflicts in git.
     (("h" windmove-left "left")
     ("j" windmove-down "down")
     ("k" windmove-up "up")
-    ("l" windmove-right "right"))
+    ("l" windmove-right "right")
+    ("a" ace-window "ace-window"))
+
 
     "Resizing"
     (("s" shrink-window "shrink window")
@@ -1204,7 +1228,7 @@ Smerge mode deals with merge conflicts in git.
 *** Git (magit and timemachine)
 #+BEGIN_SRC emacs-lisp
     (defhydra hydra-git (:color red)
-      "â³ Git â³"
+      "⏳ Git ⏳"
       ("g" magit "magit")
       ("d" magit-dispatch "dispatch")
       ("l" magit-list-repositories "list repos")
@@ -1213,7 +1237,7 @@ Smerge mode deals with merge conflicts in git.
 #+END_SRC
 *** Smerge (for handling merge conflicts)
     #+begin_src emacs-lisp
-   (pretty-hydra-define hydra-smerge (:color pink :title "âš¡ Smerge âš¡" :quit-key "q")
+   (pretty-hydra-define hydra-smerge (:color pink :title "⚡ Smerge ⚡" :quit-key "q")
      ("Move"
      (("n" smerge-next)
      ("p" smerge-prev))
@@ -1245,7 +1269,7 @@ Smerge mode deals with merge conflicts in git.
     #+end_src
 *** LSP (jump to definitions and references, list errors)
 #+BEGIN_SRC emacs-lisp
-  (pretty-hydra-define hydra-lsp (:color red :title "ðŸ“¡ LSP ðŸ“¡" :quit-key "q") 
+  (pretty-hydra-define hydra-lsp (:color red :title "📡 LSP 📡" :quit-key "q") 
     ("Find"
     (("j" lsp-ui-peek-find-definitions "peek-def")
     ("r" lsp-ui-peek-find-references "peek-ref")
@@ -1269,7 +1293,7 @@ Smerge mode deals with merge conflicts in git.
 #+END_SRC
 *** Avy (jumping around text)
 #+BEGIN_SRC emacs-lisp
-  (pretty-hydra-define hydra-avy (:color red :title "â†µ Avy â†µ" :quit-key "q")
+  (pretty-hydra-define hydra-avy (:color blue :title "↵ Avy ↵" :quit-key "q")
     ("Char"
     (("c" avy-goto-char "goto char")
     ("C" avy-goto-char-2 "goto char 2")
@@ -1293,7 +1317,7 @@ Smerge mode deals with merge conflicts in git.
   #+BEGIN_SRC emacs-lisp
 
   (defhydra hydra-launcher (:color red :columns 2)
-    "ï© Launch ï©"
+    " Launch "
     ("h" man "man")
     ("g" (browse-url "https://www.google.com/") "Google")
     ("G" (browse-url "https://github.com/marinov98") "GitHub")
@@ -1307,7 +1331,7 @@ Smerge mode deals with merge conflicts in git.
 *** Writing (taking notes, and writing)
 #+BEGIN_SRC emacs-lisp
   (defhydra hydra-writing (:color red :columns 2)
-    "âœ“ Writing and Spelling âœ“"
+    "✓ Writing and Spelling ✓"
     ("d" ispell-change-dictionary "change dict")
     ("s" ispell-word "spell word")
     ("f" flyspell-buffer "flyspell buffer")
@@ -1319,7 +1343,7 @@ Smerge mode deals with merge conflicts in git.
 #+END_SRC
 *** Utility (useful commands for me)
 #+BEGIN_SRC emacs-lisp
-  (pretty-hydra-define hydra-utility (:color red :title "ðŸ˜Ž Utility ðŸ˜Ž" :quit-key "q")
+  (pretty-hydra-define hydra-utility (:color red :title "😎 Utility 😎" :quit-key "q")
     ("Search"
     (("r" counsel-recentf "recent files")
     ("a" counsel-ag "ag")
@@ -1347,7 +1371,7 @@ Smerge mode deals with merge conflicts in git.
     #+begin_src emacs-lisp
 
   (defhydra hydra-org (:color blue :columns 4)
-    "ï‚© ORG ï‚©"
+    " ORG "
     ("o" org-open-at-point "open link")
     ("c" org-toggle-comment "comment")
     ("i" org-time-stamp "time stamp")
@@ -1366,7 +1390,7 @@ Smerge mode deals with merge conflicts in git.
 *** Bookmark (managing bookmarks)
     #+begin_src emacs-lisp
   (defhydra hydra-bookmark (:color blue :columns 2)
-    "ðŸ“’ Bookmarks ðŸ“’"
+    "📒 Bookmarks 📒"
     ("c" counsel-bookmark "counsel")
     ("j" bookmark-jump "jump")
     ("l" bookmark-bmenu-list "list")
