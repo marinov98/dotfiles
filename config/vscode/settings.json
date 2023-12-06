@@ -1,17 +1,5 @@
 {
     "workbench.colorCustomizations": {
-        "[Default Dark+]": {
-          "editor.background": "#1d1d1d",
-          "sideBar.background": "#131212",
-          "sideBar.foreground": "#e8e9e9",
-          "scrollbarSlider.hoverBackground": "#35b1d3",
-          "scrollbarSlider.activeBackground": "#05607e",
-          "sideBarSectionHeader.background": "#086289",
-          "list.hoverBackground": "#850a60",
-          "statusBar.background": "#086289",
-          "activityBar.foreground": "#DCDCAA",
-          "activityBar.background": "#272626"
-        },
         "[Cobalt2]": {
           "editor.background": "#132d42",
           "editor.foreground": "#fff",
@@ -28,22 +16,6 @@
           "activityBar.background": "#000000",
           "list.hoverBackground": "#08898d",
           "sideBarSectionHeader.background": "#0a8181"
-        },
-         "[Dracula Darcula]": {
-            "sideBar.background": "#282A36",
-            "sideBarSectionHeader.background": "#282A36",
-            "sideBarSectionHeader.foreground": "#BBBBBB",
-            "activityBar.background": "#282A36",
-            "activityBar.foreground": "#FF79C6",
-            "list.hoverBackground": "#FF79C6",
-            "sideBar.foreground": "#BBBBBB",
-            "activityBar.activeBackground": "#282A33",
-            "tab.activeBackground": "#282A30",
-            "tab.inactiveBackground": "#282A36",
-            "statusBar.background": "#282A36",
-            "editorGroupHeader.tabsBackground": "#282A36",
-            "panel.background": "#282A35",
-            "titleBar.activeBackground": "#282A35"
         },
          "[Dracula Soft]": {
               "activityBar.activeBackground": "#bd93f910",
@@ -383,6 +355,7 @@
     "editor.tabSize": 2,
     "editor.fontLigatures": true,
     "workbench.activityBar.visible": false,
+    "editor.lineNumbers": "relative",
     "errorLens.enabledDiagnosticLevels": ["warning", "info", "error"],
     "editor.minimap.enabled": false,
 }
