@@ -1,6 +1,6 @@
 #+TITLE: MarinMacs Configuration 
-#+AUTHOR: Marin P. Marinov  
-#+EMAIL: marin.marinov@macaulay.cuny.edu
+#+AUTHOR: Marin Marinov  
+#+EMAIL: mmarinov55555@gmail.com
 #+LANGUAGE: en
 #+TAGS: Emacs
 #+DESCRIPTION: My emacs config for software development
@@ -73,12 +73,17 @@ Indentation
   - I am not sure if all packages work with line numbers properly, but so far everything works
   - relative line numbers are very useful when combined with vim bindings as they help you see how far you need to jump to get where you want to 
 #+BEGIN_SRC emacs-lisp
-  (when (version<= "26.0.50" emacs-version )         
-    (setq display-line-numbers-type 'relative)           ;; relative line numbers help you see how far you need to jump to get where you want to 
-    (setq display-line-numbers-current-absolute t)
-    (setq display-line-numbers-width 2)
-    (setq display-line-numbers-widen t)
-    (global-display-line-numbers-mode))                  ;; display line numbers in every buffer
+     (when (version<= "26.0.50" emacs-version )         
+       (setq display-line-numbers-type 'relative) ;; relative line numbers help you see how far you need to jump to get where you want to 
+       (setq display-line-numbers-current-absolute t)
+       (setq display-line-numbers-width 2)
+       (setq display-line-numbers-widen t)
+       (global-display-line-numbers-mode 1)
+       (global-visual-line-mode t)) ;; display line numbers in every buffer
+
+    ;; Disable line numbers for some mode
+    (dolist (mode '(org-mode-hook term-mode-hook shell-mode-hook treemacs-mode-hook eshell-mode-hook))
+             (add-hook mode (lambda () (display-line-numbers-mode 0))))
 #+END_SRC
 Displaying time and date in emacs
 #+BEGIN_SRC emacs-lisp
@@ -163,10 +168,6 @@ A nice and quick way to view/edit my configuration at any time
         "SPC" 'hydra-projectile/body
         "w" 'hydra-window/body
         "S" 'hydra-smerge/body
-        "l" 'hydra-lsp/body        ;; hydras
-        "SPC" 'hydra-projectile/body
-        "w" 'hydra-window/body
-        "S" 'hydra-smerge/body
         "l" 'hydra-lsp/body
         "d" 'hydra-describe/body
         "g" 'hydra-git/body
@@ -185,13 +186,13 @@ A nice and quick way to view/edit my configuration at any time
         "m" 'counsel-M-x
         "*" 'swiper-thing-at-point
         "y" 'counsel-yank-pop
-        "c" 'avy-goto-char-timer
+        "c" 'compile
         ;; buffers
         "s" 'save-buffer
         "bi" 'ivy-switch-buffer
         "bc" 'counsel-switch-buffer
         "I" 'ibuffer
-        "be" 'evil-buffer
+        "bb" 'evil-buffer
         "bp" 'switch-to-prev-buffer
         "bn" 'switch-to-next-buffer
         "C" 'comment-region
@@ -224,7 +225,7 @@ A nice and quick way to view/edit my configuration at any time
       (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
       (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
       (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle))
- 
+
   (use-package evil-collection
       :after evil 
       :ensure t
@@ -849,25 +850,25 @@ I never lose where my cursor is thanks to this
 - I did not think I would use it, but its a dependency for packages I use often (LSP) so I figured I would incorporate it into my workflow
 - Repo: https://github.com/Alexander-Miller/treemacs
    #+begin_src emacs-lisp
-  (use-package treemacs 
-      :ensure t
-      :config
-      (setq treemacs-resize-icons 4))
-  
-  (use-package treemacs-evil 
-      :after treemacs
-      :ensure t)
+     (use-package treemacs 
+         :ensure t
+         :config
+         (setq treemacs-resize-icons 4))
 
-  (use-package lsp-treemacs
-      :init (lsp-treemacs-sync-mode 1))
+     (use-package treemacs-evil 
+         :after treemacs
+         :ensure t)
 
-  (use-package treemacs-projectile
-      :after treemacs projectile
-      :ensure t)
+     (use-package lsp-treemacs
+         :init (lsp-treemacs-sync-mode 1))
 
-  (use-package treemacs-magit
-      :after treemacs magit
-      :ensure t)
+     (use-package treemacs-projectile
+         :after treemacs projectile
+         :ensure t)
+
+     (use-package treemacs-magit
+         :after treemacs magit
+         :ensure t)
    #+end_src
 * Projectile
  :PROPERTIES:
@@ -880,26 +881,20 @@ I never lose where my cursor is thanks to this
    ;; Projectile-mode 
   (use-package projectile
       :ensure t
+      :diminish projectil-mode
       :bind 
       (("C-c p" . projectile-command-map))
       :custom 
-      (projectile-project-search-path '("~/Projects/"))
       (projectile-sort-order 'recently-active)
       (projectile-completion-system 'ivy)
-      :config
-      (projectile-mode t)
-      ;; css files seem to be problematic when using projectile-find-other-file
-      (add-to-list 'projectile-other-file-alist '("html" "js")) ;; switch from html -> js
-      (add-to-list 'projectile-other-file-alist '("js" "html")) ;; switch from js -> html
-      (add-to-list 'projectile-other-file-alist '("js" "css")) ;; switch from js -> css
-      (add-to-list 'projectile-other-file-alist '("css" "js")) ;; switch from css -> js
-      (add-to-list 'projectile-other-file-alist '("jsx" "css")) ;; switch from jsx -> css
-      (add-to-list 'projectile-other-file-alist '("css" "jsx")) ;; switch from css -> jsx
-      (add-to-list 'projectile-other-file-alist '("js" "html" "css"))
-      (add-to-list 'projectile-other-file-alist '("jsx" "html" "css")))
+      :init
+      (when (file-directory-p "~/Projects") ;; change this to whatever directory your projects are in
+        (setq projectile-project-search-path '("~/Projects"))))
 
-   ;; Counsel-Projectile (I utilize counsel projectile bindings in my hydra-projectile)
-  (use-package counsel-projectile :ensure t)
+  ;; Counsel-Projectile (I utilize counsel projectile bindings in my hydra-projectile)
+  (use-package counsel-projectile
+    :ensure t
+    :config (counsel-projectile-mode))
 #+END_SRC
 * Shell
  :PROPERTIES:
@@ -1004,8 +999,6 @@ I never lose where my cursor is thanks to this
        (flycheck-info ((t (:underline (:style line :color "#9500ff")))))
        (flycheck-warning ((t (:underline (:style line :color "#fbff00")))))
        (flycheck-error ((t (:underline (:style line :color "#ff0000")))))
-       :custom
-       (flycheck-check-syntax-automatically '(mode-enabled save)); run flycheck only on save
        :config
        (global-flycheck-mode t))
 #+END_SRC
@@ -1017,27 +1010,27 @@ I never lose where my cursor is thanks to this
 - By itself it does not do much, you need to add backends to it for your specific development language to get autocomplete
 - Official Site: http://company-mode.github.io/
 #+BEGIN_SRC emacs-lisp
-  (use-package company
-      :ensure t
-      :bind
-      ("S-SPC" . company-complete) ;; for when I need completion at 1 or 2 chars
-      (:map company-active-map
-      ("<tab>" . nil) ;; I will use this for a different purpose shown below
-      ("M-n" . nil) ;; old select next key
-      ("M-p" . nil) ;; old select prev key
-      ("<tab>" . company-select-next) ;; make tab our new select next key
-      ("M-j" . company-select-next)  ;; also make M-j new select next key
-      ("M-k"  . company-select-previous))
-      :custom
-      (company-tooltip-limit 5) ; show 5 candidates at one time
-      (company-idle-delay 0.15) ;; delay (in seconds) when candidates are shown, change if you need to, potentially cpu intensive on older machines if set to 0
-      (company-minimum-prefix-length 3) ;; show completions after 3 chars
-      (company-selection-wrap-around t) ;; goes to start of selection if you reached the bottom 
-      (company-require-match 'never) ;; dont need to pick a choice 
-      (company-backends '(company-capf company-elisp company-yasnippet company-files company-dabbrev-code))
-      :hook
-      (after-init . global-company-mode))
-      
+    (use-package company
+        :ensure t
+        :after lsp-mode
+        :hook (lsp-mode . company-mode)
+        :bind
+        ("S-SPC" . company-complete) ;; for when I need completion at 1 or 2 chars
+        (:map company-active-map
+            ("<tab>" . company-complete-selection) 
+            ("M-j" . company-select-next)  ;; use M-j and M-k to navigate completions (can use C-n and C-p as well I believe)
+            ("M-k"  . company-select-previous))
+        (:map lsp-mode-map
+            ("<tab>" . company-indent-or-complete-common))
+        :custom
+        (company-tooltip-limit 5) ; show 5 candidates at one time
+        (company-idle-delay 0.0) ;; delay (in seconds) when candidates are shown, change if you need to, potentially cpu intensive on older machines if set to 0
+        (company-minimum-prefix-length 2) ;; show completions after 2 chars
+        (company-selection-wrap-around t) ;; goes to start of selection if you reached the bottom 
+        (company-require-match 'never) ;; dont need to pick a choice 
+        :hook
+        (after-init . global-company-mode))
+
 #+END_SRC 
 * Git
  :PROPERTIES:
@@ -1065,12 +1058,10 @@ I never lose where my cursor is thanks to this
       (magit-repository-directories '(("~/Projects" . 1))))
 
   (use-package gitignore-mode
-      :ensure t
       :mode (("\\.gitignore\\'" . gitignore-mode)
              ("\\.dockerignore\\'" . gitignore-mode))) ;; syntax from gitignore is more or less identical to that of .dockerignore
 
   (use-package gitconfig-mode
-      :ensure t
       :mode "\\.gitconfig\\'")
 
   (use-package git-timemachine
@@ -1374,56 +1365,51 @@ Smerge mode deals with merge conflicts in git.
  - lsp-ui (UI integrations for lsp-mode)
  - lsp-java (java seems to require its own package for lsp)
 #+BEGIN_SRC emacs-lisp  
-  (use-package lsp-mode
-      :ensure t
-      :diminish
-      :commands lsp
-      :hook
-      ((c++-mode . lsp)
-      (c-mode . lsp)
-      (python-mode . lsp) ;; python server known to be slow and laggy 
-      (css-mode . lsp)
-      (yaml-mode . lsp)
-      (json-mode . lsp)
-      (js2-mode . lsp)
-      (rjsx-mode . lsp)
-      (js-mode . lsp)
-      (java-mode . lsp)
-      (typescript-mode . lsp)
-      (web-mode . lsp))
-      :custom
-      (lsp-idle-delay 0.15)
-      (lsp-flycheck-live-reporting nil) ;; allows our previous flycheck setting to only check syntax on save to work
-      :config
-      (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")))
+    (use-package lsp-mode
+        :ensure t
+        :init 
+        :commands (lsp lsp-deferred)
+        :diminish
+        :hook
+        ((c++-mode c-mode python-mode css-mode yaml-mode json-mode js-mode js2-mode rjsx-mode java-mode typescript-mode web-mode) . lsp-mode)
+        :custom
+        (lsp-idle-delay 0.1)
+        :config
+        (lsp-enable-which-key-integration t)
+        (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")))
 
-  (use-package lsp-ui
-      :after lsp-mode flycheck
-      :ensure t
-      :diminish
-      :commands lsp-ui-mode
-      :hook (lsp-mode . lsp-ui-mode)
-      :bind
-      (:map lsp-ui-peek-mode-map
-      ("M-j" . lsp-ui-peek--select-next)
-      ("M-k" . lsp-ui-peek--select-prev))
-      :custom
-      (lsp-ui-doc-enable t)
-      (lsp-ui-doc-delay 0.65) ;; display doc after 6.5/10 of a second
-      (lsp-ui-doc-use-childframe t)
-      (lsp-ui-doc-position 'top)
-      (lsp-ui-doc-include-signature t)
-      (lsp-ui-sideline-enable nil)
-      (lsp-ui-flycheck-list-position 'right)
-      (lsp-ui-peek-enable t)
-      (lsp-ui-peek-list-width 60)
-      (lsp-ui-peek-peek-height 25)
-      :config
-      (setq eldoc-idle-delay 0.65)) ;; delay eldoc for 6.5/10 second
+    (use-package lsp-ui
+        :after lsp-mode flycheck
+        :ensure t
+        :diminish
+        :commands lsp-ui-mode
+        :hook (lsp-mode . lsp-ui-mode)
+        :bind
+        (:map lsp-ui-peek-mode-map
+        ("M-j" . lsp-ui-peek--select-next)
+        ("M-k" . lsp-ui-peek--select-prev))
+        :custom
+        (lsp-ui-doc-enable t)
+        (lsp-ui-doc-delay 0.4) ;; display doc after 4/10 of a second
+        (lsp-ui-doc-use-childframe t)
+        (lsp-ui-doc-position 'top)
+        (lsp-ui-doc-include-signature t)
+        (lsp-ui-sideline-enable t)
+        (lsp-ui-sideline-show-diagnostics t)
+        (lsp-ui-sideline-show-hover t)
+        (lsp-ui-peek-enable t)
+        (lsp-ui-peek-list-width 60)
+        (lsp-ui-peek-peek-height 25)
+        :config
+        (setq eldoc-idle-delay 0.5)) ;; delay eldoc for 5/10 second
 
-(use-package lsp-java 
-    :ensure t
-    :config (add-hook 'java-mode-hook 'lsp))      
+  (use-package lsp-java 
+      :ensure t
+      :config (add-hook 'java-mode-hook 'lsp))      
+
+  (use-package lsp-ivy
+      :ensure t
+      :after lsp-mode lsp-ui)
 #+END_SRC
 * DAP
  :PROPERTIES:
@@ -1590,7 +1576,6 @@ Below is are packages and settings related to autocomplete and formatting
       :mode
       (("\\.html?\\'"      . web-mode)
       ("\\.phtml\\'"       . web-mode)
-      ("\\.tsx\\'"         . web-mode)
       ("\\.tpl\\.php\\'"   . web-mode)
       ("\\.blade\\.php\\'" . web-mode)
       ("\\.[agj]sp\\'"     . web-mode)
@@ -1685,6 +1670,7 @@ visually display hex values as colors
       :commands skewer-mode run-skewer
       :config
       (add-hook 'js2-mode-hook 'skewer-mode)
+      (add-hook 'js-mode-hook 'skewer-mode)
       (add-hook 'css-mode-hook 'skewer-css-mode)
       (add-hook 'html-mode-hook 'skewer-html-mode)
       (skewer-setup))
@@ -1767,13 +1753,13 @@ All for typescript
   ;; enable typescript in emacs
   (use-package typescript-mode
       :ensure t
-      :mode (("\\.ts\\'" . typescript-mode))
+      :mode "\\.ts\\'"
       :config
       (setq-default typescript-indent-level 2)) ;; indent 2 spaces by default
 
-  ;; typescript integrated development environment
+  ;; typescript integrated development environment (don't use since we have LSP)
   (use-package tide
-      :ensure t
+      :disabled
       :after
       (typescript-mode company flycheck web-mode)
       :hook
