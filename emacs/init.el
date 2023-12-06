@@ -64,18 +64,3 @@
 
 
 (org-babel-load-file (expand-file-name "~/.emacs.d/MarinMacs.org"))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(org-default-notes-file (concat org-directory "/Personal/notes.org"))
- '(org-directory "~/Projects/org")
- '(package-selected-packages
-   '(gitconfig-mode gitignore-mode company yasnippet-snippets yaml-mode writegood-mode which-key wgrep web-mode wc-mode undo-tree typescript-mode treemacs-projectile treemacs-magit treemacs-evil rjsx-mode react-snippets ranger rainbow-mode quelpa-use-package pretty-hydra prettier-js pdf-tools org-bullets neotree modern-cpp-font-lock lsp-ui lsp-java json-mode graphql-mode git-timemachine exec-path-from-shell evil-surround evil-multiedit evil-mc evil-leader evil-collection emmet-mode doom-themes doom-modeline dockerfile-mode diminish dashboard csv-mode counsel-projectile clang-format+ beacon all-the-icons-ivy all-the-icons-dired add-node-modules-path)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
