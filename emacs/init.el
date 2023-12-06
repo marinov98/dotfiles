@@ -26,7 +26,7 @@
 
 (defun marinov/set-memory ()
   "Set memory usage settings after start up."
-  (setq gc-cons-threshold (* 1024 1024 50)) ;; (50mb) default threshold is low by modern standards
+  (setq gc-cons-threshold 800000) ;;  default threshold
   (setq large-file-warning-threshold (* 1024 1024 80)) ;; (80mb) default threshold is low by modern standards
   (setq read-process-output-max (* 1024 1024)) ;; (1mb) Increase amount of data which Emacs reads from the process (recommended by lsp package)
   (setq gc-cons-percentage 0.1))
@@ -41,7 +41,6 @@
 
 (add-hook 'after-init-hook #'marinov/set-memory)
 (add-hook 'after-init-hook #'marinov/reset-file-name-handler-alist)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Package manager
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
