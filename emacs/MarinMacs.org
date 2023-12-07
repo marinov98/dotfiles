@@ -215,7 +215,7 @@ A nice and quick way to view/edit my configuration at any time
        "y" '(counsel-yank-pop :wk "Counsel Yank Pop"))
 
     (mpm/leader-keys
-       "r" '(:ignore t :wk "Anything Grep")
+       "r" '(:ignore t :wk "Grep Actions")
        "r g" '(counsel-git-grep :wk "Counsel Git Grep")
        "r r" '(grep :wk "Grep")
        "r w" '(:ignore t :wk "Wgrep Actions")
@@ -235,6 +235,7 @@ A nice and quick way to view/edit my configuration at any time
       "e s" '(eshell :wk "Emacs Shell"))
 
     (mpm/leader-keys
+      "t" '(:ignore t :wk "NeoTree/Treemacs")    
       "t n" '(neotree-toggle :wk "Toggle NeoTree")
       "t e" '(treemacs :wk "Treemacs")
       "t p" '(treemacs-projectile :wk "Treemacs Projectile")
@@ -1170,7 +1171,7 @@ Smerge mode deals with merge conflicts in git.
 #+BEGIN_SRC emacs-lisp
   ;; help
   (defhydra hydra-describe (:color red :columns 3)
-    "Describe 🤓"
+    "Describe ðŸ¤“"
     ("d" counsel-descbinds "bindings")
     ("f" counsel-describe-function "func")
     ("F" counsel-describe-face "face")
@@ -1186,7 +1187,7 @@ Smerge mode deals with merge conflicts in git.
 #+END_SRC
 *** Projectile (project management)
 #+BEGIN_SRC emacs-lisp
-  (pretty-hydra-define hydra-projectile (:color red :title "🚀 Projectile 🚀" :quit-key "q") 
+  (pretty-hydra-define hydra-projectile (:color red :title "ðŸš€ Projectile ðŸš€" :quit-key "q") 
     ("Finding"
     (("f" counsel-projectile-find-file "find")
     ("o" projectile-find-other-file "find other")
@@ -1212,7 +1213,7 @@ Smerge mode deals with merge conflicts in git.
 #+END_SRC
 *** Window (my attempt at window management)
 #+BEGIN_SRC emacs-lisp
-  (pretty-hydra-define hydra-window-mini (:color blue :title "⚡ Window Nav ⚡" :quit-key "q") 
+  (pretty-hydra-define hydra-window-mini (:color blue :title "âš¡ Window Nav âš¡" :quit-key "q") 
     ("Split"
     (("2" split-window-right "v-split")
     ("3" split-window-below "h-split"))
@@ -1226,7 +1227,7 @@ Smerge mode deals with merge conflicts in git.
     ("k" windmove-up "up")
     ("l" windmove-right "right"))))
 
-  (pretty-hydra-define hydra-window (:color pink :title "⚡⚡ Ivy + Windows ⚡⚡" :quit-key "q") 
+  (pretty-hydra-define hydra-window (:color pink :title "âš¡âš¡ Ivy + Windows âš¡âš¡" :quit-key "q") 
     ("Ivy"
     (("f" counsel-find-file "find")
     ("x" counsel-M-x "M-x")
@@ -1265,7 +1266,7 @@ Smerge mode deals with merge conflicts in git.
 *** Git (magit and timemachine)
 #+BEGIN_SRC emacs-lisp
     (defhydra hydra-git (:color red)
-      "⏳ Git ⏳"
+      "â³ Git â³"
       ("g" magit "magit")
       ("d" magit-dispatch "dispatch")
       ("l" magit-list-repositories "list repos")
@@ -1274,7 +1275,7 @@ Smerge mode deals with merge conflicts in git.
 #+END_SRC
 *** Smerge (for handling merge conflicts)
     #+begin_src emacs-lisp
-   (pretty-hydra-define hydra-smerge (:color pink :title "⚡ Smerge ⚡" :quit-key "q")
+   (pretty-hydra-define hydra-smerge (:color pink :title "âš¡ Smerge âš¡" :quit-key "q")
      ("Move"
      (("n" smerge-next)
      ("p" smerge-prev))
@@ -1306,7 +1307,7 @@ Smerge mode deals with merge conflicts in git.
     #+end_src
 *** LSP (jump to definitions and references, list errors)
 #+BEGIN_SRC emacs-lisp
-  (pretty-hydra-define hydra-lsp (:color red :title "📡 LSP 📡" :quit-key "q") 
+  (pretty-hydra-define hydra-lsp (:color red :title "ðŸ“¡ LSP ðŸ“¡" :quit-key "q") 
     ("Find"
     (("j" lsp-ui-peek-find-definitions "peek-def")
     ("r" lsp-ui-peek-find-references "peek-ref")
@@ -1330,7 +1331,7 @@ Smerge mode deals with merge conflicts in git.
 #+END_SRC
 *** Avy (jumping around text)
 #+BEGIN_SRC emacs-lisp
-  (pretty-hydra-define hydra-avy (:color blue :title "↵ Avy ↵" :quit-key "q")
+  (pretty-hydra-define hydra-avy (:color blue :title "â†µ Avy â†µ" :quit-key "q")
     ("Char"
     (("c" avy-goto-char "goto char")
     ("C" avy-goto-char-2 "goto char 2")
@@ -1354,7 +1355,7 @@ Smerge mode deals with merge conflicts in git.
   #+BEGIN_SRC emacs-lisp
 
   (defhydra hydra-launcher (:color red :columns 2)
-    " Launch "
+    "ï© Launch ï©"
     ("h" man "man")
     ("g" (browse-url "https://www.google.com/") "Google")
     ("G" (browse-url "https://github.com/marinov98") "GitHub")
@@ -1368,7 +1369,7 @@ Smerge mode deals with merge conflicts in git.
 *** Writing (taking notes, and writing)
 #+BEGIN_SRC emacs-lisp
   (defhydra hydra-writing (:color red :columns 2)
-    "✓ Writing and Spelling ✓"
+    "âœ“ Writing and Spelling âœ“"
     ("d" ispell-change-dictionary "change dict")
     ("s" ispell-word "spell word")
     ("f" flyspell-buffer "flyspell buffer")
@@ -1380,7 +1381,7 @@ Smerge mode deals with merge conflicts in git.
 #+END_SRC
 *** Utility (useful commands for me)
 #+BEGIN_SRC emacs-lisp
-  (pretty-hydra-define hydra-utility (:color red :title "😎 Utility 😎" :quit-key "q")
+  (pretty-hydra-define hydra-utility (:color red :title "ðŸ˜Ž Utility ðŸ˜Ž" :quit-key "q")
     ("Search"
     (("r" counsel-recentf "recent files")
     ("a" counsel-ag "ag")
@@ -1408,7 +1409,7 @@ Smerge mode deals with merge conflicts in git.
     #+begin_src emacs-lisp
 
   (defhydra hydra-org (:color blue :columns 4)
-    " ORG "
+    "ï‚© ORG ï‚©"
     ("o" org-open-at-point "open link")
     ("c" org-toggle-comment "comment")
     ("i" org-time-stamp "time stamp")
@@ -1427,7 +1428,7 @@ Smerge mode deals with merge conflicts in git.
 *** Bookmark (managing bookmarks)
     #+begin_src emacs-lisp
   (defhydra hydra-bookmark (:color blue :columns 2)
-    "📒 Bookmarks 📒"
+    "ðŸ“’ Bookmarks ðŸ“’"
     ("c" counsel-bookmark "counsel")
     ("j" bookmark-jump "jump")
     ("l" bookmark-bmenu-list "list")
