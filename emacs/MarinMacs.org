@@ -1004,6 +1004,7 @@ I never lose where my cursor is thanks to this
         (setq undo-tree-auto-save-history nil)))
 
   (use-package undo-fu
+    :disabled
     :config
     (global-unset-key (kbd "C-z"))
     (global-set-key (kbd "C-z")   'undo-fu-only-undo)
