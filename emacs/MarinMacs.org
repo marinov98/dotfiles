@@ -153,95 +153,122 @@ A nice and quick way to view/edit my configuration at any time
  - Evil mode grants us vim bindings and evil-leader allows us to create a <leader> key which creates limitless possibilities for keybindings
  - Official repository for Evil Mode: https://github.com/emacs-evil/evil
  - Evil Leader repository: https://github.com/cofi/evil-leader 
+ - General repository: [[https://github.com/noctuid/general.el][General]]
  - evil-collections: There were certain modes that open with vanilla emacs bindings, this package ensures every mode starts in evil mode
 #+BEGIN_SRC emacs-lisp
-  (use-package evil-leader
-      :ensure t
-      :init
-      (setq evil-want-keybinding nil)
-      :config
-      (global-evil-leader-mode t)
-      (evil-leader/set-leader "<SPC>")
-      (evil-leader/set-key
-        ;; hydras
-        "SPC" 'hydra-projectile/body
-        "w" 'hydra-nav/body
-        "W" 'hydra-window/body
-        "S" 'hydra-smerge/body
-        "l" 'hydra-lsp/body
-        "d" 'hydra-describe/body
-        "g" 'hydra-git/body
-        "TAB" 'hydra-launcher/body
-        "v" 'hydra-writing/body
-        "u" 'hydra-utility/body
-        "a" 'hydra-avy/body
-        "r" 'hydra-org/body
-        "RET" 'hydra-bookmark/body
-        ;; file finding, coding, searching, and yanking
-        "f" 'counsel-find-file
-        "/" 'counsel-rg ;; need ripgrep installed!
-        "ig" 'counsel-git ;; need git installed!
-        "ii" 'swiper-isearch
-        "iwc" 'ivy-wgrep-change-to-wgrep-mode
-        "iwe" 'wgrep-exit
-        "iwf" 'wgrep-finish-edit
-        "im" 'swiper-multi
-        "m" 'counsel-M-x
-        "*" 'swiper-thing-at-point
-        "y" 'counsel-yank-pop
-        "c" 'compile
-        ;; buffers
-        "s" 'save-buffer
-        "bi" 'ivy-switch-buffer
-        "bc" 'counsel-switch-buffer
-        "I" 'ibuffer
-        "bb" 'evil-buffer
-        "bp" 'switch-to-prev-buffer
-        "bn" 'switch-to-next-buffer
-        "C" 'comment-region
-        ;; deletion
-        "q" 'delete-window
-        "Q" 'save-buffers-kill-terminal
-        "k" 'kill-current-buffer
-        "K" 'kill-buffer
-        "o" 'delete-other-windows
-        ;; package-specific
-        "tn" 'neotree-toggle
-        "e" 'eshell
-        "te" 'treemacs
-        "tp" 'treemacs-projectile
-        "tw" 'treemacs-select-window))
+      (use-package general
+        :ensure t
+        :config
+        (general-evil-setup)
+       ;; set up 'SPC' as the global leader key
+       (general-create-definer mpm/leader-keys
+          :states '(normal insert visual emacs)
+          :keymaps 'override
+          :prefix "SPC" ;; set leader
+          :global-prefix "C-S-SPC") ;; access leader in insert mode
 
-  (use-package evil
-      :ensure t
-      :init
-      (setq evil-want-keybinding nil)
-      (setq evil-undo-system 'undo-fu)
-      :config
-      (evil-mode 1)
-      ;; NeoTree override keybindings, package (neotree) is shown further in the config
-      (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
-      (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
-      (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-      (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
-      (evil-define-key 'normal neotree-mode-map (kbd "R") 'neotree-refresh)
-      (evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-next-line)
-      (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
-      (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
-      (evil-define-key 'normal neotree-mode-map (kbd "a") 'neotree-create-node)
-      (evil-define-key 'normal neotree-mode-map (kbd "d") 'neotree-delete-node)
-      (evil-define-key 'normal neotree-mode-map (kbd "r") 'neotree-rename-node)
-      (evil-define-key 'normal neotree-mode-map (kbd "c") 'neotree-copy-node)
-      (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle))
+       (mpm/leader-keys
+          "SPC" '(hydra-projectile/body :wk "Projectile Hydra")
+          "w" '(hydra-nav/body :wk "Window Nav Hydra")
+          "S" '(hydra-smerge/body :wk "Smerge Hydra")
+          "l" '(hydra-lsp/body :wk "LSP Hydra")
+          "d" '(hydra-describe/body :wk "Describe Hydra")
+          "g" '(hydra-git/body :wk "Git Hydra")
+          "TAB" '(hydra-launcher/body :wk "Launcher Hydra")
+          "v" '(hydra-writing/body :wk "Writing Hydra")
+          "u" '(hydra-utility/body :wk "Utility Hydra")
+          "a" '(hydra-avy/body :wk "Avy Hydra")
+          "o" '(hydra-org/body :wk "Org Hydra")
+          "RET" '(hydra-bookmark/body :wk "Bookmark Hydra"))
 
-  (use-package evil-collection
-      :after evil 
-      :ensure t
-      :custom
-      (evil-collection-company-use-tng nil) ;; I hacked this already (Personal preference)
-      (evil-collection-setup-debugger-keys nil) ;; no need for this (Again.. Personal preference)
-      :config
-      (evil-collection-init))
+       (mpm/leader-keys
+          "i" '(:ignore t :wk "Ivy/Swiper/Counsel")
+          "i c" '(counsel-compile :wk "Counsel Compile")
+          "i g" '(counsel-git :wk "Counsel Git") ;; need git installed!
+          "i f" '(counsel-fzf :wk "Counsel Git") 
+          "i i" '(swiper-isearch :wk "Swiper Isearch")
+          "i o" '(ivy-occur :wk "Ivy Occur")
+          "i m" '(swiper-multi :wk "Swiper Multi Select"))
+
+       (mpm/leader-keys
+          "b" '(:ignore t :wk "Buffers")
+          "bi" '(ivy-switch-buffer :wk "(Ivy)Switch Buffer")
+          "bc" '(counsel-switch-buffer :wk "(Counsel)Switch Buffer")
+          "bb" '(evil-buffer :wk "Ctrl+^ Buffer")
+          "bp" '(switch-to-prev-buffer :wk "Previous Buffer")
+          "bn" '(switch-to-next-buffer :wk "Next Buffer"))
+
+       (mpm/leader-keys
+          "q" '(delete-window :wk "Delete Window")
+          "Q" '(save-buffers-kill-terminal :wk "Save Buffers - Kill Terminal")
+          "k" '(kill-current-buffer :wk "Kill Current Buffer")
+          "K" '(kill-buffer :wk "Kill Buffer"))
+
+       (mpm/leader-keys
+          "s" '(save-buffer :wk "Save Buffer")
+          "f" '(counsel-find-file :wk "Counsel Find File")
+          "c" '(comment-region :wk "Comment Region")
+          "/" '(counsel-rg :wk "Counsel rg") ;; need ripgrep installed!
+          "m" '(counsel-M-x :wk "Counsel M-x")
+          "*" '(swiper-thing-at-point :wk "Swiper at Point")
+          "I" '(ibuffer :wk "Ibuffer")
+          "y" '(counsel-yank-pop :wk "Counsel Yank Pop"))
+
+       (mpm/leader-keys
+          "r" '(:ignore t :wk "Anything Grep")
+          "r g" '(counsel-git-grep :wk "Counsel Git Grep")
+          "r r" '(grep :wk "Grep")
+          "r w c" '(ivy-wgrep-change-to-wgrep-mode :wk "ivy to wgrep mode")
+          "r w e" '(wgrep-exit :wk "Wgrep Exit")
+          "r w a" '(wgrep-abort-changes :wk "Wgrep Abort Changes")
+          "r w f" '(wgrep-finish-edit :wk "Wgrep Finish Edit"))
+
+       (mpm/leader-keys
+         "e" '(:ignore t :wk "Eshell/Evaluate")    
+         "e b" '(eval-buffer :wk "Evaluate elisp in buffer")
+         "e d" '(eval-defun :wk "Evaluate defun containing or after point")
+         "e e" '(eval-expression :wk "Evaluate and elisp expression")
+         "e h" '(counsel-esh-history :which-key "Eshell history")
+         "e l" '(eval-last-sexp :wk "Evaluate elisp expression before point")
+         "e r" '(eval-region :wk "Evaluate elisp in region")
+         "e s" '(eshell :wk "Emacs Shell"))
+
+       (mpm/leader-keys
+         "t n" '(neotree-toggle :wk "Toggle NeoTree")
+         "t e" '(treemacs :wk "Treemacs")
+         "t p" '(treemacs-projectile :wk "Treemacs Projectile")
+         "t w" '(treemacs-select-window :wk "Treemacs Select Window")))
+
+      (use-package evil
+          :ensure t
+          :init
+          (setq evil-want-keybinding nil)
+          (setq evil-undo-system 'undo-redo)
+          :config
+          (evil-mode 1)
+          ;; NeoTree override keybindings, package (neotree) is shown further in the config
+          (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
+          (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
+          (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
+          (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
+          (evil-define-key 'normal neotree-mode-map (kbd "R") 'neotree-refresh)
+          (evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-next-line)
+          (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
+          (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
+          (evil-define-key 'normal neotree-mode-map (kbd "a") 'neotree-create-node)
+          (evil-define-key 'normal neotree-mode-map (kbd "d") 'neotree-delete-node)
+          (evil-define-key 'normal neotree-mode-map (kbd "r") 'neotree-rename-node)
+          (evil-define-key 'normal neotree-mode-map (kbd "c") 'neotree-copy-node)
+          (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle))
+
+      (use-package evil-collection
+          :after evil 
+          :ensure t
+          :custom
+          (evil-collection-company-use-tng nil) ;; I hacked this already (Personal preference)
+          (evil-collection-setup-debugger-keys nil) ;; no need for this (Again.. Personal preference)
+          :config
+          (evil-collection-init))
 
 #+END_SRC
 ** Evil utility 
@@ -941,6 +968,12 @@ I never lose where my cursor is thanks to this
 
         (setq eshell-prompt-function #'4lex1v:eshell-prompt
                eshell-prompt-regexp ".*>>+ ")
+        (setq
+          eshell-hist-ignoredups t
+          eshell-scroll-to-bottom-on-input t
+          eshell-destroy-buffer-when-process-dies t
+          eshell-visual-commands'("bash" "fish" "htop" "ssh" "top" "zsh"))
+
        (global-set-key (kbd "C-`") 'eshell) 
    #+END_SRC
 * Globals
@@ -1182,6 +1215,9 @@ Smerge mode deals with merge conflicts in git.
     ("Split"
     (("2" split-window-right "v-split")
     ("3" split-window-below "h-split"))
+
+    "Full Window Hydra"
+    (("w" hydra-window/body  "Full Window Hydra"))
 
     "Navigate"
     (("h" windmove-left "left")
