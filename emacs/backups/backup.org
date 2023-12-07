@@ -81,6 +81,62 @@
 * Evil-Mode
 #+BEGIN_SRC emacs-lisp
 ;;;; Package needed to enable vim bindings...
+  (use-package evil-leader
+      :ensure t
+      :init
+      (setq evil-want-keybinding nil)
+      :config
+      (global-evil-leader-mode t)
+       (evil-leader/set-leader "<SPC>")
+      (evil-leader/set-key
+        ;; hydras
+        "SPC" 'hydra-projectile/body
+        "w" 'hydra-nav/body
+        "W" 'hydra-window/body
+        "S" 'hydra-smerge/body
+        "l" 'hydra-lsp/body
+        "d" 'hydra-describe/body
+        "g" 'hydra-git/body
+        "TAB" 'hydra-launcher/body
+        "v" 'hydra-writing/body
+        "u" 'hydra-utility/body
+        "a" 'hydra-avy/body
+        "o" 'hydra-org/body
+        "RET" 'hydra-bookmark/body
+        ;; file finding, coding, searching, and yanking
+        "f" 'counsel-find-file
+        "/" 'counsel-rg ;; need ripgrep installed!
+        "m" 'counsel-M-x
+        "*" 'swiper-thing-at-point
+        "y" 'counsel-yank-pop
+        "ic" 'counsel-compile
+        "ig" 'counsel-git ;; need git installed!
+        "ii" 'swiper-isearch
+        "io" 'ivy-occur
+        "iwc" 'ivy-wgrep-change-to-wgrep-mode
+        "iwe" 'wgrep-exit
+        "iwf" 'wgrep-finish-edit
+        "im" 'swiper-multi
+        ;; buffers
+        "s" 'save-buffer
+        "I" 'ibuffer
+        "c" 'comment-region
+        "bi" 'ivy-switch-buffer
+        "bc" 'counsel-switch-buffer
+        "bb" 'evil-buffer
+        "bp" 'switch-to-prev-buffer
+        "bn" 'switch-to-next-buffer
+        ;; deletion
+        "q" 'delete-window
+        "Q" 'save-buffers-kill-terminal
+        "k" 'kill-current-buffer
+        "K" 'kill-buffer
+        ;; package-specific
+        "es" 'eshell
+        "tn" 'neotree-toggle
+        "te" 'treemacs
+        "tp" 'treemacs-projectile
+        "tw" 'treemacs-select-window))
 
 (use-package evil
   :ensure t
