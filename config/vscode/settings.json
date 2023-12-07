@@ -224,145 +224,125 @@
     "vim.sneak": true,
     "vim.easymotion": true,
     "vim.leader": "<space>",
-      "vim.normalModeKeyBindings": [
+    "vim.normalModeKeyBindings": [
     {
       "before": ["<leader>", "s"],
-
       "after": [],
-
       "commands": [
         {
           "command": "workbench.action.files.save",
-
           "args": []
         }
       ]
     },
-
     {
       "before": ["<leader>", "2"],
-
       "commands": ["workbench.action.splitEditor"]
     },
-
     {
       "before": ["<leader>", "l", "e"],
-
       "commands": ["editor.action.marker.next"]
     },
-
     {
       "before": ["<leader>", "l", "E"],
-
       "commands": ["editor.action.marker.prev"]
     },
-
     {
       "before": ["<leader>", "l", "F"],
-
       "commands": ["editor.action.formatDocument"]
     }
   ],
   "vim.normalModeKeyBindingsNonRecursive": [
     {
       "before": ["<leader>", "n"],
-
       "commands": [":nohl"]
     },
-
     {
       "before": ["<leader>", "q"],
-
       "commands": [":q"]
     },
-
     {
       "before": ["<leader>", "f"],
-
       "commands": ["workbench.action.quickOpen"]
     },
-
     {
       "before": ["<leader>", "t", "t"],
-
       "commands": ["workbench.action.terminal.toggleTerminal"]
     },
-
     {
       "before": ["<leader>", "t", "T"],
-
       "commands": ["workbench.action.terminal.new"]
     },
-
     {
       "before": ["<leader>", "l", "r"],
-
       "commands": ["editor.action.goToReferences"]
     },
-
     {
       "before": ["<leader>", "l", "t"],
-
       "commands": ["editor.action.goToTypeDefinition"]
     },
-
     {
       "before": ["<leader>", "l", "R"],
-
       "commands": ["editor.action.refactor"]
     },
-
     {
       "before": ["<leader>", "l", "a"],
-
       "commands": ["editor.action.changeAll"]
     },
-
     {
       "before": ["<leader>", "l", "c"],
-
       "commands": ["editor.action.rename"]
     },
-
     {
       "before": ["<leader>", "<leader>", "l"],
-
       "commands": ["projectManager.listProjects"]
     },
-
+    {
+      "before": ["<leader>", "<leader>", "s"],
+      "commands": ["projectManager.saveProject"]
+    },
     {
       "before": ["<leader>", "e", "f"],
-
       "commands": ["workbench.action.findInFiles"]
     },
-
     {
       "before": ["<leader>", "e", "x"],
-
       "commands": ["workbench.view.extensions"]
     },
-
     {
       "before": ["<leader>", "e", "g"],
-
       "commands": ["workbench.view.scm"]
     },
-
     {
       "before": ["<leader>", "e", "c"],
-
       "commands": ["workbench.panel.chatSidebar.copilot"]
     },
-
     {
       "before": ["<leader>", "b", "b"],
-
       "commands": ["extension.vim_ctrl+^"]
     },
-
+    {
+      "before": ["<leader>", "b", "n"],
+      "commands": [":tabnext"]
+    },
+    {
+      "before": ["<leader>", "b", "p"],
+      "commands": [":tabprev"]
+    },
+    {
+      "before": ["<leader>", "d", "d"],
+      "commands": ["workbench.action.files.openFolder"]
+    },
+    {
+      "before": ["<leader>", "u", "m"],
+      "commands": ["workbench.action.openSettingsJson"]
+    },
+    {
+      "before": ["<leader>", "u", "k"],
+      "commands": ["workbench.action.openGlobalKeybindingsFile"]
+    },
     {
       "before": ["<leader>", "m"],
-
       "commands": ["workbench.action.showCommands"]
     }
   ],
