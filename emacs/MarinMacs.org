@@ -172,7 +172,6 @@ A nice and quick way to view/edit my configuration at any time
        "w" '(hydra-window-mini/body :wk "Window Hydra")
        "S" '(hydra-smerge/body :wk "Smerge Hydra")
        "l" '(hydra-lsp/body :wk "LSP Hydra")
-       "d" '(hydra-describe/body :wk "Describe Hydra")
        "g" '(hydra-git/body :wk "Git Hydra")
        "TAB" '(hydra-launcher/body :wk "Launcher Hydra")
        "v" '(hydra-writing/body :wk "Writing Hydra")
@@ -180,6 +179,15 @@ A nice and quick way to view/edit my configuration at any time
        "a" '(hydra-avy/body :wk "Avy Hydra")
        "o" '(hydra-org/body :wk "Org Hydra")
        "RET" '(hydra-bookmark/body :wk "Bookmark Hydra"))
+
+    (mpm/leader-keys
+       "d" '(:ignore t :wk "Dired/Describe")
+       "d d" '(dired :wk "Open dired")
+       "d h" '(hydra-describe/body :wk "Describe Hydra")
+       "d j" '(dired-jump :wk "Dired jump to current")
+       "d f" '(wdired-finish-edit :wk "Writable dired finish edit")
+       "d w" '(wdired-change-to-wdired-mode :wk "Writable dired")
+       "d n" '(neotree-dir :wk "Open directory in neotree"))
 
     (mpm/leader-keys
        "i" '(:ignore t :wk "Ivy/Swiper/Counsel")
@@ -192,11 +200,11 @@ A nice and quick way to view/edit my configuration at any time
 
     (mpm/leader-keys
        "b" '(:ignore t :wk "Buffers")
-       "bi" '(ivy-switch-buffer :wk "(Ivy)Switch Buffer")
-       "bc" '(counsel-switch-buffer :wk "(Counsel)Switch Buffer")
-       "bb" '(evil-buffer :wk "Ctrl+^ Buffer")
-       "bp" '(switch-to-prev-buffer :wk "Previous Buffer")
-       "bn" '(switch-to-next-buffer :wk "Next Buffer"))
+       "b i" '(ivy-switch-buffer :wk "(Ivy)Switch Buffer")
+       "b c" '(counsel-switch-buffer :wk "(Counsel)Switch Buffer")
+       "b b" '(evil-buffer :wk "Ctrl+^ Buffer")
+       "b p" '(switch-to-prev-buffer :wk "Previous Buffer")
+       "b n" '(switch-to-next-buffer :wk "Next Buffer"))
 
     (mpm/leader-keys
        "q" '(delete-window :wk "Delete Window")
