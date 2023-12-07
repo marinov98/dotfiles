@@ -169,7 +169,7 @@ A nice and quick way to view/edit my configuration at any time
 
     (mpm/leader-keys
        "SPC" '(hydra-projectile/body :wk "Projectile Hydra")
-       "w" '(hydra-nav/body :wk "Window Nav Hydra")
+       "w" '(hydra-window-mini/body :wk "Window Hydra")
        "S" '(hydra-smerge/body :wk "Smerge Hydra")
        "l" '(hydra-lsp/body :wk "LSP Hydra")
        "d" '(hydra-describe/body :wk "Describe Hydra")
@@ -1212,7 +1212,7 @@ Smerge mode deals with merge conflicts in git.
 #+END_SRC
 *** Window (my attempt at window management)
 #+BEGIN_SRC emacs-lisp
-  (pretty-hydra-define hydra-nav (:color blue :title "⚡ Window Nav ⚡" :quit-key "q") 
+  (pretty-hydra-define hydra-window-mini (:color blue :title "⚡ Window Nav ⚡" :quit-key "q") 
     ("Split"
     (("2" split-window-right "v-split")
     ("3" split-window-below "h-split"))
