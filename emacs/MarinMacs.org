@@ -1488,6 +1488,8 @@ Smerge mode deals with merge conflicts in git.
         (lsp-ui-doc-position 'top)
         (lsp-ui-doc-include-signature t)
         (lsp-ui-sideline-enable t)
+        (lsp-ui-doc-show-with-cursor t)
+        (lsp-ui-doc-show-with-mouse nil)
         (lsp-ui-sideline-show-diagnostics t)
         (lsp-ui-sideline-show-hover t)
         (lsp-ui-peek-enable t)
