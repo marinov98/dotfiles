@@ -58,6 +58,7 @@ Indentation
   (setq-default indent-tabs-mode nil)                    ;; disable tabs and use spaces
   (setq-default tab-width 4)                             ;; set default tab width 4 
   (setq backward-delete-char-untabify-method 'hungry)    ;; backspaces entire tab instead of one space at a time
+  (setq compilation-scroll-output 'first-error)          ;; compile scroll location
 #+END_SRC
 - Options, display, parenthesis 
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
