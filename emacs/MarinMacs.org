@@ -273,6 +273,7 @@ A nice and quick way to view/edit my configuration at any time
       :bind
       ((:map evil-normal-state-map
          ("/" . swiper-isearch)
+         ("C-/" . comment-line)
          ("*" . swiper-thing-at-point)))
       :config
       (evil-mode 1)
@@ -1455,7 +1456,7 @@ Smerge mode deals with merge conflicts in git.
     ("t" org-todo "todo state")
     ("a" org-todo-list "agenda")
     ("l" org-show-todo-tree "show todo tree")
-    ("S" marinov/enter-eval "enter and eval")
+    ("m" marinov/enter-eval "enter and eval")
     ("s" org-edit-special "edit special")
     ("x" org-edit-src-exit "exit special")
     ("n" marinov/jump-to-notes "goto notes")
