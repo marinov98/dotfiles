@@ -8,7 +8,7 @@ This file, if it exists, specifies how to initialize Emacs for you.  Emacs looks
 - Reference =alt-Configs= folder for either more minimal or alternative implementations of my config (I currently use Ivy but I have a helm and an icomplete version of my configuration as well in the folder)
 - The =img= folder contains snapshots of my configuration in action
 * Contact
-- Email me if there are any issues/questions/things that can be better: marin.marinov@macaulay.cuny.edu
+- Email me if there are any issues/questions/things that can be better: mmarinov55555@gmail.com
 ** Purpose:
 - Initially, I made this repo for myself to keep track of my configurations...
 - Now I want to make it more of a guide for anyone trying to switch to emacs whether its from another editor and/or is confused about what packages to install and how to configure.
