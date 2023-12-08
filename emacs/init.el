@@ -64,6 +64,7 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package)
+  (eval-and-compile (setq use-package-expand-minimally t))
   (package-install 'quelpa-use-package)
   (quelpa
     '(quelpa-use-package
