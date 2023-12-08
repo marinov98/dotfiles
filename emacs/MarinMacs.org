@@ -166,20 +166,18 @@ A nice and quick way to view/edit my configuration at any time
        :states '(normal insert visual emacs)
        :keymaps 'override
        :prefix "SPC" ;; set leader
-       :global-prefix "C-S-SPC") ;; access leader in insert mode
+       :global-prefix "S-SPC") ;; access leader in insert mode
 
     (mpm/leader-keys
        "SPC" '(hydra-projectile/body :wk "Projectile Hydra")
        "w" '(hydra-window-mini/body :wk "Window Hydra")
        "S" '(hydra-smerge/body :wk "Smerge Hydra")
-       "l" '(hydra-lsp/body :wk "LSP Hydra")
+       "l" '(hydra-code/body :wk "LSP Hydra")
        "g" '(hydra-git/body :wk "Git Hydra")
-       "TAB" '(hydra-launcher/body :wk "Launcher Hydra")
        "v" '(hydra-writing/body :wk "Writing Hydra")
        "u" '(hydra-utility/body :wk "Utility Hydra")
        "a" '(hydra-avy/body :wk "Avy Hydra")
-       "o" '(hydra-org/body :wk "Org Hydra")
-       "RET" '(hydra-bookmark/body :wk "Bookmark Hydra"))
+       "o" '(hydra-org/body :wk "Org Hydra"))
 
     (mpm/leader-keys
        "d" '(:ignore t :wk "Dired/Describe")
@@ -190,20 +188,24 @@ A nice and quick way to view/edit my configuration at any time
        "d w" '(wdired-change-to-wdired-mode :wk "Writable dired")
        "d n" '(neotree-dir :wk "Open directory in neotree"))
 
+  
     (mpm/leader-keys
        "i" '(:ignore t :wk "Ivy/Swiper/Counsel")
        "i c" '(counsel-compile :wk "Counsel Compile")
-       "i g" '(counsel-git :wk "Counsel Git") ;; need git installed!
+       "i g" '(counsel-git :wk "Counsel Git") 
        "i f" '(counsel-fzf :wk "Counsel FZF") 
-       "i i" '(swiper-isearch :wk "Swiper Isearch")
+       "i r" '(counsel-rg :wk "Counsel Rg") 
+       "i s" '(swiper-isearch :wk "Swiper Isearch")
+       "i i" '(ibuffer :wk "Ibuffer")
        "i o" '(ivy-occur :wk "Ivy Occur")
        "i m" '(swiper-multi :wk "Swiper Multi Select"))
 
     (mpm/leader-keys
-       "b" '(:ignore t :wk "Buffers")
+       "b" '(:ignore t :wk "Buffers/BookMark")
        "b i" '(ivy-switch-buffer :wk "(Ivy)Switch Buffer")
        "b c" '(counsel-switch-buffer :wk "(Counsel)Switch Buffer")
        "b b" '(evil-buffer :wk "Ctrl+^ Buffer")
+       "b z" '(bury-buffer :wk "Bury Buffer")
        "b p" '(switch-to-prev-buffer :wk "Previous Buffer")
        "b n" '(switch-to-next-buffer :wk "Next Buffer"))
 
@@ -214,19 +216,20 @@ A nice and quick way to view/edit my configuration at any time
        "K" '(kill-buffer :wk "Kill Buffer"))
 
     (mpm/leader-keys
+       "TAB" '(hydra-mc/body :wk "Multiple Cursors Hydra")
+       "RET" '(company-complete :wk "Company Complete")
        "s" '(save-buffer :wk "Save Buffer")
        "f" '(counsel-find-file :wk "Counsel Find File")
-       "c" '(comment-region :wk "Comment Region")
-       "/" '(counsel-rg :wk "Counsel rg") ;; need ripgrep installed!
+       "/" '(comment-line :wk "Comment Line") 
        "m" '(counsel-M-x :wk "Counsel M-x")
        "*" '(swiper-thing-at-point :wk "Swiper at Point")
-       "I" '(ibuffer :wk "Ibuffer")
        "y" '(counsel-yank-pop :wk "Counsel Yank Pop"))
 
     (mpm/leader-keys
        "r" '(:ignore t :wk "Grep Actions")
        "r g" '(counsel-git-grep :wk "Counsel Git Grep")
-       "r r" '(grep :wk "Grep")
+       "r /" '(grep :wk "Grep")
+       "r r" '(rgrep :wk "Ripgrep")
        "r w" '(:ignore t :wk "Wgrep Actions")
        "r w c" '(ivy-wgrep-change-to-wgrep-mode :wk "ivy to wgrep mode")
        "r w e" '(wgrep-exit :wk "Wgrep Exit")
@@ -234,14 +237,27 @@ A nice and quick way to view/edit my configuration at any time
        "r w f" '(wgrep-finish-edit :wk "Wgrep Finish Edit"))
 
     (mpm/leader-keys
-      "e" '(:ignore t :wk "Eshell/Evaluate")    
-      "e b" '(eval-buffer :wk "Evaluate elisp in buffer")
-      "e d" '(eval-defun :wk "Evaluate defun containing or after point")
-      "e e" '(eval-expression :wk "Evaluate and elisp expression")
+      "c" '(:ignore t :wk "Coding")    
+      "c /" '(comment-region :wk "Comment Region")
+      "c u" '(uncomment-region :wk "Uncomment Region")
+      "c l" '(hydra-launcher/body :wk "Launcher Hydra")
+      "c f" '(:ignore t :wk "Flycheck options")    
+      "c f e" '(flycheck-explain-error-at-point :wk "Flycheck explain error")    
+      "c f l" '(flycheck-list-errors :which-key "Flycheck List Errors"))
+
+    (mpm/leader-keys
+      "e" '(:ignore t :wk "Editing/Evil")    
+      "e e b" '(eval-buffer :wk "Evaluate elisp in buffer")
+      "e e d" '(eval-defun :wk "Evaluate defun containing or after point")
+      "e e e" '(eval-expression :wk "Evaluate and elisp expression")
+      "e e s" '(eval-last-sexp :wk "Evaluate elisp expression before point")
+      "e e r" '(eval-region :wk "Evaluate elisp in region")
+      "e s" '(eshell :wk "Emacs Shell")
       "e h" '(counsel-esh-history :which-key "Eshell history")
-      "e l" '(eval-last-sexp :wk "Evaluate elisp expression before point")
-      "e r" '(eval-region :wk "Evaluate elisp in region")
-      "e s" '(eshell :wk "Emacs Shell"))
+      "e m" '(hydra-bookmark/body :which-key "Bookmark Hydra")
+      "e d" '(evil-goto-definition :wk "Evil goto definition")
+      "e *" '(evil-search-word-forward :wk "Evil Search at Point")
+      "e /" '(evil-search-forward :wk "Evil search forward"))
 
     (mpm/leader-keys
       "t" '(:ignore t :wk "NeoTree/Treemacs")    
@@ -255,6 +271,10 @@ A nice and quick way to view/edit my configuration at any time
       :init
       (setq evil-want-keybinding nil)
       (setq evil-undo-system 'undo-redo)
+      :bind
+      ((:map evil-normal-state-map
+         ("/" . swiper-isearch)
+         ("*" . swiper-thing-at-point)))
       :config
       (evil-mode 1)
       ;; NeoTree override keybindings, package (neotree) is shown further in the config
@@ -285,21 +305,35 @@ A nice and quick way to view/edit my configuration at any time
 ** Evil utility 
 - Below evil packages are extras that enhance the evil-mode experience in emacs
 #+BEGIN_SRC emacs-lisp
-   ;; like tpope's vim-surround
-   (use-package evil-surround
-       :ensure t
-       :config
-       (global-evil-surround-mode 1))
+  ;; like tpope's vim-surround
+  (use-package evil-surround
+      :ensure t
+      :config
+      (global-evil-surround-mode 1))
 
-   (use-package evil-multiedit
-       :ensure t
-       :config
-       (evil-multiedit-default-keybinds))
+  ;; no need thanks to mc hydra now 
+  (use-package evil-multiedit
+      :disabled
+      :config
+      (evil-multiedit-default-keybinds))
 
-   (use-package evil-mc
-       :ensure t
-       :config
-       (global-evil-mc-mode 1))
+  (use-package evil-mc
+      :ensure t
+      :config
+      (global-evil-mc-mode 1))
+
+  ;; like vim-sneak and/or vim-seek
+  (use-package evil-snipe
+      :ensure t
+      :custom
+      (evil-snipe-scope 'buffer)
+      (evil-snipe-repeat-scope 'buffer)
+      (evil-snipe-spillover-scope 'whole-buffer)
+      :config
+      (evil-snipe-mode +1)
+      (evil-snipe-override-mode +1)
+      (evil-define-key 'visual evil-snipe-local-mode-map "z" 'evil-snipe-s)
+      (evil-define-key 'visual evil-snipe-local-mode-map "Z" 'evil-snipe-S))
 #+END_SRC
 * Markup
  :PROPERTIES:
@@ -801,31 +835,6 @@ Useful if you work on multiple windows and want an efficient way of switching be
        (setq aw-background nil)
        (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 #+END_SRC
-** Ranger
- :PROPERTIES:
- :CUSTOM_ID: ranger
- :END:
- - An alternative to dired. (Probably will remove soon but use if you would like)
- - ranger file manager but in emacs, works the exact same way
- - Repo: https://github.com/ralesi/ranger.el
-#+BEGIN_SRC emacs-lisp
-  ;; Ranger
-  (use-package ranger
-     :disabled
-     :commands ranger
-     :custom
-     (ranger-parent-depth 1)
-     (ranger-hide-cursor t)
-     (ranger-show-hidden t)
-     (ranger-preview-file t)
-     (ranger-width-parents 0.2)
-     (ranger-width-preview 0.50)
-     (ranger-footer-delay 0.2)
-     (ranger-preview-delay 0.040))
-     ;; :config
-     ;; (ranger-override-dired-mode t))
-
-#+END_SRC
 ** All-The-Icons
  :PROPERTIES:
  :CUSTOM_ID: all-the-icons
@@ -1082,26 +1091,25 @@ I never lose where my cursor is thanks to this
 - By itself it does not do much, you need to add backends to it for your specific development language to get autocomplete
 - Official Site: http://company-mode.github.io/
 #+BEGIN_SRC emacs-lisp
-    (use-package company
-        :ensure t
-        :after lsp-mode
-        :hook (lsp-mode . company-mode)
-        :bind
-        ("S-SPC" . company-complete) ;; for when I need completion at 1 or 2 chars
-        (:map company-active-map
-            ("<tab>" . company-complete-selection) 
-            ("M-j" . company-select-next)  ;; use M-j and M-k to navigate completions (can use C-n and C-p as well I believe)
-            ("M-k"  . company-select-previous))
-        (:map lsp-mode-map
-            ("<tab>" . company-indent-or-complete-common))
-        :custom
-        (company-tooltip-limit 5) ; show 5 candidates at one time
-        (company-idle-delay 0.0) ;; delay (in seconds) when candidates are shown, change if you need to, potentially cpu intensive on older machines if set to 0
-        (company-minimum-prefix-length 2) ;; show completions after 2 chars
-        (company-selection-wrap-around t) ;; goes to start of selection if you reached the bottom 
-        (company-require-match 'never) ;; dont need to pick a choice 
-        :hook
-        (after-init . global-company-mode))
+  (use-package company
+      :ensure t
+      :after lsp-mode
+      :hook (lsp-mode . company-mode)
+      :bind
+      (:map company-active-map
+          ("<tab>" . company-complete-selection) 
+          ("M-j" . company-select-next)  
+          ("M-k"  . company-select-previous))
+      (:map lsp-mode-map
+          ("<tab>" . company-indent-or-complete-common))
+      :custom
+      (company-tooltip-limit 5) ; show 5 candidates at one time
+      (company-idle-delay 0.0) ;; delay (in seconds) when candidates are shown, change if you need to, potentially cpu intensive on older machines if set to 0
+      (company-minimum-prefix-length 2) ;; show completions after 2 chars
+      (company-selection-wrap-around t) ;; goes to start of selection if you reached the bottom 
+      (company-require-match 'never) ;; dont need to pick a choice 
+      :hook
+      (after-init . global-company-mode))
 
 #+END_SRC 
 * Git
@@ -1317,27 +1325,47 @@ Smerge mode deals with merge conflicts in git.
     #+end_src
 *** LSP (jump to definitions and references, list errors)
 #+BEGIN_SRC emacs-lisp
-  (pretty-hydra-define hydra-lsp (:color red :title "📡 LSP 📡" :quit-key "q") 
-    ("Find"
-    (("j" lsp-ui-peek-find-definitions "peek-def")
-    ("r" lsp-ui-peek-find-references "peek-ref")
-    ("f" lsp-find-definition "find-def")
-    ("t" lsp-find-type-definition "find-type-def")
-    ("i" lsp-ui-imenu "imenu"))
+    (pretty-hydra-define hydra-code (:color red :title "📡 Code 📡" :quit-key "q") 
+      ("Find"
+      (("f" lsp-find-definition "find-def")
+      ("F" lsp-ui-peek-find-definitions "peek-def")
+      ("r" lsp-find-references "find-ref")
+      ("R" lsp-ui-peek-find-references "peek-ref")
+      ("t" lsp-find-type-definition "find-type-def")
+      ("i" lsp-ui-imenu "imenu"))
 
-    "Jump"
-    (("p" switch-to-prev-buffer "prev") ;; better consistency than lsp-ui-peek-jump-backward
-    ("n" switch-to-next-buffer "next")) ;; better consistency than lsp-ui-peek-jump-forward
+      "Jump"
+      (("p" switch-to-prev-buffer "prev") ;; better consistency than lsp-ui-peek-jump-backward
+      ("n" switch-to-next-buffer "next")) ;; better consistency than lsp-ui-peek-jump-forward
 
-    "Refactor"
-    (("c" lsp-rename "rename")
-    ("F" lsp-format-buffer "format"))
+      "Refactor"
+      (("c" lsp-rename "rename")
+      ("F" lsp-format-buffer "format"))
 
-    "Errors"
-    (("l" lsp-ui-flycheck-list "list errors")
-    ("b" flycheck-buffer "flycheck buffer")
-    ("e" flycheck-next-error "next error")
-    ("E" flycheck-previous-error "prev error")))) 
+      "Errors"
+      (("l" lsp-ui-flycheck-list "list errors")
+      ("b" flycheck-buffer "flycheck buffer")
+      ("e" flycheck-next-error "next error")
+      ("E" flycheck-previous-error "prev error")))) 
+#+END_SRC
+*** MC (Multiple Cursors)
+#+BEGIN_SRC emacs-lisp
+    (pretty-hydra-define hydra-mc (:color pink :title "Multiple Cursors" :quit-key "<escape>") 
+      ("Goto"
+        (("n" evil-mc-make-and-goto-next-match "make & next")
+        ("N" evil-mc-make-and-goto-prev-match "make & prev")
+        ("p" evil-mc-skip-and-goto-next-match "skip & next")
+        ("P" evil-mc-skip-and-goto-prev-match "skip & prev")
+        ("m" evil-mc-make-all-cursors "Make all"))
+
+       "Line"
+       (("J" evil-mc-make-cursor-move-next-line "make & up") 
+       ("K" evil-mc-make-cursor-move-prev-line "make & down")) 
+
+       "Manual"
+       (("r" evil-mc-undo-last-added-cursor "undo cursor")
+       ("q" evil-mc-undo-all-cursors "undo all cursors" :color blue)
+       ("Q" evil-mc-resume-cursors "resume cursors" :color blue)))) 
 #+END_SRC
 *** Avy (jumping around text)
 #+BEGIN_SRC emacs-lisp
@@ -1412,7 +1440,6 @@ Smerge mode deals with merge conflicts in git.
     (("m" goto-MarinMacs "goto config")
     ("s" set-fill-column "set-fill-column")
     ("e" eval-buffer "eval buffer")
-    ("R" ranger "ranger")
     ("c" compile "compile"))))
 #+END_SRC
 *** Org (for org mode)
@@ -1463,12 +1490,18 @@ Smerge mode deals with merge conflicts in git.
           lsp-file-watch-threshold 500
           lsp-prefer-flymake nil) ; Use lsp-ui and flycheck
         :commands (lsp lsp-deferred)
+        :bind
+        (:map evil-normal-state-map
+          ("gh" . lsp-describe-thing-at-point)
+          ("gd" . lsp-find-definition))
         :diminish
         :hook
         ((c++-mode c-mode python-mode css-mode yaml-mode json-mode js-mode js2-mode rjsx-mode java-mode typescript-mode web-mode) . lsp-deferred)
         :custom
         (lsp-idle-delay 0.1)
         :config
+        (setq lsp-pyls-plugins-flake8-enabled nil)
+        (setq lsp-pyls-plugins-pycodestyle-enabled nil)
         (lsp-enable-which-key-integration t)
         (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")))
 
@@ -1479,15 +1512,18 @@ Smerge mode deals with merge conflicts in git.
         :commands lsp-ui-mode
         :hook (lsp-mode . lsp-ui-mode)
         :bind
+        (:map evil-normal-state-map
+          ("gr" . lsp-ui-peek-find-references))
         (:map lsp-ui-peek-mode-map
-        ("M-j" . lsp-ui-peek--select-next)
-        ("M-k" . lsp-ui-peek--select-prev))
+          ("M-j" . lsp-ui-peek--select-next)
+          ("M-k" . lsp-ui-peek--select-prev))
         :custom
         (lsp-ui-doc-enable t)
         (lsp-ui-doc-delay 0.4) ;; display doc after 4/10 of a second
         (lsp-ui-doc-use-childframe t)
         (lsp-ui-doc-position 'top)
         (lsp-ui-doc-include-signature t)
+        (lsp-ui-sideline-ignore-duplicates t)
         (lsp-ui-sideline-enable t)
         (lsp-ui-doc-show-with-cursor t)
         (lsp-ui-doc-show-with-mouse nil)
