@@ -1669,8 +1669,8 @@ python -m pip install rope jedi pylint flake8 autopep8 yapf pygments virtualenv 
         (setq-default python-indent-offset 4))
 
   (use-package python-black
-    :ensure t
     :after python
+    :ensure t
     :hook (python-mode . python-black-on-save-mode-enable-dwim))
 
 #+END_SRC
