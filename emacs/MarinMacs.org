@@ -172,10 +172,10 @@ A nice and quick way to view/edit my configuration at any time
        "w" '(hydra-window-mini/body :wk "Window Hydra")
        "S" '(hydra-smerge/body :wk "Smerge Hydra")
        "l" '(hydra-code/body :wk "LSP Hydra")
+       "a" '(hydra-avy-snipe/body :wk "LSP Hydra")
        "g" '(hydra-git/body :wk "Git Hydra")
        "v" '(hydra-writing/body :wk "Writing Hydra")
        "u" '(hydra-utility/body :wk "Utility Hydra")
-       "a" '(hydra-avy/body :wk "Avy Hydra")
        "o" '(hydra-org/body :wk "Org Hydra"))
 
     (mpm/leader-keys
@@ -187,7 +187,7 @@ A nice and quick way to view/edit my configuration at any time
        "d w" '(wdired-change-to-wdired-mode :wk "Writable dired")
        "d n" '(neotree-dir :wk "Open directory in neotree"))
 
-  
+
     (mpm/leader-keys
        "i" '(:ignore t :wk "Ivy/Swiper/Counsel")
        "i c" '(counsel-compile :wk "Counsel Compile")
@@ -330,10 +330,8 @@ A nice and quick way to view/edit my configuration at any time
       (evil-snipe-repeat-scope 'buffer)
       (evil-snipe-spillover-scope 'whole-buffer)
       :config
-      (evil-snipe-mode +1)
-      (evil-snipe-override-mode +1)
-      (evil-define-key 'visual evil-snipe-local-mode-map "z" 'evil-snipe-s)
-      (evil-define-key 'visual evil-snipe-local-mode-map "Z" 'evil-snipe-S))
+      (evil-snipe-mode t)
+      (evil-snipe-override-mode t))
 #+END_SRC
 * Markup
  :PROPERTIES:
@@ -807,7 +805,8 @@ a personal keybinding just because its so good. Check the [[https://github.com/a
   (use-package avy 
       :ensure t
       :custom
-      (avy-timeout-seconds 0.3))
+      (avy-background t)
+      (avy-timeout-seconds 0.6))
 #+END_SRC
 ** Which-Key
  :PROPERTIES:
@@ -1368,13 +1367,15 @@ Smerge mode deals with merge conflicts in git.
        ("q" evil-mc-undo-all-cursors "undo all cursors" :color blue)
        ("Q" evil-mc-resume-cursors "resume cursors" :color blue)))) 
 #+END_SRC
-*** Avy (jumping around text)
+*** Sharpshooter (Avy + Snipe)
 #+BEGIN_SRC emacs-lisp
-  (pretty-hydra-define hydra-avy (:color blue :title "↵ Avy ↵" :quit-key "q")
+  (pretty-hydra-define hydra-avy-snipe (:color blue :title "↵ Avy + Snipe ↵" :quit-key "q")
     ("Char"
-    (("c" avy-goto-char "goto char")
-    ("C" avy-goto-char-2 "goto char 2")
-    ("t" avy-goto-char-timer "timed char"))
+    (("c" avy-goto-char "char 1" :color red)
+    ("f" avy-goto-char-2 "char 2" :color red)
+    ("s" evil-snipe-s "(snipe) char 2" :color red)
+    ("S" evil-snipe-S "(snipe) goto char 2 eol" :color red)
+    ("t" avy-goto-char-timer "timed char" :color red))
 
     "Word"
     (("w" avy-goto-word-1 "goto word")
@@ -1388,7 +1389,7 @@ Smerge mode deals with merge conflicts in git.
     ("y" avy-copy-line "yank line"))
 
     "Resume"
-    (("r" avy-resume "resume"))))
+    (("r" avy-resume "resume" :color red))))
 #+END_SRC
 *** Launcher (launch stuff)
   #+BEGIN_SRC emacs-lisp
