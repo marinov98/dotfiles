@@ -1,6 +1,7 @@
 ;; -*- lexical-binding: t; -*-
 (setq load-prefer-newer t) ;; Avoid the pitfall of loading old bytecode instead of newer 
 
+
 ;; MS-Windows can be slow and can give a lot of issues. This setting below at least fixes the issue of it not recognizing unicode characters and not letting your save your file.
 (when (string-equal system-type "windows-nt")
   (prefer-coding-system 'utf-8)
@@ -23,12 +24,20 @@
 (setq file-name-handler-alist nil)
 
 
-(defun marinov/set-memory ()
+(defun marinov/set-memory-kill-buffers ()
   "Set memory usage settings after start up."
   (garbage-collect)
   (setq gc-cons-threshold (* 1024 1024 100)) ;; change this depending on your system 
   (setq large-file-warning-threshold (* 1024 1024 80)) ;; (80mb) default threshold is low by modern standards
-  (setq read-process-output-max (* 1024 1024))) ;; (1mb) Increase amount of data which Emacs reads from the process (recommended by lsp package)
+  (setq read-process-output-max (* 1024 1024)) ;; (1mb) Increase amount of data which Emacs reads from the process (recommended by lsp package)
+  ;; Delete *Messages and *Completions
+  (setq-default message-log-max nil)
+  (kill-buffer "*Messages*")
+  (add-hook 'minibuffer-exit-hook 
+      #'(lambda ()
+         (let ((buffer "*Completions*"))
+           (and (get-buffer buffer)
+            (kill-buffer buffer)))))) 
 
 
 (defun marinov/reset-file-name-handler-alist ()
@@ -38,9 +47,8 @@
 		file-name-handler-alist))
   (cl-delete-duplicates file-name-handler-alist :test 'equal))
 
-(add-hook 'after-init-hook #'marinov/set-memory)
+(add-hook 'after-init-hook #'marinov/set-memory-kill-buffers)
 (add-hook 'after-init-hook #'marinov/reset-file-name-handler-alist)
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Package manager
