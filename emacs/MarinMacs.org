@@ -333,9 +333,9 @@ A nice and quick way to view/edit my configuration at any time
   (use-package evil-snipe
       :ensure t
       :custom
-      (evil-snipe-scope 'buffer)
-      (evil-snipe-repeat-scope 'buffer)
-      (evil-snipe-spillover-scope 'whole-buffer)
+      (evil-snipe-scope 'line)
+      (evil-snipe-repeat-scope 'whole-line)
+      (evil-snipe-spillover-scope 'buffer)
       :config
       (evil-snipe-mode t)
       (evil-snipe-override-mode t))
@@ -1337,7 +1337,7 @@ Smerge mode deals with merge conflicts in git.
             (bury-buffer))
         "Save and bury buffer" :color blue)))) 
     #+end_src
-*** LSP (jump to definitions and references, list errors)
+*** Code (jump to definitions and references, list errors, formatting)
 #+BEGIN_SRC emacs-lisp
   (pretty-hydra-define hydra-code (:color red :title "📡 Code 📡" :quit-key "q") 
     ("Find"
@@ -1355,13 +1355,24 @@ Smerge mode deals with merge conflicts in git.
 
     "Refactor"
     (("c" lsp-rename "rename")
-    ("F" lsp-format-buffer "format"))
+    ("s" hydra-style/body "format style" :color blue))
 
     "Errors"
     (("l" lsp-ui-flycheck-list "list errors")
     ("b" flycheck-buffer "flycheck buffer")
     ("e" flycheck-next-error "next error")
     ("E" flycheck-previous-error "prev error")))) 
+
+  (pretty-hydra-define hydra-style (:color blue :title "📡 Style 📡" :quit-key "q") 
+    ("Buffer"
+    (("b" python-black-buffer "python-black")
+    ("l" lsp-format-buffer "LSP")
+    ("c" clang-format-buffer "clang"))
+
+    "Line"
+    (("B" python-black-region "python-black")
+    ("C" clang-format-region "clang")
+    ("L" lsp-format-region "LSP")))) 
 #+END_SRC
 *** MC (Multiple Cursors)
 #+BEGIN_SRC emacs-lisp
@@ -1670,9 +1681,7 @@ python -m pip install rope jedi pylint flake8 autopep8 yapf pygments virtualenv 
 
   (use-package python-black
     :after python
-    :ensure t
-    :hook (python-mode . python-black-on-save-mode-enable-dwim))
-
+    :ensure t)
 #+END_SRC
 *** Debugging
 Note: the template is meant to be edited to personal preferences
