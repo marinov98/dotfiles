@@ -63,7 +63,7 @@ Indentation
 - Options, display, parenthesis 
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
-  (setq default-frame-alist '((font . "Fira Code-14")))    ;; set font and font size
+  (setq default-frame-alist '((font . "Fira Code-12")))    ;; set font and font size
   (setq visible-bell t)                                    ;; disable end of buffer sounds
   (electric-pair-mode)                                     ;; auto closing brackets
   (show-paren-mode 1)                                      ;; highlight matching parenthesis
@@ -79,8 +79,7 @@ Indentation
        (setq display-line-numbers-current-absolute t)
        (setq display-line-numbers-width 2)
        (setq display-line-numbers-widen t)
-       (global-display-line-numbers-mode 1)
-       (global-visual-line-mode t)) ;; display line numbers in every buffer
+       (global-display-line-numbers-mode 1)) ;; display line numbers in every buffer
 
     ;; Disable line numbers for some mode
     (dolist (mode '(org-mode-hook term-mode-hook shell-mode-hook treemacs-mode-hook eshell-mode-hook))
@@ -371,7 +370,7 @@ Org personal variables and functions
   (custom-set-variables
            '(org-directory "~/Projects/org")
            '(org-default-notes-file (concat org-directory "/Personal/notes.org")))
-           
+
       (defun marinov/goto-org-directory ()
         "goes to my org directory"
         (interactive)
@@ -440,16 +439,17 @@ Org personal variables and functions
 - Look at the [[https://github.com/politza/pdf-tools][official repo]] for what you need to install and if your OS can support it
 - Make sure to run =M-x pdf-tools-install= If you decided to enable this package and use it 
    #+begin_src emacs-lisp
-  (use-package pdf-view
-      :ensure pdf-tools
-      :diminish (pdf-view-midnight-minor-mode pdf-view-printer-minor-mode)
-      :mode ("\\.[pP][dD][fF]\\'" . pdf-view-mode)
-      :magic ("%PDF" . pdf-view-mode)
-      :bind
-      (:map pdf-view-mode-map
-      ("C-s" . isearch-forward))
-      :init
-      (setq pdf-annot-activate-created-annotations t))
+	 (use-package pdf-view
+	     :disabled
+		 :ensure pdf-tools
+		 :diminish (pdf-view-midnight-minor-mode pdf-view-printer-minor-mode)
+		 :mode ("\\.[pP][dD][fF]\\'" . pdf-view-mode)
+		 :magic ("%PDF" . pdf-view-mode)
+		 :bind
+		 (:map pdf-view-mode-map
+		 ("C-s" . isearch-forward))
+		 :init
+		 (setq pdf-annot-activate-created-annotations t))
    #+end_src
 ** Latex 
  :PROPERTIES:
@@ -668,7 +668,6 @@ You can enable/disable any themes that you like here
       :ensure t
       :diminish
       :custom
-      (ivy-use-virtual-buffers t)
       (ivy-display-style 'fancy)
       (ivy-count-format "(%d/%d) ")
       (ivy-format-function 'ivy-format-function-line)
@@ -691,7 +690,6 @@ You can enable/disable any themes that you like here
       :custom
       (swiper-action-recenter t)
       (swiper-goto-start-of-match t)
-      (swiper-include-line-number-in-search t)
       :bind 
       (("C-s" . swiper-isearch)
       ("C-c C-r" . ivy-resume)))
@@ -868,7 +866,6 @@ Useful if you work on multiple windows and want an efficient way of switching be
   ;; icons for dired/ranger mode
   (use-package all-the-icons-dired
       :ensure t
-      :after ranger
       :config
       (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
 #+END_SRC
@@ -879,7 +876,7 @@ Useful if you work on multiple windows and want an efficient way of switching be
 I never lose where my cursor is thanks to this
 #+BEGIN_SRC emacs-lisp
   (use-package beacon
-      :ensure t
+      :disabled
       :diminish
       :custom
       (beacon-color "#ffc600")
@@ -940,7 +937,7 @@ I never lose where my cursor is thanks to this
    ;; Projectile-mode 
   (use-package projectile
       :ensure t
-      :diminish projectil-mode
+      :diminish projectile-mode
       :bind 
       (("C-c p" . projectile-command-map))
       :custom 
@@ -1045,27 +1042,30 @@ I never lose where my cursor is thanks to this
 - repo: https://github.com/joaotavora/yasnippet
 #+BEGIN_SRC emacs-lisp
   (use-package yasnippet
-      :ensure t
-      :bind 
-      ((:map yas-keymap
-      ("<tab>" . nil) ;; there are conflicts here with autocomplete
-      ("<C-tab>" . yas-next-field-or-maybe-expand))
-      (:map yas-minor-mode-map
-      ("<tab>" . nil) ;; while this is convenient, it clashes with auto-complete and jump-to-definitions
-      ("<C-tab>" . yas-expand)))
-      :hook
-      (after-init . yas-global-mode)
-      :config
-      (yas-reload-all))
+	  :disabled
+	  :ensure t
+	  :bind 
+	  ((:map yas-keymap
+	  ("<tab>" . nil) ;; there are conflicts here with autocomplete
+	  ("<C-tab>" . yas-next-field-or-maybe-expand))
+	  (:map yas-minor-mode-map
+	  ("<tab>" . nil) ;; while this is convenient, it clashes with auto-complete and jump-to-definitions
+	  ("<C-tab>" . yas-expand)))
+	  :hook
+	  (after-init . yas-global-mode)
+	  :config
+	  (yas-reload-all))
 
   (use-package yasnippet-snippets 
-      :after yasnippet
-      :ensure t)
-    
+	  :disabled
+	  :after yasnippet
+	  :ensure t)
+
   ;; snippets for React.js
   (use-package react-snippets
-      :after yasnippet
-      :ensure t)
+      :disabled
+	  :after yasnippet
+	  :ensure t)
 #+END_SRC 
 ** FlyCheck
  :PROPERTIES:
@@ -1104,7 +1104,6 @@ I never lose where my cursor is thanks to this
           ("<tab>" . company-indent-or-complete-common))
       :custom
       (company-tooltip-limit 5) ; show 5 candidates at one time
-      (company-idle-delay 0.0) ;; delay (in seconds) when candidates are shown, change if you need to, potentially cpu intensive on older machines if set to 0
       (company-minimum-prefix-length 2) ;; show completions after 2 chars
       (company-selection-wrap-around t) ;; goes to start of selection if you reached the bottom 
       (company-require-match 'never) ;; dont need to pick a choice 
@@ -1325,28 +1324,29 @@ Smerge mode deals with merge conflicts in git.
     #+end_src
 *** LSP (jump to definitions and references, list errors)
 #+BEGIN_SRC emacs-lisp
-    (pretty-hydra-define hydra-code (:color red :title "📡 Code 📡" :quit-key "q") 
-      ("Find"
-      (("f" lsp-find-definition "find-def")
-      ("P" lsp-ui-peek-find-definitions "peek-def")
-      ("r" lsp-find-references "find-ref")
-      ("R" lsp-ui-peek-find-references "peek-ref")
-      ("t" lsp-find-type-definition "find-type-def")
-      ("i" lsp-ui-imenu "imenu"))
+  (pretty-hydra-define hydra-code (:color red :title "📡 Code 📡" :quit-key "q") 
+    ("Find"
+    (("f" lsp-find-definition "find def")
+    ("P" lsp-ui-peek-find-definitions "peek def")
+    ("r" lsp-find-references "find ref")
+    ("R" lsp-ui-peek-find-references "peek ref")
+    ("t" lsp-find-type-definition "find type def")
+    ("g" lsp-ui-doc-glance "glance")
+    ("i" lsp-ui-imenu "imenu"))
 
-      "Jump"
-      (("p" switch-to-prev-buffer "prev") ;; better consistency than lsp-ui-peek-jump-backward
-      ("n" switch-to-next-buffer "next")) ;; better consistency than lsp-ui-peek-jump-forward
+    "Jump"
+    (("p" switch-to-prev-buffer "prev") ;; better consistency than lsp-ui-peek-jump-backward
+    ("n" switch-to-next-buffer "next")) ;; better consistency than lsp-ui-peek-jump-forward
 
-      "Refactor"
-      (("c" lsp-rename "rename")
-      ("F" lsp-format-buffer "format"))
+    "Refactor"
+    (("c" lsp-rename "rename")
+    ("F" lsp-format-buffer "format"))
 
-      "Errors"
-      (("l" lsp-ui-flycheck-list "list errors")
-      ("b" flycheck-buffer "flycheck buffer")
-      ("e" flycheck-next-error "next error")
-      ("E" flycheck-previous-error "prev error")))) 
+    "Errors"
+    (("l" lsp-ui-flycheck-list "list errors")
+    ("b" flycheck-buffer "flycheck buffer")
+    ("e" flycheck-next-error "next error")
+    ("E" flycheck-previous-error "prev error")))) 
 #+END_SRC
 *** MC (Multiple Cursors)
 #+BEGIN_SRC emacs-lisp
@@ -1484,11 +1484,6 @@ Smerge mode deals with merge conflicts in git.
 #+BEGIN_SRC emacs-lisp  
     (use-package lsp-mode
         :ensure t
-        :init 
-        (setq lsp-auto-guess-root t ; Detect project root
-          lsp-log-io nil
-          lsp-file-watch-threshold 500
-          lsp-prefer-flymake nil) ; Use lsp-ui and flycheck
         :commands (lsp lsp-deferred)
         :bind
         (:map evil-normal-state-map
@@ -1498,7 +1493,11 @@ Smerge mode deals with merge conflicts in git.
         :hook
         ((c++-mode c-mode python-mode css-mode yaml-mode json-mode js-mode js2-mode rjsx-mode java-mode typescript-mode web-mode) . lsp-deferred)
         :custom
-        (lsp-idle-delay 0.1)
+        (lsp-auto-guess-root t)
+        (lsp-log-io nil)
+        (lsp-file-watch-threshold 500)
+        (lsp-prefer-flymake nil)
+        (lsp-io-messages-max nil)
         :config
         (setq lsp-pyls-plugins-flake8-enabled nil)
         (setq lsp-pyls-plugins-pycodestyle-enabled nil)
@@ -1518,29 +1517,28 @@ Smerge mode deals with merge conflicts in git.
           ("M-j" . lsp-ui-peek--select-next)
           ("M-k" . lsp-ui-peek--select-prev))
         :custom
-        (lsp-ui-doc-enable t)
-        (lsp-ui-doc-delay 0.4) ;; display doc after 4/10 of a second
-        (lsp-ui-doc-use-childframe t)
+        (lsp-ui-doc-enable nil)
         (lsp-ui-doc-position 'top)
         (lsp-ui-doc-include-signature t)
-        (lsp-ui-sideline-ignore-duplicates t)
+        (lsp-ui-doc-show-with-cursor nil)
+        (lsp-ui-doc-show-with-mouse t)
         (lsp-ui-sideline-enable t)
-        (lsp-ui-doc-show-with-cursor t)
-        (lsp-ui-doc-show-with-mouse nil)
+        (lsp-ui-sideline-ignore-duplicates t)
         (lsp-ui-sideline-show-diagnostics t)
-        (lsp-ui-sideline-show-hover t)
+        (lsp-ui-sideline-show-symbol nil)
+        (lsp-ui-sideline-show-hover nil)
         (lsp-ui-peek-enable t)
         (lsp-ui-peek-list-width 60)
         (lsp-ui-peek-peek-height 25)
         :config
-        (setq eldoc-idle-delay 0.5)) ;; delay eldoc for 5/10 second
+        (global-eldoc-mode -1)) 
 
   (use-package lsp-java 
-      :ensure t
+      :disabled
       :config (add-hook 'java-mode-hook 'lsp))      
 
   (use-package lsp-ivy
-      :ensure t
+      :disabled
       :after lsp-mode lsp-ui)
 #+END_SRC
 * DAP
@@ -1578,16 +1576,17 @@ Smerge mode deals with merge conflicts in git.
   - [[https://clang.llvm.org/][Clang]]
 *** Settings
 #+BEGIN_SRC emacs-lisp
-(setq-default c-basic-offset 4) ;; indentation for C-based languages
+  (setq-default c-basic-offset 4) ;; indentation for C-based languages
 
-;; disable other checkers since we only want to utilize clangd language server
-(setq-default flycheck-disabled-checkers '(c/c++-clang c/c++-cppcheck c/c++-gcc)) 
+  ;; disable other checkers since we only want to utilize clangd language server
+  (setq-default flycheck-disabled-checkers '(c/c++-clang c/c++-cppcheck c/c++-gcc)) 
 
-;; enable modern font lock for >=c++11
-(use-package modern-cpp-font-lock
-    :ensure t
-    :config
-    (modern-c++-font-lock-global-mode t))
+  ;; enable modern font lock for >=c++11
+  (use-package modern-cpp-font-lock
+	  :ensure t
+	  :hook (c++-mode-hook . modern-c++-font-lock-mode)
+	  :config
+	  (modern-c++-font-lock-global-mode nil))
 #+END_SRC
 *** Debugging
 Still experimenting with this, native gdb in emacs is also really good 
@@ -1648,7 +1647,7 @@ python -m pip install rope jedi pylint flake8 autopep8 yapf pygments virtualenv 
   (setq-default python-indent-offset 4) 
   (setq python-indent-guess-indent-offset t) ;; allow emacs to guess offset
   (setq python-indent-guess-indent-offset-verbose nil) ;; remove indent warning because we already set indents
-  
+
 #+END_SRC
 *** Debugging
 Note: the template is meant to be edited to personal preferences
@@ -1732,12 +1731,16 @@ Below is are packages and settings related to autocomplete and formatting
 
       (setq-default css-indent-offset 2) ;; web mode for some reason cancels css autocomplete so I have to configure css separately
 #+END_SRC
-visually display hex values as colors
+rainbow mode for displaying hex colors, rainbow-delimeters for coloring parenthesis
 #+BEGIN_SRC emacs-lisp
+  (use-package rainbow-delimiters
+    :ensure t
+    :hook ((emacs-lisp-mode . rainbow-delimiters-mode)
+         (clojure-mode . rainbow-delimiters-mode)))
+
   (use-package rainbow-mode 
       :ensure t
-      :init 
-      (rainbow-mode 1))
+      :hook prog-mode org-mode)
 #+END_SRC
 - This is what I like to use to format my code
 - need to run 'npm i -g prettier' in order for this to work (Locally should work too)
