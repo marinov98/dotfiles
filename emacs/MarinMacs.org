@@ -1328,7 +1328,7 @@ Smerge mode deals with merge conflicts in git.
     (pretty-hydra-define hydra-code (:color red :title "📡 Code 📡" :quit-key "q") 
       ("Find"
       (("f" lsp-find-definition "find-def")
-      ("F" lsp-ui-peek-find-definitions "peek-def")
+      ("P" lsp-ui-peek-find-definitions "peek-def")
       ("r" lsp-find-references "find-ref")
       ("R" lsp-ui-peek-find-references "peek-ref")
       ("t" lsp-find-type-definition "find-type-def")
