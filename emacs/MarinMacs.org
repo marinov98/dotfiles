@@ -37,6 +37,7 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
   - [[#Yasnippet][Yasnippet]]
   - [[#flycheck][Flycheck]]
   - [[#company][Company]]
+  - [[#eldoc][Eldoc]]
 - [[#git][Git]]
 - [[#hydra][Hydra]]
 - [[#lsp][Language Server Protocal (lsp)]]
@@ -191,9 +192,9 @@ A nice and quick way to view/edit my configuration at any time
     (mpm/leader-keys
        "i" '(:ignore t :wk "Ivy/Swiper/Counsel")
        "i c" '(counsel-compile :wk "Counsel Compile")
-       "i g" '(counsel-git :wk "Counsel Git") 
-       "i f" '(counsel-fzf :wk "Counsel FZF") 
-       "i r" '(counsel-rg :wk "Counsel Rg") 
+       "i g" '(counsel-git :wk "Counsel Git")
+       "i f" '(counsel-fzf :wk "Counsel FZF")
+       "i r" '(counsel-rg :wk "Counsel Rg")
        "i s" '(swiper-isearch :wk "Swiper Isearch")
        "i i" '(ibuffer :wk "Ibuffer")
        "i o" '(ivy-occur :wk "Ivy Occur")
@@ -259,11 +260,17 @@ A nice and quick way to view/edit my configuration at any time
       "e /" '(evil-search-forward :wk "Evil search forward"))
 
     (mpm/leader-keys
-      "t" '(:ignore t :wk "NeoTree/Treemacs")    
-      "t n" '(neotree-toggle :wk "Toggle NeoTree")
+      "t" '(:ignore t :wk "Neotree/Treemacs")    
+      "t n" '(neotree-toggle :wk "Toggle Neotree")
       "t e" '(treemacs :wk "Treemacs")
+      "t f" '(treemacs-find-file :wk "Treemacs find file")
+      "t s" '(treemacs-switch-workspace :wk "Treemacs switch workspace")
       "t p" '(treemacs-projectile :wk "Treemacs Projectile")
-      "t w" '(treemacs-select-window :wk "Treemacs Select Window")))
+      "t w" '(treemacs-select-window :wk "Treemacs select window")
+      "t r" '(:ignore t :wk "Treemacs Rename Options")
+      "t r f" '(treemacs-rename-file :wk "Treemacs rename file")
+      "t r w" '(treemacs-rename-workspace :wk "Treemacs rename workspace")
+      "t r p" '(treemacs-rename-project :wk "Treemacs rename project")))
 
   (use-package evil
       :ensure t
@@ -730,68 +737,63 @@ wgrep combined counsel-rg and/or counsel-ag makes changing text in multiple plac
  :END:
  Enhanced buffer management. This is a native Emacs feature 
  #+begin_src emacs-lisp
-   (setq ibuffer-saved-filter-groups
-        (quote (("default"
-                ("Ranger" (mode . ranger-mode))
-                ("Org" (name . "^.*org$"))
-                ("Text" (or
-                          (mode . markdown-mode)
-                          (mode . text-mode)
-                          (mode . pdf-view-mode)
-                          (mode . LaTeX-mode)))
-                ("Git" (or 
-                        (mode . gitignore-mode)               
-                        (mode . gitconfig-mode)               
-                        (mode . magit-mode)))
-                ("Shell" (or (mode . eshell-mode) (mode . shell-mode)))
-                ("Elisp" (mode . emacs-lisp-mode))
-                ("Programming" (or ;; I dont have all of these modes but just in case for the future...
-                                (mode . python-mode)
-                                (mode . ruby-mode)
-                                (mode . go-mode)
-                                (mode . rust-mode)
-                                (mode . swift-mode)
-                                (mode . objc-mode)
-                                (mode . dart-mode)
-                                (mode . haskell-mode)
-                                (mode . csharp-mode)
-                                (mode . scala-mode)
-                                (mode . clojure-mode)
-                                (mode . java-mode)
-                                (mode . c-mode)
-                                (mode . c++-mode)))
-                ("Web Dev" (or
-                            (mode . web-mode)
-                            (mode . rjsx-mode)
-                            (mode . css-mode)
-                            (mode . js-mode)
-                            (mode . typescript-mode)
-                            (mode . js2-mode)))
-                ("Data" (or
-                         (mode . csv-mode)
-                         (mode . json-mode)
-                         (mode . sql-mode)
-                         (mode . yaml-mode)
-                         (mode . graphql-mode)
-                         (mode . dockerfile-mode)))
-                ("Help" (or
-                         (name . "\*Help\*")
-                         (name . "\*info\*")))
-                ("Emacs" (or
-                          (name . "^\\*scratch\\*$")
-                          (name . "^\\*Messages\\*$")))))))
-
-
-
-   ;; Don't show filter groups if there are no buffers in that group
-   (setq ibuffer-show-empty-filter-groups nil)
-
-
-   (add-hook 'ibuffer-mode-hook
-             (lambda ()
-               (ibuffer-auto-mode 1)
-               (ibuffer-switch-to-saved-filter-groups "default")))
-
+   (use-package ibuffer
+       :hook (ibuffer-mode . (lambda ()
+                               (ibuffer-auto-mode 1)
+                               (ibuffer-switch-to-saved-filter-groups "default")))
+       :custom
+       (ibuffer-show-empty-filter-groups nil)
+       :config
+       (setq ibuffer-saved-filter-groups
+           (quote (("default"
+                   ("Ranger" (mode . ranger-mode))
+                   ("Org" (name . "^.*org$"))
+                   ("Text" (or
+                           (mode . markdown-mode)
+                           (mode . text-mode)
+                           (mode . pdf-view-mode)
+                           (mode . LaTeX-mode)))
+                   ("Git" (or 
+                           (mode . gitignore-mode)               
+                           (mode . gitconfig-mode)               
+                           (mode . magit-mode)))
+                   ("Shell" (or (mode . eshell-mode) (mode . shell-mode)))
+                   ("Elisp" (mode . emacs-lisp-mode))
+                   ("Programming" (or ;; I dont have all of these modes but just in case for the future...
+                                   (mode . python-mode)
+                                   (mode . ruby-mode)
+                                   (mode . go-mode)
+                                   (mode . rust-mode)
+                                   (mode . swift-mode)
+                                   (mode . objc-mode)
+                                   (mode . dart-mode)
+                                   (mode . haskell-mode)
+                                   (mode . csharp-mode)
+                                   (mode . scala-mode)
+                                   (mode . clojure-mode)
+                                   (mode . java-mode)
+                                   (mode . c-mode)
+                                   (mode . c++-mode)))
+                   ("Web Dev" (or
+                               (mode . web-mode)
+                               (mode . rjsx-mode)
+                               (mode . css-mode)
+                               (mode . js-mode)
+                               (mode . typescript-mode)
+                               (mode . js2-mode)))
+                   ("Data" (or
+                           (mode . csv-mode)
+                           (mode . json-mode)
+                           (mode . sql-mode)
+                           (mode . yaml-mode)
+                           (mode . graphql-mode)
+                           (mode . dockerfile-mode)))
+                   ("Help" (or
+                           (name . "\*Help\*")
+                           (name . "\*info\*")))
+                   ("Emacs" (or
+                           (name . "^\\*scratch\\*$")
+                           (name . "^\\*Messages\\*$"))))))))
 
  #+end_src
 ** Avy
@@ -908,15 +910,14 @@ I never lose where my cursor is thanks to this
    #+begin_src emacs-lisp
      (use-package treemacs 
          :ensure t
-         :config
-         (setq treemacs-resize-icons 4))
+         :custom
+         (treemacs-resize-icons 4)
+         (treemacs-show-cursor t))
 
      (use-package treemacs-evil 
          :after treemacs
          :ensure t)
 
-     (use-package lsp-treemacs
-         :init (lsp-treemacs-sync-mode 1))
 
      (use-package treemacs-projectile
          :after treemacs projectile
@@ -959,39 +960,40 @@ I never lose where my cursor is thanks to this
 - exec-path-from-shell: https://github.com/purcell/exec-path-from-shell
 - Eshell: https://www.gnu.org/software/emacs/manual/html_mono/eshell.html
    #+BEGIN_SRC emacs-lisp
-       (use-package exec-path-from-shell
-           :ensure t
-           :config
-           (when (memq window-system '(mac ns x)) ;; check if its mac
+     (use-package exec-path-from-shell
+         :ensure t
+         :config
+         (when (memq window-system '(mac ns x)) ;; check if its mac
            (exec-path-from-shell-initialize)))
 
-     ;; Eshell 
-     ;; configuration found from this link: https://superuser.com/questions/890937/how-to-show-git-branch-in-emacs-shell
-       (defun git-prompt-branch-name ()
-           "Get current git branch name"
-           (let ((args '("symbolic-ref" "HEAD" "--short")))
-             (with-temp-buffer
-               (apply #'process-file "git" nil (list t nil) nil args)
-               (unless (bobp)
-                 (goto-char (point-min))
-                 (buffer-substring-no-properties (point) (line-end-position))))))
+     (use-package eshell
+          :ensure t
+          :bind (("C-`" . eshell))
+          :custom
+          (eshell-hist-ignoredups t)
+          (eshell-scroll-to-bottom-on-input t)
+          (eshell-destroy-buffer-when-process-dies t)
+          (eshell-visual-commands'("bash" "fish" "htop" "ssh" "top" "zsh"))
+          :config
+          ;; configuration found from this link: https://superuser.com/questions/890937/how-to-show-git-branch-in-emacs-shell
+          (defun git-prompt-branch-name ()
+            "Get current git branch name"
+            (let ((args '("symbolic-ref" "HEAD" "--short")))
+                (with-temp-buffer
+                (apply #'process-file "git" nil (list t nil) nil args)
+                (unless (bobp)
+                    (goto-char (point-min))
+                    (buffer-substring-no-properties (point) (line-end-position))))))
 
-        (defun 4lex1v:eshell-prompt ()
-           (let ((branch-name (git-prompt-branch-name)))
-             (concat
-              "\n# " (user-login-name) " in " (abbreviate-file-name (eshell/pwd)) "\n"
-              (if branch-name (format "git:(%s) >> " branch-name) ">> ")
-              )))         
+            (defun 4lex1v:eshell-prompt ()
+            (let ((branch-name (git-prompt-branch-name)))
+                (concat
+                "\n# " (user-login-name) " in " (abbreviate-file-name (eshell/pwd)) "\n"
+                (if branch-name (format "git:(%s) >> " branch-name) ">> ")
+                )))         
 
-        (setq eshell-prompt-function #'4lex1v:eshell-prompt
-               eshell-prompt-regexp ".*>>+ ")
-        (setq
-          eshell-hist-ignoredups t
-          eshell-scroll-to-bottom-on-input t
-          eshell-destroy-buffer-when-process-dies t
-          eshell-visual-commands'("bash" "fish" "htop" "ssh" "top" "zsh"))
-
-       (global-set-key (kbd "C-`") 'eshell) 
+            (setq eshell-prompt-function #'4lex1v:eshell-prompt
+                eshell-prompt-regexp ".*>>+ "))
    #+END_SRC
 * Globals
  :PROPERTIES:
@@ -1110,6 +1112,19 @@ I never lose where my cursor is thanks to this
       :hook
       (after-init . global-company-mode))
 
+#+END_SRC 
+** Eldoc
+ :PROPERTIES:
+ :CUSTOM_ID: eldoc
+ :END:
+- Minor Mode which shows you, in the echo area, the argument list of the function call you are currently writing. Very handy.
+- Documentation: https://www.emacswiki.org/emacs/ElDoc
+#+BEGIN_SRC emacs-lisp
+  (use-package eldoc
+      :diminish
+      :hook (emacs-lisp-mode . eldoc-mode)
+      :config
+      (global-eldoc-mode -1))
 #+END_SRC 
 * Git
  :PROPERTIES:
@@ -1484,64 +1499,69 @@ Smerge mode deals with merge conflicts in git.
  - lsp-ui (UI integrations for lsp-mode)
  - lsp-java (java seems to require its own package for lsp)
 #+BEGIN_SRC emacs-lisp  
-    (use-package lsp-mode
+      (use-package lsp-mode
+          :ensure t
+          :commands (lsp lsp-deferred)
+          :bind
+          (:map evil-normal-state-map
+            ("gh" . lsp-describe-thing-at-point)
+            ("gd" . lsp-find-definition))
+          :diminish
+          :hook
+          ((c++-mode c-mode python-mode css-mode yaml-mode json-mode js-mode js2-mode rjsx-mode typescript-mode web-mode) . lsp-deferred)
+          :custom
+          (lsp-auto-guess-root nil)
+          (lsp-log-io nil)
+          (lsp-file-watch-threshold 500)
+          (lsp-prefer-flymake nil)
+          (lsp-io-messages-max nil)
+          :config
+          (setq lsp-pyls-plugins-flake8-enabled nil)
+          (setq lsp-pyls-plugins-pycodestyle-enabled nil)
+          (lsp-enable-which-key-integration t)
+          (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")))
+
+      (use-package lsp-ui
+          :after lsp-mode flycheck
+          :ensure t
+          :diminish
+          :commands lsp-ui-mode
+          :hook (lsp-mode . lsp-ui-mode)
+          :bind
+          (:map evil-normal-state-map
+            ("gr" . lsp-ui-peek-find-references))
+          (:map lsp-ui-peek-mode-map
+            ("M-j" . lsp-ui-peek--select-next)
+            ("M-k" . lsp-ui-peek--select-prev))
+          :custom
+          (lsp-ui-doc-enable nil)
+          (lsp-ui-doc-position 'top)
+          (lsp-ui-doc-include-signature t)
+          (lsp-ui-doc-show-with-cursor nil)
+          (lsp-ui-doc-show-with-mouse t)
+          (lsp-ui-sideline-enable t)
+          (lsp-ui-sideline-ignore-duplicates t)
+          (lsp-ui-sideline-show-diagnostics t)
+          (lsp-ui-sideline-show-symbol nil)
+          (lsp-ui-sideline-show-hover nil)
+          (lsp-ui-peek-enable t)
+          (lsp-ui-peek-list-width 60)
+          (lsp-ui-peek-peek-height 25)) 
+
+    (use-package lsp-treemacs
+        :after treemacs lsp-mode
         :ensure t
-        :commands (lsp lsp-deferred)
-        :bind
-        (:map evil-normal-state-map
-          ("gh" . lsp-describe-thing-at-point)
-          ("gd" . lsp-find-definition))
-        :diminish
-        :hook
-        ((c++-mode c-mode python-mode css-mode yaml-mode json-mode js-mode js2-mode rjsx-mode java-mode typescript-mode web-mode) . lsp-deferred)
-        :custom
-        (lsp-auto-guess-root t)
-        (lsp-log-io nil)
-        (lsp-file-watch-threshold 500)
-        (lsp-prefer-flymake nil)
-        (lsp-io-messages-max nil)
-        :config
-        (setq lsp-pyls-plugins-flake8-enabled nil)
-        (setq lsp-pyls-plugins-pycodestyle-enabled nil)
-        (lsp-enable-which-key-integration t)
-        (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")))
+        :config (lsp-treemacs-sync-mode t))
 
-    (use-package lsp-ui
-        :after lsp-mode flycheck
-        :ensure t
-        :diminish
-        :commands lsp-ui-mode
-        :hook (lsp-mode . lsp-ui-mode)
-        :bind
-        (:map evil-normal-state-map
-          ("gr" . lsp-ui-peek-find-references))
-        (:map lsp-ui-peek-mode-map
-          ("M-j" . lsp-ui-peek--select-next)
-          ("M-k" . lsp-ui-peek--select-prev))
-        :custom
-        (lsp-ui-doc-enable nil)
-        (lsp-ui-doc-position 'top)
-        (lsp-ui-doc-include-signature t)
-        (lsp-ui-doc-show-with-cursor nil)
-        (lsp-ui-doc-show-with-mouse t)
-        (lsp-ui-sideline-enable t)
-        (lsp-ui-sideline-ignore-duplicates t)
-        (lsp-ui-sideline-show-diagnostics t)
-        (lsp-ui-sideline-show-symbol nil)
-        (lsp-ui-sideline-show-hover nil)
-        (lsp-ui-peek-enable t)
-        (lsp-ui-peek-list-width 60)
-        (lsp-ui-peek-peek-height 25)
-        :config
-        (global-eldoc-mode -1)) 
+    (use-package lsp-java 
+        :disabled
+        :after lsp-mode
+        :hook (java-mode . lsp-deferred))
 
-  (use-package lsp-java 
-      :disabled
-      :config (add-hook 'java-mode-hook 'lsp))      
+    (use-package lsp-ivy
+        :disabled
+        :after lsp-mode lsp-ui)
 
-  (use-package lsp-ivy
-      :disabled
-      :after lsp-mode lsp-ui)
 #+END_SRC
 * DAP
  :PROPERTIES:
@@ -1578,17 +1598,17 @@ Smerge mode deals with merge conflicts in git.
   - [[https://clang.llvm.org/][Clang]]
 *** Settings
 #+BEGIN_SRC emacs-lisp
-  (setq-default c-basic-offset 4) ;; indentation for C-based languages
-
-  ;; disable other checkers since we only want to utilize clangd language server
-  (setq-default flycheck-disabled-checkers '(c/c++-clang c/c++-cppcheck c/c++-gcc)) 
+  (use-package cpp
+    :config
+    ;; disable other checkers since we only want to utilize clangd language server
+    (setq-default flycheck-disabled-checkers '(c/c++-clang c/c++-cppcheck c/c++-gcc)))
 
   ;; enable modern font lock for >=c++11
   (use-package modern-cpp-font-lock
-	  :ensure t
-	  :hook (c++-mode-hook . modern-c++-font-lock-mode)
-	  :config
-	  (modern-c++-font-lock-global-mode nil))
+      :ensure t
+      :hook (c++-mode-hook . modern-c++-font-lock-mode)
+      :config
+      (modern-c++-font-lock-global-mode nil))
 #+END_SRC
 *** Debugging
 Still experimenting with this, native gdb in emacs is also really good 
@@ -1640,15 +1660,18 @@ python -m pip install rope jedi pylint flake8 autopep8 yapf pygments virtualenv 
  #+END_SRC
 *** Settings
 #+BEGIN_SRC emacs-lisp
-  ;; version 
-  (setq py-python-command "python3")
-  (setq python-shell-interpreter "python3")
+    (use-package python
+        :custom
+        (python-indent-guess-indent-offset t)
+        (python-indent-guess-indent-offset-verbose nil)
+        :config
+        (setq-default python-basic-offset 4) 
+        (setq-default python-indent-offset 4))
 
-  ;; indentation
-  (setq-default python-basic-offset 4) 
-  (setq-default python-indent-offset 4) 
-  (setq python-indent-guess-indent-offset t) ;; allow emacs to guess offset
-  (setq python-indent-guess-indent-offset-verbose nil) ;; remove indent warning because we already set indents
+  (use-package python-black
+    :ensure t
+    :after python
+    :hook (python-mode . python-black-on-save-mode-enable-dwim))
 
 #+END_SRC
 *** Debugging
