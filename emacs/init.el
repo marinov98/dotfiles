@@ -15,8 +15,8 @@
 ;; Initialization Optimization
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; maximize garbage threshold to boost startup time then reduce it after initialization is complete (done in marinov/set-memory function)
-(setq gc-cons-threshold most-positive-fixnum)
+;; increase garbage threshold to boost startup time then reduce it after initialization is complete (done in marinov/set-memory function)
+(setq gc-cons-threshold (* 1024 1024 400))
 
 
 ;; Temporarily disable the file name handler as we dont need it on startup
