@@ -607,6 +607,7 @@ You can enable/disable any themes that you like here
 - The modeline is at the bottom of the window, it describes what is going on in the current buffer
   - it can display modes, time, filenames, and even line numbers
 - You can pick one of these modeline themes, simply enable the one you want to try and disable the rest
+- If icons on the modeline are not displaying properly (especially in MS Windows) try running  =M-x nerd-icons-install-fonts=
 #+BEGIN_SRC emacs-lisp
 
 ;;;;;;;;;;;;;;;;;;;;;;   
@@ -840,7 +841,7 @@ Useful if you work on multiple windows and want an efficient way of switching be
  :CUSTOM_ID: all-the-icons
  :END:
 - This is where the file icons come from
-- Make sure to run `M-x all-the-icons-install-fonts` if you want them to work!
+- Make sure to run =M-x all-the-icons-install-fonts= if you want them to work!
 - Repo: https://github.com/domtronn/all-the-icons.el
 #+BEGIN_SRC emacs-lisp
     ;; Pretty Icons
