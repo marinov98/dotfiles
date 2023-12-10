@@ -272,7 +272,7 @@ A nice and quick way to view/edit my configuration at any time
           "t l" '(:ignore t :wk "LSP-Treemacs")    
           "t l s" '(lsp-treemacs-symbols :wk "LSP Treemacs Symbols")    
           "t l r" '(lsp-treemacs-references :wk "LSP Treemacs References")    
-          "t l e" '(lsp-treemacs-error-list :wk "LSP Treemacs Error List")))
+          "t l e" '(lsp-treemacs-errors-list :wk "LSP Treemacs Errors List")))
 
       (use-package evil
           :ensure t
@@ -1499,69 +1499,76 @@ Smerge mode deals with merge conflicts in git.
  - lsp-ui (UI integrations for lsp-mode)
  - lsp-java (java seems to require its own package for lsp)
 #+BEGIN_SRC emacs-lisp  
-    (use-package lsp-mode
-        :ensure t
-        :commands (lsp lsp-deferred)
-        :bind
-        (:map evil-normal-state-map 
-          ("gh" . lsp-describe-thing-at-point)
-          ("gi" . lsp-goto-implementation)
-          ("gd" . lsp-find-definition))
-        :diminish
-        :hook
-        ((c++-mode c-mode python-mode css-mode yaml-mode json-mode js-mode js2-mode rjsx-mode typescript-mode web-mode) . lsp-deferred)
-        :custom
-        (lsp-auto-guess-root nil)
-        (lsp-log-io nil)
-        (lsp-file-watch-threshold 5000)
-        (lsp-prefer-flymake nil)
-        (lsp-io-messages-max nil)
-        :config
-        (setq lsp-pyls-plugins-flake8-enabled nil)
-        (setq lsp-pyls-plugins-pycodestyle-enabled nil)
-        (lsp-enable-which-key-integration t)
-        (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")))
+     (use-package lsp-mode
+         :ensure t
+         :commands (lsp lsp-deferred)
+         :bind
+         (:map evil-normal-state-map 
+           ("gh" . lsp-describe-thing-at-point)
+           ("gi" . lsp-goto-implementation)
+           ("gd" . lsp-find-definition))
+         :diminish
+         :hook
+         ((c++-mode c-mode css-mode yaml-mode json-mode js-mode js2-mode rjsx-mode typescript-mode web-mode) . lsp-deferred)
+         :custom
+         (lsp-auto-guess-root nil)
+         (lsp-log-io nil)
+         (lsp-file-watch-threshold 5000)
+         (lsp-prefer-flymake nil)
+         (lsp-io-messages-max nil)
+         :config
+         (setq lsp-pyls-plugins-flake8-enabled nil)
+         (setq lsp-pyls-plugins-pycodestyle-enabled nil)
+         (lsp-enable-which-key-integration t)
+         (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")))
 
-    (use-package lsp-ui
-        :after lsp-mode flycheck
-        :ensure t
-        :diminish
-        :commands lsp-ui-mode
-        :hook (lsp-mode . lsp-ui-mode)
-        :bind
-        (:map evil-normal-state-map
-          ("gr" . lsp-ui-peek-find-references))
-        (:map lsp-ui-peek-mode-map
-          ("M-j" . lsp-ui-peek--select-next)
-          ("M-k" . lsp-ui-peek--select-prev))
-        :custom
-        (lsp-ui-doc-enable nil)
-        (lsp-ui-doc-position 'top)
-        (lsp-ui-doc-include-signature t)
-        (lsp-ui-doc-show-with-cursor nil)
-        (lsp-ui-doc-show-with-mouse t)
-        (lsp-ui-sideline-enable t)
-        (lsp-ui-sideline-ignore-duplicates t)
-        (lsp-ui-sideline-show-diagnostics t)
-        (lsp-ui-sideline-show-symbol nil)
-        (lsp-ui-sideline-show-hover nil)
-        (lsp-ui-peek-enable t)
-        (lsp-ui-peek-list-width 60)
-        (lsp-ui-peek-peek-height 25)) 
+     (use-package lsp-ui
+         :after lsp-mode flycheck
+         :ensure t
+         :diminish
+         :commands lsp-ui-mode
+         :hook (lsp-mode . lsp-ui-mode)
+         :bind
+         (:map evil-normal-state-map
+           ("gr" . lsp-ui-peek-find-references))
+         (:map lsp-ui-peek-mode-map
+           ("M-j" . lsp-ui-peek--select-next)
+           ("M-k" . lsp-ui-peek--select-prev))
+         :custom
+         (lsp-ui-doc-enable nil)
+         (lsp-ui-doc-position 'top)
+         (lsp-ui-doc-include-signature t)
+         (lsp-ui-doc-show-with-cursor nil)
+         (lsp-ui-doc-show-with-mouse t)
+         (lsp-ui-sideline-enable t)
+         (lsp-ui-sideline-ignore-duplicates t)
+         (lsp-ui-sideline-show-diagnostics t)
+         (lsp-ui-sideline-show-symbol nil)
+         (lsp-ui-sideline-show-hover nil)
+         (lsp-ui-peek-enable t)
+         (lsp-ui-peek-list-width 60)
+         (lsp-ui-peek-peek-height 25)) 
 
-  (use-package lsp-treemacs
-      :after treemacs lsp-mode
-      :ensure t
-      :config (lsp-treemacs-sync-mode t))
+   (use-package lsp-treemacs
+       :after treemacs lsp-mode
+       :ensure t
+       :config (lsp-treemacs-sync-mode t))
 
-  (use-package lsp-java 
-      :disabled
+  (use-package lsp-pyright
       :after lsp-mode
-      :hook (java-mode . lsp-deferred))
+      :ensure t
+      :hook (python-mode . (lambda ()
+                           (require 'lsp-pyright)
+                           (lsp-deferred))))  
 
-  (use-package lsp-ivy
-      :disabled
-      :after lsp-mode lsp-ui)
+   (use-package lsp-java 
+       :disabled
+       :after lsp-mode
+       :hook (java-mode . lsp-deferred))
+
+   (use-package lsp-ivy
+       :disabled
+       :after lsp-mode lsp-ui)
 
 #+END_SRC
 * DAP
@@ -1655,23 +1662,31 @@ Still experimenting with this, native gdb in emacs is also really good
  :END:
 - Python-pip: https://pip.pypa.io/en/stable/
 - Python Language Server: https://pypi.org/project/python-language-server/
-pip installs (useful packages for python development) 
+- Alt Language Server(Need =lsp-pyright= package for it): https://github.com/microsoft/pyright
+How to install particular language server
  #+BEGIN_SRC markdown
-python -m pip install rope jedi pylint flake8 autopep8 yapf pygments virtualenv virtualenvwrapper pynvim
+ python -m pip install LANGUAGE_SERVER_OF_CHOICE
  #+END_SRC
 *** Settings
 #+BEGIN_SRC emacs-lisp
-    (use-package python
-        :custom
-        (python-indent-guess-indent-offset t)
-        (python-indent-guess-indent-offset-verbose nil)
-        :config
-        (setq-default python-basic-offset 4) 
-        (setq-default python-indent-offset 4))
+  (use-package python
+      :custom
+      (python-indent-guess-indent-offset t)
+      (python-indent-guess-indent-offset-verbose nil)
+      :config
+      (setq-default python-basic-offset 4) 
+      (setq-default python-indent-offset 4))
 
+  ;; virutalenv support
+  (use-package pyvenv
+      :ensure t
+      :config
+      (pyvenv-mode t))
+
+  ;; python formatter of choice
   (use-package python-black
-    :after python
-    :ensure t)
+      :after python
+      :ensure t)
 #+END_SRC
 *** Debugging
 Note: the template is meant to be edited to personal preferences
