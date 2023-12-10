@@ -87,18 +87,18 @@ Indentation
 #+END_SRC
 Displaying time and date in emacs
 #+BEGIN_SRC emacs-lisp
-  (setq display-time-24hr-format t)
-  (display-time-mode 1)                                  ;; display time in the modeline
+  (setq display-time-24hr-format t)                        ;; 24hr format because I'm european :)
+  (display-time-mode nil)                                  ;; t to display time in the modeline nil if you'd rather not
 #+END_SRC
 Convenient yes or no and disable bars/blinking cursor
 #+BEGIN_SRC emacs-lisp
-  (fset 'yes-or-no-p 'y-or-n-p)            ;; change yes or no to y or n
-  (setq use-dialog-box nil)                ;; Don't pop up UI dialogs when prompting
-  (menu-bar-mode -1)                       ;; disable menu bar
-  (scroll-bar-mode -1)                     ;; disable scroll bar
-  (toggle-scroll-bar -1)                   ;; disable scroll bar toggle
-  (tool-bar-mode -1)                       ;; disable tool bar
-  (blink-cursor-mode -1)                   ;; make cursor stop blinking
+  (fset 'yes-or-no-p 'y-or-n-p)           ;; change yes or no to y or n
+  (setq use-dialog-box nil)               ;; Don't pop up UI dialogs when prompting
+  (menu-bar-mode -1)                      ;; disable menu bar
+  (scroll-bar-mode -1)                    ;; disable scroll bar
+  (toggle-scroll-bar -1)                  ;; disable scroll bar toggle
+  (tool-bar-mode -1)                      ;; disable tool bar
+  (blink-cursor-mode -1)                  ;; make cursor stop blinking
 #+END_SRC
 Disable back up and restrict histories files (comment if you want to enable backup files) 
 #+BEGIN_SRC emacs-lisp
@@ -244,7 +244,11 @@ A nice and quick way to view/edit my configuration at any time
       "c f" '(:ignore t :wk "Flycheck options")    
       "c f e" '(flycheck-explain-error-at-point :wk "Flycheck explain error")    
       "c f s" '(flycheck-select-checker :wk "Flycheck select checker")    
-      "c f n" '(flycheck-next-error :wk "Flycheck next error")    
+      "c f d" '(flycheck-disable-checker :wk "Flycheck disable checker")    
+      "c f h" '(flycheck-describe-checker :wk "Flycheck describe checker")    
+      "c f m" '(flycheck-mode :wk "Flycheck mode")    
+      "c f M" '(flycheck-manual :wk "Flycheck manual")    
+      "c f v" '(flycheck-verify-setup :wk "Flycheck verify setup")    
       "c f l" '(flycheck-list-errors :which-key "Flycheck List Errors"))
 
     (mpm/leader-keys
@@ -509,6 +513,8 @@ Org personal variables and functions
       (dashboard-startup-banner 'logo)
       (dashboard-footer-messages '("Maintained by Marin Marinov since 2018"))
       :config
+      (when (string-equal system-type "windows-nt" )
+        (advice-add #'dashboard-replace-displayable :override #'identity)) ;; icons have issue displaying on windows, this fixes it
       (dashboard-setup-startup-hook)
       (setq dashboard-items '((recents  . 5)
                              (bookmarks . 5)
