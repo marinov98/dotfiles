@@ -1095,6 +1095,8 @@ I never lose where my cursor is thanks to this
        (flycheck-info ((t (:underline (:style wave :color "#87cefa")))))
        (flycheck-warning ((t (:underline (:style wave :color "#ffb95c")))))
        (flycheck-error ((t (:underline (:style wave :color "#cc0202")))))
+       :custom
+       (flycheck-display-errors-delay 0.5)
        :config
        (global-flycheck-mode t))
 #+END_SRC
@@ -1118,7 +1120,8 @@ I never lose where my cursor is thanks to this
       (:map lsp-mode-map
           ("<tab>" . company-indent-or-complete-common))
       :custom
-      (company-tooltip-limit 5) ; show 5 candidates at one time
+      (company-tooltip-limit 5) ; how many candidates to show
+      (company-idle-delay 0.1) ; How much to delay to completion
       (company-minimum-prefix-length 2) ;; show completions after 2 chars
       (company-selection-wrap-around t) ;; goes to start of selection if you reached the bottom 
       (company-require-match 'never) ;; dont need to pick a choice 
@@ -1683,11 +1686,19 @@ How to install particular language server
       (setq-default python-basic-offset 4) 
       (setq-default python-indent-offset 4))
 
-  ;; virutalenv support
+  ;; venv support
   (use-package pyvenv
       :ensure t
       :config
       (pyvenv-mode t))
+
+ ;; if you need virtualenv support 
+(use-package virtualenvwrapper
+   :disabled
+   :ensure t
+   :config
+   (venv-initialize-interactive-shells)
+   (venv-initialize-eshell))
 
   ;; python formatter of choice
   (use-package python-black
@@ -1710,25 +1721,6 @@ Note: the template is meant to be edited to personal preferences
         :request "launch"
         :name "My App")))
 #+END_SRC
-Below is are packages and settings related to autocomplete and formatting
-- You will need to install =autopep= for the below to work (this is for code formatting)
-#+begin_src emacs-lisp
-  (use-package py-autopep8
-      :disabled
-      :ensure t
-      :config
-      (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save))
-#+end_src
-*** Virtualenv
- Remove disabled if you need it, I have yet to develop seriously in Python
-#+BEGIN_SRC emacs-lisp
-(use-package virtualenvwrapper
-   :disabled
-   :ensure t
-   :config
-   (venv-initialize-interactive-shells)
-   (venv-initialize-eshell))
-#+END_SRC
  :PROPERTIES:
  :CUSTOM_ID: python
  :END:
@@ -1736,7 +1728,7 @@ Below is are packages and settings related to autocomplete and formatting
  :PROPERTIES:
  :CUSTOM_ID: web-development
  :END:
- Language servers install command (that I use): 
+ Language servers install command (Might not be necessary as LSP sometimes installs it for you): 
  #+BEGIN_SRC markdown
  npm i -g typescript-language-server vscode-json-languageserver vscode-html-languageserver-bin yaml-language-server vscode-css-languageserver-bin bash-language-server
  #+END_SRC
