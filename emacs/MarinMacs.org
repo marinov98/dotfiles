@@ -56,7 +56,7 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 Indentation 
 #+BEGIN_SRC emacs-lisp
   (setq-default indent-tabs-mode nil)                    ;; disable tabs and use spaces
-  (setq-default tab-width 4)                             ;; set default tab width 4 
+  (setq-default tab-width 4)                             ;; set default tab width 4
   (setq backward-delete-char-untabify-method 'hungry)    ;; backspaces entire tab instead of one space at a time
   (setq compilation-scroll-output 'first-error)          ;; compile scroll location
 #+END_SRC
@@ -67,14 +67,14 @@ Indentation
   (setq visible-bell t)                                    ;; disable end of buffer sounds
   (electric-pair-mode)                                     ;; auto closing brackets
   (show-paren-mode 1)                                      ;; highlight matching parenthesis
-  (global-hl-line-mode 1)                                  ;; highlight current line 
+  (global-hl-line-mode 1)                                  ;; highlight current line
   (setq inhibit-startup-screen t)                          ;; disable startup screen
 #+END_SRC
 - Line numbers
   - I am not sure if all packages work with line numbers properly, but so far everything works
   - relative line numbers are very useful when combined with vim bindings as they help you see how far you need to jump to get where you want to 
 #+BEGIN_SRC emacs-lisp
-     (when (version<= "26.0.50" emacs-version )         
+     (when (version<= "26.0.50" emacs-version)         
        (setq display-line-numbers-type 'relative) ;; relative line numbers help you see how far you need to jump to get where you want to 
        (setq display-line-numbers-current-absolute t)
        (setq display-line-numbers-width 2)
@@ -87,8 +87,11 @@ Indentation
 #+END_SRC
 Displaying time and date in emacs
 #+BEGIN_SRC emacs-lisp
-  (setq display-time-24hr-format t)                        ;; 24hr format because I'm european :)
-  (display-time-mode nil)                                  ;; t to display time in the modeline nil if you'd rather not
+  (use-package time
+      :custom
+      (display-time-24hr-format t) ;; 24hr format because I'm european :)
+      :config
+      (display-time-mode -1)) ;; toggle time mode on and off
 #+END_SRC
 Convenient yes or no and disable bars/blinking cursor
 #+BEGIN_SRC emacs-lisp
@@ -128,10 +131,10 @@ The settings below are mainly for linux, you can edit this section if you want t
 A nice and quick way to view/edit my configuration at any time
   #+begin_src emacs-lisp
     (defun goto-MarinMacs ()
-      "Jump to configuration file"
+      "Jump to configuration file."
       (interactive)
-      (find-file "~/.emacs.d/MarinMacs.org")) 
-    (global-set-key (kbd "C-c m") 'goto-MarinMacs) ;; secondary binding is SPC u m 
+      (find-file "~/.emacs.d/MarinMacs.org"))
+    (global-set-key (kbd "C-c m") 'goto-MarinMacs) ;; secondary binding is SPC u m
   #+end_src
 * Quelpa
  :PROPERTIES:
@@ -382,18 +385,18 @@ Org personal variables and functions
            '(org-default-notes-file (concat org-directory "/Personal/notes.org")))
 
       (defun marinov/goto-org-directory ()
-        "goes to my org directory"
+        "goes to my org directory."
         (interactive)
         (find-file org-directory))
 
       (defun marinov/jump-to-notes ()
-        "go to notes file"
+        "go to notes file."
         (interactive)
         (find-file org-default-notes-file))
 
       ;; sometimes I edit within org and I forget to enter src but I want to just go to src to evaluate
       (defun marinov/enter-eval ()
-       "enter source, and evaluate the buffer"
+       "enter source, and evaluate the buffer."
        (interactive)
        (org-edit-special)
        (eval-buffer))
@@ -1512,7 +1515,7 @@ Smerge mode deals with merge conflicts in git.
          :ensure t
          :commands (lsp lsp-deferred)
          :bind
-         (:map evil-normal-state-map 
+         (:map evil-normal-state-map
            ("gh" . lsp-describe-thing-at-point)
            ("gi" . lsp-goto-implementation)
            ("gd" . lsp-find-definition))
@@ -1524,12 +1527,7 @@ Smerge mode deals with merge conflicts in git.
          (lsp-log-io nil)
          (lsp-file-watch-threshold 5000)
          (lsp-prefer-flymake nil)
-         (lsp-io-messages-max nil)
-         :config
-         (setq lsp-pyls-plugins-flake8-enabled nil)
-         (setq lsp-pyls-plugins-pycodestyle-enabled nil)
-         (lsp-enable-which-key-integration t)
-         (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")))
+         (lsp-io-messages-max nil))
 
      (use-package lsp-ui
          :after lsp-mode flycheck
@@ -1556,7 +1554,7 @@ Smerge mode deals with merge conflicts in git.
          (lsp-ui-sideline-show-hover nil)
          (lsp-ui-peek-enable t)
          (lsp-ui-peek-list-width 60)
-         (lsp-ui-peek-peek-height 25)) 
+         (lsp-ui-peek-peek-height 25))
 
    (use-package lsp-treemacs
        :after treemacs lsp-mode
@@ -1587,17 +1585,17 @@ Smerge mode deals with merge conflicts in git.
 - DAP stands for Debug Adapter Protocal works similiarly to LSP but for debugging
 - Repo: https://github.com/emacs-lsp/dap-mode (includes everything you need to install for your desired development language)
 #+BEGIN_SRC emacs-lisp
-   ;; only installing because dap-mode requires it
-   (use-package posframe :ensure t)
+  ;; only installing because dap-mode requires it
+  (use-package posframe :ensure t)
 
-   (use-package dap-mode
-       :ensure t
-       :after hydra
-       :hook
-       (lsp-mode . (lambda () (dap-mode t) (dap-ui-mode t) (dap-tooltip-mode 1) (tooltip-mode 1)))
-       :config
-       (add-hook 'dap-stopped-hook
-       (lambda (arg) (call-interactively #'dap-hydra)))) ;; enable hydra on breakpoint stop
+  (use-package dap-mode
+      :ensure t
+      :after hydra
+      :hook
+      (lsp-mode . (lambda () (dap-mode t) (dap-ui-mode t) (dap-tooltip-mode 1) (tooltip-mode 1)))
+      :config
+      (add-hook 'dap-stopped-hook
+      (lambda (arg) (call-interactively #'dap-hydra)))) ;; enable hydra on breakpoint stop
 
 #+END_SRC
 * Development
@@ -1859,7 +1857,7 @@ rainbow mode for displaying hex colors, rainbow-delimeters for coloring parenthe
  More on emmet: https://www.emmet.io/
 #+BEGIN_SRC emacs-lisp
   (use-package emmet-mode
-      :ensure t
+      :disabled
       :hook
       ((css-mode  . emmet-mode)
       (php-mode  . emmet-mode)
