@@ -236,8 +236,8 @@
       ]
     },
     {
-      "before": ["<leader>", "2"],
-      "commands": ["workbench.action.splitEditor"]
+      "before": ["g", "r"],
+      "commands": ["editor.action.goToReferences"]
     },
     {
       "before": ["<leader>", "l", "e"],
