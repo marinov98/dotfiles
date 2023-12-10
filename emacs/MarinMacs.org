@@ -24,7 +24,6 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
   - [[#avy][Avy]]
   - [[#which-key][Which-Key]]
   - [[#ace-window][Ace-Window]]
-  - [[#ranger][Ranger]]
   - [[#all-the-icons][All-the-icons]]
   - [[#beacon][Beacon]]
   - [[#neotree][Neotree]]
@@ -94,6 +93,7 @@ Displaying time and date in emacs
 Convenient yes or no and disable bars/blinking cursor
 #+BEGIN_SRC emacs-lisp
   (fset 'yes-or-no-p 'y-or-n-p)            ;; change yes or no to y or n
+  (setq use-dialog-box nil)                ;; Don't pop up UI dialogs when prompting
   (menu-bar-mode -1)                       ;; disable menu bar
   (scroll-bar-mode -1)                     ;; disable scroll bar
   (toggle-scroll-bar -1)                   ;; disable scroll bar toggle
@@ -106,9 +106,9 @@ Disable back up and restrict histories files (comment if you want to enable back
   (setq auto-save-default nil)             ;; stop creating autosave# files
   (setq create-lockfiles nil)              ;; stop creating any # files
 
-  (setq history-length 100)
-  (put 'minibuffer-history 'history-length 50)
-  (put 'evil-ex-history 'history-length 50)
+  (setq history-length 30)
+  (put 'minibuffer-history 'history-length 30)
+  (put 'evil-ex-history 'history-length 30)
   (put 'kill-ring 'history-length 25)
 #+END_SRC
 Emacs has native support for the GNU Debugger (GDB), and we can make it a little better
@@ -170,10 +170,10 @@ A nice and quick way to view/edit my configuration at any time
 
     (mpm/leader-keys
        "SPC" '(hydra-projectile/body :wk "Projectile Hydra")
-       "w" '(hydra-window-mini/body :wk "Window Hydra")
+       "w" '(hydra-window/body :wk "Window Hydra")
        "S" '(hydra-smerge/body :wk "Smerge Hydra")
        "l" '(hydra-code/body :wk "LSP Hydra")
-       "a" '(hydra-avy-snipe/body :wk "LSP Hydra")
+       "a" '(hydra-avy/body :wk "Avy Hydra")
        "g" '(hydra-git/body :wk "Git Hydra")
        "v" '(hydra-writing/body :wk "Writing Hydra")
        "u" '(hydra-utility/body :wk "Utility Hydra")
@@ -198,6 +198,7 @@ A nice and quick way to view/edit my configuration at any time
        "i s" '(swiper-isearch :wk "Swiper Isearch")
        "i i" '(ibuffer :wk "Ibuffer")
        "i o" '(ivy-occur :wk "Ivy Occur")
+       "i y" '(counsel-yank-pop :wk "Counsel Yank Pop")
        "i m" '(swiper-multi :wk "Swiper Multi Select"))
 
     (mpm/leader-keys
@@ -222,8 +223,7 @@ A nice and quick way to view/edit my configuration at any time
        "f" '(counsel-find-file :wk "Counsel Find File")
        "/" '(comment-line :wk "Comment Line") 
        "m" '(counsel-M-x :wk "Counsel M-x")
-       "*" '(swiper-thing-at-point :wk "Swiper at Point")
-       "y" '(counsel-yank-pop :wk "Counsel Yank Pop"))
+       "*" '(swiper-thing-at-point :wk "Swiper at Point"))
 
     (mpm/leader-keys
        "r" '(:ignore t :wk "Grep Actions")
@@ -243,6 +243,8 @@ A nice and quick way to view/edit my configuration at any time
       "c l" '(hydra-launcher/body :wk "Launcher Hydra")
       "c f" '(:ignore t :wk "Flycheck options")    
       "c f e" '(flycheck-explain-error-at-point :wk "Flycheck explain error")    
+      "c f s" '(flycheck-select-checker :wk "Flycheck select checker")    
+      "c f n" '(flycheck-next-error :wk "Flycheck next error")    
       "c f l" '(flycheck-list-errors :which-key "Flycheck List Errors"))
 
     (mpm/leader-keys
@@ -267,10 +269,10 @@ A nice and quick way to view/edit my configuration at any time
       "t s" '(treemacs-switch-workspace :wk "Treemacs switch workspace")
       "t p" '(treemacs-projectile :wk "Treemacs Projectile")
       "t w" '(treemacs-select-window :wk "Treemacs select window")
-      "t r" '(:ignore t :wk "Treemacs Rename Options")
-      "t r f" '(treemacs-rename-file :wk "Treemacs rename file")
-      "t r w" '(treemacs-rename-workspace :wk "Treemacs rename workspace")
-      "t r p" '(treemacs-rename-project :wk "Treemacs rename project")))
+      "t l" '(:ignore t :wk "LSP-Treemacs")    
+      "t l s" '(lsp-treemacs-symbols :wk "LSP Treemacs Symbols")    
+      "t l r" '(lsp-treemacs-references :wk "LSP Treemacs References")    
+      "t l e" '(lsp-treemacs-error-list :wk "LSP Treemacs Error List")))
 
   (use-package evil
       :ensure t
@@ -279,8 +281,9 @@ A nice and quick way to view/edit my configuration at any time
       (setq evil-undo-system 'undo-redo)
       :bind
       ((:map evil-normal-state-map
-         ("/" . swiper-isearch)
+         ("gs" . counsel-rg)
          ("C-/" . comment-line)
+         ("/" . swiper-isearch)
          ("*" . swiper-thing-at-point)))
       :config
       (evil-mode 1)
@@ -329,9 +332,9 @@ A nice and quick way to view/edit my configuration at any time
       :config
       (global-evil-mc-mode 1))
 
-  ;; like vim-sneak and/or vim-seek
+  ;; like vim-sneak and/or vim-seek (just going to opt for avy)
   (use-package evil-snipe
-      :ensure t
+      :disabled
       :custom
       (evil-snipe-scope 'line)
       (evil-snipe-repeat-scope 'whole-line)
@@ -697,6 +700,7 @@ You can enable/disable any themes that you like here
       :custom
       (swiper-action-recenter t)
       (swiper-goto-start-of-match t)
+      (swiper-include-line-number-in-search t)
       :bind 
       (("C-s" . swiper-isearch)
       ("C-c C-r" . ivy-resume)))
@@ -809,7 +813,7 @@ a personal keybinding just because its so good. Check the [[https://github.com/a
       :ensure t
       :custom
       (avy-background t)
-      (avy-timeout-seconds 0.6))
+      (avy-timeout-seconds 0.4))
 #+END_SRC
 ** Which-Key
  :PROPERTIES:
@@ -1246,20 +1250,6 @@ Smerge mode deals with merge conflicts in git.
 #+END_SRC
 *** Window (my attempt at window management)
 #+BEGIN_SRC emacs-lisp
-  (pretty-hydra-define hydra-window-mini (:color blue :title "⚡ Window Nav ⚡" :quit-key "q") 
-    ("Split"
-    (("2" split-window-right "v-split")
-    ("3" split-window-below "h-split"))
-
-    "Full Window Hydra"
-    (("w" hydra-window/body  "Full Window Hydra"))
-
-    "Navigate"
-    (("h" windmove-left "left")
-    ("j" windmove-down "down")
-    ("k" windmove-up "up")
-    ("l" windmove-right "right"))))
-
   (pretty-hydra-define hydra-window (:color pink :title "⚡⚡ Ivy + Windows ⚡⚡" :quit-key "q") 
     ("Ivy"
     (("f" counsel-find-file "find")
@@ -1268,8 +1258,8 @@ Smerge mode deals with merge conflicts in git.
 
     "Splitting"
     (("o" delete-other-windows "delete other windows")
-    ("2" split-window-right "v-split")
-    ("3" split-window-below "h-split"))
+    ("v" split-window-right "v-split")
+    ("2" split-window-below "h-split"))
 
     "Move"
     (("h" windmove-left "left")
@@ -1342,10 +1332,8 @@ Smerge mode deals with merge conflicts in git.
 #+BEGIN_SRC emacs-lisp
   (pretty-hydra-define hydra-code (:color red :title "📡 Code 📡" :quit-key "q") 
     ("Find"
-    (("f" lsp-find-definition "find def")
-    ("P" lsp-ui-peek-find-definitions "peek def")
+    (("f" lsp-ui-peek-find-definitions "peek def")
     ("r" lsp-find-references "find ref")
-    ("R" lsp-ui-peek-find-references "peek ref")
     ("t" lsp-find-type-definition "find type def")
     ("g" lsp-ui-doc-glance "glance")
     ("i" lsp-ui-imenu "imenu"))
@@ -1370,7 +1358,7 @@ Smerge mode deals with merge conflicts in git.
     ("l" lsp-format-buffer "LSP")
     ("c" clang-format-buffer "clang"))
 
-    "Line"
+    "Region"
     (("B" python-black-region "python-black")
     ("C" clang-format-region "clang")
     ("L" lsp-format-region "LSP")))) 
@@ -1394,14 +1382,12 @@ Smerge mode deals with merge conflicts in git.
        ("q" evil-mc-undo-all-cursors "undo all cursors" :color blue)
        ("Q" evil-mc-resume-cursors "resume cursors" :color blue)))) 
 #+END_SRC
-*** Sharpshooter (Avy + Snipe)
+*** Avy (Word finding)
 #+BEGIN_SRC emacs-lisp
-  (pretty-hydra-define hydra-avy-snipe (:color blue :title "↵ Avy + Snipe ↵" :quit-key "q")
+  (pretty-hydra-define hydra-avy (:color blue :title "↵ Avy + Snipe ↵" :quit-key "q")
     ("Char"
     (("c" avy-goto-char "char 1" :color red)
-    ("f" avy-goto-char-2 "char 2" :color red)
-    ("s" evil-snipe-s "(snipe) char 2" :color red)
-    ("S" evil-snipe-S "(snipe) goto char 2 eol" :color red)
+    ("s" avy-goto-char-2 "char 2" :color red)
     ("t" avy-goto-char-timer "timed char" :color red))
 
     "Word"
@@ -1511,68 +1497,69 @@ Smerge mode deals with merge conflicts in git.
  - lsp-ui (UI integrations for lsp-mode)
  - lsp-java (java seems to require its own package for lsp)
 #+BEGIN_SRC emacs-lisp  
-      (use-package lsp-mode
-          :ensure t
-          :commands (lsp lsp-deferred)
-          :bind
-          (:map evil-normal-state-map
-            ("gh" . lsp-describe-thing-at-point)
-            ("gd" . lsp-find-definition))
-          :diminish
-          :hook
-          ((c++-mode c-mode python-mode css-mode yaml-mode json-mode js-mode js2-mode rjsx-mode typescript-mode web-mode) . lsp-deferred)
-          :custom
-          (lsp-auto-guess-root nil)
-          (lsp-log-io nil)
-          (lsp-file-watch-threshold 500)
-          (lsp-prefer-flymake nil)
-          (lsp-io-messages-max nil)
-          :config
-          (setq lsp-pyls-plugins-flake8-enabled nil)
-          (setq lsp-pyls-plugins-pycodestyle-enabled nil)
-          (lsp-enable-which-key-integration t)
-          (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")))
-
-      (use-package lsp-ui
-          :after lsp-mode flycheck
-          :ensure t
-          :diminish
-          :commands lsp-ui-mode
-          :hook (lsp-mode . lsp-ui-mode)
-          :bind
-          (:map evil-normal-state-map
-            ("gr" . lsp-ui-peek-find-references))
-          (:map lsp-ui-peek-mode-map
-            ("M-j" . lsp-ui-peek--select-next)
-            ("M-k" . lsp-ui-peek--select-prev))
-          :custom
-          (lsp-ui-doc-enable nil)
-          (lsp-ui-doc-position 'top)
-          (lsp-ui-doc-include-signature t)
-          (lsp-ui-doc-show-with-cursor nil)
-          (lsp-ui-doc-show-with-mouse t)
-          (lsp-ui-sideline-enable t)
-          (lsp-ui-sideline-ignore-duplicates t)
-          (lsp-ui-sideline-show-diagnostics t)
-          (lsp-ui-sideline-show-symbol nil)
-          (lsp-ui-sideline-show-hover nil)
-          (lsp-ui-peek-enable t)
-          (lsp-ui-peek-list-width 60)
-          (lsp-ui-peek-peek-height 25)) 
-
-    (use-package lsp-treemacs
-        :after treemacs lsp-mode
+    (use-package lsp-mode
         :ensure t
-        :config (lsp-treemacs-sync-mode t))
+        :commands (lsp lsp-deferred)
+        :bind
+        (:map evil-normal-state-map 
+          ("gh" . lsp-describe-thing-at-point)
+          ("gi" . lsp-goto-implementation)
+          ("gd" . lsp-find-definition))
+        :diminish
+        :hook
+        ((c++-mode c-mode python-mode css-mode yaml-mode json-mode js-mode js2-mode rjsx-mode typescript-mode web-mode) . lsp-deferred)
+        :custom
+        (lsp-auto-guess-root nil)
+        (lsp-log-io nil)
+        (lsp-file-watch-threshold 5000)
+        (lsp-prefer-flymake nil)
+        (lsp-io-messages-max nil)
+        :config
+        (setq lsp-pyls-plugins-flake8-enabled nil)
+        (setq lsp-pyls-plugins-pycodestyle-enabled nil)
+        (lsp-enable-which-key-integration t)
+        (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")))
 
-    (use-package lsp-java 
-        :disabled
-        :after lsp-mode
-        :hook (java-mode . lsp-deferred))
+    (use-package lsp-ui
+        :after lsp-mode flycheck
+        :ensure t
+        :diminish
+        :commands lsp-ui-mode
+        :hook (lsp-mode . lsp-ui-mode)
+        :bind
+        (:map evil-normal-state-map
+          ("gr" . lsp-ui-peek-find-references))
+        (:map lsp-ui-peek-mode-map
+          ("M-j" . lsp-ui-peek--select-next)
+          ("M-k" . lsp-ui-peek--select-prev))
+        :custom
+        (lsp-ui-doc-enable nil)
+        (lsp-ui-doc-position 'top)
+        (lsp-ui-doc-include-signature t)
+        (lsp-ui-doc-show-with-cursor nil)
+        (lsp-ui-doc-show-with-mouse t)
+        (lsp-ui-sideline-enable t)
+        (lsp-ui-sideline-ignore-duplicates t)
+        (lsp-ui-sideline-show-diagnostics t)
+        (lsp-ui-sideline-show-symbol nil)
+        (lsp-ui-sideline-show-hover nil)
+        (lsp-ui-peek-enable t)
+        (lsp-ui-peek-list-width 60)
+        (lsp-ui-peek-peek-height 25)) 
 
-    (use-package lsp-ivy
-        :disabled
-        :after lsp-mode lsp-ui)
+  (use-package lsp-treemacs
+      :after treemacs lsp-mode
+      :ensure t
+      :config (lsp-treemacs-sync-mode t))
+
+  (use-package lsp-java 
+      :disabled
+      :after lsp-mode
+      :hook (java-mode . lsp-deferred))
+
+  (use-package lsp-ivy
+      :disabled
+      :after lsp-mode lsp-ui)
 
 #+END_SRC
 * DAP
@@ -1795,39 +1782,41 @@ rainbow mode for displaying hex colors, rainbow-delimeters for coloring parenthe
   - if you are a *node.js* developer and/or *vanilla js* developer, I found the current setup with web mode to be better for syntax highlighting
   - in *hydra-utility* located in the [[#hydra][Hydra]] section there are keybindings to switch between rjsx and web mode easily
 #+BEGIN_SRC emacs-lisp
-  (use-package rjsx-mode
-      :ensure t
-      :mode
-      (("\\.jsx\\'"  . rjsx-mode))
-      :init
-      (setq-default rjsx-basic-offset 2))
+      (use-package rjsx-mode
+          :ensure t
+          :mode
+          (("\\.jsx\\'"  . rjsx-mode))
+          :init
+          (setq-default rjsx-basic-offset 2))
     
-  (use-package json-mode
-      :ensure t
-      :commands json-mode)
+      (use-package json-mode
+          :ensure t
+          :commands json-mode
+          :init
+          (setq-default js-indent-level 2))
 
-  (use-package yaml-mode
-      :ensure t
-      :commands yaml-mode
-      :mode (("\\.yml\\'" . yaml-mode)
-             ("\\.yaml\\'" . yaml-mode)))
+      (use-package yaml-mode
+          :ensure t
+          :commands yaml-mode
+          :mode (("\\.yml\\'" . yaml-mode)
+                 ("\\.yaml\\'" . yaml-mode)))
              
-  (use-package graphql-mode
-      :ensure t
-      :commands graphql-mode
-      :mode
-      (("\\.\\(gql\\|graphql\\)\\'" . graphql-mode)))
+      (use-package graphql-mode
+          :ensure t
+          :commands graphql-mode
+          :mode
+          (("\\.\\(gql\\|graphql\\)\\'" . graphql-mode)))
     
-  (use-package dockerfile-mode 
-      :ensure t
-      :commands dockerfile-mode
-      :mode
-      (("Dockerfile'"       . dockerfile-mode)
-      ("\\.Dockerfile\\'"  . dockerfile-mode)))
+      (use-package dockerfile-mode 
+          :ensure t
+          :commands dockerfile-mode
+          :mode
+          (("Dockerfile'"       . dockerfile-mode)
+          ("\\.Dockerfile\\'"  . dockerfile-mode)))
     
-  (use-package csv-mode 
-      :ensure t
-      :commands csv-mode)
+      (use-package csv-mode 
+          :ensure t
+          :commands csv-mode)
 #+END_SRC
 *** Skewer
 'live web-development in emacs'
