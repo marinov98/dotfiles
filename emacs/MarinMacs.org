@@ -332,8 +332,8 @@ A nice and quick way to view/edit my configuration at any time
       (evil-snipe-repeat-scope 'whole-line)
       (evil-snipe-spillover-scope 'buffer)
       :config
-      (evil-snipe-mode t)
-      (evil-snipe-override-mode t))
+      (evil-snipe-mode 1)
+      (evil-snipe-override-mode 1))
 #+END_SRC
 * Markup
  :PROPERTIES:
