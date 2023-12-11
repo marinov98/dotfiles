@@ -74,16 +74,18 @@ Indentation
   - I am not sure if all packages work with line numbers properly, but so far everything works
   - relative line numbers are very useful when combined with vim bindings as they help you see how far you need to jump to get where you want to 
 #+BEGIN_SRC emacs-lisp
-     (when (version<= "26.0.50" emacs-version)         
-       (setq display-line-numbers-type 'relative) ;; relative line numbers help you see how far you need to jump to get where you want to 
-       (setq display-line-numbers-current-absolute t)
-       (setq display-line-numbers-width 2)
-       (setq display-line-numbers-widen t)
-       (global-display-line-numbers-mode 1)) ;; display line numbers in every buffer
-
-    ;; Disable line numbers for some mode
-    (dolist (mode '(org-mode-hook term-mode-hook shell-mode-hook treemacs-mode-hook eshell-mode-hook))
-             (add-hook mode (lambda () (display-line-numbers-mode 0))))
+  (when (version<= "26.0.50" emacs-version)
+    (use-package display-line-numbers
+        :custom
+        (display-line-numbers-type 'relative) ;; relative line numbers help you see how far you need to jump to get where you want to
+        (display-line-numbers-current-absolute t)
+        (display-line-numbers-width 2)
+        (display-line-numbers-widen t)
+        :config
+        (global-display-line-numbers-mode 1)
+        ;; Disable line numbers for some mode
+        (dolist (mode '(org-mode-hook term-mode-hook shell-mode-hook treemacs-mode-hook eshell-mode-hook))
+               (add-hook mode (lambda () (display-line-numbers-mode 0))))))
 #+END_SRC
 Displaying time and date in emacs
 #+BEGIN_SRC emacs-lisp
