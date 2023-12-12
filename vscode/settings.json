@@ -270,7 +270,7 @@
       "commands": ["workbench.action.terminal.new"]
     },
     {
-      "before": ["<leader>", "l", "r"],
+      "before": ["<leader>", "l", "R"],
       "commands": ["editor.action.goToReferences"]
     },
     {
@@ -278,7 +278,7 @@
       "commands": ["editor.action.goToTypeDefinition"]
     },
     {
-      "before": ["<leader>", "l", "R"],
+      "before": ["<leader>", "l", "r"],
       "commands": ["editor.action.refactor"]
     },
     {
