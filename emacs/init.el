@@ -16,7 +16,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; increase garbage threshold to boost startup time then reduce it after initialization is complete (done in marinov/set-memory function)
-(setq gc-cons-threshold (* 1024 1024 400))
+(setq gc-cons-threshold (* 1024 1024 100))
 
 
 ;; Temporarily disable the file name handler as we dont need it on startup
@@ -27,7 +27,7 @@
 (defun marinov/set-memory-kill-buffers ()
   "Set memory usage settings after start up."
   (garbage-collect)
-  (setq gc-cons-threshold (* 1024 1024 100)) ;; change this depending on your system 
+  (setq gc-cons-threshold (* 1024 1024 2)) ;; change this depending on your system 
   (setq large-file-warning-threshold (* 1024 1024 80)) ;; (80mb) default threshold is low by modern standards
   (setq read-process-output-max (* 1024 1024)) ;; (1mb) Increase amount of data which Emacs reads from the process (recommended by lsp package)
   ;; Delete *Messages and *Completions
