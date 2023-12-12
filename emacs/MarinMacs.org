@@ -1380,9 +1380,9 @@ Smerge mode deals with merge conflicts in git.
        ("K" evil-mc-make-cursor-move-prev-line "make & down")) 
 
        "Manual"
-       (("r" evil-mc-undo-last-added-cursor "undo cursor")
+       (("u" evil-mc-undo-last-added-cursor "undo cursor")
        ("q" evil-mc-undo-all-cursors "undo all cursors" :color blue)
-       ("Q" evil-mc-resume-cursors "resume cursors" :color blue)))) 
+       ("r" evil-mc-resume-cursors "resume cursors" :color blue)))) 
 #+END_SRC
 *** Avy (Word finding)
 #+BEGIN_SRC emacs-lisp
