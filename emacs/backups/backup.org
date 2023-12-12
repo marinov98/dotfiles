@@ -56,7 +56,7 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 Indentation 
 #+BEGIN_SRC emacs-lisp
   (setq-default indent-tabs-mode nil)                    ;; disable tabs and use spaces
-  (setq-default tab-width 4)                             ;; set default tab width 4 
+  (setq-default tab-width 4)                             ;; set default tab width 4
   (setq backward-delete-char-untabify-method 'hungry)    ;; backspaces entire tab instead of one space at a time
   (setq compilation-scroll-output 'first-error)          ;; compile scroll location
 #+END_SRC
@@ -67,38 +67,43 @@ Indentation
   (setq visible-bell t)                                    ;; disable end of buffer sounds
   (electric-pair-mode)                                     ;; auto closing brackets
   (show-paren-mode 1)                                      ;; highlight matching parenthesis
-  (global-hl-line-mode 1)                                  ;; highlight current line 
+  (global-hl-line-mode 1)                                  ;; highlight current line
   (setq inhibit-startup-screen t)                          ;; disable startup screen
 #+END_SRC
 - Line numbers
   - I am not sure if all packages work with line numbers properly, but so far everything works
   - relative line numbers are very useful when combined with vim bindings as they help you see how far you need to jump to get where you want to 
 #+BEGIN_SRC emacs-lisp
-     (when (version<= "26.0.50" emacs-version )         
-       (setq display-line-numbers-type 'relative) ;; relative line numbers help you see how far you need to jump to get where you want to 
-       (setq display-line-numbers-current-absolute t)
-       (setq display-line-numbers-width 2)
-       (setq display-line-numbers-widen t)
-       (global-display-line-numbers-mode 1)) ;; display line numbers in every buffer
-
-    ;; Disable line numbers for some mode
-    (dolist (mode '(org-mode-hook term-mode-hook shell-mode-hook treemacs-mode-hook eshell-mode-hook))
-             (add-hook mode (lambda () (display-line-numbers-mode 0))))
+  (when (version<= "26.0.50" emacs-version)
+    (use-package display-line-numbers
+        :custom
+        (display-line-numbers-type 'relative) ;; relative line numbers help you see how far you need to jump to get where you want to
+        (display-line-numbers-current-absolute t)
+        (display-line-numbers-width 2)
+        (display-line-numbers-widen t)
+        :config
+        (global-display-line-numbers-mode 1)
+        ;; Disable line numbers for some mode
+        (dolist (mode '(org-mode-hook term-mode-hook neotree-mode-hook shell-mode-hook treemacs-mode-hook eshell-mode-hook))
+               (add-hook mode (lambda () (display-line-numbers-mode 0))))))
 #+END_SRC
 Displaying time and date in emacs
 #+BEGIN_SRC emacs-lisp
-  (setq display-time-24hr-format t)
-  (display-time-mode 1)                                  ;; display time in the modeline
+  (use-package time
+      :custom
+      (display-time-24hr-format t) ;; 24hr format because I'm european :)
+      :config
+      (display-time-mode -1)) ;; toggle time mode on and off
 #+END_SRC
 Convenient yes or no and disable bars/blinking cursor
 #+BEGIN_SRC emacs-lisp
-  (fset 'yes-or-no-p 'y-or-n-p)            ;; change yes or no to y or n
-  (setq use-dialog-box nil)                ;; Don't pop up UI dialogs when prompting
-  (menu-bar-mode -1)                       ;; disable menu bar
-  (scroll-bar-mode -1)                     ;; disable scroll bar
-  (toggle-scroll-bar -1)                   ;; disable scroll bar toggle
-  (tool-bar-mode -1)                       ;; disable tool bar
-  (blink-cursor-mode -1)                   ;; make cursor stop blinking
+  (fset 'yes-or-no-p 'y-or-n-p)           ;; change yes or no to y or n
+  (setq use-dialog-box nil)               ;; Don't pop up UI dialogs when prompting
+  (menu-bar-mode -1)                      ;; disable menu bar
+  (scroll-bar-mode -1)                    ;; disable scroll bar
+  (toggle-scroll-bar -1)                  ;; disable scroll bar toggle
+  (tool-bar-mode -1)                      ;; disable tool bar
+  (blink-cursor-mode -1)                  ;; make cursor stop blinking
 #+END_SRC
 Disable back up and restrict histories files (comment if you want to enable backup files) 
 #+BEGIN_SRC emacs-lisp
@@ -128,10 +133,10 @@ The settings below are mainly for linux, you can edit this section if you want t
 A nice and quick way to view/edit my configuration at any time
   #+begin_src emacs-lisp
     (defun goto-MarinMacs ()
-      "Jump to configuration file"
+      "Jump to configuration file."
       (interactive)
-      (find-file "~/.emacs.d/MarinMacs.org")) 
-    (global-set-key (kbd "C-c m") 'goto-MarinMacs) ;; secondary binding is SPC u m 
+      (find-file "~/.emacs.d/MarinMacs.org"))
+    (global-set-key (kbd "C-c m") 'goto-MarinMacs) ;; secondary binding is SPC u m
   #+end_src
 * Quelpa
  :PROPERTIES:
@@ -244,7 +249,11 @@ A nice and quick way to view/edit my configuration at any time
       "c f" '(:ignore t :wk "Flycheck options")    
       "c f e" '(flycheck-explain-error-at-point :wk "Flycheck explain error")    
       "c f s" '(flycheck-select-checker :wk "Flycheck select checker")    
-      "c f n" '(flycheck-next-error :wk "Flycheck next error")    
+      "c f d" '(flycheck-disable-checker :wk "Flycheck disable checker")    
+      "c f h" '(flycheck-describe-checker :wk "Flycheck describe checker")    
+      "c f m" '(flycheck-mode :wk "Flycheck mode")    
+      "c f M" '(flycheck-manual :wk "Flycheck manual")    
+      "c f v" '(flycheck-verify-setup :wk "Flycheck verify setup")    
       "c f l" '(flycheck-list-errors :which-key "Flycheck List Errors"))
 
     (mpm/leader-keys
@@ -283,21 +292,7 @@ A nice and quick way to view/edit my configuration at any time
       ((:map evil-normal-state-map
          ("C-/" . comment-line)))
       :config
-      (evil-mode 1)
-      ;; NeoTree override keybindings, package (neotree) is shown further in the config
-      (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
-      (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
-      (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-      (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
-      (evil-define-key 'normal neotree-mode-map (kbd "R") 'neotree-refresh)
-      (evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-next-line)
-      (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
-      (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
-      (evil-define-key 'normal neotree-mode-map (kbd "a") 'neotree-create-node)
-      (evil-define-key 'normal neotree-mode-map (kbd "d") 'neotree-delete-node)
-      (evil-define-key 'normal neotree-mode-map (kbd "r") 'neotree-rename-node)
-      (evil-define-key 'normal neotree-mode-map (kbd "c") 'neotree-copy-node)
-      (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle))
+      (evil-mode 1))
 
   (use-package evil-collection
       :after evil 
@@ -337,8 +332,8 @@ A nice and quick way to view/edit my configuration at any time
       (evil-snipe-repeat-scope 'whole-line)
       (evil-snipe-spillover-scope 'buffer)
       :config
-      (evil-snipe-mode t)
-      (evil-snipe-override-mode t))
+      (evil-snipe-mode 1)
+      (evil-snipe-override-mode 1))
 #+END_SRC
 * Markup
  :PROPERTIES:
@@ -378,18 +373,18 @@ Org personal variables and functions
            '(org-default-notes-file (concat org-directory "/Personal/notes.org")))
 
       (defun marinov/goto-org-directory ()
-        "goes to my org directory"
+        "goes to my org directory."
         (interactive)
         (find-file org-directory))
 
       (defun marinov/jump-to-notes ()
-        "go to notes file"
+        "go to notes file."
         (interactive)
         (find-file org-default-notes-file))
 
       ;; sometimes I edit within org and I forget to enter src but I want to just go to src to evaluate
       (defun marinov/enter-eval ()
-       "enter source, and evaluate the buffer"
+       "enter source, and evaluate the buffer."
        (interactive)
        (org-edit-special)
        (eval-buffer))
@@ -509,6 +504,8 @@ Org personal variables and functions
       (dashboard-startup-banner 'logo)
       (dashboard-footer-messages '("Maintained by Marin Marinov since 2018"))
       :config
+      (when (string-equal system-type "windows-nt" )
+        (advice-add #'dashboard-replace-displayable :override #'identity)) ;; icons have issue displaying on windows, this fixes it
       (dashboard-setup-startup-hook)
       (setq dashboard-items '((recents  . 5)
                              (bookmarks . 5)
@@ -903,9 +900,9 @@ I never lose where my cursor is thanks to this
   ;; Neotree
   (use-package neotree
       :ensure t
-      :config 
-      (setq neo-smart-open t) ; update every time its toggled
-      (setq neo-theme (if (display-graphic-p) 'icons 'arrow))) ; add icons (utilizes all-the-icons)
+      :custom
+      (neo-smart-open t) ; update every time its toggled
+      (neo-theme (if (display-graphic-p) 'icons 'arrow))) ; add icons (utilizes all-the-icon)
 #+END_SRC
 ** Treemacs
  :PROPERTIES:
@@ -1089,6 +1086,8 @@ I never lose where my cursor is thanks to this
        (flycheck-info ((t (:underline (:style wave :color "#87cefa")))))
        (flycheck-warning ((t (:underline (:style wave :color "#ffb95c")))))
        (flycheck-error ((t (:underline (:style wave :color "#cc0202")))))
+       :custom
+       (flycheck-display-errors-delay 0.5)
        :config
        (global-flycheck-mode t))
 #+END_SRC
@@ -1112,7 +1111,8 @@ I never lose where my cursor is thanks to this
       (:map lsp-mode-map
           ("<tab>" . company-indent-or-complete-common))
       :custom
-      (company-tooltip-limit 5) ; show 5 candidates at one time
+      (company-tooltip-limit 5) ; how many candidates to show
+      (company-idle-delay 0.1) ; How much to delay to completion
       (company-minimum-prefix-length 2) ;; show completions after 2 chars
       (company-selection-wrap-around t) ;; goes to start of selection if you reached the bottom 
       (company-require-match 'never) ;; dont need to pick a choice 
@@ -1503,7 +1503,7 @@ Smerge mode deals with merge conflicts in git.
          :ensure t
          :commands (lsp lsp-deferred)
          :bind
-         (:map evil-normal-state-map 
+         (:map evil-normal-state-map
            ("gh" . lsp-describe-thing-at-point)
            ("gi" . lsp-goto-implementation)
            ("gd" . lsp-find-definition))
@@ -1515,12 +1515,7 @@ Smerge mode deals with merge conflicts in git.
          (lsp-log-io nil)
          (lsp-file-watch-threshold 5000)
          (lsp-prefer-flymake nil)
-         (lsp-io-messages-max nil)
-         :config
-         (setq lsp-pyls-plugins-flake8-enabled nil)
-         (setq lsp-pyls-plugins-pycodestyle-enabled nil)
-         (lsp-enable-which-key-integration t)
-         (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error")))
+         (lsp-io-messages-max nil))
 
      (use-package lsp-ui
          :after lsp-mode flycheck
@@ -1547,7 +1542,7 @@ Smerge mode deals with merge conflicts in git.
          (lsp-ui-sideline-show-hover nil)
          (lsp-ui-peek-enable t)
          (lsp-ui-peek-list-width 60)
-         (lsp-ui-peek-peek-height 25)) 
+         (lsp-ui-peek-peek-height 25))
 
    (use-package lsp-treemacs
        :after treemacs lsp-mode
@@ -1578,17 +1573,17 @@ Smerge mode deals with merge conflicts in git.
 - DAP stands for Debug Adapter Protocal works similiarly to LSP but for debugging
 - Repo: https://github.com/emacs-lsp/dap-mode (includes everything you need to install for your desired development language)
 #+BEGIN_SRC emacs-lisp
-   ;; only installing because dap-mode requires it
-   (use-package posframe :ensure t)
+  ;; only installing because dap-mode requires it
+  (use-package posframe :ensure t)
 
-   (use-package dap-mode
-       :ensure t
-       :after hydra
-       :hook
-       (lsp-mode . (lambda () (dap-mode t) (dap-ui-mode t) (dap-tooltip-mode 1) (tooltip-mode 1)))
-       :config
-       (add-hook 'dap-stopped-hook
-       (lambda (arg) (call-interactively #'dap-hydra)))) ;; enable hydra on breakpoint stop
+  (use-package dap-mode
+      :ensure t
+      :after hydra
+      :hook
+      (lsp-mode . (lambda () (dap-mode t) (dap-ui-mode t) (dap-tooltip-mode 1) (tooltip-mode 1)))
+      :config
+      (add-hook 'dap-stopped-hook
+      (lambda (arg) (call-interactively #'dap-hydra)))) ;; enable hydra on breakpoint stop
 
 #+END_SRC
 * Development
@@ -1677,11 +1672,19 @@ How to install particular language server
       (setq-default python-basic-offset 4) 
       (setq-default python-indent-offset 4))
 
-  ;; virutalenv support
+  ;; venv support
   (use-package pyvenv
       :ensure t
       :config
       (pyvenv-mode t))
+
+ ;; if you need virtualenv support 
+(use-package virtualenvwrapper
+   :disabled
+   :ensure t
+   :config
+   (venv-initialize-interactive-shells)
+   (venv-initialize-eshell))
 
   ;; python formatter of choice
   (use-package python-black
@@ -1704,25 +1707,6 @@ Note: the template is meant to be edited to personal preferences
         :request "launch"
         :name "My App")))
 #+END_SRC
-Below is are packages and settings related to autocomplete and formatting
-- You will need to install =autopep= for the below to work (this is for code formatting)
-#+begin_src emacs-lisp
-  (use-package py-autopep8
-      :disabled
-      :ensure t
-      :config
-      (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save))
-#+end_src
-*** Virtualenv
- Remove disabled if you need it, I have yet to develop seriously in Python
-#+BEGIN_SRC emacs-lisp
-(use-package virtualenvwrapper
-   :disabled
-   :ensure t
-   :config
-   (venv-initialize-interactive-shells)
-   (venv-initialize-eshell))
-#+END_SRC
  :PROPERTIES:
  :CUSTOM_ID: python
  :END:
@@ -1730,7 +1714,7 @@ Below is are packages and settings related to autocomplete and formatting
  :PROPERTIES:
  :CUSTOM_ID: web-development
  :END:
- Language servers install command (that I use): 
+ Language servers install command (Might not be necessary as LSP sometimes installs it for you): 
  #+BEGIN_SRC markdown
  npm i -g typescript-language-server vscode-json-languageserver vscode-html-languageserver-bin yaml-language-server vscode-css-languageserver-bin bash-language-server
  #+END_SRC
@@ -1861,7 +1845,7 @@ rainbow mode for displaying hex colors, rainbow-delimeters for coloring parenthe
  More on emmet: https://www.emmet.io/
 #+BEGIN_SRC emacs-lisp
   (use-package emmet-mode
-      :ensure t
+      :disabled
       :hook
       ((css-mode  . emmet-mode)
       (php-mode  . emmet-mode)
