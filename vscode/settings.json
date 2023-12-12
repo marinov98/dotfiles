@@ -216,12 +216,12 @@
        }
     },
     "editor.codeActionsOnSave": {
-        "source.organizeImports": true
+        "source.organizeImports": false
     },
     "vim.useSystemClipboard": true,
     "vim.incsearch": true,
     "vim.hlsearch": true,
-    "vim.sneak": true,
+    "vim.sneak": false,
     "vim.easymotion": true,
     "vim.leader": "<space>",
     "vim.normalModeKeyBindings": [
@@ -246,10 +246,6 @@
     {
       "before": ["<leader>", "l", "E"],
       "commands": ["editor.action.marker.prev"]
-    },
-    {
-      "before": ["<leader>", "l", "F"],
-      "commands": ["editor.action.formatDocument"]
     }
   ],
   "vim.normalModeKeyBindingsNonRecursive": [
@@ -294,11 +290,27 @@
       "commands": ["editor.action.rename"]
     },
     {
+      "before": ["<leader>", "l", "s", "l"],
+      "commands": ["editor.action.formatDocument"]
+    },
+    {
+      "before": ["<leader>", "l", "s", "o"],
+      "commands": ["editor.action.organizeImports"]
+    },
+    {
+      "before": ["<leader>", "a", "s"],
+      "after": ["<leader>", "<leader>", "s"]
+    },
+    {
+      "before": ["<leader>", "a", "w"],
+      "after": ["<leader>", "<leader>", "w"]
+    },
+    {
       "before": ["<leader>", "<leader>", "l"],
       "commands": ["projectManager.listProjects"]
     },
     {
-      "before": ["<leader>", "<leader>", "s"],
+      "before": ["<leader>", "<leader>", "S"],
       "commands": ["projectManager.saveProject"]
     },
     {
@@ -355,7 +367,7 @@
     "javascript.format.semicolons": "insert",
     "typescript.format.semicolons": "insert",
     "editor.fontWeight": 500,
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": false,
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
@@ -390,4 +402,5 @@
     "editor.lineNumbers": "relative",
     "errorLens.enabledDiagnosticLevels": ["warning", "info", "error"],
     "editor.minimap.enabled": false,
+    "editor.cursorBlinking": "solid",
 }
