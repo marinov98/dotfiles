@@ -1358,11 +1358,13 @@ Smerge mode deals with merge conflicts in git.
     ("Buffer"
     (("b" python-black-buffer "python-black")
     ("l" lsp-format-buffer "LSP")
+    ("p" prettier-prettify "prettier")
     ("c" clang-format-buffer "clang"))
 
     "Region"
     (("B" python-black-region "python-black")
     ("C" clang-format-region "clang")
+    ("P" prettier-prettify-region "prettier")
     ("L" lsp-format-region "LSP")))) 
 #+END_SRC
 *** MC (Multiple Cursors)
@@ -1766,16 +1768,11 @@ rainbow mode for displaying hex colors, rainbow-delimeters for coloring parenthe
       :hook prog-mode org-mode)
 #+END_SRC
 - This is what I like to use to format my code
-- need to run 'npm i -g prettier' in order for this to work (Locally should work too)
+- In your js/ts project you would run =npm i prettier= to add the dependency
+- You can hook specific modes or enable globally if you want to format on save but I prefer to do it manually through my hydra
 #+BEGIN_SRC emacs-lisp
-  (use-package prettier-js
-      :ensure t
-      :hook
-      ((js-mode . prettier-js-mode)
-      (js2-mode . prettier-js-mode)
-      (web-mode . prettier-js-mode)
-      (typescript-mode . prettier-js-mode)
-      (rjsx-mode . prettier-js-mode)))
+  (use-package prettier
+      :ensure t) 
 #+END_SRC
 *** Modes
 - These are modes related to web-dev that I have worked with 
