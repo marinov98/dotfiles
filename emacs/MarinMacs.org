@@ -222,7 +222,6 @@ A nice and quick way to view/edit my configuration at any time
        "K" '(kill-buffer :wk "Kill Buffer"))
 
     (mpm/leader-keys
-       "TAB" '(hydra-mc/body :wk "Multiple Cursors Hydra")
        "RET" '(company-complete :wk "Company Complete")
        "s" '(save-buffer :wk "Save Buffer")
        "f" '(counsel-find-file :wk "Counsel Find File")
@@ -307,33 +306,34 @@ A nice and quick way to view/edit my configuration at any time
 ** Evil utility 
 - Below evil packages are extras that enhance the evil-mode experience in emacs
 #+BEGIN_SRC emacs-lisp
-  ;; like tpope's vim-surround
-  (use-package evil-surround
-      :ensure t
-      :config
-      (global-evil-surround-mode 1))
+      ;; like tpope's vim-surround
+      (use-package evil-surround
+          :ensure t
+          :config
+          (global-evil-surround-mode 1))
 
-  ;; no need thanks to mc hydra now 
-  (use-package evil-multiedit
-      :disabled
-      :config
-      (evil-multiedit-default-keybinds))
+      ;; no need thanks to mc hydra now 
+      (use-package evil-multiedit
+          :disabled
+          :config
+          (evil-multiedit-default-keybinds))
 
-  (use-package evil-mc
-      :ensure t
-      :config
-      (global-evil-mc-mode 1))
+      (use-package evil-mc
+          :ensure t
+          :config
+          (global-evil-mc-mode 1)
+          (define-key evil-normal-state-map (kbd "gc") 'hydra-mc/body))
 
-  ;; like vim-sneak and/or vim-seek (just going to opt for avy)
-  (use-package evil-snipe
-      :disabled
-      :custom
-      (evil-snipe-scope 'line)
-      (evil-snipe-repeat-scope 'whole-line)
-      (evil-snipe-spillover-scope 'buffer)
-      :config
-      (evil-snipe-mode 1)
-      (evil-snipe-override-mode 1))
+      ;; like vim-sneak and/or vim-seek (just going to opt for avy)
+      (use-package evil-snipe
+          :disabled
+          :custom
+          (evil-snipe-scope 'line)
+          (evil-snipe-repeat-scope 'whole-line)
+          (evil-snipe-spillover-scope 'buffer)
+          :config
+          (evil-snipe-mode 1)
+          (evil-snipe-override-mode 1))
 #+END_SRC
 * Markup
  :PROPERTIES:
@@ -1357,7 +1357,7 @@ Smerge mode deals with merge conflicts in git.
   (pretty-hydra-define hydra-style (:color blue :title "📡 Style 📡" :quit-key "q") 
     ("Buffer"
     (("b" python-black-buffer "python-black")
-    ("l" lsp-format-buffer "LSP")
+    ("l" lsp-format-buffer "LSP" :color red)
     ("p" prettier-prettify "prettier")
     ("c" clang-format-buffer "clang"))
 
@@ -1365,7 +1365,7 @@ Smerge mode deals with merge conflicts in git.
     (("B" python-black-region "python-black")
     ("C" clang-format-region "clang")
     ("P" prettier-prettify-region "prettier")
-    ("L" lsp-format-region "LSP")))) 
+    ("L" lsp-format-region "LSP" :color red)))) 
 #+END_SRC
 *** MC (Multiple Cursors)
 #+BEGIN_SRC emacs-lisp
@@ -1390,7 +1390,7 @@ Smerge mode deals with merge conflicts in git.
 #+BEGIN_SRC emacs-lisp
   (pretty-hydra-define hydra-avy (:color blue :title "↵ Avy + Snipe ↵" :quit-key "q")
     ("Char"
-    (("c" avy-goto-char "char 1" :color red)
+    (("g" avy-goto-char "char 1" :color red)
     ("s" avy-goto-char-2 "char 2" :color red)
     ("t" avy-goto-char-timer "timed char" :color red))
 
@@ -1402,7 +1402,7 @@ Smerge mode deals with merge conflicts in git.
     (("l" avy-goto-line "goto line")
     ("L" avy-goto-end-of-line "goto eoline")
     ("m" avy-move-line "move line")
-    ("k" avy-kill-whole-line "kill line")
+    ("K" avy-kill-whole-line "kill line")
     ("y" avy-copy-line "yank line"))
 
     "Resume"
