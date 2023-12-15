@@ -223,9 +223,10 @@ A nice and quick way to view/edit my configuration at any time
 
     (mpm/leader-keys
        "RET" '(company-complete :wk "Company Complete")
+       "y" '(yas-expand :wk "yas-expand")
        "s" '(save-buffer :wk "Save Buffer")
        "f" '(counsel-find-file :wk "Counsel Find File")
-       "/" '(comment-line :wk "Comment Line") 
+       "/" '(comment-line :wk "Comment Line")
        "m" '(counsel-M-x :wk "Counsel M-x")
        "*" '(swiper-thing-at-point :wk "Swiper at Point"))
 
@@ -241,22 +242,22 @@ A nice and quick way to view/edit my configuration at any time
        "r w f" '(wgrep-finish-edit :wk "Wgrep Finish Edit"))
 
     (mpm/leader-keys
-      "c" '(:ignore t :wk "Coding")    
+      "c" '(:ignore t :wk "Coding")
       "c /" '(comment-region :wk "Comment Region")
       "c u" '(uncomment-region :wk "Uncomment Region")
       "c l" '(hydra-launcher/body :wk "Launcher Hydra")
-      "c f" '(:ignore t :wk "Flycheck options")    
-      "c f e" '(flycheck-explain-error-at-point :wk "Flycheck explain error")    
-      "c f s" '(flycheck-select-checker :wk "Flycheck select checker")    
-      "c f d" '(flycheck-disable-checker :wk "Flycheck disable checker")    
-      "c f h" '(flycheck-describe-checker :wk "Flycheck describe checker")    
-      "c f m" '(flycheck-mode :wk "Flycheck mode")    
-      "c f M" '(flycheck-manual :wk "Flycheck manual")    
-      "c f v" '(flycheck-verify-setup :wk "Flycheck verify setup")    
+      "c f" '(:ignore t :wk "Flycheck options")
+      "c f e" '(flycheck-explain-error-at-point :wk "Flycheck explain error")
+      "c f s" '(flycheck-select-checker :wk "Flycheck select checker")
+      "c f d" '(flycheck-disable-checker :wk "Flycheck disable checker")
+      "c f h" '(flycheck-describe-checker :wk "Flycheck describe checker")
+      "c f m" '(flycheck-mode :wk "Flycheck mode")
+      "c f M" '(flycheck-manual :wk "Flycheck manual")
+      "c f v" '(flycheck-verify-setup :wk "Flycheck verify setup")
       "c f l" '(flycheck-list-errors :which-key "Flycheck List Errors"))
 
     (mpm/leader-keys
-      "e" '(:ignore t :wk "Editing/Evil")    
+      "e" '(:ignore t :wk "Editing/Evil")
       "e e b" '(eval-buffer :wk "Evaluate elisp in buffer")
       "e e d" '(eval-defun :wk "Evaluate defun containing or after point")
       "e e e" '(eval-expression :wk "Evaluate and elisp expression")
@@ -270,16 +271,16 @@ A nice and quick way to view/edit my configuration at any time
       "e /" '(evil-search-forward :wk "Evil search forward"))
 
     (mpm/leader-keys
-      "t" '(:ignore t :wk "Neotree/Treemacs")    
+      "t" '(:ignore t :wk "Neotree/Treemacs")
       "t n" '(neotree-toggle :wk "Toggle Neotree")
       "t e" '(treemacs :wk "Treemacs")
       "t f" '(treemacs-find-file :wk "Treemacs find file")
       "t s" '(treemacs-switch-workspace :wk "Treemacs switch workspace")
       "t p" '(treemacs-projectile :wk "Treemacs Projectile")
       "t w" '(treemacs-select-window :wk "Treemacs select window")
-      "t l" '(:ignore t :wk "LSP-Treemacs")    
-      "t l s" '(lsp-treemacs-symbols :wk "LSP Treemacs Symbols")    
-      "t l r" '(lsp-treemacs-references :wk "LSP Treemacs References")    
+      "t l" '(:ignore t :wk "LSP-Treemacs")
+      "t l s" '(lsp-treemacs-symbols :wk "LSP Treemacs Symbols")
+      "t l r" '(lsp-treemacs-references :wk "LSP Treemacs References")
       "t l e" '(lsp-treemacs-errors-list :wk "LSP Treemacs Errors List")))
 
   (use-package evil
@@ -294,7 +295,7 @@ A nice and quick way to view/edit my configuration at any time
       (evil-mode 1))
 
   (use-package evil-collection
-      :after evil 
+      :after evil
       :ensure t
       :custom
       (evil-collection-company-use-tng nil) ;; I hacked this already (Personal preference)
@@ -670,7 +671,7 @@ You can enable/disable any themes that you like here
   ;; Ivy
   (use-package ivy
       :ensure t
-      :diminish
+      :diminish ivy-mode
       :custom
       (ivy-display-style 'fancy)
       (ivy-count-format "(%d/%d) ")
@@ -822,7 +823,7 @@ a personal keybinding just because its so good. Check the [[https://github.com/a
 #+BEGIN_SRC emacs-lisp
   (use-package which-key
     :ensure t 
-    :diminish
+    :diminish which-key-mode
     :config
     (which-key-mode))
 #+END_SRC
@@ -883,7 +884,7 @@ I never lose where my cursor is thanks to this
 #+BEGIN_SRC emacs-lisp
   (use-package beacon
       :disabled
-      :diminish
+      :diminish beacon-mode
       :custom
       (beacon-color "#ffc600")
       :config
@@ -936,10 +937,10 @@ I never lose where my cursor is thanks to this
  :CUSTOM_ID: projectile
  :END:
 - Amazing tool for managing projects! 
+- Projectile looks for git projects or projectils that contain a =.projectile=
 - Projectile Homepage: https://projectile.readthedocs.io/en/latest/ 
 - Counsel-Projectile: https://github.com/ericdanan/counsel-projectile 
 #+BEGIN_SRC emacs-lisp
-   ;; Projectile-mode 
   (use-package projectile
       :ensure t
       :diminish projectile-mode
@@ -949,8 +950,8 @@ I never lose where my cursor is thanks to this
       (projectile-sort-order 'recently-active)
       (projectile-completion-system 'ivy)
       :init
-      (when (file-directory-p "~/Projects") ;; change this to whatever directory your projects are in
-        (setq projectile-project-search-path '("~/Projects"))))
+      (when (file-directory-p "~/Projects/git") ;; change this to whatever directory your projects are in
+        (setq projectile-project-search-path '("~/Projects/git"))))
 
   ;; Counsel-Projectile (I utilize counsel projectile bindings in my hydra-projectile)
   (use-package counsel-projectile
@@ -1017,7 +1018,6 @@ I never lose where my cursor is thanks to this
 #+BEGIN_SRC emacs-lisp
   (use-package undo-tree
       :disabled
-      :diminish
       :init
       (global-undo-tree-mode)
       :config
@@ -1041,37 +1041,28 @@ I never lose where my cursor is thanks to this
  :END:
 - all the packages related to snippets
 - *YASnippet* is a template system for Emacs. It allows you to type an abbreviation and automatically expand it into function templates.
-- I Remapped some bindings to make them work better with autocomplete
-  - The new bindings are just as convenient if your caps lock is both esc and ctrl or even just ctrl
-  - after some testing you can still actually use tab to insert snippets, but you will have to do it before company triggers
-    - when company triggers, you can use Ctrl + Tab to insert a snippet
+- You may or may not have to do rebindings if autocomplete conflicts with snippets
 - repo: https://github.com/joaotavora/yasnippet
 #+BEGIN_SRC emacs-lisp
   (use-package yasnippet
-	  :disabled
-	  :ensure t
-	  :bind 
-	  ((:map yas-keymap
-	  ("<tab>" . nil) ;; there are conflicts here with autocomplete
-	  ("<C-tab>" . yas-next-field-or-maybe-expand))
-	  (:map yas-minor-mode-map
-	  ("<tab>" . nil) ;; while this is convenient, it clashes with auto-complete and jump-to-definitions
-	  ("<C-tab>" . yas-expand)))
-	  :hook
-	  (after-init . yas-global-mode)
-	  :config
-	  (yas-reload-all))
+      :after lsp-mode 
+      :ensure t
+      :diminish yas-minor-mode
+      :bind
+      ((:map yas-minor-mode-map
+	  ("<tab>" . nil))) ;; changed for S-SPC y 
+      :config
+      (yas-reload-all)
+      (add-hook 'prog-mode-hook #'yas-minor-mode))
 
   (use-package yasnippet-snippets 
-	  :disabled
-	  :after yasnippet
-	  :ensure t)
+      :after yasnippet
+      :ensure t)
 
   ;; snippets for React.js
   (use-package react-snippets
-      :disabled
-	  :after yasnippet
-	  :ensure t)
+      :after yasnippet
+      :ensure t)
 #+END_SRC 
 ** FlyCheck
  :PROPERTIES:
@@ -1102,7 +1093,7 @@ I never lose where my cursor is thanks to this
   (use-package company
       :ensure t
       :after lsp-mode
-      :hook (lsp-mode . company-mode)
+      :hook (prog-mode . company-mode)
       :bind
       (:map company-active-map
           ("<tab>" . company-complete-selection) 
@@ -1115,9 +1106,7 @@ I never lose where my cursor is thanks to this
       (company-idle-delay 0.1) ; How much to delay to completion
       (company-minimum-prefix-length 2) ;; show completions after 2 chars
       (company-selection-wrap-around t) ;; goes to start of selection if you reached the bottom 
-      (company-require-match 'never) ;; dont need to pick a choice 
-      :hook
-      (after-init . global-company-mode))
+      (company-require-match 'never)) ;; dont need to pick a choice
 
 #+END_SRC 
 ** Eldoc
@@ -1128,7 +1117,7 @@ I never lose where my cursor is thanks to this
 - Documentation: https://www.emacswiki.org/emacs/ElDoc
 #+BEGIN_SRC emacs-lisp
   (use-package eldoc
-      :diminish
+      :diminish eldoc-mode
       :hook (emacs-lisp-mode . eldoc-mode)
       :config
       (global-eldoc-mode -1))
@@ -1140,34 +1129,35 @@ I never lose where my cursor is thanks to this
 - [[https://magit.vc/][Magit]] is a great git interface I have yet to master...
 - git-timemachine: flip through a file's full list of version. Revert to any given phase easily
 #+BEGIN_SRC emacs-lisp
-  ;; hydra takes care of my magit bindings
-  (use-package magit :ensure t)
+    ;; hydra takes care of my magit bindings
+    (use-package magit :ensure t)
   
-  (use-package git-commit
-      :after magit
-      :custom
-      (git-commit-summary-max-length 50) ;; in accordance with https://chris.beams.io/posts/git-commit/
-      :config
-      (setq git-commit-style-convention-checks
-            '(non-empty-second-line
-            overlong-summary-line)))
+    (use-package git-commit
+        :after magit
+        :custom
+        (git-commit-summary-max-length 50) ;; in accordance with https://chris.beams.io/posts/git-commit/
+        :config
+        (setq git-commit-style-convention-checks
+              '(non-empty-second-line
+              overlong-summary-line)))
             
-  (use-package magit-repos
-      :after magit
-      :commands magit-list-repositories
-      :custom
-      (magit-repository-directories '(("~/Projects" . 1))))
+    (use-package magit-repos
+        :after magit
+        :commands magit-list-repositories
+        :config
+        (when (file-directory-p "~/Projects/git") ;; change this to whatever directory your projects are in
+          (setq magit-repository-directories '(("~/Projects/git" . 1)))))
 
-  (use-package gitignore-mode
-      :mode (("\\.gitignore\\'" . gitignore-mode)
-             ("\\.dockerignore\\'" . gitignore-mode))) ;; syntax from gitignore is more or less identical to that of .dockerignore
+    (use-package gitignore-mode
+        :mode (("\\.gitignore\\'" . gitignore-mode)
+               ("\\.dockerignore\\'" . gitignore-mode))) ;; syntax from gitignore is more or less identical to that of .dockerignore
 
-  (use-package gitconfig-mode
-      :mode "\\.gitconfig\\'")
+    (use-package gitconfig-mode
+        :mode "\\.gitconfig\\'")
 
-  (use-package git-timemachine
-      :ensure t
-      :commands git-timemachine)
+    (use-package git-timemachine
+        :ensure t
+        :commands git-timemachine)
 
 #+END_SRC
 Smerge mode deals with merge conflicts in git.
@@ -1512,20 +1502,18 @@ Smerge mode deals with merge conflicts in git.
            ("gh" . lsp-describe-thing-at-point)
            ("gi" . lsp-goto-implementation)
            ("gd" . lsp-find-definition))
-         :diminish
          :hook
          ((c++-mode c-mode css-mode yaml-mode json-mode js-mode js2-mode rjsx-mode typescript-mode web-mode) . lsp-deferred)
          :custom
          (lsp-auto-guess-root nil)
          (lsp-log-io nil)
+         (lsp-idle-delay 0.3)
          (lsp-file-watch-threshold 5000)
          (lsp-prefer-flymake nil)
          (lsp-io-messages-max nil))
 
      (use-package lsp-ui
-         :after lsp-mode flycheck
          :ensure t
-         :diminish
          :commands lsp-ui-mode
          :hook (lsp-mode . lsp-ui-mode)
          :bind
@@ -1609,7 +1597,7 @@ Smerge mode deals with merge conflicts in git.
   (use-package cc-mode
     :init
     (setq-default c-basic-offset 4))
-  
+
   (use-package cpp
     :config
     ;; disable other checkers since we only want to utilize clangd language server
@@ -1618,9 +1606,8 @@ Smerge mode deals with merge conflicts in git.
   ;; enable modern font lock for >=c++11
   (use-package modern-cpp-font-lock
       :ensure t
-      :hook (c++-mode-hook . modern-c++-font-lock-mode)
-      :config
-      (modern-c++-font-lock-global-mode nil))
+      :diminish modern-c++-font-lock-mode
+      :hook (c++-mode-hook . modern-c++-font-lock-mode))
 #+END_SRC
 *** Debugging
 Still experimenting with this, native gdb in emacs is also really good 
@@ -1647,7 +1634,6 @@ Still experimenting with this, native gdb in emacs is also really good
 #+BEGIN_SRC emacs-lisp
   (use-package clang-format 
      :ensure t
-     :diminish
      :bind 
      (("C-c R" . clang-format-region) ;; format current line
      ("C-c F" . clang-format-buffer))) ;; format entire file
@@ -1945,10 +1931,7 @@ All for typescript
     (use-package diminish
         :ensure t
         :init
-        (diminish 'yas-minor-mode)
-        (diminish 'modern-c++-font-lock-mode)
         (diminish 'auto-revert-mode)
         (diminish 'page-break-lines-mode)
-        (diminish 'eldoc-mode)
         (diminish 'abbrev-mode))
   #+end_src
