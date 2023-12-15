@@ -69,6 +69,8 @@ Indentation
   (show-paren-mode 1)                                      ;; highlight matching parenthesis
   (global-hl-line-mode 1)                                  ;; highlight current line
   (setq inhibit-startup-screen t)                          ;; disable startup screen
+  (when (and (version<= "29.1" emacs-version) (not (string-equal system-type "windows-nt")))
+    (add-to-list 'default-frame-alist '(alpha-background . 90))) ;; Emacs 29 adds true transparency
 #+END_SRC
 - Line numbers
   - I am not sure if all packages work with line numbers properly, but so far everything works
@@ -513,8 +515,8 @@ Org personal variables and functions
           (setq dashboard-startup-banner 'logo))
       :config
       (when (string-equal system-type "windows-nt" )
-        (advice-add #'dashboard-replace-displayable :override #'identity)) ;; icons have issue displaying on windows, this fixes it
-      (dashboard-setup-startup-hook))
+              (advice-add #'dashboard-replace-displayable :override #'identity)) ;; icons have issue displaying on windows, this fixes it
+      (dashboard-setup-startup-hook)) 
 #+END_SRC
 * Themes
  :PROPERTIES:
@@ -561,7 +563,6 @@ You can enable/disable any themes that you like here
 
    (use-package catppuccin-theme
       :disabled
-      :ensure t
       :custom
       (catppuccin-flavor 'macchiato)
       :config
@@ -730,12 +731,12 @@ You can enable/disable any themes that you like here
       ("M-j" . ivy-next-line)
       ("M-k" . ivy-previous-line)) 
       :custom
+      (counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)")
       (counsel-rg-base-command "rg -S --no-heading --line-number --color never %s .")
       (counsel-ag-base-command "ag -S --nocolor --nogroup %s")
       (counsel-pt-base-command "pt -S --nocolor --nogroup -e %s")
-      (counsel-find-file-at-point t)
-      :config
-      (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"))
+      (ivy-initial-inputs-alist nil) ;; removes starting ^ regex in M-x
+      (counsel-find-file-at-point t))
 
 #+END_SRC
 wgrep combined counsel-rg and/or counsel-ag makes changing text in multiple places much easier
@@ -1063,7 +1064,7 @@ I never lose where my cursor is thanks to this
       :diminish yas-minor-mode
       :bind
       ((:map yas-minor-mode-map
-	  ("<tab>" . nil))) ;; changed for S-SPC y 
+      ("<tab>" . nil))) ;; changed for S-SPC y 
       :config
       (yas-reload-all)
       (add-hook 'text-mode-hook #'yas-minor-mode)
