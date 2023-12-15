@@ -123,7 +123,7 @@ Emacs has native support for the GNU Debugger (GDB), and we can make it a little
 #+END_SRC
 The settings below are mainly for linux, you can edit this section if you want to change what browser emacs uses to open links
 #+begin_src emacs-lisp
-  (when (string-equal system-type "gnu/linux") 
+  (when (string-equal system-type "gnu/linux")
     (setq
       browse-url-browser-function
       '(("https://www.netflix.com/" . browse-url-firefox) ;; firefox deals better with video players on linux
