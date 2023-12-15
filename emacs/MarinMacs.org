@@ -1066,6 +1066,7 @@ I never lose where my cursor is thanks to this
 	  ("<tab>" . nil))) ;; changed for S-SPC y 
       :config
       (yas-reload-all)
+      (add-hook 'text-mode-hook #'yas-minor-mode)
       (add-hook 'prog-mode-hook #'yas-minor-mode))
 
   (use-package yasnippet-snippets 
