@@ -60,17 +60,45 @@ Indentation
   (setq backward-delete-char-untabify-method 'hungry)    ;; backspaces entire tab instead of one space at a time
   (setq compilation-scroll-output 'first-error)          ;; compile scroll location
 #+END_SRC
+- Ligatures (Certain fonts contain ligatures and enhance the visuals)
+- Proper support and usage of this package requires Emacs 28
+#+BEGIN_SRC emacs-lisp
+  (when (version<= "28.0.50" emacs-version)
+    (use-package ligature
+      :ensure t
+      :hook (prog-mode . ligature-mode)
+      :config
+      ;; Enable the "www" ligature in every possible major mode
+      (ligature-set-ligatures 't '("www"))
+      ;; Enable traditional ligature support in eww-mode, if the
+      ;; `variable-pitch' face supports it
+      (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
+      ;; Enable all Cascadia Code ligatures in programming modes
+      (ligature-set-ligatures 'prog-mode '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
+                                           ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
+                                           "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
+                                           "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
+                                           "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
+                                           "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
+                                           "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
+                                           "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
+                                           ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
+                                           "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
+                                           "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
+                                           "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
+                                           "\\\\" "://"))))
+#+END_SRC
 - Options, display, parenthesis 
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
-  (setq default-frame-alist '((font . "Fira Code-12")))    ;; set font and font size
-  (setq visible-bell t)                                    ;; disable end of buffer sounds
-  (electric-pair-mode)                                     ;; auto closing brackets
-  (show-paren-mode 1)                                      ;; highlight matching parenthesis
-  (global-hl-line-mode 1)                                  ;; highlight current line
-  (setq inhibit-startup-screen t)                          ;; disable startup screen
-  (when (and (version<= "29.1" emacs-version) (not (string-equal system-type "windows-nt")))
-    (add-to-list 'default-frame-alist '(alpha-background . 90))) ;; Emacs 29 adds true transparency
+    (setq default-frame-alist '((font . "Fira Code-12")))    ;; set font and font size
+    (setq visible-bell t)                                    ;; disable end of buffer sounds
+    (electric-pair-mode)                                     ;; auto closing brackets
+    (show-paren-mode 1)                                      ;; highlight matching parenthesis
+    (global-hl-line-mode 1)                                  ;; highlight current line
+    (setq inhibit-startup-screen t)                          ;; disable startup screen
+    (when (and (version<= "29.1" emacs-version) (not (string-equal system-type "windows-nt")))
+      (add-to-list 'default-frame-alist '(alpha-background . 90))) ;; Emacs 29 adds true transparency
 #+END_SRC
 - Line numbers
   - I am not sure if all packages work with line numbers properly, but so far everything works
@@ -1466,6 +1494,7 @@ Smerge mode deals with merge conflicts in git.
     "Personal"
     (("m" goto-MarinMacs "goto config")
     ("s" set-fill-column "set-fill-column")
+    ("R" restart-emacs "restart Emacs")
     ("e" eval-buffer "eval buffer")
     ("c" compile "compile"))))
 #+END_SRC
@@ -1773,8 +1802,8 @@ rainbow mode for displaying hex colors, rainbow-delimeters for coloring parenthe
       :ensure t
       :hook prog-mode org-mode)
 #+END_SRC
-- This is what I like to use to format my code
-- In your js/ts project you would run =npm i prettier= to add the dependency
+- This is what I like to use to format during web development
+- In your js/ts project you would run =npm i prettier= to add the dependency or the install globally with the =-g= flag
 - You can hook specific modes or enable globally if you want to format on save but I prefer to do it manually through my hydra
 #+BEGIN_SRC emacs-lisp
   (use-package prettier
