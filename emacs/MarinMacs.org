@@ -1361,6 +1361,9 @@ Smerge mode deals with merge conflicts in git.
     ("p" prettier-prettify "prettier")
     ("c" clang-format-buffer "clang"))
 
+     "Imports"
+     (("o" lsp-organize-imports "organize imports"))
+
     "Region"
     (("B" python-black-region "python-black")
     ("C" clang-format-region "clang")
@@ -1388,7 +1391,7 @@ Smerge mode deals with merge conflicts in git.
 #+END_SRC
 *** Avy (Word finding)
 #+BEGIN_SRC emacs-lisp
-  (pretty-hydra-define hydra-avy (:color blue :title "↵ Avy + Snipe ↵" :quit-key "q")
+  (pretty-hydra-define hydra-avy (:color blue :title "↵ Avy ↵" :quit-key "q")
     ("Char"
     (("g" avy-goto-char "char 1" :color red)
     ("s" avy-goto-char-2 "char 2" :color red)
@@ -1603,6 +1606,10 @@ Smerge mode deals with merge conflicts in git.
   - [[https://clang.llvm.org/][Clang]]
 *** Settings
 #+BEGIN_SRC emacs-lisp
+  (use-package cc-mode
+    :init
+    (setq-default c-basic-offset 4))
+  
   (use-package cpp
     :config
     ;; disable other checkers since we only want to utilize clangd language server
@@ -1683,7 +1690,6 @@ How to install particular language server
  ;; if you need virtualenv support 
 (use-package virtualenvwrapper
    :disabled
-   :ensure t
    :config
    (venv-initialize-interactive-shells)
    (venv-initialize-eshell))
@@ -1760,8 +1766,7 @@ rainbow mode for displaying hex colors, rainbow-delimeters for coloring parenthe
 #+BEGIN_SRC emacs-lisp
   (use-package rainbow-delimiters
     :ensure t
-    :hook ((emacs-lisp-mode . rainbow-delimiters-mode)
-         (clojure-mode . rainbow-delimiters-mode)))
+    :hook ((prog-mode . rainbow-delimiters-mode)))
 
   (use-package rainbow-mode 
       :ensure t
@@ -1896,7 +1901,6 @@ Adds the node_modules/.bin directory to the buffer exec_path.
       :config 
       (setq js2-strict-missing-semi-warning nil)
       (setq-default js2-basic-offset 2)) ;; set indentation to 2
-
 #+END_SRC
 
  :PROPERTIES:
