@@ -494,7 +494,7 @@ Org personal variables and functions
 - Prerequisites: https://github.com/cask/cask
 - After installing cask, learn how to customize the dashboard by going here: https://github.com/emacs-dashboard/emacs-dashboard
 #+BEGIN_SRC emacs-lisp
-  (use-package dashboard 
+  (use-package dashboard
       :ensure t
       :custom
       (dashboard-banner-logo-title "MarinMacs")
@@ -502,16 +502,19 @@ Org personal variables and functions
       (dashboard-set-init-info t)
       (dashboard-set-file-icons t)
       (dashboard-set-navigator t)
-      (dashboard-startup-banner 'logo)
+      (dashboard-items '((recents  . 5)
+                         (projects . 5)
+                         (bookmarks . 5)
+                         (agenda . 5)))
       (dashboard-footer-messages '("Maintained by Marin Marinov since 2018"))
+      :init
+      (if (file-directory-p "~/.emacs.d/img")
+            (setq dashboard-startup-banner "~/.emacs.d/img/targetBanner.png")
+          (setq dashboard-startup-banner 'logo))
       :config
       (when (string-equal system-type "windows-nt" )
         (advice-add #'dashboard-replace-displayable :override #'identity)) ;; icons have issue displaying on windows, this fixes it
-      (dashboard-setup-startup-hook)
-      (setq dashboard-items '((recents  . 5)
-                             (bookmarks . 5)
-                             (agenda . 5)
-                             (projects . 5))))
+      (dashboard-setup-startup-hook))
 #+END_SRC
 * Themes
  :PROPERTIES:
