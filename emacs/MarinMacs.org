@@ -521,13 +521,15 @@ Org personal variables and functions
 *** Colorful and visually pleasing    
 - Spacemacs-theme
 - Zerodark
-- Doom-one
+- Doom-one and Doom-dracula
+- catppuccin
 - JellyBeans 
 - modus-vivendi (amazing color contrast)
 *** Easy on the eyes
 - doom-gruvbox
 - doom-solarized-dark
 - doom-nord
+- catppuccin
 - Zenburn
 - Planet
 *** For Org and any Markdown Language
@@ -545,7 +547,7 @@ You can enable/disable any themes that you like here
        :config (load-theme 'spacemacs-dark t))
 
    (use-package doom-themes
-       :ensure t 
+       :ensure t
        :custom
        (doom-themes-enable-bold t)
        (doom-themes-enable-italic t)
@@ -553,6 +555,14 @@ You can enable/disable any themes that you like here
        (load-theme 'doom-dracula t)
        (doom-themes-visual-bell-config) ;; Enable flashing mode-line on errors
        (doom-themes-org-config)) ;; Corrects (and improves) org-mode's native fontification.
+
+   (use-package catppuccin-theme
+      :disabled
+      :ensure t
+      :custom
+      (catppuccin-flavor 'macchiato)
+      :config
+      (load-theme 'catppuccin :no-confirm))
 
    (use-package zerodark-theme
        :disabled
