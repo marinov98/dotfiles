@@ -88,14 +88,28 @@ Indentation
                                            "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
                                            "\\\\" "://"))))
 #+END_SRC
+- Parenthesis, Brackets, Lines, etc (make sure they auto close)
+#+begin_src emacs-lisp
+      (use-package elec-pair ;; auto closing brackets
+          :ensure nil
+          :hook ((prog-mode . electric-pair-mode)
+                  (text-mode . electric-pair-mode))) 
+
+      (use-package paren ;; highlight matching parenthesis
+          :custom
+          (show-paren-when-point-inside-paren t)
+          :config
+          (show-paren-mode 1))
+
+      (use-package hl-line ;; highlight the current line
+          :config
+          (global-hl-line-mode 1))
+#+end_src
 - Options, display, parenthesis 
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
     (setq default-frame-alist '((font . "Fira Code-12")))    ;; set font and font size
     (setq visible-bell t)                                    ;; disable end of buffer sounds
-    (electric-pair-mode)                                     ;; auto closing brackets
-    (show-paren-mode 1)                                      ;; highlight matching parenthesis
-    (global-hl-line-mode 1)                                  ;; highlight current line
     (setq inhibit-startup-screen t)                          ;; disable startup screen
     (when (and (version<= "29.1" emacs-version) (not (string-equal system-type "windows-nt")))
       (add-to-list 'default-frame-alist '(alpha-background . 90))) ;; Emacs 29 adds true transparency
@@ -1367,7 +1381,7 @@ Smerge mode deals with merge conflicts in git.
 #+BEGIN_SRC emacs-lisp
   (pretty-hydra-define hydra-code (:color red :title "📡 Code 📡" :quit-key "q") 
     ("Find"
-    (("f" lsp-ui-peek-find-definitions "peek def")
+    (("f" lsp-find-definition "find def") 
     ("r" lsp-find-references "find ref")
     ("t" lsp-find-type-definition "find type def")
     ("g" lsp-ui-doc-glance "glance")
@@ -1541,20 +1555,24 @@ Smerge mode deals with merge conflicts in git.
      (use-package lsp-mode
          :ensure t
          :commands (lsp lsp-deferred)
-         :bind
-         (:map evil-normal-state-map
-           ("gh" . lsp-describe-thing-at-point)
-           ("gi" . lsp-goto-implementation)
-           ("gd" . lsp-find-definition))
          :hook
          ((c++-mode c-mode css-mode yaml-mode json-mode js-mode js2-mode rjsx-mode typescript-mode web-mode) . lsp-deferred)
          :custom
          (lsp-auto-guess-root nil)
          (lsp-log-io nil)
          (lsp-idle-delay 0.3)
+         (lsp-headerline-breadcrumb-enable nil) ;; graphical bloat, don't need but useful to the right person
+         (lsp-enable-folding nil)
+         (lsp-enable-text-document-color nil)
          (lsp-file-watch-threshold 5000)
          (lsp-prefer-flymake nil)
-         (lsp-io-messages-max nil))
+         (lsp-io-messages-max nil)
+         :config
+         (add-hook 'after-init-hook #'(lambda() ;; in case I disable lsp-ui remap g prefix keys to regular lsp
+                                        (unless (package-installed-p 'lsp-ui)
+                                          (define-key evil-normal-state-map (kbd "gd") 'lsp-find-definition)
+                                          (define-key evil-normal-state-map (kbd "gi") 'lsp-goto-implementation)
+                                          (define-key evil-normal-state-map (kbd "gr") 'lsp-find-references)))))
 
      (use-package lsp-ui
          :ensure t
@@ -1562,6 +1580,8 @@ Smerge mode deals with merge conflicts in git.
          :hook (lsp-mode . lsp-ui-mode)
          :bind
          (:map evil-normal-state-map
+           ("gd" . lsp-ui-peek-find-definitions)
+           ("gi" . lsp-ui-peek-find-implementation)
            ("gr" . lsp-ui-peek-find-references))
          (:map lsp-ui-peek-mode-map
            ("M-j" . lsp-ui-peek--select-next)
