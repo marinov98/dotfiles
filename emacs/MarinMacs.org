@@ -105,7 +105,7 @@ Indentation
           :config
           (global-hl-line-mode 1))
 #+end_src
-- Options, display, parenthesis 
+- Options, display 
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
     (setq default-frame-alist '((font . "Fira Code-12")))    ;; set font and font size
