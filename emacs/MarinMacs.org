@@ -105,7 +105,7 @@ Indentation
           :config
           (global-hl-line-mode 1))
 #+end_src
-- Options, display 
+- Options, display
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
     (setq default-frame-alist '((font . "Fira Code-12")))    ;; set font and font size
@@ -1415,7 +1415,7 @@ Smerge mode deals with merge conflicts in git.
     (("B" python-black-region "python-black")
     ("C" clang-format-region "clang")
     ("P" prettier-prettify-region "prettier")
-    ("L" lsp-format-region "LSP" :color red)))) 
+    ("L" lsp-format-region "LSP" :color red))))
 #+END_SRC
 *** MC (Multiple Cursors)
 #+BEGIN_SRC emacs-lisp
@@ -1561,6 +1561,8 @@ Smerge mode deals with merge conflicts in git.
          (lsp-auto-guess-root nil)
          (lsp-log-io nil)
          (lsp-idle-delay 0.3)
+         (lsp-eldoc-enable-hover nil) ;; graphical bloat imo, but can be good
+         (lsp-signature-auto-activate nil) ;; you could manually request them via `lsp-signature-activate (This tends to cause problems and is slow ESP on MS Windows)
          (lsp-headerline-breadcrumb-enable nil) ;; graphical bloat, don't need but useful to the right person
          (lsp-enable-folding nil)
          (lsp-enable-text-document-color nil)
