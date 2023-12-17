@@ -8,7 +8,6 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 
 * Table of Contents :TOC_3:
 - [[#general-settings][General Settings]]
-- [[#quelpa][Quelpa]]
 - [[#evil-mode][Evil-mode]]
 - [[#markup][Markup]]
   - [[#org][Org]]
@@ -182,15 +181,6 @@ A nice and quick way to view/edit my configuration at any time
       (find-file "~/.emacs.d/MarinMacs.org"))
     (global-set-key (kbd "C-c m") 'goto-MarinMacs) ;; secondary binding is SPC u m
   #+end_src
-* Quelpa
- :PROPERTIES:
- :CUSTOM_ID: quelpa
- :END:
-'Build and install your Emacs Lisp packages on-the-fly and directly from source.'
-#+BEGIN_SRC emacs-lisp
-(use-package quelpa-use-package
-    :ensure t)
-#+END_SRC
 * Evil-Mode
  :PROPERTIES:
  :CUSTOM_ID: evil-mode
@@ -1700,7 +1690,6 @@ Still experimenting with this, native gdb in emacs is also really good
 
 #+END_SRC
 *** Clang-Format
- - The only package that utilizes quelpa at the moment :))
  - Formats your C++ code
  - Documentation: https://clang.llvm.org/docs/ClangFormat.html
  - You should also search how to install *clang-format* on your specific OS
@@ -1710,14 +1699,6 @@ Still experimenting with this, native gdb in emacs is also really good
      :bind 
      (("C-c R" . clang-format-region) ;; format current line
      ("C-c F" . clang-format-buffer))) ;; format entire file
- 
- ;; formats file on save
- (use-package clang-format+
-     :quelpa (clang-format+
-              :fetcher github
-              :repo "SavchenkoValeriy/emacs-clang-format-plus")
-              :config
-              (add-hook 'c-mode-common-hook #'clang-format+-mode))
 #+END_SRC
 ** Python
  :PROPERTIES:
