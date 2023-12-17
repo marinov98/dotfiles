@@ -409,7 +409,7 @@ A nice and quick way to view/edit my configuration at any time
       (org-mode . org-bullets-mode))
 
 #+END_SRC
-Org personal variables and functions
+Personal variables and functions
 #+begin_src emacs-lisp
 
   ;; Org custom settings
@@ -1005,9 +1005,16 @@ I never lose where my cursor is thanks to this
       :custom 
       (projectile-sort-order 'recently-active)
       (projectile-completion-system 'ivy)
+      (projectile-auto-discover nil) ;; Use 'projectile-discover-projects-in-search-path' manually instead
+      (projectile-globally-ignored-file-suffixes '(".pyc" ".o"))
       :init
       (when (file-directory-p "~/Projects/git") ;; change this to whatever directory your projects are in
-        (setq projectile-project-search-path '("~/Projects/git"))))
+        (setq projectile-project-search-path '("~/Projects/git")))
+      :config
+      (dolist (file '(".DS_Store")) ;; add/remove any files
+        (add-to-list 'projectile-globally-ignored-files file))
+      (dolist (dir '("^\\venv$" "^\\venv_dev$" "^\\node_modules$")) ;; add/remove any directories 
+        (add-to-list 'projectile-globally-ignored-directories dir)))
 
   ;; Counsel-Projectile (I utilize counsel projectile bindings in my hydra-projectile)
   (use-package counsel-projectile
@@ -1562,7 +1569,7 @@ Smerge mode deals with merge conflicts in git.
          (lsp-log-io nil)
          (lsp-idle-delay 0.3)
          (lsp-eldoc-enable-hover nil) ;; graphical bloat imo, but can be good
-         (lsp-signature-auto-activate nil) ;; you could manually request them via `lsp-signature-activate (This tends to cause problems and is slow ESP on MS Windows)
+         (lsp-signature-auto-activate nil) ;; (This tends to cause problems and is SUPER slow ESP on MS Windows) you could manually request them via 'lsp-signature-activate' 
          (lsp-headerline-breadcrumb-enable nil) ;; graphical bloat, don't need but useful to the right person
          (lsp-enable-folding nil)
          (lsp-enable-text-document-color nil)
