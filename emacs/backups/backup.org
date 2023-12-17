@@ -60,15 +60,59 @@ Indentation
   (setq backward-delete-char-untabify-method 'hungry)    ;; backspaces entire tab instead of one space at a time
   (setq compilation-scroll-output 'first-error)          ;; compile scroll location
 #+END_SRC
-- Options, display, parenthesis 
+- Ligatures (Certain fonts contain ligatures and enhance the visuals)
+- Proper support and usage of this package requires Emacs 28
+#+BEGIN_SRC emacs-lisp
+  (when (version<= "28.0.50" emacs-version)
+    (use-package ligature
+      :ensure t
+      :hook (prog-mode . ligature-mode)
+      :config
+      ;; Enable the "www" ligature in every possible major mode
+      (ligature-set-ligatures 't '("www"))
+      ;; Enable traditional ligature support in eww-mode, if the
+      ;; `variable-pitch' face supports it
+      (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
+      ;; Enable all Cascadia Code ligatures in programming modes
+      (ligature-set-ligatures 'prog-mode '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
+                                           ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
+                                           "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
+                                           "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
+                                           "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
+                                           "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
+                                           "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
+                                           "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
+                                           ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
+                                           "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
+                                           "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
+                                           "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
+                                           "\\\\" "://"))))
+#+END_SRC
+- Parenthesis, Brackets, Lines, etc (make sure they auto close)
+#+begin_src emacs-lisp
+      (use-package elec-pair ;; auto closing brackets
+          :ensure nil
+          :hook ((prog-mode . electric-pair-mode)
+                  (text-mode . electric-pair-mode))) 
+
+      (use-package paren ;; highlight matching parenthesis
+          :custom
+          (show-paren-when-point-inside-paren t)
+          :config
+          (show-paren-mode 1))
+
+      (use-package hl-line ;; highlight the current line
+          :config
+          (global-hl-line-mode 1))
+#+end_src
+- Options, display
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
-  (setq default-frame-alist '((font . "Fira Code-12")))    ;; set font and font size
-  (setq visible-bell t)                                    ;; disable end of buffer sounds
-  (electric-pair-mode)                                     ;; auto closing brackets
-  (show-paren-mode 1)                                      ;; highlight matching parenthesis
-  (global-hl-line-mode 1)                                  ;; highlight current line
-  (setq inhibit-startup-screen t)                          ;; disable startup screen
+    (setq default-frame-alist '((font . "Fira Code-12")))    ;; set font and font size
+    (setq visible-bell t)                                    ;; disable end of buffer sounds
+    (setq inhibit-startup-screen t)                          ;; disable startup screen
+    (when (and (version<= "29.1" emacs-version) (not (string-equal system-type "windows-nt")))
+      (add-to-list 'default-frame-alist '(alpha-background . 90))) ;; Emacs 29 adds true transparency
 #+END_SRC
 - Line numbers
   - I am not sure if all packages work with line numbers properly, but so far everything works
@@ -123,7 +167,7 @@ Emacs has native support for the GNU Debugger (GDB), and we can make it a little
 #+END_SRC
 The settings below are mainly for linux, you can edit this section if you want to change what browser emacs uses to open links
 #+begin_src emacs-lisp
-  (when (string-equal system-type "gnu/linux") 
+  (when (string-equal system-type "gnu/linux")
     (setq
       browse-url-browser-function
       '(("https://www.netflix.com/" . browse-url-firefox) ;; firefox deals better with video players on linux
@@ -222,11 +266,11 @@ A nice and quick way to view/edit my configuration at any time
        "K" '(kill-buffer :wk "Kill Buffer"))
 
     (mpm/leader-keys
-       "TAB" '(hydra-mc/body :wk "Multiple Cursors Hydra")
        "RET" '(company-complete :wk "Company Complete")
+       "y" '(yas-expand :wk "yas-expand")
        "s" '(save-buffer :wk "Save Buffer")
        "f" '(counsel-find-file :wk "Counsel Find File")
-       "/" '(comment-line :wk "Comment Line") 
+       "/" '(comment-line :wk "Comment Line")
        "m" '(counsel-M-x :wk "Counsel M-x")
        "*" '(swiper-thing-at-point :wk "Swiper at Point"))
 
@@ -242,22 +286,22 @@ A nice and quick way to view/edit my configuration at any time
        "r w f" '(wgrep-finish-edit :wk "Wgrep Finish Edit"))
 
     (mpm/leader-keys
-      "c" '(:ignore t :wk "Coding")    
+      "c" '(:ignore t :wk "Coding")
       "c /" '(comment-region :wk "Comment Region")
       "c u" '(uncomment-region :wk "Uncomment Region")
       "c l" '(hydra-launcher/body :wk "Launcher Hydra")
-      "c f" '(:ignore t :wk "Flycheck options")    
-      "c f e" '(flycheck-explain-error-at-point :wk "Flycheck explain error")    
-      "c f s" '(flycheck-select-checker :wk "Flycheck select checker")    
-      "c f d" '(flycheck-disable-checker :wk "Flycheck disable checker")    
-      "c f h" '(flycheck-describe-checker :wk "Flycheck describe checker")    
-      "c f m" '(flycheck-mode :wk "Flycheck mode")    
-      "c f M" '(flycheck-manual :wk "Flycheck manual")    
-      "c f v" '(flycheck-verify-setup :wk "Flycheck verify setup")    
+      "c f" '(:ignore t :wk "Flycheck options")
+      "c f e" '(flycheck-explain-error-at-point :wk "Flycheck explain error")
+      "c f s" '(flycheck-select-checker :wk "Flycheck select checker")
+      "c f d" '(flycheck-disable-checker :wk "Flycheck disable checker")
+      "c f h" '(flycheck-describe-checker :wk "Flycheck describe checker")
+      "c f m" '(flycheck-mode :wk "Flycheck mode")
+      "c f M" '(flycheck-manual :wk "Flycheck manual")
+      "c f v" '(flycheck-verify-setup :wk "Flycheck verify setup")
       "c f l" '(flycheck-list-errors :which-key "Flycheck List Errors"))
 
     (mpm/leader-keys
-      "e" '(:ignore t :wk "Editing/Evil")    
+      "e" '(:ignore t :wk "Editing/Evil")
       "e e b" '(eval-buffer :wk "Evaluate elisp in buffer")
       "e e d" '(eval-defun :wk "Evaluate defun containing or after point")
       "e e e" '(eval-expression :wk "Evaluate and elisp expression")
@@ -271,16 +315,16 @@ A nice and quick way to view/edit my configuration at any time
       "e /" '(evil-search-forward :wk "Evil search forward"))
 
     (mpm/leader-keys
-      "t" '(:ignore t :wk "Neotree/Treemacs")    
+      "t" '(:ignore t :wk "Neotree/Treemacs")
       "t n" '(neotree-toggle :wk "Toggle Neotree")
       "t e" '(treemacs :wk "Treemacs")
       "t f" '(treemacs-find-file :wk "Treemacs find file")
       "t s" '(treemacs-switch-workspace :wk "Treemacs switch workspace")
       "t p" '(treemacs-projectile :wk "Treemacs Projectile")
       "t w" '(treemacs-select-window :wk "Treemacs select window")
-      "t l" '(:ignore t :wk "LSP-Treemacs")    
-      "t l s" '(lsp-treemacs-symbols :wk "LSP Treemacs Symbols")    
-      "t l r" '(lsp-treemacs-references :wk "LSP Treemacs References")    
+      "t l" '(:ignore t :wk "LSP-Treemacs")
+      "t l s" '(lsp-treemacs-symbols :wk "LSP Treemacs Symbols")
+      "t l r" '(lsp-treemacs-references :wk "LSP Treemacs References")
       "t l e" '(lsp-treemacs-errors-list :wk "LSP Treemacs Errors List")))
 
   (use-package evil
@@ -295,7 +339,7 @@ A nice and quick way to view/edit my configuration at any time
       (evil-mode 1))
 
   (use-package evil-collection
-      :after evil 
+      :after evil
       :ensure t
       :custom
       (evil-collection-company-use-tng nil) ;; I hacked this already (Personal preference)
@@ -307,33 +351,34 @@ A nice and quick way to view/edit my configuration at any time
 ** Evil utility 
 - Below evil packages are extras that enhance the evil-mode experience in emacs
 #+BEGIN_SRC emacs-lisp
-  ;; like tpope's vim-surround
-  (use-package evil-surround
-      :ensure t
-      :config
-      (global-evil-surround-mode 1))
+      ;; like tpope's vim-surround
+      (use-package evil-surround
+          :ensure t
+          :config
+          (global-evil-surround-mode 1))
 
-  ;; no need thanks to mc hydra now 
-  (use-package evil-multiedit
-      :disabled
-      :config
-      (evil-multiedit-default-keybinds))
+      ;; no need thanks to mc hydra now 
+      (use-package evil-multiedit
+          :disabled
+          :config
+          (evil-multiedit-default-keybinds))
 
-  (use-package evil-mc
-      :ensure t
-      :config
-      (global-evil-mc-mode 1))
+      (use-package evil-mc
+          :ensure t
+          :config
+          (global-evil-mc-mode 1)
+          (define-key evil-normal-state-map (kbd "gc") 'hydra-mc/body))
 
-  ;; like vim-sneak and/or vim-seek (just going to opt for avy)
-  (use-package evil-snipe
-      :disabled
-      :custom
-      (evil-snipe-scope 'line)
-      (evil-snipe-repeat-scope 'whole-line)
-      (evil-snipe-spillover-scope 'buffer)
-      :config
-      (evil-snipe-mode 1)
-      (evil-snipe-override-mode 1))
+      ;; like vim-sneak and/or vim-seek (just going to opt for avy)
+      (use-package evil-snipe
+          :disabled
+          :custom
+          (evil-snipe-scope 'line)
+          (evil-snipe-repeat-scope 'whole-line)
+          (evil-snipe-spillover-scope 'buffer)
+          :config
+          (evil-snipe-mode 1)
+          (evil-snipe-override-mode 1))
 #+END_SRC
 * Markup
  :PROPERTIES:
@@ -364,7 +409,7 @@ A nice and quick way to view/edit my configuration at any time
       (org-mode . org-bullets-mode))
 
 #+END_SRC
-Org personal variables and functions
+Personal variables and functions
 #+begin_src emacs-lisp
 
   ;; Org custom settings
@@ -493,7 +538,7 @@ Org personal variables and functions
 - Prerequisites: https://github.com/cask/cask
 - After installing cask, learn how to customize the dashboard by going here: https://github.com/emacs-dashboard/emacs-dashboard
 #+BEGIN_SRC emacs-lisp
-  (use-package dashboard 
+  (use-package dashboard
       :ensure t
       :custom
       (dashboard-banner-logo-title "MarinMacs")
@@ -501,16 +546,19 @@ Org personal variables and functions
       (dashboard-set-init-info t)
       (dashboard-set-file-icons t)
       (dashboard-set-navigator t)
-      (dashboard-startup-banner 'logo)
+      (dashboard-items '((recents  . 5)
+                         (projects . 5)
+                         (bookmarks . 5)
+                         (agenda . 5)))
       (dashboard-footer-messages '("Maintained by Marin Marinov since 2018"))
+      :init
+      (if (file-directory-p "~/.emacs.d/img")
+            (setq dashboard-startup-banner "~/.emacs.d/img/targetBanner.png")
+          (setq dashboard-startup-banner 'logo))
       :config
       (when (string-equal system-type "windows-nt" )
-        (advice-add #'dashboard-replace-displayable :override #'identity)) ;; icons have issue displaying on windows, this fixes it
-      (dashboard-setup-startup-hook)
-      (setq dashboard-items '((recents  . 5)
-                             (bookmarks . 5)
-                             (agenda . 5)
-                             (projects . 5))))
+              (advice-add #'dashboard-replace-displayable :override #'identity)) ;; icons have issue displaying on windows, this fixes it
+      (dashboard-setup-startup-hook)) 
 #+END_SRC
 * Themes
  :PROPERTIES:
@@ -520,13 +568,15 @@ Org personal variables and functions
 *** Colorful and visually pleasing    
 - Spacemacs-theme
 - Zerodark
-- Doom-one
+- Doom-one and Doom-dracula
+- catppuccin
 - JellyBeans 
 - modus-vivendi (amazing color contrast)
 *** Easy on the eyes
 - doom-gruvbox
 - doom-solarized-dark
 - doom-nord
+- catppuccin
 - Zenburn
 - Planet
 *** For Org and any Markdown Language
@@ -544,7 +594,7 @@ You can enable/disable any themes that you like here
        :config (load-theme 'spacemacs-dark t))
 
    (use-package doom-themes
-       :ensure t 
+       :ensure t
        :custom
        (doom-themes-enable-bold t)
        (doom-themes-enable-italic t)
@@ -552,6 +602,13 @@ You can enable/disable any themes that you like here
        (load-theme 'doom-dracula t)
        (doom-themes-visual-bell-config) ;; Enable flashing mode-line on errors
        (doom-themes-org-config)) ;; Corrects (and improves) org-mode's native fontification.
+
+   (use-package catppuccin-theme
+      :disabled
+      :custom
+      (catppuccin-flavor 'macchiato)
+      :config
+      (load-theme 'catppuccin :no-confirm))
 
    (use-package zerodark-theme
        :disabled
@@ -670,7 +727,7 @@ You can enable/disable any themes that you like here
   ;; Ivy
   (use-package ivy
       :ensure t
-      :diminish
+      :diminish ivy-mode
       :custom
       (ivy-display-style 'fancy)
       (ivy-count-format "(%d/%d) ")
@@ -716,12 +773,12 @@ You can enable/disable any themes that you like here
       ("M-j" . ivy-next-line)
       ("M-k" . ivy-previous-line)) 
       :custom
+      (counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)")
       (counsel-rg-base-command "rg -S --no-heading --line-number --color never %s .")
       (counsel-ag-base-command "ag -S --nocolor --nogroup %s")
       (counsel-pt-base-command "pt -S --nocolor --nogroup -e %s")
-      (counsel-find-file-at-point t)
-      :config
-      (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"))
+      (ivy-initial-inputs-alist nil) ;; removes starting ^ regex in M-x
+      (counsel-find-file-at-point t))
 
 #+END_SRC
 wgrep combined counsel-rg and/or counsel-ag makes changing text in multiple places much easier
@@ -822,7 +879,7 @@ a personal keybinding just because its so good. Check the [[https://github.com/a
 #+BEGIN_SRC emacs-lisp
   (use-package which-key
     :ensure t 
-    :diminish
+    :diminish which-key-mode
     :config
     (which-key-mode))
 #+END_SRC
@@ -883,7 +940,7 @@ I never lose where my cursor is thanks to this
 #+BEGIN_SRC emacs-lisp
   (use-package beacon
       :disabled
-      :diminish
+      :diminish beacon-mode
       :custom
       (beacon-color "#ffc600")
       :config
@@ -936,10 +993,10 @@ I never lose where my cursor is thanks to this
  :CUSTOM_ID: projectile
  :END:
 - Amazing tool for managing projects! 
+- Projectile looks for git projects or projectils that contain a =.projectile=
 - Projectile Homepage: https://projectile.readthedocs.io/en/latest/ 
 - Counsel-Projectile: https://github.com/ericdanan/counsel-projectile 
 #+BEGIN_SRC emacs-lisp
-   ;; Projectile-mode 
   (use-package projectile
       :ensure t
       :diminish projectile-mode
@@ -948,9 +1005,16 @@ I never lose where my cursor is thanks to this
       :custom 
       (projectile-sort-order 'recently-active)
       (projectile-completion-system 'ivy)
+      (projectile-auto-discover nil) ;; Use 'projectile-discover-projects-in-search-path' manually instead
+      (projectile-globally-ignored-file-suffixes '(".pyc" ".o"))
       :init
-      (when (file-directory-p "~/Projects") ;; change this to whatever directory your projects are in
-        (setq projectile-project-search-path '("~/Projects"))))
+      (when (file-directory-p "~/Projects/git") ;; change this to whatever directory your projects are in
+        (setq projectile-project-search-path '("~/Projects/git")))
+      :config
+      (dolist (file '(".DS_Store")) ;; add/remove any files
+        (add-to-list 'projectile-globally-ignored-files file))
+      (dolist (dir '("^\\venv$" "^\\venv_dev$" "^\\node_modules$")) ;; add/remove any directories 
+        (add-to-list 'projectile-globally-ignored-directories dir)))
 
   ;; Counsel-Projectile (I utilize counsel projectile bindings in my hydra-projectile)
   (use-package counsel-projectile
@@ -1017,7 +1081,6 @@ I never lose where my cursor is thanks to this
 #+BEGIN_SRC emacs-lisp
   (use-package undo-tree
       :disabled
-      :diminish
       :init
       (global-undo-tree-mode)
       :config
@@ -1041,37 +1104,29 @@ I never lose where my cursor is thanks to this
  :END:
 - all the packages related to snippets
 - *YASnippet* is a template system for Emacs. It allows you to type an abbreviation and automatically expand it into function templates.
-- I Remapped some bindings to make them work better with autocomplete
-  - The new bindings are just as convenient if your caps lock is both esc and ctrl or even just ctrl
-  - after some testing you can still actually use tab to insert snippets, but you will have to do it before company triggers
-    - when company triggers, you can use Ctrl + Tab to insert a snippet
+- You may or may not have to do rebindings if autocomplete conflicts with snippets
 - repo: https://github.com/joaotavora/yasnippet
 #+BEGIN_SRC emacs-lisp
   (use-package yasnippet
-	  :disabled
-	  :ensure t
-	  :bind 
-	  ((:map yas-keymap
-	  ("<tab>" . nil) ;; there are conflicts here with autocomplete
-	  ("<C-tab>" . yas-next-field-or-maybe-expand))
-	  (:map yas-minor-mode-map
-	  ("<tab>" . nil) ;; while this is convenient, it clashes with auto-complete and jump-to-definitions
-	  ("<C-tab>" . yas-expand)))
-	  :hook
-	  (after-init . yas-global-mode)
-	  :config
-	  (yas-reload-all))
+      :after lsp-mode 
+      :ensure t
+      :diminish yas-minor-mode
+      :bind
+      ((:map yas-minor-mode-map
+      ("<tab>" . nil))) ;; changed for S-SPC y 
+      :config
+      (yas-reload-all)
+      (add-hook 'text-mode-hook #'yas-minor-mode)
+      (add-hook 'prog-mode-hook #'yas-minor-mode))
 
   (use-package yasnippet-snippets 
-	  :disabled
-	  :after yasnippet
-	  :ensure t)
+      :after yasnippet
+      :ensure t)
 
   ;; snippets for React.js
   (use-package react-snippets
-      :disabled
-	  :after yasnippet
-	  :ensure t)
+      :after yasnippet
+      :ensure t)
 #+END_SRC 
 ** FlyCheck
  :PROPERTIES:
@@ -1102,7 +1157,7 @@ I never lose where my cursor is thanks to this
   (use-package company
       :ensure t
       :after lsp-mode
-      :hook (lsp-mode . company-mode)
+      :hook (prog-mode . company-mode)
       :bind
       (:map company-active-map
           ("<tab>" . company-complete-selection) 
@@ -1115,9 +1170,7 @@ I never lose where my cursor is thanks to this
       (company-idle-delay 0.1) ; How much to delay to completion
       (company-minimum-prefix-length 2) ;; show completions after 2 chars
       (company-selection-wrap-around t) ;; goes to start of selection if you reached the bottom 
-      (company-require-match 'never) ;; dont need to pick a choice 
-      :hook
-      (after-init . global-company-mode))
+      (company-require-match 'never)) ;; dont need to pick a choice
 
 #+END_SRC 
 ** Eldoc
@@ -1128,7 +1181,7 @@ I never lose where my cursor is thanks to this
 - Documentation: https://www.emacswiki.org/emacs/ElDoc
 #+BEGIN_SRC emacs-lisp
   (use-package eldoc
-      :diminish
+      :diminish eldoc-mode
       :hook (emacs-lisp-mode . eldoc-mode)
       :config
       (global-eldoc-mode -1))
@@ -1140,34 +1193,35 @@ I never lose where my cursor is thanks to this
 - [[https://magit.vc/][Magit]] is a great git interface I have yet to master...
 - git-timemachine: flip through a file's full list of version. Revert to any given phase easily
 #+BEGIN_SRC emacs-lisp
-  ;; hydra takes care of my magit bindings
-  (use-package magit :ensure t)
+    ;; hydra takes care of my magit bindings
+    (use-package magit :ensure t)
   
-  (use-package git-commit
-      :after magit
-      :custom
-      (git-commit-summary-max-length 50) ;; in accordance with https://chris.beams.io/posts/git-commit/
-      :config
-      (setq git-commit-style-convention-checks
-            '(non-empty-second-line
-            overlong-summary-line)))
+    (use-package git-commit
+        :after magit
+        :custom
+        (git-commit-summary-max-length 50) ;; in accordance with https://chris.beams.io/posts/git-commit/
+        :config
+        (setq git-commit-style-convention-checks
+              '(non-empty-second-line
+              overlong-summary-line)))
             
-  (use-package magit-repos
-      :after magit
-      :commands magit-list-repositories
-      :custom
-      (magit-repository-directories '(("~/Projects" . 1))))
+    (use-package magit-repos
+        :after magit
+        :commands magit-list-repositories
+        :config
+        (when (file-directory-p "~/Projects/git") ;; change this to whatever directory your projects are in
+          (setq magit-repository-directories '(("~/Projects/git" . 1)))))
 
-  (use-package gitignore-mode
-      :mode (("\\.gitignore\\'" . gitignore-mode)
-             ("\\.dockerignore\\'" . gitignore-mode))) ;; syntax from gitignore is more or less identical to that of .dockerignore
+    (use-package gitignore-mode
+        :mode (("\\.gitignore\\'" . gitignore-mode)
+               ("\\.dockerignore\\'" . gitignore-mode))) ;; syntax from gitignore is more or less identical to that of .dockerignore
 
-  (use-package gitconfig-mode
-      :mode "\\.gitconfig\\'")
+    (use-package gitconfig-mode
+        :mode "\\.gitconfig\\'")
 
-  (use-package git-timemachine
-      :ensure t
-      :commands git-timemachine)
+    (use-package git-timemachine
+        :ensure t
+        :commands git-timemachine)
 
 #+END_SRC
 Smerge mode deals with merge conflicts in git.
@@ -1334,7 +1388,7 @@ Smerge mode deals with merge conflicts in git.
 #+BEGIN_SRC emacs-lisp
   (pretty-hydra-define hydra-code (:color red :title "📡 Code 📡" :quit-key "q") 
     ("Find"
-    (("f" lsp-ui-peek-find-definitions "peek def")
+    (("f" lsp-find-definition "find def") 
     ("r" lsp-find-references "find ref")
     ("t" lsp-find-type-definition "find type def")
     ("g" lsp-ui-doc-glance "glance")
@@ -1357,13 +1411,18 @@ Smerge mode deals with merge conflicts in git.
   (pretty-hydra-define hydra-style (:color blue :title "📡 Style 📡" :quit-key "q") 
     ("Buffer"
     (("b" python-black-buffer "python-black")
-    ("l" lsp-format-buffer "LSP")
+    ("l" lsp-format-buffer "LSP" :color red)
+    ("p" prettier-prettify "prettier")
     ("c" clang-format-buffer "clang"))
+
+     "Imports"
+     (("o" lsp-organize-imports "organize imports"))
 
     "Region"
     (("B" python-black-region "python-black")
     ("C" clang-format-region "clang")
-    ("L" lsp-format-region "LSP")))) 
+    ("P" prettier-prettify-region "prettier")
+    ("L" lsp-format-region "LSP" :color red))))
 #+END_SRC
 *** MC (Multiple Cursors)
 #+BEGIN_SRC emacs-lisp
@@ -1380,15 +1439,15 @@ Smerge mode deals with merge conflicts in git.
        ("K" evil-mc-make-cursor-move-prev-line "make & down")) 
 
        "Manual"
-       (("r" evil-mc-undo-last-added-cursor "undo cursor")
+       (("u" evil-mc-undo-last-added-cursor "undo cursor")
        ("q" evil-mc-undo-all-cursors "undo all cursors" :color blue)
-       ("Q" evil-mc-resume-cursors "resume cursors" :color blue)))) 
+       ("r" evil-mc-resume-cursors "resume cursors" :color blue)))) 
 #+END_SRC
 *** Avy (Word finding)
 #+BEGIN_SRC emacs-lisp
-  (pretty-hydra-define hydra-avy (:color blue :title "↵ Avy + Snipe ↵" :quit-key "q")
+  (pretty-hydra-define hydra-avy (:color blue :title "↵ Avy ↵" :quit-key "q")
     ("Char"
-    (("c" avy-goto-char "char 1" :color red)
+    (("g" avy-goto-char "char 1" :color red)
     ("s" avy-goto-char-2 "char 2" :color red)
     ("t" avy-goto-char-timer "timed char" :color red))
 
@@ -1400,7 +1459,7 @@ Smerge mode deals with merge conflicts in git.
     (("l" avy-goto-line "goto line")
     ("L" avy-goto-end-of-line "goto eoline")
     ("m" avy-move-line "move line")
-    ("k" avy-kill-whole-line "kill line")
+    ("K" avy-kill-whole-line "kill line")
     ("y" avy-copy-line "yank line"))
 
     "Resume"
@@ -1456,6 +1515,7 @@ Smerge mode deals with merge conflicts in git.
     "Personal"
     (("m" goto-MarinMacs "goto config")
     ("s" set-fill-column "set-fill-column")
+    ("R" restart-emacs "restart Emacs")
     ("e" eval-buffer "eval buffer")
     ("c" compile "compile"))))
 #+END_SRC
@@ -1502,29 +1562,35 @@ Smerge mode deals with merge conflicts in git.
      (use-package lsp-mode
          :ensure t
          :commands (lsp lsp-deferred)
-         :bind
-         (:map evil-normal-state-map
-           ("gh" . lsp-describe-thing-at-point)
-           ("gi" . lsp-goto-implementation)
-           ("gd" . lsp-find-definition))
-         :diminish
          :hook
          ((c++-mode c-mode css-mode yaml-mode json-mode js-mode js2-mode rjsx-mode typescript-mode web-mode) . lsp-deferred)
          :custom
          (lsp-auto-guess-root nil)
          (lsp-log-io nil)
+         (lsp-idle-delay 0.3)
+         (lsp-eldoc-enable-hover nil) ;; graphical bloat imo, but can be good
+         (lsp-signature-auto-activate nil) ;; (This tends to cause problems and is SUPER slow ESP on MS Windows) you could manually request them via 'lsp-signature-activate' 
+         (lsp-headerline-breadcrumb-enable nil) ;; graphical bloat, don't need but useful to the right person
+         (lsp-enable-folding nil)
+         (lsp-enable-text-document-color nil)
          (lsp-file-watch-threshold 5000)
          (lsp-prefer-flymake nil)
-         (lsp-io-messages-max nil))
+         (lsp-io-messages-max nil)
+         :config
+         (add-hook 'after-init-hook #'(lambda() ;; in case I disable lsp-ui remap g prefix keys to regular lsp
+                                        (unless (package-installed-p 'lsp-ui)
+                                          (define-key evil-normal-state-map (kbd "gd") 'lsp-find-definition)
+                                          (define-key evil-normal-state-map (kbd "gi") 'lsp-goto-implementation)
+                                          (define-key evil-normal-state-map (kbd "gr") 'lsp-find-references)))))
 
      (use-package lsp-ui
-         :after lsp-mode flycheck
          :ensure t
-         :diminish
          :commands lsp-ui-mode
          :hook (lsp-mode . lsp-ui-mode)
          :bind
          (:map evil-normal-state-map
+           ("gd" . lsp-ui-peek-find-definitions)
+           ("gi" . lsp-ui-peek-find-implementation)
            ("gr" . lsp-ui-peek-find-references))
          (:map lsp-ui-peek-mode-map
            ("M-j" . lsp-ui-peek--select-next)
@@ -1601,6 +1667,10 @@ Smerge mode deals with merge conflicts in git.
   - [[https://clang.llvm.org/][Clang]]
 *** Settings
 #+BEGIN_SRC emacs-lisp
+  (use-package cc-mode
+    :init
+    (setq-default c-basic-offset 4))
+
   (use-package cpp
     :config
     ;; disable other checkers since we only want to utilize clangd language server
@@ -1609,9 +1679,8 @@ Smerge mode deals with merge conflicts in git.
   ;; enable modern font lock for >=c++11
   (use-package modern-cpp-font-lock
       :ensure t
-      :hook (c++-mode-hook . modern-c++-font-lock-mode)
-      :config
-      (modern-c++-font-lock-global-mode nil))
+      :diminish modern-c++-font-lock-mode
+      :hook (c++-mode-hook . modern-c++-font-lock-mode))
 #+END_SRC
 *** Debugging
 Still experimenting with this, native gdb in emacs is also really good 
@@ -1638,7 +1707,6 @@ Still experimenting with this, native gdb in emacs is also really good
 #+BEGIN_SRC emacs-lisp
   (use-package clang-format 
      :ensure t
-     :diminish
      :bind 
      (("C-c R" . clang-format-region) ;; format current line
      ("C-c F" . clang-format-buffer))) ;; format entire file
@@ -1681,7 +1749,6 @@ How to install particular language server
  ;; if you need virtualenv support 
 (use-package virtualenvwrapper
    :disabled
-   :ensure t
    :config
    (venv-initialize-interactive-shells)
    (venv-initialize-eshell))
@@ -1758,24 +1825,18 @@ rainbow mode for displaying hex colors, rainbow-delimeters for coloring parenthe
 #+BEGIN_SRC emacs-lisp
   (use-package rainbow-delimiters
     :ensure t
-    :hook ((emacs-lisp-mode . rainbow-delimiters-mode)
-         (clojure-mode . rainbow-delimiters-mode)))
+    :hook ((prog-mode . rainbow-delimiters-mode)))
 
   (use-package rainbow-mode 
       :ensure t
       :hook prog-mode org-mode)
 #+END_SRC
-- This is what I like to use to format my code
-- need to run 'npm i -g prettier' in order for this to work (Locally should work too)
+- This is what I like to use to format during web development
+- In your js/ts project you would run =npm i prettier= to add the dependency or the install globally with the =-g= flag
+- You can hook specific modes or enable globally if you want to format on save but I prefer to do it manually through my hydra
 #+BEGIN_SRC emacs-lisp
-  (use-package prettier-js
-      :ensure t
-      :hook
-      ((js-mode . prettier-js-mode)
-      (js2-mode . prettier-js-mode)
-      (web-mode . prettier-js-mode)
-      (typescript-mode . prettier-js-mode)
-      (rjsx-mode . prettier-js-mode)))
+  (use-package prettier
+      :ensure t) 
 #+END_SRC
 *** Modes
 - These are modes related to web-dev that I have worked with 
@@ -1899,7 +1960,6 @@ Adds the node_modules/.bin directory to the buffer exec_path.
       :config 
       (setq js2-strict-missing-semi-warning nil)
       (setq-default js2-basic-offset 2)) ;; set indentation to 2
-
 #+END_SRC
 
  :PROPERTIES:
@@ -1944,10 +2004,7 @@ All for typescript
     (use-package diminish
         :ensure t
         :init
-        (diminish 'yas-minor-mode)
-        (diminish 'modern-c++-font-lock-mode)
         (diminish 'auto-revert-mode)
         (diminish 'page-break-lines-mode)
-        (diminish 'eldoc-mode)
         (diminish 'abbrev-mode))
   #+end_src
