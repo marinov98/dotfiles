@@ -38,7 +38,8 @@
   "Delete * Buffers after init."
   (setq-default message-log-max nil)
   (kill-buffer "*Messages*")
-  (kill-buffer "*quelpa-build-checkout*")
+  (when (package-installed-p 'quelpa-use-package)
+    (kill-buffer "*quelpa-build-checkout*"))
   (add-hook 'minibuffer-exit-hook
       #'(lambda ()
          (let ((buffer "*Completions*"))
@@ -71,12 +72,7 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package)
-  (eval-and-compile (setq use-package-expand-minimally t))
-  (package-install 'quelpa-use-package)
-  (quelpa
-    '(quelpa-use-package
-       :fetcher git
-       :url "https://github.com/quelpa/quelpa-use-package.git")))
+  (eval-and-compile (setq use-package-expand-minimally t)))
 
 
 (org-babel-load-file (expand-file-name "~/.emacs.d/MarinMacs.org"))
