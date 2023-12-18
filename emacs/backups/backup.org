@@ -8,7 +8,6 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 
 * Table of Contents :TOC_3:
 - [[#general-settings][General Settings]]
-- [[#quelpa][Quelpa]]
 - [[#evil-mode][Evil-mode]]
 - [[#markup][Markup]]
   - [[#org][Org]]
@@ -53,6 +52,23 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
  :CUSTOM_ID: general-settings
  :END:
 ** Preferences
+Variables (Change them as you see fit)
+#+BEGIN_SRC emacs-lisp
+  (defconst mpm-projects-dir "~/Projects/git"
+    "Projects directory.")
+
+  (defvar mpm-img-dir "~/.emacs.d/img"
+    "Images directory, mainly for dashboard package.")
+
+  (defconst mpm-dashboard-banner-img "targetBanner.png"
+    "Dashboard image.")
+
+  (defvar mpm-org-dir "~/Projects/org"
+    "Org directory.")
+
+  (defvar mpm-notes-org "/Personal/notes.org"
+    "Personal notes file.")
+#+END_SRC
 Indentation 
 #+BEGIN_SRC emacs-lisp
   (setq-default indent-tabs-mode nil)                    ;; disable tabs and use spaces
@@ -179,18 +195,9 @@ A nice and quick way to view/edit my configuration at any time
     (defun goto-MarinMacs ()
       "Jump to configuration file."
       (interactive)
-      (find-file "~/.emacs.d/MarinMacs.org"))
+      (find-file mpm-config-file-location))
     (global-set-key (kbd "C-c m") 'goto-MarinMacs) ;; secondary binding is SPC u m
   #+end_src
-* Quelpa
- :PROPERTIES:
- :CUSTOM_ID: quelpa
- :END:
-'Build and install your Emacs Lisp packages on-the-fly and directly from source.'
-#+BEGIN_SRC emacs-lisp
-(use-package quelpa-use-package
-    :ensure t)
-#+END_SRC
 * Evil-Mode
  :PROPERTIES:
  :CUSTOM_ID: evil-mode
@@ -290,6 +297,7 @@ A nice and quick way to view/edit my configuration at any time
       "c /" '(comment-region :wk "Comment Region")
       "c u" '(uncomment-region :wk "Uncomment Region")
       "c l" '(hydra-launcher/body :wk "Launcher Hydra")
+      "c s" '(shell :wk "Shell")
       "c f" '(:ignore t :wk "Flycheck options")
       "c f e" '(flycheck-explain-error-at-point :wk "Flycheck explain error")
       "c f s" '(flycheck-select-checker :wk "Flycheck select checker")
@@ -409,13 +417,13 @@ A nice and quick way to view/edit my configuration at any time
       (org-mode . org-bullets-mode))
 
 #+END_SRC
-Personal variables and functions
+Custom-set variables and functions
 #+begin_src emacs-lisp
 
   ;; Org custom settings
   (custom-set-variables
-           '(org-directory "~/Projects/org")
-           '(org-default-notes-file (concat org-directory "/Personal/notes.org")))
+           '(org-directory mpm-org-dir)
+           '(org-default-notes-file (concat org-directory mpm-notes-org)))
 
       (defun marinov/goto-org-directory ()
         "goes to my org directory."
@@ -552,8 +560,8 @@ Personal variables and functions
                          (agenda . 5)))
       (dashboard-footer-messages '("Maintained by Marin Marinov since 2018"))
       :init
-      (if (file-directory-p "~/.emacs.d/img")
-            (setq dashboard-startup-banner "~/.emacs.d/img/targetBanner.png")
+      (if (file-directory-p mpm-img-dir)
+            (setq dashboard-startup-banner (concat mpm-img-dir "/" mpm-dashboard-banner-img))
           (setq dashboard-startup-banner 'logo))
       :config
       (when (string-equal system-type "windows-nt" )
@@ -770,6 +778,7 @@ You can enable/disable any themes that you like here
       :map evil-normal-state-map
       ("gs" . counsel-rg)
       :map ivy-minibuffer-map
+      ("S-SPC" . ivy-occur) ;; alt binding because of minibuffer mode map where general is not triggered
       ("M-j" . ivy-next-line)
       ("M-k" . ivy-previous-line)) 
       :custom
@@ -1008,8 +1017,8 @@ I never lose where my cursor is thanks to this
       (projectile-auto-discover nil) ;; Use 'projectile-discover-projects-in-search-path' manually instead
       (projectile-globally-ignored-file-suffixes '(".pyc" ".o"))
       :init
-      (when (file-directory-p "~/Projects/git") ;; change this to whatever directory your projects are in
-        (setq projectile-project-search-path '("~/Projects/git")))
+      (when (file-directory-p mpm-projects-dir)
+        (setq projectile-project-search-path `(,mpm-projects-dir)))
       :config
       (dolist (file '(".DS_Store")) ;; add/remove any files
         (add-to-list 'projectile-globally-ignored-files file))
@@ -1193,35 +1202,35 @@ I never lose where my cursor is thanks to this
 - [[https://magit.vc/][Magit]] is a great git interface I have yet to master...
 - git-timemachine: flip through a file's full list of version. Revert to any given phase easily
 #+BEGIN_SRC emacs-lisp
-    ;; hydra takes care of my magit bindings
-    (use-package magit :ensure t)
-  
-    (use-package git-commit
-        :after magit
-        :custom
-        (git-commit-summary-max-length 50) ;; in accordance with https://chris.beams.io/posts/git-commit/
-        :config
-        (setq git-commit-style-convention-checks
-              '(non-empty-second-line
-              overlong-summary-line)))
-            
-    (use-package magit-repos
-        :after magit
-        :commands magit-list-repositories
-        :config
-        (when (file-directory-p "~/Projects/git") ;; change this to whatever directory your projects are in
-          (setq magit-repository-directories '(("~/Projects/git" . 1)))))
+  ;; hydra takes care of my magit bindings
+  (use-package magit :ensure t)
 
-    (use-package gitignore-mode
-        :mode (("\\.gitignore\\'" . gitignore-mode)
-               ("\\.dockerignore\\'" . gitignore-mode))) ;; syntax from gitignore is more or less identical to that of .dockerignore
+  (use-package git-commit
+      :after magit
+      :custom
+      (git-commit-summary-max-length 50) ;; in accordance with https://chris.beams.io/posts/git-commit/
+      :config
+      (setq git-commit-style-convention-checks
+            '(non-empty-second-line
+            overlong-summary-line)))
 
-    (use-package gitconfig-mode
-        :mode "\\.gitconfig\\'")
+  (use-package magit-repos
+      :after magit
+      :commands magit-list-repositories
+      :config
+      (when (file-directory-p mpm-projects-dir)
+        (setq magit-repository-directories `((,mpm-projects-dir . 1)))))
 
-    (use-package git-timemachine
-        :ensure t
-        :commands git-timemachine)
+  (use-package gitignore-mode
+      :mode (("\\.gitignore\\'" . gitignore-mode)
+             ("\\.dockerignore\\'" . gitignore-mode))) ;; syntax from gitignore is more or less identical to that of .dockerignore
+
+  (use-package gitconfig-mode
+      :mode "\\.gitconfig\\'")
+
+  (use-package git-timemachine
+      :ensure t
+      :commands git-timemachine)
 
 #+END_SRC
 Smerge mode deals with merge conflicts in git.
@@ -1700,7 +1709,6 @@ Still experimenting with this, native gdb in emacs is also really good
 
 #+END_SRC
 *** Clang-Format
- - The only package that utilizes quelpa at the moment :))
  - Formats your C++ code
  - Documentation: https://clang.llvm.org/docs/ClangFormat.html
  - You should also search how to install *clang-format* on your specific OS
@@ -1710,14 +1718,6 @@ Still experimenting with this, native gdb in emacs is also really good
      :bind 
      (("C-c R" . clang-format-region) ;; format current line
      ("C-c F" . clang-format-buffer))) ;; format entire file
- 
- ;; formats file on save
- (use-package clang-format+
-     :quelpa (clang-format+
-              :fetcher github
-              :repo "SavchenkoValeriy/emacs-clang-format-plus")
-              :config
-              (add-hook 'c-mode-common-hook #'clang-format+-mode))
 #+END_SRC
 ** Python
  :PROPERTIES:
@@ -1790,36 +1790,36 @@ Note: the template is meant to be edited to personal preferences
  - Essential for web-development. Highlighting, auto-closing tags, just great.
  - Official Website: http://web-mode.org/
 #+BEGIN_SRC emacs-lisp
-  (use-package web-mode
-      :ensure t
-      :mode
-      (("\\.html?\\'"      . web-mode)
-      ("\\.phtml\\'"       . web-mode)
-      ("\\.tpl\\.php\\'"   . web-mode)
-      ("\\.blade\\.php\\'" . web-mode)
-      ("\\.[agj]sp\\'"     . web-mode)
-      ("\\.as[cp]x\\'"     . web-mode)
-      ("\\.erb\\'"         . web-mode)
-      ("\\.ejs\\'"         . web-mode)
-      ("\\.mustache\\'"    . web-mode)
-      ("\\.djhtml\\'"      . web-mode))
-      :custom
-      ;; Indentation
-      (web-mode-attr-indent-offset 2)
-      (web-mode-markup-indent-offset 2)
-      (web-mode-code-indent-offset 2)
-      (web-mode-css-indent-offset 2)
-      ;; Auto-closing
-      (web-mode-auto-close-style 2)
-      (web-mode-enable-auto-pairing t)
-      (web-mode-enable-auto-quoting t)
-      ;; Highlighting
-      (web-mode-enable-current-column-highlight t)
-      (web-mode-enable-current-element-highlight t)
-      :config
-      (setq web-mode-enable-engine-detection t))
+(use-package web-mode
+    :ensure t
+    :mode
+    (("\\.html?\\'"      . web-mode)
+    ("\\.phtml\\'"       . web-mode)
+    ("\\.tpl\\.php\\'"   . web-mode)
+    ("\\.blade\\.php\\'" . web-mode)
+    ("\\.[agj]sp\\'"     . web-mode)
+    ("\\.as[cp]x\\'"     . web-mode)
+    ("\\.erb\\'"         . web-mode)
+    ("\\.ejs\\'"         . web-mode)
+    ("\\.mustache\\'"    . web-mode)
+    ("\\.djhtml\\'"      . web-mode))
+    :custom
+    ;; Indentation
+    (web-mode-attr-indent-offset 2)
+    (web-mode-markup-indent-offset 2)
+    (web-mode-code-indent-offset 2)
+    (web-mode-css-indent-offset 2)
+    ;; Auto-closing
+    (web-mode-auto-close-style 2)
+    (web-mode-enable-auto-pairing t)
+    (web-mode-enable-auto-quoting t)
+    ;; Highlighting
+    (web-mode-enable-current-column-highlight t)
+    (web-mode-enable-current-element-highlight t)
+    :config
+    (setq web-mode-enable-engine-detection t))
 
-      (setq-default css-indent-offset 2) ;; web mode for some reason cancels css autocomplete so I have to configure css separately
+    (setq-default css-indent-offset 2) ;; web mode for some reason cancels css autocomplete so I have to configure css separately
 #+END_SRC
 rainbow mode for displaying hex colors, rainbow-delimeters for coloring parenthesis
 #+BEGIN_SRC emacs-lisp
