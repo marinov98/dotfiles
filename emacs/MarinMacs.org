@@ -975,29 +975,32 @@ Useful if you work on multiple windows and want an efficient way of switching be
 - Projectile Homepage: https://projectile.readthedocs.io/en/latest/ 
 - Counsel-Projectile: https://github.com/ericdanan/counsel-projectile 
 #+BEGIN_SRC emacs-lisp
-  (use-package projectile
-      :ensure t
-      :diminish projectile-mode
-      :bind 
-      (("C-c p" . projectile-command-map))
-      :custom 
-      (projectile-sort-order 'recently-active)
-      (projectile-completion-system 'ivy)
-      (projectile-auto-discover nil) ;; Use 'projectile-discover-projects-in-search-path' manually instead
-      (projectile-globally-ignored-file-suffixes '(".pyc" ".o"))
-      :init
-      (when (file-directory-p mpm-projects-dir)
-        (setq projectile-project-search-path `(,mpm-projects-dir)))
-      :config
-      (dolist (file '(".DS_Store")) ;; add/remove any files
-        (add-to-list 'projectile-globally-ignored-files file))
-      (dolist (dir '("^\\venv$" "^\\venv_dev$" "^\\node_modules$")) ;; add/remove any directories 
-        (add-to-list 'projectile-globally-ignored-directories dir)))
+    (use-package projectile
+        :ensure t
+        :diminish projectile-mode
+        :bind 
+        (("C-c p" . projectile-command-map))
+        :custom 
+        (projectile-sort-order 'recently-active)
+        (projectile-completion-system 'ivy)
+        (projectile-auto-discover nil) ;; Use 'projectile-discover-projects-in-search-path' manually instead
+        (projectile-globally-ignored-file-suffixes '(".pyc" ".o"))
+        :init
+        (when (file-directory-p mpm-projects-dir)
+          (setq projectile-project-search-path `(,mpm-projects-dir)))
+        :config
+        (dolist (file '(".DS_Store")) ;; add/remove any files
+          (add-to-list 'projectile-globally-ignored-files file))
+        (dolist (dir '("^\\venv$" "^\\venv_dev$" "^\\node_modules$")) ;; add/remove any directories 
+          (add-to-list 'projectile-globally-ignored-directories dir))
+        (setq projectile-indexing-method (if (memq system-type '(ms-dos windows-nt cygwin)) ;; ensure alien on anything not windows related
+                                               'native
+                                             'alien)))
 
-  ;; Counsel-Projectile (I utilize counsel projectile bindings in my hydra-projectile)
-  (use-package counsel-projectile
-    :ensure t
-    :config (counsel-projectile-mode))
+    ;; Counsel-Projectile (I utilize counsel projectile bindings in my hydra-projectile)
+    (use-package counsel-projectile
+      :ensure t
+      :config (counsel-projectile-mode))
 #+END_SRC
 * Shell
  :PROPERTIES:
