@@ -411,7 +411,7 @@ A nice and quick way to view/edit my configuration at any time
       (org-mode . org-bullets-mode))
 
 #+END_SRC
-Personal variables and functions
+Custom-set variables and functions
 #+begin_src emacs-lisp
 
   ;; Org custom settings
