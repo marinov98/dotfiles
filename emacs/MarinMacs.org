@@ -761,6 +761,7 @@ You can enable/disable any themes that you like here
       :map evil-normal-state-map
       ("gs" . counsel-rg)
       :map ivy-minibuffer-map
+      ("S-SPC" . ivy-occur) ;; alt binding because of minibuffer mode map where general is not triggered
       ("M-j" . ivy-next-line)
       ("M-k" . ivy-previous-line)) 
       :custom
