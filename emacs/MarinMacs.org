@@ -54,8 +54,14 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 ** Preferences
 Variables (Change them as you see fit)
 #+BEGIN_SRC emacs-lisp
-  (defvar mpm-projects-dir "~/Projects/git"
+  (defconst mpm-projects-dir "~/Projects/git"
     "Projects directory.")
+
+  (defvar mpm-img-dir "~/.emacs.d/img"
+    "Images directory, mainly for dashboard package.")
+
+  (defconst mpm-dashboard-banner-img "targetBanner.png"
+    "Dashboard image.")
 
   (defvar mpm-org-dir "~/Projects/org"
     "Org directory.")
@@ -554,8 +560,8 @@ Custom-set variables and functions
                          (agenda . 5)))
       (dashboard-footer-messages '("Maintained by Marin Marinov since 2018"))
       :init
-      (if (file-directory-p "~/.emacs.d/img")
-            (setq dashboard-startup-banner "~/.emacs.d/img/targetBanner.png")
+      (if (file-directory-p mpm-img-dir)
+            (setq dashboard-startup-banner (concat mpm-img-dir "/" mpm-dashboard-banner-img))
           (setq dashboard-startup-banner 'logo))
       :config
       (when (string-equal system-type "windows-nt" )
