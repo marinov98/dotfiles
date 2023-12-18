@@ -2,6 +2,9 @@
 
 (setq load-prefer-newer t) ;; Avoid the pitfall of loading old bytecode instead of newer
 
+(defconst mpm-config-file-location "~/.emacs.d/MarinMacs.org"
+  "Configuration file location.")
+
 ;;; Commentary:
 ;; MS-Windows can be slow and can give a lot of issues.  This setting below at least fixes the issue of it not recognizing unicode characters and not letting your save your file.
 (when (string-equal system-type "windows-nt")
@@ -75,6 +78,6 @@
   (eval-and-compile (setq use-package-expand-minimally t)))
 
 
-(org-babel-load-file (expand-file-name "~/.emacs.d/MarinMacs.org"))
+(org-babel-load-file (expand-file-name mpm-config-file-location))
 (provide 'init)
 ;;; init.el ends here
