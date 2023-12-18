@@ -105,20 +105,20 @@ Indentation
 #+END_SRC
 - Parenthesis, Brackets, Lines, etc (make sure they auto close)
 #+begin_src emacs-lisp
-      (use-package elec-pair ;; auto closing brackets
-          :ensure nil
-          :hook ((prog-mode . electric-pair-mode)
-                  (text-mode . electric-pair-mode))) 
+  (use-package elec-pair ;; auto closing brackets
+      :ensure nil
+      :hook ((prog-mode . electric-pair-mode)
+              (text-mode . electric-pair-mode))) 
 
-      (use-package paren ;; highlight matching parenthesis
-          :custom
-          (show-paren-when-point-inside-paren t)
-          :config
-          (show-paren-mode 1))
+  (use-package paren ;; highlight matching parenthesis
+      :custom
+      (show-paren-when-point-inside-paren t)
+      :config
+      (show-paren-mode 1))
 
-      (use-package hl-line ;; highlight the current line
-          :config
-          (global-hl-line-mode 1))
+  (use-package hl-line ;; highlight the current line
+      :config
+      (global-hl-line-mode 1))
 #+end_src
 - Options, display
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
@@ -971,6 +971,7 @@ Useful if you work on multiple windows and want an efficient way of switching be
  :END:
 - Amazing tool for managing projects! 
 - Projectile looks for git projects or projectils that contain a =.projectile=
+- Tip: install [[https://github.com/sharkdp/fd][fd]] which is much faster than =find=. If =fd= is found, projectile will use as a replacement for find.
 - Projectile Homepage: https://projectile.readthedocs.io/en/latest/ 
 - Counsel-Projectile: https://github.com/ericdanan/counsel-projectile 
 #+BEGIN_SRC emacs-lisp
@@ -1403,23 +1404,23 @@ Smerge mode deals with merge conflicts in git.
 #+END_SRC
 *** MC (Multiple Cursors)
 #+BEGIN_SRC emacs-lisp
-    (pretty-hydra-define hydra-mc (:color pink :title "Multiple Cursors" :quit-key "<escape>") 
-      ("Goto"
-        (("n" evil-mc-make-and-goto-next-match "make & next")
-        ("N" evil-mc-make-and-goto-prev-match "make & prev")
-        ("p" evil-mc-skip-and-goto-next-match "skip & next")
-        ("P" evil-mc-skip-and-goto-prev-match "skip & prev")
-        ("m" evil-mc-make-all-cursors "Make all"))
+  (pretty-hydra-define hydra-mc (:color pink :title "Multiple Cursors" :quit-key "<escape>") 
+    ("Goto"
+      (("n" evil-mc-make-and-goto-next-match "make & next")
+      ("N" evil-mc-make-and-goto-prev-match "make & prev")
+      ("p" evil-mc-skip-and-goto-next-match "skip & next")
+      ("P" evil-mc-skip-and-goto-prev-match "skip & prev")
+      ("m" evil-mc-make-all-cursors "Make all"))
 
-       "Line"
-       (("J" evil-mc-make-cursor-move-next-line "make & up") 
-       ("K" evil-mc-make-cursor-move-prev-line "make & down")) 
+     "Line"
+     (("J" evil-mc-make-cursor-move-next-line "make & up") 
+     ("K" evil-mc-make-cursor-move-prev-line "make & down")) 
 
-       "Manual"
-       (("u" evil-mc-undo-last-added-cursor "undo cursor")
-       ("g" evil-mc-make-cursor-here "make cursor")
-       ("q" evil-mc-undo-all-cursors "undo all cursors" :color blue)
-       ("r" evil-mc-resume-cursors "resume cursors" :color blue)))) 
+     "Manual"
+     (("u" evil-mc-undo-last-added-cursor "undo cursor")
+     ("g" evil-mc-make-cursor-here "make cursor")
+     ("q" evil-mc-undo-all-cursors "undo all cursors" :color blue)
+     ("r" evil-mc-resume-cursors "resume cursors" :color blue)))) 
 #+END_SRC
 *** Avy (Word finding)
 #+BEGIN_SRC emacs-lisp
