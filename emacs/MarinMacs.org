@@ -280,6 +280,7 @@ A nice and quick way to view/edit my configuration at any time
       "c /" '(comment-region :wk "Comment Region")
       "c u" '(uncomment-region :wk "Uncomment Region")
       "c l" '(hydra-launcher/body :wk "Launcher Hydra")
+      "c s" '(shell :wk "Shell")
       "c f" '(:ignore t :wk "Flycheck options")
       "c f e" '(flycheck-explain-error-at-point :wk "Flycheck explain error")
       "c f s" '(flycheck-select-checker :wk "Flycheck select checker")
