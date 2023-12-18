@@ -195,7 +195,7 @@ A nice and quick way to view/edit my configuration at any time
     (defun goto-MarinMacs ()
       "Jump to configuration file."
       (interactive)
-      (find-file "~/.emacs.d/MarinMacs.org"))
+      (find-file mpm-config-file-location))
     (global-set-key (kbd "C-c m") 'goto-MarinMacs) ;; secondary binding is SPC u m
   #+end_src
 * Evil-Mode
