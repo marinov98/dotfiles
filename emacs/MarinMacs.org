@@ -24,7 +24,6 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
   - [[#which-key][Which-Key]]
   - [[#ace-window][Ace-Window]]
   - [[#all-the-icons][All-the-icons]]
-  - [[#beacon][Beacon]]
   - [[#neotree][Neotree]]
   - [[#treemacs][Treemacs]]
 - [[#ivy][Ivy]]
@@ -365,28 +364,11 @@ A nice and quick way to view/edit my configuration at any time
           :config
           (global-evil-surround-mode 1))
 
-      ;; no need thanks to mc hydra now 
-      (use-package evil-multiedit
-          :disabled
-          :config
-          (evil-multiedit-default-keybinds))
-
       (use-package evil-mc
           :ensure t
           :config
           (global-evil-mc-mode 1)
           (define-key evil-normal-state-map (kbd "gc") 'hydra-mc/body))
-
-      ;; like vim-sneak and/or vim-seek (just going to opt for avy)
-      (use-package evil-snipe
-          :disabled
-          :custom
-          (evil-snipe-scope 'line)
-          (evil-snipe-repeat-scope 'whole-line)
-          (evil-snipe-spillover-scope 'buffer)
-          :config
-          (evil-snipe-mode 1)
-          (evil-snipe-override-mode 1))
 #+END_SRC
 * Markup
  :PROPERTIES:
@@ -940,20 +922,6 @@ Useful if you work on multiple windows and want an efficient way of switching be
       :ensure t
       :config
       (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
-#+END_SRC
-** Beacon 
- :PROPERTIES:
- :CUSTOM_ID: beacon
- :END:
-I never lose where my cursor is thanks to this
-#+BEGIN_SRC emacs-lisp
-  (use-package beacon
-      :disabled
-      :diminish beacon-mode
-      :custom
-      (beacon-color "#ffc600")
-      :config
-      (beacon-mode 1))
 #+END_SRC
 ** Neotree
  :PROPERTIES:
@@ -1635,11 +1603,6 @@ Smerge mode deals with merge conflicts in git.
        :disabled
        :after lsp-mode
        :hook (java-mode . lsp-deferred))
-
-   (use-package lsp-ivy
-       :disabled
-       :after lsp-mode lsp-ui)
-
 #+END_SRC
 * DAP
  :PROPERTIES:
@@ -1965,34 +1928,14 @@ Adds the node_modules/.bin directory to the buffer exec_path.
  :PROPERTIES:
  :CUSTOM_ID: ts
  :END:
-*** TIDE
+*** TS
 All for typescript
 #+BEGIN_SRC emacs-lisp
-  ;; enable typescript in emacs
   (use-package typescript-mode
       :ensure t
       :mode "\\.ts\\'"
       :config
       (setq-default typescript-indent-level 2)) ;; indent 2 spaces by default
-
-  ;; typescript integrated development environment (don't use since we have LSP)
-  (use-package tide
-      :disabled
-      :after
-      (typescript-mode company flycheck web-mode)
-      :hook
-      ((typscript-mode . tide-setup)
-      (rjsx-mode . tide-setup)
-      (typescript-mode . tide-hl-identifier-mode)
-      (before-save . tide-format-before-save))
-      :config
-      (add-hook 'web-mode-hook
-          (lambda ()
-            (when (string-equal "tsx" (file-name-extension buffer-file-name))
-              (tide-setup))))
-      (flycheck-add-mode 'typescript-tslint 'web-mode)
-      (flycheck-add-next-checker 'typescript-tide 'javascript-eslint)
-      (flycheck-add-next-checker 'tsx-tide 'javascript-eslint))
 #+END_SRC
 * Diminish
  :PROPERTIES:
