@@ -248,6 +248,7 @@ A nice and quick way to view/edit my configuration at any time
        "i" '(:ignore t :wk "Ivy/Swiper/Counsel")
        "i c" '(counsel-compile :wk "Counsel Compile")
        "i g" '(counsel-git :wk "Counsel Git")
+       "i p" '(counsel-projectile-find-file :wk "Projectile find file")
        "i f" '(counsel-fzf :wk "Counsel FZF")
        "i r" '(counsel-rg :wk "Counsel Rg")
        "i s" '(swiper-isearch :wk "Swiper Isearch")
@@ -275,7 +276,8 @@ A nice and quick way to view/edit my configuration at any time
        "RET" '(company-complete :wk "Company Complete")
        "y" '(yas-expand :wk "yas-expand")
        "s" '(save-buffer :wk "Save Buffer")
-       "f" '(counsel-find-file :wk "Counsel Find File")
+       "f" '(counsel-projectile :wk "Projectile Find File/Buffer")
+       "." '(counsel-find-file :wk "Find File")
        "/" '(comment-line :wk "Comment Line")
        "m" '(counsel-M-x :wk "Counsel M-x")
        "*" '(swiper-thing-at-point :wk "Swiper at Point"))
@@ -1261,29 +1263,28 @@ Smerge mode deals with merge conflicts in git.
 #+END_SRC
 *** Projectile (project management)
 #+BEGIN_SRC emacs-lisp
-  (pretty-hydra-define hydra-projectile (:color red :title "🚀 Projectile 🚀" :quit-key "q") 
-    ("Finding"
-    (("f" counsel-projectile-find-file "find")
-    ("o" projectile-find-other-file "find other")
-    ("w" counsel-projectile-find-file-dwim "find-dwim")
-    ("d" counsel-projectile-find-dir "find-dir"))
+    (pretty-hydra-define hydra-projectile (:color red :title "🚀 Projectile 🚀" :quit-key "q") 
+      ("Finding"
+      (("f" projectile-find-file-in-known-projects "find all")
+      ("o" projectile-find-other-file "find other" :color blue)
+      ("w" counsel-projectile-find-file-dwim "find-dwim")
+      ("d" counsel-projectile-find-dir "find-dir")
+      ("D" projectile-find-file-in-directory "find in dir"))
 
-    "Launch"
-    (("l" counsel-projectile "launch"))
+      "Search/Replace" ;; search and replace 
+      (("a" counsel-projectile-ag "ag") 
+      ("g" counsel-projectile-rg "rg")
+      ("c" projectile-replace "replace")
+      ("x" projectile-replace-regexp "replace regex"))
 
-    "Search/Replace" ;; search and replace 
-    (("a" counsel-projectile-ag "ag") 
-    ("g" counsel-projectile-rg "rg")
-    ("c" projectile-replace "replace")
-    ("x" projectile-replace-regexp "replace regex"))
+      "Switch"
+      (("s" counsel-projectile-switch-project "switch project")
+      ("b" counsel-projectile-switch-to-buffer "switch buffer")
+      ("r" projectile-recentf "recent files"))
 
-    "Switch"
-    (("s" counsel-projectile-switch-project "switch project")
-    ("b" counsel-projectile-switch-to-buffer "switch buffer")
-    ("r" projectile-recentf "recent files"))
-
-    "Finish"
-    (("k" projectile-kill-buffers "kill project buffers"))))
+      "Finish"
+      (("S" projectile-save-project-buffers "save project buffers")
+      ("k" projectile-kill-buffers "kill project buffers"))))
 #+END_SRC
 *** Window (my attempt at window management)
 #+BEGIN_SRC emacs-lisp
