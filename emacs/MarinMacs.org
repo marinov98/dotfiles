@@ -1188,6 +1188,9 @@ Useful if you work on multiple windows and want an efficient way of switching be
             '(non-empty-second-line
             overlong-summary-line)))
 
+  (use-package git-modes
+      :ensure t)
+
   (use-package magit-repos
       :after magit
       :commands magit-list-repositories
