@@ -224,7 +224,7 @@ A nice and quick way to view/edit my configuration at any time
        :global-prefix "S-SPC") ;; access leader in insert mode
 
     (mpm/leader-keys
-       "SPC" '(/body :wk "Projectile Hydra")
+       "SPC" '(hydra-projectile/body :wk "Projectile Hydra")
        "w" '(hydra-window/body :wk "Window Hydra")
        "S" '(hydra-smerge/body :wk "Smerge Hydra")
        "l" '(hydra-code/body :wk "LSP Hydra")
@@ -298,6 +298,7 @@ A nice and quick way to view/edit my configuration at any time
       "c /" '(comment-region :wk "Comment Region")
       "c u" '(uncomment-region :wk "Uncomment Region")
       "c l" '(hydra-launcher/body :wk "Launcher Hydra")
+      "c m" '(hydra-mc/body :wk "Multiple Cursors Hydra")
       "c s" '(shell :wk "Shell")
       "c f" '(:ignore t :wk "Flycheck options")
       "c f e" '(flycheck-explain-error-at-point :wk "Flycheck explain error")
@@ -369,8 +370,7 @@ A nice and quick way to view/edit my configuration at any time
       (use-package evil-mc
           :ensure t
           :config
-          (global-evil-mc-mode 1)
-          (define-key evil-normal-state-map (kbd "gc") 'hydra-mc/body))
+          (global-evil-mc-mode 1))
 #+END_SRC
 * Markup
  :PROPERTIES:
@@ -999,7 +999,7 @@ Useful if you work on multiple windows and want an efficient way of switching be
                                                'native
                                              'alien)))
 
-    ;; Counsel-Projectile (I utilize counsel projectile bindings in my )
+    ;; Counsel-Projectile (I utilize counsel projectile bindings in my hydra-projectile)
     (use-package counsel-projectile
       :ensure t
       :config (counsel-projectile-mode))
@@ -1546,73 +1546,77 @@ Smerge mode deals with merge conflicts in git.
  - lsp-ui (UI integrations for lsp-mode)
  - lsp-java (java seems to require its own package for lsp)
 #+BEGIN_SRC emacs-lisp  
-     (use-package lsp-mode
+       (use-package lsp-mode
+           :ensure t
+           :commands (lsp lsp-deferred)
+           :hook
+           ((c++-mode c-mode css-mode yaml-mode json-mode js-mode js2-mode rjsx-mode typescript-mode web-mode) . lsp-deferred)
+           :bind
+           (:map evil-normal-state-map
+             ("gh" . lsp-describe-thing-at-point))
+           :custom
+           (lsp-auto-guess-root nil)
+           (lsp-log-io nil)
+           (lsp-idle-delay 0.3)
+           (lsp-eldoc-enable-hover nil) ;; graphical bloat imo, but can be good
+           (lsp-signature-auto-activate nil) ;; (This tends to cause problems and is SUPER slow ESP on MS Windows) you could manually request them via 'lsp-signature-activate'
+           (lsp-headerline-breadcrumb-enable nil) ;; graphical bloat, don't need but useful to the right person
+           (lsp-enable-folding nil)
+           (lsp-enable-text-document-color nil)
+           (lsp-file-watch-threshold 5000)
+           (lsp-prefer-flymake nil)
+           (lsp-io-messages-max nil)
+           :config
+           (add-hook 'after-init-hook
+                     #'(lambda () ;; in case I disable lsp-ui remap g prefix keys to regular lsp
+                         (unless (package-installed-p 'lsp-ui)
+                           (define-key evil-normal-state-map (kbd "gd") 'lsp-find-definition)
+                           (define-key evil-normal-state-map (kbd "gi") 'lsp-goto-implementation)
+                           (define-key evil-normal-state-map (kbd "gr") 'lsp-find-references)))))
+
+       (use-package lsp-ui
+           :ensure t
+           :commands lsp-ui-mode
+           :hook (lsp-mode . lsp-ui-mode)
+           :bind
+           (:map evil-normal-state-map
+             ("gd" . lsp-ui-peek-find-definitions)
+             ("gi" . lsp-ui-peek-find-implementation)
+             ("gr" . lsp-ui-peek-find-references))
+           (:map lsp-ui-peek-mode-map
+             ("M-j" . lsp-ui-peek--select-next)
+             ("M-k" . lsp-ui-peek--select-prev))
+           :custom
+           (lsp-ui-doc-enable nil)
+           (lsp-ui-doc-position 'at-point)
+           (lsp-ui-doc-include-signature t)
+           (lsp-ui-doc-show-with-cursor nil)
+           (lsp-ui-doc-show-with-mouse t)
+           (lsp-ui-sideline-enable t)
+           (lsp-ui-sideline-ignore-duplicates t)
+           (lsp-ui-sideline-show-diagnostics t)
+           (lsp-ui-sideline-show-symbol nil)
+           (lsp-ui-sideline-show-hover nil)
+           (lsp-ui-peek-enable t)
+           (lsp-ui-peek-list-width 60)
+           (lsp-ui-peek-peek-height 25))
+
+     (use-package lsp-treemacs
+         :after treemacs lsp-mode
          :ensure t
-         :commands (lsp lsp-deferred)
-         :hook
-         ((c++-mode c-mode css-mode yaml-mode json-mode js-mode js2-mode rjsx-mode typescript-mode web-mode) . lsp-deferred)
-         :custom
-         (lsp-auto-guess-root nil)
-         (lsp-log-io nil)
-         (lsp-idle-delay 0.3)
-         (lsp-eldoc-enable-hover nil) ;; graphical bloat imo, but can be good
-         (lsp-signature-auto-activate nil) ;; (This tends to cause problems and is SUPER slow ESP on MS Windows) you could manually request them via 'lsp-signature-activate' 
-         (lsp-headerline-breadcrumb-enable nil) ;; graphical bloat, don't need but useful to the right person
-         (lsp-enable-folding nil)
-         (lsp-enable-text-document-color nil)
-         (lsp-file-watch-threshold 5000)
-         (lsp-prefer-flymake nil)
-         (lsp-io-messages-max nil)
-         :config
-         (add-hook 'after-init-hook #'(lambda() ;; in case I disable lsp-ui remap g prefix keys to regular lsp
-                                        (unless (package-installed-p 'lsp-ui)
-                                          (define-key evil-normal-state-map (kbd "gd") 'lsp-find-definition)
-                                          (define-key evil-normal-state-map (kbd "gi") 'lsp-goto-implementation)
-                                          (define-key evil-normal-state-map (kbd "gr") 'lsp-find-references)))))
+         :config (lsp-treemacs-sync-mode t))
 
-     (use-package lsp-ui
-         :ensure t
-         :commands lsp-ui-mode
-         :hook (lsp-mode . lsp-ui-mode)
-         :bind
-         (:map evil-normal-state-map
-           ("gd" . lsp-ui-peek-find-definitions)
-           ("gi" . lsp-ui-peek-find-implementation)
-           ("gr" . lsp-ui-peek-find-references))
-         (:map lsp-ui-peek-mode-map
-           ("M-j" . lsp-ui-peek--select-next)
-           ("M-k" . lsp-ui-peek--select-prev))
-         :custom
-         (lsp-ui-doc-enable nil)
-         (lsp-ui-doc-position 'top)
-         (lsp-ui-doc-include-signature t)
-         (lsp-ui-doc-show-with-cursor nil)
-         (lsp-ui-doc-show-with-mouse t)
-         (lsp-ui-sideline-enable t)
-         (lsp-ui-sideline-ignore-duplicates t)
-         (lsp-ui-sideline-show-diagnostics t)
-         (lsp-ui-sideline-show-symbol nil)
-         (lsp-ui-sideline-show-hover nil)
-         (lsp-ui-peek-enable t)
-         (lsp-ui-peek-list-width 60)
-         (lsp-ui-peek-peek-height 25))
+    (use-package lsp-pyright
+        :after lsp-mode
+        :ensure t
+        :hook (python-mode . (lambda ()
+                             (require 'lsp-pyright)
+                             (lsp-deferred))))
 
-   (use-package lsp-treemacs
-       :after treemacs lsp-mode
-       :ensure t
-       :config (lsp-treemacs-sync-mode t))
-
-  (use-package lsp-pyright
-      :after lsp-mode
-      :ensure t
-      :hook (python-mode . (lambda ()
-                           (require 'lsp-pyright)
-                           (lsp-deferred))))  
-
-   (use-package lsp-java 
-       :disabled
-       :after lsp-mode
-       :hook (java-mode . lsp-deferred))
+     (use-package lsp-java 
+         :disabled
+         :after lsp-mode
+         :hook (java-mode . lsp-deferred))
 #+END_SRC
 * DAP
  :PROPERTIES:
@@ -1687,10 +1691,7 @@ Still experimenting with this, native gdb in emacs is also really good
  - You should also search how to install *clang-format* on your specific OS
 #+BEGIN_SRC emacs-lisp
   (use-package clang-format 
-     :ensure t
-     :bind 
-     (("C-c R" . clang-format-region) ;; format current line
-     ("C-c F" . clang-format-buffer))) ;; format entire file
+     :ensure t)
 #+END_SRC
 ** Python
  :PROPERTIES:
