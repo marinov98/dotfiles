@@ -29,6 +29,7 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
 - [[#ivy][Ivy]]
 - [[#projectile][Projectile]]
 - [[#shell][Shell]]
+- [[#treesitter][Treesitter]]
 - [[#globals][Globals]]
   - [[#undo-tree][Undo Tree]]
   - [[#Yasnippet][Yasnippet]]
@@ -126,14 +127,14 @@ Indentation
 - Options, display
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
-    (setq default-frame-alist '((font . "Fira Code-12")))    ;; set font and font size
-    (setq visible-bell t)                                    ;; disable end of buffer sounds
-    (setq inhibit-startup-screen t)                          ;; disable startup screen
-    (when (and (version<= "29.1" emacs-version) (not (string-equal system-type "windows-nt")))
-      (add-to-list 'default-frame-alist '(alpha-background . 90))) ;; Emacs 29 adds true transparency
+  (setq default-frame-alist '((font . "Fira Code-12")))    ;; set font and font size
+  (setq visible-bell t)                                    ;; disable end of buffer sounds
+  (setq inhibit-startup-screen t)                          ;; disable startup screen
+  (when (and (version<= "29.0.50" emacs-version) (not (string-equal system-type "windows-nt")))
+    (add-to-list 'default-frame-alist '(alpha-background . 90))) ;; Emacs 29 adds true transparency
 #+END_SRC
 - Line numbers
-  - I am not sure if all packages work with line numbers properly, but so far everything works
+  - Emacs versions after 26 contain built-in line numbers
   - relative line numbers are very useful when combined with vim bindings as they help you see how far you need to jump to get where you want to 
 #+BEGIN_SRC emacs-lisp
   (when (version<= "26.0.50" emacs-version)
@@ -1049,6 +1050,37 @@ Useful if you work on multiple windows and want an efficient way of switching be
             (setq eshell-prompt-function #'4lex1v:eshell-prompt
                 eshell-prompt-regexp ".*>>+ "))
    #+END_SRC
+* Tree-Sitter
+ :PROPERTIES:
+ :CUSTOM_ID: treesitter
+ :END:
+- Tree-sitter is a parser generator tool and an incremental parsing library and it comes by default in Emacs 29
+- [[https://tree-sitter.github.io/tree-sitter/][Tree-sitter Homepage]]
+- This will require experimentation and support
+- Once a language source has been added you should be able to install it with =treesit-install-language-grammar=
+#+BEGIN_SRC emacs-lisp
+  (when (version<= "29.0.50" emacs-version)
+    (use-package treesit
+      :config
+      (setq treesit-language-source-alist
+        '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+          (cmake "https://github.com/uyha/tree-sitter-cmake")
+          (css "https://github.com/tree-sitter/tree-sitter-css")
+          (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+          (go "https://github.com/tree-sitter/tree-sitter-go")
+          (gomod "https://github.com/camdencheek/tree-sitter-go-mod")
+          (dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile")
+          (html "https://github.com/tree-sitter/tree-sitter-html")
+          (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
+          (json "https://github.com/tree-sitter/tree-sitter-json")
+          (make "https://github.com/alemuller/tree-sitter-make")
+          (markdown "https://github.com/ikatyang/tree-sitter-markdown")
+          (python "https://github.com/tree-sitter/tree-sitter-python")
+          (toml "https://github.com/tree-sitter/tree-sitter-toml")
+          (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+          (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+          (yaml "https://github.com/ikatyang/tree-sitter-yaml")))))
+#+END_SRC 
 * Globals
  :PROPERTIES:
  :CUSTOM_ID: globals
