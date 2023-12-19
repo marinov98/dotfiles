@@ -224,7 +224,7 @@ A nice and quick way to view/edit my configuration at any time
        :global-prefix "S-SPC") ;; access leader in insert mode
 
     (mpm/leader-keys
-       "SPC" '(hydra-projectile/body :wk "Projectile Hydra")
+       "SPC" '(/body :wk "Projectile Hydra")
        "w" '(hydra-window/body :wk "Window Hydra")
        "S" '(hydra-smerge/body :wk "Smerge Hydra")
        "l" '(hydra-code/body :wk "LSP Hydra")
@@ -999,7 +999,7 @@ Useful if you work on multiple windows and want an efficient way of switching be
                                                'native
                                              'alien)))
 
-    ;; Counsel-Projectile (I utilize counsel projectile bindings in my hydra-projectile)
+    ;; Counsel-Projectile (I utilize counsel projectile bindings in my )
     (use-package counsel-projectile
       :ensure t
       :config (counsel-projectile-mode))
@@ -1287,6 +1287,7 @@ Smerge mode deals with merge conflicts in git.
 
       "Finish"
       (("S" projectile-save-project-buffers "save project buffers")
+      ("p" projectile-compile-project "compile")
       ("k" projectile-kill-buffers "kill project buffers"))))
 #+END_SRC
 *** Window (my attempt at window management)
