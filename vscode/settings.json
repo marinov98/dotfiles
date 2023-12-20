@@ -240,6 +240,10 @@
       "commands": ["editor.action.goToReferences"]
     },
     {
+      "before": ["g", "i"],
+      "commands": ["editor.action.goToImplementation"]
+    },
+    {
       "before": ["<leader>", "l", "e"],
       "commands": ["editor.action.marker.next"]
     },
