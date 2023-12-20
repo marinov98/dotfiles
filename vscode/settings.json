@@ -244,6 +244,10 @@
       "commands": ["editor.action.goToImplementation"]
     },
     {
+      "before": ["g", "y"],
+      "commands": ["editor.action.goToTypeDefinition"]
+    },
+    {
       "before": ["<leader>", "l", "e"],
       "commands": ["editor.action.marker.next"]
     },
@@ -276,10 +280,6 @@
     {
       "before": ["<leader>", "l", "R"],
       "commands": ["editor.action.goToReferences"]
-    },
-    {
-      "before": ["<leader>", "l", "t"],
-      "commands": ["editor.action.goToTypeDefinition"]
     },
     {
       "before": ["<leader>", "l", "r"],
