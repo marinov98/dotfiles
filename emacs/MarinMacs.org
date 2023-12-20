@@ -1051,9 +1051,9 @@ Useful if you work on multiple windows and want an efficient way of switching be
                 eshell-prompt-regexp ".*>>+ "))
    #+END_SRC
 * Tree-Sitter
- :PROPERTIES:
- :CUSTOM_ID: treesitter
- :END:
+:PROPERTIES:
+:CUSTOM_ID: treesitter
+:END:
 - Tree-sitter is a parser generator tool and an incremental parsing library and it comes by default in Emacs 29
 - [[https://tree-sitter.github.io/tree-sitter/][Tree-sitter Homepage]]
 - This will require experimentation and support
@@ -1424,13 +1424,8 @@ Smerge mode deals with merge conflicts in git.
     ("Find"
     (("f" lsp-find-definition "find def") 
     ("r" lsp-find-references "find ref")
-    ("t" lsp-find-type-definition "find type def")
     ("g" lsp-ui-doc-glance "glance")
     ("i" lsp-ui-imenu "imenu"))
-
-    "Jump"
-    (("p" switch-to-prev-buffer "prev") ;; better consistency than lsp-ui-peek-jump-backward
-    ("n" switch-to-next-buffer "next")) ;; better consistency than lsp-ui-peek-jump-forward
 
     "Refactor"
     (("c" lsp-rename "rename")
@@ -1601,6 +1596,7 @@ Smerge mode deals with merge conflicts in git.
          ((c++-mode c-mode css-mode yaml-mode json-mode js-mode js2-mode rjsx-mode typescript-mode web-mode) . lsp-deferred)
          :bind
          (:map evil-normal-state-map
+           ("gy" . lsp-find-type-definition)
            ("gh" . lsp-describe-thing-at-point))
          :custom
          (lsp-auto-guess-root nil)
@@ -1616,11 +1612,11 @@ Smerge mode deals with merge conflicts in git.
          (lsp-io-messages-max nil)
          :config
          (add-hook 'after-init-hook
-                   #'(lambda () ;; in case I disable lsp-ui remap g prefix keys to regular lsp
-                       (unless (package-installed-p 'lsp-ui)
-                         (define-key evil-normal-state-map (kbd "gd") 'lsp-find-definition)
-                         (define-key evil-normal-state-map (kbd "gi") 'lsp-goto-implementation)
-                         (define-key evil-normal-state-map (kbd "gr") 'lsp-find-references)))))
+                     #'(lambda () ;; in case I disable lsp-ui remap g prefix keys to regular lsp
+                         (unless (package-installed-p 'lsp-ui)
+                           (define-key evil-normal-state-map (kbd "gd") 'lsp-find-definition)
+                           (define-key evil-normal-state-map (kbd "gi") 'lsp-goto-implementation)
+                           (define-key evil-normal-state-map (kbd "gr") 'lsp-find-references)))))
 
      (use-package lsp-ui
          :ensure t
