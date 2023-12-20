@@ -290,7 +290,7 @@ A nice and quick way to view/edit my configuration at any time
        "r" '(:ignore t :wk "Grep Actions")
        "r g" '(counsel-git-grep :wk "Counsel Git Grep")
        "r /" '(grep :wk "Grep")
-       "r r" '(rgrep :wk "Ripgrep")
+       "r r" '(rgrep :wk "Grep Recursive")
        "r w" '(:ignore t :wk "Wgrep Actions")
        "r w c" '(ivy-wgrep-change-to-wgrep-mode :wk "ivy to wgrep mode")
        "r w e" '(wgrep-exit :wk "Wgrep Exit")
