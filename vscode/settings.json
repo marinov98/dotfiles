@@ -278,10 +278,6 @@
       "commands": ["workbench.action.terminal.new"]
     },
     {
-      "before": ["<leader>", "l", "R"],
-      "commands": ["editor.action.goToReferences"]
-    },
-    {
       "before": ["<leader>", "l", "r"],
       "commands": ["editor.action.refactor"]
     },
