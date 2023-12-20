@@ -1058,9 +1058,13 @@ Useful if you work on multiple windows and want an efficient way of switching be
 - [[https://tree-sitter.github.io/tree-sitter/][Tree-sitter Homepage]]
 - This will require experimentation and support
 - Once a language source has been added you should be able to install it with =treesit-install-language-grammar=
+- You may also choose to evaluate this piece of elisp code to install everything in the list at once =(mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist))=
 #+BEGIN_SRC emacs-lisp
   (when (version<= "29.0.50" emacs-version)
     (use-package treesit
+      :after lsp-mode
+      :hook
+      ((c-ts-mode c++-ts-mode bash-ts-mode cmake-ts-mode toml-ts-mode rust-ts-mode go-ts-mode css-ts-mode yaml-ts-mode json-ts-mode js-ts-mode typescript-ts-mode tsx-ts-mode) . lsp-deferred)
       :config
       (setq treesit-language-source-alist
         '((bash "https://github.com/tree-sitter/tree-sitter-bash")
@@ -1080,6 +1084,15 @@ Useful if you work on multiple windows and want an efficient way of switching be
           (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
           (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
           (yaml "https://github.com/ikatyang/tree-sitter-yaml")))))
+       ;; I would uncomment below if you like -ts-mode update to the syntax highlighting (Some syntax changes are worse imo)
+       ;; (setq major-mode-remap-alist 
+       ;;   '((yaml-mode . yaml-ts-mode)
+       ;;     (bash-mode . bash-ts-mode)
+       ;;     (js2-mode . js-ts-mode)
+       ;;     (typescript-mode . typescript-ts-mode)
+       ;;     (json-mode . json-ts-mode)
+       ;;     (css-mode . css-ts-mode)
+       ;;     (python-mode . python-ts-mode)))))
 #+END_SRC 
 * Globals
  :PROPERTIES:
@@ -1645,14 +1658,14 @@ Smerge mode deals with merge conflicts in git.
   (use-package lsp-pyright
       :after lsp-mode
       :ensure t
-      :hook (python-mode . (lambda ()
+      :hook ((python-mode python-ts-mode) . (lambda ()
                            (require 'lsp-pyright)
                            (lsp-deferred))))
 
    (use-package lsp-java
        :disabled
        :after lsp-mode
-       :hook (java-mode . lsp-deferred))
+       :hook ((java-mode java-ts-mode) . lsp-deferred))
        ;; :config ;; TODO: properly configure this if I ever use Java / Or don't use this at all
        ;; (setq lsp-java-vmargs
        ;;         (list
