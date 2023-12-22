@@ -24,12 +24,12 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
   - [[#which-key][Which-Key]]
   - [[#ace-window][Ace-Window]]
   - [[#all-the-icons][All-the-icons]]
-  - [[#beacon][Beacon]]
   - [[#neotree][Neotree]]
   - [[#treemacs][Treemacs]]
 - [[#ivy][Ivy]]
 - [[#projectile][Projectile]]
 - [[#shell][Shell]]
+- [[#treesitter][Treesitter]]
 - [[#globals][Globals]]
   - [[#undo-tree][Undo Tree]]
   - [[#Yasnippet][Yasnippet]]
@@ -45,6 +45,9 @@ This file is part of my [[https://github.com/marinov98/dotfiles][dotfiles reposi
   - [[#python][Python]]
   - [[#web-development][Web-development]]
   - [[#JavaScript-TypeScript][JavaScript/TypeScript]]
+  - [[#elixir][Elixir]]
+  - [[#go][Go]]
+  - [[#rust][Rust]]
 - [[#diminish][Diminish]]
 
 * General Settings 
@@ -106,32 +109,32 @@ Indentation
 #+END_SRC
 - Parenthesis, Brackets, Lines, etc (make sure they auto close)
 #+begin_src emacs-lisp
-      (use-package elec-pair ;; auto closing brackets
-          :ensure nil
-          :hook ((prog-mode . electric-pair-mode)
-                  (text-mode . electric-pair-mode))) 
+  (use-package elec-pair ;; auto closing brackets
+      :ensure nil
+      :hook ((prog-mode . electric-pair-mode)
+              (text-mode . electric-pair-mode))) 
 
-      (use-package paren ;; highlight matching parenthesis
-          :custom
-          (show-paren-when-point-inside-paren t)
-          :config
-          (show-paren-mode 1))
+  (use-package paren ;; highlight matching parenthesis
+      :custom
+      (show-paren-when-point-inside-paren t)
+      :config
+      (show-paren-mode 1))
 
-      (use-package hl-line ;; highlight the current line
-          :config
-          (global-hl-line-mode 1))
+  (use-package hl-line ;; highlight the current line
+      :config
+      (global-hl-line-mode 1))
 #+end_src
 - Options, display
 - I like to use [[https://github.com/tonsky/FiraCode][Fira Code]] font
 #+BEGIN_SRC emacs-lisp
-    (setq default-frame-alist '((font . "Fira Code-12")))    ;; set font and font size
-    (setq visible-bell t)                                    ;; disable end of buffer sounds
-    (setq inhibit-startup-screen t)                          ;; disable startup screen
-    (when (and (version<= "29.1" emacs-version) (not (string-equal system-type "windows-nt")))
-      (add-to-list 'default-frame-alist '(alpha-background . 90))) ;; Emacs 29 adds true transparency
+  (setq default-frame-alist '((font . "Fira Code-12")))    ;; set font and font size
+  (setq visible-bell t)                                    ;; disable end of buffer sounds
+  (setq inhibit-startup-screen t)                          ;; disable startup screen
+  (when (and (version<= "29.0.50" emacs-version) (not (string-equal system-type "windows-nt")))
+    (add-to-list 'default-frame-alist '(alpha-background . 90))) ;; Emacs 29 adds true transparency
 #+END_SRC
 - Line numbers
-  - I am not sure if all packages work with line numbers properly, but so far everything works
+  - Emacs versions after 26 contain built-in line numbers
   - relative line numbers are very useful when combined with vim bindings as they help you see how far you need to jump to get where you want to 
 #+BEGIN_SRC emacs-lisp
   (when (version<= "26.0.50" emacs-version)
@@ -249,6 +252,7 @@ A nice and quick way to view/edit my configuration at any time
        "i" '(:ignore t :wk "Ivy/Swiper/Counsel")
        "i c" '(counsel-compile :wk "Counsel Compile")
        "i g" '(counsel-git :wk "Counsel Git")
+       "i p" '(counsel-projectile-find-file :wk "Projectile find file")
        "i f" '(counsel-fzf :wk "Counsel FZF")
        "i r" '(counsel-rg :wk "Counsel Rg")
        "i s" '(swiper-isearch :wk "Swiper Isearch")
@@ -276,7 +280,8 @@ A nice and quick way to view/edit my configuration at any time
        "RET" '(company-complete :wk "Company Complete")
        "y" '(yas-expand :wk "yas-expand")
        "s" '(save-buffer :wk "Save Buffer")
-       "f" '(counsel-find-file :wk "Counsel Find File")
+       "f" '(counsel-projectile :wk "Projectile Find File/Buffer")
+       "." '(counsel-find-file :wk "Find File")
        "/" '(comment-line :wk "Comment Line")
        "m" '(counsel-M-x :wk "Counsel M-x")
        "*" '(swiper-thing-at-point :wk "Swiper at Point"))
@@ -285,7 +290,7 @@ A nice and quick way to view/edit my configuration at any time
        "r" '(:ignore t :wk "Grep Actions")
        "r g" '(counsel-git-grep :wk "Counsel Git Grep")
        "r /" '(grep :wk "Grep")
-       "r r" '(rgrep :wk "Ripgrep")
+       "r r" '(rgrep :wk "Grep Recursive")
        "r w" '(:ignore t :wk "Wgrep Actions")
        "r w c" '(ivy-wgrep-change-to-wgrep-mode :wk "ivy to wgrep mode")
        "r w e" '(wgrep-exit :wk "Wgrep Exit")
@@ -297,6 +302,7 @@ A nice and quick way to view/edit my configuration at any time
       "c /" '(comment-region :wk "Comment Region")
       "c u" '(uncomment-region :wk "Uncomment Region")
       "c l" '(hydra-launcher/body :wk "Launcher Hydra")
+      "c m" '(hydra-mc/body :wk "Multiple Cursors Hydra")
       "c s" '(shell :wk "Shell")
       "c f" '(:ignore t :wk "Flycheck options")
       "c f e" '(flycheck-explain-error-at-point :wk "Flycheck explain error")
@@ -365,28 +371,10 @@ A nice and quick way to view/edit my configuration at any time
           :config
           (global-evil-surround-mode 1))
 
-      ;; no need thanks to mc hydra now 
-      (use-package evil-multiedit
-          :disabled
-          :config
-          (evil-multiedit-default-keybinds))
-
       (use-package evil-mc
           :ensure t
           :config
-          (global-evil-mc-mode 1)
-          (define-key evil-normal-state-map (kbd "gc") 'hydra-mc/body))
-
-      ;; like vim-sneak and/or vim-seek (just going to opt for avy)
-      (use-package evil-snipe
-          :disabled
-          :custom
-          (evil-snipe-scope 'line)
-          (evil-snipe-repeat-scope 'whole-line)
-          (evil-snipe-spillover-scope 'buffer)
-          :config
-          (evil-snipe-mode 1)
-          (evil-snipe-override-mode 1))
+          (global-evil-mc-mode 1))
 #+END_SRC
 * Markup
  :PROPERTIES:
@@ -941,20 +929,6 @@ Useful if you work on multiple windows and want an efficient way of switching be
       :config
       (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
 #+END_SRC
-** Beacon 
- :PROPERTIES:
- :CUSTOM_ID: beacon
- :END:
-I never lose where my cursor is thanks to this
-#+BEGIN_SRC emacs-lisp
-  (use-package beacon
-      :disabled
-      :diminish beacon-mode
-      :custom
-      (beacon-color "#ffc600")
-      :config
-      (beacon-mode 1))
-#+END_SRC
 ** Neotree
  :PROPERTIES:
  :CUSTOM_ID: neotree
@@ -968,6 +942,7 @@ I never lose where my cursor is thanks to this
       :ensure t
       :custom
       (neo-smart-open t) ; update every time its toggled
+      (neo-show-hidden-files t)
       (neo-theme (if (display-graphic-p) 'icons 'arrow))) ; add icons (utilizes all-the-icon)
 #+END_SRC
 ** Treemacs
@@ -1003,32 +978,36 @@ I never lose where my cursor is thanks to this
  :END:
 - Amazing tool for managing projects! 
 - Projectile looks for git projects or projectils that contain a =.projectile=
+- Tip: install [[https://github.com/sharkdp/fd][fd]] which is much faster than =find=. If =fd= is found, projectile will use as a replacement for find.
 - Projectile Homepage: https://projectile.readthedocs.io/en/latest/ 
 - Counsel-Projectile: https://github.com/ericdanan/counsel-projectile 
 #+BEGIN_SRC emacs-lisp
-  (use-package projectile
-      :ensure t
-      :diminish projectile-mode
-      :bind 
-      (("C-c p" . projectile-command-map))
-      :custom 
-      (projectile-sort-order 'recently-active)
-      (projectile-completion-system 'ivy)
-      (projectile-auto-discover nil) ;; Use 'projectile-discover-projects-in-search-path' manually instead
-      (projectile-globally-ignored-file-suffixes '(".pyc" ".o"))
-      :init
-      (when (file-directory-p mpm-projects-dir)
-        (setq projectile-project-search-path `(,mpm-projects-dir)))
-      :config
-      (dolist (file '(".DS_Store")) ;; add/remove any files
-        (add-to-list 'projectile-globally-ignored-files file))
-      (dolist (dir '("^\\venv$" "^\\venv_dev$" "^\\node_modules$")) ;; add/remove any directories 
-        (add-to-list 'projectile-globally-ignored-directories dir)))
+    (use-package projectile
+        :ensure t
+        :diminish projectile-mode
+        :bind 
+        (("C-c p" . projectile-command-map))
+        :custom 
+        (projectile-sort-order 'recently-active)
+        (projectile-completion-system 'ivy)
+        (projectile-auto-discover nil) ;; Use 'projectile-discover-projects-in-search-path' manually instead
+        (projectile-globally-ignored-file-suffixes '(".pyc" ".o"))
+        :init
+        (when (file-directory-p mpm-projects-dir)
+          (setq projectile-project-search-path `(,mpm-projects-dir)))
+        :config
+        (dolist (file '(".DS_Store")) ;; add/remove any files
+          (add-to-list 'projectile-globally-ignored-files file))
+        (dolist (dir '("^\\venv$" "^\\venv_dev$" "^\\node_modules$")) ;; add/remove any directories 
+          (add-to-list 'projectile-globally-ignored-directories dir))
+        (setq projectile-indexing-method (if (memq system-type '(ms-dos windows-nt cygwin)) ;; ensure alien on anything not windows related
+                                               'native
+                                             'alien)))
 
-  ;; Counsel-Projectile (I utilize counsel projectile bindings in my hydra-projectile)
-  (use-package counsel-projectile
-    :ensure t
-    :config (counsel-projectile-mode))
+    ;; Counsel-Projectile (I utilize counsel projectile bindings in my hydra-projectile)
+    (use-package counsel-projectile
+      :ensure t
+      :config (counsel-projectile-mode))
 #+END_SRC
 * Shell
  :PROPERTIES:
@@ -1072,6 +1051,50 @@ I never lose where my cursor is thanks to this
             (setq eshell-prompt-function #'4lex1v:eshell-prompt
                 eshell-prompt-regexp ".*>>+ "))
    #+END_SRC
+* Tree-Sitter
+:PROPERTIES:
+:CUSTOM_ID: treesitter
+:END:
+- Tree-sitter is a parser generator tool and an incremental parsing library and it comes by default in Emacs 29
+- [[https://tree-sitter.github.io/tree-sitter/][Tree-sitter Homepage]]
+- This will require experimentation and support
+- Once a language source has been added you should be able to install it with =treesit-install-language-grammar=
+- You may also choose to evaluate this piece of elisp code to install everything in the list at once =(mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist))=
+#+BEGIN_SRC emacs-lisp
+  (when (version<= "29.0.50" emacs-version)
+    (use-package treesit
+      :after lsp-mode
+      :hook
+      ((c-ts-mode c++-ts-mode bash-ts-mode cmake-ts-mode toml-ts-mode rust-ts-mode go-ts-mode css-ts-mode yaml-ts-mode json-ts-mode js-ts-mode typescript-ts-mode tsx-ts-mode) . lsp-deferred)
+      :config
+      (setq treesit-language-source-alist
+        '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+          (cmake "https://github.com/uyha/tree-sitter-cmake")
+          (css "https://github.com/tree-sitter/tree-sitter-css")
+          (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+          (go "https://github.com/tree-sitter/tree-sitter-go")
+          (gomod "https://github.com/camdencheek/tree-sitter-go-mod")
+          (dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile")
+          (html "https://github.com/tree-sitter/tree-sitter-html")
+          (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
+          (json "https://github.com/tree-sitter/tree-sitter-json")
+          (make "https://github.com/alemuller/tree-sitter-make")
+          (markdown "https://github.com/ikatyang/tree-sitter-markdown")
+          (python "https://github.com/tree-sitter/tree-sitter-python")
+          (toml "https://github.com/tree-sitter/tree-sitter-toml")
+          (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+          (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+          (yaml "https://github.com/ikatyang/tree-sitter-yaml")))))
+       ;; I would uncomment below if you like -ts-mode update to the syntax highlighting (Some syntax changes are worse imo)
+       ;; (setq major-mode-remap-alist 
+       ;;   '((yaml-mode . yaml-ts-mode)
+       ;;     (bash-mode . bash-ts-mode)
+       ;;     (js2-mode . js-ts-mode)
+       ;;     (typescript-mode . typescript-ts-mode)
+       ;;     (json-mode . json-ts-mode)
+       ;;     (css-mode . css-ts-mode)
+       ;;     (python-mode . python-ts-mode)))))
+#+END_SRC 
 * Globals
  :PROPERTIES:
  :CUSTOM_ID: globals
@@ -1202,35 +1225,34 @@ I never lose where my cursor is thanks to this
 - [[https://magit.vc/][Magit]] is a great git interface I have yet to master...
 - git-timemachine: flip through a file's full list of version. Revert to any given phase easily
 #+BEGIN_SRC emacs-lisp
-  ;; hydra takes care of my magit bindings
-  (use-package magit :ensure t)
+      ;; hydra takes care of my magit bindings
+      (use-package magit :ensure t)
 
-  (use-package git-commit
-      :after magit
-      :custom
-      (git-commit-summary-max-length 50) ;; in accordance with https://chris.beams.io/posts/git-commit/
-      :config
-      (setq git-commit-style-convention-checks
-            '(non-empty-second-line
-            overlong-summary-line)))
+      (use-package git-commit
+          :after magit
+          :custom
+          (git-commit-summary-max-length 50) ;; in accordance with https://chris.beams.io/posts/git-commit/
+          :config
+          (setq git-commit-style-convention-checks
+                '(non-empty-second-line
+                overlong-summary-line)))
 
-  (use-package magit-repos
-      :after magit
-      :commands magit-list-repositories
-      :config
-      (when (file-directory-p mpm-projects-dir)
-        (setq magit-repository-directories `((,mpm-projects-dir . 1)))))
+      (use-package git-modes
+          :ensure t
+          :mode (("\\.gitconfig\\'" . gitconfig-mode)
+                 ("\\.gitignore\\'" . gitignore-mode) 
+                 ("\\.dockerignore\\'" . gitignore-mode))) ;; syntax from gitignore is more or less identical to that of .dockerignore
 
-  (use-package gitignore-mode
-      :mode (("\\.gitignore\\'" . gitignore-mode)
-             ("\\.dockerignore\\'" . gitignore-mode))) ;; syntax from gitignore is more or less identical to that of .dockerignore
+      (use-package magit-repos
+          :after magit
+          :commands magit-list-repositories
+          :config
+          (when (file-directory-p mpm-projects-dir)
+            (setq magit-repository-directories `((,mpm-projects-dir . 1)))))
 
-  (use-package gitconfig-mode
-      :mode "\\.gitconfig\\'")
-
-  (use-package git-timemachine
-      :ensure t
-      :commands git-timemachine)
+      (use-package git-timemachine
+          :ensure t
+          :commands git-timemachine)
 
 #+END_SRC
 Smerge mode deals with merge conflicts in git.
@@ -1289,29 +1311,29 @@ Smerge mode deals with merge conflicts in git.
 #+END_SRC
 *** Projectile (project management)
 #+BEGIN_SRC emacs-lisp
-  (pretty-hydra-define hydra-projectile (:color red :title "🚀 Projectile 🚀" :quit-key "q") 
-    ("Finding"
-    (("f" counsel-projectile-find-file "find")
-    ("o" projectile-find-other-file "find other")
-    ("w" counsel-projectile-find-file-dwim "find-dwim")
-    ("d" counsel-projectile-find-dir "find-dir"))
+    (pretty-hydra-define hydra-projectile (:color red :title "🚀 Projectile 🚀" :quit-key "q") 
+      ("Finding"
+      (("f" projectile-find-file-in-known-projects "find all")
+      ("o" projectile-find-other-file "find other" :color blue)
+      ("w" counsel-projectile-find-file-dwim "find-dwim")
+      ("d" counsel-projectile-find-dir "find-dir")
+      ("D" projectile-find-file-in-directory "find in dir"))
 
-    "Launch"
-    (("l" counsel-projectile "launch"))
+      "Search/Replace" ;; search and replace 
+      (("a" counsel-projectile-ag "ag") 
+      ("g" counsel-projectile-rg "rg")
+      ("c" projectile-replace "replace")
+      ("x" projectile-replace-regexp "replace regex"))
 
-    "Search/Replace" ;; search and replace 
-    (("a" counsel-projectile-ag "ag") 
-    ("g" counsel-projectile-rg "rg")
-    ("c" projectile-replace "replace")
-    ("x" projectile-replace-regexp "replace regex"))
+      "Switch"
+      (("s" counsel-projectile-switch-project "switch project")
+      ("b" counsel-projectile-switch-to-buffer "switch buffer")
+      ("r" projectile-recentf "recent files"))
 
-    "Switch"
-    (("s" counsel-projectile-switch-project "switch project")
-    ("b" counsel-projectile-switch-to-buffer "switch buffer")
-    ("r" projectile-recentf "recent files"))
-
-    "Finish"
-    (("k" projectile-kill-buffers "kill project buffers"))))
+      "Finish"
+      (("S" projectile-save-project-buffers "save project buffers")
+      ("p" projectile-compile-project "compile")
+      ("k" projectile-kill-buffers "kill project buffers"))))
 #+END_SRC
 *** Window (my attempt at window management)
 #+BEGIN_SRC emacs-lisp
@@ -1399,13 +1421,8 @@ Smerge mode deals with merge conflicts in git.
     ("Find"
     (("f" lsp-find-definition "find def") 
     ("r" lsp-find-references "find ref")
-    ("t" lsp-find-type-definition "find type def")
     ("g" lsp-ui-doc-glance "glance")
     ("i" lsp-ui-imenu "imenu"))
-
-    "Jump"
-    (("p" switch-to-prev-buffer "prev") ;; better consistency than lsp-ui-peek-jump-backward
-    ("n" switch-to-next-buffer "next")) ;; better consistency than lsp-ui-peek-jump-forward
 
     "Refactor"
     (("c" lsp-rename "rename")
@@ -1435,22 +1452,23 @@ Smerge mode deals with merge conflicts in git.
 #+END_SRC
 *** MC (Multiple Cursors)
 #+BEGIN_SRC emacs-lisp
-    (pretty-hydra-define hydra-mc (:color pink :title "Multiple Cursors" :quit-key "<escape>") 
-      ("Goto"
-        (("n" evil-mc-make-and-goto-next-match "make & next")
-        ("N" evil-mc-make-and-goto-prev-match "make & prev")
-        ("p" evil-mc-skip-and-goto-next-match "skip & next")
-        ("P" evil-mc-skip-and-goto-prev-match "skip & prev")
-        ("m" evil-mc-make-all-cursors "Make all"))
+  (pretty-hydra-define hydra-mc (:color pink :title "Multiple Cursors" :quit-key "<escape>") 
+    ("Goto"
+      (("n" evil-mc-make-and-goto-next-match "make & next")
+      ("N" evil-mc-make-and-goto-prev-match "make & prev")
+      ("p" evil-mc-skip-and-goto-next-match "skip & next")
+      ("P" evil-mc-skip-and-goto-prev-match "skip & prev")
+      ("m" evil-mc-make-all-cursors "Make all"))
 
-       "Line"
-       (("J" evil-mc-make-cursor-move-next-line "make & up") 
-       ("K" evil-mc-make-cursor-move-prev-line "make & down")) 
+     "Line"
+     (("J" evil-mc-make-cursor-move-next-line "make & up") 
+     ("K" evil-mc-make-cursor-move-prev-line "make & down")) 
 
-       "Manual"
-       (("u" evil-mc-undo-last-added-cursor "undo cursor")
-       ("q" evil-mc-undo-all-cursors "undo all cursors" :color blue)
-       ("r" evil-mc-resume-cursors "resume cursors" :color blue)))) 
+     "Manual"
+     (("u" evil-mc-undo-last-added-cursor "undo cursor")
+     ("g" evil-mc-make-cursor-here "make cursor")
+     ("q" evil-mc-undo-all-cursors "undo all cursors" :color blue)
+     ("r" evil-mc-resume-cursors "resume cursors" :color blue)))) 
 #+END_SRC
 *** Avy (Word finding)
 #+BEGIN_SRC emacs-lisp
@@ -1573,12 +1591,16 @@ Smerge mode deals with merge conflicts in git.
          :commands (lsp lsp-deferred)
          :hook
          ((c++-mode c-mode css-mode yaml-mode json-mode js-mode js2-mode rjsx-mode typescript-mode web-mode) . lsp-deferred)
+         :bind
+         (:map evil-normal-state-map
+           ("gy" . lsp-find-type-definition)
+           ("gh" . lsp-describe-thing-at-point))
          :custom
          (lsp-auto-guess-root nil)
          (lsp-log-io nil)
          (lsp-idle-delay 0.3)
          (lsp-eldoc-enable-hover nil) ;; graphical bloat imo, but can be good
-         (lsp-signature-auto-activate nil) ;; (This tends to cause problems and is SUPER slow ESP on MS Windows) you could manually request them via 'lsp-signature-activate' 
+         (lsp-signature-auto-activate nil) ;; (This tends to cause problems and is SUPER slow ESP on MS Windows) you could manually request them via 'lsp-signature-activate'
          (lsp-headerline-breadcrumb-enable nil) ;; graphical bloat, don't need but useful to the right person
          (lsp-enable-folding nil)
          (lsp-enable-text-document-color nil)
@@ -1586,11 +1608,12 @@ Smerge mode deals with merge conflicts in git.
          (lsp-prefer-flymake nil)
          (lsp-io-messages-max nil)
          :config
-         (add-hook 'after-init-hook #'(lambda() ;; in case I disable lsp-ui remap g prefix keys to regular lsp
-                                        (unless (package-installed-p 'lsp-ui)
-                                          (define-key evil-normal-state-map (kbd "gd") 'lsp-find-definition)
-                                          (define-key evil-normal-state-map (kbd "gi") 'lsp-goto-implementation)
-                                          (define-key evil-normal-state-map (kbd "gr") 'lsp-find-references)))))
+         (add-hook 'after-init-hook
+                     #'(lambda () ;; in case I disable lsp-ui remap g prefix keys to regular lsp
+                         (unless (package-installed-p 'lsp-ui)
+                           (define-key evil-normal-state-map (kbd "gd") 'lsp-find-definition)
+                           (define-key evil-normal-state-map (kbd "gi") 'lsp-goto-implementation)
+                           (define-key evil-normal-state-map (kbd "gr") 'lsp-find-references)))))
 
      (use-package lsp-ui
          :ensure t
@@ -1605,9 +1628,10 @@ Smerge mode deals with merge conflicts in git.
            ("M-j" . lsp-ui-peek--select-next)
            ("M-k" . lsp-ui-peek--select-prev))
          :custom
-         (lsp-ui-doc-enable nil)
-         (lsp-ui-doc-position 'top)
+         (lsp-ui-doc-enable t)
+         (lsp-ui-doc-position 'at-point)
          (lsp-ui-doc-include-signature t)
+         (lsp-ui-doc-use-childframe t)
          (lsp-ui-doc-show-with-cursor nil)
          (lsp-ui-doc-show-with-mouse t)
          (lsp-ui-sideline-enable t)
@@ -1627,19 +1651,22 @@ Smerge mode deals with merge conflicts in git.
   (use-package lsp-pyright
       :after lsp-mode
       :ensure t
-      :hook (python-mode . (lambda ()
+      :hook ((python-mode python-ts-mode) . (lambda ()
                            (require 'lsp-pyright)
-                           (lsp-deferred))))  
+                           (lsp-deferred))))
 
-   (use-package lsp-java 
+   (use-package lsp-java
        :disabled
        :after lsp-mode
-       :hook (java-mode . lsp-deferred))
-
-   (use-package lsp-ivy
-       :disabled
-       :after lsp-mode lsp-ui)
-
+       :hook ((java-mode java-ts-mode) . lsp-deferred))
+       ;; :config ;; TODO: properly configure this if I ever use Java / Or don't use this at all
+       ;; (setq lsp-java-vmargs
+       ;;         (list
+       ;;            "-noverify"
+       ;;            "-Xmx1G"
+       ;;            "-XX:+UseG1GC"
+       ;;            "-XX:+UseStringDeduplication"
+       ;;            "-javaagent:/path/to/lombok-1.18.6.jar"))) ;; lombok support (TODO: make lombok jar a variable)
 #+END_SRC
 * DAP
  :PROPERTIES:
@@ -1714,10 +1741,7 @@ Still experimenting with this, native gdb in emacs is also really good
  - You should also search how to install *clang-format* on your specific OS
 #+BEGIN_SRC emacs-lisp
   (use-package clang-format 
-     :ensure t
-     :bind 
-     (("C-c R" . clang-format-region) ;; format current line
-     ("C-c F" . clang-format-buffer))) ;; format entire file
+     :ensure t)
 #+END_SRC
 ** Python
  :PROPERTIES:
@@ -1961,38 +1985,52 @@ Adds the node_modules/.bin directory to the buffer exec_path.
       (setq js2-strict-missing-semi-warning nil)
       (setq-default js2-basic-offset 2)) ;; set indentation to 2
 #+END_SRC
-
  :PROPERTIES:
  :CUSTOM_ID: ts
  :END:
-*** TIDE
+*** TS
 All for typescript
 #+BEGIN_SRC emacs-lisp
-  ;; enable typescript in emacs
   (use-package typescript-mode
       :ensure t
       :mode "\\.ts\\'"
       :config
       (setq-default typescript-indent-level 2)) ;; indent 2 spaces by default
+#+END_SRC
+** Elixir
+ :PROPERTIES:
+ :CUSTOM_ID: elixir
+ :END:
+#+BEGIN_SRC emacs-lisp
+  (use-package elixir-mode
+      :ensure t
+      :hook (elixir-mode . lsp-deferred))
 
-  ;; typescript integrated development environment (don't use since we have LSP)
-  (use-package tide
-      :disabled
-      :after
-      (typescript-mode company flycheck web-mode)
-      :hook
-      ((typscript-mode . tide-setup)
-      (rjsx-mode . tide-setup)
-      (typescript-mode . tide-hl-identifier-mode)
-      (before-save . tide-format-before-save))
-      :config
-      (add-hook 'web-mode-hook
-          (lambda ()
-            (when (string-equal "tsx" (file-name-extension buffer-file-name))
-              (tide-setup))))
-      (flycheck-add-mode 'typescript-tslint 'web-mode)
-      (flycheck-add-next-checker 'typescript-tide 'javascript-eslint)
-      (flycheck-add-next-checker 'tsx-tide 'javascript-eslint))
+  ;; inferior repl mode
+  (use-package inf-elixir
+      :ensure t
+      :hook (elixir-mode . inf-elixir-minor-mode))
+#+END_SRC
+** Go
+ :PROPERTIES:
+ :CUSTOM_ID: go
+ :END:
+#+BEGIN_SRC emacs-lisp
+  (use-package go-mode
+      :ensure t
+      :hook (go-mode . lsp-deferred))
+#+END_SRC
+** Rust
+ :PROPERTIES:
+ :CUSTOM_ID: rust
+ :END:
+#+BEGIN_SRC emacs-lisp
+  (use-package rust-mode
+      :ensure t)
+
+  (use-package rustic
+      :ensure t
+      :hook (rust-mode . lsp-deferred))
 #+END_SRC
 * Diminish
  :PROPERTIES:
