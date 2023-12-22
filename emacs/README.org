@@ -3,9 +3,15 @@
 * Setup
 When Emacs is started, it normally tries to load a Lisp program from an initialization file, or init file for short. 
 This file, if it exists, specifies how to initialize Emacs for you.  Emacs looks for your init file using the filenames ~/.emacs, ~/.emacs.el, or ~/.emacs.d/init.el; - GNU Emacs Manual
+** Changelog 12/21/2023
+- Due to my org file reaching over 2000 lines I have decided to modularize my own config and write it in multiple elisp files
+- this is unstable until I have developed seriously with the new config and ensured everything has continued to work
+- I am utilizing early-init (starting emacs 27) and my own =Components= folder and have moved my org file =MarinMacs.org= to the backups for now
+** Old
 - In my case the file is *init.el* which will launch my *MarinMacs.org* file. Both should be made inside the *.emacs.d* directory
 - You can automate this if you cloned my dotfiles and ran the configure.sh script
 - Reference =alt-Configs= folder for either more minimal or alternative implementations of my config (I currently use Ivy but I have a helm and an icomplete version of my configuration as well in the folder)
+** Custom Img
 - The =img= folder contains snapshots of my configuration in action as well banners that could be used for the emacs start up screen (the script looks for =~/.emacs.d/img/targetBanner.png= but will display a default icon if nothing is found so you don't have to worry about the config crashing)
 * Contact
 - Email me if any issues/questions/things can be better: wbbmarin5@gmail.com
