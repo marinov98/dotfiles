@@ -1,3 +1,5 @@
+;; hydra-setup.el --- setup the hydra heads -*- lexical-binding: t; -*-
+
 ;;; Commentary:
 ;; Great hydras make for a great workflow (Let’s hope they are great…)
 
