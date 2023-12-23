@@ -901,27 +901,28 @@ Useful if you work on multiple windows and want an efficient way of switching be
 - Make sure to run =M-x all-the-icons-install-fonts= if you want them to work!
 - Repo: https://github.com/domtronn/all-the-icons.el
 #+BEGIN_SRC emacs-lisp
-    ;; Pretty Icons
+  ;; Pretty Icons
   (use-package all-the-icons
-      :ensure t)
+      :ensure t
+      :if (display-graphic-p))
 
   ;; icons for ivy
   (use-package all-the-icons-ivy
       :ensure t
       :after (all-the-icons ivy)
       :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup)
-      :config
-      (setq all-the-icons-ivy-file-commands
-      '(counsel-find-file 
-        counsel-file-jump 
-        counsel-git
-        counsel-recentf 
-        counsel-projectile 
-        counsel-projectile-switch-to-buffer 
-        counsel-projectile-switch-project 
-        counsel-projectile-find-file 
-        counsel-projectile-find-file-dwin 
-        counsel-projectile-find-dir)))
+      :custom
+      (all-the-icons-ivy-file-commands
+        '(counsel-find-file
+          counsel-file-jump
+          counsel-git
+          counsel-recentf
+          counsel-projectile
+          counsel-projectile-switch-to-buffer
+          counsel-projectile-switch-project
+          counsel-projectile-find-file
+          counsel-projectile-find-file-dwin
+          counsel-projectile-find-dir)))
 
   ;; icons for dired/ranger mode
   (use-package all-the-icons-dired
@@ -1198,7 +1199,7 @@ Useful if you work on multiple windows and want an efficient way of switching be
       (:map lsp-mode-map
           ("<tab>" . company-indent-or-complete-common))
       :custom
-      (company-tooltip-limit 5) ; how many candidates to show
+      (company-tooltip-limit 8) ; how many candidates to show
       (company-idle-delay 0.1) ; How much to delay to completion
       (company-minimum-prefix-length 2) ;; show completions after 2 chars
       (company-selection-wrap-around t) ;; goes to start of selection if you reached the bottom 

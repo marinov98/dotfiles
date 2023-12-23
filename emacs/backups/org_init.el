@@ -32,7 +32,7 @@
 
 (defun marinov/set-memory ()
   "Set memory usage settings after start up."
-  (setq gc-cons-threshold (* 1024 1024 2)) ;; change this depending on your system
+  (setq gc-cons-threshold (* 1024 1024 4)) ;; change this depending on your system
   (setq large-file-warning-threshold (* 1024 1024 80)) ;; (80mb) default threshold is low by modern standards
   (setq read-process-output-max (* 1024 1024))) ;; (1mb) Increase amount of data which Emacs reads from the process (recommended by lsp package)
    
