@@ -3,10 +3,19 @@ return  {
     branch = "v3.x",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", 
+      "nvim-tree/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
     },
     config = function()
-      vim.keymap.set('n', '<leader>tn',":Neotree toggle <CR>", {})
+      require("neo-tree").setup({
+      filesystem = {
+          filtered_items = {
+            visible = true, -- This is what you want: If you set this to `true`, all "hide" just mean "dimmed out"
+            hide_dotfiles = false,
+            hide_gitignored = false,
+          },
+        }
+      })
+      vim.keymap.set('n', '<leader>tn',":Neotree toggle<CR>", {})
     end
 }

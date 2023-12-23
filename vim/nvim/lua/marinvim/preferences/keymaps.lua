@@ -11,7 +11,7 @@ vim.keymap.set('n', '<leader>n',":noh<CR>", { desc = "Remove highlight" })
 vim.keymap.set('n', '<leader>bb',"<C-^>", { desc = "Alternate buffers" })
 vim.keymap.set('n', '<leader>bt',":tabnew<CR>", { desc = "New Tab" })
 vim.keymap.set('n', '<leader>bn',":tabnext<CR>", { desc = "Next Tab" })
-vim.keymap.set('n', '<leader>bp',":tabprevious<CR>", { desc = "Next Tab" })
+vim.keymap.set('n', '<leader>bp',":tabprevious<CR>", { desc = "Previous Tab" })
 
 -- ONLY if hop plugin is used! (These cause error if put inside the plugin itself)
 vim.keymap.set('n', '<leader>ag',":HopChar1<CR>", { desc = "Goto Char 1"})
