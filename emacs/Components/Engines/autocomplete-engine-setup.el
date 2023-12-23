@@ -16,7 +16,7 @@
     (:map lsp-mode-map
         ("<tab>" . company-indent-or-complete-common))
     :custom
-    (company-tooltip-limit 5) ; how many candidates to show
+    (company-tooltip-limit 8) ; how many candidates to show
     (company-idle-delay 0.1) ; How much to delay to completion
     (company-minimum-prefix-length 2) ;; show completions after 2 chars
     (company-selection-wrap-around t) ;; goes to start of selection if you reached the bottom 
