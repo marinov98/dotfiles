@@ -1,2 +1,2 @@
-require("manvim.preferences")
-require("manvim.lazy")
+require("marinvim.preferences")
+require("marinvim.lazy")

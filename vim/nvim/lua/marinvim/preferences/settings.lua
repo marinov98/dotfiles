@@ -23,4 +23,6 @@ vim.opt.termguicolors = true
 
 vim.opt.updatetime = 100
 
-vim.cmd("set clipboard=unnamedplus")
+vim.cmd("set clipboard=unnamedplus") -- use system clipboard
+vim.cmd("set cursorline") -- highlight current line
+vim.cmd("set noerrorbells") -- no sounds 
