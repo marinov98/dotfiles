@@ -127,13 +127,14 @@
 ;; Code (jump to definitions and references, list errors, formatting)
 (pretty-hydra-define hydra-code (:color red :title "📡 Code 📡" :quit-key "q")
   ("Find"
-  (("f" lsp-find-definition "find def")
-  ("r" lsp-find-references "find ref")
+  (("r" lsp-find-references "find ref")
   ("g" lsp-ui-doc-glance "glance")
   ("i" lsp-ui-imenu "imenu"))
 
   "Refactor"
   (("c" lsp-rename "rename")
+  ("f" lsp-format-buffer "format buffer")
+  ("o" lsp-organize-imports "organize imports")
   ("s" hydra-style/body "format style" :color blue))
 
   "Errors"
@@ -145,18 +146,14 @@
 (pretty-hydra-define hydra-style (:color blue :title "📡 Style 📡" :quit-key "q")
   ("Buffer"
   (("b" python-black-buffer "python-black")
-  ("l" lsp-format-buffer "LSP" :color red)
   ("p" prettier-prettify "prettier")
   ("c" clang-format-buffer "clang"))
-
-   "Imports"
-   (("o" lsp-organize-imports "organize imports"))
 
   "Region"
   (("B" python-black-region "python-black")
   ("C" clang-format-region "clang")
   ("P" prettier-prettify-region "prettier")
-  ("L" lsp-format-region "LSP" :color red))))
+  ("l" lsp-format-region "LSP" :color red))))
 
 ;; MC (Multiple Cursors)
 (pretty-hydra-define hydra-mc (:color pink :title "Multiple Cursors" :quit-key "<escape>")
