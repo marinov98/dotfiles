@@ -1,6 +1,7 @@
 return {
   {
-    'nvim-telescope/telescope.nvim', tag = '0.1.5',
+    'nvim-telescope/telescope.nvim',
+    tag = '0.1.5',
     dependencies = {
       'nvim-lua/plenary.nvim',
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
@@ -15,7 +16,7 @@ return {
       vim.keymap.set('n', '<leader>dh', builtin.help_tags, {})
       vim.keymap.set('n', '<leader>ll', builtin.diagnostics, {})
 
-	    local telescope = require("telescope")
+      local telescope = require("telescope")
       telescope.load_extension("fzf")
     end
   },
@@ -29,16 +30,22 @@ return {
           }
         }
       })
-    -- To get ui-select loaded and working with telescope, you need to call
-    -- load_extension, somewhere after setup function:
-    require("telescope").load_extension("ui-select")
-    vim.keymap.set('n', '<leader>?', function ()
+      -- To get ui-select loaded and working with telescope, you need to call
+      -- load_extension, somewhere after setup function:
+      require("telescope").load_extension("ui-select")
+      vim.keymap.set('n', '<leader>?', function()
         require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
           winblend = 10,
           previewer = false
         }))
       end, {})
-   end
+    end
+  },
+  {
+    'nvim-telescope/telescope-project.nvim',
+    config = function()
+      require("telescope").load_extension("project")
+      vim.keymap.set('n', '<leader><leader>', ":Telescope project<CR>", {})
+    end
   }
 }
-

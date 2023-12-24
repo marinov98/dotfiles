@@ -13,6 +13,9 @@ vim.keymap.set('n', '<leader>bt',":tabnew<CR>", { desc = "New Tab" })
 vim.keymap.set('n', '<leader>bn',":tabnext<CR>", { desc = "Next Tab" })
 vim.keymap.set('n', '<leader>bp',":tabprevious<CR>", { desc = "Previous Tab" })
 
+-- Coding utility
+vim.keymap.set('n', '<leader>cs',":terminal<CR>", { desc = "Open terminal" })
+
 -- ONLY if hop plugin is used! (These cause error if put inside the plugin itself)
 vim.keymap.set('n', '<leader>ag',":HopChar1<CR>", { desc = "Goto Char 1"})
 vim.keymap.set('n', '<leader>as',":HopChar2<CR>", { desc = "Goto Char 2"})
