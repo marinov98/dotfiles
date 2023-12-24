@@ -28,8 +28,8 @@
   ("t" describe-theme "theme")
   ("q" nil "quit" :color blue))
 
-;; Projectile (project management)
-(pretty-hydra-define hydra-project (:color red :title "🚀 Projectile 🚀" :quit-key "q")
+;; Project (project management)
+(pretty-hydra-define hydra-project (:color red :title "🚀 Project 🚀" :quit-key "q")
   ("Finding"
   (("f" project-search "search")
   ("d" project-find-dir "find-dir"))
