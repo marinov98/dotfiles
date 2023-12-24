@@ -16,7 +16,7 @@
 ;; Describe (help describe anything and open up documentation)
 (defhydra hydra-describe (:color red :columns 3)
   "Describe 🤓"
-  ("d" describe-bindings "bindings")
+  ("d" embark-bindings "bindings")
   ("f" describe-function "func")
   ("F" describe-face "face")
   ("k" describe-key "key")
