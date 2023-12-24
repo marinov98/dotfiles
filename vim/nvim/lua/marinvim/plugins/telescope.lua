@@ -9,8 +9,11 @@ return {
       local builtin = require('telescope.builtin')
       vim.keymap.set('n', '<leader>f', builtin.find_files, {})
       vim.keymap.set('n', 'gs', builtin.live_grep, {})
+      vim.keymap.set('n', '<leader>/', builtin.grep_string, {})
+      vim.keymap.set('n', '<leader>ur', builtin.oldfiles, {})
       vim.keymap.set('n', '<leader>bi', builtin.buffers, {})
       vim.keymap.set('n', '<leader>dh', builtin.help_tags, {})
+      vim.keymap.set('n', '<leader>ll', builtin.diagnostics, {})
 
 	    local telescope = require("telescope")
       telescope.load_extension("fzf")
@@ -29,6 +32,12 @@ return {
     -- To get ui-select loaded and working with telescope, you need to call
     -- load_extension, somewhere after setup function:
     require("telescope").load_extension("ui-select")
+    vim.keymap.set('n', '<leader>?', function ()
+        require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+          winblend = 10,
+          previewer = false
+        }))
+      end, {})
    end
   }
 }

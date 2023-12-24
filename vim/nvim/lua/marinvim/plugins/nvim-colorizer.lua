@@ -1,5 +1,5 @@
 return {
   "NvChad/nvim-colorizer.lua",
-  version = "*", 
+  version = "*",
   config = true,
 }
