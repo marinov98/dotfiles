@@ -290,7 +290,7 @@
       "commands": ["editor.action.rename"]
     },
     {
-      "before": ["<leader>", "l", "s", "l"],
+      "before": ["<leader>", "l", "f"],
       "commands": ["editor.action.formatDocument"]
     },
     {
