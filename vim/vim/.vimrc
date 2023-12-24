@@ -189,8 +189,8 @@ set signcolumn=yes
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <leader>lE <Plug>(coc-diagnostic-prev)
+nmap <leader>le <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition) 
@@ -200,7 +200,7 @@ nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gs :CocSearch 
 
 " Symbol renaming.
-nmap <leader>r <Plug>(coc-rename)
+nmap <leader>lc <Plug>(coc-rename)
 """"""""""" AUTOCOMPLETE END
 
 """"""""""" Easy Motion:
