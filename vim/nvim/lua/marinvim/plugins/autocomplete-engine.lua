@@ -20,6 +20,7 @@ return {
     cmp.setup({
       completion = {
         completeopt = "menu,menuone,preview,noselect",
+        keyword_length = 2 -- show completions after X characters
       },
 
       snippet = { -- configure how nvim-cmp interacts with snippet engine
