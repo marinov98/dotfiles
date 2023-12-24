@@ -106,7 +106,7 @@ function! ToggleNetrw()
     endif
 endfunction
 
-noremap <silent> <leader>t :call ToggleNetrw()<CR>
+noremap <silent> <leader>tn :call ToggleNetrw()<CR>
 
 """""""""""""""""""""""
 """"" PERSONAL BINDINGS:
@@ -114,23 +114,23 @@ noremap <silent> <leader>t :call ToggleNetrw()<CR>
 nnoremap <leader>n :noh<CR>
 nnoremap Y y$
 nnoremap <leader>s :w<CR>
+nnoremap <leader>k :tabclose<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>Q :q!<CR>
+
+nnoremap <leader>cs :terminal<CR>
+
+nnoremap <leader>bb <C-^>
+nnoremap <leader>bt :tabnew<CR>
+nnoremap <leader>bn :tabnext<CR>
+nnoremap <leader>bp :tabprevious<CR>
+
 
 """""""""""""""""""""""
 """"" WINDOW MANAGEMENT:
 """""""""""""""""""""""
 " Fix splitting
 set splitbelow splitright
-
-nnoremap <leader>j <C-W>j
-nnoremap <leader>k <C-W>k
-nnoremap <leader>l <C-W>l
-nnoremap <leader>h <C-W>h
-
-" Shortcut split opening
-nnoremap <leader>2 :split<CR>
-nnoremap <leader>3 :vsplit<CR>>
 
 " Auto close braces
 inoremap " ""<left>
