@@ -45,7 +45,7 @@ return {
           vim.keymap.set('n', '<space>lc', vim.lsp.buf.rename, opts)
           vim.keymap.set('n', '<space>la', vim.lsp.buf.code_action, opts)
           vim.keymap.set('n', '<space>lg', vim.lsp.buf.hover, opts)
-          vim.keymap.set('n', '<space>lsl', function()
+          vim.keymap.set('n', '<space>lf', function()
             vim.lsp.buf.format { async = true }
           end, opts)
       end,
