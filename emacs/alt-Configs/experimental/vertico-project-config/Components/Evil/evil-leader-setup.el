@@ -42,7 +42,6 @@
      "i r" '(consult-ripgrep :wk "Rg")
      "i s" '(consult-line :wk "Isearch")
      "i i" '(ibuffer :wk "Ibuffer")
-     "i o" '(ivy-occur :wk "Ivy Occur")
      "i y" '(consult-yank-pop :wk "Yank Pop"))
 
   (mpm/leader-keys
