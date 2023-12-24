@@ -294,7 +294,7 @@
       "commands": ["editor.action.formatDocument"]
     },
     {
-      "before": ["<leader>", "l", "s", "o"],
+      "before": ["<leader>", "l", "o"],
       "commands": ["editor.action.organizeImports"]
     },
     {
