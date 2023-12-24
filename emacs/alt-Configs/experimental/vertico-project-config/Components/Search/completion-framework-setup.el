@@ -33,9 +33,10 @@
 
 (use-package embark
     :ensure t
-    :bind(:map minibuffer-local-map
-           ("C-q" . embark-export))) ;; inspired by quickfix list exporting in vim
- 
+    :bind
+    (("C-," . embark-act)
+     :map minibuffer-local-map
+     ("C-q" . embark-export))) ;; inspired by quickfix list exporting in vim
 
 (use-package embark-consult
   :ensure t ; only need to install it, embark loads it after consult if found
