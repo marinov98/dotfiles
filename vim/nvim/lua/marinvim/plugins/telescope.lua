@@ -40,12 +40,5 @@ return {
         }))
       end, {})
     end
-  },
-  {
-    'nvim-telescope/telescope-project.nvim',
-    config = function()
-      require("telescope").load_extension("project")
-      vim.keymap.set('n', '<leader><leader>', ":Telescope project<CR>", {})
-    end
   }
 }
