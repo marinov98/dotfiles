@@ -26,3 +26,4 @@ vim.opt.updatetime = 100
 vim.cmd("set clipboard=unnamedplus") -- use system clipboard
 vim.cmd("set cursorline") -- highlight current line
 vim.cmd("set noerrorbells") -- no sounds 
+vim.cmd("set pumheight=8") -- how many candidates to show on a popup
