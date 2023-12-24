@@ -270,11 +270,11 @@
       "commands": ["workbench.action.quickOpen"]
     },
     {
-      "before": ["<leader>", "t", "t"],
+      "before": ["<leader>", "c", "s"],
       "commands": ["workbench.action.terminal.toggleTerminal"]
     },
     {
-      "before": ["<leader>", "t", "T"],
+      "before": ["<leader>", "c", "S"],
       "commands": ["workbench.action.terminal.new"]
     },
     {
