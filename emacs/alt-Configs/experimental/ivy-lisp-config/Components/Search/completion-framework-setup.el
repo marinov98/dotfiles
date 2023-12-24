@@ -43,7 +43,7 @@
     :map evil-normal-state-map
     ("gs" . counsel-rg)
     :map ivy-minibuffer-map
-    ("S-SPC" . ivy-occur) ;; alt binding because of minibuffer mode map where our leader key is not triggered
+    ("C-q" . ivy-occur) ;; inspired by vim quickfix list binding
     ("M-j" . ivy-next-line)
     ("M-k" . ivy-previous-line))
     :custom
