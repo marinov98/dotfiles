@@ -12,6 +12,7 @@ return {
       vim.keymap.set('n', 'gs', builtin.live_grep, {})
       vim.keymap.set('n', '<leader>/', builtin.grep_string, {})
       vim.keymap.set('n', '<leader>ur', builtin.oldfiles, {})
+      vim.keymap.set('n', '<leader>rg', builtin.git_files, {})
       vim.keymap.set('n', '<leader>bi', builtin.buffers, {})
       vim.keymap.set('n', '<leader>dh', builtin.help_tags, {})
       vim.keymap.set('n', '<leader>ll', builtin.diagnostics, {})
