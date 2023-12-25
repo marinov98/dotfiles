@@ -199,6 +199,7 @@ nnoremap <leader>Q :q!<CR>
 nnoremap <leader>cs :terminal<CR>
 nnoremap <leader>cm :%s//gc<Left><Left><Left>
 nnoremap <leader>* :%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>
+nnoremap <leader>x :!chmod +x %<CR>
 
 nnoremap <leader>bb <C-^>
 nnoremap <leader>bt :tabnew<CR>
