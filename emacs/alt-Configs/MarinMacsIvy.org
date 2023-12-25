@@ -1140,8 +1140,7 @@ Useful if you work on multiple windows and want an efficient way of switching be
 - You may or may not have to do rebindings if autocomplete conflicts with snippets
 - repo: https://github.com/joaotavora/yasnippet
 #+BEGIN_SRC emacs-lisp
-  (use-package yasnippet
-      :after lsp-mode 
+  (use-package yasnippet 
       :ensure t
       :diminish yas-minor-mode
       :bind
