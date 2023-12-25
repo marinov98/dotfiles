@@ -1168,15 +1168,19 @@ Useful if you work on multiple windows and want an efficient way of switching be
 - Official Site: https://www.flycheck.org/en/latest/
 #+BEGIN_SRC emacs-lisp
   (use-package flycheck
-       :ensure t
-       :custom-face
-       (flycheck-info ((t (:underline (:style wave :color "#87cefa")))))
-       (flycheck-warning ((t (:underline (:style wave :color "#ffb95c")))))
-       (flycheck-error ((t (:underline (:style wave :color "#cc0202")))))
-       :custom
-       (flycheck-display-errors-delay 0.5)
-       :config
-       (global-flycheck-mode t))
+   :ensure t
+   :custom-face
+   (flycheck-info ((t (:underline (:style wave :color "#87cefa")))))
+   (flycheck-warning ((t (:underline (:style wave :color "#ffb95c")))))
+   (flycheck-error ((t (:underline (:style wave :color "#cc0202")))))
+   :custom
+   (flycheck-display-errors-delay 0.5)
+   :bind
+   (:map evil-normal-state-map
+         ("]d" . flycheck-next-error)
+         ("[d" . flycheck-previous-error))
+   :config
+   (global-flycheck-mode t))
 #+END_SRC
 ** Company
  :PROPERTIES:
