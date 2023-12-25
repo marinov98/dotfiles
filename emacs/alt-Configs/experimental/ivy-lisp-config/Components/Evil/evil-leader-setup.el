@@ -71,7 +71,7 @@
      "s" '(save-buffer :wk "Save Buffer")
      "f" '(counsel-projectile :wk "Projectile Find File/Buffer")
      "." '(counsel-find-file :wk "Find File")
-     "/" '(comment-line :wk "Comment Line")
+     "/" '(swiper-multi :wk "Swiper Multi")
      "m" '(counsel-M-x :wk "Counsel M-x")
      "*" '(swiper-thing-at-point :wk "Swiper at Point"))
 
