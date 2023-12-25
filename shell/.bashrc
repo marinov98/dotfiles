@@ -146,6 +146,7 @@ alias c='code .'                            # c:            Open VS Code
 alias rr='ranger'                           # ra:           Opens ranger
 alias t='tmux'                              # t:            Opens tmux
 alias ts='tmux attach'                      # ts:           Tmux attaches to specified session
+alias zj='./zellij'                         # zj:           Start zellij
 
 alias get='sudo apt install'                # get:          UBUNTU: installs specified package(s)
 alias rem='sudo apt remove'                 # rem:          UBUNTU: removes specified package(s)        
