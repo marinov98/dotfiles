@@ -13,22 +13,6 @@
     (neo-show-hidden-files t)
     (neo-theme (if (display-graphic-p) 'icons 'arrow))) ; add icons (utilizes all-the-icon)
 
-;; treemacs
-(use-package treemacs
-    :ensure t
-    :custom
-    (treemacs-resize-icons 4)
-    (treemacs-show-cursor t))
-
-(use-package treemacs-evil
-    :after treemacs
-    :ensure t)
-
-(use-package treemacs-magit
-    :after treemacs magit
-    :ensure t)
-    
-
 
 (provide 'file-tree-setup)
 ;;; file-tree-setup.el ends here

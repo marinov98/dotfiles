@@ -61,11 +61,6 @@
        (lsp-ui-peek-list-width 60)
        (lsp-ui-peek-peek-height 25))
 
- (use-package lsp-treemacs
-     :after treemacs lsp-mode
-     :ensure t
-     :config (lsp-treemacs-sync-mode t))
-
 (use-package lsp-pyright
     :after lsp-mode
     :ensure t

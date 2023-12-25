@@ -31,7 +31,7 @@
       :config
       (global-display-line-numbers-mode 1)
       ;; Disable line numbers for some mode
-      (dolist (mode '(org-mode-hook term-mode-hook neotree-mode-hook shell-mode-hook treemacs-mode-hook eshell-mode-hook))
+      (dolist (mode '(org-mode-hook term-mode-hook neotree-mode-hook shell-mode-hook eshell-mode-hook))
              (add-hook mode (lambda () (display-line-numbers-mode 0))))))
 
 (provide 'parenthesis-and-lines-setup)

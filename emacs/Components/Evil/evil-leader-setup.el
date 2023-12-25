@@ -110,15 +110,7 @@
 
   (mpm/leader-keys
     "t" '(:ignore t :wk "Neotree/Treemacs")
-    "t n" '(neotree-toggle :wk "Toggle Neotree")
-    "t e" '(treemacs :wk "Treemacs")
-    "t f" '(treemacs-find-file :wk "Treemacs find file")
-    "t s" '(treemacs-switch-workspace :wk "Treemacs switch workspace")
-    "t w" '(treemacs-select-window :wk "Treemacs select window")
-    "t l" '(:ignore t :wk "LSP-Treemacs")
-    "t l s" '(lsp-treemacs-symbols :wk "LSP Treemacs Symbols")
-    "t l r" '(lsp-treemacs-references :wk "LSP Treemacs References")
-    "t l e" '(lsp-treemacs-errors-list :wk "LSP Treemacs Errors List")))
+    "t n" '(neotree-toggle :wk "Toggle Neotree")))
 
 (provide 'evil-leader-setup)
 ;;; evil-leader-setup.el ends here

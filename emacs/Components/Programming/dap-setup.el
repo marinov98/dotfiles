@@ -5,10 +5,10 @@
 
 ;;; Code:
 ;; only installing because dap-mode requires it
-(use-package posframe :ensure t)
+(use-package posframe :disabled)
 
 (use-package dap-mode
-    :ensure t
+    :disabled
     :after hydra
     :hook
     (lsp-mode . (lambda () (dap-mode t) (dap-ui-mode t) (dap-tooltip-mode 1) (tooltip-mode 1)))
