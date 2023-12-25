@@ -1141,7 +1141,6 @@ Useful if you work on multiple windows and want an efficient way of switching be
 - repo: https://github.com/joaotavora/yasnippet
 #+BEGIN_SRC emacs-lisp
   (use-package yasnippet
-      :after lsp-mode 
       :ensure t
       :diminish yas-minor-mode
       :bind
@@ -1650,7 +1649,6 @@ Smerge mode deals with merge conflicts in git.
        :config (lsp-treemacs-sync-mode t))
 
   (use-package lsp-pyright
-      :after lsp-mode
       :ensure t
       :hook ((python-mode python-ts-mode) . (lambda ()
                            (require 'lsp-pyright)
@@ -1658,7 +1656,6 @@ Smerge mode deals with merge conflicts in git.
 
    (use-package lsp-java
        :disabled
-       :after lsp-mode
        :hook ((java-mode java-ts-mode) . lsp-deferred))
        ;; :config ;; TODO: properly configure this if I ever use Java / Or don't use this at all
        ;; (setq lsp-java-vmargs
