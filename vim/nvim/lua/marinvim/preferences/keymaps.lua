@@ -15,6 +15,9 @@ vim.keymap.set('n', '<leader>bp',":tabprevious<CR>", { desc = "Previous Tab" })
 
 -- Coding utility
 vim.keymap.set('n', '<leader>cs',":terminal<CR>", { desc = "Open terminal" })
+vim.keymap.set("n", "<leader>cm", ":%s//gc<Left><Left><Left>") -- attempt at native multiple cursors
+vim.keymap.set("n", "<leader>*", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 -- ONLY if hop plugin is used! (These cause error if put inside the plugin itself)
 vim.keymap.set('n', '<leader>ag',":HopChar1<CR>", { desc = "Goto Char 1"})
