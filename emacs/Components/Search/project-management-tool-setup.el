@@ -10,19 +10,19 @@
 
 
 ;; override vcs for monorepos
-;; Returns the parent directory containing a .project.el file, if any,
+;; Returns the parent directory containing a custom override file, if any,
 ;; to override the standard project.el detection logic when needed.
-(defun mpm-project-override (dir)
-  (let ((override (locate-dominating-file dir mpm-projects-override-file)))
-    (if override
-      (cons 'vc override)
-      nil)))
+;; (defun mpm-project-override (dir)
+;;   (let ((override (locate-dominating-file dir mpm-projects-override-file)))
+;;     (if override
+;;       (cons 'vc override)
+;;       nil)))
 
 ;;; Code:
 (use-package project
   :config
+  ;; (add-hook 'project-find-functions #'mpm-project-override)
   (add-hook 'project-find-functions #'mpm-override-dir)
-  (add-hook 'project-find-functions #'mpm-project-override)
   ;; discover projects when none have been created
   (when (and (not (file-exists-p (concat user-emacs-directory "projects"))) (file-directory-p mpm-projects-dir))
     (project-remember-projects-under mpm-projects-dir)))
