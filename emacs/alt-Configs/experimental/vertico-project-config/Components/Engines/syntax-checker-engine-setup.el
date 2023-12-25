@@ -12,6 +12,10 @@
      (flycheck-error ((t (:underline (:style wave :color "#cc0202")))))
      :custom
      (flycheck-display-errors-delay 0.5)
+     :bind
+     (:map evil-normal-state-map
+           ("]d" . flycheck-next-error)
+           ("[d" . flycheck-previous-error))
      :config
      (global-flycheck-mode t))
 

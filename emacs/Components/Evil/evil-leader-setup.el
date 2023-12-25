@@ -64,7 +64,7 @@
      "s" '(save-buffer :wk "Save Buffer")
      "f" '(project-find-file :wk "Project Find File/Buffer")
      "." '(find-file :wk "Find File")
-     "/" '(consult-line-multi :wk "Multi File Search")
+     "/" '(consult-line-multi :wk "Multi file search")
      "m" '(execute-extended-command :wk "M-x"))
 
   (mpm/leader-keys

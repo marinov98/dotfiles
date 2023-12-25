@@ -5,7 +5,6 @@
 
 ;;; Code:
 (use-package yasnippet
-    :after lsp-mode
     :ensure t
     :diminish yas-minor-mode
     :bind

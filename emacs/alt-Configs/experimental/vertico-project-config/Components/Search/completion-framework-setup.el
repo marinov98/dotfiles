@@ -43,7 +43,6 @@
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
-
 ;; wgrep combined ripgrep and/or silver searcher makes changing text in multiple places much easier
 (use-package wgrep
   :ensure t

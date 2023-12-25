@@ -62,7 +62,6 @@
        (lsp-ui-peek-peek-height 25))
 
 (use-package lsp-pyright
-    :after lsp-mode
     :ensure t
     :hook ((python-mode python-ts-mode) . (lambda ()
                          (require 'lsp-pyright)
@@ -70,7 +69,6 @@
 
  (use-package lsp-java
      :disabled
-     :after lsp-mode
      :hook ((java-mode java-ts-mode) . lsp-deferred))
      ;; :config ;; TODO: properly configure this if I ever use Java / Or don't use this at all
      ;; (setq lsp-java-vmargs
