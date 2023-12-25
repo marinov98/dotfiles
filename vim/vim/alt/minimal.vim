@@ -62,9 +62,6 @@ else " Else use old configuration
 		  \ }
 	let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 endif
-" bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-
 
 """"""""" Easy Motion:
 map  <Leader>ag <Plug>(easymotion-bd-f)
@@ -200,6 +197,8 @@ nnoremap <leader>cs :terminal<CR>
 nnoremap <leader>cm :%s//gc<Left><Left><Left>
 nnoremap <leader>* :%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>
 nnoremap <leader>x :!chmod +x %<CR>
+" command to grep word under cursor
+nnoremap <leader>/ :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 nnoremap <leader>bb <C-^>
 nnoremap <leader>bt :tabnew<CR>

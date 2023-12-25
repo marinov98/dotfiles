@@ -122,6 +122,8 @@ nnoremap <leader>cs :terminal<CR>
 nnoremap <leader>cm :%s//gc<Left><Left><Left>
 nnoremap <leader>* :%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>
 nnoremap <leader>x :!chmod +x %<CR>
+" command to grep word under cursor
+nnoremap <leader>/ :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 nnoremap <leader>bb <C-^>
 nnoremap <leader>bt :tabnew<CR>
