@@ -4,7 +4,7 @@
 ;; defining variables and functions that can be reused is a great way to keep your Emacs config clean and scalable
 
 ;;; Code:
-(defconst mpm-config-file-location "~/.emacs.d/init.el"
+(defconst mpm-config-file-location (concat user-emacs-directory "init.el")
   "Configuration file location.")
 
 (defconst mpm-projects-dir "~/Projects"
