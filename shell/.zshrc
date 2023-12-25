@@ -63,6 +63,7 @@ alias c='code .'                            # c:            Open VS Code
 alias rr='ranger'                           # rr:           Opens ranger
 alias t='tmux'                              # t:            Opens tmux
 alias ts='tmux attach'                      # ts:           Tmux attaches to specified session
+alias zj='./zellij'                         # zj:           Start zellij
 
 alias f='open -a Finder ./'                 # f:            Opens current directory in MacOS Finder
 alias ~="cd ~"                              # ~:            Go Home
