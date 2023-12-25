@@ -248,11 +248,11 @@
       "commands": ["editor.action.goToTypeDefinition"]
     },
     {
-      "before": ["<leader>", "l", "e"],
+      "before": ["]", "d"],
       "commands": ["editor.action.marker.next"]
     },
     {
-      "before": ["<leader>", "l", "E"],
+      "before": ["[", "d"],
       "commands": ["editor.action.marker.prev"]
     }
   ],
