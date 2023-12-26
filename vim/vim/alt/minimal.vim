@@ -14,7 +14,7 @@ Plug 'https://github.com/itchyny/vim-gitbranch'
 """"""" VIM UTILITY:
 Plug 'https://github.com/tpope/vim-repeat'
 Plug 'https://github.com/tpope/vim-surround'
-Plug 'tpope/vim-commentary
+Plug 'tpope/vim-commentary'
 """"""" WEB DEV:
 Plug 'alvan/vim-closetag'
 Plug 'mattn/emmet-vim'
