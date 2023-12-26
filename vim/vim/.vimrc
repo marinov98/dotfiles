@@ -26,7 +26,6 @@ Plug 'tpope/vim-fugitive'
 """"""" VIM UTILITY:
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-commentary'
 """"""" WEB DEV:
 Plug 'alvan/vim-closetag'
