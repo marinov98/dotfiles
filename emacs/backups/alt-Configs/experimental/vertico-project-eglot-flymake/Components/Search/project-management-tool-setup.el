@@ -10,7 +10,7 @@
 
 
 ;; override vcs for monorepos
-;; Returns the parent directory containing a .project.el file, if any,
+;; Returns the parent directory containing a custom override file, if any,
 ;; to override the standard project.el detection logic when needed.
 (defun mpm-project-override (dir)
   (let ((override (locate-dominating-file dir mpm-projects-override-file)))
