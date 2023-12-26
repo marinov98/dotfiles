@@ -5,7 +5,6 @@
 
 ;;; Code:
 (use-package flymake
-     :ensure t
      :bind
      (:map evil-normal-state-map
          ("]d" . flymake-goto-next-error)
