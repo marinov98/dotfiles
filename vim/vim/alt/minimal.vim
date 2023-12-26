@@ -14,7 +14,7 @@ Plug 'https://github.com/itchyny/vim-gitbranch'
 """"""" VIM UTILITY:
 Plug 'https://github.com/tpope/vim-repeat'
 Plug 'https://github.com/tpope/vim-surround'
-Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-commentary
 """"""" WEB DEV:
 Plug 'alvan/vim-closetag'
 Plug 'mattn/emmet-vim'
@@ -121,7 +121,7 @@ set showcmd
 set cursorline
 set foldenable
 set incsearch
-set hlsearch
+set nohlsearch
 set noerrorbells
 set showmatch
 set wildmenu
@@ -189,22 +189,24 @@ noremap <silent> <leader>tn :call ToggleNetrw()<CR>
 nnoremap <leader>n :noh<CR>
 nnoremap Y y$
 nnoremap <leader>s :w<CR>
-nnoremap <leader>k :tabclose<CR>
+nnoremap <leader>k :bd<CR>
+nnoremap <leader>x :tabclose<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>Q :q!<CR>
 
 nnoremap <leader>cs :terminal<CR>
 nnoremap <leader>cm :%s//gc<Left><Left><Left>
+vnoremap <leader>cm :s//gc<Left><Left><Left>
 nnoremap <leader>* :%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>
-nnoremap <leader>x :!chmod +x %<CR>
-" command to grep word under cursor
-nnoremap <leader>/ :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+nnoremap <leader>X :!chmod +x %<CR>
 
 nnoremap <leader>bb <C-^>
-nnoremap <leader>bt :tabnew<CR>
-nnoremap <leader>bn :tabnext<CR>
-nnoremap <leader>bp :tabprevious<CR>
+nnoremap <leader>bn :bnext<CR>
+nnoremap <leader>bp :bprevious<CR>
 
+nnoremap <leader>tt :tabnew<CR>
+nnoremap <leader>tj :tabnext<CR>
+nnoremap <leader>tk :tabprevious<CR>
 
 """""""""""""""""""""""
 """"" WINDOW MANAGEMENT:
