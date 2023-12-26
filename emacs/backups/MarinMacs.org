@@ -131,7 +131,7 @@ Indentation
   (setq visible-bell t)                                    ;; disable end of buffer sounds
   (setq inhibit-startup-screen t)                          ;; disable startup screen
   (when (and (version<= "29.0.50" emacs-version) (not (string-equal system-type "windows-nt")))
-    (add-to-list 'default-frame-alist '(alpha-background . 90))) ;; Emacs 29 adds true transparency
+    (add-to-list 'default-frame-alist '(alpha-background . 95))) ;; Emacs 29 adds true transparency
 #+END_SRC
 - Line numbers
   - Emacs versions after 26 contain built-in line numbers
