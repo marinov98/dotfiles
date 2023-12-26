@@ -6,9 +6,8 @@
 ;;; Code:
 (when (>= emacs-major-version 29)
   (use-package treesit
-    :after lsp-mode
     :hook
-    ((c-ts-mode c++-ts-mode bash-ts-mode cmake-ts-mode toml-ts-mode rust-ts-mode go-ts-mode css-ts-mode yaml-ts-mode json-ts-mode js-ts-mode typescript-ts-mode tsx-ts-mode) . lsp-deferred)
+    ((c-ts-mode c++-ts-mode bash-ts-mode cmake-ts-mode toml-ts-mode rust-ts-mode go-ts-mode css-ts-mode yaml-ts-mode json-ts-mode js-ts-mode typescript-ts-mode tsx-ts-mode) . eglot-ensure)
     :config
     (setq treesit-language-source-alist
       '((bash "https://github.com/tree-sitter/tree-sitter-bash")
