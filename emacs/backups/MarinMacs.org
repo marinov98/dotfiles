@@ -1575,34 +1575,35 @@ Smerge mode deals with merge conflicts in git.
  - lsp-ui (UI integrations for lsp-mode)
  - lsp-java (java seems to require its own package for lsp)
 #+BEGIN_SRC emacs-lisp  
-     (use-package lsp-mode
-         :ensure t
-         :commands (lsp lsp-deferred)
-         :hook
-         ((c++-mode c-mode css-mode yaml-mode json-mode js-mode js2-mode rjsx-mode typescript-mode web-mode) . lsp-deferred)
-         :bind
-         (:map evil-normal-state-map
-           ("gy" . lsp-find-type-definition)
-           ("gh" . lsp-describe-thing-at-point))
-         :custom
-         (lsp-auto-guess-root nil)
-         (lsp-log-io nil)
-         (lsp-idle-delay 0.3)
-         (lsp-eldoc-enable-hover nil) ;; graphical bloat imo, but can be good
-         (lsp-signature-auto-activate nil) ;; (This tends to cause problems and is SUPER slow ESP on MS Windows) you could manually request them via 'lsp-signature-activate'
-         (lsp-headerline-breadcrumb-enable nil) ;; graphical bloat, don't need but useful to the right person
-         (lsp-enable-folding nil)
-         (lsp-enable-text-document-color nil)
-         (lsp-file-watch-threshold 5000)
-         (lsp-prefer-flymake nil)
-         (lsp-io-messages-max nil)
-         :config
-         (add-hook 'after-init-hook
-                     #'(lambda () ;; in case I disable lsp-ui remap g prefix keys to regular lsp
-                         (unless (package-installed-p 'lsp-ui)
-                           (define-key evil-normal-state-map (kbd "gd") 'lsp-find-definition)
-                           (define-key evil-normal-state-map (kbd "gi") 'lsp-goto-implementation)
-                           (define-key evil-normal-state-map (kbd "gr") 'lsp-find-references)))))
+       (use-package lsp-mode
+       :ensure t
+       :commands (lsp lsp-deferred)
+       :hook
+       (((c++-mode c-mode css-mode yaml-mode json-mode js-mode js2-mode rjsx-mode typescript-mode web-mode) . lsp-deferred)
+        ((bash-ts-mode rust-ts-mode go-ts-mode css-ts-mode yaml-ts-mode json-ts-mode js-ts-mode typescript-ts-mode tsx-ts-mode) . lsp-deferred)) ;; treesitter modes
+       :bind
+       (:map evil-normal-state-map
+         ("gy" . lsp-find-type-definition)
+         ("gh" . lsp-describe-thing-at-point))
+       :custom
+       (lsp-auto-guess-root nil)
+       (lsp-log-io nil)
+       (lsp-idle-delay 0.3)
+       (lsp-eldoc-enable-hover nil) ;; graphical bloat imo, but can be good
+       (lsp-signature-auto-activate nil) ;; (This tends to cause problems and is SUPER slow ESP on MS Windows) you could manually request them via 'lsp-signature-activate'
+       (lsp-headerline-breadcrumb-enable nil) ;; graphical bloat, don't need but useful to the right person
+       (lsp-enable-folding nil)
+       (lsp-enable-text-document-color nil)
+       (lsp-file-watch-threshold 5000)
+       (lsp-prefer-flymake nil)
+       (lsp-io-messages-max nil)
+       :config
+       (add-hook 'after-init-hook
+                   #'(lambda () ;; in case I disable lsp-ui remap g prefix keys to regular lsp
+                       (unless (package-installed-p 'lsp-ui)
+                         (define-key evil-normal-state-map (kbd "gd") 'lsp-find-definition)
+                         (define-key evil-normal-state-map (kbd "gi") 'lsp-goto-implementation)
+                         (define-key evil-normal-state-map (kbd "gr") 'lsp-find-references)))))
 
      (use-package lsp-ui
          :ensure t
