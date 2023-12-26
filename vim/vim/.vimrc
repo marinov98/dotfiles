@@ -50,7 +50,7 @@ set smartcase
 """" PREFFERED DEFAULTS:
 set foldenable
 set incsearch
-set hlsearch
+set nohlsearch
 set showmatch
 set wildmenu
 
@@ -99,21 +99,24 @@ set path+=**
 nnoremap <leader>n :noh<CR>
 nnoremap Y y$
 nnoremap <leader>s :w<CR>
-nnoremap <leader>k :tabclose<CR>
+nnoremap <leader>k :bd<CR>
+nnoremap <leader>x :tabclose<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>Q :q!<CR>
 
 nnoremap <leader>cs :terminal<CR>
 nnoremap <leader>cm :%s//gc<Left><Left><Left>
+vnoremap <leader>cm :s//gc<Left><Left><Left>
 nnoremap <leader>* :%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>
-nnoremap <leader>x :!chmod +x %<CR>
-" command to grep word under cursor
-nnoremap <leader>/ :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+nnoremap <leader>X :!chmod +x %<CR>
 
 nnoremap <leader>bb <C-^>
-nnoremap <leader>bt :tabnew<CR>
-nnoremap <leader>bn :tabnext<CR>
-nnoremap <leader>bp :tabprevious<CR>
+nnoremap <leader>bn :bnext<CR>
+nnoremap <leader>bp :bprevious<CR>
+
+nnoremap <leader>tt :tabnew<CR>
+nnoremap <leader>tj :tabnext<CR>
+nnoremap <leader>tk :tabprevious<CR>
 
 nnoremap <Leader>+ :vertical resize +5<CR>
 nnoremap <Leader>- :vertical resize -5<CR>
