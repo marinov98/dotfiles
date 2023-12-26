@@ -8,7 +8,8 @@
        :ensure t
        :commands (lsp lsp-deferred)
        :hook
-       ((c++-mode c-mode css-mode yaml-mode json-mode js-mode js2-mode rjsx-mode typescript-mode web-mode) . lsp-deferred)
+       (((c++-mode c-mode css-mode yaml-mode json-mode js-mode js2-mode rjsx-mode typescript-mode web-mode) . lsp-deferred)
+        ((bash-ts-mode rust-ts-mode go-ts-mode css-ts-mode yaml-ts-mode json-ts-mode js-ts-mode typescript-ts-mode tsx-ts-mode) . lsp-deferred)) ;; treesitter modes
        :bind
        (:map evil-normal-state-map
          ("gy" . lsp-find-type-definition)
@@ -61,13 +62,7 @@
        (lsp-ui-peek-list-width 60)
        (lsp-ui-peek-peek-height 25))
 
- (use-package lsp-treemacs
-     :after treemacs lsp-mode
-     :ensure t
-     :config (lsp-treemacs-sync-mode t))
-
 (use-package lsp-pyright
-    :after lsp-mode
     :ensure t
     :hook ((python-mode python-ts-mode) . (lambda ()
                          (require 'lsp-pyright)
@@ -75,7 +70,6 @@
 
  (use-package lsp-java
      :disabled
-     :after lsp-mode
      :hook ((java-mode java-ts-mode) . lsp-deferred))
      ;; :config ;; TODO: properly configure this if I ever use Java / Or don't use this at all
      ;; (setq lsp-java-vmargs
