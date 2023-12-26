@@ -6,6 +6,10 @@
 ;;; Code:
 (use-package flymake
      :ensure t
+     :bind
+     (:map evil-normal-state-map
+         ("]d" . flymake-goto-next-error)
+         ("[d" . flymake-goto-prev-error))
      :hook (prog-mode . flymake-mode))
 
 
