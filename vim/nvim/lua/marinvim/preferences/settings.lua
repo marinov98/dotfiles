@@ -2,6 +2,7 @@ vim.opt.guicursor = ""
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
+vim.opt.mouse = 'a'						-- enable the mouse in all modes
 
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
@@ -26,6 +27,13 @@ vim.opt.splitright = true				-- vertical split to the right
 
 vim.opt.updatetime = 100
 
+-- netrw
+vim.g.netrw_browse_split = 0
+vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 25
+vim.g.netrw_altv = 1
+
+-- clipboard, cursors
 vim.cmd("set clipboard=unnamedplus") -- use system clipboard
 vim.cmd("set cursorline") -- highlight current line
 vim.cmd("set noerrorbells") -- no sounds 
