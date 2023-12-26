@@ -6,7 +6,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 """"""" CODING:
 Plug 'easymotion/vim-easymotion'
 Plug 'https://github.com/jiangmiao/auto-pairs'
-Plug 'octol/vim-cpp-enhanced-highlight'
 """"""" MODELINE:
 Plug 'itchyny/lightline.vim'
 """"""" GITHUB:
@@ -17,7 +16,6 @@ Plug 'https://github.com/tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 """"""" WEB DEV:
 Plug 'alvan/vim-closetag'
-Plug 'mattn/emmet-vim'
 Plug 'sheerun/vim-polyglot'
 call plug#end()
 
