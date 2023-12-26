@@ -16,14 +16,16 @@ vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undofile = false
 
-vim.opt.hlsearch = true
+vim.opt.hlsearch = false
 vim.opt.incsearch = true
+vim.opt.pumheight = 8 -- how many candidates to show on a popup
 
 vim.opt.termguicolors = true
+vim.opt.splitbelow = true				-- split go below
+vim.opt.splitright = true				-- vertical split to the right
 
 vim.opt.updatetime = 100
 
 vim.cmd("set clipboard=unnamedplus") -- use system clipboard
 vim.cmd("set cursorline") -- highlight current line
 vim.cmd("set noerrorbells") -- no sounds 
-vim.cmd("set pumheight=8") -- how many candidates to show on a popup
