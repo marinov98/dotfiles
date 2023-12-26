@@ -1,6 +1,6 @@
 call plug#begin('~/.vim/plugged')
 """"""" THEMES:
-Plug 'morhetz/gruvbox'
+Plug 'dracula/vim', { 'as': 'dracula' }
 """"""" File Search:
 Plug 'ctrlpvim/ctrlp.vim'
 """"""" CODING:
@@ -16,6 +16,7 @@ Plug 'https://github.com/tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 """"""" WEB DEV:
 Plug 'alvan/vim-closetag'
+Plug 'mattn/emmet-vim'
 Plug 'sheerun/vim-polyglot'
 call plug#end()
 
@@ -26,7 +27,7 @@ map <SPACE> <Leader>
 
 " Modeline
 let g:lightline = {
-  \ 'colorscheme': 'seoul256',
+	\ 'colorscheme': 'dracula',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
     \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -60,6 +61,9 @@ else " Else use old configuration
 		  \ }
 	let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 endif
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
 
 """"""""" Easy Motion:
 map  <Leader>ag <Plug>(easymotion-bd-f)
@@ -93,7 +97,7 @@ set nocompatible
 
 "Color theme
 set background=dark
-colorscheme gruvbox
+colorscheme dracula
 
 
 "indentation
@@ -139,6 +143,7 @@ set t_Co=256
 set path+=**
 
 " MODE SPECIFIC SETTINGS:
+autocmd BufEnter *.tsx set filetype=typescript
 autocmd FileType html setlocal ts=2 sts=2 sw=2
 autocmd FileType css setlocal ts=2 sts=2 sw=2
 autocmd FileType javascript setlocal ts=2 sts=2 sw=2
