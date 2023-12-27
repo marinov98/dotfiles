@@ -126,7 +126,7 @@ nnoremap <leader>* :%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>
 nnoremap <leader>/ :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 nnoremap <leader>X :!chmod +x %<CR>
 
-nnoremap <leader>bb <C-^>
+nnoremap <leader>a <C-^>
 nnoremap <leader>bn :bnext<CR>
 nnoremap <leader>bp :bprevious<CR>
 

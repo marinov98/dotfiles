@@ -10,7 +10,6 @@ Plug 'morhetz/gruvbox'
 """"""" File Search:
 Plug 'ctrlpvim/ctrlp.vim'
 """"""" CODING:
-Plug 'easymotion/vim-easymotion'
 Plug 'SirVer/ultisnips'| Plug 'honza/vim-snippets'
 Plug 'rhysd/vim-clang-format'
 Plug 'jiangmiao/auto-pairs'
@@ -110,7 +109,7 @@ nnoremap <leader>* :%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>
 nnoremap <leader>/ :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 nnoremap <leader>X :!chmod +x %<CR>
 
-nnoremap <leader>bb <C-^>
+nnoremap <leader>a <C-^>
 nnoremap <leader>bn :bnext<CR>
 nnoremap <leader>bp :bprevious<CR>
 
@@ -210,18 +209,6 @@ nmap <silent> gs :CocSearch
 " Symbol renaming.
 nmap <leader>lc <Plug>(coc-rename)
 """"""""""" AUTOCOMPLETE END
-
-""""""""""" Easy Motion:
-map  <Leader>ag <Plug>(easymotion-bd-f)
-nmap <Leader>ag <Plug>(easymotion-overwin-f)
-
-" Move to line
-map <Leader>al <Plug>(easymotion-bd-jk)
-nmap <Leader>al <Plug>(easymotion-overwin-line)
-
-" Move to word
-map  <Leader>aw <Plug>(easymotion-bd-w)
-nmap <Leader>aw <Plug>(easymotion-overwin-w)
 
 """"""""""" Modeline:
 let g:lightline = {
