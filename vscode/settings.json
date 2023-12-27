@@ -334,11 +334,11 @@
       "commands": ["extension.vim_ctrl+^"]
     },
     {
-      "before": ["<leader>", "b", "n"],
+      "before": ["<leader>", "t", "j"],
       "commands": [":tabnext"]
     },
     {
-      "before": ["<leader>", "b", "p"],
+      "before": ["<leader>", "t", "k"],
       "commands": [":tabprev"]
     },
     {

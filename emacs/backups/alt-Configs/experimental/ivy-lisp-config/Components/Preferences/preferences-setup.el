@@ -13,7 +13,7 @@
 (setq visible-bell t)                                    ;; disable end of buffer sounds
 (setq inhibit-startup-screen t)                          ;; disable startup screen
 (when (and (<= 29 emacs-major-version) (not (string-equal system-type "windows-nt")))
-  (add-to-list 'default-frame-alist '(alpha-background . 90))) ;; Emacs 29 adds true transparency
+  (add-to-list 'default-frame-alist '(alpha-background . 95))) ;; Emacs 29 adds true transparency
 
 (fset 'yes-or-no-p 'y-or-n-p)           ;; change yes or no to y or n
 (setq use-dialog-box nil)               ;; Don't pop up UI dialogs when prompting
