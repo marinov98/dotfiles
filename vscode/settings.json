@@ -220,9 +220,9 @@
     },
     "vim.useSystemClipboard": true,
     "vim.incsearch": true,
-    "vim.hlsearch": true,
+    "vim.hlsearch": false,
     "vim.sneak": false,
-    "vim.easymotion": true,
+    "vim.easymotion": false,
     "vim.leader": "<space>",
     "vim.normalModeKeyBindings": [
     {
@@ -298,14 +298,6 @@
       "commands": ["editor.action.organizeImports"]
     },
     {
-      "before": ["<leader>", "a", "s"],
-      "after": ["<leader>", "<leader>", "s"]
-    },
-    {
-      "before": ["<leader>", "a", "w"],
-      "after": ["<leader>", "<leader>", "w"]
-    },
-    {
       "before": ["<leader>", "<leader>", "l"],
       "commands": ["projectManager.listProjects"]
     },
@@ -330,7 +322,7 @@
       "commands": ["workbench.panel.chatSidebar.copilot"]
     },
     {
-      "before": ["<leader>", "b", "b"],
+      "before": ["<leader>", "a"],
       "commands": ["extension.vim_ctrl+^"]
     },
     {
