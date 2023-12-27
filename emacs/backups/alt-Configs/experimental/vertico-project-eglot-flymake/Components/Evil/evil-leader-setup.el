@@ -20,7 +20,7 @@
      "w" '(hydra-window/body :wk "Window Hydra")
      "S" '(hydra-smerge/body :wk "Smerge Hydra")
      "l" '(hydra-code/body :wk "LSP Hydra")
-     "a" '(hydra-avy/body :wk "Avy Hydra")
+     "a" '(evil-buffer :wk "Ctrl+^ Buffer")
      "g" '(hydra-git/body :wk "Git Hydra")
      "v" '(hydra-writing/body :wk "Writing Hydra")
      "u" '(hydra-utility/body :wk "Utility Hydra")

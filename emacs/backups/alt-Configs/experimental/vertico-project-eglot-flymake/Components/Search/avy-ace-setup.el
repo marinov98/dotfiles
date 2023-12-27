@@ -5,7 +5,7 @@
 
 ;;; Code:
 (use-package avy
-    :ensure t
+    :disabled
     :custom
     (avy-background t)
     (avy-timeout-seconds 0.4))

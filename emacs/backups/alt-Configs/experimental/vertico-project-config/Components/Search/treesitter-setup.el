@@ -21,7 +21,10 @@
      ;;     (json-mode . json-ts-mode)
      ;;     (css-mode . css-ts-mode)
      ;;     (python-mode . python-ts-mode)))
-))
+    )
+  (use-package python-ts-mode
+    :mode (("\\.py\\'" . python-ts-mode)))
+)
 
 (provide 'treesitter-setup)
 ;;; treesitter-setup.el ends here

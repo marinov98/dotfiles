@@ -8,7 +8,7 @@
 
 (require 'completion-framework-setup)
 (require 'project-management-tool-setup)
-(require 'avy-ace-setup)
+(require 'word-window-search-setup)
 (require 'dashboard-setup)
 (require 'treesitter-setup)
 

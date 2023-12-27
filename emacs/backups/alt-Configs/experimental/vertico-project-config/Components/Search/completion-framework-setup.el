@@ -17,20 +17,6 @@
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
-;; don't care for this but might add it to my workflow later on
-(use-package marginalia
-  :disabled
-  :after vertico
-  :bind (:map minibuffer-local-map
-         ("M-A" . marginalia-cycle))
-  :init
-  (marginalia-mode))
-
-(use-package consult
-  :ensure t
-  :bind(:map evil-normal-state-map
-         ("gs" . consult-ripgrep)))
-
 (use-package embark
     :ensure t
     :bind
@@ -42,6 +28,11 @@
   :ensure t ; only need to install it, embark loads it after consult if found
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
+
+(use-package consult
+  :ensure t
+  :bind(:map evil-normal-state-map
+         ("gs" . consult-ripgrep)))
 
 ;; wgrep combined ripgrep and/or silver searcher makes changing text in multiple places much easier
 (use-package wgrep
