@@ -9,7 +9,7 @@ vim.keymap.set('n', '<leader>Q',":q!<CR>", { desc = "Force Quit" })
 vim.keymap.set('n', '<leader>n',":noh<CR>", { desc = "Remove highlight" })
 
 -- Buffers and tabs
-vim.keymap.set('n', '<leader>bb',"<C-^>", { desc = "Alternate buffers" })
+vim.keymap.set('n', '<leader>a',"<C-^>", { desc = "Alternate buffers" })
 vim.keymap.set('n', '<leader>bp',":bprevious<CR>", { desc = "Previous Buffer" })
 vim.keymap.set('n', '<leader>bn',":bnext<CR>", { desc = "Next buffer" })
 
@@ -23,9 +23,3 @@ vim.keymap.set("n", "<leader>cm", ":%s//gc<Left><Left><Left>") -- attempt at nat
 vim.keymap.set("v", "<leader>cm", ":s//gc<Left><Left><Left>") -- attempt at native multiple cursors visual mode
 vim.keymap.set("n", "<leader>*", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>X", "<cmd>!chmod +x %<CR>", { silent = true })
-
--- ONLY if hop plugin is used! (These cause error if put inside the plugin itself)
-vim.keymap.set('n', '<leader>ag',":HopChar1<CR>", { desc = "Goto Char 1"})
-vim.keymap.set('n', '<leader>as',":HopChar2<CR>", { desc = "Goto Char 2"})
-vim.keymap.set('n', '<leader>at',":HopPattern<CR>", { desc = "Goto pattern"})
-vim.keymap.set('n', '<leader>aw',":HopWord<CR>", { desc = "Goto Word"})
