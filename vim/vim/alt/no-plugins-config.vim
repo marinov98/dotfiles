@@ -143,6 +143,7 @@ set splitbelow splitright
 " Auto close braces
 inoremap " ""<left>
 inoremap ' ''<left>
+inoremap ` ``<left>
 inoremap ( ()<left>
 inoremap [ []<left>
 inoremap { {}<left>
