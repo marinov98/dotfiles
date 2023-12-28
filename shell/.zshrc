@@ -26,8 +26,8 @@ export VISUAL=vim
 
 plugins=(
   git
-	zsh-syntax-highlighting
-	zsh-autosuggestions
+  zsh-syntax-highlighting
+  zsh-autosuggestions
   vi-mode
 )
 
