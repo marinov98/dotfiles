@@ -19,6 +19,7 @@
 	co = checkout
 	br = branch
 	c = commit
+  	ds = diff --staged
 	cl = clone
 	st = status
 	m = merge
