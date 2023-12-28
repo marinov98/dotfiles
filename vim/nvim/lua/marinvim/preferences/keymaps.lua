@@ -23,6 +23,7 @@ vim.keymap.set("n", "<leader>cm", ":%s//gc<Left><Left><Left>") -- attempt at nat
 vim.keymap.set("v", "<leader>cm", ":s//gc<Left><Left><Left>")  -- attempt at native multiple cursors visual mode
 vim.keymap.set("n", "<leader>*", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>X", "<cmd>!chmod +x %<CR>", { silent = true })
+vim.keymap.set("n", "<leader>uc", ":! ", { silent = true })
 
 -- Git
 vim.keymap.set('n', '<leader>gg', vim.cmd.Git, { desc = "Launch Fugitive" })

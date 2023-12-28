@@ -63,7 +63,7 @@ alias c='code .'                            # c:            Open VS Code
 alias rr='ranger'                           # rr:           Opens ranger
 alias t='tmux'                              # t:            Opens tmux
 alias ts='tmux attach'                      # ts:           Tmux attaches to specified session
-alias zj='./zellij'                         # zj:           Start zellij
+alias zj='zellij'                           # zj:           Start zellij
 
 alias f='open -a Finder ./'                 # f:            Opens current directory in MacOS Finder
 alias ~="cd ~"                              # ~:            Go Home
@@ -95,5 +95,19 @@ goto-projects() {
   zfd
 }
 
+rg-find-file() {
+  vz
+}
+
+goto-projects-and-find() {
+  zle goto-projects
+  zle rg-find-file
+}
+
 zle -N goto-projects
-bindkey '^f' goto-projects
+zle -N rg-find-file
+zle -N goto-projects-and-find
+
+bindkey '^ ' goto-projects
+bindkey '^f' rg-find-file
+bindkey '^l' goto-projects-and-find
