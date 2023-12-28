@@ -7,6 +7,7 @@ All my dot files
 - My [**Vim/Neovim**](https://github.com/marinov98/dotfiles/blob/master/vim/) config guide
 
 ### Quick Start
+- WARNING: the scripts require an update and may not be reliable
 - Clone this repo: `git clone https://github.com/marinov98/dotfiles.git `
 - cd into it `cd dotfiles/`
 - 2 options (Make sure to make the scripts executable with `sudo chmod +x SCRIPT`
