@@ -1,9 +1,15 @@
 vim.opt.guicursor = ""
 
+-- Ignore compiled files
+vim.opt.wildignore = "__pycache__"
+vim.opt.wildignore:append { "*.o", "*~", "*.pyc", "*pycache*" }
+vim.opt.wildignore:append { "Cargo.lock", "Cargo.Bazel.lock" }
+
+-- Line Numbers
 vim.opt.nu = true
 vim.opt.relativenumber = true
-vim.opt.mouse = 'a'						-- enable the mouse in all modes
 
+vim.opt.mouse = 'a'						-- enable the mouse in all modes
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2

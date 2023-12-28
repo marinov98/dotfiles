@@ -82,7 +82,18 @@ stty -ixon
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-alias vz='v $(fzf)'
+CUSTOM_PROJECTS_DIR_PATH="$HOME/Projects/" # Change this based on your projects directory
+alias fzfi='rg --files --hidden --follow --no-ignore-vcs -g "!{node_modules,.git}" | fzf'
+alias zfind='cd $CUSTOM_PROJECTS_DIR_PATH && cd $(find . -type d -print | fzf)' 
+alias zfd='cd $CUSTOM_PROJECTS_DIR_PATH && cd $(fd . -t d | fzf)'
+alias vz='v $(fzfi)'
 
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240"  
-ZSH_HIGHLIGHT_STYLES[path]=fg=255   
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240"
+ZSH_HIGHLIGHT_STYLES[path]=fg=255
+
+goto-projects() {
+  zfd
+}
+
+zle -N goto-projects
+bindkey '^f' goto-projects
