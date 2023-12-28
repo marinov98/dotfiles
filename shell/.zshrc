@@ -95,5 +95,19 @@ goto-projects() {
   zfd
 }
 
+rg-find-file() {
+  vz
+}
+
+goto-projects-and-find() {
+  zle goto-projects
+  zle rg-find-file
+}
+
 zle -N goto-projects
-bindkey '^f' goto-projects
+zle -N rg-find-file
+zle -N goto-projects-and-find
+
+bindkey '^ ' goto-projects
+bindkey '^f' rg-find-file
+bindkey '^l' goto-projects-and-find
