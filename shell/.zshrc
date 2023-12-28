@@ -25,10 +25,10 @@ export VISUAL=vim
 # export MANPATH="/usr/local/man:$MANPATH"
 
 plugins=(
-  git 
-  z
-  zsh-syntax-highlighting
-  zsh-autosuggestions
+  git
+	zsh-syntax-highlighting
+	zsh-autosuggestions
+  vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
