@@ -19,9 +19,9 @@ colors:
     foreground: '0xebebeb'
 
   # Colors the cursor will use if `custom_cursor_colors` is true
-  cursor:
-    text: '0xebebeb'
-    cursor: '0xbd002c'
+  # cursor:
+  #   text: '0xebebeb'
+  #   cursor: '0xbd002c'
 
   # Normal colors
   normal:
@@ -54,7 +54,8 @@ colors:
     - { index: 21, color: '0xe8e8e8' }
 
 # Background opacity
-window.opacity: 0.9
+window:
+  opacity: 0.9
 
 
 font:
