@@ -91,9 +91,16 @@ alias vz='v $(fzfi)'
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240"
 ZSH_HIGHLIGHT_STYLES[path]=fg=255
 
-goto-projects() {
-  zfd
-}
+if which fd >/dev/null; then
+  goto-projects() {
+    zfd
+  }
+else
+  goto-projects() {
+    zfind
+  }
+fi
+
 
 rg-find-file() {
   vz
