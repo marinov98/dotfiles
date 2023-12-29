@@ -51,7 +51,6 @@ colors:
 # Background opacity
 window:
   opacity: 0.9
-  decorations: none
   padding:
     x: 5
     y: 0
