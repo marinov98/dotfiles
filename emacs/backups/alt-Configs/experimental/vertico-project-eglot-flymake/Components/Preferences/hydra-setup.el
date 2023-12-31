@@ -137,7 +137,7 @@
   ("s" hydra-style/body "format style" :color blue))
 
   "Errors"
-  (("l" flymake-show-buffer-diagnostics "list errors")
+  (("l" flymake-show-project-diagnostics "list errors")
   ("e" flymake-goto-next-error "next error")
   ("E" flymake-goto-prev-error "prev error"))))
 
