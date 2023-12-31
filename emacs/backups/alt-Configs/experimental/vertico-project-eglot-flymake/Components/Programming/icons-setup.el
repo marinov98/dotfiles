@@ -12,7 +12,6 @@
 
 (use-package all-the-icons-completion
   :ensure t
-  ;; :hook (marginalia-mode . all-the-icons-completion-marginalia-setup) ;; uncomment this line if you want to integrate with marginalia
   :init
   (all-the-icons-completion-mode))
 
