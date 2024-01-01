@@ -4,13 +4,12 @@ return {
     require("lualine").setup({
       options = {
         theme = 'catppuccin',
-        icons_enabled = false,
       },
       sections = {
         lualine_a = { 'mode' },
         lualine_b = { 'branch', 'diagnostics' },
         lualine_c = { 'filename' },
-        lualine_x = { 'encoding', 'filetype' },
+        lualine_x = { 'encoding', { 'filetype', icons_enabled = false } },
         lualine_y = {},
         lualine_z = {}
       },
