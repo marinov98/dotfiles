@@ -89,7 +89,7 @@ alias zfind='cd $CUSTOM_PROJECTS_DIR_PATH && cd $(find . -type d -print | fzf)'
 alias zfd='cd $CUSTOM_PROJECTS_DIR_PATH && cd $(fd . -t d | fzf)'
 alias vz='v $(fzfi)'
 
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#f1fa8c'
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#6272a4'
 ZSH_HIGHLIGHT_STYLES[path]='fg=#8be9fd'
 
 if which fd >/dev/null; then
