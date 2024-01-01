@@ -81,6 +81,7 @@
   (mpm/leader-keys
     "c" '(:ignore t :wk "Coding")
     "c /" '(comment-region :wk "Comment Region")
+    "c a" '(hydra-avy/body :wk "Avy Hydra")
     "c u" '(uncomment-region :wk "Uncomment Region")
     "c l" '(hydra-launcher/body :wk "Launcher Hydra")
     "c m" '(hydra-mc/body :wk "Multiple Cursors Hydra")

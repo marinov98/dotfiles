@@ -1,14 +1,33 @@
-;; avy-ace-setup.el --- avy and ace-window join the config battle -*- lexical-binding: t; -*-
+;; avy-ace-setup.el --- packages for word/window searching -*- lexical-binding: t; -*-
 
 ;;; Commentary:
-;; I did not think anything of this package until I actively used it in my workflow.  This package proved to be nothing but amazing for jumping around text.  Its inspiration comes from the vim package easymotion.  This package really boosts your ability to fly around text even with the already fast motion vim keybindings.  I utilize the keybindings in a hydra and a personal keybinding just because its so good.  Check the official repository If you want to know more.
 
 ;;; Code:
-(use-package avy
-    :disabled
+(use-package avy 
+    :ensure t
     :custom
     (avy-background t)
-    (avy-timeout-seconds 0.4))
+    (avy-timeout-seconds 0.4)
+    :config
+    (pretty-hydra-define hydra-avy (:color blue :title "↵ Avy ↵" :quit-key "q")
+      ("Char"
+       (("g" avy-goto-char "char 1" :color red)
+        ("s" avy-goto-char-2 "char 2" :color red)
+        ("t" avy-goto-char-timer "timed char" :color red))
+
+       "Word"
+       (("w" avy-goto-word-1 "goto word")
+        ("W" avy-goto-word-0 "goto word 0"))
+
+       "Line"
+       (("l" avy-goto-line "goto line")
+        ("L" avy-goto-end-of-line "goto eoline")
+        ("m" avy-move-line "move line")
+        ("K" avy-kill-whole-line "kill line")
+        ("y" avy-copy-line "yank line"))
+
+       "Resume"
+       (("r" avy-resume "resume" :color red)))))
 
 (use-package ace-window
      :ensure t
