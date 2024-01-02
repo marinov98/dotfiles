@@ -1,4 +1,5 @@
 # https://github.com/helix-editor/helix/blob/master/languages.toml for configs
+# https://github.com/helix-editor/helix/wiki/How-to-install-the-default-language-servers for how to install lang servers
 
 [[language]]
 name = "python"
