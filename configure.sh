@@ -1,3 +1,4 @@
+#!/bin/bash
 ## Script works best when directory is cloned in home not desktop
 
 ## IMPORTANT ensure appropriate packages are installed for terminal : neofetch, powerline shell, xcape before using script!
