@@ -4,6 +4,7 @@ theme = "onedark"
 line-number = "relative"
 cursorline = true
 bufferline = "multiple"
+color-modes = true
 
 [editor.cursor-shape]
 insert = "bar"
