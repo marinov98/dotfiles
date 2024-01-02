@@ -1,4 +1,4 @@
-theme = "onedark"
+theme = "catppuccin_macchiato"
 
 [editor]
 line-number = "relative"
@@ -15,7 +15,7 @@ select = "underline"
 hidden = false
 
 [editor.statusline]
-left = ["mode", "file-name", "diagnostics"]
+left = ["mode", "separator", "file-name", "diagnostics"]
 center = ["read-only-indicator"]
 right = ["spinner", "file-encoding", "position"]
-separator = "|"
+separator = " "
