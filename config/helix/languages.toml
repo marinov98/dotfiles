@@ -1,3 +1,4 @@
+# https://github.com/helix-editor/helix/blob/master/languages.toml for configs
 [[language]]
 name = "python"
 auto-format = false
