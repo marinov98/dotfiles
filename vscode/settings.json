@@ -224,6 +224,8 @@
     "vim.sneak": false,
     "vim.easymotion": false,
     "vim.leader": "<space>",
+    "vim.cursorStylePerMode.insert": "line-thin",
+    "vim.cursorStylePerMode.normal": "block",
     "vim.normalModeKeyBindings": [
     {
       "before": ["<leader>", "s"],
