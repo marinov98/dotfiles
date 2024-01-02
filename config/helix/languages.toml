@@ -1,0 +1,7 @@
+[[language]]
+name = "python"
+auto-format = false
+formatter = { command = "black", args = ["--line-length", "160", "--quiet", "-"] }
+language-servers = ["pyright"]
+
+
