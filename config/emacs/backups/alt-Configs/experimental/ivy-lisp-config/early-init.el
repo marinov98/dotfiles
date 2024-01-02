@@ -15,7 +15,6 @@
 ;;; Code:
 
 ;; add all our components to the load path
-;; add all our components to the load path
 (let ((default-directory  (concat user-emacs-directory "Components/")))
   (normal-top-level-add-subdirs-to-load-path))
 
