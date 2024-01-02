@@ -12,7 +12,7 @@ then
     \cp shell/.zshrc ~/
     echo "shell done"
     echo "copying config..."
-    \cp -r config/ ~/.config/
+    \cp -r config/* ~/.config/
     echo "finished copying config"
 else
     echo "Machine found to not be linux or Mac will not copy config!"
