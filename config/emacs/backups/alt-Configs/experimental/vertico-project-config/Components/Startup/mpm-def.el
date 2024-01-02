@@ -16,7 +16,7 @@
 (defconst mpm-projects-override-file ".project-override.el"
   "File to override in monorepos for project.el.")
 
-(defvar mpm-img-dir "~/.emacs.d/img"
+(defvar mpm-img-dir (concat user-emacs-directory "img")
   "Images directory, mainly for dashboard package.")
 
 (defconst mpm-dashboard-banner-img "targetBanner.png"
