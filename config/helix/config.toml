@@ -2,6 +2,8 @@ theme = "onedark"
 
 [editor]
 line-number = "relative"
+cursorline = true
+bufferline = "multiple"
 
 [editor.cursor-shape]
 insert = "bar"
