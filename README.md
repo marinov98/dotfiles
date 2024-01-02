@@ -3,13 +3,12 @@ All my dot files
 
 ### Deeper dive into emacs and/or vim
 - My [**Emacs**](https://github.com/marinov98/dotfiles/blob/master/config/emacs/) config guide
-
 - My [**Neovim**](https://github.com/marinov98/dotfiles/blob/master/config/nvim/) config guide
 
 ### Quick Start
 - Clone this repo: `git clone https://github.com/marinov98/dotfiles.git `
 - cd into it `cd dotfiles/`
--`sudo chmod +x configure.sh && ./configure.sh` 
+- `sudo chmod +x configure.sh && ./configure.sh` 
  
 ### OS-specific
 - WARNING: the scripts require an update and may not be reliable just use any commands you see in them if you find them useful
