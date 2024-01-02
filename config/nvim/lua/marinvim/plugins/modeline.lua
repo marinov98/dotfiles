@@ -10,7 +10,7 @@ return {
         lualine_a = { 'mode' },
         lualine_b = { 'branch', 'diagnostics' },
         lualine_c = { 'filename' },
-        lualine_x = { 'encoding', { 'fileformat', icons_enabled = false } },
+        lualine_x = { 'encoding', "location" },
         lualine_y = {},
         lualine_z = {}
       },
