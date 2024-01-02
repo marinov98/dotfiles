@@ -3,7 +3,7 @@
 ;;; Commentary:
 ;; in case early-init doesn't load (Emacs 27 introduced early-init)
 (when (< emacs-major-version 27)
- (load "~/.emacs.d/early-init.el"))
+ (load (concat user-emacs-directory "early-init.el")))
 
 ;;; Code:
 ;; load our custom components except startup (used in early-init.el)
