@@ -80,7 +80,8 @@ trash () { command mv "$@" ~/.Trash ; }     # trash:        Moves a file to the 
 stty -ixon
 
 # FZF customization
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs'
+# export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs' # ripgrep variant
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --no-ignore'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 CUSTOM_PROJECTS_DIR_PATH="$HOME/Projects/" # Change this based on your projects directory
