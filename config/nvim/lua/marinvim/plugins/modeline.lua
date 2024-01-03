@@ -17,6 +17,6 @@ return {
       },
     })
     vim.opt.showmode = false -- avoid duplicate showings of mode
-    vim.cmd("set noshowcmd") -- don't show commands'
+    vim.opt.showcmd = false -- don't show commands'
   end
 }
