@@ -38,12 +38,6 @@ return {
           -- See `:help vim.lsp.*` for documentation on any of the below functions
           local opts = { buffer = ev.buf }
           vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-          vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-          local builtin = require('telescope.builtin')
-          vim.keymap.set('n', 'gr', builtin.lsp_references, opts) -- better visuals than vim.lsp.buf.references
-          -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts) -- use if telescope is not installed
-          vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-          vim.keymap.set('n', 'gy', vim.lsp.buf.type_definition, opts)
           vim.keymap.set('n', 'gh', vim.lsp.buf.signature_help, opts)
           vim.keymap.set('n', '<space>lc', vim.lsp.buf.rename, opts)
           vim.keymap.set('n', '<space>la', vim.lsp.buf.code_action, opts)
@@ -51,6 +45,21 @@ return {
           vim.keymap.set('n', '<space>lf', function()
             vim.lsp.buf.format { async = true }
           end, opts)
+
+          -- Enhance builtin-commands with Telescope
+          local builtin = require('telescope.builtin')
+          vim.keymap.set('n', 'gd', builtin.lsp_definitions, opts)
+          vim.keymap.set('n', 'gr', builtin.lsp_references, opts) -- better visuals than vim.lsp.buf.references
+          vim.keymap.set('n', 'gi', builtin.lsp_implementations, opts)
+          vim.keymap.set('n', 'gy', builtin.lsp_type_definitions, opts)
+          vim.keymap.set('n', '<space>lw', builtin.lsp_workspace_symbols, opts)
+          vim.keymap.set('n', '<space>ld', builtin.lsp_document_symbols, opts)
+
+          -- old commands use if telescope is not installed or you prefer them
+          -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+          -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts) 
+          -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+          -- vim.keymap.set('n', 'gy', vim.lsp.buf.type_definition, opts)
       end,
       })
     end
