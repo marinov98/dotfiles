@@ -5,6 +5,7 @@ return  {
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
     },
+    keys = '<leader>tn',
     config = function()
       require("neo-tree").setup({
       filesystem = {
