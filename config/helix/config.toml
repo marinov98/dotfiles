@@ -1,4 +1,4 @@
-theme = "tokyonight"
+theme = "catppuccin_mocha"
 
 [editor]
 line-number = "relative"
@@ -19,3 +19,6 @@ left = ["mode", "separator", "file-name", "diagnostics"]
 center = ["read-only-indicator"]
 right = ["spinner", "file-encoding", "position"]
 separator = " "
+
+[keys.normal]
+"space" = { "l" = { "f" = ":format" }, "q" =  ":q" , "Q" = ":q!" }
