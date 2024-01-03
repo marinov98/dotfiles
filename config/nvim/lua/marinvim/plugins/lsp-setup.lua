@@ -1,6 +1,7 @@
 return {
   {
     "williamboman/mason.nvim",
+    cmd = 'Mason',
     config = function()
       require("mason").setup()
     end
@@ -38,7 +39,9 @@ return {
           local opts = { buffer = ev.buf }
           vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
           vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-          vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+          local builtin = require('telescope.builtin')
+          vim.keymap.set('n', 'gr', builtin.lsp_references, opts) -- better visuals than vim.lsp.buf.references
+          -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts) -- use if telescope is not installed
           vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
           vim.keymap.set('n', 'gy', vim.lsp.buf.type_definition, opts)
           vim.keymap.set('n', 'gh', vim.lsp.buf.signature_help, opts)
