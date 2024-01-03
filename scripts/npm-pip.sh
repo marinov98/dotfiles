@@ -1,12 +1,10 @@
-echo "python tools using pip..."
-python -m pip install rope jedi pylint flake8 autopep8 yapf pygments virtualenv virtualenvwrapper powerline-shell pynvim
+#!/bin/bash
 
-echo "npm installations..."
-mkdir ~/.npm-global
-npm config set prefix '~/.npm-global'
-export PATH=~/.npm-global/bin:$PATH
-source ~/.profile
-
-npm i -g netlify-cli prettier ngrok 
-echo "installing language servers..."
-npm i -g typescript-language-server vscode-json-languageserver vscode-html-languageserver-bin yaml-language-server vscode-css-languageserver-bin bash-language-server
+if [[ $(uname -s) == Linux ]] || [[ $(uname -s) == Darwin ]]
+then
+    echo "machine found to be linux or Mac will install language servers with admin permissions"
+    sudo npm i -g pyright typescript typescript-language-server vscode-langservers-extracted yaml-language-server@next
+    sudo pip install black
+else
+    echo "system not found to be linux or mac will not install language servers"
+fi
