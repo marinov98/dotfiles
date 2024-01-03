@@ -21,5 +21,5 @@ right = ["spinner", "file-encoding", "position"]
 separator = " "
 
 [keys.normal]
-"space" = { "s" = ":w", "l" = { "f" = ":format", "s" = "symbol_picker" }, "q" = ":q", "Q" = ":q!" }
+"space" = { "s" = ":w", "l" = { "f" = ":format", "s" = "symbol_picker", "g" = "hover" }, "k" = ":buffer-close", "q" = ":q", "Q" = ":q!" }
 "esc" = ["collapse_selection", "keep_primary_selection"]
