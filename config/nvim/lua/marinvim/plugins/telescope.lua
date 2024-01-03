@@ -9,10 +9,17 @@ return {
     config = function()
       local builtin = require('telescope.builtin')
       -- Essentials
-      -- vim.keymap.set('n', '<leader>f', function()
-      --   builtin.find_files({ find_command = { 'fd', '--type', 'f', "--color=never", '--hidden', '--exclude', ".git" } })
-      -- end, {})
-      vim.keymap.set('n', '<leader>f', builtin.find_files, {})
+      if vim.fn.executable('fd') == 1 then
+        vim.keymap.set('n', '<leader>f', function()
+          builtin.find_files({ find_command = { 'fd', '--type', 'f', "--color=never", '--hidden', '--exclude', ".git" } })
+        end, {})
+      elseif vim.fn.executable('rg') == 1 then
+        vim.keymap.set('n', '<leader>f', function()
+          builtin.find_files({ find_command = { 'rg', '--files', "--hidden", "--color", "never", "--glob=!**/.git/*" } })
+        end, {})
+      else -- I cannot save you if it gets to here
+        vim.keymap.set('n', '<leader>f', builtin.find_files, {})
+      end
       vim.keymap.set('n', 'gs', builtin.live_grep, {})
       vim.keymap.set('n', '<leader>/', builtin.grep_string, {})
       vim.keymap.set('n', '<leader>ur', builtin.oldfiles, {})
