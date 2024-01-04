@@ -17,7 +17,7 @@
        :custom
        (lsp-auto-guess-root nil)
        (lsp-log-io nil)
-       (lsp-idle-delay 0.3)
+       (lsp-idle-delay 0.4)
        (lsp-eldoc-enable-hover nil) ;; graphical bloat imo, but can be good
        (lsp-signature-auto-activate nil) ;; (This tends to cause problems and is SUPER slow ESP on MS Windows) you could manually request them via 'lsp-signature-activate'
        (lsp-headerline-breadcrumb-enable nil) ;; graphical bloat, don't need but useful to the right person
