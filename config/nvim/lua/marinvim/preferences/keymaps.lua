@@ -19,6 +19,7 @@ vim.keymap.set('n', '<leader>tk', ":tabprevious<CR>", { desc = "Previous Tab" })
 
 -- Coding utility
 vim.keymap.set('n', '<leader>cs', ":terminal<CR>", { desc = "Open terminal" })
+-- vim.keymap.set('n', '<leader>tn', ":Explore<CR>", { desc = "Open file browser" }) -- Uncomment when no outside file tree plugin is used
 vim.keymap.set("n", "<leader>cm", ":%s//gc<Left><Left><Left>") -- attempt at native multiple cursors
 vim.keymap.set("v", "<leader>cm", ":s//gc<Left><Left><Left>")  -- attempt at native multiple cursors visual mode
 vim.keymap.set("n", "<leader>*", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
