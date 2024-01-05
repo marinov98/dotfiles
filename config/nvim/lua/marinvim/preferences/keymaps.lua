@@ -24,6 +24,7 @@ vim.keymap.set("v", "<leader>cm", ":s//gc<Left><Left><Left>")  -- attempt at nat
 vim.keymap.set("n", "<leader>*", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>X", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.keymap.set("n", "<leader>uc", ":! ", { silent = true })
+vim.keymap.set("n", "<leader><leader>k", "<cmd>%bd|e#<cr>", { desc = "Close all buffers but the current one" }) -- https://stackoverflow.com/a/42071865/516188
 
 -- Git
 vim.keymap.set('n', '<leader>gg', vim.cmd.Git, { desc = "Launch Fugitive" })
