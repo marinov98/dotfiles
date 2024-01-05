@@ -27,9 +27,7 @@
   (marginalia-mode))
 
 (use-package consult
-  :ensure t
-  :bind(:map evil-normal-state-map
-         ("gs" . consult-ripgrep)))
+  :ensure t)
 
 (use-package embark
     :ensure t

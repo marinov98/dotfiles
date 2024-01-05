@@ -30,9 +30,7 @@
   (embark-collect-mode . consult-preview-at-point-mode))
 
 (use-package consult
-  :ensure t
-  :bind(:map evil-normal-state-map
-         ("gs" . consult-ripgrep)))
+  :ensure t)
 
 ;; wgrep combined ripgrep and/or silver searcher makes changing text in multiple places much easier
 (use-package wgrep
