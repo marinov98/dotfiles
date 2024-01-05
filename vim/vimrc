@@ -106,7 +106,7 @@ nnoremap <leader>cs :terminal<CR>
 nnoremap <leader>cm :%s//gc<Left><Left><Left>
 vnoremap <leader>cm :s//gc<Left><Left><Left>
 nnoremap <leader>* :%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>
-nnoremap <leader>/ :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+nnoremap <leader>? :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 nnoremap <leader>X :!chmod +x %<CR>
 nnoremap <leader>uc  :! 
 
@@ -183,7 +183,7 @@ let g:coc_global_extensions = [
 			\ 'coc-tsserver', 'coc-tslint','coc-html',
 			\'coc-css', 'coc-json', 'coc-python', 'coc-yaml']
 
-" Below settings are reccommended by coc
+" Below settings are recommended by coc
 set hidden
 
 set nobackup
@@ -205,7 +205,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nmap <silent> gs :CocSearch 
+nmap <silent> <leader>/ :CocSearch 
 
 " Symbol renaming.
 nmap <leader>lc <Plug>(coc-rename)
