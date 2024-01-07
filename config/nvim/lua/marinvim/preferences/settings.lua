@@ -40,6 +40,6 @@ vim.g.netrw_winsize = 25
 vim.g.netrw_altv = 1
 
 -- clipboard, cursors
-vim.cmd("set clipboard=unnamedplus") -- use system clipboard
-vim.cmd("set cursorline") -- highlight current line
-vim.cmd("set noerrorbells") -- no sounds 
+vim.opt.cursorline = true
+vim.opt.clipboard = "unnamedplus" -- use system clipboard
+vim.opt.errorbells = false -- no sounds on error
