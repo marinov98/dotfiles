@@ -43,7 +43,7 @@ let g:ctrlp_map = '<leader>f'
 " Ripgrep 
 if executable('rg')
 	set grepprg=rg\ --color=never
-	let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+	let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob "!.git/"'
 	let g:ctrlp_use_caching = 0
 elseif executable('ag') " Try The Silver Searcher if ripgrep not found
 	" Use ag over grep
