@@ -41,5 +41,5 @@ vim.g.netrw_altv = 1
 
 -- clipboard, cursors
 vim.opt.cursorline = true
-vim.opt.clipboard = "unnamedplus" -- use system clipboard
+-- vim.opt.clipboard = "unnamedplus" -- use system clipboard
 vim.opt.errorbells = false -- no sounds on error
