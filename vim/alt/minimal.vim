@@ -28,11 +28,14 @@ map <SPACE> <Leader>
 let g:lightline = {
 	\ 'colorscheme': 'dracula',
     \ 'active': {
-    \   'left': [ [ 'mode', 'paste' ],
-    \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-    \ },
-    \ 'component_function': {
-    \   'gitbranch': 'gitbranch#name'
+    \   'left': [ 
+	\		[ 'mode',  ],
+	\		['filename', 'modified']
+    \           ],
+	\   'right': [
+	\		["lineinfo"],
+	\		["readonly", "fileformat", "fileencoding"],
+	\   ]
     \ },
     \ }
 
