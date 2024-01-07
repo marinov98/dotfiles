@@ -1,14 +1,12 @@
 call plug#begin('~/.vim/plugged')
 """"""" THEMES:
-Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'morhetz/gruvbox'
 """"""" File Search:
 Plug 'ctrlpvim/ctrlp.vim'
 """"""" CODING:
-Plug 'https://github.com/jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs'
 """"""" MODELINE:
 Plug 'itchyny/lightline.vim'
-""""""" GITHUB:
-Plug 'https://github.com/itchyny/vim-gitbranch'
 """"""" VIM UTILITY:
 Plug 'https://github.com/tpope/vim-repeat'
 Plug 'https://github.com/tpope/vim-surround'
@@ -26,7 +24,7 @@ map <SPACE> <Leader>
 
 " Modeline
 let g:lightline = {
-	\ 'colorscheme': 'dracula',
+	\ 'colorscheme': 'gruvbox',
     \ 'active': {
     \   'left': [ 
 	\		[ 'mode',  ],
@@ -66,6 +64,7 @@ endif
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
+
 """"""""""""""""""""""
 """"""" BASICS:
 """"""""""""""""""""""
@@ -86,7 +85,8 @@ set nocompatible
 
 "Color theme
 set background=dark
-colorscheme dracula
+let g:gruvbox_contrast_dark = "hard"
+colorscheme gruvbox
 
 
 "indentation
