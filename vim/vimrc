@@ -212,14 +212,18 @@ nmap <leader>lc <Plug>(coc-rename)
 """"""""""" AUTOCOMPLETE END
 
 """"""""""" Modeline:
+" Modeline
 let g:lightline = {
-  \ 'colorscheme': 'jellybeans'	,
+	\ 'colorscheme': 'dracula',
     \ 'active': {
-    \   'left': [ [ 'mode', 'paste' ],
-    \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-    \ },
-    \ 'component_function': {
-    \   'gitbranch': 'gitbranch#name'
+    \   'left': [ 
+	\		[ 'mode',  ],
+	\		['filename', 'modified']
+    \           ],
+	\   'right': [
+	\		["lineinfo"],
+	\		["readonly", "fileformat", "fileencoding"],
+	\   ]
     \ },
     \ }
 
