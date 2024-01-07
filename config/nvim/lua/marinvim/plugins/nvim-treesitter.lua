@@ -16,8 +16,12 @@ return {
           -- preference (personal choice starts here)
           "python",
           "elixir",
+          "json",
           "javascript",
           "typescript",
+          "kdl", -- for zellij
+          "yaml",
+          "toml",
           "html"
         },
         highlight = { enable = true },
