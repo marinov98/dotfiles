@@ -213,7 +213,7 @@ nmap <leader>lc <Plug>(coc-rename)
 """"""""""" Modeline:
 " Modeline
 let g:lightline = {
-	\ 'colorscheme': 'dracula',
+	\ 'colorscheme': 'gruvbox',
     \ 'active': {
     \   'left': [ 
 	\		[ 'mode',  ],
