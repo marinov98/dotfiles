@@ -8,8 +8,8 @@ Plug 'jiangmiao/auto-pairs'
 """"""" MODELINE:
 Plug 'itchyny/lightline.vim'
 """"""" VIM UTILITY:
-Plug 'https://github.com/tpope/vim-repeat'
-Plug 'https://github.com/tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 """"""" WEB DEV:
 Plug 'alvan/vim-closetag'
