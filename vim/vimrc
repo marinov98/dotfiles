@@ -20,7 +20,6 @@ Plug 'sheerun/vim-polyglot'
 """"""" MODELINE:
 Plug 'itchyny/lightline.vim'
 """"""" GITHUB:
-Plug 'itchyny/vim-gitbranch'
 Plug 'tpope/vim-fugitive'
 """"""" VIM UTILITY:
 Plug 'tpope/vim-repeat'
