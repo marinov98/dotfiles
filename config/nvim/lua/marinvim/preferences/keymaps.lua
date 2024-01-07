@@ -1,12 +1,16 @@
 vim.g.mapleader = " "
 
--- saving, quitting
+-- saving, quitting, copying, pasting
 vim.keymap.set('n', '<leader>s', ":w<CR>", { desc = "Save File" })
 vim.keymap.set('n', '<leader>k', ":bd<CR>", { desc = "Close buffer" })
 vim.keymap.set('n', '<leader>x', ":tabclose<CR>", { desc = "Close tab" })
 vim.keymap.set('n', '<leader>q', ":q<CR>", { desc = "Quit" })
 vim.keymap.set('n', '<leader>Q', ":q!<CR>", { desc = "Force Quit" })
 vim.keymap.set('n', '<leader>n', ":noh<CR>", { desc = "Remove highlight" })
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy to system clipboard" })
+vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Copy line to system clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]], { desc = "Paste from system clipboard" })
+vim.keymap.set("x", "<leader>P", [["_dP]], { desc = "Paste without cutting" })
 
 -- Buffers and tabs
 vim.keymap.set('n', '<leader>a', "<C-^>", { desc = "Alternate buffers" })
