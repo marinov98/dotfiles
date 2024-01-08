@@ -31,9 +31,9 @@ skip-levels = 1
 # tabpad = "·" # Tabs will look like "→···" (depending on tab width)
 
 [editor.statusline]
-left = ["mode", "separator", "file-name", "diagnostics"]
+left = ["mode", "separator", "file-name", "file-modification-indicator", "diagnostics"]
 center = ["read-only-indicator"]
-right = ["spinner", "file-encoding", "position"]
+right = ["selections" ,"file-encoding", "position"]
 separator = " "
 
 [keys.normal]
