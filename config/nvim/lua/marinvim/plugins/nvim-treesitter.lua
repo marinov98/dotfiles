@@ -20,6 +20,8 @@ return {
           "javascript",
           "typescript",
           "kdl", -- for zellij
+          "xml",
+          "rust",
           "yaml",
           "toml",
           "html"
