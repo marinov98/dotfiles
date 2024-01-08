@@ -37,5 +37,5 @@ right = ["selections" ,"file-encoding", "position"]
 separator = " "
 
 [keys.normal]
-"space" = { "s" = ":w", "S" = ":lsp-restart", "k" = ":buffer-close", "q" = ":q", "Q" = ":q!", "l" = { "f" = ":format", "d" = "symbol_picker", "w" = "workspace_symbol_picker", "g" = "hover" } }
+"space" = { "s" = ":w", "S" = ":lsp-restart", "k" = ":buffer-close", "Q" = ":q!", "l" = { "f" = ":format", "d" = "symbol_picker", "w" = "workspace_symbol_picker", "g" = "hover" } }
 "esc" = ["collapse_selection", "keep_primary_selection"]
