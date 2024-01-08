@@ -15,14 +15,23 @@ return {
           "query",
           -- preference (personal choice starts here)
           "python",
+          "cpp",
+          "java",
           "elixir",
+          "rust",
+          -- config
+          "kdl", -- for zellij
+          "xml",
+          "cmake",
+          "yaml",
+          "toml",
+          -- Web Dev
           "json",
           "javascript",
           "typescript",
-          "kdl", -- for zellij
-          "yaml",
-          "toml",
-          "html"
+          "html",
+          "css",
+          "scss"
         },
         highlight = { enable = true },
         indent = { enable = true },

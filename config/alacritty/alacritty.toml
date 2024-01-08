@@ -66,6 +66,7 @@ multiplier = 3
 
 [window]
 opacity = 0.9
+# decorations = "none"
 
 [window.padding]
 x = 5
