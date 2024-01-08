@@ -29,7 +29,6 @@
   (mpm/leader-keys
      "d" '(:ignore t :wk "Dired/Describe")
      "d d" '(dired :wk "Open dired")
-     "d h" '(hydra-describe/body :wk "Describe Hydra")
      "d j" '(dired-jump :wk "Dired jump to current")
      "d f" '(wdired-finish-edit :wk "Writable dired finish edit")
      "d w" '(wdired-change-to-wdired-mode :wk "Writable dired")
@@ -65,7 +64,8 @@
      "f" '(project-find-file :wk "Project Find File/Buffer")
      "." '(find-file :wk "Find File")
      "/" '(consult-ripgrep :wk "Multi file text search")
-     "?" '(consult-line-multi :wk "Multi buffer text search")
+     "*" '(consult-line-multi :wk "Multi buffer text search")
+     "?" '(hydra-describe/body :wk "Describe Hydra")
      "m" '(execute-extended-command :wk "M-x"))
 
   (mpm/leader-keys
