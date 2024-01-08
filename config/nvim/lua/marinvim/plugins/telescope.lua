@@ -7,7 +7,25 @@ return {
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },
     config = function()
-      local builtin = require('telescope.builtin')
+      local telescope = require("telescope")
+      telescope.load_extension("fzf")
+      telescope.setup({
+        pickers = {
+          live_grep = {
+            additional_args = function()
+              return { '--hidden', '--glob', '!**/.git/*' }
+            end
+          },
+          grep_string = {
+            additional_args = function()
+              return { '--hidden', '--glob', '!**/.git/*' }
+            end
+          }
+        }
+
+      })
+
+      local builtin = require("telescope.builtin")
       -- Essentials
       if vim.fn.executable('fd') == 1 then
         vim.keymap.set('n', '<leader>f', function()
@@ -42,9 +60,6 @@ return {
       vim.keymap.set('n', '<leader>dhl', builtin.loclist, {})
       vim.keymap.set('n', '<leader>dhs', builtin.search_history, {})
       vim.keymap.set('n', '<leader>dhr', builtin.registers, {})
-
-      local telescope = require("telescope")
-      telescope.load_extension("fzf")
     end
   },
   {
