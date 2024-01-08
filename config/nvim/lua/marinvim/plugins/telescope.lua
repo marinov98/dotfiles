@@ -62,15 +62,15 @@ return {
       vim.keymap.set('n', '<leader>gt', builtin.git_status, {})
       vim.keymap.set('n', '<leader>gh', builtin.git_stash, {})
       -- Helpful
-      vim.keymap.set('n', '<leader>dht', builtin.help_tags, {})
-      vim.keymap.set('n', '<leader>dhk', builtin.keymaps, {})
-      vim.keymap.set('n', '<leader>dhc', builtin.commands, {})
-      vim.keymap.set('n', '<leader>dhh', builtin.command_history, {})
-      vim.keymap.set('n', '<leader>dhm', builtin.man_pages, {})
-      vim.keymap.set('n', '<leader>dhj', builtin.jumplist, {})
-      vim.keymap.set('n', '<leader>dhl', builtin.loclist, {})
-      vim.keymap.set('n', '<leader>dhs', builtin.search_history, {})
-      vim.keymap.set('n', '<leader>dhr', builtin.registers, {})
+      vim.keymap.set('n', '<leader>?t', builtin.help_tags, {})
+      vim.keymap.set('n', '<leader>?k', builtin.keymaps, {})
+      vim.keymap.set('n', '<leader>?c', builtin.commands, {})
+      vim.keymap.set('n', '<leader>?h', builtin.command_history, {})
+      vim.keymap.set('n', '<leader>?m', builtin.man_pages, {})
+      vim.keymap.set('n', '<leader>?j', builtin.jumplist, {})
+      vim.keymap.set('n', '<leader>?l', builtin.loclist, {})
+      vim.keymap.set('n', '<leader>?s', builtin.search_history, {})
+      vim.keymap.set('n', '<leader>?r', builtin.registers, {})
 
     end
   }
