@@ -14,6 +14,22 @@ select = "underline"
 [editor.file-picker]
 hidden = false
 
+[editor.indent-guides]
+render = true
+character = "╎" # Some characters that work well: "▏", "┆", "┊", "⸽"
+skip-levels = 1
+
+# [editor.whitespace.render]
+# tab = "all"
+# newline = "all"
+
+# [editor.whitespace.characters]
+# space = "·"
+# nbsp = "⍽"
+# tab = "→"
+# newline = "↵"
+# tabpad = "·" # Tabs will look like "→···" (depending on tab width)
+
 [editor.statusline]
 left = ["mode", "separator", "file-name", "diagnostics"]
 center = ["read-only-indicator"]
