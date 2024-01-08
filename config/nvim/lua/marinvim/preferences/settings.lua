@@ -1,4 +1,6 @@
--- vim.opt.guicursor = ""
+-- vim.opt.guicursor = "" -- keep block cursor even in insert mode
+-- vim.opt.list = true
+-- vim.opt.listchars:append({ eol = '↵', tab = '» ', trail = '.', nbsp = '␣' })
 
 -- Ignore compiled files
 vim.opt.wildignore = "__pycache__"
