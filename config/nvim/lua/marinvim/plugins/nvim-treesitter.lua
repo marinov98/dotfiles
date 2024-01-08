@@ -15,6 +15,8 @@ return {
           "query",
           -- preference (personal choice starts here)
           "python",
+          "cpp",
+          "java",
           "elixir",
           "json",
           "javascript",
