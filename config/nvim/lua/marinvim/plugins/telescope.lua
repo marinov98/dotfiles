@@ -11,6 +11,15 @@ return {
       -- Setup
       local telescope = require("telescope")
       telescope.setup({
+        defaults = {
+          layout_strategy = "horizontal",
+          layout_config = {
+            horizontal = {
+              prompt_position = "top",
+            },
+          },
+          sorting_strategy = "ascending"
+        },
         extensions = {
           ["ui-select"] = {
             require("telescope.themes").get_dropdown({})
