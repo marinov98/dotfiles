@@ -1,6 +1,7 @@
 return {
   {
     "mfussenegger/nvim-lint",
+    keys = '<leader>cl',
     config = function()
       local lint = require("lint")
 
@@ -17,6 +18,7 @@ return {
   },
   {
     "stevearc/conform.nvim",
+    keys = { { '<leader>ls', mode = { 'n', 'v' } } },
     config = function()
       local conform = require("conform")
 
