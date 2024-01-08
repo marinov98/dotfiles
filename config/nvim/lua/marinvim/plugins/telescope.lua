@@ -21,7 +21,7 @@ return {
         vim.keymap.set('n', '<leader>f', builtin.find_files, {})
       end
       vim.keymap.set('n', '<leader>/', builtin.live_grep, {})
-      vim.keymap.set('n', '<leader>?', builtin.grep_string, {})
+      vim.keymap.set('n', '<leader>*', builtin.grep_string, {})
       vim.keymap.set('n', '<leader>ur', builtin.oldfiles, {})
       vim.keymap.set('n', '<leader>bi', builtin.buffers, {})
       vim.keymap.set('n', '<leader>ll', builtin.diagnostics, {})
