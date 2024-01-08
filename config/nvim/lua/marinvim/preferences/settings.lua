@@ -1,4 +1,4 @@
-vim.opt.guicursor = ""
+-- vim.opt.guicursor = ""
 
 -- Ignore compiled files
 vim.opt.wildignore = "__pycache__"
