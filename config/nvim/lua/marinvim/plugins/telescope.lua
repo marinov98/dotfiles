@@ -64,7 +64,7 @@ return {
       vim.keymap.set('n', '<leader>bi', builtin.buffers, {})
       vim.keymap.set('n', '<leader>ll', builtin.diagnostics, {})
       -- Git specific
-      vim.keymap.set('n', '<leader>rg', builtin.git_files, {})
+      vim.keymap.set('n', '<leader>gf', builtin.git_files, {})
       vim.keymap.set('n', '<leader>gc', builtin.git_commits, {})
       vim.keymap.set('n', '<leader>gC', builtin.git_bcommits, {})
       vim.keymap.set('n', '<leader>gb', builtin.git_branches, {})
