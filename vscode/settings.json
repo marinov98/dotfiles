@@ -300,6 +300,14 @@
       "commands": ["editor.action.organizeImports"]
     },
     {
+      "before": ["<leader>", "l", "d"],
+      "commands": ["workbench.action.gotoSymbol"]
+    },
+    {
+      "before": ["<leader>", "l", "w"],
+      "commands": ["workbench.action.showAllSymbols"]
+    },
+    {
       "before": ["<leader>", "<leader>", "l"],
       "commands": ["projectManager.listProjects"]
     },
