@@ -23,6 +23,10 @@ return {
       lspconfig.lua_ls.setup({})
       lspconfig.pyright.setup({})
       lspconfig.tsserver.setup({})
+      lspconfig.jsonls.setup({})
+      lspconfig.yamlls.setup({})
+      lspconfig.html.setup({})
+      lspconfig.cssls.setup({})
 
       -- Bindings
       vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
