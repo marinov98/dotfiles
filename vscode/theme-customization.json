@@ -204,7 +204,7 @@
               "titleBar.activeForeground": "#d3d3d3f6",
               "titleBar.inactiveBackground": "#191a21",
               "titleBar.inactiveForeground": "#7b7f8b",
-              "walkThrough.embeddedEditorBackground": "#262626",
+              "walkThrough.embeddedEditorBackground": "#262626"
         }
       },
     "editor.tokenColorCustomizations": {
@@ -212,7 +212,7 @@
           "comments": "#8f9f9f"
         },
         "[Dracula Soft]": {
-          "variables": "#d3d3d3f6",
+          "variables": "#d3d3d3f6"
        }
-    },
+    }
 }
