@@ -84,11 +84,11 @@
       "commands": ["editor.action.organizeImports"]
     },
     {
-      "before": ["<leader>", "l", "d"],
+      "before": ["<leader>", "l", "s"],
       "commands": ["workbench.action.gotoSymbol"]
     },
     {
-      "before": ["<leader>", "l", "w"],
+      "before": ["<leader>", "l", "w", "s"],
       "commands": ["workbench.action.showAllSymbols"]
     },
     {
