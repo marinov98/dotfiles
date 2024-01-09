@@ -18,7 +18,7 @@ return {
   },
   {
     "stevearc/conform.nvim",
-    keys = { { '<leader>ls', mode = { 'n', 'v' } } },
+    keys = { { '<leader>ll', mode = { 'n', 'v' } } },
     config = function()
       local conform = require("conform")
 
@@ -40,7 +40,7 @@ return {
           scss = { { "prettierd", "prettier" } },
         },
       })
-      vim.keymap.set({ "n", "v" }, "<leader>ls", function()
+      vim.keymap.set({ "n", "v" }, "<leader>ll", function()
         conform.format({
           lsp_fallback = true,
           async = false,

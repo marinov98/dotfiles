@@ -52,12 +52,18 @@ return {
           vim.keymap.set('n', 'gr', builtin.lsp_references, opts) -- better visuals than vim.lsp.buf.references
           vim.keymap.set('n', 'gi', builtin.lsp_implementations, opts)
           vim.keymap.set('n', 'gy', builtin.lsp_type_definitions, opts)
-          vim.keymap.set('n', '<space>lw', builtin.lsp_workspace_symbols, opts)
-          vim.keymap.set('n', '<space>ld', builtin.lsp_document_symbols, opts)
+          vim.keymap.set('n', '<space>ls', builtin.lsp_document_symbols, opts)
+          -- Workspace related
+          vim.keymap.set('n', '<space>lws', builtin.lsp_workspace_symbols, opts)
+          vim.keymap.set('n', '<space>lwa', vim.lsp.buf.add_workspace_folder, opts)
+          vim.keymap.set('n', '<space>lwr', vim.lsp.buf.remove_workspace_folder, opts)
+          vim.keymap.set('n', '<space>lwl', function()
+            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+          end, opts)
 
           -- old commands use if telescope is not installed or you prefer them
           -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-          -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts) 
+          -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
           -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
           -- vim.keymap.set('n', 'gy', vim.lsp.buf.type_definition, opts)
       end,

@@ -62,7 +62,7 @@ return {
       vim.keymap.set('n', '<leader>*', builtin.grep_string, {})
       vim.keymap.set('n', '<leader>ur', builtin.oldfiles, {})
       vim.keymap.set('n', '<leader>bi', builtin.buffers, {})
-      vim.keymap.set('n', '<leader>ll', builtin.diagnostics, {})
+      vim.keymap.set('n', '<leader>ld', builtin.diagnostics, {})
       -- Git specific
       vim.keymap.set('n', '<leader>gf', builtin.git_files, {})
       vim.keymap.set('n', '<leader>gc', builtin.git_commits, {})
