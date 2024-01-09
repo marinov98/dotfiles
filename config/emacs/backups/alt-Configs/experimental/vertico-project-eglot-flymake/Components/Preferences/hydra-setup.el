@@ -134,10 +134,10 @@
   (("c" eglot-rename "rename")
   ("f" eglot-format-buffer "format" :color blue)
   ("a" eglot-code-actions "code actions" :color blue)
-  ("s" hydra-style/body "format style" :color blue))
+  ("l" hydra-style/body "format style" :color blue))
 
   "Errors"
-  (("l" flymake-show-project-diagnostics "list errors")
+  (("d" flymake-show-project-diagnostics "list errors")
   ("e" flymake-goto-next-error "next error")
   ("E" flymake-goto-prev-error "prev error"))))
 

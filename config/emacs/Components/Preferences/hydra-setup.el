@@ -135,10 +135,10 @@
   (("c" lsp-rename "rename")
   ("f" lsp-format-buffer "format buffer")
   ("o" lsp-organize-imports "organize imports")
-  ("s" hydra-style/body "format style" :color blue))
+  ("l" hydra-style/body "format style" :color blue))
 
   "Errors"
-  (("l" lsp-ui-flycheck-list "list errors")
+  (("d" lsp-ui-flycheck-list "list errors")
   ("b" flycheck-buffer "flycheck buffer")
   ("e" flycheck-next-error "next error")
   ("E" flycheck-previous-error "prev error"))))
