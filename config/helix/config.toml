@@ -33,7 +33,7 @@ skip-levels = 1
 [editor.statusline]
 left = ["mode", "separator", "file-name", "file-modification-indicator", "diagnostics"]
 center = ["read-only-indicator"]
-right = ["selections" ,"file-encoding", "position"]
+right = ["file-encoding", "position"]
 separator = " "
 
 [keys.normal]
