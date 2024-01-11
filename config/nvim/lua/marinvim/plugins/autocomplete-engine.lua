@@ -48,9 +48,9 @@ return {
       sources = cmp.config.sources({
         { name = "nvim_lsp" },
         { name = 'nvim_lsp_signature_help' },
-        { name = "luasnip" }, -- snippets
+        { name = "luasnip" },       -- snippets
         {
-          name = "buffer",
+          name = "buffer",          -- text within current buffer
           option = {
             get_bufnrs = function() -- don't give source if file > 1 MB
               local buf = vim.api.nvim_get_current_buf()
@@ -61,7 +61,7 @@ return {
               return { buf }
             end
           }
-        },                 -- text within current buffer
+        },
         { name = "path" }, -- file system paths
       }),
 
