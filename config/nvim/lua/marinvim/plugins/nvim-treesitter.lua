@@ -18,6 +18,8 @@ return {
           "cpp",
           "java",
           "elixir",
+          "go",
+          "sql",
           "rust",
           -- config
           "kdl", -- for zellij
@@ -29,6 +31,7 @@ return {
           "json",
           "javascript",
           "typescript",
+          "tsx",
           "html",
           "css",
           "scss"
