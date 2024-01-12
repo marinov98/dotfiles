@@ -11,7 +11,7 @@ vim.opt.wildignore:append { "Cargo.lock", "Cargo.Bazel.lock" }
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
-vim.opt.mouse = 'a'						-- enable the mouse in all modes
+vim.opt.mouse = 'a' -- enable the mouse in all modes
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
@@ -30,8 +30,8 @@ vim.opt.incsearch = true
 vim.opt.pumheight = 8 -- how many candidates to show on a popup
 
 vim.opt.termguicolors = true
-vim.opt.splitbelow = true				-- split go below
-vim.opt.splitright = true				-- vertical split to the right
+vim.opt.splitbelow = true -- split go below
+vim.opt.splitright = true -- vertical split to the right
 
 vim.opt.updatetime = 100
 
@@ -40,6 +40,7 @@ vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
 vim.g.netrw_altv = 1
+vim.g.netrw_liststyle = 3 -- Tree style view
 
 -- clipboard, cursors
 vim.opt.cursorline = true
