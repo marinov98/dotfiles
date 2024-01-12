@@ -72,6 +72,7 @@ return {
       vim.keymap.set('n', '<leader>gh', builtin.git_stash, {})
       -- Helpful
       vim.keymap.set('n', '<leader>?t', builtin.help_tags, {})
+      vim.keymap.set('n', '<leader>?b', builtin.builtin, {})
       vim.keymap.set('n', '<leader>?k', builtin.keymaps, {})
       vim.keymap.set('n', '<leader>?c', builtin.commands, {})
       vim.keymap.set('n', '<leader>?h', builtin.command_history, {})
