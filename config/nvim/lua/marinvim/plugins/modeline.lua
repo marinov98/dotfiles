@@ -5,13 +5,14 @@ return {
     require("lualine").setup({
       options = {
         theme = 'catppuccin',
+        component_separators = { left = "", right = "" },
         globalstatus = true,
       },
       sections = {
         lualine_a = { 'mode' },
-        lualine_b = {},
+        lualine_b = { 'branch' },
         lualine_c = { { 'filename', path = 1 }, 'diagnostics' },
-        lualine_x = { 'encoding', "location" },
+        lualine_x = { 'encoding', 'fileformat', 'location' },
         lualine_y = {},
         lualine_z = {}
       },
