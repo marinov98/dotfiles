@@ -21,7 +21,7 @@ character = "╎" # Some characters that work well: "▏", "┆", "┊", "⸽"
 skip-levels = 1
 
 [editor.statusline]
-left = ["mode", "separator", "file-name", "file-modification-indicator", "diagnostics"]
+left = ["mode", "file-name", "file-modification-indicator", "separator", "diagnostics"]
 center = ["version-control"]
 right = ["read-only-indicator","file-encoding", "position"]
 separator = " "
