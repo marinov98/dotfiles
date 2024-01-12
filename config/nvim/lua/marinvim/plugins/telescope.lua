@@ -5,7 +5,7 @@ return {
     dependencies = {
       'nvim-lua/plenary.nvim',
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-      "nvim-telescope/telescope-ui-select.nvim"
+      "nvim-telescope/telescope-ui-select.nvim",
     },
     config = function()
       -- Setup
@@ -80,7 +80,6 @@ return {
       vim.keymap.set('n', '<leader>?l', builtin.loclist, {})
       vim.keymap.set('n', '<leader>?s', builtin.search_history, {})
       vim.keymap.set('n', '<leader>?r', builtin.registers, {})
-
     end
   }
 }

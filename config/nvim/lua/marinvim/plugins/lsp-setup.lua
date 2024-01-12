@@ -8,6 +8,7 @@ return {
   },
   {
     "williamboman/mason-lspconfig.nvim",
+    event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       require("mason-lspconfig").setup({
         ensure_installed = { "lua_ls" } -- examples: "pyright", "cssls", "tsserver", "jsonls"
@@ -16,6 +17,7 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
+    event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       local lspconfig = require('lspconfig')
 
@@ -70,7 +72,7 @@ return {
           -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
           -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
           -- vim.keymap.set('n', 'gy', vim.lsp.buf.type_definition, opts)
-      end,
+        end,
       })
     end
   }
