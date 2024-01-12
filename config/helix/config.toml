@@ -1,6 +1,7 @@
 theme = "catppuccin_mocha"
 
 [editor]
+auto-pairs = false # Hot take 
 line-number = "relative"
 cursorline = true
 bufferline = "multiple"
@@ -19,21 +20,10 @@ render = true
 character = "╎" # Some characters that work well: "▏", "┆", "┊", "⸽"
 skip-levels = 1
 
-# [editor.whitespace.render]
-# tab = "all"
-# newline = "all"
-
-# [editor.whitespace.characters]
-# space = "·"
-# nbsp = "⍽"
-# tab = "→"
-# newline = "↵"
-# tabpad = "·" # Tabs will look like "→···" (depending on tab width)
-
 [editor.statusline]
 left = ["mode", "separator", "file-name", "file-modification-indicator", "diagnostics"]
-center = ["read-only-indicator"]
-right = ["file-encoding", "position"]
+center = ["version-control"]
+right = ["read-only-indicator","file-encoding", "position"]
 separator = " "
 
 [keys.normal]
