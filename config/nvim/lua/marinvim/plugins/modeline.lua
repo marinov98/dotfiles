@@ -10,13 +10,13 @@ return {
       sections = {
         lualine_a = { 'mode' },
         lualine_b = {},
-        lualine_c = { 'filename', 'diagnostics' },
+        lualine_c = { { 'filename', path = 1 }, 'diagnostics' },
         lualine_x = { 'encoding', "location" },
         lualine_y = {},
         lualine_z = {}
       },
     })
     vim.opt.showmode = false -- avoid duplicate showings of mode
-    vim.opt.showcmd = false -- don't show commands'
+    vim.opt.showcmd = false  -- don't show commands'
   end
 }
