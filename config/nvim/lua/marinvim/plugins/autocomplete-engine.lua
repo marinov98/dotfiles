@@ -16,6 +16,7 @@ return {
   },
   config = function()
     local cmp = require("cmp")
+    local cmp_select = { behavior = cmp.SelectBehavior.Select } -- don't insert candidates just select them
 
     require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -37,11 +38,10 @@ return {
       },
 
       mapping = cmp.mapping.preset.insert({
-        ["<C-p>"] = cmp.mapping.select_prev_item(), -- previous suggestion
-        ["<C-n>"] = cmp.mapping.select_next_item(), -- next suggestion
+        ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select), -- previous suggestion
+        ["<C-n>"] = cmp.mapping.select_next_item(cmp_select), -- next suggestion
         ["<tab>"] = cmp.mapping.confirm({ select = true }),
-        ["<CR>"] = cmp.mapping.confirm({ select = false }),
-        ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
+        ["<C-Space>"] = cmp.mapping.complete(),               -- show completion suggestions
       }),
 
       -- sources for autocompletion
