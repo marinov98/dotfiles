@@ -1,18 +1,21 @@
 {
-    "editor.codeActionsOnSave": {
-        "source.organizeImports": false
-    },
-    "vim.useSystemClipboard": true,
-    "vim.incsearch": true,
-    "vim.hlsearch": false,
-    "vim.sneak": false,
-    "vim.easymotion": false,
-    "vim.leader": "<space>",
-    "vim.cursorStylePerMode.insert": "line-thin",
-    "vim.cursorStylePerMode.normal": "block",
-    "vim.normalModeKeyBindings": [
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": false
+  },
+  "vim.useSystemClipboard": true,
+  "vim.incsearch": true,
+  "vim.hlsearch": false,
+  "vim.sneak": false,
+  "vim.easymotion": false,
+  "vim.leader": "<space>",
+  "vim.cursorStylePerMode.insert": "line-thin",
+  "vim.cursorStylePerMode.normal": "block",
+  "vim.normalModeKeyBindings": [
     {
-      "before": ["<leader>", "s"],
+      "before": [
+        "<leader>",
+        "s"
+      ],
       "after": [],
       "commands": [
         {
@@ -22,170 +25,364 @@
       ]
     },
     {
-      "before": ["g", "r"],
-      "commands": ["editor.action.goToReferences"]
+      "before": [
+        "g",
+        "r"
+      ],
+      "commands": [
+        "editor.action.goToReferences"
+      ]
     },
     {
-      "before": ["g", "i"],
-      "commands": ["editor.action.goToImplementation"]
+      "before": [
+        "g",
+        "i"
+      ],
+      "commands": [
+        "editor.action.goToImplementation"
+      ]
     },
     {
-      "before": ["g", "y"],
-      "commands": ["editor.action.goToTypeDefinition"]
+      "before": [
+        "g",
+        "y"
+      ],
+      "commands": [
+        "editor.action.goToTypeDefinition"
+      ]
     },
     {
-      "before": ["]", "d"],
-      "commands": ["editor.action.marker.next"]
+      "before": [
+        "]",
+        "d"
+      ],
+      "commands": [
+        "editor.action.marker.next"
+      ]
     },
     {
-      "before": ["[", "d"],
-      "commands": ["editor.action.marker.prev"]
+      "before": [
+        "[",
+        "d"
+      ],
+      "commands": [
+        "editor.action.marker.prev"
+      ]
     }
   ],
   "vim.normalModeKeyBindingsNonRecursive": [
     {
-      "before": ["<leader>", "n"],
-      "commands": [":nohl"]
+      "before": [
+        "<leader>",
+        "n"
+      ],
+      "commands": [
+        ":nohl"
+      ]
     },
     {
-      "before": ["<leader>", "q"],
-      "commands": [":q"]
+      "before": [
+        "<leader>",
+        "q"
+      ],
+      "commands": [
+        ":q"
+      ]
     },
     {
-      "before": ["<leader>", "f"],
-      "commands": ["workbench.action.quickOpen"]
+      "before": [
+        "<leader>",
+        "f"
+      ],
+      "commands": [
+        "workbench.action.quickOpen"
+      ]
     },
     {
-      "before": ["<leader>", "c", "s"],
-      "commands": ["workbench.action.terminal.toggleTerminal"]
+      "before": [
+        "<leader>",
+        "c",
+        "s"
+      ],
+      "commands": [
+        "workbench.action.terminal.toggleTerminal"
+      ]
     },
     {
-      "before": ["<leader>", "c", "S"],
-      "commands": ["workbench.action.terminal.new"]
+      "before": [
+        "<leader>",
+        "c",
+        "S"
+      ],
+      "commands": [
+        "workbench.action.terminal.new"
+      ]
     },
     {
-      "before": ["<leader>", "l", "r"],
-      "commands": ["editor.action.refactor"]
+      "before": [
+        "<leader>",
+        "l",
+        "r"
+      ],
+      "commands": [
+        "editor.action.refactor"
+      ]
     },
     {
-      "before": ["<leader>", "l", "a"],
-      "commands": ["editor.action.changeAll"]
+      "before": [
+        "<leader>",
+        "l",
+        "a"
+      ],
+      "commands": [
+        "editor.action.changeAll"
+      ]
     },
     {
-      "before": ["<leader>", "l", "c"],
-      "commands": ["editor.action.rename"]
+      "before": [
+        "<leader>",
+        "l",
+        "c"
+      ],
+      "commands": [
+        "editor.action.rename"
+      ]
     },
     {
-      "before": ["<leader>", "l", "f"],
-      "commands": ["editor.action.formatDocument"]
+      "before": [
+        "<leader>",
+        "l",
+        "f"
+      ],
+      "commands": [
+        "editor.action.formatDocument"
+      ]
     },
     {
-      "before": ["<leader>", "l", "o"],
-      "commands": ["editor.action.organizeImports"]
+      "before": [
+        "<leader>",
+        "l",
+        "o"
+      ],
+      "commands": [
+        "editor.action.organizeImports"
+      ]
     },
     {
-      "before": ["<leader>", "l", "s"],
-      "commands": ["workbench.action.gotoSymbol"]
+      "before": [
+        "<leader>",
+        "l",
+        "s"
+      ],
+      "commands": [
+        "workbench.action.gotoSymbol"
+      ]
     },
     {
-      "before": ["<leader>", "l", "w", "s"],
-      "commands": ["workbench.action.showAllSymbols"]
+      "before": [
+        "<leader>",
+        "l",
+        "w",
+        "s"
+      ],
+      "commands": [
+        "workbench.action.showAllSymbols"
+      ]
     },
     {
-      "before": ["<leader>", "<leader>", "l"],
-      "commands": ["projectManager.listProjects"]
+      "before": [
+        "<leader>",
+        "l",
+        "d"
+      ],
+      "commands": [
+        "workbench.actions.view.problems"
+      ]
     },
     {
-      "before": ["<leader>", "<leader>", "S"],
-      "commands": ["projectManager.saveProject"]
+      "before": [
+        "<leader>",
+        "l",
+        "g"
+      ],
+      "commands": [
+        "editor.action.showHover"
+      ]
     },
     {
-      "before": ["<leader>", "e", "f"],
-      "commands": ["workbench.action.findInFiles"]
+      "before": [
+        "<leader>",
+        "<leader>",
+        "l"
+      ],
+      "commands": [
+        "projectManager.listProjects"
+      ]
     },
     {
-      "before": ["<leader>", "e", "x"],
-      "commands": ["workbench.view.extensions"]
+      "before": [
+        "<leader>",
+        "<leader>",
+        "S"
+      ],
+      "commands": [
+        "projectManager.saveProject"
+      ]
     },
     {
-      "before": ["<leader>", "e", "g"],
-      "commands": ["workbench.view.scm"]
+      "before": [
+        "<leader>",
+        "/"
+      ],
+      "commands": [
+        "workbench.action.findInFiles"
+      ]
     },
     {
-      "before": ["<leader>", "e", "c"],
-      "commands": ["workbench.panel.chatSidebar.copilot"]
+      "before": [
+        "<leader>",
+        "e",
+        "x"
+      ],
+      "commands": [
+        "workbench.view.extensions"
+      ]
     },
     {
-      "before": ["<leader>", "a"],
-      "commands": ["extension.vim_ctrl+^"]
+      "before": [
+        "<leader>",
+        "e",
+        "g"
+      ],
+      "commands": [
+        "workbench.view.scm"
+      ]
     },
     {
-      "before": ["<leader>", "t", "j"],
-      "commands": [":tabnext"]
+      "before": [
+        "<leader>",
+        "e",
+        "c"
+      ],
+      "commands": [
+        "workbench.panel.chatSidebar.copilot"
+      ]
     },
     {
-      "before": ["<leader>", "t", "k"],
-      "commands": [":tabprev"]
+      "before": [
+        "<leader>",
+        "a"
+      ],
+      "commands": [
+        "extension.vim_ctrl+^"
+      ]
     },
     {
-      "before": ["<leader>", "d", "d"],
-      "commands": ["workbench.action.files.openFolder"]
+      "before": [
+        "<leader>",
+        "t",
+        "j"
+      ],
+      "commands": [
+        ":tabnext"
+      ]
     },
     {
-      "before": ["<leader>", "u", "m"],
-      "commands": ["workbench.action.openSettingsJson"]
+      "before": [
+        "<leader>",
+        "t",
+        "k"
+      ],
+      "commands": [
+        ":tabprev"
+      ]
     },
     {
-      "before": ["<leader>", "u", "k"],
-      "commands": ["workbench.action.openGlobalKeybindingsFile"]
+      "before": [
+        "<leader>",
+        "d",
+        "d"
+      ],
+      "commands": [
+        "workbench.action.files.openFolder"
+      ]
     },
     {
-      "before": ["<leader>", "m"],
-      "commands": ["workbench.action.showCommands"]
+      "before": [
+        "<leader>",
+        "u",
+        "m"
+      ],
+      "commands": [
+        "workbench.action.openSettingsJson"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "u",
+        "k"
+      ],
+      "commands": [
+        "workbench.action.openGlobalKeybindingsFile"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "m"
+      ],
+      "commands": [
+        "workbench.action.showCommands"
+      ]
     }
   ],
-    "java.codeGeneration.toString.codeStyle": "STRING_BUILDER",
-    "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
-    "java.format.settings.profile": "GoogleStyle",
-    "java.codeGeneration.generateComments": true,
-    "java.codeGeneration.hashCodeEquals.useJava7Objects": true,
-    "java.codeGeneration.hashCodeEquals.useInstanceof": true,
-    "javascript.format.semicolons": "insert",
-    "typescript.format.semicolons": "insert",
-    "editor.fontWeight": 500,
-    "editor.formatOnSave": false,
-    "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[typescript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[json]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[jsonc]": {
-       "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[less]": {
-       "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[html]": {
-       "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[css]": {
-       "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[yaml]": {
-        "editor.defaultFormatter": "redhat.vscode-yaml"
-    },
-    "editor.bracketPairColorization.enabled": true,
-    "editor.guides.bracketPairs": "active",
-    "window.menuBarVisibility": "compact",
-    "editor.tabSize": 2,
-    "editor.fontLigatures": true,
-    "workbench.activityBar.visible": false,
-    "editor.lineNumbers": "relative",
-    "errorLens.enabledDiagnosticLevels": ["warning", "info", "error"],
-    "editor.minimap.enabled": false,
-    "editor.cursorBlinking": "solid"
+  "java.codeGeneration.toString.codeStyle": "STRING_BUILDER",
+  "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+  "java.format.settings.profile": "GoogleStyle",
+  "java.codeGeneration.generateComments": true,
+  "java.codeGeneration.hashCodeEquals.useJava7Objects": true,
+  "java.codeGeneration.hashCodeEquals.useInstanceof": true,
+  "javascript.format.semicolons": "insert",
+  "typescript.format.semicolons": "insert",
+  "editor.fontWeight": 500,
+  "editor.formatOnSave": false,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[less]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "window.menuBarVisibility": "compact",
+  "editor.tabSize": 2,
+  "editor.fontLigatures": true,
+  "workbench.activityBar.visible": false,
+  "editor.lineNumbers": "relative",
+  "errorLens.enabledDiagnosticLevels": [
+    "warning",
+    "info",
+    "error"
+  ],
+  "editor.minimap.enabled": false,
+  "editor.cursorBlinking": "solid"
 }
