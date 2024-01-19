@@ -19,8 +19,8 @@ else
     echo "Machine found to not be linux or Mac will not copy config!"
 fi
 
-echo "copying git autocompletions"
-cp git/git-completion.bash ~/
+echo "copying git configs..."
+# cp git/git-completion.bash ~/
 cp git/.gitconfig ~/
 
 # FORMATTERS
