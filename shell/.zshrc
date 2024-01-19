@@ -1,4 +1,4 @@
-# Path to your oh-my-zsh installation.
+a# Path to your oh-my-zsh installation.
 export ZSH="/Users/marinmarinov/.oh-my-zsh"
 
 ###################################
@@ -41,7 +41,6 @@ source $ZSH/oh-my-zsh.sh
 ###################################
 
 alias ls='ls -GFh'
-alias ls='ls -G'
 alias cp='cp -iv'                           # Preferred 'cp' implementation
 alias mv='mv -iv'                           # Preferred 'mv' implementation
 alias mkdir='mkdir -pv'                     # Preferred 'mkdir' implementation
