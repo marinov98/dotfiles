@@ -10,7 +10,7 @@ if [[ $(uname -s) == Linux ]] || [[ $(uname -s) == Darwin ]]
 then
     echo "machine found to be linux or Mac"
     echo "copying shell .."
-    \cp shell/.zshrc ~/
+    \cp shell/zsh/.zshrc ~/
     echo "shell done"
     echo "copying config..."
     \cp -r config/* ~/.config/
