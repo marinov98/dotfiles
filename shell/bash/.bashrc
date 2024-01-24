@@ -115,20 +115,21 @@ fi
 
 
 ###################################
-####### Aliases   
+####### Aliases
 ###################################
 
-alias ls='ls -GFh'
+alias ls='ls -GFh --color=auto'             # Preferred 'ls' implementation
 alias cp='cp -iv'                           # Preferred 'cp' implementation
 alias mv='mv -iv'                           # Preferred 'mv' implementation
 alias mkdir='mkdir -pv'                     # Preferred 'mkdir' implementation
-alias ll='ls -FGlAhp'                       # Preferred 'ls' implementation
+alias ll='ls -FGlAhp --color=auto'          # Preferred alternative 'ls' implementation
 alias less='less -FSRXc'                    # Preferred 'less' implementation
 
-alias v='vim'                               # v:            Opens any file in vim editor
-alias emt='emacs -nw'                       # emt:          Open emacs in terminal
+alias v='vim'             		              # v:            Opens any file in vim/nvim editor
+alias vc='v --clean'                        # vc:           Opens any file in vim/nvim editor without config
+alias ec='emacsclient -n -c -a ""'          # ec:           Opens emacs server
 alias c='code .'                            # c:            Open VS Code
-alias rr='ranger'                           # ra:           Opens ranger
+alias rr='ranger'                           # rr:           Opens ranger
 alias t='tmux'                              # t:            Opens tmux
 alias ts='tmux attach'                      # ts:           Tmux attaches to specified session
 alias zj='zellij'                           # zj:           Start zellij
