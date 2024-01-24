@@ -6,7 +6,6 @@ return {
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-nvim-lua',
     'hrsh7th/cmp-nvim-lsp-signature-help', -- signature help while typing
-    -- "ray-x/lsp_signature.nvim", -- alt signature help while typing
     "hrsh7th/cmp-buffer",                  -- source for text in buffer
     "hrsh7th/cmp-path",                    -- source for file system paths
     -- Snippets
@@ -24,6 +23,22 @@ return {
       completion = {
         completeopt = "menu,menuone,preview,noselect",
         keyword_length = 2 -- show completions after X characters
+      },
+
+      formatting = {
+        fields = { 'abbr', 'kind', 'menu' },
+        format = function(entry, item)
+          local menu_icon = {
+            nvim_lsp = '[LSP]',
+            luasnip = '[Lua]',
+            nvim_lua = '[Nvim]',
+            buffer = '[Buffer]',
+            path = '[Path]',
+          }
+
+          item.menu = menu_icon[entry.source.name]
+          return item
+        end,
       },
 
       window = {
@@ -46,9 +61,11 @@ return {
 
       -- sources for autocompletion
       sources = cmp.config.sources({
+        { name = 'nvim_lua' },
         { name = "nvim_lsp" },
         { name = 'nvim_lsp_signature_help' },
         { name = "luasnip" },       -- snippets
+        { name = "path" },          -- file system paths
         {
           name = "buffer",          -- text within current buffer
           option = {
@@ -62,10 +79,7 @@ return {
             end
           }
         },
-        { name = "path" }, -- file system paths
       }),
-
-      -- require("lsp_signature").setup({ hint_enable = false})
     })
   end,
 }
