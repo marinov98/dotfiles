@@ -103,6 +103,7 @@ zle -N goto-projects
 zle -N rg-find-file
 zle -N goto-projects-and-find
 
-bindkey '^ ' goto-projects
+bindkey '^ ' autosuggest-accept
 bindkey '^f' rg-find-file
-bindkey '^l' goto-projects-and-find
+bindkey '^l' goto-projects
+# bindkey '^L' goto-projects-and-find
