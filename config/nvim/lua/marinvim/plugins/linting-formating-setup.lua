@@ -38,6 +38,7 @@ return {
           html = { { "prettierd", "prettier" } },
           css = { { "prettierd", "prettier" } },
           scss = { { "prettierd", "prettier" } },
+          rust = { "rustfmt" },
         },
       })
       vim.keymap.set({ "n", "v" }, "<leader>ll", function()
