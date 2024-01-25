@@ -29,6 +29,7 @@ return {
       lspconfig.yamlls.setup({})
       lspconfig.html.setup({})
       lspconfig.cssls.setup({})
+      lspconfig.rust_analyzer.setup({})
 
       -- Bindings
       vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
