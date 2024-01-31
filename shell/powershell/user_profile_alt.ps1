@@ -33,7 +33,6 @@ function prompt {
 }
 
 # Alias
-Set-Alias vim v
 Set-Alias grep findstr
 Set-Alias ll ls
 
