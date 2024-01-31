@@ -8,7 +8,6 @@ Set-PSReadLineOption -BellStyle None
 Set-PSReadLineOption -PredictionSource History
 
 # Alias
-Set-Alias vim v
 Set-Alias grep findstr
 Set-Alias ll ls
 
