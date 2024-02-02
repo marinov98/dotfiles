@@ -1,0 +1,214 @@
+""""""""""""""""""""""
+
+"""""" LEADER KEY:
+
+""""""""""""""""""""""
+
+map <SPACE> <Leader>
+
+ 
+
+""""""""""""""""""""""
+
+"""""" SETTINGS:
+
+""""""""""""""""""""""
+
+ 
+
+" if hidden is not set, TextEdit might fail.
+
+set hidden
+
+ 
+
+
+set nobackup
+
+set nowritebackup
+
+set showcmd
+
+ 
+
+set updatetime=300
+
+ 
+
+" don't give |ins-completion-menu| messages.
+
+set shortmess+=c
+
+ 
+
+syntax enable
+
+set nocompatible
+
+ 
+
+"Color theme
+
+set background=dark
+
+colorscheme slate
+
+ 
+
+"indentation
+
+set tabstop=4
+
+set softtabstop=4
+
+set shiftwidth=4
+
+set noexpandtab
+
+set smartindent
+
+set smartcase
+
+ 
+
+" line numbers and tabs
+
+set number relativenumber
+
+set nu rnu
+
+set completeopt-=preview
+
+set guioptions-=e
+
+set sessionoptions+=tabpages,globals
+
+ 
+
+" directory navigations and settings
+
+set foldenable
+
+set incsearch
+
+set hlsearch
+
+set showmatch
+
+set wildmenu
+
+set cursorline
+
+set noswapfile
+
+set tags=tags
+
+set bs=2
+
+set mouse=a
+
+"set clipboard=unnamed "Windows
+
+set clipboard=unnamedplus " Linux and Mac
+
+set laststatus=2
+
+set t_Co=256
+
+ 
+
+ 
+
+" MODE SPECIFIC SETTINGS:
+
+autocmd FileType html setlocal ts=2 sts=2 sw=2
+
+autocmd FileType css setlocal ts=2 sts=2 sw=2
+
+autocmd FileType javascript setlocal ts=2 sts=2 sw=2
+
+autocmd FileType jsx setlocal ts=2 sts=2 sw=2
+
+autocmd FileType typescript setlocal ts=2 sts=2 sw=2
+
+autocmd FileType tsx setlocal ts=2 sts=2 sw=2
+
+ 
+
+" Don't offer to open certain files/directories
+
+set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
+
+set wildignore+=*.pdf,*.psd
+
+set wildignore+=node_modules/*,bower_components/*
+
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+
+ 
+
+" Search down into subfolders
+
+" Provides tab-completion for all file-related tasks
+
+set path+=**
+
+ 
+
+ 
+
+"""""""""""""""""""""""
+
+""""" PERSONAL BINDINGS:
+
+"""""""""""""""""""""""
+
+nnoremap <leader>n :noh<CR>
+nnoremap Y y$
+nnoremap <leader>s :w<CR>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>Q :q!<CR>
+
+ 
+
+"""""""""""""""""""""""
+
+""""" IDEA SPECIFIC:
+
+"""""""""""""""""""""""
+
+map <leader>f <Action>(GotoFile)
+map <leader>/ <Action>(FindInPath)
+map <leader>bi <Action>(Switcher)
+
+ 
+map <leader>dp <Action>(Debug)
+map <leader>dt <Action>(ToggleLineBreakpoint)
+map <leader>dg <Action>(ShowErrorDescription)
+
+ 
+map ]d <Action>(GotoNextError)
+map [d <Action>(GotoPreviousError)
+
+map gr <Action>(FindUsages)
+map gi <Action>(GotoImplementation)
+map gy <Action>(GotoTypeDeclaration)
+map gR <Action>(FindUsagesInFile)
+
+ 
+
+map <leader>lf <Action>(ReformatCode)
+map <leader>lg <Action>(QuickJavaDoc)
+map <leader>lc <Action>(RenameElement)
+map <leader>ls <Action>(GotoSymbol)
+
+ 
+
+"""""""""""""""""""""""
+
+""""" WINDOW MANAGEMENT:
+
+"""""""""""""""""""""""
+
+" Fix splitting
+set splitbelow splitright
