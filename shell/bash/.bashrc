@@ -167,6 +167,9 @@ stty -ixon
 #PS1+="\[$(tput sgr0)\]";
 #export PS1;
 
+# MOST RECENT WITH $ AND NEWLINE
+#export PS1="\[\033[36m\]\u@\h:\033[32m\]\w\[\033[1;35m\]\$(parse_git_branch)\[\033[00m\]\n\033[1;33m\]$ \[\033[00m\]"
+
 ###################################
 ####### POWERLINE SHELL PS1
 ###################################

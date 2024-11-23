@@ -1,19 +1,10 @@
-# ZSH Home
-export ZSH="$HOME/.zsh"
-export ZSH_PLUGINS="$ZSH/plugins"
+# Path to your oh-my-zsh installation.
+export ZSH="/Users/marinmarinov/.oh-my-zsh"
 
 ###################################
 ####### SETTINGS
 ###################################
-export HISTFILE=$ZSH/.zsh_history
-export HISTSIZE=10000
-export SAVEHIST=10000
-
-# History won't save duplicates.
-setopt HIST_IGNORE_ALL_DUPS
-
-# History won't show duplicates on search.
-setopt HIST_FIND_NO_DUPS
+ZSH_THEME="robbyrussell" # "powerlevel10k/powerlevel10k" if we are feeling extra
 
 CASE_SENSITIVE="true"
 
@@ -27,19 +18,20 @@ export VISUAL=vim
 # export EDITOR="emacsclient -t -a ''"
 # export VISUAL="emacsclient -c -a emacs"
 
-###################################
-####### Plugins
-###################################
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+# export MANPATH="/usr/local/man:$MANPATH"
 
-source $ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $ZSH_PLUGINS/zsh-vi-mode/zsh-vi-mode.zsh
+# export MANPATH="/usr/local/man:$MANPATH"
 
-_fix_cursor() {
-   echo -ne '\e[5 q'
-}
+plugins=(
+  git
+  zsh-syntax-highlighting
+  zsh-autosuggestions
+  vi-mode
+)
 
-precmd_functions+=(_fix_cursor)
+source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -115,32 +107,3 @@ bindkey '^ ' autosuggest-accept
 bindkey '^f' rg-find-file
 bindkey '^l' goto-projects
 # bindkey '^L' goto-projects-and-find
-
-
-###################################
-####### Git
-###################################
-
-# Git autocompletetion
-zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
-fpath=(~/.zsh $fpath)
-autoload -Uz compinit && compinit
-
-autoload -Uz vcs_info # enable vcs_info
-precmd () { vcs_info } # always load before displaying the prompt
-zstyle ':vcs_info:*' formats '(%b)'
-
-parse_git_dirty() {
-  git_status="$(git status 2> /dev/null)"
-  [[ "$git_status" =~ "Changes to be committed:" ]] && echo -n "%F{green}·%f"
-  [[ "$git_status" =~ "Changes not staged for commit:" ]] && echo -n "%F{yellow}·%f"
-  [[ "$git_status" =~ "Untracked files:" ]] && echo -n "%F{red}·%f"
-}
-
-###################################
-####### PS1
-###################################
-
-setopt PROMPT_SUBST
-NEWLINE=$'\n'
-PROMPT='%F{81}%n@%m:%f%F{green}${PWD/#$HOME/~}%f %F{183}${vcs_info_msg_0_}%f $(parse_git_dirty) %F{yellow}$NEWLINE$%f '
