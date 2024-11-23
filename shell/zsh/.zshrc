@@ -143,4 +143,8 @@ parse_git_dirty() {
 
 setopt PROMPT_SUBST
 NEWLINE=$'\n'
+
 PROMPT='%F{81}%n@%m:%f%F{green}${PWD/#$HOME/~}%f %F{183}${vcs_info_msg_0_}%f $(parse_git_dirty) %F{yellow}$NEWLINE$%f '
+
+### NERD FONT VARIANT
+#PROMPT='%F{81}󰌢 %n@%m%f%F{green}  ${PWD/#$HOME/~}%f %F{183}${vcs_info_msg_0_}%f $(parse_git_dirty) %F{yellow}$NEWLINE%f '

@@ -56,8 +56,8 @@ set noswapfile
 set tags=tags
 set bs=2
 set mouse=a
-"set clipboard=unnamed "Windows
-set clipboard=unnamedplus " Linux and Mac
+"set clipboard=unnamed "Windows and Mac
+set clipboard=unnamedplus " Linux
 set laststatus=2
 set t_Co=256
 
