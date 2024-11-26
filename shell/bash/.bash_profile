@@ -7,7 +7,25 @@
 ## Git integration
 parse_git_branch() {
    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1]/'
-} 
+}
+
+_RED=$(tput setaf 1)
+_GREEN=$(tput setaf 2)
+_YELLOW=$(tput setaf 3)
+_BLUE=$(tput setaf 4)
+_MAGENTA=$(tput setaf 5)
+_CYAN=$(tput setaf 6)
+_WHITE=$(tput setaf 7)
+
+parse_git_status() {
+   git_status="$(git status 2> /dev/null)"
+   [[ "$git_status" =~ "Changes to be committed:" ]] && echo -n "${_GREEN} *"
+   [[ "$git_status" =~ "Changes not staged for commit:" ]] && echo -n "${_YELLOW} *"
+   [[ "$git_status" =~ "Untracked files:" ]] && echo -n "${_RED} *"
+   [[ "$git_status" =~ "Your branch is behind" ]] && echo -n "${_RED} ^"
+   [[ "$git_status" =~ "Your branch is ahead" ]] && echo -n "${_GREEN} ^"
+   [[ "$git_status" =~ "have diverged" ]] && echo -n "${_RED} !"
+}
 
 # Git autocompletetion
 source ~/git-completion.bash
@@ -17,7 +35,8 @@ PS1="\[$(tput bold)\]\n";
 PS1+="\[$(tput setaf 39)\]$(whoami) ";        # blue  user
 PS1+="\[$(tput setaf 148)\]at: "
 PS1+="\[$(tput setaf 196)\]\W";   # red directories
-PS1+="\[$(tput setaf 162)\]\$(parse_git_branch) >> "; #github integration
+PS1+="\[$(tput setaf 162)\]\$(parse_git_branch) > "; #github integration
+PS1+="\[$(tput sgr0)\]\$(parse_git_status)";
 PS1+="\[$(tput sgr0)\]";
 export PS1;
 

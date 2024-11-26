@@ -159,6 +159,24 @@ stty -ixon
 #     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1]/'
 #}
 
+_RED=$(tput setaf 1)
+_GREEN=$(tput setaf 2)
+_YELLOW=$(tput setaf 3)
+_BLUE=$(tput setaf 4)
+_MAGENTA=$(tput setaf 5)
+_CYAN=$(tput setaf 6)
+_WHITE=$(tput setaf 7)
+
+parse_git_status() {
+   git_status="$(git status 2> /dev/null)"
+   [[ "$git_status" =~ "Changes to be committed:" ]] && echo -n "${_GREEN} *"
+   [[ "$git_status" =~ "Changes not staged for commit:" ]] && echo -n "${_YELLOW} *"
+   [[ "$git_status" =~ "Untracked files:" ]] && echo -n "${_RED} *"
+   [[ "$git_status" =~ "Your branch is behind" ]] && echo -n "${_RED} ^"
+   [[ "$git_status" =~ "Your branch is ahead" ]] && echo -n "${_GREEN} ^"
+   [[ "$git_status" =~ "have diverged" ]] && echo -n "${_RED} !"
+}
+
 #PS1="\[$(tput bold)\]\n";
 #PS1+="\[$(tput setaf 39)\]$(whoami) ";        # blue  user
 #PS1+="\[$(tput setaf 148)\]at: "
@@ -167,8 +185,9 @@ stty -ixon
 #PS1+="\[$(tput sgr0)\]";
 #export PS1;
 
-# MOST RECENT WITH $ AND NEWLINE
+# MOST RECENT WITH $ AND NEWLINE (2 variants)
 #export PS1="\[\033[36m\]\u@\h:\033[32m\]\w\[\033[1;35m\]\$(parse_git_branch)\[\033[00m\]\n\033[1;33m\]$ \[\033[00m\]"
+#export PS1="\[\033[36m\]\u@\h:\033[32m\]\w\[\033[1;35m\]\$(parse_git_branch)\[\033[00m\]\$(parse_git_status)\n\033[1;33m\]$ ${_WHITE}"
 
 ###################################
 ####### POWERLINE SHELL PS1
