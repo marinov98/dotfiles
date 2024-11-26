@@ -133,12 +133,12 @@ zstyle ':vcs_info:*' formats '(%b)'
 
 parse_git_status() {
   git_status="$(git status 2> /dev/null)"
-  [[ "$git_status" =~ "Changes to be committed:" ]] && echo -n "%F{green}·%f"
-  [[ "$git_status" =~ "Changes not staged for commit:" ]] && echo -n "%F{yellow}·%f"
-  [[ "$git_status" =~ "Untracked files:" ]] && echo -n "%F{red}·%f"
-  [[ "$git_status" =~ "Your branch is behind" ]] && echo -n "%F{red} ^%f"
-  [[ "$git_status" =~ "Your branch is ahead" ]] && echo -n "%F{green} ^%f"
-  [[ "$git_status" =~ "have diverged" ]] && echo -n "%F{red} !%f"
+  [[ "$git_status" =~ "Changes to be committed:" ]] && echo -n "%F{green}·%f "
+  [[ "$git_status" =~ "Changes not staged for commit:" ]] && echo -n "%F{yellow}·%f "
+  [[ "$git_status" =~ "Untracked files:" ]] && echo -n "%F{red}·%f "
+  [[ "$git_status" =~ "Your branch is behind" ]] && echo -n "%F{red}^%f "
+  [[ "$git_status" =~ "Your branch is ahead" ]] && echo -n "%F{green}^%f "
+  [[ "$git_status" =~ "have diverged" ]] && echo -n "%F{red}!%f "
 }
 
 ###################################
@@ -148,7 +148,7 @@ parse_git_status() {
 setopt PROMPT_SUBST
 NEWLINE=$'\n'
 
-PROMPT='%F{81}%n@%m:%f%F{green}${PWD/#$HOME/~}%f %F{183}${vcs_info_msg_0_}%f $(parse_git_status) %F{yellow}$NEWLINE$%f '
+PROMPT='%F{81}%n@%m:%f%F{green}${PWD/#$HOME/~}%f %F{183}${vcs_info_msg_0_}%f $(parse_git_status)%F{yellow}$NEWLINE$%f '
 
 ### NERD FONT VARIANT
-#PROMPT='%F{81}󰌢 %n@%m%f%F{green}  ${PWD/#$HOME/~}%f %F{183}${vcs_info_msg_0_}%f $(parse_git_status) %F{yellow}$NEWLINE%f '
+#PROMPT='%F{81}󰌢 %n@%m%f%F{green}  ${PWD/#$HOME/~}%f %F{183}${vcs_info_msg_0_}%f $(parse_git_status)%F{yellow}$NEWLINE%f '
