@@ -12,10 +12,6 @@ scoop install ripgrep
 scoop install fzf
 scoop install make
 
-# uncomment if you need these installs
-# echo 'installing global yarn packages'
-# yarn global add netlify-cli prettier @angular/cli http-server requirejs ngrok
-
 echo 'installing choco`
 Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 choco install poshgit 
