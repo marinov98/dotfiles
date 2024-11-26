@@ -23,6 +23,8 @@ parse_git_status() {
    [[ "$git_status" =~ "Changes not staged for commit:" ]] && echo -n "${_YELLOW} *"
    [[ "$git_status" =~ "Untracked files:" ]] && echo -n "${_RED} *"
    [[ "$git_status" =~ "Your branch is behind" ]] && echo -n "${_RED} ^"
+   [[ "$git_status" =~ "Your branch is ahead" ]] && echo -n "${_GREEN} ^"
+   [[ "$git_status" =~ "have diverged" ]] && echo -n "${_RED} !"
 }
 
 # Git autocompletetion
