@@ -23,7 +23,8 @@ return {
         extensions = {
           ["ui-select"] = {
             require("telescope.themes").get_dropdown({})
-          }
+          },
+          fzf = {}
         },
         pickers = {
           live_grep = {
