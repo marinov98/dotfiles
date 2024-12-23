@@ -129,6 +129,7 @@ autoload -Uz compinit && compinit
 autoload -Uz vcs_info # enable vcs_info
 precmd () { vcs_info } # always load before displaying the prompt
 zstyle ':vcs_info:*' formats '(%b)'
+# zstyle ':vcs_info:*' formats ' %b'
 
 
 parse_git_status() {
