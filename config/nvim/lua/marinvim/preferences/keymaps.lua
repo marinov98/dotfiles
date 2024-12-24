@@ -23,7 +23,6 @@ vim.keymap.set('n', '<leader>tk', ":tabprevious<CR>", { desc = "Previous Tab" })
 
 -- Coding utility
 vim.keymap.set('n', '<leader>cs', ":terminal<CR>", { desc = "Open terminal" })
--- vim.keymap.set('n', '<leader>tn', vim.cmd.Explore, { desc = "Open file browser" }) -- Uncomment when not using a file tree plugin
 vim.keymap.set("n", "<leader>cm", ":%s//gc<Left><Left><Left>") -- attempt at native multiple cursors
 vim.keymap.set("v", "<leader>cm", ":s//gc<Left><Left><Left>")  -- attempt at native multiple cursors visual mode
 vim.keymap.set("n", "<leader>i", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
@@ -37,3 +36,7 @@ vim.keymap.set('n', '<leader>gs', ":Git ", { desc = "Git commands" })
 vim.keymap.set('n', '<leader>gm', ":Gdiffsplit!<CR>", { desc = "Open 3 way split" })
 vim.keymap.set('n', '<leader>gdj', ":diffget //2<CR>", { desc = "diff get 2" })
 vim.keymap.set('n', '<leader>gdk', ":diffget //3<CR>", { desc = "diff get 3" })
+
+-- File tree 
+-- vim.keymap.set('n', '<leader>tn', vim.cmd.Explore, { desc = "Open file browser" }) -- Uncomment when not using a different file tree plugin
+-- vim.keymap.set('n', '<leader>tn', ":Vexplore!<CR>", { desc = "Open netrw side bar" }) -- same as above but open as a sidebar
