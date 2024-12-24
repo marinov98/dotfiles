@@ -13,6 +13,8 @@ return {
   },
   {
     'stevearc/oil.nvim',
+    cmd = "Oil",
+    keys = "-",
     version = "*",
     config = function()
       require("oil").setup({
