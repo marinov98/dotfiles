@@ -11,25 +11,28 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls" } -- examples: "pyright", "cssls", "tsserver", "jsonls"
+        ensure_installed = { "lua_ls" } -- examples: "pyright", "cssls", "ts_ls", "jsonls"
       })
     end
   },
   {
     "neovim/nvim-lspconfig",
+    dependencies = { 'saghen/blink.cmp' },
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       local lspconfig = require('lspconfig')
+      local capabilities = require('blink.cmp').get_lsp_capabilities()
 
       -- Servers
-      lspconfig.lua_ls.setup({})
-      lspconfig.pyright.setup({})
-      lspconfig.tsserver.setup({})
-      lspconfig.jsonls.setup({})
-      lspconfig.yamlls.setup({})
-      lspconfig.html.setup({})
-      lspconfig.cssls.setup({})
-      lspconfig.rust_analyzer.setup({})
+      lspconfig.lua_ls.setup({ capabilities = capabilities })
+      lspconfig.pyright.setup({ capabilities = capabilities })
+      lspconfig.ts_ls.setup({ capabilities = capabilities })
+      lspconfig.jsonls.setup({ capabilities = capabilities })
+      lspconfig.yamlls.setup({ capabilities = capabilities })
+      lspconfig.html.setup({ capabilities = capabilities })
+      lspconfig.cssls.setup({ capabilities = capabilities })
+      lspconfig.rust_analyzer.setup({ capabilities = capabilities })
+      lspconfig.elixirls.setup({ capabilities = capabilities })
 
       -- Bindings
       vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
@@ -47,10 +50,10 @@ return {
           local opts = { buffer = ev.buf }
           vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
           vim.keymap.set('n', 'gh', vim.lsp.buf.signature_help, opts)
-          vim.keymap.set('n', '<space>lc', vim.lsp.buf.rename, opts)
-          vim.keymap.set('n', '<space>la', vim.lsp.buf.code_action, opts)
-          vim.keymap.set('n', '<space>lg', vim.lsp.buf.hover, opts)
-          vim.keymap.set('n', '<space>lf', function()
+          vim.keymap.set('n', '<leader>lc', vim.lsp.buf.rename, opts)
+          vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, opts)
+          vim.keymap.set('n', '<leader>lg', vim.lsp.buf.hover, opts)
+          vim.keymap.set('n', '<leader>lf', function()
             vim.lsp.buf.format { async = true }
           end, opts)
 
@@ -60,12 +63,12 @@ return {
           vim.keymap.set('n', 'gr', builtin.lsp_references, opts) -- better visuals than vim.lsp.buf.references
           vim.keymap.set('n', 'gi', builtin.lsp_implementations, opts)
           vim.keymap.set('n', 'gy', builtin.lsp_type_definitions, opts)
-          vim.keymap.set('n', '<space>ls', builtin.lsp_document_symbols, opts)
+          vim.keymap.set('n', '<leader>ls', builtin.lsp_document_symbols, opts)
           -- Workspace related
-          vim.keymap.set('n', '<space>lws', builtin.lsp_workspace_symbols, opts)
-          vim.keymap.set('n', '<space>lwa', vim.lsp.buf.add_workspace_folder, opts)
-          vim.keymap.set('n', '<space>lwr', vim.lsp.buf.remove_workspace_folder, opts)
-          vim.keymap.set('n', '<space>lwl', function()
+          vim.keymap.set('n', '<leader>lws', builtin.lsp_workspace_symbols, opts)
+          vim.keymap.set('n', '<leader>lwa', vim.lsp.buf.add_workspace_folder, opts)
+          vim.keymap.set('n', '<leader>lwr', vim.lsp.buf.remove_workspace_folder, opts)
+          vim.keymap.set('n', '<leader>lwl', function()
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
           end, opts)
 
