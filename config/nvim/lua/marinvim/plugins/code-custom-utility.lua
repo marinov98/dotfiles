@@ -1,11 +1,26 @@
 return {
   {
-    'm4xshen/autoclose.nvim', -- autopairs plugin
+    'echasnovski/mini.pairs',
+    version = "*",
     event = "InsertEnter",
     opts = {}
   },
+  -- icons
   {
-    "HiPhish/rainbow-delimiters.nvim",
-    event = { 'BufReadPre', 'BufNewFile' },
+    'echasnovski/mini.icons',
+    version = '*',
+    opts = {}
+  },
+  {
+    'stevearc/oil.nvim',
+    version = "*",
+    config = function()
+      require("oil").setup({
+        view_options = {
+          show_hidden = true
+        }
+      })
+      vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory with Oil" })
+    end
   }
 }
