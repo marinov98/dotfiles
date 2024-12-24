@@ -9,9 +9,15 @@ return {
   opts = {
     signature = { enabled = true },
     keymap = {
-      preset = 'default',
-      ['<Tab>'] = { 'select_and_accept' },
-      ['<C-y>'] = { 'snippet_forward', 'fallback' }
+      preset = 'super-tab',
+    },
+    completion = {
+      list = {
+        max_items = 10
+      },
+    },
+    sources = {
+      min_keyword_length = 2
     }
   }
 }
