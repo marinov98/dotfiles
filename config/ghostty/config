@@ -1,0 +1,12 @@
+theme = catppuccin-mocha
+
+font-size = 14
+font-family = FiraCode Nerd Font Mono
+
+shell-integration-features = no-cursor
+cursor-style = block
+cursor-style-blink = false
+
+background-opacity = 0.9
+window-padding-x = 5
+
