@@ -13,7 +13,7 @@ sudo pacman -S neofetch tmux htop
 
 echo "installing version control, debuggers and file mamagers.."
 sudo pacman -S git gdb curl ranger wireless_tools gnupg wget 
-sudo pacman -S the_silver_searcher ripgrep
+sudo pacman -S fd ripgrep
 
 echo "power management"
 # pamac stuff to be done when OS is installed
@@ -30,7 +30,7 @@ echo "x stuff..."
 sudo pacman -S xf86-input-libinput xbacklight xf86-input-wacom xf86-video-fbdev xf86-video-intel xf86-video-vesa xfsprogs xorg-bdftopcf xorg-font-util xorg-fonts-encodings xorg-iceauth xorg-luit xorg-mkfontscale xorg-server xorg-sessreg
 
 echo "installing tools for Python..."
-sudo pacman -S python3 python-pip pyenv
+sudo pacman -S python3 python-pip
 
 echo "installing tools for Javascript..."
 sudo pacman -S nodejs npm postgresql
@@ -44,7 +44,6 @@ curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 
 echo "preparation for i3 configuring..."
 sudo pacman -S feh compton i3-gaps i3status i3lock rofi trash-cli
-sudo pacman -S alacritty
 
 echo "Latex setup"
 sudo pacman -S texlive-core texline-bin biber texlive-fontsextra texlive-bibtexextra texlive-formatsextra texlive-science

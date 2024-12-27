@@ -8,27 +8,17 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 echo "installing packages with brew now"
 
 echo "installing terminal essentials..."
-brew install curl ranger tmux
+brew install curl tmux
 brew install ripgrep
 brew install reattach-to-user-namespace
 
 echo "installing programming essentials..."
 brew install llvm
-brew install python3
 brew install clang-format gcc ctags aspell 
 brew install yarn 
 brew install fzf
 brew install cmake node npm gdb neofetch 
-brew install pyenv pyenv-virtualenv pyenv-virtualenvwrapper
-brew tap heroku/brew && brew install heroku
 
-echo "installing latex packages"
-# brew install tap
-# brew cask install mactex
-
-echo "installing emacs and vim "
-brew cask install emacs
-brew install vim
 
 echo "Installing Postgres"
 brew uninstall --force posrgresql

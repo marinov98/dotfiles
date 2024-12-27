@@ -38,5 +38,5 @@ vim.keymap.set('n', '<leader>gdj', ":diffget //2<CR>", { desc = "diff get 2" })
 vim.keymap.set('n', '<leader>gdk', ":diffget //3<CR>", { desc = "diff get 3" })
 
 -- File tree 
--- vim.keymap.set('n', '<leader>tn', vim.cmd.Explore, { desc = "Open file browser" }) -- Uncomment when not using a different file tree plugin
+-- vim.keymap.set('n', '-', vim.cmd.Explore, { desc = "Open file browser" }) -- Uncomment when not using a different file tree plugin
 -- vim.keymap.set('n', '<leader>tn', ":Vexplore!<CR>", { desc = "Open netrw side bar" }) -- same as above but open as a sidebar
