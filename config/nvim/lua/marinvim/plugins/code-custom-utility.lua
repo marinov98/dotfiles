@@ -12,25 +12,17 @@ return {
     opts = {}
   },
   {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-    },
-    cmd = "Neotree",
-    keys = '<leader>tn',
+    "nvim-tree/nvim-tree.lua",
+    version = "*",
+    keys = "<leader>tn",
+    cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeFindFile" },
     config = function()
-      require("neo-tree").setup({
-        filesystem = {
-          filtered_items = {
-            visible = true,
-            hide_dotfiles = false,
-            hide_gitignored = false,
-          },
+      require("nvim-tree").setup({
+        view = {
+          width = 50
         }
       })
-      vim.keymap.set('n', '<leader>tn', ":Neotree toggle<CR>", {})
+      vim.keymap.set('n', '<leader>tn', ":NvimTreeToggle<CR>", { desc = "Open Nvim tree" })
     end
   },
   {
