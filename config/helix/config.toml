@@ -1,7 +1,7 @@
 theme = "catppuccin_mocha"
 
 [editor]
-auto-pairs = false # Hot take 
+auto-pairs = true
 line-number = "relative"
 cursorline = true
 bufferline = "multiple"
@@ -23,9 +23,28 @@ skip-levels = 1
 [editor.statusline]
 left = ["mode", "file-name", "file-modification-indicator", "separator", "diagnostics"]
 center = ["version-control"]
-right = ["read-only-indicator","file-encoding", "position"]
+right = ["read-only-indicator", "file-encoding", "position"]
 separator = " "
 
+[keys.insert]
+"C-[" = "normal_mode"
+
+[keys.select]
+"C-[" = "normal_mode"
+
 [keys.normal]
-"space" = { "s" = ":w", "S" = ":lsp-restart", "k" = ":buffer-close", "Q" = ":q!", "l" = { "f" = ":format", "a" = "code_action" ,"s" = "symbol_picker", "w" = { "s" = "workspace_symbol_picker" }, "g" = "hover" } }
 "esc" = ["collapse_selection", "keep_primary_selection"]
+
+[keys.normal.space]
+"s" = ":w"
+"S" = ":lsp-restart"
+"k" = ":buffer-close"
+"q" = ":q"
+"Q" = ":q!"
+
+[keys.normal.space.l]
+"f" = ":format"
+"a" = "code_action"
+"s" = "symbol_picker"
+"w" = { "s" = "workspace_symbol_picker" }
+"g" = "hover"
