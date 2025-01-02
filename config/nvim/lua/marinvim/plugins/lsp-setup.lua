@@ -31,13 +31,13 @@ return {
       lspconfig.yamlls.setup({ capabilities = capabilities })
       lspconfig.html.setup({ capabilities = capabilities })
       lspconfig.cssls.setup({ capabilities = capabilities })
+      lspconfig.gopls.setup({ capabilities = capabilities })
       lspconfig.rust_analyzer.setup({ capabilities = capabilities })
       lspconfig.elixirls.setup({ capabilities = capabilities })
 
       -- Bindings
-      vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-      vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-      vim.keymap.set('n', '<leader>dg', vim.diagnostic.open_float)
+      vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Next diagnostic in current file" })
+      vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Previous diagnostic in current file" })
 
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('UserLspConfig', {}),

@@ -12,6 +12,7 @@ vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Copy line to system clipboar
 vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]], { desc = "Paste from system clipboard" })
 vim.keymap.set("x", "<leader>P", [["_dP]], { desc = "Paste without cutting" })
 
+
 -- Buffers and tabs
 vim.keymap.set('n', '<leader>a', "<C-^>", { desc = "Alternate buffers" })
 vim.keymap.set('n', '<leader>bp', ":bprevious<CR>", { desc = "Previous Buffer" })
@@ -23,11 +24,11 @@ vim.keymap.set('n', '<leader>tk', ":tabprevious<CR>", { desc = "Previous Tab" })
 
 -- Coding utility
 vim.keymap.set('n', '<leader>cs', ":terminal<CR>", { desc = "Open terminal" })
-vim.keymap.set("n", "<leader>cm", ":%s//gc<Left><Left><Left>") -- attempt at native multiple cursors
-vim.keymap.set("v", "<leader>cm", ":s//gc<Left><Left><Left>")  -- attempt at native multiple cursors visual mode
-vim.keymap.set("n", "<leader>i", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>cm", ":%s//gc<Left><Left><Left>", { desc = "Search/replace in current file with confirmation" }) -- attempt at native multiple cursors
+vim.keymap.set("v", "<leader>cm", ":s//gc<Left><Left><Left>", { desc = "Search/replace in visual highlight with confirmation" })  -- attempt at native multiple cursors visual mode
+vim.keymap.set("n", "<leader>i", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Case insensitive search/replace under cursor for current file" })
 vim.keymap.set("n", "<leader>X", "<cmd>!chmod +x %<CR>", { silent = true })
-vim.keymap.set("n", "<leader>uc", ":! ", { silent = true })
+vim.keymap.set("n", "<leader>uc", ":! ", { silent = true, desc = "Execute a command in terminal" })
 vim.keymap.set("n", "<leader><leader>k", "<cmd>%bd|e#<cr>", { desc = "Close all buffers but the current one" }) -- https://stackoverflow.com/a/42071865/516188
 
 -- Git
