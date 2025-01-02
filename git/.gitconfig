@@ -19,7 +19,7 @@
 	co = checkout
 	br = branch
 	c = commit
-  	ds = diff --staged
+  ds = diff --staged
 	cl = clone
 	st = status
 	m = merge
@@ -31,3 +31,5 @@
 	psf = push -f
 	psu = push -u
 	pst = push --tags
+[pull]
+	ff = only
