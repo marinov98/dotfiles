@@ -28,7 +28,7 @@ vim.keymap.set("n", "<leader>cm", ":%s//gc<Left><Left><Left>", { desc = "Search/
 vim.keymap.set("v", "<leader>cm", ":s//gc<Left><Left><Left>", { desc = "Search/replace in visual highlight with confirmation" })  -- attempt at native multiple cursors visual mode
 vim.keymap.set("n", "<leader>i", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Case insensitive search/replace under cursor for current file" })
 vim.keymap.set("n", "<leader>X", "<cmd>!chmod +x %<CR>", { silent = true })
-vim.keymap.set("n", "<leader>uc", ":! ", { silent = true, desc = "Execute a command in terminal" })
+vim.keymap.set("n", "<leader>uc", ":! ", { silent = true, desc = "Execute external command" })
 vim.keymap.set("n", "<leader><leader>k", "<cmd>%bd|e#<cr>", { desc = "Close all buffers but the current one" }) -- https://stackoverflow.com/a/42071865/516188
 
 -- Git
