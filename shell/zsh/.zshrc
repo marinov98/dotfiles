@@ -33,13 +33,12 @@ export VISUAL=vim
 
 source $ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $ZSH_PLUGINS/zsh-vi-mode/zsh-vi-mode.zsh
 
-_fix_cursor() {
-   echo -ne '\e[5 q'
-}
-
-precmd_functions+=(_fix_cursor)
+# source $ZSH_PLUGINS/zsh-vi-mode/zsh-vi-mode.zsh
+# _fix_cursor() {
+#    echo -ne '\e[5 q'
+# }
+# precmd_functions+=(_fix_cursor)
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
