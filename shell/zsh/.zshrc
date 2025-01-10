@@ -72,30 +72,36 @@ trash () { command mv "$@" ~/.Trash ; }     # trash:        Moves a file to the 
 # Fix Vim C-s crash
 stty -ixon
 
-# FZF customization
-# export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs' # ripgrep variant
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --no-ignore'
+###################################
+####### FZF
+###################################
+
+CUSTOM_PROJECTS_DIR_PATH="$HOME/projects/" # Change this based on your projects directory
+
+# Ripgrep
+# export FZF_DEFAULT_COMMAND='rg --files --hidden --follow'
+# alias fzfi='rg --files --hidden --follow --no-ignore-vcs -g "!{node_modules,.git}" | fzf'
+# alias zfd='cd $CUSTOM_PROJECTS_DIR_PATH && cd $(find . -type d -print | fzf)' 
+
+# Fd
+export FZF_DEFAULT_COMMAND='fd --type f --hidden'
+alias fzfi='fd --type file --hidden --no-ignore --exclude .git | fzf'
+alias zfd='cd $CUSTOM_PROJECTS_DIR_PATH && cd $(fd . -t d | fzf)'
+
+alias vz='v $(fzfi)'
+
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-CUSTOM_PROJECTS_DIR_PATH="$HOME/Projects/" # Change this based on your projects directory
-alias fzfi='rg --files --hidden --follow --no-ignore-vcs -g "!{node_modules,.git}" | fzf'
-alias zfind='cd $CUSTOM_PROJECTS_DIR_PATH && cd $(find . -type d -print | fzf)' 
-alias zfd='cd $CUSTOM_PROJECTS_DIR_PATH && cd $(fd . -t d | fzf)'
-alias vz='v $(fzfi)'
+###################################
+####### ZSH Plugin config
+###################################
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#6272a4'
 ZSH_HIGHLIGHT_STYLES[path]='fg=#8be9fd'
 
-if which fd >/dev/null; then
-  goto-projects() {
-    zfd
-  }
-else
-  goto-projects() {
-    zfind
-  }
-fi
-
+goto-projects() {
+  zfd
+}
 
 rg-find-file() {
   vz
@@ -113,8 +119,7 @@ zle -N goto-projects-and-find
 bindkey '^ ' autosuggest-accept
 bindkey '^f' rg-find-file
 bindkey '^l' goto-projects
-# bindkey '^L' goto-projects-and-find
-
+bindkey '^p' goto-projects-and-find
 
 ###################################
 ####### Git
