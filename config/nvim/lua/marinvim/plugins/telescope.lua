@@ -55,7 +55,7 @@ return {
       elseif vim.fn.executable('rg') == 1 then
         vim.keymap.set('n', '<leader>f', function()
           builtin.find_files({ find_command = { 'rg', '--files', "--hidden", "--color", "never", "--glob=!**/.git/*" } })
-        end, { "Fuzzy find files with ripgrep" })
+        end, { desc = "Fuzzy find files with ripgrep" })
       else -- I cannot save you if it gets to here
         vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = "Fuzzy find files" })
       end
