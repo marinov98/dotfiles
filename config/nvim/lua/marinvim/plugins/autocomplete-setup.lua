@@ -8,6 +8,7 @@ return {
   },
   opts = {
     signature = { enabled = true },
+    snippets = { preset = "luasnip" },
     keymap = {
       preset = 'super-tab',
     },
