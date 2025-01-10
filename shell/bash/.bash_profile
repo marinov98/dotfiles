@@ -4,11 +4,6 @@
 ####### PS1   
 ###################################
 
-## Git integration
-parse_git_branch() {
-   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1]/'
-}
-
 _RED=$(tput setaf 1)
 _GREEN=$(tput setaf 2)
 _YELLOW=$(tput setaf 3)
@@ -16,6 +11,11 @@ _BLUE=$(tput setaf 4)
 _MAGENTA=$(tput setaf 5)
 _CYAN=$(tput setaf 6)
 _WHITE=$(tput setaf 7)
+
+## Git integration
+parse_git_branch() {
+   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1]/'
+}
 
 parse_git_status() {
    git_status="$(git status 2> /dev/null)"
@@ -32,7 +32,7 @@ source ~/git-completion.bash
 
  
 PS1="\[$(tput bold)\]\n";
-PS1+="\[$(tput setaf 39)\]$(whoami) ";        # blue  user
+PS1+="\[$(tput setaf 39)\]$(whoami) ";  # blue  user
 PS1+="\[$(tput setaf 148)\]at: "
 PS1+="\[$(tput setaf 196)\]\W";   # red directories
 PS1+="\[$(tput setaf 162)\]\$(parse_git_branch) > "; #github integration
@@ -85,25 +85,22 @@ export HISTSIZE=10000
 export HISTFILESIZE=120000
 
 ###################################
-####### Powerline-Shell PS1   
+####### FZF
 ###################################
 
-# function _update_ps1() {
-#     PS1=$(powerline-shell $?)
-# }
-
-# if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
-#     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
-# fi
-
-neofetch
-
-# FZF customization
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-
 CUSTOM_PROJECTS_DIR_PATH="$HOME/Projects/" # Change this based on your projects directory
+
+# Ripgrep
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs'
 alias fzfi='rg --files --hidden --follow --no-ignore-vcs -g "!{node_modules,.git}" | fzf'
-alias zfind='cd $CUSTOM_PROJECTS_DIR_PATH && cd $(find . -type d -print | fzf)' 
-alias zfd='cd $CUSTOM_PROJECTS_DIR_PATH && cd $(fd . -t d | fzf)'
+alias zfd='cd $CUSTOM_PROJECTS_DIR_PATH && cd $(find . -type d -print | fzf)' 
+
+# Fd
+# export FZF_DEFAULT_COMMAND='fd --type f --hidden'
+# alias fzfi='fd --type file --hidden --no-ignore --exclude .git | fzf'
+# alias zfd='cd $CUSTOM_PROJECTS_DIR_PATH && cd $(fd . -t d | fzf)'
+
 alias vz='v $(fzfi)'
+
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+neofetch

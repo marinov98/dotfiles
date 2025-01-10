@@ -154,11 +154,6 @@ stty -ixon
 ####### PS1
 ###################################
 
-# Git integration
-#parse_git_branch() {
-#     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1]/'
-#}
-
 _RED=$(tput setaf 1)
 _GREEN=$(tput setaf 2)
 _YELLOW=$(tput setaf 3)
@@ -166,6 +161,11 @@ _BLUE=$(tput setaf 4)
 _MAGENTA=$(tput setaf 5)
 _CYAN=$(tput setaf 6)
 _WHITE=$(tput setaf 7)
+
+# Git integration
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1]/'
+}
 
 parse_git_status() {
    git_status="$(git status 2> /dev/null)"
@@ -186,29 +186,27 @@ parse_git_status() {
 #export PS1;
 
 # MOST RECENT WITH $ AND NEWLINE (2 variants)
-#export PS1="\[\033[36m\]\u@\h:\033[32m\]\w\[\033[1;35m\]\$(parse_git_branch)\[\033[00m\]\n\033[1;33m\]$ \[\033[00m\]"
-#export PS1="\[\033[36m\]\u@\h:\033[32m\]\w\[\033[1;35m\]\$(parse_git_branch)\[\033[00m\]\$(parse_git_status)\n\033[1;33m\]$ ${_WHITE}"
+# export PS1="\[\033[36m\]\u@\h:\033[32m\]\w\[\033[1;35m\]\$(parse_git_branch)\[\033[00m\]\n\033[1;33m\]$ \[\033[00m\]"
+export PS1="\[\033[36m\]\u@\h:\033[32m\]\w\[\033[1;35m\]\$(parse_git_branch)\[\033[00m\]\$(parse_git_status)\n\033[1;33m\]$ \[\033[00m\]"
 
 ###################################
-####### POWERLINE SHELL PS1
+####### FZF
 ###################################
-
-function _update_ps1() {
-    PS1=$(powerline-shell $?)
-}
-
-if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
-    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
-fi
-
-neofetch
-
-# FZF customization
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 CUSTOM_PROJECTS_DIR_PATH="$HOME/Projects/" # Change this based on your projects directory
+
+# Ripgrep
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs'
 alias fzfi='rg --files --hidden --follow --no-ignore-vcs -g "!{node_modules,.git}" | fzf'
-alias zfind='cd $CUSTOM_PROJECTS_DIR_PATH && cd $(find . -type d -print | fzf)' 
-alias zfd='cd $CUSTOM_PROJECTS_DIR_PATH && cd $(fd . -t d | fzf)'
+alias zfd='cd $CUSTOM_PROJECTS_DIR_PATH && cd $(find . -type d -print | fzf)' 
+
+# Fd
+# export FZF_DEFAULT_COMMAND='fd --type f --hidden'
+# alias fzfi='fd --type file --hidden --no-ignore --exclude .git | fzf'
+# alias zfd='cd $CUSTOM_PROJECTS_DIR_PATH && cd $(fd . -t d | fzf)'
+
 alias vz='v $(fzfi)'
+
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+neofetch
