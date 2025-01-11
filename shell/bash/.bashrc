@@ -186,8 +186,8 @@ parse_git_status() {
 #export PS1;
 
 # MOST RECENT WITH $ AND NEWLINE (2 variants)
-# export PS1="\[\033[36m\]\u@\h:\033[32m\]\w\[\033[1;35m\]\$(parse_git_branch)\[\033[00m\]\n\033[1;33m\]$ \[\033[00m\]"
-export PS1="\[\033[36m\]\u@\h:\033[32m\]\w\[\033[1;35m\]\$(parse_git_branch)\[\033[00m\]\$(parse_git_status)\n\033[1;33m\]$ \[\033[00m\]"
+# export PS1="\[\033[36m\]\u@\h:\033[32m\]\w\[\033[1;35m\]\$(parse_git_branch)\[\033[00m\]\n\[\033[1;33m\]$ \[\033[00m\]"
+export PS1="\[\033[36m\]\u@\h:\033[32m\]\w\[\033[1;35m\]\$(parse_git_branch)\[\033[00m\]\$(parse_git_status)\n\[\033[1;33m\]$ \[\033[00m\]"
 
 ###################################
 ####### FZF
