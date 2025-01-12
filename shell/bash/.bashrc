@@ -226,10 +226,6 @@ mm_go_into_project() {
 ####### Bindings
 ###################################
 
-
-
-
-
 bind -x '"\C-f":"mm_goto_file"'
 bind -x '"\C-l":"mm_goto_project"'
 bind -x '"\C-p":"mm_go_into_project"'
