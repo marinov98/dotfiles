@@ -101,4 +101,28 @@ alias zfd='cd $CUSTOM_PROJECTS_DIR_PATH && cd $(find . -type d -print | fzf)'
 alias vz='v $(fzfi)'
 
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+
+mm_goto_file() {
+  vz
+}
+
+mm_goto_project() {
+  zfd
+}
+
+mm_go_into_project() {
+  mm_goto_file
+  mm_goto_project
+}
+
+###################################
+####### Bindings
+###################################
+
+bind -x '"\C-f":"mm_goto_file"'
+bind -x '"\C-l":"mm_goto_project"'
+bind -x '"\C-p":"mm_go_into_project"'
+
+
 neofetch
