@@ -10,6 +10,7 @@ return {
         typescript = { "eslint_d" },
         javascriptreact = { "eslint_d" },
         typescriptreact = { "eslint_d" },
+        python = { "ruff" },
       }
       vim.keymap.set("n", "<leader>cl", function()
         lint.try_lint()
@@ -24,7 +25,13 @@ return {
 
       conform.setup({
         formatters_by_ft = {
-          python = { "ruff" },
+          python = function(bufnr)
+            if require("conform").get_formatter_info("ruff_format", bufnr).available then
+              return { "ruff_format" }
+            else
+              return { "black" }
+            end
+          end,
           lua = { "stylua" },
           svelte = { { "prettierd", "prettier" } },
           javascript = { { "prettierd", "prettier" } },

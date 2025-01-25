@@ -10,9 +10,9 @@ return {
       },
       sections = {
         lualine_a = { 'mode' },
-        lualine_b = { 'branch' },
+        lualine_b = {},
         lualine_c = { { 'filename', path = 1 }, 'diagnostics' },
-        lualine_x = { 'encoding', 'fileformat', 'filetype', 'location' },
+        lualine_x = { 'encoding', 'filetype', 'location' },
         lualine_y = {},
         lualine_z = {}
       },
