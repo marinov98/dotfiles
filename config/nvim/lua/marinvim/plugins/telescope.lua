@@ -47,19 +47,25 @@ return {
 
       -- Keybindings
       local builtin = require("telescope.builtin")
+
       -- Essentials
-      if vim.fn.executable('fd') == 1 then -- typically find this case with ubuntu where instead 'fd' there is 'fdfind'
-        vim.keymap.set('n', '<leader>f', function()
-          builtin.find_files({ find_command = { 'fd', '--type', 'f', "--color=never", '--hidden', '--exclude', ".git" } })
-        end, { desc = "Fuzzy find files with fd" })
-      elseif vim.fn.executable('rg') == 1 then
-        vim.keymap.set('n', '<leader>f', function()
-          builtin.find_files({ find_command = { 'rg', '--files', "--hidden", "--color", "never", "--glob=!**/.git/*" } })
-        end, { desc = "Fuzzy find files with ripgrep" })
-      else -- I cannot save you if it gets to here
-        vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = "Fuzzy find files" })
+      local target_find_command = { 'rg', '--files', "--hidden", "--color", "never", "--glob=!**/.git/*" }
+      local target_desc = "Fuzzy find files in current working directory (Ripgrep)"
+
+      if vim.fn.executable('fd') == 1 then
+        target_find_command = { 'fd', '--type', 'f', "--color=never", '--hidden', '--exclude', ".git" } -- might be fdfind for Ubuntu or other linux distros
+        target_desc = "Fuzzy find files in current working directory (Fd)"
       end
 
+      vim.keymap.set('n', '<leader>f', function()
+        builtin.find_files({ find_command = target_find_command })
+      end, { desc = target_desc })
+
+      vim.keymap.set('n', '<leader>um', function()
+        builtin.find_files({ cwd = vim.fn.stdpath('config') })
+      end, { desc = "Fuzzy Find in Nvim configuration" })
+
+      -- vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = "Fuzzy find files in current working directory" })
       vim.keymap.set('n', '<leader>/', builtin.live_grep, { desc = "Live grep project" })
       vim.keymap.set('n', '<leader>*', builtin.grep_string, { desc = "Live grep project under cursor" })
       vim.keymap.set('n', '<leader>ur', builtin.oldfiles, { desc = "List old files" })
