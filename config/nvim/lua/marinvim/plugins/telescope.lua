@@ -27,6 +27,9 @@ return {
           fzf = {}
         },
         pickers = {
+          buffers = {
+            theme = 'ivy'
+          },
           live_grep = {
             additional_args = function()
               return { '--hidden', '--glob', '!**/.git/*' }
