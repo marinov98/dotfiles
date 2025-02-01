@@ -65,14 +65,17 @@ return {
         builtin.find_files({ cwd = vim.fn.stdpath('config') })
       end, { desc = "Fuzzy Find in Nvim configuration" })
 
-      -- vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = "Fuzzy find files in current working directory" })
       vim.keymap.set('n', '<leader>/', builtin.live_grep, { desc = "Live grep project" })
       vim.keymap.set('n', '<leader>*', builtin.grep_string, { desc = "Live grep project under cursor" })
       vim.keymap.set('n', '<leader>ur', builtin.oldfiles, { desc = "List old files" })
       vim.keymap.set('n', '<leader>bi', builtin.buffers, { desc = "List buffers" })
       vim.keymap.set('n', '<leader>ld', builtin.diagnostics, { desc = "List diagnostics in project" })
+      -- Project Specific
+      vim.keymap.set('n', '<leader><leader>f', builtin.git_files, { desc = "Find git files" })
+      vim.keymap.set('n', '<leader><leader>g', function()
+        builtin.grep_string({ search = vim.fn.input("Grep > ") })
+      end, { desc = "Live grep on user input" })
       -- Git specific
-      vim.keymap.set('n', '<leader>gf', builtin.git_files, { desc = "List git files" })
       vim.keymap.set('n', '<leader>gc', builtin.git_commits, { desc = "List git commits" })
       vim.keymap.set('n', '<leader>gC', builtin.git_bcommits, { desc = "List git bcommits" })
       vim.keymap.set('n', '<leader>gb', builtin.git_branches, { desc = "List git branches" })
