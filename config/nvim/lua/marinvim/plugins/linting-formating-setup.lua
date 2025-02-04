@@ -19,7 +19,7 @@ return {
   },
   {
     "stevearc/conform.nvim",
-    keys = { { '<leader>ll', mode = { 'n', 'v' } } },
+    keys = { { '<leader>lf', mode = { 'n', 'v' } } },
     config = function()
       local conform = require("conform")
 
@@ -48,10 +48,10 @@ return {
           rust = { "rustfmt" },
         },
       })
-      vim.keymap.set({ "n", "v" }, "<leader>ll", function()
+      vim.keymap.set({ "n", "v" }, "<leader>lf", function()
         conform.format({
           lsp_fallback = true,
-          async = false,
+          async = true,
           timeout_ms = 800,
         })
       end, { desc = "Format file or range (in visual mode)" })
