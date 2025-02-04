@@ -195,8 +195,8 @@
     {
       "before": [
         "<leader>",
-        "l",
-        "d"
+        "d",
+        "l"
       ],
       "commands": [
         "workbench.actions.view.problems"
@@ -302,9 +302,7 @@
     },
     {
       "before": [
-        "<leader>",
-        "d",
-        "d"
+        "-",
       ],
       "commands": [
         "workbench.action.files.openFolder"
