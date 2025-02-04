@@ -53,7 +53,6 @@ return {
 
           -- L (lsp)
           vim.keymap.set('n', '<leader>lg', vim.lsp.buf.hover, opts)
-          vim.keymap.set('n', '<leader>lc', vim.lsp.buf.rename, opts)
           vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, opts)
           vim.keymap.set('n', '<leader>lF', function() vim.lsp.buf.format { async = true } end, opts)
 
@@ -66,6 +65,7 @@ return {
 
           -- Original
           vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+          vim.keymap.set('n', 'grn', vim.lsp.buf.rename, opts)
           vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, opts)
           -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
           -- vim.keymap.set('n', 'grr', vim.lsp.buf.references, opts)

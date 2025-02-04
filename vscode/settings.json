@@ -142,9 +142,9 @@
     },
     {
       "before": [
-        "<leader>",
-        "l",
-        "c"
+        "g",
+        "r",
+        "n"
       ],
       "commands": [
         "editor.action.rename"
