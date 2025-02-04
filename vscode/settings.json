@@ -27,6 +27,7 @@
     {
       "before": [
         "g",
+        "r",
         "r"
       ],
       "commands": [
@@ -36,6 +37,7 @@
     {
       "before": [
         "g",
+        "r",
         "i"
       ],
       "commands": [
