@@ -53,15 +53,18 @@ return {
 
           vim.keymap.set('n', '<leader>lg', vim.lsp.buf.hover, opts)
           vim.keymap.set('n', '<leader>lc', vim.lsp.buf.rename, opts)
+          vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, opts)
           vim.keymap.set('n', '<leader>lF', function()
             vim.lsp.buf.format { async = true }
           end, opts)
 
           -- Original
-          vim.keymap.set('n', 'grd', vim.lsp.buf.declaration, opts)
+          vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
           vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
           vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, opts)
-          -- vim.keymap.set('n', 'gy', vim.lsp.buf.type_definition, opts)
+          -- vim.keymap.set('n', 'grr', vim.lsp.buf.references, opts)
+          -- vim.keymap.set('n', 'gri', vim.lsp.buf.implementation, opts)
+          -- vim.keymap.set('n', 'gry', vim.lsp.buf.type_definition, opts)
           -- vim.keymap.set('n', '<leader>ls', vim.lsp.buf.document_symbol, opts)
           -- vim.keymap.set('n', '<leader>lws', vim.lsp.buf.workspace_symbol, opts)
           vim.keymap.set('n', '<leader>lwa', vim.lsp.buf.add_workspace_folder, opts)
