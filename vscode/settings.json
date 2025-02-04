@@ -47,6 +47,7 @@
     {
       "before": [
         "g",
+        "r",
         "y"
       ],
       "commands": [
