@@ -60,8 +60,8 @@ return {
 
           -- Original
           vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-          vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
           vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, opts)
+          -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
           -- vim.keymap.set('n', 'grr', vim.lsp.buf.references, opts)
           -- vim.keymap.set('n', 'gri', vim.lsp.buf.implementation, opts)
           -- vim.keymap.set('n', 'gry', vim.lsp.buf.type_definition, opts)
@@ -75,7 +75,7 @@ return {
 
           -- Telescope Variant
           local builtin = require('telescope.builtin')
-          -- vim.keymap.set('n', 'gd', builtin.lsp_definitions, opts)
+          vim.keymap.set('n', 'gd', builtin.lsp_definitions, opts)
           vim.keymap.set('n', 'grr', builtin.lsp_references, opts) -- better visuals than vim.lsp.buf.references
           vim.keymap.set('n', 'gri', builtin.lsp_implementations, opts)
           vim.keymap.set('n', 'gry', builtin.lsp_type_definitions, opts)
