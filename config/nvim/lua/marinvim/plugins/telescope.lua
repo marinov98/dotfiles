@@ -30,15 +30,14 @@ return {
           buffers = {
             theme = 'ivy'
           },
+          diagnostics = {
+            theme = 'ivy'
+          },
           live_grep = {
-            additional_args = function()
-              return { '--hidden', '--glob', '!**/.git/*' }
-            end
+            additional_args = { "--hidden" }
           },
           grep_string = {
-            additional_args = function()
-              return { '--hidden', '--glob', '!**/.git/*' }
-            end
+            additional_args = { "--hidden" }
           }
         }
 
@@ -52,27 +51,25 @@ return {
       local builtin = require("telescope.builtin")
 
       -- Essentials
-      local target_find_command = { 'rg', '--files', "--hidden", "--color", "never", "--glob=!**/.git/*" }
-      local target_desc = "Fuzzy find files in current working directory (Ripgrep)"
+      local ff_command = { 'rg', '--files', "--hidden", "--color", "never" }
 
+      -- priority for find_files should be fd if you ask me
       if vim.fn.executable('fd') == 1 then
-        target_find_command = { 'fd', '--type', 'f', "--color=never", '--hidden', '--exclude', ".git" } -- might be fdfind for Ubuntu or other linux distros
-        target_desc = "Fuzzy find files in current working directory (Fd)"
+        ff_command = { 'fd', '--type', 'f', "--color=never", '--hidden' }
+      elseif vim.fn.executable('fdfind') == 1 then
+        ff_command = { 'fdfind', '--type', 'f', "--color=never", '--hidden' }
       end
 
-      vim.keymap.set('n', '<leader>f', function()
-        builtin.find_files({ find_command = target_find_command })
-      end, { desc = target_desc })
+      vim.keymap.set('n', '<leader>f', function() builtin.find_files({ find_command = ff_command }) end,
+        { desc = "Fuzzy find files in current working directory" })
 
-      vim.keymap.set('n', '<leader>um', function()
-        builtin.find_files({ cwd = vim.fn.stdpath('config') })
-      end, { desc = "Fuzzy Find in Nvim configuration" })
+      vim.keymap.set('n', '<leader>um', function() builtin.find_files({ cwd = vim.fn.stdpath('config') }) end,
+        { desc = "Fuzzy Find in Nvim configuration" })
 
       vim.keymap.set('n', '<leader>/', builtin.live_grep, { desc = "Live grep project" })
       vim.keymap.set('n', '<leader>*', builtin.grep_string, { desc = "Live grep project under cursor" })
-      vim.keymap.set('n', '<leader>ur', builtin.oldfiles, { desc = "List old files" })
-      vim.keymap.set('n', '<leader>bi', builtin.buffers, { desc = "List buffers" })
-      vim.keymap.set('n', '<leader>ld', builtin.diagnostics, { desc = "List diagnostics in project" })
+      vim.keymap.set('n', '<leader>bl', builtin.buffers, { desc = "List buffers" })
+      vim.keymap.set('n', '<leader>dl', builtin.diagnostics, { desc = "List diagnostics" })
       -- Project Specific
       vim.keymap.set('n', '<leader><leader>f', builtin.git_files, { desc = "Find git files" })
       vim.keymap.set('n', '<leader><leader>g', function()
