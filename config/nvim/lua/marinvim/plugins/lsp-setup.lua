@@ -36,11 +36,6 @@ return {
       lspconfig.elixirls.setup({ capabilities = capabilities })
 
 
-      -- Bindings
-      vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Next diagnostic in current file" })
-      vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Previous diagnostic in current file" })
-      vim.keymap.set('n', '<leader>dg', vim.diagnostic.open_float, { desc = "Glance diagnostic" })
-
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('UserLspConfig', {}),
         callback = function(ev)
@@ -51,12 +46,23 @@ return {
           -- See `:help vim.lsp.*` for documentation on any of the below functions
           local opts = { buffer = ev.buf }
 
+          -- Diagnostic
+          vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Next diagnostic in current file" })
+          vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Previous diagnostic in current file" })
+          vim.keymap.set('n', '<leader>dg', vim.diagnostic.open_float, { desc = "Glance diagnostic" })
+
+          -- L (lsp)
           vim.keymap.set('n', '<leader>lg', vim.lsp.buf.hover, opts)
           vim.keymap.set('n', '<leader>lc', vim.lsp.buf.rename, opts)
           vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, opts)
-          vim.keymap.set('n', '<leader>lF', function()
-            vim.lsp.buf.format { async = true }
+          vim.keymap.set('n', '<leader>lF', function() vim.lsp.buf.format { async = true } end, opts)
+
+          vim.keymap.set('n', '<leader>lwa', vim.lsp.buf.add_workspace_folder, opts)
+          vim.keymap.set('n', '<leader>lwr', vim.lsp.buf.remove_workspace_folder, opts)
+          vim.keymap.set('n', '<leader>lwl', function()
+            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
           end, opts)
+
 
           -- Original
           vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
@@ -67,11 +73,6 @@ return {
           -- vim.keymap.set('n', 'gry', vim.lsp.buf.type_definition, opts)
           -- vim.keymap.set('n', '<leader>ls', vim.lsp.buf.document_symbol, opts)
           -- vim.keymap.set('n', '<leader>lws', vim.lsp.buf.workspace_symbol, opts)
-          vim.keymap.set('n', '<leader>lwa', vim.lsp.buf.add_workspace_folder, opts)
-          vim.keymap.set('n', '<leader>lwr', vim.lsp.buf.remove_workspace_folder, opts)
-          vim.keymap.set('n', '<leader>lwl', function()
-            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-          end, opts)
 
           -- Telescope Variant
           local builtin = require('telescope.builtin')
