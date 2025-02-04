@@ -9,13 +9,14 @@ copy_dotfiles_to_home() {
       echo "shell done"
       echo "copying config..."
       \cp -r config/* ~/.config/
-      echo "finished copying config"
+      echo "creating '.ignore' from fzyIgnore..."
+      mv ~/.config/fzyIgnore ~/.ignore
+      echo "Finished setting up config"
   else
       echo "Machine found to not be linux or Mac will not copy config!"
   fi
 
   echo "copying git configs..."
-  # cp git/git-completion.bash ~/
   cp git/.gitconfig ~/
 
   # FORMATTERS
