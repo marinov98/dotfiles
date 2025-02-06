@@ -27,9 +27,6 @@ apt-install-all() {
 
   echo "battery management..."
   sudo apt install tlp && sudo apt install tlpui
-
-  echo "Package install complete, transfering appropriate files now"
-  sudo chmod +x configure.sh
 }
 
 apt-install-mini() {

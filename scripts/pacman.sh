@@ -48,9 +48,6 @@ pacman-install-all() {
 
   echo "Latex setup"
   sudo pacman -S texlive-core texline-bin biber texlive-fontsextra texlive-bibtexextra texlive-formatsextra texlive-science
-
-  echo "Package install complete, transfering appropriate files now"
-  sudo chmod +x configure.sh
 }
 
 pacman-install-mini() {
