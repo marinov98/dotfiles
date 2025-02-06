@@ -1,9 +1,0 @@
-* Files
-- windows.sh (small install script for installing tools I use while developing in windows)
-- capstocontrol.reg (maps caps lock to ctrl)
-- capsToEscAndCtrl.ahk (maps caps lock to esc when tapped, ctrl when held down)
-
-* Details
-- Please use *either* the .reg script or the .ahk script, *NOT* the two together
-- If you are confused by what *.reg* or *.ahk* extensions mean, I suggest you google them 
-- If you decided to use the *.ahk* script, you should google to see how to make it permanent
