@@ -35,7 +35,6 @@ return {
       lspconfig.rust_analyzer.setup({ capabilities = capabilities })
       lspconfig.elixirls.setup({ capabilities = capabilities })
 
-
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('UserLspConfig', {}),
         callback = function(ev)
@@ -47,11 +46,11 @@ return {
           -- Diagnostic
           vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Next diagnostic in current file" })
           vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Previous diagnostic in current file" })
-          vim.keymap.set('n', '<leader>dg', vim.diagnostic.open_float, { desc = "Glance diagnostic" })
+          vim.keymap.set('n', '<leader>dg', vim.diagnostic.open_float, { desc = "Glance Diagnostic" })
 
           -- L (lsp)
-          vim.keymap.set('n', '<leader>lg', vim.lsp.buf.hover, { desc = "glance method", buffer = local_buf })
-          vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, { desc = "code action", buffer = local_buf })
+          vim.keymap.set('n', '<leader>lg', vim.lsp.buf.hover, { desc = "LSP Glance", buffer = local_buf })
+          vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, { desc = "LSP Code Action", buffer = local_buf })
           vim.keymap.set('n', '<leader>lF', function()
               vim.lsp.buf.format { async = true }
           end, { desc = "LSP format file", buffer = local_buf })
