@@ -42,9 +42,7 @@ return {
           -- Enable completion triggered by <c-x><c-o>
           vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-          -- Buffer local mappings.
-          -- See `:help vim.lsp.*` for documentation on any of the below functions
-          local opts = { buffer = ev.buf }
+          local local_buf = ev.buf
 
           -- Diagnostic
           vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Next diagnostic in current file" })
@@ -52,32 +50,34 @@ return {
           vim.keymap.set('n', '<leader>dg', vim.diagnostic.open_float, { desc = "Glance diagnostic" })
 
           -- L (lsp)
-          vim.keymap.set('n', '<leader>lg', vim.lsp.buf.hover, opts)
-          vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, opts)
-          vim.keymap.set('n', '<leader>lF', function() vim.lsp.buf.format { async = true } end, opts)
+          vim.keymap.set('n', '<leader>lg', vim.lsp.buf.hover, { desc = "glance method", buffer = local_buf })
+          vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, { desc = "code action", buffer = local_buf })
+          vim.keymap.set('n', '<leader>lF', function()
+              vim.lsp.buf.format { async = true }
+          end, { desc = "LSP format file", buffer = local_buf })
 
-          vim.keymap.set('n', '<leader>lwa', vim.lsp.buf.add_workspace_folder, opts)
-          vim.keymap.set('n', '<leader>lwr', vim.lsp.buf.remove_workspace_folder, opts)
+          vim.keymap.set('n', '<leader>lwa', vim.lsp.buf.add_workspace_folder, { desc = "Add workspace folder", buffer = local_buf })
+          vim.keymap.set('n', '<leader>lwr', vim.lsp.buf.remove_workspace_folder, { desc = "Remove workspace folder", buffer = local_buf })
 
           -- Original
-          vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-          vim.keymap.set('n', 'grn', vim.lsp.buf.rename, opts)
-          vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, opts)
-          -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-          -- vim.keymap.set('n', 'grr', vim.lsp.buf.references, opts)
-          -- vim.keymap.set('n', 'gri', vim.lsp.buf.implementation, opts)
-          -- vim.keymap.set('n', 'gry', vim.lsp.buf.type_definition, opts)
-          -- vim.keymap.set('n', '<leader>ls', vim.lsp.buf.document_symbol, opts)
-          -- vim.keymap.set('n', '<leader>lws', vim.lsp.buf.workspace_symbol, opts)
+          vim.keymap.set('n', 'grd', vim.lsp.buf.declaration, { desc = "Go to declaration", buffer = local_buf })
+          vim.keymap.set('n', 'grn', vim.lsp.buf.rename, { desc = "Rename variable", buffer = local_buf })
+          vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, { desc = "Signature Help", buffer = local_buf })
+          -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = "Show Definitions", buffer = local_buf })
+          -- vim.keymap.set('n', 'grr', vim.lsp.buf.references, { desc = "Show References", buffer = local_buf })
+          -- vim.keymap.set('n', 'gri', vim.lsp.buf.implementation, { desc = "Show implementations", buffer = local_buf })
+          -- vim.keymap.set('n', 'gry', vim.lsp.buf.type_definition, { desc = "Show Type Definitions", buffer = local_buf })
+          -- vim.keymap.set('n', '<leader>ls', vim.lsp.buf.document_symbol, { desc = "Document Symbol", buffer = local_buf })
+          -- vim.keymap.set('n', '<leader>lws', vim.lsp.buf.workspace_symbol, { desc = "Workspace Symbols", buffer = local_buf })
 
           -- Telescope Variant
           local builtin = require('telescope.builtin')
-          vim.keymap.set('n', 'gd', builtin.lsp_definitions, opts)
-          vim.keymap.set('n', 'grr', builtin.lsp_references, opts)
-          vim.keymap.set('n', 'gri', builtin.lsp_implementations, opts)
-          vim.keymap.set('n', 'gry', builtin.lsp_type_definitions, opts)
-          vim.keymap.set('n', '<leader>ls', builtin.lsp_document_symbols, opts)
-          vim.keymap.set('n', '<leader>lws', builtin.lsp_workspace_symbols, opts)
+          vim.keymap.set('n', 'gd', builtin.lsp_definitions, { desc = "Show Definitions", buffer = local_buf })
+          vim.keymap.set('n', 'grr', builtin.lsp_references, { desc = "Show References", buffer = local_buf })
+          vim.keymap.set('n', 'gri', builtin.lsp_implementations, { desc = "Show implementations", buffer = local_buf })
+          vim.keymap.set('n', 'gry', builtin.lsp_type_definitions, { desc = "Show Type Definitions", buffer = local_buf })
+          vim.keymap.set('n', '<leader>ls', builtin.lsp_document_symbols, { desc = "Document Symbol", buffer = local_buf })
+          vim.keymap.set('n', '<leader>lws', builtin.lsp_workspace_symbols, { desc = "Workspace Symbols", buffer = local_buf })
         end,
       })
     end
