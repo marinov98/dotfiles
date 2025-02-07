@@ -92,7 +92,7 @@ return {
   {
     "folke/snacks.nvim",
     lazy = false,
-    priority = 999,
+    priority = 1001,
     opts = {
       picker = {
         enabled = true,
