@@ -55,19 +55,19 @@ return {
         ff_command = { 'fdfind', '--type', 'f', "--color=never", '--hidden' }
       end
 
-      vim.keymap.set('n', '<leader>f', function() builtin.find_files({ find_command = ff_command }) end,
+      vim.keymap.set('n', '<leader>z', function() builtin.find_files({ find_command = ff_command }) end,
         { desc = "Fuzzy find files in current working directory" })
 
-      vim.keymap.set('n', '<leader>um', function() builtin.find_files({ cwd = vim.fn.stdpath('config') }) end,
+      vim.keymap.set('n', '<leader>uz', function() builtin.find_files({ cwd = vim.fn.stdpath('config') }) end,
         { desc = "Fuzzy Find in Nvim configuration" })
 
-      vim.keymap.set('n', '<leader>/', builtin.live_grep, { desc = "Live grep project" })
-      vim.keymap.set('n', '<leader>*', builtin.grep_string, { desc = "Live grep project under cursor" })
+      -- vim.keymap.set('n', '<leader>/', builtin.live_grep, { desc = "Live grep project" })
+      -- vim.keymap.set('n', '<leader>*', builtin.grep_string, { desc = "Live grep project under cursor" })
       vim.keymap.set('n', '<leader>bl', builtin.buffers, { desc = "List buffers" })
       vim.keymap.set('n', '<leader>dl', builtin.diagnostics, { desc = "List diagnostics" })
       -- Project Specific
       vim.keymap.set('n', '<leader><leader>f', builtin.git_files, { desc = "Find git files" })
-      vim.keymap.set('n', '<leader><leader>g', function()
+      vim.keymap.set('n', '<leader><leader>G', function()
         builtin.grep_string({ search = vim.fn.input("Grep > ") })
       end, { desc = "Live grep on user input" })
       -- Git specific
@@ -111,19 +111,23 @@ return {
           diagnostics = {
             layout = { preset = "ivy" },
           },
-          grep = { hidden = true }
+          grep = { hidden = true },
+          grep_word = { hidden = true }
         },
         icons = { files = { enabled = false } }
       }
     },
     keys = {
-      -- Essentials
-      -- { "<leader>z",         function() Snacks.picker.files({ cmd = "rg", args = { '--files', "--color", "never" } }) end, desc = "Find Files" },
-      { "<leader>z",         function() Snacks.picker.files({ cmd = "fd", args = { '--type', 'f', "--color=never" } }) end, desc = "Find Files" },
-      { "<leader><leader>G", function() Snacks.picker.grep() end,                                                           desc = "Grep" },
-      { "<leader>e",         function() Snacks.picker.grep_word({ search = vim.fn.input("rg > ") }) end,                    desc = "File Explorer" },
+      -- Finding
+      -- { "<leader>f",         function() Snacks.picker.files({ cmd = "rg", args = { '--files', "--color", "never" } }) end, desc = "Find Files" },
+      { "<leader>f",         function() Snacks.picker.files({ cmd = "fd", args = { '--type', 'f', "--color=never" } }) end, desc = "Find Files" },
+      { "<leader>um",        function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end,                        desc = "Find Config File" },
+      -- Grep
+      { "<leader>/",         function() Snacks.picker.grep() end,                                                           desc = "Grep Current Working Directory" },
+      { "<leader>*",         function() Snacks.picker.grep_word() end,                                                      desc = "Grep Current Working Directory under cursor" },
+      { "<leader><leader>g", function() Snacks.picker.grep_word({ search = vim.fn.input("rg > ") }) end,                    desc = "Grep on user input" },
       -- File Tree
       { "<leader>tn",        function() Snacks.picker.explorer() end,                                                       desc = "File Explorer" },
     }
-  },
+  }
 }
