@@ -1,3 +1,1 @@
-* A peek at how some of the configs come together:
-#+ATTR_HTML: :style margin-left: auto; margin-right: auto;
-[[./config-showcase.png]]
+* Configurations for '.config' 
