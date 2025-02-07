@@ -117,11 +117,13 @@ return {
       }
     },
     keys = {
-      -- Top Pickers & Explorer
-      { "<leader><leader>G", function() Snacks.picker.grep() end,                                       desc = "Grep" },
-      { "<leader>e",         function() Snacks.picker.grep_word({ search = vim.fn.input("rg >") }) end, desc = "File Explorer" },
-      { "<leader>E",         function() Snacks.picker.lsp_references() end,                             desc = "File Explorer" },
-      -- find
-      { "<leader>z",         function() Snacks.picker.files() end,                                      desc = "Find Files" } }
+      -- Essentials
+      -- { "<leader>z",         function() Snacks.picker.files({ cmd = "rg", args = { '--files', "--color", "never" } }) end, desc = "Find Files" },
+      { "<leader>z",         function() Snacks.picker.files({ cmd = "fd", args = { '--type', 'f', "--color=never" } }) end, desc = "Find Files" },
+      { "<leader><leader>G", function() Snacks.picker.grep() end,                                                           desc = "Grep" },
+      { "<leader>e",         function() Snacks.picker.grep_word({ search = vim.fn.input("rg > ") }) end,                    desc = "File Explorer" },
+      -- File Tree
+      { "<leader>tn",        function() Snacks.picker.explorer() end,                                                       desc = "File Explorer" },
+    }
   },
 }
