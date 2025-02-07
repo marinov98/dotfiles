@@ -12,20 +12,6 @@ return {
     opts = {}
   },
   {
-    "nvim-tree/nvim-tree.lua",
-    version = "*",
-    keys = "<leader>tn",
-    cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeFindFile" },
-    config = function()
-      require("nvim-tree").setup({
-        view = {
-          width = 50
-        }
-      })
-      vim.keymap.set('n', '<leader>tn', ":NvimTreeToggle<CR>", { desc = "Open Nvim tree" })
-    end
-  },
-  {
     'stevearc/oil.nvim',
     version = "*",
     config = function()
