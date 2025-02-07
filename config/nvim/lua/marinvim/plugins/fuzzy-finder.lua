@@ -5,7 +5,6 @@ return {
     dependencies = {
       'nvim-lua/plenary.nvim',
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-      "nvim-telescope/telescope-ui-select.nvim",
     },
     config = function()
       -- Setup
@@ -21,9 +20,6 @@ return {
           sorting_strategy = "ascending"
         },
         extensions = {
-          ["ui-select"] = {
-            require("telescope.themes").get_dropdown({})
-          },
           fzf = {}
         },
         pickers = {
@@ -45,7 +41,6 @@ return {
 
       -- Extensions
       telescope.load_extension("fzf")
-      telescope.load_extension("ui-select")
 
       -- Keybindings
       local builtin = require("telescope.builtin")
@@ -93,5 +88,40 @@ return {
       vim.keymap.set('n', '<leader>?s', builtin.search_history, { desc = "Show search history" })
       vim.keymap.set('n', '<leader>?r', builtin.registers, { desc = "List registers" })
     end
-  }
+  },
+  {
+    "folke/snacks.nvim",
+    lazy = false,
+    priority = 999,
+    opts = {
+      picker = {
+        enabled = true,
+        layout = {
+          layout = {
+            backdrop = false
+          }
+        },
+        sources = {
+          files = {
+            hidden = true
+          },
+          buffers = {
+            layout = { preset = "ivy" },
+          },
+          diagnostics = {
+            layout = { preset = "ivy" },
+          },
+          grep = { hidden = true }
+        },
+        icons = { files = { enabled = false } }
+      }
+    },
+    keys = {
+      -- Top Pickers & Explorer
+      { "<leader><leader>G", function() Snacks.picker.grep() end,                                       desc = "Grep" },
+      { "<leader>e",         function() Snacks.picker.grep_word({ search = vim.fn.input("rg >") }) end, desc = "File Explorer" },
+      { "<leader>E",         function() Snacks.picker.lsp_references() end,                             desc = "File Explorer" },
+      -- find
+      { "<leader>z",         function() Snacks.picker.files() end,                                      desc = "Find Files" } }
+  },
 }
