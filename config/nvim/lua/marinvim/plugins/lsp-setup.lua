@@ -24,7 +24,17 @@ return {
       local capabilities = require('blink.cmp').get_lsp_capabilities()
 
       -- Servers
-      lspconfig.lua_ls.setup({ capabilities = capabilities })
+      lspconfig.lua_ls.setup({
+        capabilities = capabilities,
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = { "vim", "Snacks", "it", "describe" }
+            }
+          }
+        }
+      })
+
       lspconfig.pyright.setup({ capabilities = capabilities })
       lspconfig.ts_ls.setup({ capabilities = capabilities })
       lspconfig.jsonls.setup({ capabilities = capabilities })
