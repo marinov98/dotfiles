@@ -15,7 +15,7 @@ set nobackup
 set nowritebackup
 set showcmd
 
-set updatetime=300
+set updatetime=100
 
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
@@ -80,6 +80,9 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 " Provides tab-completion for all file-related tasks
 set path+=**
 
+" grep arg
+set grepprg=grep\ -HRIn\ $*\ .
+
 "" NETRW:
 let g:netrw_banner=0 " Disable annoying banner
 let g:netrw_browse_split=4 " open in prior window
@@ -111,7 +114,7 @@ noremap <silent> <leader>tn :call ToggleNetrw()<CR>
 """""""""""""""""""""""
 """"" PERSONAL BINDINGS:
 """""""""""""""""""""""
-nnoremap <leader>n :noh<CR>
+nnoremap <leader>cn :noh<CR>
 nnoremap Y y$
 nnoremap <leader>s :w<CR>
 nnoremap <leader>k :bd<CR>
@@ -122,9 +125,10 @@ nnoremap <leader>Q :q!<CR>
 nnoremap <leader>cs :terminal<CR>
 nnoremap <leader>cm :%s//gc<Left><Left><Left>
 vnoremap <leader>cm :s//gc<Left><Left><Left>
-nnoremap <leader>* :%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>
-nnoremap <leader>/ :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-nnoremap <leader>X :!chmod +x %<CR>
+nnoremap <leader>ci :%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>
+nnoremap <leader>/ :grep 
+nnoremap <leader>* :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+nnoremap <leader>ux :!chmod +x %<CR>
 nnoremap <leader>uc  :! 
 
 nnoremap <leader>a <C-^>
