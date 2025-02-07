@@ -99,27 +99,10 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#6272a4'
 ZSH_HIGHLIGHT_STYLES[path]='fg=#8be9fd'
 
-goto-projects() {
-  zfd
-}
-
-rg-find-file() {
-  vz
-}
-
-goto-projects-and-find() {
-  zle goto-projects
-  zle rg-find-file
-}
-
-zle -N goto-projects
-zle -N rg-find-file
-zle -N goto-projects-and-find
-
 bindkey '^ ' autosuggest-accept
-bindkey '^f' rg-find-file
-bindkey '^l' goto-projects
-bindkey '^p' goto-projects-and-find
+bindkey -s '^f' "vz^M"
+bindkey -s "^l" "zfd^M"
+bindkey -s '^p' "zfd && vz^M"
 
 ###################################
 ####### Git
