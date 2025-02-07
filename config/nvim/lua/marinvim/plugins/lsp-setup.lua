@@ -29,7 +29,7 @@ return {
         settings = {
           Lua = {
             diagnostics = {
-              globals = { "vim", "Snacks", "it", "describe" }
+              globals = { "vim", "it", "describe", "Snacks" }
             }
           }
         }
@@ -79,14 +79,14 @@ return {
           -- vim.keymap.set('n', '<leader>ls', vim.lsp.buf.document_symbol, { desc = "Document Symbol", buffer = local_buf })
           -- vim.keymap.set('n', '<leader>lws', vim.lsp.buf.workspace_symbol, { desc = "Workspace Symbols", buffer = local_buf })
 
-          -- Telescope Variant
-          local builtin = require('telescope.builtin')
-          vim.keymap.set('n', 'gd', builtin.lsp_definitions, { desc = "Show Definitions", buffer = local_buf })
-          vim.keymap.set('n', 'grr', builtin.lsp_references, { desc = "Show References", buffer = local_buf })
-          vim.keymap.set('n', 'gri', builtin.lsp_implementations, { desc = "Show implementations", buffer = local_buf })
-          vim.keymap.set('n', 'gry', builtin.lsp_type_definitions, { desc = "Show Type Definitions", buffer = local_buf })
-          vim.keymap.set('n', '<leader>ls', builtin.lsp_document_symbols, { desc = "Document Symbol", buffer = local_buf })
-          vim.keymap.set('n', '<leader>lws', builtin.lsp_workspace_symbols, { desc = "Workspace Symbols", buffer = local_buf })
+          -- Picker Variant
+          local picker = Snacks.picker
+          vim.keymap.set('n', 'gd', function() picker.lsp_definitions() end, { desc = "Show Definitions", buffer = local_buf })
+          vim.keymap.set('n', 'grr', function() picker.lsp_references() end, { desc = "Show References", buffer = local_buf })
+          vim.keymap.set('n', 'gri', function() picker.lsp_implementations() end, { desc = "Show implementations", buffer = local_buf })
+          vim.keymap.set('n', 'gry', function() picker.lsp_type_definitions() end, { desc = "Show Type Definitions", buffer = local_buf })
+          vim.keymap.set('n', '<leader>ls', function() picker.lsp_symbols() end, { desc = "Document Symbol", buffer = local_buf })
+          vim.keymap.set('n', '<leader>lws', function() picker.lsp_workspace_symbols() end, { desc = "Workspace Symbols", buffer = local_buf })
         end,
       })
     end
