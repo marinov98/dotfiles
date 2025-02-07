@@ -9,7 +9,7 @@ return {
     },
     config = function()
       -- Setup
-      local telescope = require("lua.marinvim.plugins.fuzzy-finder")
+      local telescope = require("telescope")
       telescope.setup({
         defaults = {
           layout_strategy = "horizontal",
