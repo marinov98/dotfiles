@@ -12,6 +12,11 @@ return {
           }
         },
         sources = {
+          projects = {
+            filter = {
+              paths = { ["~/projects"] = true },
+            }
+          },
           files = {
             hidden = true
           },
