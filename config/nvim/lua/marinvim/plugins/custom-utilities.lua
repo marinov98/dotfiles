@@ -12,7 +12,12 @@ return {
     opts = {}
   },
   -- icons
-  -- { 'echasnovski/mini.icons', version = '*', opts = {} },
+  {
+    'echasnovski/mini.icons',
+    enabled = false, -- set to true and enable in fuzzy finder for icons
+    version = '*',
+    opts = {}
+  },
   {
     'stevearc/oil.nvim',
     version = "*",
