@@ -12,7 +12,7 @@ return {
     opts = {}
   },
   -- icons
-  { 'echasnovski/mini.icons', version = '*', opts = {} },
+  -- { 'echasnovski/mini.icons', version = '*', opts = {} },
   {
     'stevearc/oil.nvim',
     version = "*",
