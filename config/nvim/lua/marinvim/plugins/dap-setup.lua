@@ -22,9 +22,9 @@ return {
       dapui.close()
     end
 
-    vim.keymap.set("n", "<Leader>dt", ":DapToggleBreakpoint<CR>")
-    vim.keymap.set("n", "<Leader>dc", ":DapContinue<CR>")
-    vim.keymap.set("n", "<Leader>dx", ":DapTerminate<CR>")
-    vim.keymap.set("n", "<Leader>do", ":DapStepOver<CR>")
+    vim.keymap.set("n", "<leader>dt", ":DapToggleBreakpoint<CR>")
+    vim.keymap.set("n", "<leader>dc", ":DapContinue<CR>")
+    vim.keymap.set("n", "<leader>dx", ":DapTerminate<CR>")
+    vim.keymap.set("n", "<leader>do", ":DapStepOver<CR>")
   end,
 }
