@@ -12,11 +12,7 @@ return {
     opts = {}
   },
   -- icons
-  {
-    'nvim-tree/nvim-web-devicons',
-    version = false,
-    opts = {}
-  },
+  { 'echasnovski/mini.icons', version = '*', opts = {} },
   {
     'stevearc/oil.nvim',
     version = "*",
