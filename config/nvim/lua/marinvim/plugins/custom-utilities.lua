@@ -1,5 +1,11 @@
 return {
   {
+    "kylechui/nvim-surround",
+    keys = { 'cs', 'ds', 'ys' },
+    version = "*",
+    config = true,
+  },
+  {
     'echasnovski/mini.pairs',
     version = "*",
     event = "InsertEnter",
