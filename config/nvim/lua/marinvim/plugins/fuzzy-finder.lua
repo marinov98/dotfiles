@@ -37,6 +37,7 @@ return {
       -- { "<leader>f",         function() Snacks.picker.files({ cmd = "rg", args = { '--files', "--color", "never" } }) end, desc = "Find Files" },
       { "<leader>f",         function() Snacks.picker.files({ cmd = "fd", args = { '--type', 'f', "--color=never" } }) end, desc = "Find Files" },
       { "<leader>um",        function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end,                        desc = "Find Config File" },
+      { "<leader>ud",        function() Snacks.picker.files({ cwd = "~/.config" }) end,                                     desc = "Find Dotfiles" },
       { "<leader>bl",        function() Snacks.picker.buffers() end,                                                        desc = "List Buffers" },
       { "<leader>dl",        function() Snacks.picker.diagnostics() end,                                                    desc = "List Diagnostics" },
       { "<leader><leader>l", function() Snacks.picker.projects() end,                                                       desc = "Find Projects" },
