@@ -54,7 +54,7 @@ return {
       -- File Tree
       { "<leader>tn",        function() Snacks.picker.explorer() end,                                    desc = "File Explorer" },
       -- Help
-      { "<leader>?t",        function() Snacks.picker.help() end,                                        desc = "Show Help" },
+      { "<leader>?t",        function() Snacks.picker.help() end,                                        desc = "Show Help Tags" },
       { "<leader>?k",        function() Snacks.picker.keymaps() end,                                     desc = "Show Keymaps" },
       { "<leader>?c",        function() Snacks.picker.commands() end,                                    desc = "Show Commands" },
       { "<leader>?h",        function() Snacks.picker.command_history() end,                             desc = "Show Command History" },
