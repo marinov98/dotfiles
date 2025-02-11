@@ -13,7 +13,6 @@ vim.keymap.set('n', '<leader>Q', ":q!<CR>", { desc = "Force Quit" })
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy to system clipboard" })
 vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Copy line to system clipboard" })
 vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]], { desc = "Paste from system clipboard" })
-vim.keymap.set("x", "<leader>P", [["_dP]], { desc = "Paste without cutting" })
 
 -- Coding utility
 vim.keymap.set('n', '<leader>cs', ":terminal<CR>", { desc = "Open terminal" })
