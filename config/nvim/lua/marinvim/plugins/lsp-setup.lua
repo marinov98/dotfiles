@@ -80,7 +80,7 @@ return {
           -- vim.keymap.set('n', '<leader>lws', vim.lsp.buf.workspace_symbol, { desc = "Workspace Symbols", buffer = local_buf })
 
           -- Picker Variant
-          local picker = Snacks.picker
+          local picker = require('fzf-lua')
           vim.keymap.set('n', 'gd', function() picker.lsp_definitions() end, { desc = "Show Definitions", buffer = local_buf })
           vim.keymap.set('n', 'grr', function() picker.lsp_references() end, { desc = "Show References", buffer = local_buf })
           vim.keymap.set('n', 'gri', function() picker.lsp_implementations() end, { desc = "Show implementations", buffer = local_buf })

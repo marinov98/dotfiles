@@ -2,6 +2,7 @@ return {
   {
     "folke/snacks.nvim",
     lazy = false,
+    enabled = false,
     priority = 1001,
     opts = {
       picker = {
@@ -39,6 +40,7 @@ return {
       { "<leader>um",        function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end,     desc = "Find Config File" },
       { "<leader>ud",        function() Snacks.picker.files({ cwd = "~/.config" }) end,                  desc = "Find Dotfiles" },
       { "<leader>bl",        function() Snacks.picker.buffers() end,                                     desc = "List Buffers" },
+      { "<leader>bt",        function() Snacks.picker.treesitter() end,                                  desc = "Buffer Treesitter Symbols" },
       { "<leader>dl",        function() Snacks.picker.diagnostics() end,                                 desc = "List Diagnostics" },
       { "<leader><leader>l", function() Snacks.picker.projects() end,                                    desc = "Find Projects" },
       -- Grep
@@ -65,5 +67,48 @@ return {
       { "<leader>?r",        function() Snacks.picker.registers() end,                                   desc = "Show Registers" },
       { "<leader>?M",        function() Snacks.picker.marks() end,                                       desc = "Show Marks" },
     }
+  },
+  {
+    "ibhagwan/fzf-lua",
+    priority = 1001,
+    lazy = false,
+    config = function()
+      require('fzf-lua').setup({})
+      local picker = require('fzf-lua')
+      picker.register_ui_select()
+
+      vim.keymap.set('n', '<leader>f', function() picker.files({ cmd = "fd" }) end,
+        { desc = "Fuzzy find files in current working directory" })
+
+      vim.keymap.set('n', '<leader>um', function() picker.files({ cwd = vim.fn.stdpath('config') }) end,
+        { desc = "Fuzzy Find in Nvim configuration" })
+
+      vim.keymap.set('n', '<leader>bl', picker.buffers, { desc = "List buffers" })
+      vim.keymap.set('n', '<leader>bt', picker.treesitter, { desc = "Buffer treesitter" })
+      vim.keymap.set('n', '<leader>dl', picker.diagnostics_workspace, { desc = "List diagnostics" })
+
+      vim.keymap.set('n', '<leader>/', picker.live_grep_native, { desc = "Grep Current Working Directory" })
+      vim.keymap.set('n', '<leader>*', picker.grep_cword, { desc = "Live grep project under cursor" })
+      vim.keymap.set('n', '<leader><leader>g', picker.grep, { desc = "Grep on user input" })
+
+      vim.keymap.set('n', '<leader>gc', picker.git_commits, { desc = "List git commits" })
+      vim.keymap.set('n', '<leader>gC', picker.git_bcommits, { desc = "List git buffer commits" })
+      vim.keymap.set('n', '<leader>gb', picker.git_branches, { desc = "List git branches" })
+      vim.keymap.set('n', '<leader>gt', picker.git_status, { desc = "Show git status" })
+      vim.keymap.set('n', '<leader>gh', picker.git_stash, { desc = "Git stash" })
+
+      -- Helpful
+      vim.keymap.set('n', '<leader>?t', picker.helptags, { desc = "Show help tags" })
+      vim.keymap.set('n', '<leader>?b', picker.builtin, { desc = "Show telescope builtins" })
+      vim.keymap.set('n', '<leader>?k', picker.keymaps, { desc = "Show keymaps" })
+      vim.keymap.set('n', '<leader>?c', picker.commands, { desc = "List commands" })
+      vim.keymap.set('n', '<leader>?h', picker.command_history, { desc = "Show command history" })
+      vim.keymap.set('n', '<leader>?m', picker.man_pages, { desc = "List man pages" })
+      vim.keymap.set('n', '<leader>?j', picker.jumps, { desc = "List jumplists" })
+      vim.keymap.set('n', '<leader>?l', picker.loclist, { desc = "Show loclist" })
+      vim.keymap.set('n', '<leader>?s', picker.search_history, { desc = "Show search history" })
+      vim.keymap.set('n', '<leader>?r', picker.registers, { desc = "List registers" })
+    end
   }
+
 }
