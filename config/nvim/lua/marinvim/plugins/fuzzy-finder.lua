@@ -96,6 +96,9 @@ return {
       vim.keymap.set('n', '<leader>um', function() picker.files({ cwd = vim.fn.stdpath('config') }) end,
         { desc = "Fuzzy Find in Nvim configuration" })
 
+      vim.keymap.set('n', '<leader>ud', function() picker.files({ cwd = '~/.config' }) end,
+        { desc = "Find Dotfiles" })
+
       vim.keymap.set('n', '<leader>bl', picker.buffers, { desc = "List buffers" })
       vim.keymap.set('n', '<leader>bt', picker.treesitter, { desc = "Buffer treesitter" })
       vim.keymap.set('n', '<leader>dl', picker.diagnostics_workspace, { desc = "List diagnostics" })
