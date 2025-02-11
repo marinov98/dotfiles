@@ -81,12 +81,12 @@ return {
 
           -- Picker Variant
           local picker = Snacks.picker
-          vim.keymap.set('n', 'gd', function() picker.lsp_definitions() end, { desc = "Show Definitions", buffer = local_buf })
-          vim.keymap.set('n', 'grr', function() picker.lsp_references() end, { desc = "Show References", buffer = local_buf })
-          vim.keymap.set('n', 'gri', function() picker.lsp_implementations() end, { desc = "Show implementations", buffer = local_buf })
-          vim.keymap.set('n', 'gry', function() picker.lsp_type_definitions() end, { desc = "Show Type Definitions", buffer = local_buf })
-          vim.keymap.set('n', '<leader>ls', function() picker.lsp_symbols() end, { desc = "Document Symbol", buffer = local_buf })
-          vim.keymap.set('n', '<leader>lws', function() picker.lsp_workspace_symbols() end, { desc = "Workspace Symbols", buffer = local_buf })
+          vim.keymap.set('n', 'gd', picker.lsp_definitions, { desc = "Show Definitions", buffer = local_buf })
+          vim.keymap.set('n', 'grr', picker.lsp_references, { desc = "Show References", buffer = local_buf })
+          vim.keymap.set('n', 'gri', picker.lsp_implementations, { desc = "Show implementations", buffer = local_buf })
+          vim.keymap.set('n', 'gry', picker.lsp_type_definitions, { desc = "Show Type Definitions", buffer = local_buf })
+          vim.keymap.set('n', '<leader>ls', picker.lsp_symbols, { desc = "Document Symbol", buffer = local_buf })
+          vim.keymap.set('n', '<leader>lws', picker.lsp_workspace_symbols, { desc = "Workspace Symbols", buffer = local_buf })
         end,
       })
     end
