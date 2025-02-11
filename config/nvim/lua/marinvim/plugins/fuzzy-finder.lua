@@ -58,12 +58,12 @@ return {
       { "<leader>?k",        function() Snacks.picker.keymaps() end,                                     desc = "Show Keymaps" },
       { "<leader>?c",        function() Snacks.picker.commands() end,                                    desc = "Show Commands" },
       { "<leader>?h",        function() Snacks.picker.command_history() end,                             desc = "Show Command History" },
-      { "<leader>?m",        function() Snacks.picker.man() end,                                         desc = "Show man pages" },
-      { "<leader>?j",        function() Snacks.picker.jumps() end,                                       desc = "Show Jump lists" },
+      { "<leader>?m",        function() Snacks.picker.man() end,                                         desc = "Show Man Pages" },
+      { "<leader>?j",        function() Snacks.picker.jumps() end,                                       desc = "Show Jump Lists" },
       { "<leader>?l",        function() Snacks.picker.loclist() end,                                     desc = "Show Location List" },
       { "<leader>?s",        function() Snacks.picker.search_history() end,                              desc = "Show Search History" },
       { "<leader>?r",        function() Snacks.picker.registers() end,                                   desc = "Show Registers" },
-      { "<leader>?M",        function() Snacks.picker.marks() end,                                       desc = "Show marks" },
+      { "<leader>?M",        function() Snacks.picker.marks() end,                                       desc = "Show Marks" },
     }
   }
 }
