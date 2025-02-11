@@ -73,11 +73,21 @@ return {
     priority = 1001,
     lazy = false,
     config = function()
-      require('fzf-lua').setup({})
+      require('fzf-lua').setup({
+        keymap = {
+          fzf = {
+            ["ctrl-q"] = "select-all+accept"
+          }
+        },
+        defaults = {
+          hidden = true
+        }
+      })
+
       local picker = require('fzf-lua')
       picker.register_ui_select()
 
-      vim.keymap.set('n', '<leader>f', function() picker.files({ cmd = "fd" }) end,
+      vim.keymap.set('n', '<leader>f', function() picker.files() end,
         { desc = "Fuzzy find files in current working directory" })
 
       vim.keymap.set('n', '<leader>um', function() picker.files({ cwd = vim.fn.stdpath('config') }) end,
@@ -110,5 +120,4 @@ return {
       vim.keymap.set('n', '<leader>?r', picker.registers, { desc = "List registers" })
     end
   }
-
 }
