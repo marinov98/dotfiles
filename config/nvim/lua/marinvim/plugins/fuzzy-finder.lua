@@ -39,6 +39,7 @@ return {
       { "<leader>um",        function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end,     desc = "Find Config File" },
       { "<leader>ud",        function() Snacks.picker.files({ cwd = "~/.config" }) end,                  desc = "Find Dotfiles" },
       { "<leader>bl",        function() Snacks.picker.buffers() end,                                     desc = "List Buffers" },
+      { "<leader>bt",        function() Snacks.picker.treesitter() end,                                  desc = "Buffer Treesitter Symbols" },
       { "<leader>dl",        function() Snacks.picker.diagnostics() end,                                 desc = "List Diagnostics" },
       { "<leader><leader>l", function() Snacks.picker.projects() end,                                    desc = "Find Projects" },
       -- Grep
