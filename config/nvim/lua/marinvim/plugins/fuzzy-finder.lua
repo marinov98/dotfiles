@@ -104,6 +104,7 @@ return {
       vim.keymap.set('n', '<leader>*', picker.grep_cword, { desc = "Live grep project under cursor" })
       vim.keymap.set('n', '<leader><leader>g', picker.grep, { desc = "Grep on user input" })
 
+      vim.keymap.set('n', '<leader><leader>f', picker.git_files, { desc = "Find Git Files" })
       vim.keymap.set('n', '<leader>gc', picker.git_commits, { desc = "List git commits" })
       vim.keymap.set('n', '<leader>gC', picker.git_bcommits, { desc = "List git buffer commits" })
       vim.keymap.set('n', '<leader>gb', picker.git_branches, { desc = "List git branches" })
