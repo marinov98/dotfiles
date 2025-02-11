@@ -79,6 +79,9 @@ return {
             ["ctrl-q"] = "select-all+accept"
           }
         },
+        winopts = {
+          backdrop = 100
+        },
         defaults = {
           hidden = true
         }
