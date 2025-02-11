@@ -47,7 +47,7 @@ return {
       { "<leader><leader>g", function() Snacks.picker.grep_word({ search = vim.fn.input("rg > ") }) end, desc = "Grep on user input" },
       -- Git
       { "<leader><leader>f", function() Snacks.picker.git_files() end,                                   desc = "Find Git Files" },
-      { "<leader>gc",        function() Snacks.picker.git_log() end,                                     desc = "Git Log" },
+      { "<leader>gc",        function() Snacks.picker.git_log() end,                                     desc = "Git Commits(Log)" },
       { "<leader>gb",        function() Snacks.picker.git_branches() end,                                desc = "Git Branches" },
       { "<leader>gt",        function() Snacks.picker.git_status() end,                                  desc = "Git Status" },
       { "<leader>gh",        function() Snacks.picker.git_stash() end,                                   desc = "Git Stash" },
