@@ -83,7 +83,7 @@ return {
       vim.keymap.set('n', '<leader>gh', picker.git_stash, { desc = "Git stash" })
       -- Helpful
       vim.keymap.set('n', '<leader>?t', picker.help_tags, { desc = "Show help tags" })
-      vim.keymap.set('n', '<leader>?b', picker.builtin, { desc = "Show telescope builtins" })
+      vim.keymap.set('n', '<leader>?b', picker.builtin, { desc = "Show builtins" })
       vim.keymap.set('n', '<leader>?k', picker.keymaps, { desc = "Show keymaps" })
       vim.keymap.set('n', '<leader>?c', picker.commands, { desc = "List commands" })
       vim.keymap.set('n', '<leader>?h', picker.command_history, { desc = "Show command history" })
