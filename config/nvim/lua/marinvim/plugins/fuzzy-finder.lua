@@ -90,41 +90,43 @@ return {
       local picker = require('fzf-lua')
       picker.register_ui_select()
 
-      vim.keymap.set('n', '<leader>f', function() picker.files() end,
-        { desc = "Fuzzy find files in current working directory" })
 
-      vim.keymap.set('n', '<leader>um', function() picker.files({ cwd = vim.fn.stdpath('config') }) end,
-        { desc = "Fuzzy Find in Nvim configuration" })
+      -- Finding
+      vim.keymap.set('n', '<leader>f', picker.files, { desc = "Find Files" })
+      vim.keymap.set('n', '<leader>bl', picker.buffers, { desc = "List Buffers" })
+      vim.keymap.set('n', '<leader>bt', picker.treesitter, { desc = "Buffer Treesitter Symbols" })
+      vim.keymap.set('n', '<leader>dl', picker.diagnostics_workspace, { desc = "List Diagnostics" })
+      -- Utility
+      vim.keymap.set('n', '<leader>um', function()
+        picker.files({ cwd = vim.fn.stdpath('config') })
+      end, { desc = "Find Config File" })
 
-      vim.keymap.set('n', '<leader>ud', function() picker.files({ cwd = '~/.config' }) end,
-        { desc = "Find Dotfiles" })
-
-      vim.keymap.set('n', '<leader>bl', picker.buffers, { desc = "List buffers" })
-      vim.keymap.set('n', '<leader>bt', picker.treesitter, { desc = "Buffer treesitter" })
-      vim.keymap.set('n', '<leader>dl', picker.diagnostics_workspace, { desc = "List diagnostics" })
-
+      vim.keymap.set('n', '<leader>ud', function()
+        picker.files({ cwd = '~/.config' })
+      end, { desc = "Find Dotfiles" })
+      -- Grep
       vim.keymap.set('n', '<leader>/', picker.live_grep_native, { desc = "Grep Current Working Directory" })
-      vim.keymap.set('n', '<leader>*', picker.grep_cword, { desc = "Live grep project under cursor" })
+      vim.keymap.set('n', '<leader>*', picker.grep_cword, { desc = "Grep Current Working Directory under cursor" })
       vim.keymap.set('n', '<leader><leader>g', picker.grep, { desc = "Grep on user input" })
-
+      --Git
       vim.keymap.set('n', '<leader><leader>f', picker.git_files, { desc = "Find Git Files" })
-      vim.keymap.set('n', '<leader>gc', picker.git_commits, { desc = "List git commits" })
-      vim.keymap.set('n', '<leader>gC', picker.git_bcommits, { desc = "List git buffer commits" })
-      vim.keymap.set('n', '<leader>gb', picker.git_branches, { desc = "List git branches" })
-      vim.keymap.set('n', '<leader>gt', picker.git_status, { desc = "Show git status" })
-      vim.keymap.set('n', '<leader>gh', picker.git_stash, { desc = "Git stash" })
-
+      vim.keymap.set('n', '<leader>gc', picker.git_commits, { desc = "Git Commits" })
+      vim.keymap.set('n', '<leader>gC', picker.git_bcommits, { desc = "Git Buffer Commits" })
+      vim.keymap.set('n', '<leader>gb', picker.git_branches, { desc = "Git Branches" })
+      vim.keymap.set('n', '<leader>gt', picker.git_status, { desc = "Git Status" })
+      vim.keymap.set('n', '<leader>gh', picker.git_stash, { desc = "Git Stash" })
       -- Helpful
-      vim.keymap.set('n', '<leader>?t', picker.helptags, { desc = "Show help tags" })
-      vim.keymap.set('n', '<leader>?b', picker.builtin, { desc = "Show telescope builtins" })
-      vim.keymap.set('n', '<leader>?k', picker.keymaps, { desc = "Show keymaps" })
-      vim.keymap.set('n', '<leader>?c', picker.commands, { desc = "List commands" })
-      vim.keymap.set('n', '<leader>?h', picker.command_history, { desc = "Show command history" })
-      vim.keymap.set('n', '<leader>?m', picker.man_pages, { desc = "List man pages" })
-      vim.keymap.set('n', '<leader>?j', picker.jumps, { desc = "List jumplists" })
-      vim.keymap.set('n', '<leader>?l', picker.loclist, { desc = "Show loclist" })
-      vim.keymap.set('n', '<leader>?s', picker.search_history, { desc = "Show search history" })
-      vim.keymap.set('n', '<leader>?r', picker.registers, { desc = "List registers" })
+      vim.keymap.set('n', '<leader>?t', picker.helptags, { desc = "Show Help Tags" })
+      vim.keymap.set('n', '<leader>?b', picker.builtin, { desc = "Show Builtins" })
+      vim.keymap.set('n', '<leader>?k', picker.keymaps, { desc = "Show Keymaps" })
+      vim.keymap.set('n', '<leader>?c', picker.commands, { desc = "Show Commands" })
+      vim.keymap.set('n', '<leader>?h', picker.command_history, { desc = "Show Command History" })
+      vim.keymap.set('n', '<leader>?m', picker.man_pages, { desc = "Show Man Pages" })
+      vim.keymap.set('n', '<leader>?j', picker.jumps, { desc = "Show Jump Lists" })
+      vim.keymap.set('n', '<leader>?l', picker.loclist, { desc = "Show Location Lists" })
+      vim.keymap.set('n', '<leader>?s', picker.search_history, { desc = "Show Search History" })
+      vim.keymap.set('n', '<leader>?r', picker.registers, { desc = "List Registers" })
+      vim.keymap.set('n', '<leader>?M', picker.marks, { desc = "Show Marks" })
     end
   }
 }
