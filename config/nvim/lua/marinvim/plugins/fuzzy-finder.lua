@@ -42,11 +42,11 @@ return {
       { "<leader>bl",        function() Snacks.picker.buffers() end,                                       desc = "List Buffers" },
       { "<leader>bt",        function() Snacks.picker.treesitter() end,                                    desc = "Buffer Treesitter Symbols" },
       { "<leader>dl",        function() Snacks.picker.diagnostics() end,                                   desc = "List Diagnostics" },
-      { "<leader><leader>l", function() Snacks.picker.projects() end,                                      desc = "Find Projects" },
+      { "<leader><leader>l", function() Snacks.picker.projects() end,                                      desc = "List Projects" },
       -- Grep
-      { "<leader>/",         function() Snacks.picker.grep() end,                                          desc = "Grep Current Working Directory" },
-      { "<leader>*",         function() Snacks.picker.grep_word() end,                                     desc = "Grep Current Working Directory under cursor" },
-      { "<leader><leader>g", function() Snacks.picker.grep_word({ search = vim.fn.input("Grep > ") }) end, desc = "Grep on user input" },
+      { "<leader>/",         function() Snacks.picker.grep_word({ search = vim.fn.input("Grep > ") }) end, desc = "Grep on user input" },
+      { "<leader>*",         function() Snacks.picker.grep_word() end,                                     desc = "Grep word under cursor" },
+      { "<leader><leader>/", function() Snacks.picker.grep() end,                                          desc = "Live Grep" },
       -- Git
       { "<leader><leader>f", function() Snacks.picker.git_files() end,                                     desc = "Find Git Files" },
       { "<leader>gc",        function() Snacks.picker.git_log() end,                                       desc = "Git Commits(Log)" },
@@ -105,9 +105,9 @@ return {
         picker.files({ cwd = '~/.config' })
       end, { desc = "Find Dotfiles" })
       -- Grep
-      vim.keymap.set('n', '<leader>/', picker.live_grep_native, { desc = "Grep Current Working Directory" })
-      vim.keymap.set('n', '<leader>*', picker.grep_cword, { desc = "Grep Current Working Directory under cursor" })
-      vim.keymap.set('n', '<leader><leader>g', picker.grep, { desc = "Grep on user input" })
+      vim.keymap.set('n', '<leader>/', picker.grep, { desc = "Grep on user input" })
+      vim.keymap.set('n', '<leader>*', picker.grep_cword, { desc = "Grep word under cursor" })
+      vim.keymap.set('n', '<leader><leader>/', picker.live_grep_native, { desc = "Live Grep" })
       --Git
       vim.keymap.set('n', '<leader><leader>f', picker.git_files, { desc = "Find Git Files" })
       vim.keymap.set('n', '<leader>gc', picker.git_commits, { desc = "Git Commits" })
