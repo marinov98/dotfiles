@@ -58,10 +58,12 @@ return {
           vim.keymap.set('n', '<leader>lwa', vim.lsp.buf.add_workspace_folder, { desc = "Add workspace folder", buffer = local_buf })
           vim.keymap.set('n', '<leader>lwr', vim.lsp.buf.remove_workspace_folder, { desc = "Remove workspace folder", buffer = local_buf })
 
-          -- Original
           vim.keymap.set('n', 'grd', vim.lsp.buf.declaration, { desc = "Go to declaration", buffer = local_buf })
           vim.keymap.set('n', 'grn', vim.lsp.buf.rename, { desc = "Rename variable", buffer = local_buf })
+          vim.keymap.set('n', 'grh', vim.lsp.buf.signature_help, { desc = "Signature Help", buffer = local_buf })
           vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, { desc = "Signature Help", buffer = local_buf })
+
+          -- Original
           -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = "Show Definitions", buffer = local_buf })
           -- vim.keymap.set('n', 'grr', vim.lsp.buf.references, { desc = "Show References", buffer = local_buf })
           -- vim.keymap.set('n', 'gri', vim.lsp.buf.implementation, { desc = "Show implementations", buffer = local_buf })
@@ -69,7 +71,7 @@ return {
           -- vim.keymap.set('n', '<leader>ls', vim.lsp.buf.document_symbol, { desc = "Document Symbol", buffer = local_buf })
           -- vim.keymap.set('n', '<leader>lws', vim.lsp.buf.workspace_symbol, { desc = "Workspace Symbols", buffer = local_buf })
 
-          -- Telescope Variant
+          -- Picker Variant
           local picker = require('telescope.builtin')
           vim.keymap.set('n', 'gd', picker.lsp_definitions, { desc = "Show Definitions", buffer = local_buf })
           vim.keymap.set('n', 'grr', picker.lsp_references, { desc = "Show References", buffer = local_buf })
