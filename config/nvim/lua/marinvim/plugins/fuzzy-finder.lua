@@ -34,7 +34,7 @@ return {
       }
     },
     keys = {
-      -- Finding
+      -- Finding, Listing
       -- { "<leader>f",         function() Snacks.picker.files({ cmd = "rg" }) end,                         desc = "Find Files" },
       { "<leader>f",         function() Snacks.picker.files({ cmd = "fd" }) end,                           desc = "Find Files" },
       { "<leader>um",        function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end,       desc = "Find Config File" },
