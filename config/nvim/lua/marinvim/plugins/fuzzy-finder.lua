@@ -45,7 +45,7 @@ return {
       -- Grep
       { "<leader>/",         function() Snacks.picker.grep_word({ search = vim.fn.input("Grep > ") }) end, desc = "Grep on user input" },
       { "<leader>*",         function() Snacks.picker.grep_word() end,                                     desc = "Grep word under cursor" },
-      { "<leader><leader>/", function() Snacks.picker.grep() end,                                          desc = "Grep Current Working Directory" },
+      { "<leader><leader>/", function() Snacks.picker.grep() end,                                          desc = "Live Grep" },
       -- Git
       { "<leader><leader>f", function() Snacks.picker.git_files() end,                                     desc = "Find Git Files" },
       { "<leader>gc",        function() Snacks.picker.git_log() end,                                       desc = "Git Commits(Log)" },
