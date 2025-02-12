@@ -70,13 +70,13 @@ return {
           -- vim.keymap.set('n', '<leader>lws', vim.lsp.buf.workspace_symbol, { desc = "Workspace Symbols", buffer = local_buf })
 
           -- Telescope Variant
-          local builtin = require('telescope.builtin')
-          vim.keymap.set('n', 'gd', builtin.lsp_definitions, { desc = "Show Definitions", buffer = local_buf })
-          vim.keymap.set('n', 'grr', builtin.lsp_references, { desc = "Show References", buffer = local_buf })
-          vim.keymap.set('n', 'gri', builtin.lsp_implementations, { desc = "Show implementations", buffer = local_buf })
-          vim.keymap.set('n', 'gry', builtin.lsp_type_definitions, { desc = "Show Type Definitions", buffer = local_buf })
-          vim.keymap.set('n', '<leader>ls', builtin.lsp_document_symbols, { desc = "Document Symbol", buffer = local_buf })
-          vim.keymap.set('n', '<leader>lws', builtin.lsp_workspace_symbols, { desc = "Workspace Symbols", buffer = local_buf })
+          local picker = require('telescope.builtin')
+          vim.keymap.set('n', 'gd', picker.lsp_definitions, { desc = "Show Definitions", buffer = local_buf })
+          vim.keymap.set('n', 'grr', picker.lsp_references, { desc = "Show References", buffer = local_buf })
+          vim.keymap.set('n', 'gri', picker.lsp_implementations, { desc = "Show implementations", buffer = local_buf })
+          vim.keymap.set('n', 'gry', picker.lsp_type_definitions, { desc = "Show Type Definitions", buffer = local_buf })
+          vim.keymap.set('n', '<leader>ls', picker.lsp_document_symbols, { desc = "Document Symbol", buffer = local_buf })
+          vim.keymap.set('n', '<leader>lws', picker.lsp_workspace_symbols, { desc = "Workspace Symbols", buffer = local_buf })
         end,
       })
     end
