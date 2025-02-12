@@ -115,6 +115,7 @@ return {
       vim.keymap.set('n', '<leader>gb', picker.git_branches, { desc = "Git Branches" })
       vim.keymap.set('n', '<leader>gt', picker.git_status, { desc = "Git Status" })
       vim.keymap.set('n', '<leader>gh', picker.git_stash, { desc = "Git Stash" })
+      vim.keymap.set('n', '<leader>gl', picker.git_blame, { desc = "Git Blame Buffer" })
       -- Helpful
       vim.keymap.set('n', '<leader>?t', picker.helptags, { desc = "Show Help Tags" })
       vim.keymap.set('n', '<leader>?b', picker.builtin, { desc = "Show Builtins" })
