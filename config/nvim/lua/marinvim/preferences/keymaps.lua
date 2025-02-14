@@ -12,7 +12,6 @@ vim.keymap.set('n', '<leader>n', ":noh<CR>", { desc = "Remove highlight" })
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy to system clipboard" })
 vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Copy line to system clipboard" })
 vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]], { desc = "Paste from system clipboard" })
-vim.keymap.set("x", "<leader>P", [["_dP]], { desc = "Paste without cutting" })
 
 -- Coding utility
 vim.keymap.set('n', '<leader>a', "<C-^>", { desc = "Alternate buffers" })
