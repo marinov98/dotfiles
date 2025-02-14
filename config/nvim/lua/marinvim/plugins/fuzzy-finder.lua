@@ -53,7 +53,7 @@ return {
       { "<leader>gt",        function() Snacks.picker.git_status() end,                                    desc = "Git Status" },
       { "<leader>gh",        function() Snacks.picker.git_stash() end,                                     desc = "Git Stash" },
       -- File Tree
-      { "<leader>tn",        function() Snacks.picker.explorer() end,                                      desc = "File Explorer" },
+      { "<leader>ct",        function() Snacks.picker.explorer() end,                                      desc = "File Tree Explorer" },
       -- Help
       { "<leader>?t",        function() Snacks.picker.help() end,                                          desc = "Show Help Tags" },
       { "<leader>?k",        function() Snacks.picker.keymaps() end,                                       desc = "Show Keymaps" },
@@ -65,6 +65,6 @@ return {
       { "<leader>?s",        function() Snacks.picker.search_history() end,                                desc = "Show Search History" },
       { "<leader>?r",        function() Snacks.picker.registers() end,                                     desc = "Show Registers" },
       { "<leader>?M",        function() Snacks.picker.marks() end,                                         desc = "Show Marks" },
-    }
+    },
   }
 }
