@@ -53,7 +53,7 @@ return {
       { "<leader>gt",        function() Snacks.picker.git_status() end,                                    desc = "Git Status" },
       { "<leader>gh",        function() Snacks.picker.git_stash() end,                                     desc = "Git Stash" },
       -- File Tree
-      { "<leader>ct",        function() Snacks.picker.explorer() end,                                      desc = "File Tree Explorer" },
+      { "<leader>ut",        function() Snacks.picker.explorer() end,                                      desc = "File Tree Explorer" },
       -- Help
       { "<leader>?t",        function() Snacks.picker.help() end,                                          desc = "Show Help Tags" },
       { "<leader>?k",        function() Snacks.picker.keymaps() end,                                       desc = "Show Keymaps" },
