@@ -14,7 +14,7 @@ return {
   {
     "nvim-tree/nvim-tree.lua",
     version = "*",
-    keys = "<leader>ct",
+    keys = "<leader>ut",
     cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeFindFile" },
     config = function()
       require("nvim-tree").setup({
@@ -22,7 +22,7 @@ return {
           width = 50
         }
       })
-      vim.keymap.set('n', '<leader>ct', ":NvimTreeToggle<CR>", { desc = "Open Nvim tree" })
+      vim.keymap.set('n', '<leader>ut', ":NvimTreeToggle<CR>", { desc = "Open File Tree" })
     end
   },
   {
