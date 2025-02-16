@@ -25,4 +25,4 @@ vim.keymap.set("n", "<leader><leader>k", "<cmd>%bd|e#<cr>", { desc = "Close all 
 
 -- File tree 
 -- vim.keymap.set('n', '-', vim.cmd.Explore, { desc = "Open file browser" }) -- Uncomment when not using a different file tree plugin
--- vim.keymap.set('n', '<leader>tn', ":Vexplore!<CR>", { desc = "Open netrw side bar" }) -- same as above but open as a sidebar
+-- vim.keymap.set('n', '<leader>ut', ":Vexplore!<CR>", { desc = "Open netrw side bar" }) -- same as above but open as a sidebar
