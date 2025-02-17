@@ -11,7 +11,7 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "pyright", "jsonls", "yamlls", "ts_ls", "cssls" } -- examples: "pyright", "cssls", "ts_ls", "jsonls"
+        ensure_installed = { "lua_ls" } -- examples: "pyright", "cssls", "ts_ls", "jsonls"
       })
     end
   },
