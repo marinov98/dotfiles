@@ -34,7 +34,7 @@ return {
             local diagnostics   = MiniStatusline.section_diagnostics({ trunc_width = 80 })
             local lsp           = MiniStatusline.section_lsp({ trunc_width = 80 })
             local filename      = MiniStatusline.section_filename({ trunc_width = 120 })
-            local fileinfo      = MiniStatusline.section_fileinfo({ trunc_width = 120 })
+            -- local fileinfo      = MiniStatusline.section_fileinfo({ trunc_width = 120 })
             local location      = MiniStatusline.section_location({ trunc_width = 200 })
 
             return MiniStatusline.combine_groups({
@@ -45,7 +45,7 @@ return {
               '%<', -- Mark general truncate point
               '%=', -- End left alignment
               { hl = 'MiniStatuslineDevinfo',  strings = { lsp } },
-              { hl = 'MiniStatuslineFilename', strings = { fileinfo, location } },
+              { hl = 'MiniStatuslineFilename', strings = { location } },
               -- { hl = 'MiniStatuslineFileinfo', strings = { fileinfo, location } },
             })
           end
