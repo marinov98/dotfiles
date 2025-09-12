@@ -1,7 +1,7 @@
 return {
   "saghen/blink.cmp",
   event = { 'LspAttach' },
-  version = "v0.*",
+  version = '1.*',
   dependencies = {
     "L3MON4D3/LuaSnip",             -- snippet engine
     "rafamadriz/friendly-snippets", -- useful snippets
