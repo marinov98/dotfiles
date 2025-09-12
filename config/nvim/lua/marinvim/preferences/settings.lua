@@ -44,5 +44,5 @@ vim.g.netrw_liststyle = 3 -- Tree style view
 
 -- clipboard, cursors
 vim.opt.cursorline = true
--- vim.opt.clipboard = "unnamedplus" -- use system clipboard
+vim.opt.clipboard = "unnamedplus" -- use system clipboard
 vim.opt.errorbells = false -- no sounds on error

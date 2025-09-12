@@ -18,5 +18,6 @@ return {
     })
     vim.opt.showmode = false -- avoid duplicate showings of mode
     vim.opt.showcmd = false  -- don't show commands'
+    vim.opt.laststatus = 3 -- global status
   end
 }
