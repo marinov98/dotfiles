@@ -214,6 +214,14 @@
   (which-key-mode)
 )
 
+(use-package neotree
+    :ensure t
+    :custom
+    (neo-smart-open t) ; update every time its toggled
+    (neo-show-hidden-files t)
+    (neo-theme (if (display-graphic-p) 'icons 'arrow))
+)
+
 (use-package hydra
     :ensure t
     :config
@@ -328,6 +336,7 @@
     (("m" goto-MarinMacs "goto config")
     ("s" set-fill-column "set-fill-column")
     ("R" restart-emacs "restart Emacs")
+    ("t" neotree-toggle "file tree" :color blue)
     ("e" eval-buffer "eval buffer")
     ("c" compile "compile"))
   )
@@ -347,27 +356,6 @@
   ("q" nil "quit")
 )
 
-(pretty-hydra-define hydra-mc (:color pink :title "Multiple Cursors" :quit-key "<escape>")
-  (
-      "Goto"
-      (("n" evil-mc-make-and-goto-next-match "make & next")
-      ("N" evil-mc-make-and-goto-prev-match "make & prev")
-      ("p" evil-mc-skip-and-goto-next-match "skip & next")
-      ("P" evil-mc-skip-and-goto-prev-match "skip & prev")
-      ("m" evil-mc-make-all-cursors "Make all"))
-
-     "Line"
-     (("J" evil-mc-make-cursor-move-next-line "make & up")
-     ("K" evil-mc-make-cursor-move-prev-line "make & down"))
-
-     "Manual"
-     (("u" evil-mc-undo-last-added-cursor "undo cursor")
-     ("g" evil-mc-make-cursor-here "make cursor")
-     ("q" evil-mc-undo-all-cursors "undo all cursors" :color blue)
-     ("r" evil-mc-resume-cursors "resume cursors" :color blue))
-   )
-)
-
 
 (mpm/leader-keys
      "w" '(hydra-window/body :wk "Window Hydra")
@@ -376,7 +364,6 @@
      "u" '(hydra-utility/body :wk "Utility Hydra")
      "?" '(hydra-describe/body :wk "Describe Hydra")
      "c l" '(hydra-launcher/body :wk "Launcher Hydra")
-     "c m" '(hydra-mc/body :wk "Multiple Cursors Hydra")
 )
 
 (provide 'mpm-core)
