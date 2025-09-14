@@ -41,8 +41,8 @@
   :ensure t
   :config
   (mpm/leader-keys
-     "/" '(consult-ripgrep :wk "Multi file text search")
-     "*" '(consult-line-multi :wk "Multi buffer text search")
+     "/" '(consult-ripgrep :wk "Grep on user input")
+     "*" '(consult-line-multi :wk "Multi line search")
   )
 )
 
@@ -51,6 +51,14 @@
   :ensure t
   :custom
   (wgrep-change-readonly-file t)
+  :config
+  (mpm/leader-keys
+     "r w" '(:ignore t :wk "Wgrep Actions")
+     "r w c" '(wgrep-change-to-wgrep-mode :wk "change to wgrep mode")
+     "r w e" '(wgrep-exit :wk "Wgrep Exit")
+     "r w a" '(wgrep-abort-changes :wk "Wgrep Abort Changes")
+     "r w f" '(wgrep-finish-edit :wk "Wgrep Finish Edit")
+  )
 )
 
 ;; Managing Projects is great with the right project tools
@@ -94,7 +102,7 @@
       ("c" project-query-replace-regexp "replace"))
 
       "Switch"
-      (("s" project-switch-project "switch project")
+      (("l" project-switch-project "list/switch project(s)")
       ("b" project-switch-to-buffer "switch buffer"))
 
       "Finish"
@@ -108,7 +116,6 @@
     "f" '(project-find-file :wk "Project Find File/Buffer")
   )
 )
-
 
 
 (provide 'fuzzy-find-setup)
