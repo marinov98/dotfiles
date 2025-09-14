@@ -13,6 +13,7 @@
 (require 'mpm-core)
 (require 'icons-setup)
 (require 'fuzzy-find-setup)
+(require 'markup-setup)
 
 
 (provide 'init)
