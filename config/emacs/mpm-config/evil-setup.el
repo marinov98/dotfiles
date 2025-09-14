@@ -52,7 +52,7 @@
 
   (mpm/leader-keys
        "b" '(:ignore t :wk "Buffers")
-       "b i" '(switch-to-buffer :wk "Switch Buffer")
+       "b l" '(switch-to-buffer :wk "List & Switch Buffer")
        "b b" '(evil-buffer :wk "Ctrl+^ Buffer")
        "b z" '(bury-buffer :wk "Bury Buffer")
        "b p" '(switch-to-prev-buffer :wk "Previous Buffer")

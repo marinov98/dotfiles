@@ -15,6 +15,8 @@
 (require 'fuzzy-find-setup)
 (require 'markup-setup)
 (require 'git-setup)
+(require 'web-dev-setup)
+(require 'lsp-setup)
 
 
 (provide 'init)

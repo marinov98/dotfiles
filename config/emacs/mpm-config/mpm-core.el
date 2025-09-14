@@ -113,6 +113,7 @@
         (add-hook mode (lambda () (display-line-numbers-mode 0)))))
 )
 
+
 (use-package ibuffer
     :hook (ibuffer-mode . (lambda ()
                             (ibuffer-auto-mode 1)
