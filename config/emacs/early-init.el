@@ -1,7 +1,7 @@
 ;; early-init.el -- startup before loading GUI  -*- lexical-binding: t; -*-
 
 (setq load-prefer-newer t) ;; Avoid the pitfall of loading old bytecode instead of newer
-;; (setenv "LSP_USE_PLISTS" "true") ;; supposed to make lsp faster
+(setenv "LSP_USE_PLISTS" "true") ;; supposed to make lsp faster
 
 ;;; Commentary:
 ;; MS-Windows can be slow and can give a lot of issues. This setting below at least fixes the issue of it not recognizing unicode characters and not letting your save your file.
@@ -16,11 +16,17 @@
 ;;; Code:
 
 ;; add all our components to the load path
-(let ((default-directory  (concat user-emacs-directory "Components/")))
-  (normal-top-level-add-subdirs-to-load-path))
+(message "Adding config directory to load path...")
+(add-to-list 'load-path (expand-file-name "mpm-config" user-emacs-directory))
 
-(require 'startup-component)
+(message "Adding startup config and custom library...")
+(require 'startup-config)
+(require 'mpm-lib)
+
+
+(add-hook 'after-init-hook #'mpm/clean-after-buffers) ;; comment this variable when debugging
+(add-hook 'after-init-hook #'mpm/reset-file-name-handler-alist)
+(add-hook 'after-init-hook #'mpm/set-memory)
 
 (provide 'early-init)
 ;;; early-init.el ends here
-
