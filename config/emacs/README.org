@@ -1,0 +1,19 @@
+#+ATTR_HTML: :style margin-left: auto; margin-right: auto;
+[[./img/emacs-homescreen-2024.png]]
+
+* Changelog
+** 09/14/2025
+- I have mainly been using nvim but decided I want to try out Emacs out of curiosity to test out the 30.1+ releases which promise much better performance
+- In coming back I am trying to rewrite and simplify some of the stuff and also change the structure as to point make similar functionality fit better together
+- I am also potentially switching up some packages for newer or more native ones
+- When I will actually finalize this new variant I don't know but you have been warned that the config is changing check the =legacy-backup= branch for the old config
+** 12/21/2023
+- Due to my org file reaching over 2000 lines I have decided to modularize my own config and write it in multiple elisp files
+- this is unstable until I have developed seriously with the new config and ensured everything has continued to work
+* Summary
+** Old
+- In my case the file is *init.el* which will launch my *MarinMacs.org* file. Both should be made inside the *.emacs.d* directory
+- You can automate this if you cloned my dotfiles and ran the configure.sh script
+- Reference =alt-Configs= folder for either more minimal or alternative implementations of my config (I currently use Ivy but I have a helm and an icomplete version of my configuration as well in the folder)
+** Custom Img
+- The =img= folder contains snapshots of my configuration in action as well banners that could be used for the emacs start up screen (the script looks for =~/.emacs.d/img/targetBanner.png= but will display a default icon if nothing is found so you don't have to worry about the config crashing)
