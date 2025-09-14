@@ -89,7 +89,6 @@
       "e e s" '(eval-last-sexp :wk "Evaluate elisp expression before point")
       "e e r" '(eval-region :wk "Evaluate elisp in region")
       "e s" '(eshell :wk "Emacs Shell")
-      "e m" '(hydra-bookmark/body :which-key "Bookmark Hydra")
       "e d" '(evil-goto-definition :wk "Evil goto definition")
       "e *" '(evil-search-word-forward :wk "Evil Search at Point")
       "e /" '(evil-search-forward :wk "Evil search forward")

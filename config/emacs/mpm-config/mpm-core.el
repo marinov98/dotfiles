@@ -373,6 +373,7 @@
 (mpm/leader-keys
      "w" '(hydra-window/body :wk "Window Hydra")
      "v" '(hydra-writing/body :wk "Writing Hydra")
+     "e m" '(hydra-bookmark/body :which-key "Bookmark Hydra")
      "u" '(hydra-utility/body :wk "Utility Hydra")
      "?" '(hydra-describe/body :wk "Describe Hydra")
      "c l" '(hydra-launcher/body :wk "Launcher Hydra")
