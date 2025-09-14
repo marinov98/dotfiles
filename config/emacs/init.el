@@ -14,6 +14,7 @@
 (require 'icons-setup)
 (require 'fuzzy-find-setup)
 (require 'markup-setup)
+(require 'git-setup)
 
 
 (provide 'init)

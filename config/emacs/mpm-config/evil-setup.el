@@ -103,8 +103,33 @@
 
 (use-package evil-mc
     :ensure t
+    :after (general pretty-hydra)
     :config
     (global-evil-mc-mode 1)
+    (pretty-hydra-define hydra-mc (:color pink :title "Multiple Cursors" :quit-key "<escape>")
+      (
+        "Goto"
+        (("n" evil-mc-make-and-goto-next-match "make & next")
+        ("N" evil-mc-make-and-goto-prev-match "make & prev")
+        ("p" evil-mc-skip-and-goto-next-match "skip & next")
+        ("P" evil-mc-skip-and-goto-prev-match "skip & prev")
+        ("m" evil-mc-make-all-cursors "Make all"))
+
+        "Line"
+        (("J" evil-mc-make-cursor-move-next-line "make & up")
+        ("K" evil-mc-make-cursor-move-prev-line "make & down"))
+
+        "Manual"
+        (("u" evil-mc-undo-last-added-cursor "undo cursor")
+        ("g" evil-mc-make-cursor-here "make cursor")
+        ("q" evil-mc-undo-all-cursors "undo all cursors" :color blue)
+        ("r" evil-mc-resume-cursors "resume cursors" :color blue))
+      )
+    )
+
+    (mpm/leader-keys
+        "c m" '(hydra-mc/body :wk "Multiple Cursors Hydra")
+    )
 )
 
 
