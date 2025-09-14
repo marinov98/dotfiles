@@ -279,8 +279,7 @@
     (("h" windmove-left "left")
     ("j" windmove-down "down")
     ("k" windmove-up "up")
-    ("l" windmove-right "right")
-    ("a" ace-window "ace-window"))
+    ("l" windmove-right "right"))
 
     "Resizing"
     (("s" shrink-window "shrink window")
