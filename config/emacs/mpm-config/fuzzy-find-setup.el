@@ -98,15 +98,15 @@
       ("d" project-find-dir "find-dir"))
 
       "Search/Replace" ;; search and replace
-      (("g" project-find-regexp "grep project")
-      ("c" project-query-replace-regexp "replace"))
+      (("/" project-find-regexp "grep project")
+      ("r" project-query-replace-regexp "replace"))
 
       "Switch"
       (("l" project-switch-project "list/switch project(s)")
       ("b" project-switch-to-buffer "switch buffer"))
 
       "Finish"
-      (("p" project-compile "compile")
+      (("c" project-compile "compile")
       ("k" project-kill-buffers "kill project buffers"))
     )
   )
