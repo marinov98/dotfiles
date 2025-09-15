@@ -20,9 +20,9 @@
      :config
      (mpm/leader-keys
         "d l" '(flycheck-list-errors :wk "Diagnostics List Errors")
-        "d g" '(flycheck-display-error-at-point :wk "Display Diagnostics at point")
+        "d g" '(flycheck-explain-error-at-point :wk "Display Diagnostics at point")
         "c f" '(:ignore t :wk "Flycheck commands")
-        "c f e" '(flycheck-explain-error-at-point :wk "Flycheck explain error")
+        "c f e" '(flycheck-display-error-at-point :wk "Flycheck display error")
         "c f s" '(flycheck-select-checker :wk "Flycheck select checker")
         "c f l" '(flycheck-list-errors :wk "Diagnostics List Errors") ;; alternative binding
         "c f d" '(flycheck-disable-checker :wk "Flycheck disable checker")
