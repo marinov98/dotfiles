@@ -55,6 +55,8 @@
 (use-package json-mode
     :ensure t
     :commands json-mode
+    :mode (("\\.json\\'" . json-mode)
+           ("\\.jsonc\\'" . json-mode))
     :init
     (setq-default js-indent-level 2)
 )

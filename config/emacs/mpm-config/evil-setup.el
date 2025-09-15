@@ -8,6 +8,8 @@
 
 (use-package evil
     :ensure t
+    :custom
+    (evil-want-C-u-scroll t)
     :init
     (setq evil-want-keybinding nil)
     (setq evil-undo-system 'undo-redo)
