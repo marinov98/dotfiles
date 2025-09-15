@@ -24,6 +24,7 @@
         "c f" '(:ignore t :wk "Flycheck commands")
         "c f e" '(flycheck-explain-error-at-point :wk "Flycheck explain error")
         "c f s" '(flycheck-select-checker :wk "Flycheck select checker")
+        "c f l" '(flycheck-list-errors :wk "Diagnostics List Errors") ;; alternative binding
         "c f d" '(flycheck-disable-checker :wk "Flycheck disable checker")
         "c f h" '(flycheck-describe-checker :wk "Flycheck describe checker")
         "c f m" '(flycheck-mode :wk "Flycheck mode")
@@ -107,9 +108,9 @@
        (mpm/leader-keys
         "l g" '(lsp-ui-doc-glance :wk "Hover")
         "l i" '(lsp-ui-imenu :wk "Imenu")
-        "l d" '(lsp-ui-flycheck-list :wk "Error list")
+        "l d" '(lsp-ui-flycheck-list :wk "(LSP UI)List Diagnostics")
         "l w" '(:ignore t :wk "LSP Workspace")
-        "l w s" '(lsp-ui-find-workspace-symbol :wk "LSP Workspace Symbols")
+        "l w d" '(lsp-ui-find-workspace-symbol :wk "Document Workspace Symbols")
        )
 )
 
@@ -123,6 +124,17 @@
 (use-package lsp-java
      :disabled
      :hook ((java-mode java-ts-mode) . lsp-deferred)
+)
+
+(use-package consult-lsp
+  :ensure t
+  :after (flycheck lsp-mode consult)
+  :config
+  (mpm/leader-keys
+    "d l" '(consult-lsp-diagnostics :wk "List Diagnostics") ;; overwrite flycheck binding
+    "l s" '(consult-lsp-file-symbols :wk "File Symbols")
+    "l w s" '(consult-lsp-symbols :wk "Workspace Symbols")
+  )
 )
 
 
