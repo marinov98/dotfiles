@@ -60,7 +60,7 @@
   )
 
   (mpm/leader-keys
-     "d" '(:ignore t :wk "Dired")
+     "d" '(:ignore t :wk "Dired/Diagnostics")
      "d d" '(dired :wk "Open dired")
      "d j" '(dired-jump :wk "Dired jump to current")
      "d f" '(wdired-finish-edit :wk "Writable dired finish edit")

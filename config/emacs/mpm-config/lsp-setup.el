@@ -16,11 +16,12 @@
      (:map evil-normal-state-map
            ("]d" . flycheck-next-error)
            ("[d" . flycheck-previous-error))
+     :init (global-flycheck-mode)
      :config
-     (global-flycheck-mode t)
      (mpm/leader-keys
-        "d l" '(flycheck-list-errors :which-key "Diagnostics List Errors")
-        "c f" '(:ignore t :wk "Flycheck options")
+        "d l" '(flycheck-list-errors :wk "Diagnostics List Errors")
+        "d g" '(flycheck-display-error-at-point :wk "Display Diagnostics at point")
+        "c f" '(:ignore t :wk "Flycheck commands")
         "c f e" '(flycheck-explain-error-at-point :wk "Flycheck explain error")
         "c f s" '(flycheck-select-checker :wk "Flycheck select checker")
         "c f d" '(flycheck-disable-checker :wk "Flycheck disable checker")

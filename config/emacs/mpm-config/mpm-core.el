@@ -368,4 +368,4 @@
 )
 
 (provide 'mpm-core)
-;;; preferences-setup.el ends here
+;;; mpm-core.el ends here
