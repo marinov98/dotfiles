@@ -41,9 +41,16 @@
   :ensure t
   :config
   (define-key evil-normal-state-map (kbd "gl") 'consult-line)
+
+  (defun mpm/consult-find-file () (interactive)
+         (let ((consult-async-min-input 1))
+           (consult-fd)
+         )
+  )
+
   (mpm/leader-keys
      "/" '(consult-ripgrep :wk "Grep on user input")
-     "f" '(consult-fd :wk "Find File")
+     "f" '(mpm/consult-find-file :wk "Find File")
      "l i" '(consult-imenu :wk "Imenu")
      "*" '(consult-line-multi :wk "Multi line search")
   )
