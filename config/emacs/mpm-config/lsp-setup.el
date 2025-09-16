@@ -56,6 +56,7 @@
        (lsp-signature-auto-activate nil) ;; (This tends to cause problems and is SUPER slow ESP on MS Windows) you could manually request them via 'lsp-signature-activate'
        (lsp-headerline-breadcrumb-enable nil) ;; graphical bloat, don't need but useful to the right person
        (lsp-enable-folding nil)
+       (lsp-enable-symbol-highlighting nil)
        (lsp-enable-text-document-color nil)
        (lsp-file-watch-threshold 5000)
        (lsp-prefer-flymake nil)
@@ -107,8 +108,6 @@
        :config
        (mpm/leader-keys
         "l g" '(lsp-ui-doc-glance :wk "Hover")
-        "l i" '(lsp-ui-imenu :wk "Imenu")
-        "l d" '(lsp-ui-flycheck-list :wk "(LSP UI)List Diagnostics")
         "l w" '(:ignore t :wk "LSP Workspace")
         "l w d" '(lsp-ui-find-workspace-symbol :wk "Document Workspace Symbols")
        )

@@ -29,7 +29,7 @@
     (("C-," . embark-act)
      :map minibuffer-local-map
      ("C-q" . embark-export)) ;; inspired by quickfix list exporting in vim
-) 
+)
 
 (use-package embark-consult
   :ensure t ; only need to install it, embark loads it after consult if found
@@ -40,8 +40,11 @@
 (use-package consult
   :ensure t
   :config
+  (define-key evil-normal-state-map (kbd "gl") 'consult-line)
   (mpm/leader-keys
      "/" '(consult-ripgrep :wk "Grep on user input")
+     "f" '(consult-fd :wk "Find File")
+     "l i" '(consult-imenu :wk "Imenu")
      "*" '(consult-line-multi :wk "Multi line search")
   )
 )
@@ -94,11 +97,12 @@
   (pretty-hydra-define hydra-project (:color red :title "🚀 Project 🚀" :quit-key "q")
     (
       "Finding"
-      (("f" project-search "search")
+      (("f" project-find-file "find file")
       ("d" project-find-dir "find-dir"))
 
       "Search/Replace" ;; search and replace
       (("/" project-find-regexp "grep project")
+      ("s" project-search "search project")
       ("r" project-query-replace-regexp "replace"))
 
       "Switch"
@@ -113,7 +117,6 @@
 
   (mpm/leader-keys
     "SPC" '(hydra-project/body :wk "Project Hydra")
-    "f" '(project-find-file :wk "Project Find File/Buffer")
   )
 )
 

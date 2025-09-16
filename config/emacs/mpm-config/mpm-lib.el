@@ -7,7 +7,7 @@
 (defconst mpm-config-file-location (concat user-emacs-directory "init.el")
   "Configuration file location.")
 
-(defconst mpm-projects-dir "~/Projects"
+(defconst mpm-projects-dir "~/projects"
   "Projects directory.")
 
 (defconst mpm-projects-discovery-file ".project.el"
@@ -22,7 +22,7 @@
 (defconst mpm-dashboard-banner-img "targetBanner.png"
   "Dashboard image.")
 
-(defvar mpm-org-dir "~/Projects/org"
+(defvar mpm-org-dir "~/projects/org"
   "Org directory.")
 
 (defun goto-MarinMacs ()

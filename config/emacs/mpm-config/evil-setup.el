@@ -13,12 +13,12 @@
     :init
     (setq evil-want-keybinding nil)
     (setq evil-undo-system 'undo-redo)
-    :bind
-    ((:map evil-normal-state-map
-        ("C-/" . comment-line) ;; vscode inspired binding
-        ("gcc" . comment-line) ;; alt-bindings, similar to vim commentary
-      :map evil-visual-state-map
-        ("gc" . comment-line))) ;; alt-bindings, similar to vim commentary
+     :bind
+     ((:map evil-normal-state-map
+         ("C-/" . comment-line) ;; vscode inspired binding
+         ("gcc" . comment-line) ;; alt-bindings, similar to vim commentary
+       :map evil-visual-state-map
+         ("gc" . comment-line))) ;; alt-bindings, similar to vim commentary
     :config
     (evil-mode 1)
 )
@@ -48,7 +48,7 @@
   (mpm/leader-keys
     "a" '(evil-buffer :wk "Ctrl+^ Buffer")
     "m" '(execute-extended-command :wk "M-x")
-    "." '(find-file :wk "Find File")
+    "." '(find-file :wk "(Native) Find File")
     "s" '(save-buffer :wk "Save Buffer")
   )
 
