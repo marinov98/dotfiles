@@ -16,20 +16,8 @@
 	untracked = red bold
 
 [alias]
-	co = checkout
-	br = branch
-	c = commit
-  ds = diff --staged
-	cl = clone
-	st = status
-	m = merge
-	#############
-	pl = pull
+	ds = diff --staged
 	pb = pull --rebase
-	#############
-	ps = push
-	psf = push -f
-	psu = push -u
-	pst = push --tags
+
 [pull]
 	ff = only
