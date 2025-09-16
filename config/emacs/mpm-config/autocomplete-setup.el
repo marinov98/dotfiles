@@ -28,7 +28,8 @@
             :states 'insert
             "C-n" #'corfu-next
             "C-p" #'corfu-previous
-            "<escape>" #'corfu-quit
+            "<escape>" #'evil-collection-corfu-quit-and-escape
+            "C-[" #'evil-collection-corfu-quit-and-escape
             "<tab>" #'corfu-insert
  )
   :init (global-corfu-mode)
