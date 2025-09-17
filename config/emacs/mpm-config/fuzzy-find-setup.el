@@ -1,3 +1,4 @@
+
 ;; fuzzy-find-setup.el --- completion framework for searching -*- lexical-binding: t; -*-
 
 ;;; Commentary:
@@ -41,6 +42,7 @@
   :ensure t
   :config
   (define-key evil-normal-state-map (kbd "gl") 'consult-line)
+  (define-key evil-normal-state-map (kbd "gL") 'consult-line-multi)
 
   (defun mpm/consult-find-file () (interactive)
          (let ((consult-async-min-input 1))
@@ -48,11 +50,28 @@
          )
   )
 
+  (defun mpm/grep-on-input () (interactive)
+         (let ((grep-input (read-string "Grep > "))
+               (consult-async-min-input 1))
+           (consult-ripgrep nil grep-input)
+         )
+  )
+
+  (defun mpm/grep-under-cursor () (interactive)
+         (let ((grep-input (or (thing-at-point 'symbol)
+                               (thing-at-point 'word)))
+               (consult-async-min-input 2))
+           (if grep-input
+               (consult-ripgrep nil grep-input)
+               (message "No symbol or word found under cursor!"))
+          )
+  )
+
   (mpm/leader-keys
-     "/" '(consult-ripgrep :wk "Grep on user input")
+     "/" '(mpm/grep-on-input :wk "Grep on user input")
      "f" '(mpm/consult-find-file :wk "Find File")
      "l i" '(consult-imenu :wk "Imenu")
-     "*" '(consult-line-multi :wk "Multi line search")
+     "*" '(mpm/grep-under-cursor :wk "Grep under cursor")
   )
 )
 
@@ -108,7 +127,8 @@
       ("d" project-find-dir "find-dir"))
 
       "Search/Replace" ;; search and replace
-      (("/" project-find-regexp "grep project")
+      (("/" consult-ripgrep "live grep project")
+      ("*" project-find-regexp "grep project")
       ("s" project-search "search project")
       ("r" project-query-replace-regexp "replace"))
 
