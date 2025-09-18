@@ -18,7 +18,7 @@
 [alias]
 	ds = diff --staged
 	pb = pull --rebase
-  pf = push --force
+	pf = push --force
 
 [pull]
 	ff = only
