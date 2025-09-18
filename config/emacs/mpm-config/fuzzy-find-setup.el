@@ -127,8 +127,7 @@
       ("d" project-find-dir "find-dir"))
 
       "Search/Replace" ;; search and replace
-      (("/" consult-ripgrep "live grep project")
-      ("*" project-find-regexp "grep project")
+      (("/" project-find-regexp "grep project")
       ("s" project-search "search project")
       ("r" project-query-replace-regexp "replace"))
 
