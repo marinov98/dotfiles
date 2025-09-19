@@ -9,7 +9,7 @@
 (setq backward-delete-char-untabify-method 'hungry)    ;; backspaces entire tab instead of one space at a time
 (setq compilation-scroll-output 'first-error)          ;; compile scroll location
 
-(setq default-frame-alist '((font . "Fira Code-12")))    ;; set font and font size
+(setq default-frame-alist '((font . "JetBrainsMono NF Regular 12"))) ;; set font and font size
 (setq visible-bell t)                                    ;; disable end of buffer sounds
 (setq inhibit-startup-screen t)                          ;; disable startup screen
 (when (and (<= 29 emacs-major-version) (not (string-equal system-type "windows-nt")))
@@ -247,7 +247,7 @@
                        (projects . 5)
                        (bookmarks . 5)
                        (agenda . 5)))
-    (dashboard-footer-messages '("Maintained by Marin Marinov since 2018"))
+    (dashboard-footer-messages '("Quest for the divine workflow continues..."))
     :init
     (if (file-directory-p mpm-img-dir)
           (setq dashboard-startup-banner (concat mpm-img-dir "/" mpm-dashboard-banner-img))
