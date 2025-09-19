@@ -47,6 +47,7 @@
          ("grd" . lsp-find-declaration)
          ("grn" . lsp-rename)
          ("grh" . lsp-describe-thing-at-point)
+         ("gra" . lsp-execute-code-action)
        )
        :general-config
        (mpm/leader-keys
