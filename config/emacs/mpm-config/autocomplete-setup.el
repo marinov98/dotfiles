@@ -18,14 +18,16 @@
   (corfu-count 10)
   (corfu-scroll-margin 4)
   (corfu-cycle t)
-  :general
-  (:keymaps 'corfu-map
-            :states 'insert
-            "C-n" #'corfu-next
-            "C-p" #'corfu-previous
-            "<escape>" #'evil-collection-corfu-quit-and-escape
-            "C-[" #'evil-collection-corfu-quit-and-escape
-            "<tab>" #'corfu-insert
+  :bind
+  (:map corfu-map
+    ("RET" . nil)
+    ("C-n" . corfu-next)
+    ("C-p" . corfu-previous)
+    ("<down>" . corfu-next)
+    ("<up>" . corfu-previous)
+    ("<escape>" . evil-collection-corfu-quit-and-escape)
+    ("C-[" . evil-collection-corfu-quit-and-escape)
+    ("<tab>" . corfu-insert)
   )
   :config
   (defun mpm/corfu-setup-lsp ()

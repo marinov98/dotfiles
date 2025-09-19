@@ -16,15 +16,17 @@
     (evil-mode 1)
     (define-key evil-normal-state-map (kbd "gcc") 'comment-line)
     (define-key evil-normal-state-map (kbd "C-/") 'comment-line)
-    (define-key evil-visual-state-map (kbd "gc") 'comment-line)
+    (define-key evil-visual-state-map (kbd "gc") 'comment-dwim)
 )
 
 (use-package evil-collection
     :ensure t
     :after evil
     :custom
-    (evil-collection-company-use-tng nil) ;; I hacked this already (Personal preference)
-    (evil-collection-setup-debugger-keys nil) ;; no need for this (Again.. Personal preference)
+    ;; statements below disable bindings for specific packages
+    (evil-collection-company-use-tng nil)
+    (evil-collection-setup-debugger-keys nil)
+    (evil-collection-disabled-modules '(corfu))
     :config
     (evil-collection-init)
 )
