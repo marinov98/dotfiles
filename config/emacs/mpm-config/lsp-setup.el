@@ -42,12 +42,17 @@
         ((bash-ts-mode rust-ts-mode go-ts-mode css-ts-mode yaml-ts-mode json-ts-mode js-ts-mode typescript-ts-mode tsx-ts-mode) . lsp-deferred) ;; treesitter modes
        )
        :bind
-       (:map evil-normal-state-map
+       (
+        (:map evil-normal-state-map
          ("gry" . lsp-find-type-definition)
          ("grd" . lsp-find-declaration)
          ("grn" . lsp-rename)
-         ("grh" . lsp-describe-thing-at-point)
+         ("gr?" . lsp-describe-thing-at-point)
+         ("grh" . lsp-signature-activate)
          ("gra" . lsp-execute-code-action)
+         :map evil-insert-state-map
+         ("C-h" . lsp-signature-activate)
+        )
        )
        :general-config
        (mpm/leader-keys
