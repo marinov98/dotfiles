@@ -10,8 +10,12 @@
     (org-file-apps
       '(("\\.pdf\\(::[0-9]+\\)?\\'" . "epdfview %s")))
     :pin org
+    :general-config
+    (mpm/leader-keys
+      "o" '(hydra-org/body :wk "Org Hydra")
+    )
     :config
-    ;; allow easier snippet insertio
+    ;; allow easier snippet insertion
     (when (version<= "27.0.50" emacs-version)
       (require 'org-tempo)
     )
@@ -31,10 +35,6 @@
       ("x" org-edit-src-exit "exit special")
       ("g" mpm/goto-org-directory "goto org directory")
       ("q" nil "quit")
-    )
-
-    (mpm/leader-keys
-      "o" '(hydra-org/body :wk "Org Hydra")
     )
 )
 
@@ -83,7 +83,7 @@
     :bind
     (:map flyspell-mode-map
     ("C-M-i" . nil)) ;; messes with org autocomplete
-) 
+)
 
 (use-package wc-mode
     :ensure t
@@ -93,7 +93,7 @@
 (use-package writegood-mode
     :ensure t
     :commands writegood-mode
-) 
+)
 
 (defhydra hydra-writing (:color red :columns 2)
   "✓ Writing and Spelling ✓"

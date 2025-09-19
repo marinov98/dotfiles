@@ -1,4 +1,3 @@
-
 ;; fuzzy-find-setup.el --- completion framework for searching -*- lexical-binding: t; -*-
 
 ;;; Commentary:
@@ -9,8 +8,7 @@
   :ensure t
   :custom
   (vertico-cycle t)
-  :init
-  (vertico-mode)
+  :hook (after-init . vertico-mode)
 )
 
 (use-package orderless
@@ -40,38 +38,35 @@
 
 (use-package consult
   :ensure t
+  :general-config
+  (mpm/leader-keys
+     "/" '(mpm/grep-on-input :wk "Grep on user input")
+     "f" '(consult-fd :wk "Find File")
+     "l i" '(consult-imenu :wk "Imenu")
+     "*" '(mpm/grep-under-cursor :wk "Grep under cursor")
+  )
+  :custom
+  (consult-async-min-input 2)
   :config
   (define-key evil-normal-state-map (kbd "gl") 'consult-line)
   (define-key evil-normal-state-map (kbd "gL") 'consult-line-multi)
 
-  (defun mpm/consult-find-file () (interactive)
-         (let ((consult-async-min-input 1))
-           (consult-fd)
-         )
+  (defun mpm/grep-on-input ()
+         "Grep based on input first, don't live grep"
+         (interactive)
+         (consult-ripgrep nil (read-string "Grep > "))
   )
 
-  (defun mpm/grep-on-input () (interactive)
-         (let ((grep-input (read-string "Grep > "))
-               (consult-async-min-input 1))
-           (consult-ripgrep nil grep-input)
-         )
-  )
-
-  (defun mpm/grep-under-cursor () (interactive)
-         (let ((grep-input (or (thing-at-point 'symbol)
-                               (thing-at-point 'word)))
-               (consult-async-min-input 2))
+  (defun mpm/grep-under-cursor ()
+    "Pass the symbol (or word if not a symbol)
+     under the cursor to grep"
+     (interactive)
+     (let ((grep-input (or (thing-at-point 'symbol)
+                           (thing-at-point 'word))))
            (if grep-input
                (consult-ripgrep nil grep-input)
                (message "No symbol or word found under cursor!"))
           )
-  )
-
-  (mpm/leader-keys
-     "/" '(mpm/grep-on-input :wk "Grep on user input")
-     "f" '(mpm/consult-find-file :wk "Find File")
-     "l i" '(consult-imenu :wk "Imenu")
-     "*" '(mpm/grep-under-cursor :wk "Grep under cursor")
   )
 )
 
@@ -80,7 +75,7 @@
   :ensure t
   :custom
   (wgrep-change-readonly-file t)
-  :config
+  :general-config
   (mpm/leader-keys
      "r w" '(:ignore t :wk "Wgrep Actions")
      "r w c" '(wgrep-change-to-wgrep-mode :wk "change to wgrep mode")
@@ -91,27 +86,17 @@
 )
 
 ;; Managing Projects is great with the right project tools
-
-;; find projects with custom discovery file and not just git
-(defun mpm-override-dir (dir)
-    (let ((root (locate-dominating-file dir mpm-projects-discovery-file)))
-      (and root (cons 'transient root)))
-)
-
-
-;; override vcs for monorepos
-;; Returns the parent directory containing a custom override file, if any,
-;; to override the standard project.el detection logic when needed.
-;; (defun mpm-project-override (dir)
-;;   (let ((override (locate-dominating-file dir mpm-projects-override-file)))
-;;     (if override
-;;       (cons 'vc override)
-;;       nil)))
-
-;;; Code:
 (use-package project
+  :general-config
+  (mpm/leader-keys
+    "SPC" '(hydra-project/body :wk "Project Hydra")
+  )
   :config
-  ;; (add-hook 'project-find-functions #'mpm-project-override)
+  ;; find projects with custom discovery file and not just git
+  (defun mpm-override-dir (dir)
+      (let ((root (locate-dominating-file dir mpm-projects-discovery-file)))
+      (and root (cons 'transient root)))
+  )
   (add-hook 'project-find-functions #'mpm-override-dir)
   ;; discover projects when none have been created
   (add-hook 'after-init-hook #'(lambda ()
@@ -119,7 +104,6 @@
                                    (when (and (not (file-exists-p project-list-target-file)) (file-directory-p mpm-projects-dir))
                                      (message (format "'%s' file not found, will attempt to discover projects based on '%s'" project-list-target-file mpm-projects-dir))
                                      (project-remember-projects-under mpm-projects-dir)))))
-  ;; project hydra
   (pretty-hydra-define hydra-project (:color red :title "🚀 Project 🚀" :quit-key "q")
     (
       "Finding"
@@ -141,9 +125,6 @@
     )
   )
 
-  (mpm/leader-keys
-    "SPC" '(hydra-project/body :wk "Project Hydra")
-  )
 )
 
 

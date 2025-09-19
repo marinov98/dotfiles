@@ -6,6 +6,7 @@
 ;;; Code:
 (use-package flycheck
      :ensure t
+     :hook (after-init . global-flycheck-mode)
      :custom-face
      (flycheck-info ((t (:underline (:style wave :color "#87cefa")))))
      (flycheck-warning ((t (:underline (:style wave :color "#ffb95c")))))
@@ -16,8 +17,7 @@
      (:map evil-normal-state-map
            ("]d" . flycheck-next-error)
            ("[d" . flycheck-previous-error))
-     :init (global-flycheck-mode)
-     :config
+     :general
      (mpm/leader-keys
         "d l" '(flycheck-list-errors :wk "Diagnostics List Errors")
         "d g" '(flycheck-explain-error-at-point :wk "Display Diagnostics at point")
@@ -48,6 +48,13 @@
          ("grn" . lsp-rename)
          ("grh" . lsp-describe-thing-at-point)
        )
+       :general-config
+       (mpm/leader-keys
+        "l" '(:ignore t :wk "LSP")
+        "l f" '(lsp-format-buffer :wk "LSP Format")
+        "l a" '(lsp-execute-code-action :wk "LSP Code Action")
+        "l o" '(lsp-organize-imports :wk "LSP Organize Imports")
+       )
        :custom
        (lsp-auto-guess-root nil)
        (lsp-log-io nil)
@@ -70,12 +77,6 @@
                          (define-key evil-normal-state-map (kbd "grr") 'lsp-find-references)
                         )
                      ))
-       (mpm/leader-keys
-        "l" '(:ignore t :wk "LSP")
-        "l f" '(lsp-format-buffer :wk "LSP Format")
-        "l a" '(lsp-execute-code-action :wk "LSP Code Action")
-        "l o" '(lsp-organize-imports :wk "LSP Organize Imports")
-       )
 )
 
 (use-package lsp-ui
@@ -105,7 +106,7 @@
        (lsp-ui-peek-enable t)
        (lsp-ui-peek-list-width 60)
        (lsp-ui-peek-peek-height 25)
-       :config
+       :general-config
        (mpm/leader-keys
         "l g" '(lsp-ui-doc-glance :wk "Hover")
         "l w" '(:ignore t :wk "LSP Workspace")
@@ -128,7 +129,7 @@
 (use-package consult-lsp
   :ensure t
   :after (flycheck lsp-mode consult)
-  :config
+  :general-config
   (mpm/leader-keys
     "d l" '(consult-lsp-diagnostics :wk "List Diagnostics") ;; overwrite flycheck binding
     "l s" '(consult-lsp-file-symbols :wk "File Symbols")

@@ -22,7 +22,7 @@
 (defconst mpm-dashboard-banner-img "targetBanner.png"
   "Dashboard image.")
 
-(defvar mpm-org-dir "~/projects/org"
+(defvar mpm-org-dir (concat mpm-projects-dir "/org")
   "Org directory.")
 
 (defun goto-MarinMacs ()

@@ -1,18 +1,14 @@
-;;; treesitter-setup.el --- syntax checker -*- lexical-binding: t; -*-
+;;; autocomplete-setup.el --- syntax checker -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;; Setup for Completion backend that will provide autocomplete
 
 ;;; Code:
 
-(defun mpm/corfu-setup-lsp ()
-  "Use orderless completion style with lsp-capf instead of the default lsp-passthrough."
-  (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
-        '(orderless))
-)
 
 (use-package corfu
   :ensure t
+  :hook (after-init . global-corfu-mode)
   :custom
   (corfu-auto t)
   (corfu-auto-prefix 2)
@@ -22,7 +18,6 @@
   (corfu-count 10)
   (corfu-scroll-margin 4)
   (corfu-cycle t)
-  (lsp-completion-provider :none) ; Use corfu instead for lsp completions
   :general
   (:keymaps 'corfu-map
             :states 'insert
@@ -31,9 +26,15 @@
             "<escape>" #'evil-collection-corfu-quit-and-escape
             "C-[" #'evil-collection-corfu-quit-and-escape
             "<tab>" #'corfu-insert
- )
-  :init (global-corfu-mode)
-  :hook (lsp-completion-mode . mpm/corfu-setup-lsp) ; Use corfu for lsp completion
+  )
+  :config
+  (defun mpm/corfu-setup-lsp ()
+    "Use orderless completion style with lsp-capf instead of the default lsp-passthrough."
+    (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
+            '(orderless))
+  )
+  (add-hook 'lsp-completion-mode-hook #'mpm/corfu-setup-lsp)
+  (setq lsp-completion-provider :none) ; use corfu instead of lsp-completions
 )
 
 (provide 'autocomplete-setup)
