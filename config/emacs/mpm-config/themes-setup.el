@@ -8,13 +8,13 @@
 ;; Some themes do not mix well which is why I disable themes
 
 (use-package doom-themes
-     :disabled
+     ;; :disabled
      :ensure t
      :custom
      (doom-themes-enable-bold t)
      (doom-themes-enable-italic t)
      :config
-     (load-theme 'doom-dracula t)
+     (load-theme 'doom-tokyo-night t)
      (doom-themes-visual-bell-config) ;; Enable flashing mode-line on errors
      (doom-themes-org-config) ;; Corrects (and improves) org-mode's native fontification.
 )
@@ -28,7 +28,7 @@
 )
 
 (use-package catppuccin-theme
-    ;; :disabled
+    :disabled
     :ensure t
     :custom
     (catppuccin-flavor 'macchiato)
