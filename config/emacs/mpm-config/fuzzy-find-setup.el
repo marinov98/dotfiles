@@ -48,6 +48,9 @@
   :custom
   (consult-async-min-input 2)
   :config
+  (setq consult-ripgrep-args (concat consult-ripgrep-args " --hidden -g '!{node_modules,.git}'"))
+  (add-to-list 'consult-fd-args "--hidden --exclude .git --exclude node_modules" t)
+
   (define-key evil-normal-state-map (kbd "gl") 'consult-line)
   (define-key evil-normal-state-map (kbd "gL") 'consult-line-multi)
 
