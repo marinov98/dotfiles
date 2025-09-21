@@ -6,7 +6,7 @@
  (load (concat user-emacs-directory "early-init.el")))
 
 ;;; Code:
-;; load our custom components except startup (used in early-init.el)
+;; load our config
 (require 'mpm-config)
 
 
