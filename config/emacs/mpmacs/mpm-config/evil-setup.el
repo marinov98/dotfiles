@@ -18,7 +18,7 @@
     (define-key evil-normal-state-map (kbd "C-/") 'comment-line)
     (define-key evil-visual-state-map (kbd "gc") 'comment-dwim)
     (define-key evil-visual-state-map (kbd "C-/") 'comment-region)
-    (define-key evil-normal-state-map (kbd "-") (lambda () (interactive) (dired nil)))
+    (define-key evil-normal-state-map (kbd "-") 'dired-jump)
 )
 
 (use-package evil-collection
@@ -64,10 +64,14 @@
     "b n" '(switch-to-next-buffer :wk "Next Buffer")
     ;; <leader>d
      "d" '(:ignore t :wk "Dired/Diagnostics")
-     "d d" '(dired :wk "Open dired")
-     "d j" '(dired-jump :wk "Dired jump to current")
-     "d f" '(wdired-finish-edit :wk "Writable dired finish edit")
-     "d w" '(wdired-change-to-wdired-mode :wk "Writable dired")
+     "d d" '(:ignore t :wk "Dired")
+     "d d o" '(dired :wk "Open dired")
+     "d d j" '(dired-jump :wk "Dired jump to current")
+     "d d f" '(wdired-finish-edit :wk "Writable dired finish edit")
+     "d d w" '(wdired-change-to-wdired-mode :wk "Writable dired")
+     "d d c" '(:ignore t :wk "Dired Create")
+     "d d c f" '(dired-create-empty-file :wk "Dired Create File")
+     "d d c d" '(dired-create-directory :wk "Dired Create Directory")
     ;; <leader>c
      "c" '(:ignore t :wk "Coding")
      "c /" '(comment-region :wk "Comment Region")
