@@ -1,4 +1,4 @@
-;; init.el --- configuration entry point -*- lexical-binding: t; -*-
+;; mpm-custom.el --- custom configuration entry point -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;; in case early-init doesn't load (Emacs 27 introduced early-init)
@@ -7,8 +7,11 @@
 
 ;;; Code:
 ;; load our custom components except startup (used in early-init.el)
-(require 'mpm-config)
+(message "Loading MPM custom...")
+(require 'startup-config)
+(require 'mpm-preferences)
+(require 'mpm-lib)
 
 
-(provide 'init)
-;;; init.el ends here
+(provide 'mpm-custom)
+;;; mpm-custom.el ends here

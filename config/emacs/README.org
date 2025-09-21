@@ -2,6 +2,8 @@
 [[./img/emacs-homescreen-2024.png]]
 
 * Changelog
+** 09/21/2025
+- rewrote the structure twice but also added much needed enhancements for grepping and config structuring , the config is in a much more stable state then when I first started
 ** 09/14/2025
 - I have mainly been using nvim but decided I want to try out Emacs out of curiosity to test out the 30.1+ releases which promise much better performance
 - In coming back, I am trying to rewrite and simplify some of the stuff and also change the structure as to point make similar functionality fit better together

@@ -4,54 +4,6 @@
 ;; how I prefer to set somethings up
 
 ;;; Code:
-(setq-default indent-tabs-mode nil)                    ;; disable tabs and use spaces
-(setq-default tab-width 4)                             ;; set default tab width 4
-(setq backward-delete-char-untabify-method 'hungry)    ;; backspaces entire tab instead of one space at a time
-(setq compilation-scroll-output 'first-error)          ;; compile scroll location
-
-(setq default-frame-alist '((font . "JetBrainsMono NF Regular 12"))) ;; set font and font size
-(setq visible-bell t)                                    ;; disable end of buffer sounds
-(setq inhibit-startup-screen t)                          ;; disable startup screen
-(when (and (<= 29 emacs-major-version) (not (string-equal system-type "windows-nt")))
-  (add-to-list 'default-frame-alist '(alpha-background . 95))) ;; Emacs 29 adds true transparency
-
-(fset 'yes-or-no-p 'y-or-n-p)           ;; change yes or no to y or n
-(setq use-dialog-box nil)               ;; Don't pop up UI dialogs when prompting
-(menu-bar-mode -1)                      ;; disable menu bar
-(scroll-bar-mode -1)                    ;; disable scroll bar
-(toggle-scroll-bar -1)                  ;; disable scroll bar toggle
-(tool-bar-mode -1)                      ;; disable tool bar
-(blink-cursor-mode -1)                  ;; make cursor stop blinking
-
-(setq make-backup-files nil)             ;; stop creating backup~ files
-(setq auto-save-default nil)             ;; stop creating autosave# files
-(setq create-lockfiles nil)              ;; stop creating any # files
-
-(setq history-length 30)
-(put 'minibuffer-history 'history-length 30)
-(put 'evil-ex-history 'history-length 30)
-(put 'kill-ring 'history-length 25)
-
-(setq gdb-many-windows t)                ;; have multiple windows when debugging
-(setq gdb-show-main t)                   ;; Non-nil means display source file containing the main routine at startup
-
-
-(use-package time
-    :custom
-    (display-time-24hr-format t) ;; 24hr format because I'm european :)
-    :config
-    (display-time-mode -1) ;; toggle time mode on and off
-) 
-
-(when (string-equal system-type "gnu/linux")
-  (setq
-    browse-url-browser-function
-    '(("https://www.netflix.com/" . browse-url-firefox) ;; firefox deals better with video players on linux
-      ("." . browse-url-chromium))
-  )
-)
-
-
 (when (>= emacs-major-version 28)
   (use-package ligature
     :ensure t
@@ -223,22 +175,10 @@
     (neo-theme (if (display-graphic-p) 'icons 'arrow))
 )
 
-(use-package hydra
-    :ensure t
-    :config
-    (setq hydra-is-helpful t)
-    (setq hydra-hint-display-type 'lv)
-)
-    
-(use-package pretty-hydra
-    :after hydra
-    :ensure t
-)
-
 (use-package dashboard
     :ensure t
     :custom
-    (dashboard-banner-logo-title "MarinMacs")
+    (dashboard-banner-logo-title "MPMacs")
     (dashboard-set-heading-icons t)
     (dashboard-set-init-info t)
     (dashboard-set-file-icons t)
@@ -258,113 +198,6 @@
     (when (string-equal system-type "windows-nt" )
             (advice-add #'dashboard-replace-displayable :override #'identity)) ;; icons have issue displaying on windows, this fixes it
     (dashboard-setup-startup-hook)
-)
-
-
-(defhydra hydra-describe (:color red :columns 3)
-  "Describe 🤓"
-  ("d" embark-bindings "bindings")
-  ("f" describe-function "func")
-  ("F" describe-face "face")
-  ("k" describe-key "key")
-  ("v" describe-variable "var")
-  ("p" describe-package "package")
-  ("s" describe-symbol "symbol")
-  ("m" which-key-show-major-mode "major mode")
-  ("M" describe-mode "modes")
-  ("t" describe-theme "theme")
-  ("q" nil "quit" :color blue)
-)
-
-;; Window (my attempt at window management)
-(pretty-hydra-define hydra-window (:color pink :title "⚡⚡ Completion + Windows ⚡⚡" :quit-key "q")
-  (
-    "Splitting"
-    (("o" delete-other-windows "delete other windows")
-    ("v" split-window-right "v-split")
-    ("H" split-window-below "h-split"))
-
-    "Move"
-    (("h" windmove-left "left")
-    ("j" windmove-down "down")
-    ("k" windmove-up "up")
-    ("l" windmove-right "right"))
-
-    "Resizing"
-    (("s" shrink-window "shrink window")
-    ("e" enlarge-window "enlarge window")
-    ("S" shrink-window-horizontally "shrink horizontally")
-    ("E" enlarge-window-horizontally "shrink horizontally")
-    ("B" balance-windows "balance windows"))
-
-    "Zoom"
-    (("+" text-scale-increase "in")
-    ("-" text-scale-decrease "out")
-    ("0" (text-scale-adjust 0) "reset"))
-
-    "Quit"
-    (("K" kill-current-buffer "kill current buffer")
-    ("d" delete-window "delete window")
-    ("D" kill-this-buffer "kill buffer"))
-  )
-)
-
-;; Bookmark (managing bookmarks)
-(defhydra hydra-bookmark (:color blue :columns 2)
-  "📒 Bookmarks 📒"
-  ("j" bookmark-jump "jump")
-  ("l" bookmark-bmenu-list "list")
-  ("s" bookmark-set "set")
-  ("o" bookmark-set-no-overwrite "set no overwrite")
-  ("q" nil "quit" :color blue)
-)
-
-;; Utility (useful commands for me)
-(pretty-hydra-define hydra-utility (:color red :title "😎 Utility 😎" :quit-key "q")
-  (
-    "Debugging"
-    (("b" gdb "gdb")
-    ("d" dap-debug "dap debug")
-    ("i" dap-debug-edit-template "debug template"))
-
-    "Modes"
-    (("u" auto-fill-mode "auto-fill mode")
-    ("W" web-mode "web mode")
-    ("X" rjsx-mode "rjsx mode")
-    ("J" js-mode "js mode"))
-
-    "Personal"
-    (("m" goto-MarinMacs "goto config")
-    ("s" set-fill-column "set-fill-column")
-    ("R" restart-emacs "restart Emacs")
-    ("t" neotree-toggle "file tree" :color blue)
-    ("e" eval-buffer "eval buffer")
-    ("c" compile "compile"))
-  )
-)
-
-;; Launcher (launch stuff)
-(defhydra hydra-launcher (:color red :columns 2)
-  " Launch "
-  ("h" man "man")
-  ("g" (browse-url "https://www.google.com/") "Google")
-  ("G" (browse-url "https://github.com/marinov98") "GitHub")
-  ("n" (browse-url "https://www.netflix.com/") "Netflix")
-  ("y" (browse-url "https://www.youtube.com/") "YouTube")
-  ("m" (browse-url "https://www.messenger.com/") "Messenger")
-  ("s" eshell "shell")
-  ("a" ansi-term "ansi-term")
-  ("q" nil "quit")
-)
-
-
-(mpm/leader-keys
-     "w" '(hydra-window/body :wk "Window Hydra")
-     "v" '(hydra-writing/body :wk "Writing Hydra")
-     "e m" '(hydra-bookmark/body :which-key "Bookmark Hydra")
-     "u" '(hydra-utility/body :wk "Utility Hydra")
-     "?" '(hydra-describe/body :wk "Describe Hydra")
-     "c l" '(hydra-launcher/body :wk "Launcher Hydra")
 )
 
 (provide 'mpm-core)

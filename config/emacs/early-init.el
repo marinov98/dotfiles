@@ -16,12 +16,11 @@
 ;;; Code:
 
 ;; add all our components to the load path
-(message "Adding config directory to load path...")
-(add-to-list 'load-path (expand-file-name "mpm-config" user-emacs-directory))
+(message "Adding mpmacs dirs/subdirs to load path...")
+(let ((default-directory  (concat user-emacs-directory "mpmacs/")))
+  (normal-top-level-add-subdirs-to-load-path))
 
-(message "Adding startup config and custom library...")
-(require 'startup-config)
-(require 'mpm-lib)
+(require 'mpm-custom)
 
 
 (add-hook 'after-init-hook #'mpm/clean-after-buffers) ;; comment this variable when debugging
