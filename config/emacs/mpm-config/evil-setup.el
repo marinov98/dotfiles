@@ -18,6 +18,7 @@
     (define-key evil-normal-state-map (kbd "C-/") 'comment-line)
     (define-key evil-visual-state-map (kbd "gc") 'comment-dwim)
     (define-key evil-visual-state-map (kbd "C-/") 'comment-region)
+    (define-key evil-normal-state-map (kbd "-") (lambda () (interactive) (dired nil)))
 )
 
 (use-package evil-collection
