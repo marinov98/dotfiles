@@ -17,7 +17,9 @@ setopt HIST_FIND_NO_DUPS
 
 CASE_SENSITIVE="true"
 
-export TERM="xterm-256color" 
+if [[ "$TERM" != "ghostty" ]]; then
+  export TERM="xterm-256color"
+fi
 
 # vim/nvim option
 export EDITOR=vim # change to nvim if using neovim
