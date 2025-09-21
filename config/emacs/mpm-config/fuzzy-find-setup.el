@@ -45,6 +45,10 @@
      "l i" '(consult-imenu :wk "Imenu")
      "*" '(mpm/grep-under-cursor :wk "Grep under cursor")
   )
+  (mpm/leader-keys
+   :states '(visual)
+   "*" '(mpm/grep-region :wk "Grep region")
+  )
   :custom
   (consult-async-min-input 2)
   :config
@@ -70,6 +74,16 @@
                (message "No symbol or word found under cursor!"))
           )
   )
+
+  (defun mpm/grep-region ()
+    "Grep the currently selected region."
+    (interactive)
+    (if (region-active-p)
+        (let* ((start (region-beginning))
+               (end (region-end))
+               (grep-input (buffer-substring start end)))
+          (consult-ripgrep nil grep-input))
+      (message "No region selected!")))
 )
 
 ;; wgrep combined ripgrep and/or silver searcher makes changing text in multiple places much easier
