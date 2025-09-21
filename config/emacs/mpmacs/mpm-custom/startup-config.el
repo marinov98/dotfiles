@@ -18,7 +18,10 @@
                          ("melpa" . "https://melpa.org/packages/")
 			                   ("org"   . "https://orgmode.org/elpa/")))
 (package-initialize)
-(eval-and-compile (setq use-package-expand-minimally t))
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package)
+  (eval-and-compile (setq use-package-expand-minimally t)))
 
 
 (provide 'startup-config)
