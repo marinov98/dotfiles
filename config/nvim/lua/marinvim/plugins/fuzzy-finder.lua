@@ -25,9 +25,7 @@ return {
           },
           diagnostics = {
             layout = { preset = "ivy" },
-          },
-          grep = { hidden = true },
-          grep_word = { hidden = true }
+          }
         },
         icons = { files = { enabled = false } }
       }
