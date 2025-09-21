@@ -30,7 +30,7 @@
       ("t" org-todo "todo state")
       ("a" org-todo-list "agenda")
       ("l" org-show-todo-tree "show todo tree")
-      ("m" marinov/enter-eval "enter and eval")
+      ("m" mpm/enter-eval "enter and eval")
       ("s" org-edit-special "edit special")
       ("x" org-edit-src-exit "exit special")
       ("g" mpm/goto-org-directory "goto org directory")
