@@ -199,5 +199,6 @@
   "editor.lineNumbers": "relative",
   "errorLens.enabledDiagnosticLevels": ["warning", "info", "error"],
   "editor.minimap.enabled": false,
-  "editor.cursorBlinking": "solid"
+  "editor.cursorBlinking": "solid",
+  "workbench.editor.showTabs": "none"
 }
