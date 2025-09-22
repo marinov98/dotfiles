@@ -1,6 +1,13 @@
 local M = {}
 
--- The function to get the visual selection and return the search string
+--- Gets the currently selected text from a single-line visual selection.
+-- This function first escapes from any active selection, then retrieves the start
+-- and end positions of the last visual selection. It checks to ensure the
+-- selection is on a single line and returns an empty string if not.
+-- The function returns the selected text as a string.
+--
+-- @returns {string} The text from the visual selection, or an empty string if
+--                   the selection is multi-line or no text is selected.
 function M.get_visual_selection()
   vim.api.nvim_feedkeys('\027', 'xt', false)
   local start_pos = vim.fn.getpos("'<")
@@ -23,12 +30,7 @@ function M.get_visual_selection()
     return ""
   end
 
-  local search_string = string.sub(lines[1], start_pos[3], end_pos[3]) or ""
-  if search_string == nil or search_string == "" then
-    print("Empty/nil string from visual selection!")
-  end
-
-  return search_string
+  return string.sub(lines[1], start_pos[3], end_pos[3])
 end
 
 return M
