@@ -27,7 +27,7 @@ return {
             layout = { preset = "ivy" },
           }
         },
-        icons = { files = { enabled = false } }
+        icons = { files = { enabled = true } }
       }
     },
     keys = {
@@ -43,26 +43,36 @@ return {
       -- Grep
       { "<leader>/",         function() Snacks.picker.grep_word({ search = vim.fn.input("Grep > ") }) end, desc = "Grep on user input" },
       { "<leader>*",         function() Snacks.picker.grep_word() end,                                     desc = "Grep word under cursor" },
-      { "<leader><leader>/", function() Snacks.picker.grep() end,                                          desc = "Live Grep" },
+      {
+        "<leader>*",
+        function()
+          Snacks.picker.grep_word({
+            search = require("marinvim.custom.mpm").get_visual_selection()
+          })
+        end,
+        mode = "v",
+        desc = "Grep visual selection"
+      },
+      { "<leader><leader>/", function() Snacks.picker.grep() end,            desc = "Live Grep" },
       -- Git
-      { "<leader><leader>f", function() Snacks.picker.git_files() end,                                     desc = "Find Git Files" },
-      { "<leader>gc",        function() Snacks.picker.git_log() end,                                       desc = "Git Commits(Log)" },
-      { "<leader>gb",        function() Snacks.picker.git_branches() end,                                  desc = "Git Branches" },
-      { "<leader>gt",        function() Snacks.picker.git_status() end,                                    desc = "Git Status" },
-      { "<leader>gh",        function() Snacks.picker.git_stash() end,                                     desc = "Git Stash" },
+      { "<leader><leader>f", function() Snacks.picker.git_files() end,       desc = "Find Git Files" },
+      { "<leader>gc",        function() Snacks.picker.git_log() end,         desc = "Git Commits(Log)" },
+      { "<leader>gb",        function() Snacks.picker.git_branches() end,    desc = "Git Branches" },
+      { "<leader>gt",        function() Snacks.picker.git_status() end,      desc = "Git Status" },
+      { "<leader>gh",        function() Snacks.picker.git_stash() end,       desc = "Git Stash" },
       -- File Tree
-      { "<leader>ut",        function() Snacks.picker.explorer() end,                                      desc = "File Tree Explorer" },
+      { "<leader>ut",        function() Snacks.picker.explorer() end,        desc = "File Tree Explorer" },
       -- Help
-      { "<leader>?t",        function() Snacks.picker.help() end,                                          desc = "Show Help Tags" },
-      { "<leader>?k",        function() Snacks.picker.keymaps() end,                                       desc = "Show Keymaps" },
-      { "<leader>?c",        function() Snacks.picker.commands() end,                                      desc = "Show Commands" },
-      { "<leader>?h",        function() Snacks.picker.command_history() end,                               desc = "Show Command History" },
-      { "<leader>?m",        function() Snacks.picker.man() end,                                           desc = "Show Man Pages" },
-      { "<leader>?j",        function() Snacks.picker.jumps() end,                                         desc = "Show Jump Lists" },
-      { "<leader>?l",        function() Snacks.picker.loclist() end,                                       desc = "Show Location List" },
-      { "<leader>?s",        function() Snacks.picker.search_history() end,                                desc = "Show Search History" },
-      { "<leader>?r",        function() Snacks.picker.registers() end,                                     desc = "Show Registers" },
-      { "<leader>?M",        function() Snacks.picker.marks() end,                                         desc = "Show Marks" },
+      { "<leader>?t",        function() Snacks.picker.help() end,            desc = "Show Help Tags" },
+      { "<leader>?k",        function() Snacks.picker.keymaps() end,         desc = "Show Keymaps" },
+      { "<leader>?c",        function() Snacks.picker.commands() end,        desc = "Show Commands" },
+      { "<leader>?h",        function() Snacks.picker.command_history() end, desc = "Show Command History" },
+      { "<leader>?m",        function() Snacks.picker.man() end,             desc = "Show Man Pages" },
+      { "<leader>?j",        function() Snacks.picker.jumps() end,           desc = "Show Jump Lists" },
+      { "<leader>?l",        function() Snacks.picker.loclist() end,         desc = "Show Location List" },
+      { "<leader>?s",        function() Snacks.picker.search_history() end,  desc = "Show Search History" },
+      { "<leader>?r",        function() Snacks.picker.registers() end,       desc = "Show Registers" },
+      { "<leader>?M",        function() Snacks.picker.marks() end,           desc = "Show Marks" },
     },
   }
 }
