@@ -43,7 +43,7 @@
      "/" '(mpm/grep-on-input :wk "Grep on user input")
      "f" '(consult-fd :wk "Find File")
      "l i" '(consult-imenu :wk "Imenu")
-     "*" '(mpm/grep-under-cursor :wk "Grep under cursor")
+     "*" '(mpm/word-grep-under-cursor :wk "Grep under cursor")
   )
   (mpm/leader-keys
    :states '(visual)
@@ -58,22 +58,20 @@
   (define-key evil-normal-state-map (kbd "gL") 'consult-line-multi)
 
   (defun mpm/grep-on-input ()
-         "Grep based on input first, don't live grep"
-         (interactive)
-         (consult-ripgrep nil (read-string "Grep > "))
+    "Grep based on input first, don't live grep"
+    (interactive)
+    (consult-ripgrep nil (read-string "Grep > "))
   )
 
-  (defun mpm/grep-under-cursor ()
-    "Pass the symbol (or word if not a symbol)
-     under the cursor to grep"
-     (interactive)
-     (let ((grep-input (or (thing-at-point 'symbol)
-                           (thing-at-point 'word))))
-           (if grep-input
-               (consult-ripgrep nil grep-input)
-               (message "No symbol or word found under cursor!"))
-          )
-  )
+  (defun mpm/word-grep-under-cursor ()
+    "Pass the word under the cursor to grep"
+    (interactive)
+    (let ((grep-input (thing-at-point 'word)))
+      (if grep-input
+          (consult-ripgrep nil grep-input)
+        (message "No word found under cursor!"))
+      )
+    )
 
   (defun mpm/grep-region ()
     "Grep the currently selected region."
@@ -85,7 +83,7 @@
           (evil-force-normal-state)
           (consult-ripgrep nil grep-input))
       (message "No region selected!"))
-   )
+    )
 )
 
 ;; wgrep combined ripgrep and/or silver searcher makes changing text in multiple places much easier
@@ -103,7 +101,7 @@
   )
 )
 
-;; Managing Projects is great with the right project tools
+
 (use-package project
   :general-config
   (mpm/leader-keys
@@ -122,19 +120,41 @@
                                    (when (and (not (file-exists-p project-list-target-file)) (file-directory-p mpm-projects-dir))
                                      (message (format "'%s' file not found, will attempt to discover projects based on '%s'" project-list-target-file mpm-projects-dir))
                                      (project-remember-projects-under mpm-projects-dir)))))
+
+  ;; utilize fuzzy finder for more consistency
+  (when (package-installed-p 'consult)
+    (advice-add #'project-find-regexp :override #'consult-ripgrep)
+  )
+
+  (defun mpm/symbol-grep-under-cursor ()
+    "Grep Symbol under cursor"
+     (interactive)
+     (let ((grep-input (thing-at-point 'symbol)))
+           (if grep-input
+               (if (package-installed-p 'consult)
+                 ;; usually advice-add takes care of it but not when the number of function arguments are different
+                 (project-find-regexp nil grep-input)
+                 (project-find-regexp grep-input)
+               )
+               (message "No symbol found under cursor!"))
+     )
+  )
+
+
   (pretty-hydra-define hydra-project (:color red :title "🚀 Project 🚀" :quit-key "q")
     (
       "Finding"
       (("f" project-find-file "find file")
       ("d" project-find-dir "find-dir"))
 
-      "Search/Replace" ;; search and replace
-      (("/" project-find-regexp "grep project")
-      ("s" project-search "search project")
+      "Search/Replace"
+      (("/" project-find-regexp "live grep")
+      ("*" mpm/symbol-grep-under-cursor "grep under cursor")
+      ("s" project-search "search")
       ("r" project-query-replace-regexp "replace"))
 
       "Switch"
-      (("l" project-switch-project "list/switch project(s)")
+      (("l" project-switch-project "list/switch project")
       ("b" project-switch-to-buffer "switch buffer"))
 
       "Finish"
