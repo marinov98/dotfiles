@@ -82,8 +82,10 @@
         (let* ((start (region-beginning))
                (end (region-end))
                (grep-input (buffer-substring start end)))
+          (evil-force-normal-state)
           (consult-ripgrep nil grep-input))
-      (message "No region selected!")))
+      (message "No region selected!"))
+   )
 )
 
 ;; wgrep combined ripgrep and/or silver searcher makes changing text in multiple places much easier
