@@ -54,7 +54,7 @@
 (when (>= emacs-major-version 26)
   (use-package display-line-numbers
       :custom
-      (display-line-numbers-type 'relative) ;; relative line numbers help you see how far you need to jump to get where you want to
+      (display-line-numbers-type 'relative)
       (display-line-numbers-current-absolute t)
       (display-line-numbers-width 2)
       (display-line-numbers-widen t)
