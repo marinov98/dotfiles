@@ -27,7 +27,7 @@ return {
             layout = { preset = "ivy" },
           }
         },
-        icons = { files = { enabled = true } }
+        icons = { files = { enabled = false } }
       }
     },
     keys = {
