@@ -175,6 +175,27 @@
     (neo-theme (if (display-graphic-p) 'icons 'arrow))
 )
 
+(use-package yasnippet
+    :ensure t
+    :hook (after-init . yas-global-mode)
+    :diminish yas-minor-mode
+    :config
+    ;; nullify default tab behavior (tab complete ONLY with autocomplete)
+    (define-key yas-minor-mode-map [(tab)] nil)
+    (define-key yas-minor-mode-map (kbd "<tab>") nil)
+    (define-key yas-minor-mode-map (kbd "TAB") nil)
+    ;; add new behavior
+    (evil-define-key 'insert yas-minor-mode-map (kbd "C-;") 'yas-expand)
+    (evil-define-key 'insert yas-minor-mode-map (kbd "<backtab>") 'yas-expand)
+)
+
+(use-package yasnippet-snippets
+    :after yasnippet
+    :ensure t
+    :config
+    (yas-reload-all)
+)
+
 (use-package dashboard
     :ensure t
     :custom

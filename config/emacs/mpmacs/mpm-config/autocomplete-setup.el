@@ -4,8 +4,6 @@
 ;; Setup for Completion backend that will provide autocomplete
 
 ;;; Code:
-
-
 (use-package corfu
   :ensure t
   :hook (after-init . global-corfu-mode)
@@ -37,6 +35,26 @@
   )
   (add-hook 'lsp-completion-mode-hook #'mpm/corfu-setup-lsp)
   (setq lsp-completion-provider :none) ; use corfu instead of lsp-completions
+)
+
+(use-package cape
+  :ensure t
+  :after corfu
+  :config
+  (add-to-list 'completion-at-point-functions #'cape-file)
+)
+
+(use-package yasnippet-capf
+  :ensure t
+  :after cape
+  :init
+  (defun mpm/add-yasnippet-capf ()
+    (add-to-list 'completion-at-point-functions #'yasnippet-capf))
+  :hook
+  (
+   (emacs-lisp-mode . mpm/add-yasnippet-capf)
+   (org-mode . mpm/add-yasnippet-capf)
+  )
 )
 
 (provide 'autocomplete-setup)
