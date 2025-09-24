@@ -1,36 +1,38 @@
 local M = {}
 
---- Gets the currently selected text from a single-line visual selection.
--- This function first escapes from any active selection, then retrieves the start
--- and end positions of the last visual selection. It checks to ensure the
--- selection is on a single line and returns an empty string if not.
--- The function returns the selected text as a string.
---
--- @returns {string} The text from the visual selection, or an empty string if
---                   the selection is multi-line or no text is selected.
+--- Closes all loaded buffers except for the current one.
+--- Iterates through all buffers, checks if they are loaded and not the current
+--- buffer, and then deletes them. It prints a message indicating how many
+--- buffers were closed.
+--- This function will not close buffers that are not loaded.
+--- @param opts table
+--- @return nil
+function M.close_other_buffers(opts)
+  opts = opts or {}
+  local curr_buf = vim.api.nvim_get_current_buf()
+  local bufs = vim.api.nvim_list_bufs()
+  for _, buf in ipairs(bufs) do
+    if vim.api.nvim_buf_is_loaded(buf) and buf ~= curr_buf then
+      vim.api.nvim_buf_delete(buf, opts)
+    end
+  end
+  print(#bufs - #vim.api.nvim_list_bufs(), "buffer(s) deleted")
+end
+
+--- A Lua function to yank the current visual selection, store it in register 'c',
+--- and then return the yanked text. The 'c' register is cleared after the
+--- text is retrieved.
+--- @return string
 function M.get_visual_selection()
-  vim.api.nvim_feedkeys('\027', 'xt', false)
-  local start_pos = vim.fn.getpos("'<")
-  local end_pos = vim.fn.getpos("'>")
+    -- Execute a normal mode command to yank the selection into register 'c'.
+    -- We can assume the function is always called from visual mode.
+    vim.cmd('normal! "cy')
 
-  local lines = vim.api.nvim_buf_get_lines(
-    0,
-    start_pos[2] - 1,
-    end_pos[2],
-    false
-  )
+    local yanked_text = vim.fn.getreg('c')
 
-  if not lines or #lines == 0 then
-    return ""
-  end
+    vim.fn.setreg('c', '')
 
-  -- The multi-line check to ensure it's a single-line selection
-  if start_pos[2] ~= end_pos[2] then
-    vim.notify("Multi-line selection not supported", vim.log.levels.INFO)
-    return ""
-  end
-
-  return string.sub(lines[1], start_pos[3], end_pos[3])
+    return yanked_text
 end
 
 return M
