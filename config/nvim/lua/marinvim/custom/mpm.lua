@@ -26,11 +26,12 @@ end
 function M.get_visual_selection()
     -- Execute a normal mode command to yank the selection into register 'c'.
     -- We can assume the function is always called from visual mode.
+    local old_text = vim.fn.getreg('c')
     vim.cmd('normal! "cy')
 
     local yanked_text = vim.fn.getreg('c')
 
-    vim.fn.setreg('c', '')
+    vim.fn.setreg('c', old_text)
 
     return yanked_text
 end
