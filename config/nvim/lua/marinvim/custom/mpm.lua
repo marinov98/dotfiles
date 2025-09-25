@@ -20,20 +20,20 @@ function M.close_other_buffers(opts)
 end
 
 --- A Lua function to yank the current visual selection, store it in register 'c',
---- and then return the yanked text. The 'c' register is cleared after the
+--- and then return the yanked text. The 'c' register is set to the previous value after the
 --- text is retrieved.
 --- @return string
 function M.get_visual_selection()
-    -- Execute a normal mode command to yank the selection into register 'c'.
-    -- We can assume the function is always called from visual mode.
-    local old_text = vim.fn.getreg('c')
-    vim.cmd('normal! "cy')
+  -- Execute a normal mode command to yank the selection into register 'c'.
+  -- We can assume the function is always called from visual mode.
+  local old_text = vim.fn.getreg('c')
+  vim.cmd('normal! "cy')
 
-    local yanked_text = vim.fn.getreg('c')
+  local yanked_text = vim.fn.getreg('c')
 
-    vim.fn.setreg('c', old_text)
+  vim.fn.setreg('c', old_text)
 
-    return yanked_text
+  return yanked_text
 end
 
 return M
