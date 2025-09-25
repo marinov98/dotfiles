@@ -25,27 +25,21 @@ return {
 
       conform.setup({
         formatters_by_ft = {
-          python = function(bufnr)
-            if require("conform").get_formatter_info("ruff_format", bufnr).available then
-              return { "ruff_format" }
-            else
-              return { "black" }
-            end
-          end,
+          python = { "ruff", "black" },
           lua = { "stylua" },
-          svelte = { { "prettierd", "prettier" } },
-          javascript = { { "prettierd", "prettier" } },
-          typescript = { { "prettierd", "prettier" } },
-          javascriptreact = { { "prettierd", "prettier" } },
-          typescriptreact = { { "prettierd", "prettier" } },
-          json = { { "prettierd", "prettier" } },
-          graphql = { { "prettierd", "prettier" } },
+          svelte = { "prettier", "prettierd" },
+          javascript = { "prettier", "prettierd" },
+          typescript = { "prettier", "prettierd" },
+          javascriptreact = { "prettier", "prettierd" },
+          typescriptreact = { "prettier", "prettierd" },
+          json = { "prettier", "prettierd", lsp_format = "fallback" },
+          graphql = { "prettier", "prettierd" },
           java = { "google-java-format" },
-          markdown = { { "prettierd", "prettier" } },
-          html = { { "prettierd", "prettier" } },
-          css = { { "prettierd", "prettier" } },
-          scss = { { "prettierd", "prettier" } },
-          rust = { "rustfmt" },
+          markdown = { "prettier", "prettierd" },
+          html = { "prettier", "prettierd" },
+          css = { "prettier", "prettierd" },
+          scss = { "prettier", "prettierd" },
+          rust = { "rustfmt", lsp_format = "fallback" },
         },
       })
       vim.keymap.set({ "n", "v" }, "<leader>lf", function()
