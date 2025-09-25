@@ -62,6 +62,7 @@
         "l o" '(lsp-organize-imports :wk "LSP Organize Imports")
        )
        :custom
+       (lsp-enable-xref t)
        (lsp-auto-guess-root nil)
        (lsp-log-io nil)
        (lsp-idle-delay 0.5)
@@ -75,13 +76,13 @@
        (lsp-prefer-flymake nil)
        (lsp-io-messages-max nil)
        :config
+       (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
+       (evil-define-key 'normal 'global "grr" 'xref-find-references)
        (add-hook 'after-init-hook
-                   #'(lambda () ;; in case I disable lsp-ui remap g prefix keys to regular lsp
-                       (unless (package-installed-p 'lsp-ui)
-                         (define-key evil-normal-state-map (kbd "gd") 'lsp-find-definition)
-                         (define-key evil-normal-state-map (kbd "gri") 'lsp-goto-implementation)
-                         (define-key evil-normal-state-map (kbd "grr") 'lsp-find-references)
-                        )
+                 #'(lambda () ;; in case I disable lsp-ui remap g prefix keys to regular lsp
+                     (unless (package-installed-p 'lsp-ui)
+                       (define-key evil-normal-state-map (kbd "gri") 'lsp-goto-implementation)
+                       )
                      ))
 )
 
@@ -91,9 +92,8 @@
        :hook (lsp-mode . lsp-ui-mode)
        :bind
        (:map evil-normal-state-map
-         ("gd" . lsp-ui-peek-find-definitions)
          ("gri" . lsp-ui-peek-find-implementation)
-         ("grr" . lsp-ui-peek-find-references))
+       )
        (:map lsp-ui-peek-mode-map
          ("C-n" . lsp-ui-peek--select-next)
          ("C-p" . lsp-ui-peek--select-prev))
@@ -118,6 +118,9 @@
         "l w" '(:ignore t :wk "LSP Workspace")
         "l w d" '(lsp-ui-find-workspace-symbol :wk "Document Workspace Symbols")
        )
+       :config
+       (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+       (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
 )
 
 (use-package lsp-pyright

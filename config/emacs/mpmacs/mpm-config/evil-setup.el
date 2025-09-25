@@ -14,6 +14,7 @@
     (setq evil-undo-system 'undo-redo)
     :config
     (evil-mode 1)
+    (evil-define-key 'normal 'global "gd" 'xref-find-definitions)
     (define-key evil-normal-state-map (kbd "gcc") 'comment-line)
     (define-key evil-normal-state-map (kbd "C-/") 'comment-line)
     (define-key evil-visual-state-map (kbd "gc") 'comment-dwim)
