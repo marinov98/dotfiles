@@ -34,6 +34,10 @@
       "commands": ["editor.action.goToTypeDefinition"]
     },
     {
+      "before": ["g", "r", "h"],
+      "commands": ["editor.action.triggerParameterHints"]
+    },
+    {
       "before": ["]", "d"],
       "commands": ["editor.action.marker.next"]
     },
@@ -46,6 +50,10 @@
     {
       "before": ["<leader>", "n"],
       "commands": [":nohl"]
+    },
+    {
+      "before": ["<leader>", "k"],
+      "commands": [":bd"]
     },
     {
       "before": ["<leader>", "q"],
@@ -80,6 +88,10 @@
       "commands": ["editor.action.rename"]
     },
     {
+      "before": ["g", "r", "a"],
+      "commands": ["editor.action.codeAction"]
+    },
+    {
       "before": ["<leader>", "l", "f"],
       "commands": ["editor.action.formatDocument"]
     },
@@ -96,12 +108,24 @@
       "commands": ["workbench.action.showAllSymbols"]
     },
     {
+      "before": ["<leader>", "b", "l"],
+      "commands": ["workbench.action.showAllEditors"]
+    },
+    {
       "before": ["<leader>", "d", "l"],
       "commands": ["workbench.actions.view.problems"]
     },
     {
       "before": ["<leader>", "l", "g"],
       "commands": ["editor.action.showHover"]
+    },
+    {
+      "before": ["<leader>", "<leader>", "k"],
+      "commands": ["workbench.action.closeOtherEditors"]
+    },
+    {
+      "before": ["<leader>", "<leader>", "K"],
+      "commands": ["workbench.action.closeAllEditors"]
     },
     {
       "before": ["<leader>", "<leader>", "l"],
@@ -113,15 +137,25 @@
     },
     {
       "before": ["<leader>", "/"],
-      "commands": ["workbench.action.findInFiles"]
+      "commands": ["workbench.action.findInFiles", "extension.vim_escape"]
+    },
+    {
+      "before": ["<leader>", "*"],
+      "commands": [
+        "editor.action.addSelectionToNextFindMatch",
+        "editor.action.clipboardCopyAction",
+        "workbench.action.findInFiles",
+        "editor.action.clipboardPasteAction",
+        "extension.vim_escape"
+      ]
+    },
+    {
+      "before": ["<leader>", "g", "g"],
+      "commands": ["workbench.view.scm"]
     },
     {
       "before": ["<leader>", "e", "x"],
       "commands": ["workbench.view.extensions"]
-    },
-    {
-      "before": ["<leader>", "e", "g"],
-      "commands": ["workbench.view.scm"]
     },
     {
       "before": ["<leader>", "e", "c"],
@@ -130,14 +164,6 @@
     {
       "before": ["<leader>", "a"],
       "commands": ["extension.vim_ctrl+^"]
-    },
-    {
-      "before": ["<leader>", "t", "j"],
-      "commands": [":tabnext"]
-    },
-    {
-      "before": ["<leader>", "t", "k"],
-      "commands": [":tabprev"]
     },
     {
       "before": ["-"],
@@ -152,8 +178,43 @@
       "commands": ["workbench.action.openGlobalKeybindingsFile"]
     },
     {
+      "before": ["<leader>", "u", "t"],
+      "commands": ["workbench.action.toggleSidebarVisibility"]
+    },
+    {
       "before": ["<leader>", "m"],
       "commands": ["workbench.action.showCommands"]
+    },
+    {
+      "before": ["<leader>", "c", "m", "o"],
+      "commands": ["editor.action.insertCursorBelow"]
+    },
+    {
+      "before": ["<leader>", "c", "m", "O"],
+      "commands": ["editor.action.insertCursorAbove"]
+    },
+    {
+      "before": ["<leader>", "c", "m", "a"],
+      "commands": ["editor.action.selectHighlights"]
+    }
+  ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<leader>", "*"],
+      "commands": [
+        "editor.action.clipboardCopyAction",
+        "workbench.action.findInFiles",
+        "editor.action.clipboardPasteAction",
+        "extension.vim_escape"
+      ]
+    },
+    {
+      "before": ["<leader>", "c", "m", "n"],
+      "commands": ["editor.action.addSelectionToNextFindMatch"]
+    },
+    {
+      "before": ["<leader>", "c", "m", "a"],
+      "commands": ["editor.action.insertCursorAtEndOfEachLineSelected"]
     }
   ],
   "java.codeGeneration.toString.codeStyle": "STRING_BUILDER",
