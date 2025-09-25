@@ -31,6 +31,19 @@
         "c f M" '(flycheck-manual :wk "Flycheck manual")
         "c f v" '(flycheck-verify-setup :wk "Flycheck verify setup")
      )
+     ;; :config
+     ;; (defun mpm/enable-flycheck ()
+     ;;   "Enables Flycheck in the current buffer."
+     ;;   (flycheck-mode 1))
+
+     ;; (defun mpm/disable-flycheck ()
+     ;;   "Disables Flycheck in the current buffer."
+     ;;   (flycheck-mode -1))
+
+     ;; ;; EXPERIMENTAL: trigger flycheck only during normal/visual mode
+     ;; (add-hook 'evil-insert-state-entry-hook #'mpm/disable-flycheck)
+     ;; (add-hook 'evil-normal-state-entry-hook #'mpm/enable-flycheck)
+     ;; (add-hook 'evil-visual-state-entry-hook #'mpm/enable-flycheck)
 )
 
 (use-package lsp-mode
