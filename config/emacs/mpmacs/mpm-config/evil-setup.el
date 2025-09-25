@@ -14,7 +14,7 @@
     (setq evil-undo-system 'undo-redo)
     :config
     (evil-mode 1)
-    (evil-define-key 'normal 'global "gd" 'xref-find-definitions)
+    (define-key evil-motion-state-map "gd" 'xref-find-definitions)
     (define-key evil-normal-state-map (kbd "gcc") 'comment-line)
     (define-key evil-normal-state-map (kbd "C-/") 'comment-line)
     (define-key evil-visual-state-map (kbd "gc") 'comment-dwim)
@@ -30,8 +30,10 @@
     (evil-collection-company-use-tng nil)
     (evil-collection-setup-debugger-keys nil)
     (evil-collection-disabled-modules '(corfu))
+    (evil-collection-want-find-usages-bindings nil)
     :config
     (evil-collection-init)
+    (evil-global-set-key 'normal "grr" 'xref-find-references)
 )
 
 (use-package general

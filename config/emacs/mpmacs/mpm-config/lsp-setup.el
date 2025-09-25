@@ -77,7 +77,6 @@
        (lsp-io-messages-max nil)
        :config
        (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
-       (evil-define-key 'normal 'global "grr" 'xref-find-references)
        (add-hook 'after-init-hook
                  #'(lambda () ;; in case I disable lsp-ui remap g prefix keys to regular lsp
                      (unless (package-installed-p 'lsp-ui)
