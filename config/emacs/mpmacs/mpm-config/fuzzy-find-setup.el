@@ -140,6 +140,19 @@
      )
   )
 
+  (defun mpm/kill-other-project-buffers ()
+    "Kill all project buffers except current one"
+    (interactive)
+    (when (yes-or-no-p "Are you sure you want to kill other project buffers? ")
+      (let* ((current-buffer (current-buffer))
+             (project-buffers (project-buffers (project-current))))
+        (cl-loop for buffer in project-buffers
+                 do
+                 (unless (eq buffer current-buffer)
+                   (kill-buffer buffer)))))
+   )
+
+
 
   (pretty-hydra-define hydra-project (:color red :title "🚀 Project 🚀" :quit-key "q")
     (
@@ -159,7 +172,8 @@
 
       "Finish"
       (("c" project-compile "compile")
-      ("k" project-kill-buffers "kill project buffers"))
+      ("k" mpm/kill-other-project-buffers "kill other project buffers")
+      ("K" project-kill-buffers "kill project buffers"))
     )
   )
 
