@@ -62,10 +62,8 @@
                                       )
                                    (cond
                                     (target-fd-command
-                                         (message "find command will use fd")
                                          (setq consult-find-command (concat (if (executable-find "fdfind" 'remote) "fdfind" "fd") target-fd-args)))
                                     (target-rg-command
-                                         (message "find command will use rg")
                                          (setq consult-find-command (concat "rg" target-rg-args)))
                                     (t nil))
                                 )
