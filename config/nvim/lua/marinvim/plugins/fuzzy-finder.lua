@@ -32,7 +32,6 @@ return {
     },
     keys = {
       -- Finding, Listing
-      -- { "<leader>f",         function() Snacks.picker.files({ cmd = "rg" }) end,                         desc = "Find Files" },
       { "<leader>f",         function() Snacks.picker.files({ cmd = "fd" }) end,                           desc = "Find Files" },
       { "<leader>um",        function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end,       desc = "Find Config File" },
       { "<leader>ud",        function() Snacks.picker.files({ cwd = "~/.config" }) end,                    desc = "Find Dotfiles" },
@@ -42,20 +41,18 @@ return {
       { "<leader><leader>l", function() Snacks.picker.projects() end,                                      desc = "List Projects" },
       -- Grep
       { "gl",                function() Snacks.picker.lines({ layout = { preset = "ivy" } }) end,          desc = "Goto line" },
+      { "gL",                function() Snacks.picker.grep_buffers({ layout = { preset = "ivy" } }) end,   desc = "Goto line" },
       { "<leader>/",         function() Snacks.picker.grep_word({ search = vim.fn.input("Grep > ") }) end, desc = "Grep on user input" },
-      { "<leader>*",         function() Snacks.picker.grep_word() end,                                     desc = "Grep word under cursor" },
+      { "<leader><leader>/", function() Snacks.picker.grep() end,                                          desc = "Live Grep" },
       {
         "<leader>*",
         function()
-          Snacks.picker.grep_word({
-            search = require("marinvim.custom.mpm").get_visual_selection()
-          })
+          Snacks.picker.grep_word()
         end,
-        mode = "v",
-        desc = "Grep visual selection"
+        mode = { "n", "x" },
+        desc = "Grep word under cursor/visual"
       },
       { "<leader><leader>*", function() Snacks.picker.grep_word({ search = vim.fn.expand("<cWORD>") }) end, desc = "Grep WORD under cursor" },
-      { "<leader><leader>/", function() Snacks.picker.grep() end,                                           desc = "Live Grep" },
       -- Git
       { "<leader><leader>f", function() Snacks.picker.git_files() end,                                      desc = "Find Git Files" },
       { "<leader>gc",        function() Snacks.picker.git_log() end,                                        desc = "Git Commits(Log)" },
