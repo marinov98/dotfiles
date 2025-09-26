@@ -53,6 +53,23 @@
   (consult-async-min-input 2)
   :config
   (add-to-list 'consult-fd-args "--hidden --exclude .git" t)
+  ;; backup for consult-find
+  (add-hook 'after-init-hook #'(lambda ()
+                                 (let ((target-fd-command (or (executable-find "fdfind" 'remote) (executable-find "fd" 'remote)))
+                                       (target-rg-command (executable-find "rg" 'remote))
+                                       (target-fd-args " -t f --color=never --full-path --hidden --exclude .git")
+                                       (target-rg-args " --files --color=never --hidden --follow -g '!{.git}'")
+                                      )
+                                   (cond
+                                    (target-fd-command
+                                         (message "find command will use fd")
+                                         (setq consult-find-command (concat (if (executable-find "fdfind" 'remote) "fdfind" "fd") target-fd-args)))
+                                    (target-rg-command
+                                         (message "find command will use rg")
+                                         (setq consult-find-command (concat "rg" target-rg-args)))
+                                    (t nil))
+                                )
+                              ))
 
   (define-key evil-normal-state-map (kbd "gl") 'consult-line)
   (define-key evil-normal-state-map (kbd "gL") 'consult-line-multi)
