@@ -41,6 +41,7 @@ return {
       { "<leader>dl",        function() Snacks.picker.diagnostics() end,                                   desc = "List Diagnostics" },
       { "<leader><leader>l", function() Snacks.picker.projects() end,                                      desc = "List Projects" },
       -- Grep
+      { "gl",                function() Snacks.picker.lines({ layout = { preset = "ivy" } }) end,          desc = "Goto line" },
       { "<leader>/",         function() Snacks.picker.grep_word({ search = vim.fn.input("Grep > ") }) end, desc = "Grep on user input" },
       { "<leader>*",         function() Snacks.picker.grep_word() end,                                     desc = "Grep word under cursor" },
       {
