@@ -1,5 +1,5 @@
 #+ATTR_HTML: :style margin-left: auto; margin-right: auto;
-[[./img/emacs-homescreen-2024.png]]
+[[./img/emacs_homescreen_2025.png]]
 
 * Changelog
 ** 09/21/2025
