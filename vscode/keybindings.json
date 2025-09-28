@@ -82,6 +82,42 @@
     "command": "search.action.focusSearchFromResults",
     "when": "searchViewletFocus && !searchInputBoxFocus"
   },
+  // Problems
+  {
+    "key": "ctrl+n",
+    "command": "list.focusDown",
+    "when": "problemFocus"
+  },
+  {
+    "key": "ctrl+p",
+    "command": "list.focusUp",
+    "when": "problemFocus"
+  },
+  {
+    "key": "/",
+    "command": "problems.action.focusFilter",
+    "when": "problemFocus"
+  },
+  {
+    "key": "ctrl+n",
+    "command": "list.focusDown",
+    "when": "problemsFilterFocus"
+  },
+  {
+    "key": "ctrl+p",
+    "command": "list.focusUp",
+    "when": "problemsFilterFocus"
+  },
+  {
+    "key": "ctrl+[",
+    "command": "workbench.actions.view.toggleProblems",
+    "when": "problemsFilterFocus"
+  },
+  {
+    "key": "escape",
+    "command": "workbench.actions.view.toggleProblems",
+    "when": "problemsFilterFocus"
+  },
   // QuickOpen
   {
     "key": "ctrl+n",
