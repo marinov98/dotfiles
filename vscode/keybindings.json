@@ -69,18 +69,23 @@
   },
   {
     "key": "ctrl+p",
-    "command": "list.focusUp",
-    "when": "searchViewletFocus && !inputFocus"
+    "command": "list.focusup",
+    "when": "searchviewletfocus && !inputfocus"
+  },
+  {
+    "key": "ctrl+p",
+    "command": "search.action.focusSearchFromResults",
+    "when": "replaceInputBoxFocus"
   },
   {
     "key": "ctrl+r",
     "command": "workbench.action.replaceInFiles",
-    "when": "searchInputBoxFocus"
+    "when": "searchInputBoxFocus || searchViewletFocus"
   },
   {
     "key": "/",
     "command": "search.action.focusSearchFromResults",
-    "when": "searchViewletFocus && !searchInputBoxFocus"
+    "when": "searchViewletFocus && !inputFocus"
   },
   // Problems
   {
@@ -96,7 +101,7 @@
   {
     "key": "/",
     "command": "problems.action.focusFilter",
-    "when": "problemFocus"
+    "when": "problemFocus && !inputFocus"
   },
   {
     "key": "ctrl+n",
