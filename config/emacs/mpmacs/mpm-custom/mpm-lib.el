@@ -84,7 +84,13 @@
     "Get visually selected text."
     (interactive)
     (cond
-     ((region-active-p) (buffer-substring (region-beginning) (region-end)))
+     ((region-active-p)
+      (progn
+        (let ((target-begin (region-beginning))
+              (target-end (region-end)))
+          (when (boundp 'evil-mode)
+            (evil-force-normal-state))
+          (buffer-substring target-begin target-end))))
      (t
       (progn
         (when (boundp 'evil-mode) (evil-force-normal-state))

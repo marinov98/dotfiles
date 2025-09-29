@@ -43,7 +43,7 @@
      "/" '(mpm/grep-on-input :wk "Grep on user input")
      "f" '(consult-fd :wk "Find File")
      "l i" '(consult-imenu :wk "Imenu")
-     "*" '(mpm/word-grep-under-cursor :wk "Grep under cursor")
+     "*" '(mpm/word-grep-under-cursor :wk "Grep word")
   )
   (mpm/leader-keys
    :states '(visual)
@@ -90,10 +90,7 @@
   (defun mpm/grep-region ()
     "Grep the currently selected region."
     (interactive)
-    (let ((grep-input (mpm/get-visual-selection)))
-      (evil-force-normal-state)
-      (consult-ripgrep nil grep-input)
-    )
+    (consult-ripgrep nil (mpm/get-visual-selection))
   )
 )
 
@@ -173,7 +170,7 @@
 
       "Search/Replace"
       (("/" project-find-regexp "live grep")
-      ("*" mpm/symbol-grep-under-cursor "grep under cursor")
+      ("*" mpm/symbol-grep-under-cursor "grep symbol")
       ("s" project-search "search")
       ("r" project-query-replace-regexp "replace"))
 
