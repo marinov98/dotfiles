@@ -85,7 +85,10 @@
     (interactive)
     (cond
      ((region-active-p) (buffer-substring (region-beginning) (region-end)))
-     (t (error "No region selected/found!"))
+     (t
+      (progn
+        (when (boundp 'evil-mode) (evil-force-normal-state))
+        (error "No region selected/found!")))
     )
 )
 
