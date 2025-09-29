@@ -129,7 +129,9 @@
   :custom
   (exec-path-from-shell-arguments '("-l" "-c"))
   :config
-  (exec-path-from-shell-initialize))
+  (when (or (memq window-system '(mac ns x)) (daemonp))
+    (exec-path-from-shell-initialize))
+)
 
 (use-package eshell
      :ensure t
