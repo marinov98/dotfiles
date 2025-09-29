@@ -1,4 +1,4 @@
-;; mpm-vars.el --- Personal definitions -*- lexical-binding: t; -*-
+;; mpm-lib.el --- Personal definitions -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;; defining variables and functions that can be reused is a great way to keep your Emacs config clean and scalable
