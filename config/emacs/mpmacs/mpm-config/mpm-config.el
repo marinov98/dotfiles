@@ -9,6 +9,7 @@
 ;; load our custom components except startup (used in early-init.el)
 (message "Loading MPM config...")
 (require 'evil-setup)
+(require 'mpm-preferences)
 (require 'themes-setup)
 (require 'mpm-core)
 (require 'hydra-setup)

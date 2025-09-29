@@ -9,7 +9,13 @@
 (setq backward-delete-char-untabify-method 'hungry)    ;; backspaces entire tab instead of one space at a time
 (setq compilation-scroll-output 'first-error)          ;; compile scroll location
 
-(setq default-frame-alist '((font . "JetBrainsMono NF Regular 12"))) ;; set font and font size
+;; set font and font size
+(let ((desired-font (mpm/get-font)))
+  (when desired-font
+    (add-to-list 'default-frame-alist (cons 'font desired-font))
+  )
+)
+
 (setq visible-bell t)                                    ;; disable end of buffer sounds
 (setq inhibit-startup-screen t)                          ;; disable startup screen
 (when (and (<= 29 emacs-major-version) (not (string-equal system-type "windows-nt")))

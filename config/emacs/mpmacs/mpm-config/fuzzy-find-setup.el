@@ -56,8 +56,7 @@
   ;; backup for consult-find
   (add-hook 'after-init-hook #'(lambda ()
                                  (let ((target-fd-command (or (executable-find "fdfind" 'remote) (executable-find "fd" 'remote)))
-                                       (target-rg-command (executable-find "rg" 'remote))
-                                       (target-fd-args " -t f --color=never --full-path --hidden --exclude .git")
+                                       (target-fd-args " -t f -H -E .git .")
                                        (target-rg-args " --files --color=never --hidden --follow -g '!{.git}'")
                                       )
                                    (cond
@@ -91,14 +90,11 @@
   (defun mpm/grep-region ()
     "Grep the currently selected region."
     (interactive)
-    (if (region-active-p)
-        (let* ((start (region-beginning))
-               (end (region-end))
-               (grep-input (buffer-substring start end)))
-          (evil-force-normal-state)
-          (consult-ripgrep nil grep-input))
-      (message "No region selected!"))
+    (let ((grep-input (mpm/get-visual-selection)))
+      (evil-force-normal-state)
+      (consult-ripgrep nil grep-input)
     )
+  )
 )
 
 ;; wgrep combined ripgrep and/or silver searcher makes changing text in multiple places much easier

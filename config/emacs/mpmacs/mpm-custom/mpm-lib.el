@@ -7,6 +7,9 @@
 (defconst mpm-config-file-location (concat user-emacs-directory "init.el")
   "Configuration file location.")
 
+(defconst mpm-default-font "Fira Code"
+  "Default font when all else fails.")
+
 (defconst mpm-projects-dir "~/projects"
   "Projects directory.")
 
@@ -16,11 +19,17 @@
 (defconst mpm-projects-override-file ".project-override.el"
   "File to override in monorepos for project.el.")
 
-(defvar mpm-img-dir (concat user-emacs-directory "img")
-  "Images directory, mainly for dashboard package.")
-
 (defconst mpm-dashboard-banner-img "targetBanner.png"
   "Dashboard image.")
+
+(defvar mpm-target-font-size "12"
+  "Desired font-size.")
+
+(defvar mpm-target-font "JetBrainsMono Nerd Font"
+  "The desired font for the editor.")
+
+(defvar mpm-img-dir (concat user-emacs-directory "img")
+  "Images directory, mainly for dashboard package.")
 
 (defvar mpm-org-dir (concat mpm-projects-dir "/org")
   "Org directory.")
@@ -29,6 +38,9 @@
   "Jump to configuration file."
   (interactive)
   (find-file mpm-config-file-location))
+
+(defun mpm/font-exists-p (font)
+  "Check if the FONT exists." (and (display-graphic-p) (not (null (x-list-fonts font)))))
 
 (defun mpm/set-memory ()
   "Set memory usage settings after start up."
@@ -44,6 +56,17 @@
 		file-name-handler-alist))
   (cl-delete-duplicates file-name-handler-alist :test 'equal))
 
+(defun mpm/get-font ()
+  "Get the available font."
+  (interactive)
+  (cond
+    ((mpm/font-exists-p mpm-target-font)
+        (format "%s %s" mpm-target-font mpm-target-font-size))
+    ((mpm/font-exists-p mpm-default-font)
+        (format "%s %s" mpm-default-font mpm-target-font-size))
+    (t nil)
+  )
+)
 
 (defun mpm/clean-after-buffers ()
   "Delete * Buffers after init."
@@ -57,5 +80,14 @@
            (and (get-buffer buffer)
              (kill-buffer buffer))))))
 
+(defun mpm/get-visual-selection ()
+    "Get visually selected text."
+    (interactive)
+    (cond
+     ((region-active-p) (buffer-substring (region-beginning) (region-end)))
+     (t (error "No region selected/found!"))
+    )
+)
+
 (provide 'mpm-lib)
-;;; custom-vars.el ends here
+;;; mpm-lib.el ends here

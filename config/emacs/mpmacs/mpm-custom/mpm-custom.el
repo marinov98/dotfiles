@@ -9,7 +9,6 @@
 ;; load our custom components except startup (used in early-init.el)
 (message "Loading MPM custom...")
 (require 'startup-config)
-(require 'mpm-preferences)
 (require 'mpm-lib)
 
 
