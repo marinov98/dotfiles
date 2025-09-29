@@ -125,10 +125,11 @@
                         (name . "^\\*Messages\\*$"))))))))
 
 (use-package exec-path-from-shell
-    :ensure t
-    :config
-    (when (memq window-system '(mac ns x)) ;; check if its mac
-      (exec-path-from-shell-initialize)))
+  :ensure t
+  :custom
+  (exec-path-from-shell-arguments '("-l" "-c"))
+  :config
+  (exec-path-from-shell-initialize))
 
 (use-package eshell
      :ensure t

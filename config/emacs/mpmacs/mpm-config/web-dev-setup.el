@@ -42,7 +42,10 @@
 
     (setq-default css-indent-offset 2) ;; web mode for some reason cancels css autocomplete so I have to configure css separately
 
-(use-package prettier :ensure t)
+(use-package prettier
+  :ensure t
+  :commands (prettier-prettify prettier-mode prettier-prettify-region)
+)
 
 (use-package rjsx-mode
     :ensure t

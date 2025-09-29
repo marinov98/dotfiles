@@ -6,7 +6,7 @@
 ;;; Code:
 (use-package magit
   :ensure t
-  :after hydra
+  :commands (magit-status magit-dispatch magit-list-repositories)
 )
 
 (use-package git-commit
@@ -25,11 +25,11 @@
            ("\\.dockerignore\\'" . gitignore-mode))) ;; syntax from gitignore is more or less identical to that of .dockerignore
 
 (use-package magit-repos
-    :after magit
     :commands magit-list-repositories
-    :config
+    :init
     (when (file-directory-p mpm-projects-dir)
-      (setq magit-repository-directories `((,mpm-projects-dir . 1)))))
+      (setq magit-repository-directories `((,mpm-projects-dir . 1))))
+)
 
 (use-package git-timemachine
     :ensure t
@@ -71,14 +71,12 @@
          "Save and bury buffer" :color blue))
       )
     )
-    :hook (magit-diff-visit-file . (lambda ()
-                                    (when smerge-mode
-                                      (hydra-smerge/body))))
+    :hook (smerge-mode . hydra-smerge/body)
 )
 
 (defhydra hydra-git (:color red)
     "⏳ Git ⏳"
-    ("g" magit "magit")
+    ("g" magit-status "magit")
     ("d" magit-dispatch "dispatch")
     ("l" magit-list-repositories "list repos")
     ("t" git-timemachine "timemachine")
