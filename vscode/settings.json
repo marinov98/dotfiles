@@ -4,7 +4,7 @@
   },
   "editor.fontLigatures": true,
   "editor.tabSize": 2,
-  "editor.fontSize": 16,
+  "editor.fontSize": 14,
   "scm.diffDecorations": "none",
   "breadcrumbs.enabled": false,
   "git.decorations.enabled": false,
