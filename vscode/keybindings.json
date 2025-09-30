@@ -4,12 +4,6 @@
     "key": "alt+x",
     "command": "workbench.action.showCommands"
   },
-  // LSP
-  {
-    "key": "ctrl+h",
-    "command": "editor.action.triggerParameterHints",
-    "when": "editorTextFocus"
-  },
   // Sidebar
   {
     "key": "ctrl+e",
