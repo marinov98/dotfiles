@@ -85,6 +85,10 @@
       "commands": ["workbench.action.quickOpen"]
     },
     {
+      "before": ["ctrl+p"],
+      "commands": ["workbench.action.quickOpen"]
+    },
+    {
       "before": ["<leader>", "c", "s"],
       "commands": ["workbench.action.terminal.toggleTerminal"]
     },

@@ -10,6 +10,7 @@
     "command": "workbench.files.action.focusFilesExplorer",
     "when": "editorTextFocus"
   },
+
   {
     "key": "ctrl+e",
     "command": "workbench.action.focusActiveEditorGroup",
@@ -20,6 +21,7 @@
     "command": "explorer.newFile",
     "when": "filesExplorerFocus && !inputFocus"
   },
+
   {
     "key": "r",
     "command": "renameFile",
@@ -35,9 +37,20 @@
     "command": "filesExplorer.paste",
     "when": "filesExplorerFocus && !inputFocus"
   },
+
   {
     "key": "d",
     "command": "deleteFile",
+    "when": "filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "ctrl+[",
+    "command": "workbench.action.closeSidebar",
+    "when": "filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "escape",
+    "command": "workbench.action.closeSidebar",
     "when": "filesExplorerFocus && !inputFocus"
   },
   // Search List
@@ -61,6 +74,7 @@
     "command": "list.focusDown",
     "when": "searchViewletFocus && !inputFocus"
   },
+
   {
     "key": "ctrl+p",
     "command": "list.focusUp",
@@ -71,6 +85,7 @@
     "command": "search.action.focusSearchFromResults",
     "when": "replaceInputBoxFocus"
   },
+
   {
     "key": "ctrl+r",
     "command": "workbench.action.replaceInFiles",
@@ -80,6 +95,17 @@
     "key": "/",
     "command": "search.action.focusSearchFromResults",
     "when": "searchViewletFocus && !inputFocus"
+  },
+
+  {
+    "key": "ctrl+[",
+    "command": "workbench.action.closeSidebar",
+    "when": "searchViewletFocus"
+  },
+  {
+    "key": "escape",
+    "command": "workbench.action.closeSidebar",
+    "when": "searchViewletFocus"
   },
   // Problems
   {
@@ -128,17 +154,15 @@
     "command": "workbench.action.quickOpenSelectPrevious",
     "when": "inQuickOpen"
   },
-  // Closing
-  // Close the sidebar when not in the editor
   {
     "key": "ctrl+[",
-    "command": "workbench.action.closeSidebar",
-    "when": "!editorTextFocus"
+    "command": "workbench.action.closeQuickOpen",
+    "when": "inQuickOpen"
   },
   {
     "key": "escape",
-    "command": "workbench.action.closeSidebar",
-    "when": "!editorTextFocus"
+    "command": "workbench.action.closeQuickOpen",
+    "when": "inQuickOpen"
   },
   // Close the panel (bottom area) when it's focused
   {
@@ -150,16 +174,5 @@
     "key": "escape",
     "command": "workbench.action.closePanel",
     "when": "panelFocus"
-  },
-  // Close Quick Open (file picker) when it's visible
-  {
-    "key": "ctrl+[",
-    "command": "workbench.action.closeQuickOpen",
-    "when": "inQuickOpen"
-  },
-  {
-    "key": "escape",
-    "command": "workbench.action.closeQuickOpen",
-    "when": "inQuickOpen"
   }
 ]
