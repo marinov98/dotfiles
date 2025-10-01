@@ -41,7 +41,7 @@ return {
       { "<leader><leader>l", function() Snacks.picker.projects() end,                                                               desc = "List Projects" },
       -- Grep
       { "gl",                function() Snacks.picker.lines({ layout = { preset = "ivy", layout = { height = 0.3 } } }) end,        desc = "Goto line" },
-      { "gL",                function() Snacks.picker.grep_buffers({ layout = { preset = "ivy", layout = { height = 0.3 } } }) end, desc = "Goto line" },
+      { "gL",                function() Snacks.picker.grep_buffers({ layout = { preset = "ivy", layout = { height = 0.3 } } }) end, desc = "Goto line-multi" },
       { "<leader>/",         function() Snacks.picker.grep_word({ search = vim.fn.input("Grep > ") }) end,                          desc = "Grep on user input" },
       { "<leader><leader>/", function() Snacks.picker.grep() end,                                                                   desc = "Live Grep" },
       {
