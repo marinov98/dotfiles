@@ -97,7 +97,7 @@
         ("J" js-mode "js mode"))
 
        "Personal"
-       (("m" mpm/goto-MarinMacs "goto config")
+       (("m" mpm/goto-mpm-init "goto config")
         ("s" set-fill-column "set-fill-column")
         ("R" restart-emacs "restart Emacs")
         ("t" neotree-toggle "file tree" :color blue)

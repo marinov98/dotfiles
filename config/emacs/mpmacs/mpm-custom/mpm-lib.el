@@ -34,7 +34,7 @@
 (defvar mpm-org-dir (concat mpm-projects-dir "/org")
   "Org directory.")
 
-(defun mpm/goto-MarinMacs ()
+(defun mpm/goto-mpm-init ()
   "Jump to configuration file."
   (interactive)
   (find-file mpm-config-file-location))
