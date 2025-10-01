@@ -32,18 +32,18 @@ return {
     },
     keys = {
       -- Finding, Listing
-      { "<leader>f",         function() Snacks.picker.files({ cmd = "fd" }) end,                           desc = "Find Files" },
-      { "<leader>um",        function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end,       desc = "Find Config File" },
-      { "<leader>ud",        function() Snacks.picker.files({ cwd = "~/.config" }) end,                    desc = "Find Dotfiles" },
-      { "<leader>bl",        function() Snacks.picker.buffers() end,                                       desc = "List Buffers" },
-      { "<leader>bt",        function() Snacks.picker.treesitter() end,                                    desc = "Buffer Treesitter Symbols" },
-      { "<leader>dl",        function() Snacks.picker.diagnostics() end,                                   desc = "List Diagnostics" },
-      { "<leader><leader>l", function() Snacks.picker.projects() end,                                      desc = "List Projects" },
+      { "<leader>f",         function() Snacks.picker.files({ cmd = "fd" }) end,                                                    desc = "Find Files" },
+      { "<leader>um",        function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end,                                desc = "Find Config File" },
+      { "<leader>ud",        function() Snacks.picker.files({ cwd = "~/.config" }) end,                                             desc = "Find Dotfiles" },
+      { "<leader>bl",        function() Snacks.picker.buffers() end,                                                                desc = "List Buffers" },
+      { "<leader>bt",        function() Snacks.picker.treesitter() end,                                                             desc = "Buffer Treesitter Symbols" },
+      { "<leader>dl",        function() Snacks.picker.diagnostics() end,                                                            desc = "List Diagnostics" },
+      { "<leader><leader>l", function() Snacks.picker.projects() end,                                                               desc = "List Projects" },
       -- Grep
-      { "gl",                function() Snacks.picker.lines({ layout = { preset = "ivy" } }) end,          desc = "Goto line" },
-      { "gL",                function() Snacks.picker.grep_buffers({ layout = { preset = "ivy" } }) end,   desc = "Goto line-multi" },
-      { "<leader>/",         function() Snacks.picker.grep_word({ search = vim.fn.input("Grep > ") }) end, desc = "Grep on user input" },
-      { "<leader><leader>/", function() Snacks.picker.grep() end,                                          desc = "Live Grep" },
+      { "gl",                function() Snacks.picker.lines({ layout = { preset = "ivy", layout = { height = 0.3 } } }) end,        desc = "Goto line" },
+      { "gL",                function() Snacks.picker.grep_buffers({ layout = { preset = "ivy", layout = { height = 0.3 } } }) end, desc = "Goto line" },
+      { "<leader>/",         function() Snacks.picker.grep_word({ search = vim.fn.input("Grep > ") }) end,                          desc = "Grep on user input" },
+      { "<leader><leader>/", function() Snacks.picker.grep() end,                                                                   desc = "Live Grep" },
       {
         "<leader>*",
         function()
