@@ -4,13 +4,23 @@
     "key": "alt+x",
     "command": "workbench.action.showCommands"
   },
+  // Default movement
+  {
+    "key": "ctrl+n",
+    "command": "list.focusDown",
+    "when": "listFocus"
+  },
+  {
+    "key": "ctrl+p",
+    "command": "list.focusUp",
+    "when": "listFocus"
+  },
   // Sidebar
   {
     "key": "ctrl+e",
     "command": "workbench.files.action.focusFilesExplorer",
     "when": "editorTextFocus"
   },
-
   {
     "key": "ctrl+e",
     "command": "workbench.action.focusActiveEditorGroup",
@@ -109,16 +119,6 @@
   },
   // Problems
   {
-    "key": "ctrl+n",
-    "command": "list.focusDown",
-    "when": "problemFocus"
-  },
-  {
-    "key": "ctrl+p",
-    "command": "list.focusUp",
-    "when": "problemFocus"
-  },
-  {
     "key": "/",
     "command": "problems.action.focusFilter",
     "when": "problemFocus && !inputFocus"
@@ -174,5 +174,10 @@
     "key": "escape",
     "command": "workbench.action.closePanel",
     "when": "panelFocus"
+  },
+  {
+    "key": "enter",
+    "command": "-renameFile",
+    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
   }
 ]
