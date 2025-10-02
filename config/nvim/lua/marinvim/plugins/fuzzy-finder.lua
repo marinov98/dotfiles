@@ -21,10 +21,10 @@ return {
             hidden = true
           },
           buffers = {
-            layout = { preset = "ivy" },
+            layout = { preset = "ivy", layout = { height = 0.3 } },
           },
           diagnostics = {
-            layout = { preset = "ivy" },
+            layout = { preset = "ivy", layout = { height = 0.3 } },
           }
         },
         icons = { files = { enabled = false } }
