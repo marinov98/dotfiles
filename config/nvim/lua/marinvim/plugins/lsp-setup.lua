@@ -44,7 +44,13 @@ return {
       })
 
 
-      vim.diagnostic.config({ virtual_text = true })
+      vim.diagnostic.config({
+        virtual_text = true,
+        float = {
+          focusable = false,
+          border = "rounded",
+        }
+      })
 
       -- Keymaps / autocmd on attach
       vim.api.nvim_create_autocmd("LspAttach", {
