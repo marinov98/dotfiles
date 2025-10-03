@@ -1,47 +1,39 @@
 return {
   {
-    "williamboman/mason.nvim",
-    cmd = { 'Mason', 'MasonInstall', 'MasonUninstall' },
-    config = function()
-      require("mason").setup()
-    end
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    event = { 'BufReadPre', 'BufNewFile' },
-    config = function()
-      require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls" } -- examples: "pyright", "cssls", "ts_ls", "jsonls"
-      })
-    end
-  },
-  {
-    "neovim/nvim-lspconfig",
-    dependencies = { "saghen/blink.cmp" },
+    "mason-org/mason-lspconfig.nvim",
+    dependencies = {
+      {
+        "mason-org/mason.nvim",
+        cmd = { 'Mason', 'MasonInstall', 'MasonUninstall' },
+        opts = {}
+      },
+      "neovim/nvim-lspconfig",
+    },
     event = { "BufReadPre", "BufNewFile" },
     config = function()
-      local capabilities = require("blink.cmp").get_lsp_capabilities()
-      local servers = {
-        "pyright",
-        "ts_ls",
-        "jsonls",
-        "yamlls",
-        "html",
-        "cssls",
-        "gopls",
-        "rust_analyzer",
-        "elixirls",
-      }
+      local capabilities = vim.tbl_deep_extend(
+        "force",
+        {},
+        vim.lsp.protocol.make_client_capabilities(),
+        require("blink.cmp").get_lsp_capabilities())
 
-      for _, server in ipairs(servers) do
-        vim.lsp.config[server] = vim.tbl_deep_extend("force", vim.lsp.config[server] or {}, {
-          capabilities = capabilities,
-        })
-      end
+      require("mason-lspconfig").setup({
+        ensure_installed = {
+          "pyright",
+          "ts_ls",
+          "jsonls",
+          "yamlls",
+          "html",
+          "cssls",
+          "rust_analyzer",
+        }
+      })
 
-      -- Special config for lua_ls
-      vim.lsp.config.lua_ls = vim.tbl_deep_extend("force", vim.lsp.config.lua_ls or {}, {
+      vim.lsp.config("*", {
         capabilities = capabilities,
+      })
+
+      vim.lsp.config("lua_ls", {
         settings = {
           Lua = {
             diagnostics = {
@@ -51,8 +43,7 @@ return {
         },
       })
 
-      -- Finally enable them all
-      vim.lsp.enable(vim.list_extend({ "lua_ls" }, servers))
+
       vim.diagnostic.config({ virtual_text = true })
 
       -- Keymaps / autocmd on attach

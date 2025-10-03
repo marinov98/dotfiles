@@ -39,7 +39,7 @@ return {
               layout = ivy_layout
             }
           },
-          icons = { files = { enabled = true } },
+          icons = { files = { enabled = false } },
         },
       })
 
