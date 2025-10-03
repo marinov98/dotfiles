@@ -7,7 +7,7 @@ return {
     "rafamadriz/friendly-snippets", -- useful snippets
   },
   opts = {
-    signature = { enabled = true },
+    signature = { enabled = true, window = { border = "rounded" } },
     snippets = { preset = "luasnip" },
     keymap = {
       preset = 'super-tab',
