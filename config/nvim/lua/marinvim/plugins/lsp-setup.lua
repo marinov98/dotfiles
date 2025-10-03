@@ -53,6 +53,7 @@ return {
 
       -- Finally enable them all
       vim.lsp.enable(vim.list_extend({ "lua_ls" }, servers))
+      vim.diagnostic.config({ virtual_text = true })
 
       -- Keymaps / autocmd on attach
       vim.api.nvim_create_autocmd("LspAttach", {
