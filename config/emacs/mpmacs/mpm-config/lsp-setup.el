@@ -53,6 +53,7 @@
        (
         ((c++-mode c-mode css-mode yaml-mode json-mode js-mode js2-mode rjsx-mode typescript-mode web-mode) . lsp-deferred)
         ((bash-ts-mode rust-ts-mode go-ts-mode css-ts-mode yaml-ts-mode json-ts-mode js-ts-mode typescript-ts-mode tsx-ts-mode) . lsp-deferred) ;; treesitter modes
+        (lsp-mode . lsp-enable-which-key-integration)
        )
        :bind
        (
@@ -89,7 +90,6 @@
        (lsp-prefer-flymake nil)
        (lsp-io-messages-max nil)
        :config
-       (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
        (add-hook 'after-init-hook
                  #'(lambda () ;; in case I disable lsp-ui remap g prefix keys to regular lsp
                      (unless (package-installed-p 'lsp-ui)

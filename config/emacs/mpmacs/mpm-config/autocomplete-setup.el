@@ -10,7 +10,7 @@
   :custom
   (corfu-auto t)
   (corfu-auto-prefix 2)
-  (corfu-auto-delay 0.25)
+  (corfu-auto-delay 0.1)
   (corfu-min-width 80)
   (corfu-max-width corfu-min-width) ; Always have the same width
   (corfu-count 10)
