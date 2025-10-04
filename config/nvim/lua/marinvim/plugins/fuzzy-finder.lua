@@ -45,7 +45,7 @@ return {
 
       local map = vim.keymap.set
       -- Finding, Listing
-      map("n", "<leader>f", function() Snacks.picker.files({ cmd = "fd", hidden = true, ignored = true }) end, { desc = "Find (Project) Files" })
+      map("n", "<leader>f", function() Snacks.picker.files({ cmd = "fd", hidden = true, ignored = true }) end, { desc = "Find (All) Files" })
       map("n", "<C-p>", function() Snacks.picker.files({ cmd = "fd" }) end, { desc = "Find (Project) Files" })
       map("n", "<leader>um", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, { desc = "Find Config File" })
       map("n", "<leader>ud", function() Snacks.picker.files({ cwd = "~/.config" }) end, { desc = "Find Dotfiles" })
