@@ -13,6 +13,7 @@
      (flycheck-error ((t (:underline (:style wave :color "#cc0202")))))
      :custom
      (flycheck-display-errors-delay 0.5)
+     (flycheck-check-syntax-automatically '(save idle-change mode-enabled))
      :bind
      (:map evil-normal-state-map
            ("]d" . flycheck-next-error)
