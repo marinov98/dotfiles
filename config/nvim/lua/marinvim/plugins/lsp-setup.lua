@@ -57,8 +57,10 @@ return {
           local local_buf = ev.buf
 
           -- Diagnostics navigation
-          vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Prev diagnostic", buffer = local_buf })
-          vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic", buffer = local_buf })
+          vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = false }) end,
+            { desc = "Prev diagnostic", buffer = local_buf })
+          vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = false }) end,
+            { desc = "Next diagnostic", buffer = local_buf })
           vim.keymap.set("n", "<leader>dg", vim.diagnostic.open_float, { desc = "Glance Diagnostic", buffer = local_buf })
 
           -- LSP utilities
