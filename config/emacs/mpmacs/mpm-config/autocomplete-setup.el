@@ -8,7 +8,7 @@
   :ensure t
   :hook (after-init . global-corfu-mode)
   :custom
-  (corfu-auto t)
+  (corfu-auto nil) ;; auto can be dangerous in the wrong place
   (corfu-auto-prefix 2)
   (corfu-auto-delay 0.1)
   (corfu-min-width 80)
@@ -35,6 +35,7 @@
   )
   (add-hook 'lsp-completion-mode-hook #'mpm/corfu-setup-lsp)
   (setq lsp-completion-provider :none) ; use corfu instead of lsp-completions
+  (define-key evil-insert-state-map (kbd "C-SPC") #'completion-at-point) ;; in case of manually triggering completion
 )
 
 (use-package cape
