@@ -28,6 +28,7 @@
 (toggle-scroll-bar -1)                  ;; disable scroll bar toggle
 (tool-bar-mode -1)                      ;; disable tool bar
 (blink-cursor-mode -1)                  ;; make cursor stop blinking
+(fringe-mode -1)                        ;; remove fringes
 
 (setq make-backup-files nil)             ;; stop creating backup~ files
 (setq auto-save-default nil)             ;; stop creating autosave# files
