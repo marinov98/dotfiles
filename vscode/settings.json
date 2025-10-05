@@ -217,6 +217,10 @@
     {
       "before": ["<leader>", "c", "m", "a"],
       "commands": ["editor.action.selectHighlights"]
+    },
+    {
+      "before": ["ctrl+n"],
+      "commands": ["editor.action.addSelectionToNextFindMatch"]
     }
   ],
   "vim.visualModeKeyBindingsNonRecursive": [
@@ -230,7 +234,7 @@
       ]
     },
     {
-      "before": ["<leader>", "c", "m", "n"],
+      "before": ["ctrl+n"],
       "commands": ["editor.action.addSelectionToNextFindMatch"]
     },
     {
