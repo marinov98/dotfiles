@@ -93,15 +93,13 @@
        "Modes"
        (("u" auto-fill-mode "auto-fill mode")
         ("W" web-mode "web mode")
-        ("X" rjsx-mode "rjsx mode")
-        ("J" js-mode "js mode"))
+        ("T" tooltip-mode "tooltip-mode")
+        ("F" fringe-mode "fringe-mode"))
 
        "Personal"
        (("m" mpm/goto-mpm-init "goto config")
-        ("s" set-fill-column "set-fill-column")
         ("R" restart-emacs "restart Emacs")
         ("t" neotree-toggle "file tree" :color blue)
-        ("e" eval-buffer "eval buffer")
         ("c" compile "compile"))
        )
       )

@@ -75,6 +75,7 @@
         "l f" '(lsp-format-buffer :wk "LSP Format")
         "l a" '(lsp-execute-code-action :wk "LSP Code Action")
         "l o" '(lsp-organize-imports :wk "LSP Organize Imports")
+        "l R" '(lsp-workspace-restart :wk "LSP restart")
        )
        :custom
        (lsp-enable-xref t)
