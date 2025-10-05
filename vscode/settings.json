@@ -164,9 +164,7 @@
       "before": ["<leader>", "*"],
       "commands": [
         "editor.action.addSelectionToNextFindMatch",
-        "editor.action.clipboardCopyAction",
         "workbench.action.findInFiles",
-        "editor.action.clipboardPasteAction",
         "extension.vim_escape"
       ]
     },
@@ -226,12 +224,7 @@
   "vim.visualModeKeyBindingsNonRecursive": [
     {
       "before": ["<leader>", "*"],
-      "commands": [
-        "editor.action.clipboardCopyAction",
-        "workbench.action.findInFiles",
-        "editor.action.clipboardPasteAction",
-        "extension.vim_escape"
-      ]
+      "commands": ["workbench.action.findInFiles", "extension.vim_escape"]
     },
     {
       "before": ["ctrl+n"],
