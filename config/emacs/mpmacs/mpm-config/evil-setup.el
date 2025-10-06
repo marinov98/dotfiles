@@ -116,8 +116,8 @@
       (
         "Goto"
         (("n" evil-mc-make-and-goto-next-match "make & next")
-        ("N" evil-mc-make-and-goto-prev-match "make & prev")
-        ("p" evil-mc-skip-and-goto-next-match "skip & next")
+        ("p" evil-mc-make-and-goto-prev-match "make & prev")
+        ("N" evil-mc-skip-and-goto-next-match "skip & next")
         ("P" evil-mc-skip-and-goto-prev-match "skip & prev")
         ("m" evil-mc-make-all-cursors "Make all"))
 
