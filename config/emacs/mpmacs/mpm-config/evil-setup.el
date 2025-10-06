@@ -133,6 +133,7 @@
       )
     )
     (evil-global-set-key 'visual (kbd "C-n") 'hydra-mc/evil-mc-make-and-goto-next-match)
+    (evil-global-set-key 'visual (kbd "C-p") 'hydra-mc/evil-mc-make-and-goto-prev-match)
 )
 
 

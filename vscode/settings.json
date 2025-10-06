@@ -239,7 +239,7 @@
       "commands": ["editor.action.addSelectionToNextFindMatch"]
     },
     {
-      "before": ["<leader>", "c", "m", "N"],
+      "before": ["ctrl+p"],
       "commands": ["editor.action.addSelectionToPreviousFindMatch"]
     },
     {
