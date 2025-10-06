@@ -205,11 +205,19 @@
       "commands": ["workbench.action.showCommands"]
     },
     {
-      "before": ["<leader>", "c", "m", "o"],
+      "before": ["<leader>", "c", "m", "n"],
+      "commands": ["editor.action.addSelectionToNextFindMatch"]
+    },
+    {
+      "before": ["<leader>", "c", "m", "N"],
+      "commands": ["editor.action.addSelectionToPreviousFindMatch"]
+    },
+    {
+      "before": ["<leader>", "c", "m", "j"],
       "commands": ["editor.action.insertCursorBelow"]
     },
     {
-      "before": ["<leader>", "c", "m", "O"],
+      "before": ["<leader>", "c", "m", "k"],
       "commands": ["editor.action.insertCursorAbove"]
     },
     {
@@ -229,6 +237,10 @@
     {
       "before": ["ctrl+n"],
       "commands": ["editor.action.addSelectionToNextFindMatch"]
+    },
+    {
+      "before": ["<leader>", "c", "m", "N"],
+      "commands": ["editor.action.addSelectionToPreviousFindMatch"]
     },
     {
       "before": ["<leader>", "c", "m", "a"],

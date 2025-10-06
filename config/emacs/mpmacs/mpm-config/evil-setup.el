@@ -132,7 +132,7 @@
         ("r" evil-mc-resume-cursors "resume cursors" :color blue))
       )
     )
-    (evil-global-set-key 'visual (kbd "C-n") 'hydra-mc/body)
+    (evil-global-set-key 'visual (kbd "C-n") 'hydra-mc/evil-mc-make-and-goto-next-match)
 )
 
 
