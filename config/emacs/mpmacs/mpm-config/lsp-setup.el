@@ -128,8 +128,6 @@
        :general-config
        (mpm/leader-keys
         "l g" '(lsp-ui-doc-glance :wk "Hover")
-        "l w" '(:ignore t :wk "LSP Workspace")
-        "l w d" '(lsp-ui-find-workspace-symbol :wk "Document Workspace Symbols")
        )
        :config
        (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
@@ -154,11 +152,12 @@
   :after (flycheck lsp-mode consult)
   :general-config
   (mpm/leader-keys
-    "l s" '(consult-lsp-file-symbols :wk "File Symbols")
+    "l w" '(:ignore t :wk "LSP Workspace")
     "l w s" '(consult-lsp-symbols :wk "Workspace Symbols")
   )
   :config
   (define-key lsp-mode-map [remap flycheck-list-errors] #'consult-lsp-diagnostics)
+  (define-key lsp-mode-map [remap consult-imenu] #'consult-lsp-file-symbols)
 )
 
 

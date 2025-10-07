@@ -42,7 +42,7 @@
   (mpm/leader-keys
      "/" '(mpm/grep-on-input :wk "Grep on user input")
      "f" '(consult-fd :wk "Find File")
-     "l i" '(consult-imenu :wk "Imenu")
+     "l s" '(consult-imenu :wk "Imenu")
      "*" '(mpm/word-grep-under-cursor :wk "Grep word")
   )
   (mpm/leader-keys
