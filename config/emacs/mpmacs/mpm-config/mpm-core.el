@@ -183,10 +183,9 @@
     :hook (after-init . yas-global-mode)
     :diminish yas-minor-mode
     :config
-    ;; nullify default tab behavior (tab complete ONLY with autocomplete)
-    (define-key yas-minor-mode-map [(tab)] nil)
-    (define-key yas-minor-mode-map (kbd "<tab>") nil)
-    (define-key yas-minor-mode-map (kbd "TAB") nil)
+    ;; nullify default tab behavior
+    (keymap-unset yas-minor-mode-map "TAB" 'remove)
+    (keymap-unset yas-minor-mode-map "<tab>" 'remove)
     ;; add new behavior
     (evil-define-key 'insert yas-minor-mode-map (kbd "C-;") 'yas-expand)
     (evil-define-key 'insert yas-minor-mode-map (kbd "<backtab>") 'yas-expand)
