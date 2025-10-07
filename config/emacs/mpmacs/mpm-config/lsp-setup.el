@@ -25,7 +25,6 @@
         "c f" '(:ignore t :wk "Flycheck commands")
         "c f e" '(flycheck-display-error-at-point :wk "Flycheck display error")
         "c f s" '(flycheck-select-checker :wk "Flycheck select checker")
-        "c f l" '(flycheck-list-errors :wk "Diagnostics List Errors") ;; alternative binding
         "c f d" '(flycheck-disable-checker :wk "Flycheck disable checker")
         "c f h" '(flycheck-describe-checker :wk "Flycheck describe checker")
         "c f m" '(flycheck-mode :wk "Flycheck mode")
@@ -155,10 +154,11 @@
   :after (flycheck lsp-mode consult)
   :general-config
   (mpm/leader-keys
-    "d l" '(consult-lsp-diagnostics :wk "List Diagnostics") ;; overwrite flycheck binding
     "l s" '(consult-lsp-file-symbols :wk "File Symbols")
     "l w s" '(consult-lsp-symbols :wk "Workspace Symbols")
   )
+  :config
+  (define-key lsp-mode-map [remap flycheck-list-errors] #'consult-lsp-diagnostics)
 )
 
 
