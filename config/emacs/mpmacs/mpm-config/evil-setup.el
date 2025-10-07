@@ -14,12 +14,12 @@
     (setq evil-undo-system 'undo-redo)
     :config
     (evil-mode 1)
-    (define-key evil-motion-state-map "gd" 'xref-find-definitions)
-    (define-key evil-normal-state-map (kbd "gcc") 'comment-line)
-    (define-key evil-normal-state-map (kbd "C-/") 'comment-line)
-    (define-key evil-visual-state-map (kbd "gc") 'comment-dwim)
-    (define-key evil-visual-state-map (kbd "C-/") 'comment-region)
-    (define-key evil-normal-state-map (kbd "-") 'dired-jump)
+    (evil-global-set-key 'motion (kbd "gd") 'xref-find-definitions)
+    (evil-global-set-key 'normal (kbd "gcc") 'comment-line)
+    (evil-global-set-key 'normal (kbd "C-/") 'comment-line)
+    (evil-global-set-key 'visual (kbd "gc") 'comment-dwim)
+    (evil-global-set-key 'visual (kbd "C-/") 'comment-region)
+    (evil-global-set-key 'normal (kbd "-") 'dired-jump)
 )
 
 (use-package evil-collection

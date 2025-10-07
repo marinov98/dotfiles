@@ -54,8 +54,8 @@
   :config
   (add-to-list 'consult-fd-args "--hidden --exclude .git" t)
 
-  (define-key evil-normal-state-map (kbd "gl") 'consult-line)
-  (define-key evil-normal-state-map (kbd "gL") 'consult-line-multi)
+  (evil-global-set-key 'normal (kbd "gl") 'consult-line)
+  (evil-global-set-key 'normal (kbd "gL") 'consult-line-multi)
 
   (defun mpm/grep-on-input ()
     "Grep based on input first, don't live grep"
@@ -148,7 +148,7 @@
 
 
 
-  (define-key evil-normal-state-map (kbd "C-p") 'project-find-file)
+  (evil-global-set-key 'normal (kbd "C-p") 'project-find-file)
   (pretty-hydra-define hydra-project (:color red :title "🚀 Project 🚀" :quit-key "q")
     (
       "Finding"

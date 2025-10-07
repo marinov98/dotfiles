@@ -38,7 +38,7 @@
   )
   (add-hook 'lsp-completion-mode-hook #'mpm/corfu-setup-lsp)
   (setq lsp-completion-provider :none) ; use corfu instead of lsp-completions
-  (define-key evil-insert-state-map (kbd "C-SPC") #'completion-at-point) ;; in case of manually triggering completion
+  (evil-global-set-key 'insert (kbd "C-SPC") 'completion-at-point)
 )
 
 (use-package cape
