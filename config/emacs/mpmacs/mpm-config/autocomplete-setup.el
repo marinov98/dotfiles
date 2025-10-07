@@ -16,6 +16,7 @@
   (corfu-count 10)
   (corfu-scroll-margin 4)
   (corfu-cycle t)
+  (corfu-popupinfo-delay nil)
   :bind
   (:map corfu-map
     ("RET" . nil)
@@ -26,8 +27,10 @@
     ("<escape>" . evil-collection-corfu-quit-and-escape)
     ("C-[" . evil-collection-corfu-quit-and-escape)
     ("<tab>" . corfu-insert)
+    ("C-/" . corfu-popupinfo-toggle)
   )
   :config
+  (corfu-popupinfo-mode)
   (defun mpm/corfu-setup-lsp ()
     "Use orderless completion style with lsp-capf instead of the default lsp-passthrough."
     (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
