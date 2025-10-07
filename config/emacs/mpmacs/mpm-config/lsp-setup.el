@@ -62,7 +62,6 @@
          ("gry" . lsp-find-type-definition)
          ("grd" . lsp-find-declaration)
          ("grn" . lsp-rename)
-         ("gr?" . lsp-describe-thing-at-point)
          ("grh" . lsp-signature-activate)
          ("gra" . lsp-execute-code-action)
          :map evil-insert-state-map
@@ -87,7 +86,7 @@
        (lsp-headerline-breadcrumb-enable nil) ;; graphical bloat, don't need but useful to the right person
        (lsp-enable-folding nil)
        (lsp-enable-symbol-highlighting nil)
-       (lsp-enable-text-document-color nil)
+       (lsp-enable-text-document-color t)
        (lsp-file-watch-threshold 5000)
        (lsp-prefer-flymake nil)
        (lsp-io-messages-max nil)
@@ -98,6 +97,7 @@
                        (define-key evil-normal-state-map (kbd "gri") 'lsp-goto-implementation)
                        )
                      ))
+       (define-key lsp-mode-map [remap evil-lookup] #'lsp-describe-thing-at-point)
 )
 
 (use-package lsp-ui
@@ -135,6 +135,7 @@
        :config
        (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
        (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+       (evil-define-key 'normal 'lsp-ui-doc-mode (kbd "TAB") 'lsp-ui-doc-focus-frame)
 )
 
 (use-package lsp-pyright
