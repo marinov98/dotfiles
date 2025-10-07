@@ -56,17 +56,16 @@
         (lsp-mode . lsp-enable-which-key-integration)
        )
        :bind
-       (
-        (:map evil-normal-state-map
-         ("gry" . lsp-find-type-definition)
-         ("grd" . lsp-find-declaration)
-         ("grn" . lsp-rename)
-         ("grh" . lsp-signature-activate)
-         ("gra" . lsp-execute-code-action)
-         :map evil-insert-state-map
-         ("C-h" . lsp-signature-activate)
-        )
-       )
+       (:map evil-normal-state-map
+             ("gry" . lsp-find-type-definition)
+             ("grd" . lsp-find-declaration)
+             ("grn" . lsp-rename)
+             ("grh" . lsp-signature-activate)
+             ("gra" . lsp-execute-code-action)
+             :map evil-insert-state-map
+             ("C-h" . lsp-signature-activate)
+             :map lsp-mode-map
+             ([remap evil-lookup] . lsp-describe-thing-at-point))
        :general-config
        (mpm/leader-keys
         "l" '(:ignore t :wk "LSP")
@@ -89,14 +88,6 @@
        (lsp-file-watch-threshold 5000)
        (lsp-prefer-flymake nil)
        (lsp-io-messages-max nil)
-       :config
-       (add-hook 'after-init-hook
-                 #'(lambda () ;; in case I disable lsp-ui remap g prefix keys to regular lsp
-                     (unless (package-installed-p 'lsp-ui)
-                       (define-key evil-normal-state-map (kbd "gri") 'lsp-goto-implementation)
-                       )
-                     ))
-       (define-key lsp-mode-map [remap evil-lookup] #'lsp-describe-thing-at-point)
 )
 
 (use-package lsp-ui
@@ -104,12 +95,14 @@
        :commands lsp-ui-mode
        :hook (lsp-mode . lsp-ui-mode)
        :bind
-       (:map evil-normal-state-map
-         ("gri" . lsp-ui-peek-find-implementation)
-       )
-       (:map lsp-ui-peek-mode-map
-         ("C-n" . lsp-ui-peek--select-next)
-         ("C-p" . lsp-ui-peek--select-prev))
+       (:map lsp-ui-mode-map
+             ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
+             ([remap xref-find-references] . lsp-ui-peek-find-references)
+             :map evil-normal-state-map
+             ("gri" . lsp-ui-peek-find-implementation)
+             :map lsp-ui-peek-mode-map
+             ("C-n" . lsp-ui-peek--select-next)
+             ("C-p" . lsp-ui-peek--select-prev))
        :custom
        (lsp-ui-doc-enable t)
        (lsp-ui-doc-position 'at-point)
@@ -130,9 +123,21 @@
         "l g" '(lsp-ui-doc-glance :wk "Hover")
        )
        :config
-       (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-       (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
        (evil-define-key 'normal 'lsp-ui-doc-mode (kbd "TAB") 'lsp-ui-doc-focus-frame)
+)
+
+(use-package consult-lsp
+  :ensure t
+  :after (flycheck lsp-mode consult)
+  :bind
+  (:map lsp-mode-map
+        ([remap flycheck-list-errors] . consult-lsp-diagnostics)
+        ([remap consult-imenu] . consult-lsp-file-symbols))
+  :general
+  (mpm/leader-keys
+    "l w" '(:ignore t :wk "LSP Workspace")
+    "l w s" '(consult-lsp-symbols :wk "Workspace Symbols")
+  )
 )
 
 (use-package lsp-pyright
@@ -145,19 +150,6 @@
 (use-package lsp-java
      :disabled
      :hook ((java-mode java-ts-mode) . lsp-deferred)
-)
-
-(use-package consult-lsp
-  :ensure t
-  :after (flycheck lsp-mode consult)
-  :general-config
-  (mpm/leader-keys
-    "l w" '(:ignore t :wk "LSP Workspace")
-    "l w s" '(consult-lsp-symbols :wk "Workspace Symbols")
-  )
-  :config
-  (define-key lsp-mode-map [remap flycheck-list-errors] #'consult-lsp-diagnostics)
-  (define-key lsp-mode-map [remap consult-imenu] #'consult-lsp-file-symbols)
 )
 
 
