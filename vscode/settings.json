@@ -13,6 +13,7 @@
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": "active",
   "editor.lineNumbers": "relative",
+  "editor.acceptSuggestionOnEnter": "off",
   "editor.minimap.enabled": false,
   "editor.cursorBlinking": "solid",
   "editor.fontWeight": 500,
