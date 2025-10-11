@@ -1,7 +1,4 @@
 {
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": false
-  },
   "editor.fontLigatures": true,
   "editor.tabSize": 2,
   "editor.fontSize": 14,
