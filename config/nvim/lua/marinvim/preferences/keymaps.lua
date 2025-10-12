@@ -1,19 +1,13 @@
 vim.g.mapleader = " "
 
-local mpm = require("marinvim.custom.mpm")
-
 -- Saving, Quitting, Navigating
 vim.keymap.set('n', '<leader>a', "<C-^>", { desc = "Alternate buffers" })
 vim.keymap.set('n', '<leader>s', ":w<CR>", { desc = "Save File" })
 vim.keymap.set('n', '<leader>k', ":bd<CR>", { desc = "Close buffer" })
-vim.keymap.set("n", "<leader><leader>k", mpm.close_other_buffers,
-  { desc = "Close all buffers but the current one" })
-vim.keymap.set("n", "<leader><leader>K", function()
-  mpm.close_other_buffers({ force = true })
-end, { desc = "Force close all buffers but the current one" })
 vim.keymap.set('n', '<leader>x', ":tabclose<CR>", { desc = "Close tab" })
 vim.keymap.set('n', '<leader>q', ":q<CR>", { desc = "Quit" })
 vim.keymap.set('n', '<leader>Q', ":q!<CR>", { desc = "Force Quit" })
+
 
 -- Copying, Pasting
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy to system clipboard" })
