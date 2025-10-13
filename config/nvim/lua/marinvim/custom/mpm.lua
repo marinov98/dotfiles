@@ -19,14 +19,43 @@ function M.close_other_buffers(opts)
   print(#bufs - #vim.api.nvim_list_bufs(), "buffer(s)", opts.force and "(force) deleted" or "deleted")
 end
 
+function M.toggle_signcolumns()
+  local curr = vim.opt.signcolumn:get()
+  if curr == 'no' then
+    vim.cmd("set signcolumn=yes")
+  else
+    vim.cmd("set signcolumn=no")
+  end
+end
+
+-- To be used if no other file tree plugins exist
+function M.enable_netrw_keymaps()
+  vim.keymap.set('n', '-', vim.cmd.Explore, { desc = "Open file browser" })
+  vim.keymap.set('n', '<leader>ut', ":Vexplore!<CR>", { desc = "Open netrw side bar" })
+end
+
 function M.setup(opts)
   opts = opts or {}
 
+  -- Buffers
   vim.keymap.set("n", "<leader><leader>k", M.close_other_buffers,
     { desc = "Close all buffers but the current one" })
   vim.keymap.set("n", "<leader><leader>K", function()
     M.close_other_buffers({ force = true })
   end, { desc = "Force close all buffers but the current one" })
+
+  -- SignColumns
+  vim.keymap.set("n", "<leader>uS", M.toggle_signcolumns, { desc = "Toggle sign columns" })
+
+  -- Copying, Pasting
+  if vim.opt.clipboard._value ~= 'unnamedplus' then
+    vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy to system clipboard" })
+    vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Copy line to system clipboard" })
+    vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]], { desc = "Paste from system clipboard" })
+  end
+
+  -- File Tree
+  -- M.enable_netrw_keymaps()
 end
 
 return M
