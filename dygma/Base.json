@@ -11,7 +11,7 @@
       }
     ]
   },
-  "language": "english",
+  "language": "en-US",
   "layerNames": [
     {
       "id": 0,
@@ -19,7 +19,7 @@
     },
     {
       "id": 1,
-      "name": "Symbols"
+      "name": "Functions_Symbols"
     },
     {
       "id": 2,
@@ -230,9 +230,10 @@
       "label": "G"
     },
     {
-      "keyCode": 17152,
-      "label": "NEXT",
-      "extraLabel": "LED"
+      "keyCode": 0,
+      "label": "KEY",
+      "extraLabel": "NO",
+      "verbose": "Disabled"
     },
     {
       "keyCode": 0,
@@ -353,15 +354,8 @@
       "verbose": "Right Shift"
     },
     {
-      "keyCode": 0,
-      "label": "KEY",
-      "extraLabel": "NO",
-      "verbose": "Disabled"
-    },
-    {
-      "keyCode": 17452,
-      "label": "3",
-      "extraLabel": "SHIFT"
+      "keyCode": 41,
+      "label": "ESC"
     },
     {
       "keyCode": 227,
@@ -369,13 +363,27 @@
       "verbose": "Left Windows"
     },
     {
-      "keyCode": 76,
-      "label": "DEL"
+      "keyCode": 0,
+      "label": "KEY",
+      "extraLabel": "NO",
+      "verbose": "Disabled"
     },
     {
-      "keyCode": 49722,
-      "label": "ESC",
-      "extraLabel": "ALT/"
+      "keyCode": 226,
+      "label": "LEFT ALT",
+      "verbose": "Left Alt"
+    },
+    {
+      "keyCode": 51806,
+      "label": "DEL",
+      "extraLabel": {
+        "key": null,
+        "ref": null,
+        "props": {
+          "layerNumber": 3
+        },
+        "_owner": null
+      }
     },
     {
       "keyCode": 44,
@@ -406,8 +414,16 @@
       "verbose": "Disabled"
     },
     {
-      "keyCode": 40,
-      "label": "ENTER"
+      "keyCode": 51514,
+      "label": "ENTER",
+      "extraLabel": {
+        "key": null,
+        "ref": null,
+        "props": {
+          "layerNumber": 2
+        },
+        "_owner": null
+      }
     },
     {
       "keyCode": 42,
@@ -421,14 +437,15 @@
       "verbose": "AltGr"
     },
     {
+      "keyCode": 0,
+      "label": "KEY",
+      "extraLabel": "NO",
+      "verbose": "Disabled"
+    },
+    {
       "keyCode": 231,
       "label": "RIGHT WIN",
       "verbose": "Right Windows"
-    },
-    {
-      "keyCode": 17451,
-      "label": "2",
-      "extraLabel": "SHIFT"
     },
     {
       "keyCode": 0,
@@ -438,7 +455,7 @@
     }
   ],
   "colormap": [
-    12,
+    14,
     4,
     4,
     4,
@@ -458,54 +475,54 @@
     4,
     4,
     4,
-    8,
+    14,
     7,
     4,
     4,
     4,
     4,
     4,
-    12,
+    7,
+    1,
+    14,
+    7,
     15,
-    13,
+    7,
+    12,
+    12,
+    12,
+    4,
+    4,
+    4,
+    4,
+    4,
+    12,
+    7,
+    4,
+    4,
+    4,
+    4,
+    4,
+    12,
+    7,
+    7,
+    4,
+    4,
+    4,
+    4,
+    12,
+    7,
+    7,
+    7,
+    7,
+    4,
+    4,
+    12,
+    1,
+    14,
+    7,
     11,
-    7,
-    7,
-    12,
-    12,
-    12,
-    4,
-    4,
-    4,
-    4,
-    4,
-    12,
-    7,
-    4,
-    4,
-    4,
-    4,
-    4,
-    12,
-    7,
-    7,
-    4,
-    4,
-    4,
-    4,
-    12,
-    7,
-    7,
-    7,
-    7,
-    4,
-    4,
-    12,
     15,
-    13,
-    7,
-    11,
-    7,
     12,
     12,
     4,
