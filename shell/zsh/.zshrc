@@ -118,7 +118,8 @@ autoload -Uz compinit && compinit
 autoload -Uz vcs_info
 precmd_functions+=(vcs_info)
 zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git:*' formats ' %b'
+zstyle ':vcs_info:git:*' formats '(%b)'
+# zstyle ':vcs_info:git:*' formats ' %b'
 
 parse_git_status() {
   git_status="$(git status 2> /dev/null)"
