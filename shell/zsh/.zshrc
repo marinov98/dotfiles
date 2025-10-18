@@ -115,11 +115,10 @@ zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
 fpath=(~/.zsh $fpath)
 autoload -Uz compinit && compinit
 
-autoload -Uz vcs_info # enable vcs_info
-precmd () { vcs_info } # always load before displaying the prompt
-zstyle ':vcs_info:*' formats '(%b)'
-# zstyle ':vcs_info:*' formats ' %b'
-
+autoload -Uz vcs_info
+precmd_functions+=(vcs_info)
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git:*' formats ' %b'
 
 parse_git_status() {
   git_status="$(git status 2> /dev/null)"
@@ -138,7 +137,11 @@ parse_git_status() {
 setopt PROMPT_SUBST
 NEWLINE=$'\n'
 
-PROMPT='%F{81}%n@%m:%f%F{green}${PWD/#$HOME/~}%f %F{183}${vcs_info_msg_0_}%f $(parse_git_status)%F{yellow}$NEWLINE$%f '
+# No (Nerdfont) Icons Prompt
+PROMPT='%F{81}%n:%f%F{green}${PWD/#$HOME/~}%f %F{183}${vcs_info_msg_0_}%f $(parse_git_status)%F{yellow}$NEWLINE$%f '
 
-### NERD FONT VARIANT
-#PROMPT='%F{81}󰌢 %n@%m%f%F{green}  ${PWD/#$HOME/~}%f %F{183}${vcs_info_msg_0_}%f $(parse_git_status)%F{yellow}$NEWLINE%f '
+# (Nerdfont) Icons variant
+# PROMPT='%F{81}󰌢 %n%f%F{green}  ${PWD/#$HOME/~}%f %F{183}${vcs_info_msg_0_}%f $(parse_git_status)%F{yellow}${NEWLINE}󰘧%f '
+
+# Lambda variant
+# PROMPT='%F{250}󰌢 %f%F{68}${PWD/#$HOME/~}%f %F{146}${vcs_info_msg_0_}%f $(parse_git_status)%F{172}${NEWLINE}󰘧%f '
