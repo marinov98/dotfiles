@@ -23,7 +23,7 @@
     },
     {
       "id": 2,
-      "name": "Media"
+      "name": "Nav"
     },
     {
       "id": 3,
@@ -354,8 +354,10 @@
       "verbose": "Right Shift"
     },
     {
-      "keyCode": 41,
-      "label": "ESC"
+      "keyCode": 0,
+      "label": "KEY",
+      "extraLabel": "NO",
+      "verbose": "Disabled"
     },
     {
       "keyCode": 227,
@@ -437,10 +439,17 @@
       "verbose": "AltGr"
     },
     {
-      "keyCode": 0,
-      "label": "KEY",
-      "extraLabel": "NO",
-      "verbose": "Disabled"
+      "keyCode": 49210,
+      "label": "ESC",
+      "extraLabel": {
+        "key": null,
+        "ref": null,
+        "props": {
+          "modifier": "control",
+          "size": "sm"
+        },
+        "_owner": null
+      }
     },
     {
       "keyCode": 231,
@@ -455,7 +464,7 @@
     }
   ],
   "colormap": [
-    14,
+    12,
     4,
     4,
     4,
@@ -475,18 +484,18 @@
     4,
     4,
     4,
+    13,
+    7,
+    4,
+    4,
+    4,
+    4,
+    4,
     14,
-    7,
-    4,
-    4,
-    4,
-    4,
-    4,
-    7,
     1,
-    14,
+    13,
     7,
-    15,
+    0,
     7,
     12,
     12,
@@ -519,10 +528,10 @@
     4,
     12,
     1,
-    14,
+    0,
     7,
     11,
-    15,
+    0,
     12,
     12,
     4,
@@ -714,10 +723,10 @@
       "rgb": "rgb(0, 0, 0)"
     },
     {
-      "r": 126,
-      "g": 211,
-      "b": 33,
-      "rgb": "rgb(126, 211, 33)"
+      "r": 0,
+      "g": 0,
+      "b": 0,
+      "rgb": "rgb(0, 0, 0)"
     },
     {
       "r": 0,
@@ -726,10 +735,10 @@
       "rgb": "rgb(0, 0, 0)"
     },
     {
-      "r": 245,
-      "g": 166,
-      "b": 35,
-      "rgb": "rgb(245, 166, 35)"
+      "r": 0,
+      "g": 0,
+      "b": 0,
+      "rgb": "rgb(0, 0, 0)"
     }
   ]
 }
