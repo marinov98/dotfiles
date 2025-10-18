@@ -1,12 +1,11 @@
-theme = Catppuccin Mocha
+theme = JellyBeans
 
 font-size = 14
-font-family = FiraCode Nerd Font Mono
+font-family = JetBrainsMono Nerd Font
 
 shell-integration-features = no-cursor
 cursor-style = block
 cursor-style-blink = false
 
-background-opacity = 0.9
+background-opacity = 0.8
 window-padding-x = 5
-
