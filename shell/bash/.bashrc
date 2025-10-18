@@ -31,14 +31,7 @@ if [ -f "$HOME/git-completion.bash" ]; then
 fi
 
  
-PS1="\[$(tput bold)\]\n";
-PS1+="\[$(tput setaf 39)\]$(whoami) ";  # blue  user
-PS1+="\[$(tput setaf 148)\]at: "
-PS1+="\[$(tput setaf 196)\]\W";   # red directories
-PS1+="\[$(tput setaf 162)\]\$(parse_git_branch) > "; #github integration
-PS1+="\[$(tput sgr0)\]\$(parse_git_status)";
-PS1+="\[$(tput sgr0)\]";
-export PS1;
+export PS1="\[\033[36m\]\u@\h:\033[32m\]\w\[\033[1;35m\]\$(parse_git_branch)\[\033[00m\]\$(parse_git_status)\n\[\033[1;33m\]$ \[\033[00m\]"
 
 
 ###################################
