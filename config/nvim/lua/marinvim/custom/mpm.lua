@@ -34,6 +34,11 @@ function M.enable_netrw_keymaps()
   vim.keymap.set('n', '<leader>ut', ":Vexplore!<CR>", { desc = "Open netrw side bar" })
 end
 
+function M.set_hl()
+  vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+  vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+end
+
 function M.setup(opts)
   opts = opts or {}
 
@@ -56,6 +61,9 @@ function M.setup(opts)
 
   -- File Tree
   -- M.enable_netrw_keymaps()
+
+  -- Highlight
+  -- M.set_hl()
 end
 
 return M

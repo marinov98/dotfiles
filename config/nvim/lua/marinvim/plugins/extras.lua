@@ -7,16 +7,26 @@ return {
   },
   {
     'echasnovski/mini.pairs',
+    enabled = false,
     version = "*",
     event = "InsertEnter",
     opts = {}
   },
-  -- icons
   {
     'echasnovski/mini.icons',
-    enabled = false, -- set to true and enable in fuzzy finder for icons
+    enabled = true,
     version = '*',
     opts = {}
+  },
+  {
+    "j-hui/fidget.nvim",
+    opts = {
+      notification = {
+        window = {
+          winblend = 0,
+        }
+      }
+    }
   },
   {
     'stevearc/oil.nvim',
@@ -31,6 +41,7 @@ return {
           show_hidden = true
         }
       })
+
       vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory with Oil" })
     end
   }
