@@ -1,4 +1,4 @@
-;; git-setup.el --- setup-git -*- lexical-binding: t; -*-
+;; vcs-setup.el --- setup version control -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;; setup git related packages.
@@ -87,5 +87,5 @@
   "g" '(hydra-git/body :wk "Git Hydra")
 )
 
-(provide 'git-setup)
-;;; git-setup.el ends here
+(provide 'vcs-setup)
+;;; vcs-setup.el ends here

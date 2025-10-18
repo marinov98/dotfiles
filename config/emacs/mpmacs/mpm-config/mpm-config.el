@@ -18,7 +18,7 @@
 (require 'lang-modes)
 (require 'treesitter-setup)
 (require 'markup-setup)
-(require 'git-setup)
+(require 'vcs-setup)
 (require 'autocomplete-setup)
 (require 'web-dev-setup)
 (require 'lsp-setup)
