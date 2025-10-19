@@ -41,12 +41,11 @@
   :after evil
   :config
   (general-evil-setup)
-  ;; set up 'SPC' as the global leader key
   (general-create-definer mpm/leader-keys
      :states '(normal insert visual emacs)
      :keymaps 'override
      :prefix "SPC" ;; set leader
-     :global-prefix "S-SPC") ;; access leader in insert mode
+     :global-prefix "M-SPC") ;; access leader in insert mode
 
   (mpm/leader-keys
     "a" '(evil-buffer :wk "Ctrl+^ Buffer")

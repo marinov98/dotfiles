@@ -25,7 +25,10 @@
 (use-package embark
     :ensure t
     :bind
-    (("C-," . embark-act)
+    (:map evil-normal-state-map
+     ("C-;" . embark-act)
+     :map evil-visual-state-map
+     ("C-;" . embark-act)
      :map minibuffer-local-map
      ("C-q" . embark-export)) ;; inspired by quickfix list exporting in vim
 )
