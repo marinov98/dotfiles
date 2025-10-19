@@ -17,6 +17,7 @@ vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.signcolumn = 'yes'
+vim.opt.laststatus = 3 -- global status
 
 vim.opt.smartindent = true
 

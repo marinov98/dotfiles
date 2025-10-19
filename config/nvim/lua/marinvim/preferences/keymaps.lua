@@ -1,4 +1,5 @@
 vim.g.mapleader = " "
+vim.g.maplocalleader = ";"
 
 -- Saving, Quitting, Navigating
 vim.keymap.set('n', '<leader>a', "<C-^>", { desc = "Alternate buffers" })
