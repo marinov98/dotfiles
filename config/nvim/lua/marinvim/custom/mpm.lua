@@ -39,6 +39,16 @@ function M.set_hl()
   vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 end
 
+function M.get_visual_selection()
+  local old_text = vim.fn.getreg('c')
+  vim.cmd('normal! "cy')
+
+  local yanked_text = vim.fn.getreg('c')
+
+  vim.fn.setreg('c', old_text)
+  return yanked_text
+end
+
 function M.setup(opts)
   opts = opts or {}
 
@@ -58,6 +68,13 @@ function M.setup(opts)
     vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Copy line to system clipboard" })
     vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]], { desc = "Paste from system clipboard" })
   end
+
+  -- Search/Replace
+  vim.keymap.set("x", "<leader>ca", function()
+      local target = M.get_visual_selection()
+      vim.fn.feedkeys(":%s/" .. target .. "/" .. target .. "/gc\x80kl\x80kl\x80kl", "n")
+    end,
+    { desc = "Change all selections in file with confirmation" })
 
   -- File Tree
   -- M.enable_netrw_keymaps()
