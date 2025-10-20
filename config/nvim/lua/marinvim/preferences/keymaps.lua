@@ -19,7 +19,9 @@ vim.keymap.set("n", "<C-;>s", "<cmd>cdo :w<CR>", { desc = "execute cdo :w" })
 vim.keymap.set('n', '<leader>cs', ":terminal<CR>", { desc = "Open terminal" })
 vim.keymap.set('n', '<leader>cn', ":noh<CR>", { desc = "Remove highlight" })
 vim.keymap.set("n", "<leader>ca", ":%s/<C-r><C-w>/<C-r><C-w>/gc<Left><Left><Left>",
-  { desc = "Change all under cursor with confirmation" })
+  { desc = "Change all word under cursor with confirmation" })
+vim.keymap.set("n", "<leader>cA", ":%s/<C-r><C-a>/<C-r><C-a>/gc<Left><Left><Left>",
+  { desc = "Change all WORD under cursor with confirmation" })
 vim.keymap.set("n", "<leader>ci", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
   { desc = "Case insensitive search/replace under cursor for current file" })
 
