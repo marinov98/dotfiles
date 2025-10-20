@@ -77,8 +77,8 @@ function M.setup(opts)
 
   vim.keymap.set("x", "<leader>cm", function()
     local target = vim.fn.input("substitute < ")
-    vim.fn.feedkeys(":s/" .. target .. "/" .. target, "v")
-  end, { desc = "Multi Search/Replace in highlighted region" })
+    vim.fn.feedkeys(":s/" .. target .. "/" .. target .. "/g\x80kl\x80kl", "v")
+  end, { desc = " Multi Search/Replace in highlighted region" })
 
   -- File Tree
   -- M.enable_netrw_keymaps()
