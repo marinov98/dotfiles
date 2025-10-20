@@ -36,6 +36,7 @@
     (evil-global-set-key 'normal "grr" 'xref-find-references)
 )
 
+
 (use-package general
   :ensure t
   :after evil
@@ -79,8 +80,6 @@
      "d d c d" '(dired-create-directory :wk "Dired Create Directory")
     ;; <leader>c
      "c" '(:ignore t :wk "Coding")
-     "c /" '(comment-region :wk "Comment Region")
-     "c u" '(uncomment-region :wk "Uncomment Region")
      "c s" '(shell :wk "Shell")
      ;; <leader>e
      "e" '(:ignore t :wk "Editing/Evil")
@@ -108,10 +107,11 @@
     :general-config
     (mpm/leader-keys
         "c m" '(hydra-mc/body :wk "Multiple Cursors Hydra")
+        "c a" '(hydra-mc/evil-mc-make-all-cursors :wk "Change all")
     )
     :config
     (global-evil-mc-mode 1)
-    (pretty-hydra-define hydra-mc (:color pink :title "Multiple Cursors" :quit-key "<escape>")
+    (pretty-hydra-define hydra-mc (:color red :title "Multiple Cursors" :quit-key "<escape>")
       (
         "Goto"
         (("n" evil-mc-make-and-goto-next-match "make & next")
