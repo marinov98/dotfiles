@@ -95,12 +95,12 @@
       "commands": ["workbench.action.terminal.new"]
     },
     {
-      "before": ["<leader>", "l", "r"],
-      "commands": ["editor.action.refactor"]
+      "before": ["<leader>", "c", "a"],
+      "commands": ["editor.action.changeAll"]
     },
     {
-      "before": ["<leader>", "l", "a"],
-      "commands": ["editor.action.changeAll"]
+      "before": ["<leader>", "l", "r"],
+      "commands": ["editor.action.refactor"]
     },
     {
       "before": ["g", "r", "n"],
@@ -239,6 +239,10 @@
     {
       "before": ["ctrl+p"],
       "commands": ["editor.action.addSelectionToPreviousFindMatch"]
+    },
+    {
+      "before": ["<leader>", "c", "a"],
+      "commands": ["editor.action.changeAll"]
     },
     {
       "before": ["<leader>", "c", "m", "a"],

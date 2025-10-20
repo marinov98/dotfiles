@@ -117,6 +117,16 @@
     "command": "workbench.action.closeSidebar",
     "when": "searchViewletFocus"
   },
+  {
+    "key": "ctrl+; r",
+    "command": "search.action.replaceAll",
+    "when": "replaceActive && searchViewletVisible && !findWidgetVisible"
+  },
+  {
+    "key": "ctrl+; l",
+    "command": "search.action.replaceAllInFile",
+    "when": "fileMatchFocus && isEditableItem && replaceActive && searchViewletVisible"
+  },
   // Problems
   {
     "key": "/",
