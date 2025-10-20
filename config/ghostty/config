@@ -1,3 +1,4 @@
+# Appearance
 theme = JellyBeans
 
 font-size = 14
@@ -9,3 +10,21 @@ cursor-style-blink = false
 
 background-opacity = 0.8
 window-padding-x = 5
+
+# Bindings
+keybind = ctrl+,>z=toggle_split_zoom
+keybind = ctrl+,>c=new_tab
+
+## Movement
+keybind = ctrl+,>h=goto_split:left
+keybind = ctrl+,>j=goto_split:down
+keybind = ctrl+,>k=goto_split:up
+keybind = ctrl+,>l=goto_split:right
+
+keybind = ctrl+,>p=previous_tab
+keybind = ctrl+,>n=next_tab
+
+## Closing, Quitting
+keybind = ctrl+,>x=close_surface
+keybind = ctrl+,>shift+k=close_tab
+keybind = ctrl+,>shift+q=close_window
