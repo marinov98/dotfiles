@@ -76,7 +76,7 @@ function M.setup(opts)
   end, { desc = "Change all selections in file with confirmation" })
 
   vim.keymap.set("x", "<leader>cm", function()
-    local target = vim.fn.input("sed < ")
+    local target = vim.fn.input("substitute < ")
     vim.fn.feedkeys(":s/" .. target .. "/" .. target, "v")
   end, { desc = "Multi Search/Replace in highlighted region" })
 
