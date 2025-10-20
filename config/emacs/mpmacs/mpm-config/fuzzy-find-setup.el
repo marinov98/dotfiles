@@ -31,6 +31,7 @@
      ("C-;" . embark-act)
      :map minibuffer-local-map
      ("C-;" . embark-act)
+     ("C-<" . embark-become)
      ("C-q" . embark-export)) ;; inspired by quickfix list exporting in vim
 )
 
