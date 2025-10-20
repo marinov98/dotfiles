@@ -30,6 +30,7 @@
      :map evil-visual-state-map
      ("C-;" . embark-act)
      :map minibuffer-local-map
+     ("C-;" . embark-act)
      ("C-q" . embark-export)) ;; inspired by quickfix list exporting in vim
 )
 
@@ -149,6 +150,18 @@
                    (kill-buffer buffer)))))
    )
 
+  (defun mpm/save-project-buffers ()
+    "Save all buffers belonging to the current project."
+    (interactive)
+    (when (yes-or-no-p "Save all project buffers? ")
+      (let ((project-buffers (project-buffers (project-current))))
+        (cl-loop for buffer in project-buffers
+                 do
+                 (with-current-buffer buffer
+                   (when (and (buffer-file-name)
+                              (buffer-modified-p))
+                     (save-buffer))))))
+   )
 
 
   (evil-global-set-key 'normal (kbd "C-p") 'project-find-file)
@@ -170,6 +183,7 @@
 
       "Finish"
       (("c" project-compile "compile")
+      ("w" mpm/save-project-buffers "save project buffers")
       ("k" mpm/kill-other-project-buffers "kill other project buffers")
       ("K" project-kill-buffers "kill project buffers"))
     )
