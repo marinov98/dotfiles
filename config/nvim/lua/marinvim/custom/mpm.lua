@@ -71,10 +71,14 @@ function M.setup(opts)
 
   -- Search/Replace
   vim.keymap.set("x", "<leader>ca", function()
-      local target = M.get_visual_selection()
-      vim.fn.feedkeys(":%s/" .. target .. "/" .. target .. "/gc\x80kl\x80kl\x80kl", "n")
-    end,
-    { desc = "Change all selections in file with confirmation" })
+    local target = M.get_visual_selection()
+    vim.fn.feedkeys(":%s/" .. target .. "/" .. target .. "/gc\x80kl\x80kl\x80kl", "n")
+  end, { desc = "Change all selections in file with confirmation" })
+
+  vim.keymap.set("x", "<leader>cm", function()
+    local target = vim.fn.input("sed < ")
+    vim.fn.feedkeys(":s/" .. target .. "/" .. target, "v")
+  end, { desc = "Multi Search/Replace in highlighted region" })
 
   -- File Tree
   -- M.enable_netrw_keymaps()
