@@ -75,11 +75,6 @@ function M.setup(opts)
     vim.fn.feedkeys(":%s/" .. target .. "/" .. target .. "/gc\x80kl\x80kl\x80kl", "n")
   end, { desc = "Change all selections in file with confirmation" })
 
-  vim.keymap.set("x", "<leader>cm", function()
-    local target = vim.fn.input("substitute < ")
-    vim.fn.feedkeys(":s/" .. target .. "//g\x80kl\x80kl", "v")
-  end, { desc = " Multi Search/Replace in highlighted region" })
-
   -- File Tree
   -- M.enable_netrw_keymaps()
 
