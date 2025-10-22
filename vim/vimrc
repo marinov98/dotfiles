@@ -109,11 +109,12 @@ function! ToggleNetrw()
     endif
 endfunction
 
-noremap <silent> <leader>tn :call ToggleNetrw()<CR>
+noremap <silent> <leader>ut :call ToggleNetrw()<CR>
 
 """""""""""""""""""""""
 """"" PERSONAL BINDINGS:
 """""""""""""""""""""""
+
 nnoremap <leader>cn :noh<CR>
 nnoremap Y y$
 nnoremap <leader>s :w<CR>
@@ -121,34 +122,32 @@ nnoremap <leader>k :bd<CR>
 nnoremap <leader>x :tabclose<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>Q :q!<CR>
+nnoremap <leader>f :e
 
 nnoremap <leader>cs :terminal<CR>
-nnoremap <leader>cm :%s//gc<Left><Left><Left>
-vnoremap <leader>cm :s//gc<Left><Left><Left>
+nnoremap <leader>ca :%s/<C-r><C-w>/<C-r><C-w>/g<Left><Left>
+nnoremap <leader>cA :%s/<C-r><C-a>/<C-r><C-a>/g<Left><Left>
 nnoremap <leader>ci :%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>
-nnoremap <leader>/ :grep 
+nnoremap <leader>/ :grep
 nnoremap <leader>* :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 nnoremap <leader>ux :!chmod +x %<CR>
-nnoremap <leader>uc  :! 
+nnoremap <leader>uc :!
+
+
+nnoremap ]q :cnext<CR>
+nnoremap [q :cprev<CR>
+
 
 nnoremap <leader>a <C-^>
 nnoremap <leader>bn :bnext<CR>
 nnoremap <leader>bp :bprevious<CR>
 
-nnoremap <leader>tt :tabnew<CR>
-nnoremap <leader>tj :tabnext<CR>
-nnoremap <leader>tk :tabprevious<CR>
+
+nnoremap <leader>tn :tabnext<CR>
+nnoremap <leader>tp :tabprevious<CR>
 
 """""""""""""""""""""""
 """"" WINDOW MANAGEMENT:
 """""""""""""""""""""""
 " Fix splitting
 set splitbelow splitright
-
-" Auto close braces
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ` ``<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
