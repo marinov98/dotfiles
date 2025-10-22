@@ -42,7 +42,7 @@ alias ls='ls -GFh --color=auto'             # Preferred 'ls' implementation
 alias cp='cp -iv'                           # Preferred 'cp' implementation
 alias mv='mv -iv'                           # Preferred 'mv' implementation
 alias mkdir='mkdir -pv'                     # Preferred 'mkdir' implementation
-alias ll='ls -FGlAhp --color=auto'          # Preferred alternative 'ls' implementation
+alias ll='ls -l'                            # Preferred alternative 'ls' implementation
 alias less='less -FSRXc'                    # Preferred 'less' implementation
 
 alias v='vim'             		              # v:            Opens any file in vim/nvim editor
