@@ -106,6 +106,7 @@ map grn <Action>(RenameElement)
 map gra <Action>(ShowIntentionActions)
 map gri <Action>(GotoImplementation)
 map gry <Action>(GotoTypeDeclaration)
+map grh <Action>(ParameterInfo)
 map grR <Action>(FindUsagesInFile)
 map gcc <Action>(CommentByLineComment)
  
