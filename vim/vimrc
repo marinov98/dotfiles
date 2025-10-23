@@ -121,7 +121,7 @@ nnoremap <leader>k :bd<CR>
 nnoremap <leader>x :tabclose<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>Q :q!<CR>
-nnoremap <leader>f :e
+nnoremap <leader>f :e 
 
 nnoremap <leader>cs :terminal<CR>
 nnoremap <leader>ca :%s/<C-r><C-w>/<C-r><C-w>/gc<Left><Left><Left>
