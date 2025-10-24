@@ -87,7 +87,7 @@ function M.setup(opts)
   -- Search/Replace
   vim.keymap.set("x", "<leader>ca", function()
     local target = M.get_visual_selection()
-    vim.fn.feedkeys(":%s/" .. target .. "/" .. target .. "/gc\x80kl\x80kl\x80kl", "n")
+    vim.fn.feedkeys(":%s/" .. target .. "/" .. target .. "/g\x80kl\x80kl", "n")
   end, { desc = "Change all selections in file with confirmation" })
 
   M.emulate_MC()
