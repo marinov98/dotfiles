@@ -124,8 +124,9 @@ nnoremap <leader>Q :q!<CR>
 nnoremap <leader>f :e 
 
 nnoremap <leader>cs :terminal<CR>
-nnoremap <leader>ca :%s/<C-r><C-w>/<C-r><C-w>/gc<Left><Left><Left>
-nnoremap <leader>cA :%s/<C-r><C-a>/<C-r><C-a>/gc<Left><Left><Left>
+nnoremap <leader>ca :%s/<C-r><C-w>/<C-r><C-w>/g<Left><Left>
+nnoremap <leader>cA :%s/<C-r><C-a>/<C-r><C-a>/g<Left><Left>
+nnoremap <leader>cm *Ncgn
 nnoremap <leader>ci :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
 nnoremap <leader>/ :grep
 nnoremap <leader>* :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
