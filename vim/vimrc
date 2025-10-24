@@ -81,6 +81,20 @@ set path+=**
 
 " grep arg
 set grepprg=grep\ -HRIn\ $*\ .
+if executable('rg')
+	set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+endif
+
+function! GrepInput()
+  let user_in = input("Grep > ")
+  if empty(user_in)
+    echo "Cancelled"
+    return
+  endif
+
+  let cmd = 'silent! grep! ' . shellescape(user_in) . ' | silent! cwindow | redraw!'
+  call timer_start(0, { -> execute(cmd) })
+endfunction
 
 "" NETRW:
 let g:netrw_banner=0 " Disable annoying banner
@@ -91,6 +105,7 @@ let g:netrw_winsize = 25    " take 25 % of window
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 let g:NetrwIsOpen=0
+
 
 function! ToggleNetrw()
     if g:NetrwIsOpen
@@ -128,7 +143,7 @@ nnoremap <leader>ca :%s/<C-r><C-w>/<C-r><C-w>/g<Left><Left>
 nnoremap <leader>cA :%s/<C-r><C-a>/<C-r><C-a>/g<Left><Left>
 nnoremap <leader>cm *Ncgn
 nnoremap <leader>ci :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
-nnoremap <leader>/ :grep
+nnoremap <leader>/ :call GrepInput()<CR>
 nnoremap <leader>* :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 nnoremap <leader>ux :!chmod +x %<CR>
 nnoremap <leader>uc :!
