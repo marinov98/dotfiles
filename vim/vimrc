@@ -142,6 +142,7 @@ nnoremap <leader>cs :terminal<CR>
 nnoremap <leader>ca :%s/<C-r><C-w>/<C-r><C-w>/g<Left><Left>
 nnoremap <leader>cA :%s/<C-r><C-a>/<C-r><C-a>/g<Left><Left>
 nnoremap <leader>cm *Ncgn
+vnoremap <leader>cm y/\V<C-R>=escape(@", '/\')<CR><CR>Ncgn
 nnoremap <leader>ci :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
 nnoremap <leader>/ :call GrepInput()<CR>
 nnoremap <leader>* :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
