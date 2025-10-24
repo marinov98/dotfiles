@@ -44,5 +44,18 @@ return {
 
       vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory with Oil" })
     end
+  },
+  {
+    'MagicDuck/grug-far.nvim',
+    config = function()
+      local grug = require("grug-far")
+
+      grug.setup({})
+
+      vim.keymap.set({ 'n', 'x' }, '<leader><leader>/', function()
+        grug.open({ visualSelectionUsage = 'operate-within-range' })
+      end, { desc = 'Search within range' })
+      vim.keymap.set("x", "<leader><leader>*", grug.with_visual_selection, { desc = "Search/Replace Visual Selection" })
+    end
   }
 }

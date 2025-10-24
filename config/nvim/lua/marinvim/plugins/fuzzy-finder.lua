@@ -57,7 +57,6 @@ return {
       map("n", "gl", function() Snacks.picker.lines() end, { desc = "Goto line" })
       map("n", "gL", function() Snacks.picker.grep_buffers() end, { desc = "Goto line-multi" })
       map("n", "<leader>/", function() Snacks.picker.grep_word({ search = vim.fn.input("Grep > ") }) end, { desc = "Grep on user input" })
-      map("n", "<leader><leader>/", function() Snacks.picker.grep() end, { desc = "Live Grep" })
       map({ "n", "x" }, "<leader>*", function() Snacks.picker.grep_word() end, { desc = "Grep word under cursor/visual" })
       map("n", "<leader><leader>*", function() Snacks.picker.grep_word({ search = vim.fn.expand("<cWORD>") }) end, { desc = "Grep WORD under cursor" })
       -- Git
