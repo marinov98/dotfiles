@@ -9,12 +9,6 @@ vim.keymap.set('n', '<leader>x', ":tabclose<CR>", { desc = "Close tab" })
 vim.keymap.set('n', '<leader>q', ":q<CR>", { desc = "Quit" })
 vim.keymap.set('n', '<leader>Q', ":q!<CR>", { desc = "Force Quit" })
 
--- QuickFix
-vim.keymap.set("n", "<C-;>o", "<cmd>copen<CR>", { desc = "QuickFix Open" })
-vim.keymap.set("n", "<C-;>x", "<cmd>cclose<CR>", { desc = "QuickFix Close" })
-vim.keymap.set("n", "<C-;>d", ":cdo ", { desc = "execute cdo" })
-vim.keymap.set("n", "<C-;>s", "<cmd>cdo :w<CR>", { desc = "execute cdo :w" })
-
 -- Coding utility
 vim.keymap.set('n', '<leader>cs', ":terminal<CR>", { desc = "Open terminal" })
 vim.keymap.set('n', '<leader>cn', ":noh<CR>", { desc = "Remove highlight" })
