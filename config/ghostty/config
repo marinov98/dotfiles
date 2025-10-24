@@ -15,6 +15,8 @@ window-padding-x = 5
 keybind = ctrl+,>z=toggle_split_zoom
 keybind = ctrl+,>shift+f=toggle_fullscreen
 keybind = ctrl+,>c=new_tab
+keybind = ctrl+,>shift+\=new_split:right
+keybind = ctrl+,>-=new_split:down
 
 ## Movement
 keybind = ctrl+,>h=goto_split:left
