@@ -203,24 +203,8 @@
       "commands": ["workbench.action.showCommands"]
     },
     {
-      "before": ["<leader>", "c", "m", "n"],
-      "commands": ["editor.action.addSelectionToNextFindMatch"]
-    },
-    {
-      "before": ["<leader>", "c", "m", "p"],
-      "commands": ["editor.action.addSelectionToPreviousFindMatch"]
-    },
-    {
-      "before": ["<leader>", "c", "m", "j"],
-      "commands": ["editor.action.insertCursorBelow"]
-    },
-    {
-      "before": ["<leader>", "c", "m", "k"],
-      "commands": ["editor.action.insertCursorAbove"]
-    },
-    {
-      "before": ["<leader>", "c", "m", "a"],
-      "commands": ["editor.action.selectHighlights"]
+      "before": ["<leader>", "c", "m"],
+      "after": ["*", "N","c", "g", "n"]
     },
     {
       "before": ["ctrl+n"],
@@ -245,8 +229,8 @@
       "commands": ["editor.action.changeAll"]
     },
     {
-      "before": ["<leader>", "c", "m", "a"],
-      "commands": ["editor.action.insertCursorAtEndOfEachLineSelected"]
+      "before": ["<leader>", "c", "m"],
+      "commands": ["editor.action.selectHighlights"]
     }
   ],
   "vim.insertModeKeyBindingsNonRecursive": [
