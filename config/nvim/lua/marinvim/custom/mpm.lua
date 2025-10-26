@@ -49,7 +49,7 @@ function M.get_visual_selection()
   return yanked_text
 end
 
-function M.mpm_VMC(opts)
+function M.mpm_Vedit(opts)
   opts = opts or {}
   local escaped = vim.fn.escape(M.get_visual_selection(), "/\\")
   vim.fn.setreg("/", "\\V" .. escaped)
@@ -57,11 +57,18 @@ function M.mpm_VMC(opts)
   vim.api.nvim_feedkeys(target, "n", false)
 end
 
-function M.emulate_MC()
-  vim.keymap.set("x", "<C-n>", M.mpm_VMC, { desc = "Multi edit visually selected occurence forward" })
-  vim.keymap.set("x", "<C-p>", function() M.mpm_VMC({ reverse = true }) end,
+function M.mpm_Medit()
+  vim.keymap.set("x", "<C-n>", M.mpm_Vedit, { desc = "Multi edit visually selected occurence forward" })
+  vim.keymap.set("x", "<C-p>", function() M.mpm_Vedit({ reverse = true }) end,
     { desc = "Multi edit visually selected occurence reverse" })
   vim.keymap.set("n", "<C-n>", "*Ncgn", { desc = "(MC Emulation) Change occurence under cursor" })
+
+  -- Alternative bindings
+  vim.keymap.set("n", "<leader>cm", "*Ncgn", { desc = "(Multi Edit) Change occurence under cursor" })
+  vim.keymap.set("n", "<leader>cM", "*NcgN", { desc = "(Multi Edit) Change occurence under cursor" })
+  vim.keymap.set("x", "<leader>cm", M.mpm_Vedit, { desc = "Multi edit visually selected occurence forward" })
+  vim.keymap.set("x", "<leader>cM", function() M.mpm_Vedit({ reverse = true }) end,
+    { desc = "Multi edit visually selected occurence reverse" })
 end
 
 function M.setup(opts)
@@ -90,7 +97,7 @@ function M.setup(opts)
     vim.fn.feedkeys(":%s/" .. target .. "/" .. target .. "/g\x80kl\x80kl", "n")
   end, { desc = "Change all selections in file with confirmation" })
 
-  M.emulate_MC()
+  M.mpm_Medit()
 
   -- File Tree
   -- M.enable_netrw_keymaps()
