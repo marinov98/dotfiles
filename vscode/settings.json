@@ -204,7 +204,11 @@
     },
     {
       "before": ["<leader>", "c", "m"],
-      "after": ["*", "N","c", "g", "n"]
+      "after": ["*", "N", "c", "g", "n"]
+    },
+    {
+      "before": ["<leader>", "c", "M"],
+      "after": ["*", "N", "c", "g", "N"]
     },
     {
       "before": ["ctrl+n"],
