@@ -233,8 +233,20 @@
       "commands": ["editor.action.changeAll"]
     },
     {
+      "before": ["<leader>", "c", "e"],
+      "commands": ["editor.action.insertCursorAtEndOfEachLineSelected"]
+    },
+    {
       "before": ["<leader>", "c", "m"],
-      "commands": ["editor.action.selectHighlights"]
+      "commands": ["editor.action.addSelectionToNextFindMatch"]
+    },
+    {
+      "before": ["<leader>", "c", "M"],
+      "commands": ["editor.action.addSelectionToPreviousFindMatch"]
+    },
+    {
+      "before": ["<leader>", "u", "c"],
+      "commands": ["workbench.action.terminal.runSelectedText"]
     }
   ],
   "vim.insertModeKeyBindingsNonRecursive": [
