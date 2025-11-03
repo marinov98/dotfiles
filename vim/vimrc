@@ -124,6 +124,7 @@ function! ToggleNetrw()
 endfunction
 
 noremap <silent> <leader>ut :call ToggleNetrw()<CR>
+nnoremap - :Explore<CR>
 
 """""""""""""""""""""""
 """"" PERSONAL BINDINGS:
