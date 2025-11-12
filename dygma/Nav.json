@@ -66,16 +66,18 @@
       "label": "F1"
     },
     {
-      "keyCode": 59,
-      "label": "F2"
+      "keyCode": 20545,
+      "label": "LEFT",
+      "extraLabel": "M.Btn"
     },
     {
       "keyCode": 60,
       "label": "F3"
     },
     {
-      "keyCode": 61,
-      "label": "F4"
+      "keyCode": 20546,
+      "label": "RIGHT",
+      "extraLabel": "M.Btn"
     },
     {
       "keyCode": 62,
@@ -257,9 +259,8 @@
       "verbose": "Transparent"
     },
     {
-      "keyCode": 20545,
-      "label": "LEFT",
-      "extraLabel": "M.Btn"
+      "keyCode": 76,
+      "label": "DEL"
     },
     {
       "keyCode": 74,
@@ -360,8 +361,8 @@
       "verbose": "Caps Lock"
     },
     {
-      "keyCode": 72,
-      "label": "PAUSE"
+      "keyCode": 73,
+      "label": "INSERT"
     },
     {
       "keyCode": 70,
@@ -444,10 +445,17 @@
       "verbose": "Next track"
     },
     {
-      "keyCode": 0,
-      "label": "KEY",
-      "extraLabel": "NO",
-      "verbose": "Disabled"
+      "keyCode": 22733,
+      "label": {
+        "key": null,
+        "ref": null,
+        "props": {
+          "size": "sm"
+        },
+        "_owner": null
+      },
+      "extraLabel": "",
+      "verbose": "Play / pause"
     },
     {
       "keyCode": 0,
@@ -555,9 +563,9 @@
   "colormap": [
     14,
     4,
+    6,
     4,
-    4,
-    4,
+    6,
     4,
     4,
     7,
@@ -568,7 +576,7 @@
     10,
     12,
     7,
-    6,
+    7,
     7,
     7,
     7,
@@ -581,11 +589,11 @@
     7,
     4,
     12,
-    1,
+    14,
     12,
-    7,
+    14,
     15,
-    7,
+    14,
     12,
     12,
     12,
@@ -610,16 +618,16 @@
     6,
     12,
     12,
-    12,
+    7,
     7,
     7,
     9,
     12,
     12,
-    1,
-    15,
-    7,
-    11,
+    14,
+    14,
+    14,
+    14,
     15,
     12,
     12,

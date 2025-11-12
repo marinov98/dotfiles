@@ -365,15 +365,16 @@
       "verbose": "Left Windows"
     },
     {
+      "keyCode": 225,
+      "label": "SHIFT",
+      "extraLabel": "LEFT",
+      "verbose": "Left Shift"
+    },
+    {
       "keyCode": 0,
       "label": "KEY",
       "extraLabel": "NO",
       "verbose": "Disabled"
-    },
-    {
-      "keyCode": 226,
-      "label": "LEFT ALT",
-      "verbose": "Left Alt"
     },
     {
       "keyCode": 51806,
@@ -392,10 +393,9 @@
       "label": "SPACE"
     },
     {
-      "keyCode": 0,
-      "label": "KEY",
-      "extraLabel": "NO",
-      "verbose": "Disabled"
+      "keyCode": 226,
+      "label": "LEFT ALT",
+      "verbose": "Left Alt"
     },
     {
       "keyCode": 0,
@@ -410,10 +410,10 @@
       "verbose": "Transparent"
     },
     {
-      "keyCode": 0,
-      "label": "KEY",
-      "extraLabel": "NO",
-      "verbose": "Disabled"
+      "keyCode": 230,
+      "label": "RIGHT ALT",
+      "extraLabel": "",
+      "verbose": "AltGr"
     },
     {
       "keyCode": 51514,
@@ -433,10 +433,10 @@
       "verbose": "Backspace"
     },
     {
-      "keyCode": 230,
-      "label": "RIGHT ALT",
-      "extraLabel": "",
-      "verbose": "AltGr"
+      "keyCode": 0,
+      "label": "KEY",
+      "extraLabel": "NO",
+      "verbose": "Disabled"
     },
     {
       "keyCode": 49210,
@@ -493,11 +493,11 @@
     4,
     14,
     1,
-    14,
     7,
+    14,
     15,
     7,
-    12,
+    7,
     12,
     12,
     4,
@@ -529,10 +529,10 @@
     12,
     1,
     15,
-    7,
+    12,
     11,
     15,
-    12,
+    7,
     12,
     4,
     4,
