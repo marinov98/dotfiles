@@ -127,7 +127,13 @@ return {
 
       conform.setup({
         formatters_by_ft = {
-          python = { "ruff", "black" },
+          python = function(bufnr)
+            if require("conform").get_formatter_info("ruff_format", bufnr).available then
+              return { "ruff_format", "ruff_organize_imports" }
+            else
+              return { "black", "isort" }
+            end
+          end,
           lua = { "stylua" },
           svelte = { "prettier", "prettierd" },
           javascript = { "prettier", "prettierd" },
