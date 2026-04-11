@@ -27,7 +27,7 @@ return {
       })
 
       vim.lsp.config("*", {
-        capabilities = capabilities,
+        capabilities = capabilities
       })
 
       vim.lsp.config("lua_ls", {
@@ -42,14 +42,14 @@ return {
 
 
       vim.diagnostic.config({
-        -- signs = {
-        --   text = {
-        --     [vim.diagnostic.severity.ERROR] = "",
-        --     [vim.diagnostic.severity.WARN]  = "",
-        --     [vim.diagnostic.severity.INFO]  = "",
-        --     [vim.diagnostic.severity.HINT]  = "",
-        --   },
-        -- },
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = "",
+            [vim.diagnostic.severity.WARN]  = "",
+            [vim.diagnostic.severity.INFO]  = "",
+            [vim.diagnostic.severity.HINT]  = "",
+          },
+        },
         virtual_text = true,
         float = {
           focusable = false,
@@ -60,9 +60,9 @@ return {
       -- Keymaps / autocmd on attach
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-        callback = function(ev)
-          vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-          local local_buf = ev.buf
+        callback = function(args)
+          vim.bo[args.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+          local local_buf = args.buf
 
           -- Diagnostics navigation
           vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = false }) end,
@@ -82,6 +82,9 @@ return {
             { desc = "Add WS Folder", buffer = local_buf })
           vim.keymap.set("n", "<leader>lwr", vim.lsp.buf.remove_workspace_folder,
             { desc = "Remove WS Folder", buffer = local_buf })
+          vim.keymap.set("n", "<leader>lh", function()
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = local_buf }), { bufnr = local_buf })
+          end, { desc = "Toggle Inlay Hints", buffer = local_buf })
 
           vim.keymap.set("n", "grd", vim.lsp.buf.declaration, { desc = "Go to Declaration", buffer = local_buf })
           vim.keymap.set("n", "grn", vim.lsp.buf.rename, { desc = "Rename", buffer = local_buf })
@@ -97,6 +100,31 @@ return {
           vim.keymap.set("n", "<leader>ls", picker.lsp_symbols, { desc = "Document Symbols", buffer = local_buf })
           vim.keymap.set("n", "<leader>lws", picker.lsp_workspace_symbols,
             { desc = "Workspace Symbols", buffer = local_buf })
+          vim.keymap.set("n", "<leader>lci", picker.lsp_incoming_calls, { desc = "Incoming Calls", buffer = local_buf })
+          vim.keymap.set("n", "<leader>lco", picker.lsp_outgoing_calls, { desc = "Outgoing Calls", buffer = local_buf })
+
+          -- Document highlighting
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+          if client and client:supports_method("textDocument/documentHighlight") then
+            local augroup = vim.api.nvim_create_augroup("LspDocumentHighlight", { clear = false })
+            local timer = vim.uv.new_timer()
+            vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+              buffer = args.buf,
+              group = augroup,
+              callback = function()
+                timer:start(300, 0, vim.schedule_wrap(vim.lsp.buf.document_highlight))
+              end,
+            })
+
+            vim.api.nvim_create_autocmd("CursorMoved", {
+              buffer = args.buf,
+              group = augroup,
+              callback = function()
+                timer:stop()
+                vim.lsp.buf.clear_references()
+              end,
+            })
+          end
         end,
       })
     end,
