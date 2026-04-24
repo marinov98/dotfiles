@@ -20,7 +20,7 @@ return {
       require("mason-lspconfig").setup({
         ensure_installed = {
           "lua_ls",
-          "pyright",
+          "ty", -- alternative to "pyright"
           "ts_ls",
           "rust_analyzer",
         }
@@ -136,10 +136,10 @@ return {
       local lint = require("lint")
 
       lint.linters_by_ft = {
-        javascript = { "eslint_d" },
-        typescript = { "eslint_d" },
-        javascriptreact = { "eslint_d" },
-        typescriptreact = { "eslint_d" },
+        javascript = { "biomejs" },
+        typescript = { "biomejs" },
+        javascriptreact = { "biomejs" },
+        typescriptreact = { "biomejs" },
         python = { "ruff" },
       }
       vim.keymap.set("n", "<leader>cl", function()
@@ -163,18 +163,18 @@ return {
             end
           end,
           lua = { "stylua" },
-          svelte = { "prettier", "prettierd" },
-          javascript = { "prettier", "prettierd" },
-          typescript = { "prettier", "prettierd" },
-          javascriptreact = { "prettier", "prettierd" },
-          typescriptreact = { "prettier", "prettierd" },
-          json = { "prettier", "prettierd", lsp_format = "fallback" },
-          graphql = { "prettier", "prettierd" },
+          svelte = { "prettierd", "prettier", stop_after_first = true },
+          javascript = { "biome", "biome-organize-imports" },
+          typescript = { "biome", "biome-organize-imports" },
+          javascriptreact = { "biome", "biome-organize-imports" },
+          typescriptreact = { "biome", "biome-organize-imports" },
+          json = { "biome", "biome-organize-imports", lsp_format = "fallback" },
+          graphql = { "biome", "biome-organize-imports" },
           java = { "google-java-format" },
-          markdown = { "prettier", "prettierd" },
-          html = { "prettier", "prettierd" },
-          css = { "prettier", "prettierd" },
-          scss = { "prettier", "prettierd" },
+          markdown = { "prettierd", "prettier", stop_after_first = true },
+          html = { "biome", "biome-organize-imports" },
+          css = { "biome", "biome-organize-imports" },
+          scss = { "biome", "biome-organize-imports" },
           rust = { "rustfmt", lsp_format = "fallback" },
         },
       })
