@@ -20,7 +20,7 @@ return {
       require("mason-lspconfig").setup({
         ensure_installed = {
           "lua_ls",
-          "ty", -- alternative to "pyright"
+          "ty",
           "ts_ls",
           "rust_analyzer",
         }
