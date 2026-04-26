@@ -107,22 +107,16 @@ return {
           local client = vim.lsp.get_client_by_id(args.data.client_id)
           if client and client:supports_method("textDocument/documentHighlight") then
             local augroup = vim.api.nvim_create_augroup("LspDocumentHighlight", { clear = false })
-            local timer = vim.uv.new_timer()
             vim.api.nvim_create_autocmd({ "CursorHold" }, {
               buffer = args.buf,
               group = augroup,
-              callback = function()
-                timer:start(300, 0, vim.schedule_wrap(vim.lsp.buf.document_highlight))
-              end,
+              callback = vim.lsp.buf.document_highlight
             })
 
             vim.api.nvim_create_autocmd("CursorMoved", {
               buffer = args.buf,
               group = augroup,
-              callback = function()
-                timer:stop()
-                vim.lsp.buf.clear_references()
-              end,
+              callback = vim.lsp.buf.clear_references
             })
           end
         end,
