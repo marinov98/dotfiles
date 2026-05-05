@@ -17,30 +17,12 @@ setopt HIST_FIND_NO_DUPS
 
 CASE_SENSITIVE="true"
 
-if [[ "$TERM" != "xterm-ghostty" ]]; then
-  export TERM="xterm-256color"
-fi
+export EDITOR=nvim
+export VISUAL=nvim
 
-# vim/nvim option
-export EDITOR=vim # change to nvim if using neovim
-export VISUAL=vim
-
-# emacs option
 # export EDITOR="emacsclient -t -a ''"
 # export VISUAL="emacsclient -c -a emacs"
 
-###################################
-####### Plugins
-###################################
-
-source $ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# source $ZSH_PLUGINS/zsh-vi-mode/zsh-vi-mode.zsh
-# _fix_cursor() {
-#    echo -ne '\e[5 q'
-# }
-# precmd_functions+=(_fix_cursor)
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -49,30 +31,18 @@ source $ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ####### Aliases
 ###################################
 
-alias ls='ls -GFh --color=auto'             # Preferred 'ls' implementation
-alias cp='cp -iv'                           # Preferred 'cp' implementation
-alias mv='mv -iv'                           # Preferred 'mv' implementation
-alias mkdir='mkdir -pv'                     # Preferred 'mkdir' implementation
-alias ll='ls -l'                            # Preferred alternative 'ls' implementation
-alias less='less -FSRXc'                    # Preferred 'less' implementation
+alias ls='ls -GFh --color=auto'
+alias cp='cp -iv'
+alias mv='mv -iv'
+alias mkdir='mkdir -pv'
+alias ll='ls -l'
+alias less='less -FSRXc'
 
-alias v='vim'             		              # v:            Opens any file in vim/nvim editor
-alias vc='v --clean'                        # vc:           Opens any file in vim/nvim editor without config
-alias ec='emacsclient -n -c -a ""'          # ec:           Opens emacs server
-alias c='code .'                            # c:            Open VS Code
-alias rr='ranger'                           # rr:           Opens ranger
-alias t='tmux'                              # t:            Opens tmux
-alias ts='tmux attach'                      # ts:           Tmux attaches to specified session
-alias zj='zellij'                           # zj:           Start zellij
-
-alias path='echo -e ${PATH//:/\\n}'         # path:         Echo all executable Paths
-alias fix_stty='stty sane'                  # fix_stty:     Restore terminal settings when screwed up
-
-mcd () { mkdir -p "$1" && cd "$1"; }        # mcd:          Makes new Dir and jumps inside
-trash () { command mv "$@" ~/.Trash ; }     # trash:        Moves a file to the MacOS trash
-
-# Fix Vim C-s crash
-stty -ixon
+alias v='nvim'
+alias vc='v --clean'
+alias ec='emacsclient -n -c -a ""'
+alias zj='zellij'
+alias path='echo -e ${PATH//:/\\n}'
 
 ###################################
 ####### FZF
@@ -81,30 +51,46 @@ stty -ixon
 CUSTOM_PROJECTS_DIR_PATH="$HOME/projects/" # Change this based on your projects directory
 
 # Ripgrep
-# export FZF_DEFAULT_COMMAND='rg --files --hidden --follow'
-# alias fzfi='rg --files --hidden --follow --no-ignore-vcs -g "!{node_modules,.git}" | fzf'
+# export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{node_modules,.git}"'
 # alias zfd='cd $CUSTOM_PROJECTS_DIR_PATH && cd $(find . -type d -print | fzf)' 
 
 # Fd
-export FZF_DEFAULT_COMMAND='fd --type f --hidden'
-alias fzfi='fd --type file --hidden --no-ignore --exclude .git | fzf'
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
 alias zfd='cd $CUSTOM_PROJECTS_DIR_PATH && cd $(fd . -t d | fzf)'
 
-alias vz='v $(fzfi)'
-
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+alias vz='v $(fzf)'
 
 ###################################
-####### ZSH Plugin config
+####### Interactive Check
 ###################################
+
+# Stop here if not interactive
+[[ -o interactive ]] || return
+
+if [[ "$TERM" != "xterm-ghostty" ]]; then
+  export TERM="xterm-256color"
+fi
+
+###################################
+####### Plugins
+###################################
+
+source $ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#6272a4'
 ZSH_HIGHLIGHT_STYLES[path]='fg=#8be9fd'
+
+###################################
+####### Bindings
+###################################
 
 bindkey '^ ' autosuggest-accept
 bindkey -s '^f' "vz^M"
 bindkey -s "^l" "zfd^M"
 bindkey -s '^p' "zfd && vz^M"
+
 
 ###################################
 ####### Git

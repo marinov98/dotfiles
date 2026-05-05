@@ -1,3 +1,59 @@
+#### History Size
+export HISTSIZE=10000
+export HISTFILESIZE=120000
+
+export EDITOR=nvim
+export VISUAL=nvim
+
+###################################
+####### Aliases
+###################################
+
+alias ls='ls -GFh --color=auto'
+alias cp='cp -iv'
+alias mv='mv -iv'
+alias mkdir='mkdir -pv'
+alias ll='ls -l'
+alias less='less -FSRXc'
+
+alias v='nvim'
+alias vc='v --clean'
+alias ec='emacsclient -n -c -a ""'
+alias zj='zellij'
+alias path='echo -e ${PATH//:/\\n}'
+
+###################################
+####### FZF
+###################################
+
+CUSTOM_PROJECTS_DIR_PATH="$HOME/projects/" # Change this based on your projects directory
+
+# Ripgrep
+# export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{node_modules,.git}"'
+# alias zfd='cd $CUSTOM_PROJECTS_DIR_PATH && cd $(find . -type d -print | fzf)' 
+
+# Fd
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
+alias zfd='cd $CUSTOM_PROJECTS_DIR_PATH && cd $(fd . -t d | fzf)'
+
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+alias vz='v $(fzf)'
+
+###################################
+####### Interactive Check
+###################################
+
+# Stop here if not interactive
+[[ $- != *i* ]] && return
+
+###################################
+####### Bindings
+###################################
+
+bind '"\C-f":"vz\n"'
+bind '"\C-l":"zfd\n"'
+bind '"\C-p":"zfd && vz\n"'
+
 ###################################
 ####### PS1
 ###################################
@@ -33,61 +89,3 @@ fi
  
 export PS1="\[\033[36m\]\u@\h:\033[32m\]\w\[\033[1;35m\]\$(parse_git_branch)\[\033[00m\]\$(parse_git_status)\n\[\033[1;33m\]$ \[\033[00m\]"
 
-
-###################################
-####### Aliases
-###################################
-
-alias ls='ls -GFh --color=auto'             # Preferred 'ls' implementation
-alias cp='cp -iv'                           # Preferred 'cp' implementation
-alias mv='mv -iv'                           # Preferred 'mv' implementation
-alias mkdir='mkdir -pv'                     # Preferred 'mkdir' implementation
-alias ll='ls -l'                            # Preferred alternative 'ls' implementation
-alias less='less -FSRXc'                    # Preferred 'less' implementation
-
-alias v='vim'             		              # v:            Opens any file in vim/nvim editor
-alias vc='v --clean'                        # vc:           Opens any file in vim/nvim editor without config
-alias ec='emacsclient -n -c -a ""'          # ec:           Opens emacs server
-alias c='code .'                            # c:            Open VS Code
-alias t='tmux'                              # t:            Opens tmux
-alias ts='tmux attach'                      # ts:           Tmux attaches to specified session
-alias zj='zellij'                           # zj:           Start zellij
-
-alias path='echo -e ${PATH//:/\\n}'         # path:         Echo all executable Paths
-alias fix_stty='stty sane'                  # fix_stty:     Restore terminal settings when screwed up
-
-mcd () { mkdir -p "$1" && cd "$1"; }        # mcd:          Makes new Dir and jumps inside
-trash () { command mv "$@" ~/.Trash ; }     # trash:        Moves a file to the MacOS trash
-
-#### History Size
-export HISTSIZE=10000
-export HISTFILESIZE=120000
-
-###################################
-####### FZF
-###################################
-
-CUSTOM_PROJECTS_DIR_PATH="$HOME/projects/" # Change this based on your projects directory
-
-# Ripgrep
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs'
-alias fzfi='rg --files --hidden --follow --no-ignore-vcs -g "!{node_modules,.git}" | fzf'
-alias zfd='cd $CUSTOM_PROJECTS_DIR_PATH && cd $(find . -type d -print | fzf)' 
-
-# Fd
-# export FZF_DEFAULT_COMMAND='fd --type f --hidden'
-# alias fzfi='fd --type file --hidden --no-ignore --exclude .git | fzf'
-# alias zfd='cd $CUSTOM_PROJECTS_DIR_PATH && cd $(fd . -t d | fzf)'
-
-alias vz='v $(fzfi)'
-
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-
-
-###################################
-####### Bindings
-###################################
-
-bind '"\C-f":"vz\n"'
-bind '"\C-l":"zfd\n"'
-bind '"\C-p":"zfd && vz\n"'
