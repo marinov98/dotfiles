@@ -1,0 +1,41 @@
+{
+  // custom
+  "git": {
+    "inline_blame": {
+      "enabled": false,
+    },
+    "git_gutter": "hide",
+    "disable_git": true,
+  },
+  "preview_tabs": {
+    "enabled": false,
+  },
+  "format_on_save": "off",
+  "cursor_blink": false,
+  "cursor_shape": "block",
+  "scrollbar": null,
+  "vim_mode": true,
+  "vim": {
+    "cursor_shape": {
+      "normal": "block",
+      "insert": "bar",
+      "replace": "hollow",
+      "visual": "underline",
+    },
+  },
+  "terminal": {
+    "font_family": "FiraCode Nerd Font Mono",
+  },
+  // LSP
+  "languages": {
+    "Python": {
+      "language_servers": [
+        // Enable ty, disable basedpyright
+        // other registered language servers (ruff, pylsp, pyright).
+        "ty",
+        "!basedpyright",
+        "ruff",
+      ],
+    },
+  },
+}

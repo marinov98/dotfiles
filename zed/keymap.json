@@ -1,0 +1,40 @@
+[
+  // NORMAL MODE
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      // Pane/Workspace management
+      "space s": "workspace::Save",
+      "space k": "pane::CloseActiveItem",
+      "space space k": "pane::CloseOtherItems",
+      "space space K": "pane::CloseAllItems",
+      "space m": "command_palette::Toggle",
+      "space a": "pane::AlternateFile",
+      // Navigation
+      "space f": "file_finder::Toggle",
+      "space /": "pane::DeploySearch",
+      "space u t": "workspace::ToggleRightDock",
+      // LSP
+      "space l g": "editor::Hover",
+      "space l f": "editor::Format",
+      "space l o": "editor::OrganizeImports",
+      "space l h": "editor::ToggleInlayHints",
+      "space l s": "project_symbols::Toggle",
+      "space d l": "editor::ToggleDiagnostics",
+      // Terminal
+      "space c s": "terminal_panel::ToggleFocus",
+      "space c S": "workspace::NewTerminal",
+      // Git
+      "space g g": "git_panel::Toggle",
+      // Personal
+      "space u m": "zed::OpenSettingsFile",
+      "space u k": "zed::OpenKeymapFile",
+    },
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      "ctrl-h": "editor::Hover",
+    },
+  },
+]
