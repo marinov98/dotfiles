@@ -1,19 +1,6 @@
 {
   // custom
-  "git": {
-    "inline_blame": {
-      "enabled": false,
-    },
-    "git_gutter": "hide",
-    "disable_git": true,
-  },
-  "preview_tabs": {
-    "enabled": false,
-  },
-  "format_on_save": "off",
-  "cursor_blink": false,
-  "cursor_shape": "block",
-  "scrollbar": null,
+  "base_keymap": "VSCode",
   "vim_mode": true,
   "vim": {
     "cursor_shape": {
@@ -23,8 +10,39 @@
       "visual": "underline",
     },
   },
-  "terminal": {
-    "font_family": "FiraCode Nerd Font Mono",
+  "cursor_shape": "block",
+  "preview_tabs": {
+    "enabled": false,
+  },
+  "format_on_save": "off",
+  "scrollbar": null,
+  "tab_bar": {
+    "show": false,
+  },
+  "gutter": {
+    "line_numbers": true,
+  },
+  "minimap": {
+    "show": "never",
+  },
+  "cursor_blink": false,
+  "colorize_brackets": true,
+  // Git
+  "git": {
+    "inline_blame": {
+      "enabled": false,
+    },
+    "git_gutter": "hide",
+    "disable_git": true,
+  },
+  "project_panel": {
+    "git_status": false,
+  },
+  "outline_panel": {
+    "git_status": false,
+  },
+  "tabs": {
+    "git_status": false,
   },
   // LSP
   "languages": {
