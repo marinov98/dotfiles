@@ -6,14 +6,16 @@
       // Pane/Workspace management
       "space s": "workspace::Save",
       "space k": "pane::CloseActiveItem",
-      "space space k": "pane::CloseOtherItems",
-      "space space K": "pane::CloseAllItems",
+      "space q": "pane::CloseAllItems",
+      "space Q": "workspace::CloseWindow",
+      "space space k": "workspace::CloseAllItemsAndPanes",
       "space m": "command_palette::Toggle",
       "space a": "pane::AlternateFile",
       // Navigation
       "space f": "file_finder::Toggle",
       "space /": "pane::DeploySearch",
       "space u t": "workspace::ToggleRightDock",
+      "space space l": "projects::OpenRecent",
       // LSP
       "space l g": "editor::Hover",
       "space l f": "editor::Format",
