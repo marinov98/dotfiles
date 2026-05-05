@@ -25,5 +25,13 @@ copy_dotfiles_to_home() {
   cp code-formatters/.prettierrc ~/
   cp tmux/.tmux.conf ~/
   echo "formatters & tmux done"
+
+  setup_zsh_git_completion
+}
+
+setup_zsh_git_completion() {
+  mkdir -p ~/.zsh/plugins/
+  curl -o ~/.zsh/git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+  curl -o ~/.zsh/_git https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh
 }
 
