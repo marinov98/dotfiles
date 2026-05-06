@@ -3,10 +3,10 @@
 ###################################
 
 alias ls='ls -GFh --color=auto'
+alias ll='ls -l'
 alias cp='cp -iv'
 alias mv='mv -iv'
 alias mkdir='mkdir -pv'
-alias ll='ls -l'
 alias less='less -FSRXc'
 
 alias v='nvim'
