@@ -1,6 +1,5 @@
 {
   // custom
-  "base_keymap": "VSCode",
   "vim_mode": true,
   "vim": {
     "cursor_shape": {
