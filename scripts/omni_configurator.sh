@@ -20,35 +20,30 @@ copy_dotfiles_to_home() {
     case "$SHELL" in
       */zsh)
         mv ~/.config/shell/zshrc ~/.zshrc
-        rm -rf ~/.config/shell/bashrc
-        rm -rf ~/.config/shell/bash_profile
         setup_zsh_git_completion
         echo "zsh config copied"
         ;;
       */bash)
         mv ~/.config/shell/bashrc ~/.bashrc
         mv ~/.config/shell/bash_profile ~/.bash_profile
-        rm -rf ~/.config/shell/zshrc
         echo "bash config copied"
         ;;
       *)
         echo "Unsupported shell: $SHELL"
         ;;
     esac
+    rm -rf ~/.config/shell/bashrc
+    rm -rf ~/.config/shell/zshrc
+    rm -rf ~/.config/shell/bash_profile
     echo "shell done"
   else
     echo "Machine found to not be linux or Mac will not copy config!"
   fi
 
-  echo "copying git configs..."
-  cp git/.gitconfig ~/
-
   # FORMATTERS
-  echo "Copying formatters and tmux..."
+  echo "Copying formatters..."
   cp code-formatters/.clang-format ~/
   cp code-formatters/.prettierrc ~/
-  cp tmux/.tmux.conf ~/
-  echo "formatters & tmux done"
 }
 
 
