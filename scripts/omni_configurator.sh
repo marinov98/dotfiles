@@ -1,3 +1,9 @@
+setup_zsh_git_completion() {
+  mkdir -p ~/.zsh/plugins/
+  curl -o ~/.zsh/git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+  curl -o ~/.zsh/_git https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh
+}
+
 copy_dotfiles_to_home() {
   echo "Resolving shell configs..."
   echo "Certain shell configurations will be copied based on the system"
@@ -14,11 +20,14 @@ copy_dotfiles_to_home() {
     case "$SHELL" in
       */zsh)
         mv ~/.config/shell/zshrc ~/.zshrc
+        rm -rf ~/.config/shell/bashrc
+        rm -rf ~/.config/shell/bash_profile
         echo "zsh config copied"
         ;;
       */bash)
         mv ~/.config/shell/bashrc ~/.bashrc
         mv ~/.config/shell/bash_profile ~/.bash_profile
+        rm -rf ~/.config/shell/zshrc
         echo "bash config copied"
         ;;
       *)
@@ -43,8 +52,4 @@ copy_dotfiles_to_home() {
   setup_zsh_git_completion
 }
 
-setup_zsh_git_completion() {
-  mkdir -p ~/.zsh/plugins/
-  curl -o ~/.zsh/git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
-  curl -o ~/.zsh/_git https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh
-}
+
