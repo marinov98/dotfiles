@@ -3,7 +3,7 @@ export ZSH="$HOME/.zsh"
 export ZSH_PLUGINS="$ZSH/plugins"
 
 # Source common shell config
-source "$HOME/.config/shell/common.sh"
+source "$HOME/.config/shell/custom_aliases.sh"
 
 ###################################
 ####### SETTINGS

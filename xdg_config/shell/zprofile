@@ -2,8 +2,3 @@ if [ -f ~/.config/shell/custom_exports.sh ];
 then
     .  ~/.config/shell/custom_exports.sh;
 fi
-
-if [ -f ~/.bashrc ];
-then
-    .  ~/.bashrc;
-fi

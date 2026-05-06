@@ -20,6 +20,7 @@ copy_dotfiles_to_home() {
     case "$SHELL" in
       */zsh)
         mv ~/.config/shell/zshrc ~/.zshrc
+        mv ~/.config/shell/zprofile ~/.zprofile
         setup_zsh_git_completion
         echo "zsh config copied"
         ;;
@@ -33,8 +34,9 @@ copy_dotfiles_to_home() {
         ;;
     esac
     rm -rf ~/.config/shell/bashrc
-    rm -rf ~/.config/shell/zshrc
     rm -rf ~/.config/shell/bash_profile
+    rm -rf ~/.config/shell/zshrc
+    rm -rf ~/.config/shell/zprofile
     echo "shell done"
   else
     echo "Machine found to not be linux or Mac will not copy config!"

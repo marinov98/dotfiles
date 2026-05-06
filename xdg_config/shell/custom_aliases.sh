@@ -1,15 +1,4 @@
 ###################################
-####### EDITOR
-###################################
-
-export EDITOR=nvim
-export VISUAL=nvim
-
-# emacs option
-# export EDITOR="emacsclient -t -a ''"
-# export VISUAL="emacsclient -c -a emacs"
-
-###################################
 ####### Aliases
 ###################################
 
