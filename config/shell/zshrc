@@ -2,6 +2,9 @@
 export ZSH="$HOME/.zsh"
 export ZSH_PLUGINS="$ZSH/plugins"
 
+# Source common shell config
+source "$HOME/.config/shell/common.sh"
+
 ###################################
 ####### SETTINGS
 ###################################
@@ -17,49 +20,8 @@ setopt HIST_FIND_NO_DUPS
 
 CASE_SENSITIVE="true"
 
-export EDITOR=nvim
-export VISUAL=nvim
-
-# export EDITOR="emacsclient -t -a ''"
-# export VISUAL="emacsclient -c -a emacs"
-
-
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
-
-###################################
-####### Aliases
-###################################
-
-alias ls='ls -GFh --color=auto'
-alias cp='cp -iv'
-alias mv='mv -iv'
-alias mkdir='mkdir -pv'
-alias ll='ls -l'
-alias less='less -FSRXc'
-
-alias v='nvim'
-alias vc='v --clean'
-alias ec='emacsclient -n -c -a ""'
-alias zj='zellij'
-alias path='echo -e ${PATH//:/\\n}'
-
-###################################
-####### FZF
-###################################
-
-CUSTOM_PROJECTS_DIR_PATH="$HOME/projects/" # Change this based on your projects directory
-
-# Ripgrep
-# export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{node_modules,.git}"'
-# alias zfd='cd $CUSTOM_PROJECTS_DIR_PATH && cd $(find . -type d -print | fzf)' 
-
-# Fd
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
-alias zfd='cd $CUSTOM_PROJECTS_DIR_PATH && cd $(fd . -t d | fzf)'
-
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-alias vz='v $(fzf)'
 
 ###################################
 ####### Interactive Check
@@ -105,7 +67,6 @@ autoload -Uz vcs_info
 precmd_functions+=(vcs_info)
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:git:*' formats '(%b)'
-# zstyle ':vcs_info:git:*' formats ' %b'
 
 parse_git_status() {
   git_status="$(git status 2> /dev/null)"
