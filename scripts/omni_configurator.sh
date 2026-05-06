@@ -22,6 +22,7 @@ copy_dotfiles_to_home() {
         mv ~/.config/shell/zshrc ~/.zshrc
         rm -rf ~/.config/shell/bashrc
         rm -rf ~/.config/shell/bash_profile
+        setup_zsh_git_completion
         echo "zsh config copied"
         ;;
       */bash)
@@ -48,8 +49,6 @@ copy_dotfiles_to_home() {
   cp code-formatters/.prettierrc ~/
   cp tmux/.tmux.conf ~/
   echo "formatters & tmux done"
-
-  setup_zsh_git_completion
 }
 
 

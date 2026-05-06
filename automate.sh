@@ -1,8 +1,5 @@
 #!/bin/bash
 
-source scripts/omni_configurator.sh
-copy_dotfiles_to_home
-
 if [[ $(uname -s) == Darwin ]]; then
   echo "Detected macOS, running brew installer..."
   source scripts/brew.sh
@@ -27,4 +24,7 @@ elif [[ $(uname -s) == Linux ]]; then
     esac
   fi
 fi
+
+source scripts/omni_configurator.sh
+copy_dotfiles_to_home
 
