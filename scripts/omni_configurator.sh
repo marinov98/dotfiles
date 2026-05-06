@@ -1,9 +1,3 @@
-setup_zsh_git_completion() {
-  mkdir -p ~/.zsh/plugins/
-  curl -o ~/.zsh/git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
-  curl -o ~/.zsh/_git https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh
-}
-
 copy_dotfiles_to_home() {
   echo "Resolving shell configs..."
   echo "Certain shell configurations will be copied based on the system"
@@ -21,12 +15,16 @@ copy_dotfiles_to_home() {
       */zsh)
         mv ~/.config/shell/zshrc ~/.zshrc
         mv ~/.config/shell/zprofile ~/.zprofile
-        setup_zsh_git_completion
+
+        mkdir -p ~/.zsh/plugins/
+        curl -o ~/.zsh/git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+        curl -o ~/.zsh/_git https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh
         echo "zsh config copied"
         ;;
       */bash)
         mv ~/.config/shell/bashrc ~/.bashrc
         mv ~/.config/shell/bash_profile ~/.bash_profile
+        curl -o ~/git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
         echo "bash config copied"
         ;;
       *)
@@ -47,5 +45,4 @@ copy_dotfiles_to_home() {
   cp code-formatters/.clang-format ~/
   cp code-formatters/.prettierrc ~/
 }
-
 
