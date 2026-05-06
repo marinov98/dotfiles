@@ -11,7 +11,7 @@ copy_dotfiles_to_home() {
   then
     echo "machine found to be linux or Mac"
     echo "copying config..."
-    cp -r config/* ~/.config/
+    cp -r xdg_config/* ~/.config/
     echo "creating '.ignore' from fzyIgnore..."
     mv ~/.config/fzyIgnore ~/.ignore
     echo "Finished setting up config"
