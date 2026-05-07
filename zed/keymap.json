@@ -82,4 +82,10 @@
       "ctrl-[": "menu::Cancel",
     },
   },
+  {
+    "context": "BufferSearchBar && !in_replace",
+    "bindings": {
+      "ctrl-[": "buffer_search::Dismiss",
+    },
+  },
 ]
