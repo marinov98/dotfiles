@@ -15,6 +15,9 @@ alias ec='emacsclient -n -c -a ""'
 alias zj='zellij'
 alias path='echo -e ${PATH//:/\\n}'
 
+alias glc='git log -1 --pretty=%B | tr -s "\n"'
+alias gbc='git branch --format="%(refname:short)" | grep -v -E "^(main|master)$" | xargs -p git branch -D'
+
 ###################################
 ####### FZF
 ###################################
