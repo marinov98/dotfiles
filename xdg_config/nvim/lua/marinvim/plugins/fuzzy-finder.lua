@@ -54,8 +54,6 @@ return {
       map("n", "<leader>dl", function() Snacks.picker.diagnostics() end, { desc = "List Diagnostics" })
       map("n", "<leader><leader>l", function() Snacks.picker.projects() end, { desc = "List Projects" })
       -- Grep
-      map("n", "gl", function() Snacks.picker.lines() end, { desc = "Goto line" })
-      map("n", "gL", function() Snacks.picker.grep_buffers() end, { desc = "Goto line-multi" })
       map("n", "<leader>/", function() Snacks.picker.grep_word({ search = vim.fn.input("Grep > ") }) end, { desc = "Grep on user input" })
       map({ "n", "x" }, "<leader>*", function() Snacks.picker.grep_word() end, { desc = "Grep word under cursor/visual" })
       map("n", "<leader><leader>*", function() Snacks.picker.grep_word({ search = vim.fn.expand("<cWORD>") }) end, { desc = "Grep WORD under cursor" })
@@ -69,7 +67,7 @@ return {
       map("n", "<leader>ut", function() Snacks.picker.explorer() end, { desc = "File Tree Explorer" })
       -- Help
       map("n", "<C-h>", function() Snacks.picker.help() end, { desc = "Show Help Tags" })
-      map("n", "<leader>?k", function() Snacks.picker.keymaps() end, { desc = "Show Keymaps" })
+      map("n", "<leader>uk", function() Snacks.picker.keymaps() end, { desc = "Show Keymaps" })
       map("n", "<leader>?c", function() Snacks.picker.commands() end, { desc = "Show Commands" })
       map("n", "<leader>?h", function() Snacks.picker.command_history() end, { desc = "Show Command History" })
       map("n", "<leader>?m", function() Snacks.picker.man() end, { desc = "Show Man Pages" })

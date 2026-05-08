@@ -95,7 +95,7 @@ return {
           vim.keymap.set("n", "gd", picker.lsp_definitions, { desc = "Definitions", buffer = local_buf })
           vim.keymap.set("n", "grr", picker.lsp_references, { desc = "References", buffer = local_buf })
           vim.keymap.set("n", "gri", picker.lsp_implementations, { desc = "Implementations", buffer = local_buf })
-          vim.keymap.set("n", "gry", picker.lsp_type_definitions, { desc = "Type Definitions", buffer = local_buf })
+          vim.keymap.set("n", "grt", picker.lsp_type_definitions, { desc = "Type Definitions", buffer = local_buf })
           vim.keymap.set("n", "<leader>ls", picker.lsp_symbols, { desc = "Document Symbols", buffer = local_buf })
           vim.keymap.set("n", "<leader>lws", picker.lsp_workspace_symbols,
             { desc = "Workspace Symbols", buffer = local_buf })

@@ -34,11 +34,6 @@ function M.enable_netrw_keymaps()
   vim.keymap.set('n', '<leader>ut', ":Vexplore!<CR>", { desc = "Open netrw side bar" })
 end
 
-function M.set_hl()
-  vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-  vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-end
-
 function M.get_visual_selection()
   local old_text = vim.fn.getreg('c')
   vim.cmd('normal! "cy')
@@ -58,16 +53,11 @@ function M.mpm_Vedit(opts)
 end
 
 function M.mpm_Medit()
-  vim.keymap.set("x", "<C-n>", M.mpm_Vedit, { desc = "Multi edit visually selected occurence forward" })
-  vim.keymap.set("x", "<C-p>", function() M.mpm_Vedit({ reverse = true }) end,
-    { desc = "Multi edit visually selected occurence reverse" })
-  vim.keymap.set("n", "<C-n>", "*Ncgn", { desc = "(MC Emulation) Change occurence under cursor" })
+  vim.keymap.set("n", "gl", "*Ncgn", { desc = "(Multi Edit) Change occurence under cursor" })
+  vim.keymap.set("n", "gL", "*NcgN", { desc = "(Multi Edit) Change occurence under cursor" })
 
-  -- Alternative bindings
-  vim.keymap.set("n", "<leader>cm", "*Ncgn", { desc = "(Multi Edit) Change occurence under cursor" })
-  vim.keymap.set("n", "<leader>cM", "*NcgN", { desc = "(Multi Edit) Change occurence under cursor" })
-  vim.keymap.set("x", "<leader>cm", M.mpm_Vedit, { desc = "Multi edit visually selected occurence forward" })
-  vim.keymap.set("x", "<leader>cM", function() M.mpm_Vedit({ reverse = true }) end,
+  vim.keymap.set("x", "gl", M.mpm_Vedit, { desc = "Multi edit visually selected occurence forward" })
+  vim.keymap.set("x", "gL", function() M.mpm_Vedit({ reverse = true }) end,
     { desc = "Multi edit visually selected occurence reverse" })
 end
 
@@ -102,8 +92,6 @@ function M.setup(opts)
   -- File Tree
   -- M.enable_netrw_keymaps()
 
-  -- Highlight
-  -- M.set_hl()
 end
 
 return M
