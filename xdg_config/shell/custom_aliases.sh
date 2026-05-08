@@ -26,7 +26,7 @@ CUSTOM_PROJECTS_DIR_PATH="$HOME/projects/"
 
 # Ripgrep
 # export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{.git}"'
-# alias zfd='cd "$CUSTOM_PROJECTS_DIR_PATH" && cd "$(find . -maxdepth 2 -type d | fzf)"'
+# alias zfd='cd "$CUSTOM_PROJECTS_DIR_PATH" && cd "$(find . -maxdepth 2 -name ".git" -prune -o -type d -print | fzf)"'
 
 
 # Fd
