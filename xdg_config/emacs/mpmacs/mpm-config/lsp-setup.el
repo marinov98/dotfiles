@@ -57,7 +57,7 @@
        )
        :bind
        (:map evil-normal-state-map
-             ("gry" . lsp-find-type-definition)
+             ("grt" . lsp-find-type-definition)
              ("grd" . lsp-find-declaration)
              ("grn" . lsp-rename)
              ("grh" . lsp-signature-activate)
