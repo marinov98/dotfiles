@@ -59,6 +59,15 @@ function M.mpm_Medit()
   vim.keymap.set("x", "gl", M.mpm_Vedit, { desc = "Multi edit visually selected occurence forward" })
   vim.keymap.set("x", "gL", function() M.mpm_Vedit({ reverse = true }) end,
     { desc = "Multi edit visually selected occurence reverse" })
+
+  vim.keymap.set("x", "<leader>ca", function()
+    local target = M.get_visual_selection()
+    vim.fn.feedkeys(":%s/" .. target .. "/" .. target .. "/g\x80kl\x80kl", "n")
+  end, { desc = "Edit all patterns in visual selection" })
+
+  vim.keymap.set("x", "<leader>cA", function()
+    vim.fn.feedkeys(":s/" .. "$" .. "/" .. "/\x80kl", "n")
+  end, { desc = "Edit end of every line in visual selection" })
 end
 
 function M.setup(opts)
@@ -81,17 +90,10 @@ function M.setup(opts)
     vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]], { desc = "Paste from system clipboard" })
   end
 
-  -- Search/Replace
-  vim.keymap.set("x", "<leader>ca", function()
-    local target = M.get_visual_selection()
-    vim.fn.feedkeys(":%s/" .. target .. "/" .. target .. "/g\x80kl\x80kl", "n")
-  end, { desc = "Change all selections in file with confirmation" })
-
   M.mpm_Medit()
 
   -- File Tree
   -- M.enable_netrw_keymaps()
-
 end
 
 return M
