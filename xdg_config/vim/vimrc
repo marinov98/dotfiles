@@ -40,7 +40,6 @@ set smartcase
 
 " line numbers and tabs
 set number relativenumber
-set nu rnu 
 set completeopt-=preview
 set guioptions-=e
 set sessionoptions+=tabpages,globals
