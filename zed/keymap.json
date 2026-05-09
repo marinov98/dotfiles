@@ -1,5 +1,7 @@
 [
+  // ===============================================
   // Normal Mode
+  // ===============================================
   {
     "context": "Editor && vim_mode == normal",
     "bindings": {
@@ -13,8 +15,8 @@
       "space a": "pane::AlternateFile",
       // Navigation
       "space f": "file_finder::Toggle",
-      "space u t": "pane::RevealInProjectPanel",
-      "space e": "workspace::ToggleRightDock",
+      "space e": "project_panel::ToggleFocus",
+      "space u t": "workspace::ToggleRightDock",
       "space space l": "projects::OpenRecent",
       // Search
       "space /": "pane::DeploySearch",
@@ -39,21 +41,27 @@
       "space u k": "zed::OpenKeymapFile",
     },
   },
-  // Visual Mode
+  // ===============================================
+  // VIsual Mode
+  // ===============================================
   {
     "context": "Editor && vim_mode == visual",
     "bindings": {
       "space *": "pane::DeploySearch",
     },
   },
+  // ===============================================
   // Insert Mode
+  // ===============================================
   {
     "context": "Editor && vim_mode == insert",
     "bindings": {
       "ctrl-h": "editor::Hover",
     },
   },
-  // File panel
+  // ===============================================
+  // Project Panel
+  // ===============================================
   {
     "context": "ProjectPanel && not_editing",
     "bindings": {
@@ -62,11 +70,11 @@
       "r": "project_panel::Rename",
       "d": "project_panel::Delete",
       "x": "project_panel::Cut",
-      "c": "project_panel::Copy",
+      "y": "project_panel::Copy",
       "p": "project_panel::Paste",
       "ctrl-[": "workspace::ToggleRightDock",
-      "space e": "workspace::ToggleRightDock",
       "space q": "workspace::ToggleRightDock",
+      "space e": "editor::ToggleFocus",
       "space u t": "workspace::ToggleRightDock",
     },
   },
