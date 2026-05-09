@@ -48,8 +48,7 @@ function M.mpm_Vedit(opts)
   opts = opts or {}
   local escaped = vim.fn.escape(M.get_visual_selection(), "/\\")
   vim.fn.setreg("/", "\\V" .. escaped)
-  local target = opts.reverse and "cgN" or "cgn"
-  vim.api.nvim_feedkeys(target, "n", false)
+  vim.api.nvim_feedkeys(opts.reverse and "cgN" or "cgn", "n", false)
 end
 
 function M.mpm_Medit()
@@ -64,10 +63,6 @@ function M.mpm_Medit()
     local target = M.get_visual_selection()
     vim.fn.feedkeys(":%s/" .. target .. "/" .. target .. "/g\x80kl\x80kl", "n")
   end, { desc = "Edit all patterns in visual selection" })
-
-  vim.keymap.set("x", "<leader>cA", function()
-    vim.fn.feedkeys(":s/" .. "$" .. "/" .. "/\x80kl", "n")
-  end, { desc = "Edit end of every line in visual selection" })
 end
 
 function M.setup(opts)

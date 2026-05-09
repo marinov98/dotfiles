@@ -16,6 +16,7 @@ vim.keymap.set("n", "<leader>ca", ":%s/<C-r><C-w>/<C-r><C-w>/g<Left><Left>",
   { desc = "Change all word under cursor with confirmation" })
 vim.keymap.set("n", "<leader>cA", ":%s/<C-r><C-a>/<C-r><C-a>/g<Left><Left>",
   { desc = "Change all WORD under cursor with confirmation" })
+vim.keymap.set("x", "<leader>cA", ":s/$//<Left>", { desc = "Edit end of every line in visual selection" })
 vim.keymap.set("n", "<leader>ci", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
   { desc = "Case insensitive search/replace under cursor for current file" })
 
