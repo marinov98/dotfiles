@@ -26,7 +26,11 @@
       ],
       // LSP
       "space l g": "editor::Hover",
-      "space l f": "editor::Format",
+      "space l f": [
+        "action::Sequence",
+        ["editor::Format", "editor::OrganizeImports"]
+      ],
+      "space l F": "editor::Format",
       "space l o": "editor::OrganizeImports",
       "space l h": "editor::ToggleInlayHints",
       "space l s": "project_symbols::Toggle",
