@@ -92,4 +92,4 @@ PROMPT='%F{81}%n:%f%F{green}${PWD/#$HOME/~}%f %F{183}${vcs_info_msg_0_}%f $(pars
 # PROMPT='%F{81}󰌢 %n%f%F{green}  ${PWD/#$HOME/~}%f %F{183}${vcs_info_msg_0_}%f $(parse_git_status)%F{yellow}${NEWLINE}󰘧%f '
 
 # Lambda variant
-# PROMPT='%F{250}󰌢 %f%F{68}${PWD/#$HOME/~}%f %F{146}${vcs_info_msg_0_}%f $(parse_git_status)%F{172}${NEWLINE}󰘧%f '
+#PROMPT='%F{246}󰌢 %f%F{110}${PWD/#$HOME/~}%f %F{146}${vcs_info_msg_0_}%f $(parse_git_status)%F{209}${NEWLINE}󰘧%f '
