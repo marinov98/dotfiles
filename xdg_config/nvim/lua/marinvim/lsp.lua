@@ -1,0 +1,63 @@
+local M = {}
+local picker = require("snacks").picker
+local lsp = vim.lsp.buf
+local map = vim.keymap.set
+
+local function enable_document_highlight(client_id, buffer)
+  local client = vim.lsp.get_client_by_id(client_id)
+  if not client or not client:supports_method("textDocument/documentHighlight") then
+    return
+  end
+
+  local group = vim.api.nvim_create_augroup("LspDocumentHighlight", { clear = false })
+  vim.api.nvim_create_autocmd("CursorHold", {
+    buffer = buffer,
+    group = group,
+    callback = vim.lsp.buf.document_highlight
+  })
+
+  vim.api.nvim_create_autocmd("CursorMoved", {
+    buffer = buffer,
+    group = group,
+    callback = vim.lsp.buf.clear_references
+  })
+end
+
+
+function M.map_on_attach(args)
+  local opts = { buffer = args.buf, silent = true }
+
+  -- Diagnostics
+  map("n", "[d", function() vim.diagnostic.jump({ count = -1, float = false }) end, opts)
+  map("n", "]d", function() vim.diagnostic.jump({ count = 1, float = false }) end, opts)
+  map("n", "<leader>dg", vim.diagnostic.open_float, opts)
+
+  -- LSP utilities
+  map("n", "grd", lsp.declaration, opts)
+  map("n", "grn", lsp.rename, opts)
+  map("n", "grh", lsp.signature_help, opts)
+  map("i", "<C-h>", lsp.signature_help, opts)
+  map("n", "<leader>lg", lsp.hover, opts)
+  map("n", "<leader>lF", function() lsp.format({ async = true }) end, opts)
+  map("n", "<leader>lwa", lsp.add_workspace_folder, opts)
+  map("n", "<leader>lwr", lsp.remove_workspace_folder, opts)
+  map("n", "<leader>lh",
+    function()
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = opts.buffer }),
+        { bufnr = opts.buffer })
+    end, opts)
+
+  -- Picker
+  map("n", "gd", picker.lsp_definitions, opts)
+  map("n", "grr", picker.lsp_references, opts)
+  map("n", "gri", picker.lsp_implementations, opts)
+  map("n", "grt", picker.lsp_type_definitions, opts)
+  map("n", "<leader>ls", picker.lsp_symbols, opts)
+  map("n", "<leader>lws", picker.lsp_workspace_symbols, opts)
+  map("n", "<leader>lci", picker.lsp_incoming_calls, opts)
+  map("n", "<leader>lco", picker.lsp_outgoing_calls, opts)
+
+  enable_document_highlight(args.data.client_id, opts.buffer)
+end
+
+return M

@@ -2,7 +2,7 @@
 -- vim.opt.list = true
 -- vim.opt.listchars:append({ eol = '↵', tab = '» ', trail = '.', nbsp = '␣' })
 
--- Ignore compiled files
+-- -- Ignore compiled files
 vim.opt.wildignore = "__pycache__"
 vim.opt.wildignore:append { "*.o", "*~", "*.pyc", "*pycache*" }
 vim.opt.wildignore:append { "Cargo.lock", "Cargo.Bazel.lock" }
@@ -16,7 +16,7 @@ vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
-vim.opt.signcolumn = 'yes'
+vim.opt.signcolumn = 'no'
 vim.opt.laststatus = 3 -- global status
 
 vim.opt.smartindent = true
@@ -48,3 +48,4 @@ vim.g.netrw_liststyle = 3 -- Tree style view
 vim.opt.cursorline = true
 vim.opt.clipboard = "unnamedplus" -- use system clipboard
 vim.opt.errorbells = false -- no sounds on error
+

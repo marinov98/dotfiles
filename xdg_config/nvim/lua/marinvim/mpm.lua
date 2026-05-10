@@ -1,4 +1,5 @@
 local M = {}
+local map = vim.keymap.set
 
 --- Closes all loaded buffers except for the current one.
 --- Iterates through all buffers, checks if they are loaded and not the current
@@ -30,8 +31,8 @@ end
 
 -- To be used if no other file tree plugins exist
 function M.enable_netrw_keymaps()
-  vim.keymap.set('n', '-', vim.cmd.Explore, { desc = "Open file browser" })
-  vim.keymap.set('n', '<leader>ut', ":Vexplore!<CR>", { desc = "Open netrw side bar" })
+  map('n', '-', vim.cmd.Explore, { desc = "Open file browser" })
+  map('n', '<leader>ut', ":Vexplore!<CR>", { desc = "Open netrw side bar" })
 end
 
 function M.get_visual_selection()
@@ -52,14 +53,14 @@ function M.mpm_Vedit(opts)
 end
 
 function M.mpm_Medit()
-  vim.keymap.set("n", "gl", "*Ncgn", { desc = "(Multi Edit) Change occurence under cursor" })
-  vim.keymap.set("n", "gL", "*NcgN", { desc = "(Multi Edit) Change occurence under cursor" })
+  map("n", "gl", "*Ncgn", { desc = "(Multi Edit) Change occurence under cursor" })
+  map("n", "gL", "*NcgN", { desc = "(Multi Edit) Change occurence under cursor" })
 
-  vim.keymap.set("x", "gl", M.mpm_Vedit, { desc = "Multi edit visually selected occurence forward" })
-  vim.keymap.set("x", "gL", function() M.mpm_Vedit({ reverse = true }) end,
+  map("x", "gl", M.mpm_Vedit, { desc = "Multi edit visually selected occurence forward" })
+  map("x", "gL", function() M.mpm_Vedit({ reverse = true }) end,
     { desc = "Multi edit visually selected occurence reverse" })
 
-  vim.keymap.set("x", "<leader>ca", function()
+  map("x", "<leader>ca", function()
     local target = M.get_visual_selection()
     vim.fn.feedkeys(":%s/" .. target .. "/" .. target .. "/g\x80kl\x80kl", "n")
   end, { desc = "Edit all patterns in visual selection" })
@@ -69,21 +70,22 @@ function M.setup(opts)
   opts = opts or {}
 
   -- Buffers
-  vim.keymap.set("n", "<leader><leader>k", M.close_other_buffers,
+  map("n", "<leader><leader>k", M.close_other_buffers,
     { desc = "Close all buffers but the current one" })
-  vim.keymap.set("n", "<leader><leader>K", function()
+  map("n", "<leader><leader>K", function()
     M.close_other_buffers({ force = true })
   end, { desc = "Force close all buffers but the current one" })
 
   -- SignColumns
-  vim.keymap.set("n", "<leader>uS", M.toggle_signcolumns, { desc = "Toggle sign columns" })
+  map("n", "<leader>uS", M.toggle_signcolumns, { desc = "Toggle sign columns" })
 
   -- Copying, Pasting
   if vim.opt.clipboard._value ~= 'unnamedplus' then
-    vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy to system clipboard" })
-    vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Copy line to system clipboard" })
-    vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]], { desc = "Paste from system clipboard" })
+    map({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy to system clipboard" })
+    map("n", "<leader>Y", [["+Y]], { desc = "Copy line to system clipboard" })
+    map({ "n", "v" }, "<leader>p", [["+p]], { desc = "Paste from system clipboard" })
   end
+
 
   M.mpm_Medit()
 

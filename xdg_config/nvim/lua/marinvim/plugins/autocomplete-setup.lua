@@ -16,7 +16,7 @@ return {
       completion = {
         list = {
           max_items = 10
-        }
+        },
       },
       sources = {
         min_keyword_length = 2
