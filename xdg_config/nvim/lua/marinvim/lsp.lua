@@ -3,8 +3,7 @@ local picker = require("snacks").picker
 local lsp = vim.lsp.buf
 local map = vim.keymap.set
 
-local function enable_document_highlight(client_id, buffer)
-  local client = vim.lsp.get_client_by_id(client_id)
+local function enable_document_highlight(client, buffer)
   if not client or not client:supports_method("textDocument/documentHighlight") then
     return
   end
@@ -57,7 +56,8 @@ function M.map_on_attach(args)
   map("n", "<leader>lci", picker.lsp_incoming_calls, opts)
   map("n", "<leader>lco", picker.lsp_outgoing_calls, opts)
 
-  enable_document_highlight(args.data.client_id, opts.buffer)
+  local client = vim.lsp.get_client_by_id(args.data.client_id)
+  enable_document_highlight(client, opts.buffer)
 end
 
 return M
