@@ -2,69 +2,17 @@ return {
   {
     "mason-org/mason-lspconfig.nvim",
     dependencies = {
-      {
-        "mason-org/mason.nvim",
-        cmd = { 'Mason', 'MasonInstall', 'MasonUninstall' },
-        opts = {}
-      },
+      { "mason-org/mason.nvim", opts = {} },
       "neovim/nvim-lspconfig",
     },
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      local capabilities = vim.tbl_deep_extend(
-        "force",
-        {},
-        vim.lsp.protocol.make_client_capabilities(),
-        require("blink.cmp").get_lsp_capabilities())
-
-      require("mason-lspconfig").setup({
-        ensure_installed = {
-          "lua_ls",
-          "ty",
-          "ruff",
-          "ts_ls",
-          "rust_analyzer",
-        }
-      })
-
-      vim.lsp.config("*", {
-        capabilities = capabilities
-      })
-
-      vim.lsp.config("lua_ls", {
-        settings = {
-          Lua = {
-            diagnostics = {
-              globals = { "vim" },
-            },
-          },
-        },
-      })
-
-
-      local severity = vim.diagnostic.severity
-      vim.diagnostic.config({
-        signs = {
-          text = {
-            [severity.ERROR] = "",
-            [severity.WARN]  = "",
-            [severity.INFO]  = "",
-            [severity.HINT]  = "",
-          },
-        },
-        virtual_text = true,
-        float = {
-          focusable = true,
-          border = "rounded",
-        }
-      })
-
-      -- Keymaps / autocmd on attach
-      vim.api.nvim_create_autocmd("LspAttach", {
-        group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-        callback = require("marinvim.lsp").map_on_attach
-      })
-    end,
+    opts = {
+      ensure_installed = {
+        "lua_ls",
+        "ty",
+        "ruff",
+        "ts_ls"
+      },
+    }
   },
   {
     "mfussenegger/nvim-lint",
