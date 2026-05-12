@@ -8,7 +8,6 @@ return {
     },
     opts = {
       signature = { enabled = true, window = { border = "rounded" } },
-      snippets = { preset = "default" },
       keymap = {
         preset = 'super-tab',
       },
