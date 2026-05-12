@@ -29,7 +29,7 @@ vim.opt.undofile = false
 
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
-vim.opt.pumheight = 8 -- how many candidates to show on a popup
+vim.opt.pumheight = 10 -- how many candidates to show on a popup
 
 vim.opt.termguicolors = true
 vim.opt.splitbelow = true -- split go below
