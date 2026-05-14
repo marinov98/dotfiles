@@ -1,78 +1,5 @@
 {
   // ===============================================
-  // Editor
-  // ===============================================
-  "editor.fontLigatures": true,
-  "editor.fontSize": 12,
-  "editor.bracketPairColorization.enabled": true,
-  "editor.guides.bracketPairs": "active",
-  "editor.acceptSuggestionOnEnter": "off",
-  "editor.minimap.enabled": false,
-  "editor.cursorBlinking": "solid",
-  "editor.fontWeight": 500,
-  "editor.formatOnSave": false,
-  "editor.tabSize": 2,
-  "editor.lineNumbers": "relative",
-  "editor.inlayHints.enabled": "offUnlessPressed",
-  "errorLens.enabledDiagnosticLevels": ["warning", "info", "error"],
-
-  // ===============================================
-  // UI
-  // ===============================================
-  "breadcrumbs.enabled": false,
-  "git.decorations.enabled": false,
-  "workbench.editor.showTabs": "none",
-  "workbench.startupEditor": "none",
-  "scm.diffDecorations": "none",
-  "chat.mcp.gallery.enabled": true,
-  "update.showReleaseNotes": false,
-  "workbench.activityBar.location": "hidden",
-
-  // ===============================================
-  // Java
-  // ===============================================
-  "java.codeGeneration.toString.codeStyle": "STRING_BUILDER",
-  "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
-  "java.format.settings.profile": "GoogleStyle",
-  "java.codeGeneration.generateComments": true,
-  "java.codeGeneration.hashCodeEquals.useJava7Objects": true,
-  "java.codeGeneration.hashCodeEquals.useInstanceof": true,
-
-  // ===============================================
-  // Formatting
-  // ===============================================
-  "js.format.semicolons": "insert",
-  "ts.format.semicolons": "insert",
-  "ruff.lineLength": 79,
-  "[python]": {
-    "editor.defaultFormatter": "charliermarsh.ruff"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  "[less]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[yaml]": {
-    "editor.defaultFormatter": "redhat.vscode-yaml"
-  },
-
-  // ===============================================
   // Vim
   // ===============================================
   "vim.useSystemClipboard": true,
@@ -165,5 +92,78 @@
   // ===============================================
   "vim.insertModeKeyBindingsNonRecursive": [
     { "before": ["<C-h>"], "commands": ["editor.action.triggerParameterHints"] }
-  ]
+  ],
+
+  // ===============================================
+  // Editor
+  // ===============================================
+  "editor.fontLigatures": true,
+  "editor.fontSize": 12,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.acceptSuggestionOnEnter": "off",
+  "editor.minimap.enabled": false,
+  "editor.cursorBlinking": "solid",
+  "editor.fontWeight": 500,
+  "editor.formatOnSave": false,
+  "editor.tabSize": 2,
+  "editor.lineNumbers": "relative",
+  "editor.inlayHints.enabled": "offUnlessPressed",
+  "errorLens.enabledDiagnosticLevels": ["warning", "info", "error"],
+
+  // ===============================================
+  // UI
+  // ===============================================
+  "breadcrumbs.enabled": false,
+  "git.decorations.enabled": false,
+  "workbench.editor.showTabs": "none",
+  "workbench.startupEditor": "none",
+  "scm.diffDecorations": "none",
+  "chat.mcp.gallery.enabled": true,
+  "update.showReleaseNotes": false,
+  "workbench.activityBar.location": "hidden",
+
+  // ===============================================
+  // Java
+  // ===============================================
+  "java.codeGeneration.toString.codeStyle": "STRING_BUILDER",
+  "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+  "java.format.settings.profile": "GoogleStyle",
+  "java.codeGeneration.generateComments": true,
+  "java.codeGeneration.hashCodeEquals.useJava7Objects": true,
+  "java.codeGeneration.hashCodeEquals.useInstanceof": true,
+
+  // ===============================================
+  // Formatting
+  // ===============================================
+  "js.format.semicolons": "insert",
+  "ts.format.semicolons": "insert",
+  "ruff.lineLength": 79,
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[less]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  }
 }
