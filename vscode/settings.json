@@ -29,101 +29,6 @@
   "workbench.activityBar.location": "hidden",
 
   // ===============================================
-  // Vim
-  // ===============================================
-  "vim.useSystemClipboard": true,
-  "vim.incsearch": true,
-  "vim.hlsearch": false,
-  "vim.sneak": false,
-  "vim.surround": true,
-  "vim.easymotion": false,
-  "vim.leader": "<space>",
-  "vim.cursorStylePerMode.insert": "line-thin",
-  "vim.cursorStylePerMode.normal": "block",
-
-  // ===============================================
-  // Vim Remaps
-  // ===============================================
-  "vim.normalModeKeyBindingsNonRecursive": [
-    {
-      "before": ["g", "r", "r"],
-      "commands": ["editor.action.goToReferences"]
-    },
-    {
-      "before": ["g", "r", "i"],
-      "commands": ["editor.action.goToImplementation"]
-    },
-    {
-      "before": ["g", "r", "d"],
-      "commands": ["editor.action.goToDeclaration"]
-    },
-    {
-      "before": ["g", "r", "n"],
-      "commands": ["editor.action.rename"]
-    },
-    {
-      "before": ["g", "r", "t"],
-      "commands": ["editor.action.goToTypeDefinition"]
-    },
-    {
-      "before": ["g", "r", "a"],
-      "commands": ["editor.action.codeAction"]
-    },
-    {
-      "before": ["g", "r", "h"],
-      "commands": ["editor.action.triggerParameterHints"]
-    },
-    {
-      "before": ["]", "d"],
-      "commands": ["editor.action.marker.next"]
-    },
-    {
-      "before": ["[", "d"],
-      "commands": ["editor.action.marker.prev"]
-    },
-    {
-      "before": ["K"],
-      "commands": ["editor.action.showHover"]
-    },
-    {
-      "before": ["<C-p>"],
-      "commands": ["workbench.action.quickOpen"]
-    },
-    {
-      "before": ["-"],
-      "commands": ["workbench.action.files.openFolder"]
-    },
-    {
-      "before": ["g", "l"],
-      "after": ["*", "N", "c", "g", "n"]
-    },
-    {
-      "before": ["g", "L"],
-      "after": ["*", "N", "c", "g", "N"]
-    }
-  ],
-  "vim.visualModeKeyBindingsNonRecursive": [
-    {
-      "before": ["g", "r", "a"],
-      "commands": ["editor.action.codeAction"]
-    },
-    {
-      "before": ["g", "l"],
-      "commands": ["editor.action.addSelectionToNextFindMatch"]
-    },
-    {
-      "before": ["g", "L"],
-      "commands": ["editor.action.addSelectionToPreviousFindMatch"]
-    }
-  ],
-  "vim.insertModeKeyBindingsNonRecursive": [
-    {
-      "before": ["<C-h>"],
-      "commands": ["editor.action.triggerParameterHints"]
-    }
-  ],
-
-  // ===============================================
   // Java
   // ===============================================
   "java.codeGeneration.toString.codeStyle": "STRING_BUILDER",
@@ -165,5 +70,100 @@
   },
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
-  }
+  },
+
+  // ===============================================
+  // Vim
+  // ===============================================
+  "vim.useSystemClipboard": true,
+  "vim.incsearch": true,
+  "vim.hlsearch": false,
+  "vim.sneak": false,
+  "vim.surround": true,
+  "vim.easymotion": false,
+  "vim.leader": "<space>",
+  "vim.cursorStylePerMode.insert": "line-thin",
+  "vim.cursorStylePerMode.normal": "block",
+
+  // ===============================================
+  // Vim - Normal Mode
+  // ===============================================
+  "vim.normalModeKeyBindingsNonRecursive": [
+    // g mode
+    { "before": ["g", "r", "r"], "commands": ["editor.action.goToReferences"] },
+    { "before": ["g", "r", "i"], "commands": ["editor.action.goToImplementation"] },
+    { "before": ["g", "r", "d"], "commands": ["editor.action.goToDeclaration"] },
+    { "before": ["g", "r", "n"], "commands": ["editor.action.rename"] },
+    { "before": ["g", "r", "t"], "commands": ["editor.action.goToTypeDefinition"] },
+    { "before": ["g", "r", "a"], "commands": ["editor.action.codeAction"] },
+    { "before": ["g", "r", "h"], "commands": ["editor.action.triggerParameterHints"] },
+    { "before": ["g", "l"], "after": ["*", "N", "c", "g", "n"] },
+    { "before": ["g", "L"], "after": ["*", "N", "c", "g", "N"] },
+
+    // custom
+    { "before": ["]", "d"], "commands": ["editor.action.marker.next"] },
+    { "before": ["[", "d"], "commands": ["editor.action.marker.prev"] },
+    { "before": ["K"], "commands": ["editor.action.showHover"] },
+    { "before": ["<C-p>"], "commands": ["workbench.action.quickOpen"] },
+    { "before": ["-"], "commands": ["workbench.action.files.openFolder"] },
+
+    // --- Space mode ---
+    { "before": ["<leader>", "e"], "commands": ["workbench.files.action.focusFilesExplorer"] },
+    { "before": ["<leader>", "u", "m"], "commands": ["workbench.action.openSettingsJson"] },
+    { "before": ["<leader>", "u", "k"], "commands": ["workbench.action.openGlobalKeybindingsFile"] },
+    { "before": ["<leader>", "m"], "commands": ["workbench.action.showCommands"] },
+    { "before": ["<leader>", "s"], "commands": ["workbench.action.files.save"] },
+    { "before": ["<leader>", "k"], "commands": ["workbench.action.closeActiveEditor"] },
+    { "before": ["<leader>", "q"], "commands": ["workbench.action.closeEditorsInGroup"] },
+    { "before": ["<leader>", "Q"], "commands": ["workbench.action.closeAllGroups"] },
+    { "before": ["<leader>", "a"], "commands": ["extension.vim_ctrl+^"] },
+    { "before": ["<leader>", "b", "l"], "commands": ["workbench.action.showAllEditors"] },
+    { "before": ["<leader>", "<leader>", "l"], "commands": ["projectManager.listProjects"] },
+    { "before": ["<leader>", "<leader>", "S"], "commands": ["projectManager.saveProject"] },
+    { "before": ["<leader>", "<leader>", "k"], "commands": ["workbench.action.closeOtherEditors"] },
+    { "before": ["<leader>", "<leader>", "K"], "commands": ["workbench.action.closeAllEditors"] },
+    { "before": ["<leader>", "l", "g"], "commands": ["editor.action.showHover"] },
+    { "before": ["<leader>", "l", "f"], "commands": ["editor.action.formatDocument", "editor.action.organizeImports"] },
+    { "before": ["<leader>", "l", "F"], "commands": ["editor.action.formatDocument"] },
+    { "before": ["<leader>", "l", "o"], "commands": ["editor.action.organizeImports"] },
+    { "before": ["<leader>", "l", "s"], "commands": ["workbench.action.gotoSymbol"] },
+    { "before": ["<leader>", "l", "w", "s"], "commands": ["workbench.action.showAllSymbols"] },
+    { "before": ["<leader>", "d", "l"], "commands": ["workbench.actions.view.problems"] },
+    { "before": ["<leader>", "f"], "commands": ["workbench.action.quickOpen"] },
+    { "before": ["<leader>", "/"], "commands": ["workbench.action.findInFiles"] },
+    { "before": ["<leader>", "*"], "commands": ["editor.action.addSelectionToNextFindMatch", "workbench.action.findInFiles"] },
+    { "before": ["<leader>", "u", "t"], "commands": ["workbench.action.toggleSidebarVisibility"] },
+    { "before": ["<leader>", "E"], "commands": ["search.action.focusSearchList"] },
+    { "before": ["<leader>", "c", "s"], "commands": ["workbench.action.terminal.toggleTerminal"] },
+    { "before": ["<leader>", "c", "S"], "commands": ["workbench.action.terminal.new"] },
+    { "before": ["<leader>", "g", "g"], "commands": ["workbench.view.scm"] },
+    { "before": ["<leader>", "u", "x"], "commands": ["workbench.view.extensions"] },
+    { "before": ["<leader>", "i", "c"], "commands": ["workbench.action.chat.open"] },
+    { "before": ["<leader>", "i", "s"], "commands": ["workbench.action.chat.openInSidebar"] },
+    { "before": ["<leader>", "i", "i"], "commands": ["inlineChat.start"] }
+  ],
+
+  // ===============================================
+  // Vim - Visual Mode
+  // ===============================================
+  "vim.visualModeKeyBindingsNonRecursive": [
+    // --- g mode ---
+    { "before": ["g", "r", "a"], "commands": ["editor.action.codeAction"] },
+    { "before": ["g", "l"], "commands": ["editor.action.addSelectionToNextFindMatch"] },
+    { "before": ["g", "L"], "commands": ["editor.action.addSelectionToPreviousFindMatch"] },
+
+    // --- Space mode ---
+    { "before": ["<leader>", "u", "c"], "commands": ["workbench.action.terminal.runSelectedText"] },
+    { "before": ["<leader>", "*"], "commands": ["workbench.action.findInFiles"] },
+    { "before": ["<leader>", "c", "a"], "commands": ["editor.action.changeAll"] },
+    { "before": ["<leader>", "c", "A"], "commands": ["editor.action.insertCursorAtEndOfEachLineSelected"] },
+    { "before": ["<leader>", "i", "i"], "commands": ["inlineChat.start"] }
+  ],
+
+  // ===============================================
+  // Vim - Insert Mode
+  // ===============================================
+  "vim.insertModeKeyBindingsNonRecursive": [
+    { "before": ["<C-h>"], "commands": ["editor.action.triggerParameterHints"] }
+  ]
 }
