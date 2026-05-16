@@ -40,6 +40,17 @@ return {
       local map = vim.keymap.set
       -- Finding, Listing
       map("n", "<leader>f", function() Snacks.picker.files({ cmd = "fd", hidden = true, ignored = true }) end, { desc = "Find (All) Files" })
+      map("n", "gf", function()
+        local file_with_suffix = vim.fn.expand("<cWORD>")
+        if vim.uv.fs_stat(vim.fn.expand("<cfile>")) then
+          vim.api.nvim_command("wincmd k")
+          vim.api.nvim_command(string.format("e %s", file_with_suffix))
+        else
+          vim.api.nvim_command("wincmd k")
+          Snacks.picker.files({ search = file_with_suffix })
+        end
+      end,
+      { desc = "Find File under cursor" })
       map("n", "<C-p>", function() Snacks.picker.files({ cmd = "fd" }) end, { desc = "Find (Project) Files" })
       map("n", "<leader>um", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, { desc = "Find Config File" })
       map("n", "<leader>ud", function() Snacks.picker.files({ cwd = "~/.config" }) end, { desc = "Find Dotfiles" })

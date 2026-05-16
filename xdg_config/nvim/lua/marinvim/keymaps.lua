@@ -11,7 +11,13 @@ map('n', '<leader>q', ":q<CR>", { desc = "Quit" })
 map('n', '<leader>Q', ":q!<CR>", { desc = "Force Quit" })
 
 -- Coding utility
-map('n', '<leader>cs', ":terminal<CR>", { desc = "Open terminal" })
+map('t', '<C-[>', '<C-\\><C-N>')
+map('n', '<leader>cs', function()
+  vim.cmd.vnew()
+  vim.cmd.term()
+  vim.cmd.wincmd("J")
+  vim.api.nvim_win_set_height(0, 10)
+end, { desc = "Open terminal at bottom" })
 map('n', '<leader>cn', ":noh<CR>", { desc = "Remove highlight" })
 map("n", "<leader>ca", ":%s/<C-r><C-w>/<C-r><C-w>/g<Left><Left>",
   { desc = "Change all word under cursor with confirmation" })
