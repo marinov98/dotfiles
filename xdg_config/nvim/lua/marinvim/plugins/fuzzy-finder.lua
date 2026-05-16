@@ -42,11 +42,11 @@ return {
       map("n", "<leader>f", function() Snacks.picker.files({ cmd = "fd", hidden = true, ignored = true }) end, { desc = "Find (All) Files" })
       map("n", "gf", function()
         local file_with_suffix = vim.fn.expand("<cWORD>")
-        if vim.uv.fs_stat(vim.fn.expand("<cfile>")) then
-          vim.api.nvim_command("wincmd k")
+        local file = vim.fn.expand("<cfile>")
+        vim.api.nvim_command("wincmd k")
+        if vim.uv.fs_stat(file) then
           vim.api.nvim_command(string.format("e %s", file_with_suffix))
         else
-          vim.api.nvim_command("wincmd k")
           Snacks.picker.files({ search = file_with_suffix })
         end
       end,
