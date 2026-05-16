@@ -1,22 +1,27 @@
 return {
   {
-    "catppuccin/nvim",
-    lazy = false,
-    enabled = false,
-    name = "catppuccin",
+    "folke/tokyonight.nvim",
     priority = 1000,
-    config = function()
-      require('catppuccin').setup({ flavour = "mocha" })
-      vim.cmd.colorscheme("catppuccin")
-    end
+    lazy = false,
+    opts = {
+      style = "night",
+    },
   },
   {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require("tokyonight").setup({ style = "night" })
-      vim.cmd.colorscheme("tokyonight")
-    end,
-  }
+    "catppuccin/nvim",
+    name = "catppuccin",
+    opts = {
+      flavour = "mocha",
+    },
+  },
+  {
+    "rose-pine/neovim",
+    name = "rose-pine",
+  },
+  {
+    "EdenEast/nightfox.nvim",
+  },
+  {
+    'AlexvZyl/nordic.nvim',
+  },
 }

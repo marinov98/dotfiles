@@ -81,6 +81,7 @@ return {
       map("n", "<leader>?s", function() Snacks.picker.search_history() end, { desc = "Show Search History" })
       map("n", "<leader>?r", function() Snacks.picker.registers() end, { desc = "Show Registers" })
       map("n", "<leader>?M", function() Snacks.picker.marks() end, { desc = "Show Marks" })
+      map("n", "<leader>?t", function() Snacks.picker.colorschemes() end, { desc = "Show Themes" })
     end,
   }
 }
