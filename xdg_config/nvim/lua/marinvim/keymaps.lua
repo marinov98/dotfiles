@@ -6,6 +6,7 @@ local map = vim.keymap.set
 map('n', '<leader>a', "<C-^>", { desc = "Alternate buffers" })
 map('n', '<leader>s', ":w<CR>", { desc = "Save File" })
 map('n', '<leader>k', ":bd<CR>", { desc = "Close buffer" })
+map('n', '<leader>K', ":bd!<CR>", { desc = "(Force) Close buffer" })
 map('n', '<leader>x', ":tabclose<CR>", { desc = "Close tab" })
 map('n', '<leader>q', ":q<CR>", { desc = "Quit" })
 map('n', '<leader>Q', ":q!<CR>", { desc = "Force Quit" })
