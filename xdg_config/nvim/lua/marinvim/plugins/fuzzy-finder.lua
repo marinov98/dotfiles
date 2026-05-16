@@ -40,6 +40,7 @@ return {
       local map = vim.keymap.set
       -- Finding, Listing
       map("n", "<leader>f", function() Snacks.picker.files({ cmd = "fd", hidden = true, ignored = true }) end, { desc = "Find (All) Files" })
+      map("n", "<C-p>", function() Snacks.picker.files({ cmd = "fd" }) end, { desc = "Find (Project) Files" })
       map("n", "gf", function()
         local file_with_suffix = vim.fn.expand("<cWORD>")
         local file = vim.fn.expand("<cfile>")
@@ -51,7 +52,6 @@ return {
         end
       end,
       { desc = "Find File under cursor" })
-      map("n", "<C-p>", function() Snacks.picker.files({ cmd = "fd" }) end, { desc = "Find (Project) Files" })
       map("n", "<leader>um", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, { desc = "Find Config File" })
       map("n", "<leader>ud", function() Snacks.picker.files({ cwd = "~/.config" }) end, { desc = "Find Dotfiles" })
       map("n", "<leader>bl", function() Snacks.picker.buffers() end, { desc = "List Buffers" })
