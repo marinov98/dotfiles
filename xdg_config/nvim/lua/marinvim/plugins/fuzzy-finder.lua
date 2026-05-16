@@ -32,12 +32,6 @@ return {
             lines = {
               layout = ivy_layout
             },
-            grep_buffers = {
-              layout = ivy_layout
-            },
-            lsp_symbols = {
-              layout = ivy_layout
-            }
           },
           icons = { files = { enabled = false } },
         },
