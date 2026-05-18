@@ -22,6 +22,7 @@ return {
     "EdenEast/nightfox.nvim",
   },
   {
-    'AlexvZyl/nordic.nvim',
-  },
+    "scottmckendry/cyberdream.nvim",
+    opts = { variant = "dark" }
+  }
 }
