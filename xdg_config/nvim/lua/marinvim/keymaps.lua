@@ -28,6 +28,8 @@ map("n", "<leader>ci", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
   { desc = "Case insensitive search/replace under cursor for current file" })
 
 -- General Utility
+map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move lines down in visual selection" })
+map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move lines up in visual selection" })
 map("n", "<leader>ux", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Chmod +x current file" })
 map("n", "<leader>uc", ":! ", { silent = true, desc = "Execute external command" })
 -- map('n', '-', vim.cmd.Explore, { desc = "Open file browser" })
