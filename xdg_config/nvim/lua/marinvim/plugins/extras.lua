@@ -32,10 +32,6 @@ return {
     'stevearc/oil.nvim',
     version = "*",
     config = function()
-      -- ensure netrw is disabled
-      vim.g.loaded_netrw = 1
-      vim.g.loaded_netrwPlugin = 1
-
       require("oil").setup({
         view_options = {
           show_hidden = true
