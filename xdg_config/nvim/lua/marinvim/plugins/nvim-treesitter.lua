@@ -46,9 +46,8 @@ return {
 
       -- Enable highlighting and indentation via FileType autocmd
       vim.api.nvim_create_autocmd("FileType", {
-        callback = function()
-          pcall(vim.treesitter.start)
-          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        callback = function(args)
+          pcall(vim.treesitter.start, args.buf)
         end,
       })
     end,
