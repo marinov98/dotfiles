@@ -5,6 +5,23 @@ return {
     build = ":TSUpdate",
     event = { 'BufReadPre', 'BufNewFile' },
     init = function()
+      -- Enable highlighting via FileType autocmd
+      vim.api.nvim_create_autocmd("FileType", {
+        group = vim.api.nvim_create_augroup("MPMTreesitter", { clear = true }),
+        callback = function(args)
+          local buf = args.buf
+
+          local ft = vim.bo[buf].filetype
+          local lang = vim.treesitter.language.get_lang(ft) or ft
+          local has_parser = pcall(vim.treesitter.get_parser, buf, lang)
+
+          if has_parser then
+            pcall(vim.treesitter.start, buf)
+          end
+        end,
+      })
+    end,
+    config = function()
       -- Install missing parsers without reinstalling already-installed ones
       local ensureInstalled = {
         -- mandatory
@@ -36,20 +53,14 @@ return {
         "css",
         "scss",
       }
-      local alreadyInstalled = require("nvim-treesitter.config").get_installed()
+      local treesitter = require("nvim-treesitter")
+      local alreadyInstalled = treesitter.get_installed()
       local parsersToInstall = vim.iter(ensureInstalled)
-        :filter(function(parser)
-          return not vim.tbl_contains(alreadyInstalled, parser)
-        end)
-        :totable()
-      require("nvim-treesitter").install(parsersToInstall)
-
-      -- Enable highlighting and indentation via FileType autocmd
-      vim.api.nvim_create_autocmd("FileType", {
-        callback = function(args)
-          pcall(vim.treesitter.start, args.buf)
-        end,
-      })
-    end,
+          :filter(function(parser)
+            return not vim.tbl_contains(alreadyInstalled, parser)
+          end)
+          :totable()
+      treesitter.install(parsersToInstall)
+    end
   }
 }
