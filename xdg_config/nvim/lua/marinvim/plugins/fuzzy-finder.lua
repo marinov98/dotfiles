@@ -39,7 +39,23 @@ return {
 
       local map = vim.keymap.set
       -- Finding, Listing
-      map("n", "<leader>f", function() Snacks.picker.files({ cmd = "fd", hidden = true, ignored = true }) end, { desc = "Find (All) Files" })
+      map("n", "<leader>f", function()
+        Snacks.picker.smart {
+          multi = { "buffers", "recent", "files" },
+          hidden = true,
+          format = "file",
+          matcher = {
+            fuzzy = true,
+            filename_bonus = true,
+            history_bonus = true,
+            sort_empty = true,
+            frecency = true,
+          },
+          filter = {
+            cwd = true,
+          },
+        }
+      end, { desc = "Find (Smart) Files" })
       map("n", "<C-p>", function() Snacks.picker.files({ cmd = "fd" }) end, { desc = "Find (Project) Files" })
       map("n", "gf", function()
         local file_with_suffix = vim.fn.expand("<cWORD>")
