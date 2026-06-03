@@ -4,6 +4,7 @@ copy_dotfiles_to_home() {
   if [[ $(uname -s) == Linux ]] || [[ $(uname -s) == Darwin ]]
   then
     echo "machine found to be linux or Mac"
+    mkdir -p ~/.config
     echo "copying config..."
     cp -r xdg_config/* ~/.config/
     echo "creating '.ignore' from fzyIgnore..."
