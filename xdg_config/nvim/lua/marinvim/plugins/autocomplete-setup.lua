@@ -1,10 +1,10 @@
 return {
+  { "folke/lazydev.nvim", ft = "lua", opts = {} },
   {
     "saghen/blink.cmp",
     version = "v1.*",
     dependencies = {
       "rafamadriz/friendly-snippets", -- useful snippets
-      { "folke/lazydev.nvim", ft = "lua", opts = {} },
     },
     opts = {
       signature = { enabled = true, window = { border = "rounded" } },
