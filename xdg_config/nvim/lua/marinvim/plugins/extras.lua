@@ -35,6 +35,7 @@ return {
   {
     'MagicDuck/grug-far.nvim',
     opts = {},
+    cmd = { "GrugFar", "GrugFarWithin" },
     keys = {
       {
         "<leader><leader>/",
