@@ -1,23 +1,16 @@
 return {
   {
-    "jay-babu/mason-nvim-dap.nvim",
+    'mfussenegger/nvim-dap',
     dependencies = {
-      'mfussenegger/nvim-dap',
       "mfussenegger/nvim-dap-python",
       "nvim-neotest/nvim-nio",
       'rcarriga/nvim-dap-ui',
     },
-    opts = {
-      ensure_installed = {
-        "codelldb"
-      }
-    },
     config = function()
       local dap, dapui = require("dap"), require("dapui")
-      local dap_python = require("dap-python")
 
       dapui.setup()
-      dap_python.setup("uv")
+      require("dap-python").setup("uv")
 
       -- Automatically open/close DAP UI
       dap.listeners.after.event_initialized['dapui_config'] = dapui.open
