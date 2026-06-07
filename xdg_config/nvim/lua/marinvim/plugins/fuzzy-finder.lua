@@ -41,7 +41,6 @@ return {
               layout = ivy_layout
             },
           },
-          icons = { files = { enabled = false } },
         },
       })
 
