@@ -93,3 +93,5 @@ PROMPT='%F{81}%n:%f%F{green}${PWD/#$HOME/~}%f %F{183}${vcs_info_msg_0_}%f $(pars
 
 # Lambda variant
 #PROMPT='%F{246}󰌢 %f%F{110}${PWD/#$HOME/~}%f %F{146}${vcs_info_msg_0_}%f $(parse_git_status)%F{209}${NEWLINE}󰘧%f '
+
+[ -f ~/.custom_local.sh ] && source ~/.custom_local.sh
