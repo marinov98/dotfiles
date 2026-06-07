@@ -2,10 +2,12 @@ return {
   {
     'mfussenegger/nvim-dap',
     dependencies = {
-      "mfussenegger/nvim-dap-python",
       "nvim-neotest/nvim-nio",
       'rcarriga/nvim-dap-ui',
+      "mfussenegger/nvim-dap-python",
     },
+    cmd = { 'DapUIToggle', 'DapToggleRepl', 'DapToggleBreakpoint', 'DapContinue' },
+    keys = { '<leader>db', '<leader>dB', '<F5>', '<F7>' },
     config = function()
       local dap, dapui = require("dap"), require("dapui")
 
@@ -60,5 +62,5 @@ return {
         }
       })
     end,
-  }
+  },
 }
