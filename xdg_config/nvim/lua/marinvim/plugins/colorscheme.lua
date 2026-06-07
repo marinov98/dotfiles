@@ -21,7 +21,10 @@ return {
   },
   {
     "scottmckendry/cyberdream.nvim",
-    opts = { variant = "dark" },
+    opts = {
+      variant = "dark",
+      cache = true
+    },
     lazy = false,
     priority = 1000,
     config = function(_, opts)
