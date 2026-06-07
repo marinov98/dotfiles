@@ -29,6 +29,7 @@ config.window_padding = {
   bottom = 5,
 }
 
+config.audible_bell = "Disabled"
 config.leader = { key = ',', mods = 'CTRL', timeout_milliseconds = 2000 }
 
 config.keys = {
