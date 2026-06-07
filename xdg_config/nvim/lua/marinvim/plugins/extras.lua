@@ -2,20 +2,16 @@ return {
   {
     "kylechui/nvim-surround",
     keys = { 'cs', 'ds', 'ys' },
-    version = "*",
-    config = true,
+    opts = {}
   },
   {
     'echasnovski/mini.pairs',
     enabled = false,
-    version = "*",
     event = "InsertEnter",
     opts = {}
   },
   {
     'echasnovski/mini.icons',
-    enabled = true,
-    version = '*',
     opts = {}
   },
   {
@@ -30,28 +26,32 @@ return {
   },
   {
     'stevearc/oil.nvim',
-    version = "*",
-    config = function()
-      require("oil").setup({
-        view_options = {
-          show_hidden = true
-        }
-      })
-
-      vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory with Oil" })
-    end
+    opts = { view_options = { show_hidden = true } },
+    cmd = "Oil",
+    keys = {
+      { "-", "<CMD>Oil<CR>", desc = "Open parent directory with Oil" }
+    },
   },
   {
     'MagicDuck/grug-far.nvim',
-    config = function()
-      local grug = require("grug-far")
-
-      grug.setup({})
-
-      vim.keymap.set({ 'n', 'x' }, '<leader><leader>/', function()
-        grug.open({ visualSelectionUsage = 'operate-within-range' })
-      end, { desc = 'Search within range' })
-      vim.keymap.set("x", "<leader><leader>*", grug.with_visual_selection, { desc = "Search/Replace Visual Selection" })
-    end
+    opts = {},
+    keys = {
+      {
+        "<leader><leader>/",
+        function()
+          require("grug-far").open({ visualSelectionUsage = 'operate-within-range' })
+        end,
+        mode = { 'n', 'x' },
+        desc = 'Search within range'
+      },
+      {
+        "<leader><leader>*",
+        function()
+          require("grug-far").with_visual_selection()
+        end,
+        mode = "x",
+        desc = "Search/Replace Visual Selection"
+      }
+    },
   }
 }
