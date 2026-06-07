@@ -32,6 +32,40 @@ return {
       vim.keymap.set("n", "<F2>", dap.step_over, { desc = "Debug: Step Over" })
       vim.keymap.set("n", "<F3>", dap.step_out, { desc = "Debug: Step Out" })
       vim.keymap.set("n", "<F7>", dapui.toggle, { desc = "Debug: See last session" })
+
+      dap.adapters.lldb = {
+        type = "executable",
+        command = os.getenv("HOME") .. "/.local/share/nvim/mason/bin/codelldb",
+        name = "codelldb",
+      }
+
+      local default_lldb_config = {
+        {
+          name = "Launch",
+          type = "lldb",
+          request = "launch",
+          program = function()
+            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+          end,
+          args = function()
+            return vim.split(vim.fn.input("(Optional) Args: ", "", "file"), " ", { trimempty = true })
+          end,
+          cwd = "${workspaceFolder}",
+          stopOnEntry = false,
+        },
+      }
+      dap.configurations.c = default_lldb_config
+      dap.configurations.cpp = default_lldb_config
+      dap.configurations.asm = default_lldb_config
+      dap.configurations.zig = default_lldb_config
+      dap.configurations.rust = vim.tbl_deep_extend("force", default_lldb_config, {
+        {
+          name = "Launch (Rust)",
+          program = function()
+            return vim.fn.input("Cargo executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
+          end,
+        }
+      })
     end,
   }
 }
