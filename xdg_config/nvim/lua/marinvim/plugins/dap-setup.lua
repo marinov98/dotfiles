@@ -1,30 +1,37 @@
 return {
-  'mfussenegger/nvim-dap',
-  dependencies = {
-    'rcarriga/nvim-dap-ui',
-  },
-  cmd = { 'DapUIToggle', 'DapToggleRepl', 'DapToggleBreakpoint' },
-  config = function()
-    require("dapui").setup()
-    -- Experimental need to add dap servers for this to work!
-    local dap, dapui = require("dap"), require("dapui")
+  {
+    "jay-babu/mason-nvim-dap.nvim",
+    dependencies = {
+      'mfussenegger/nvim-dap',
+      "mfussenegger/nvim-dap-python",
+      "nvim-neotest/nvim-nio",
+      'rcarriga/nvim-dap-ui',
+    },
+    opts = {
+      ensure_installed = {
+        "codelldb"
+      }
+    },
+    config = function()
+      local dap, dapui = require("dap"), require("dapui")
+      local dap_python = require("dap-python")
 
-    dap.listeners.before.attach.dapui_config = function()
-      dapui.open()
-    end
-    dap.listeners.before.launch.dapui_config = function()
-      dapui.open()
-    end
-    dap.listeners.before.event_terminated.dapui_config = function()
-      dapui.close()
-    end
-    dap.listeners.before.event_exited.dapui_config = function()
-      dapui.close()
-    end
+      dapui.setup()
+      dap_python.setup("uv")
 
-    vim.keymap.set("n", "<leader>dt", ":DapToggleBreakpoint<CR>")
-    vim.keymap.set("n", "<leader>dc", ":DapContinue<CR>")
-    vim.keymap.set("n", "<leader>dx", ":DapTerminate<CR>")
-    vim.keymap.set("n", "<leader>do", ":DapStepOver<CR>")
-  end,
+      -- Automatically open/close DAP UI
+      dap.listeners.after.event_initialized['dapui_config'] = dapui.open
+      dap.listeners.before.event_terminated['dapui_config'] = dapui.close
+      dap.listeners.before.event_exited['dapui_config'] = dapui.close
+
+      vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Debug: Toggle Breakpoint" })
+      vim.keymap.set("n", "<leader>dB", dap.set_breakpoint, { desc = "Debug: Set Breakpoint" })
+
+      vim.keymap.set("n", "<F5>", dap.continue, { desc = "Debug: Start/Continue" })
+      vim.keymap.set("n", "<F1>", dap.step_into, { desc = "Debug: Step Into" })
+      vim.keymap.set("n", "<F2>", dap.step_over, { desc = "Debug: Step Over" })
+      vim.keymap.set("n", "<F3>", dap.step_out, { desc = "Debug: Step Out" })
+      vim.keymap.set("n", "<F7>", dapui.toggle, { desc = "Debug: See last session" })
+    end,
+  }
 }
