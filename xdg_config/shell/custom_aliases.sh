@@ -2,12 +2,30 @@
 ####### Aliases
 ###################################
 
-alias ls='ls -GFh --color=auto'
-alias ll='ls -l'
+if command -v eza >/dev/null 2>&1; then
+  alias ls='eza'
+  alias ll='eza -l --icons'
+  alias tree='eza --tree --icons=always'
+else
+  alias ls='ls -GFh --color=auto'
+  alias ll='ls -l'
+fi
+
 alias cp='cp -iv'
 alias mv='mv -iv'
 alias mkdir='mkdir -pv'
 alias less='less -FSRXc'
+
+if command -v bat >/dev/null 2>&1; then
+  export BAT_OPTS="--paging=never"
+  cat() {
+    if [ -t 1 ]; then
+      bat "$@"
+    else
+      command cat "$@"
+    fi
+  }
+fi
 
 alias v='nvim'
 alias vc='v --clean'
