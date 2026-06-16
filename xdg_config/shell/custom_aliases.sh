@@ -49,8 +49,8 @@ CUSTOM_PROJECTS_DIR_PATH="$HOME/projects/"
 
 # Fd
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
-alias zfd='cd $CUSTOM_PROJECTS_DIR_PATH && cd $(fd . -d 2 -t d | fzf)'
+alias zfd='cd "$CUSTOM_PROJECTS_DIR_PATH" && cd "$(fd . -d 2 -t d | fzf)"'
 
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-alias vz='v $(fzf)'
+alias vz='v "$(fzf)"'
 
