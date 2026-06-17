@@ -14,5 +14,5 @@
     "bash": "allow",
     "webfetch": "ask"
   },
-  "model": "opencode/big-pickle"
+  "model": "opencode/big-pickle",
 }
