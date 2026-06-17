@@ -26,7 +26,7 @@ These tools respect `.gitignore` by default, filtering `.git/`, `.venv`, `node_m
 | `shellcheck`    | Shell validation          | Catches bugs before they ship          |
 | `yq`            | YAML/INI processing       | Query/edit with comment preservation   |
 
-**Not used:** `grep`/`find` (no gitignore), `sed` (sd is cleaner), `bat` (redundant with `read`)
+**Not used:** `grep`/`find` (no gitignore), `sed` (sd is cleaner)
 
 ## Search Strategy
 
