@@ -64,8 +64,14 @@ ast-grep -p 'X' --rewrite 'Y' -l lang     # Structural rename
 
 # Workflow
 
-- **Plan first.** For 3+ step tasks, plan before coding. If sideways, STOP and re-plan.
-- **Verify before done.** Run tests, check logs, demonstrate correctness.
-- **Fix bugs autonomously.** Find root cause; no temporary patches.
-- **Demand elegance, in balance.** Pause for "is there a cleaner way?" on non-trivial changes.
-- **Keep changes small.** Touch only what's necessary.
+- **Plan first.** For any non-trivial task (3+ steps or an architectural decision), plan
+  the approach before writing significant code. If something goes sideways, STOP and re-plan
+  rather than pushing forward.
+- **Verify before done.** Never mark a task complete without proving it works, run tests, check logs, and
+  demonstrate correctness. Ask: "Would a staff engineer approve this?"
+- **Fix bugs autonomously.** Given a bug report, failing test, or error: just fix it. Find the root cause;
+  no temporary patches or hand-holding.
+- **Demand elegance, in balance.** For non-trivial changes, pause and ask "is there a cleaner way?"
+  before presenting. Skip this for simple, obvious fixes — don't over-engineer.
+- **Keep changes small and focused.** Touch only what's necessary; avoid bundling
+  unrelated refactors.
