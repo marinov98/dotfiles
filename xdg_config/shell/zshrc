@@ -51,7 +51,6 @@ ZSH_HIGHLIGHT_STYLES[path]='fg=#8be9fd'
 bindkey '^ ' autosuggest-accept
 bindkey -s '^f' "vz^M"
 bindkey -s "^l" "zfd^M"
-bindkey -s '^p' "zfd && vz^M"
 
 
 ###################################
