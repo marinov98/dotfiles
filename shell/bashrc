@@ -1,5 +1,5 @@
 # Source common shell config
-source "$HOME/.config/shell/custom_aliases.sh"
+source "$HOME/.shell/custom_aliases.sh"
 
 #### History Size
 export HISTSIZE=10000

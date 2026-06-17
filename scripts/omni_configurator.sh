@@ -12,10 +12,12 @@ copy_dotfiles_to_home() {
     echo "Finished setting up config"
 
     echo "detecting shell and copying shell config..."
+    mkdir -p ~/.shell
+    cp shell/custom_aliases.sh shell/custom_exports.sh ~/.shell/
     case "$SHELL" in
       */zsh)
-        mv ~/.config/shell/zshrc ~/.zshrc
-        mv ~/.config/shell/zprofile ~/.zprofile
+        cp shell/zshrc ~/.zshrc
+        cp shell/zprofile ~/.zprofile
 
         mkdir -p ~/.zsh/plugins/
         curl -o ~/.zsh/git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
@@ -23,8 +25,8 @@ copy_dotfiles_to_home() {
         echo "zsh config copied"
         ;;
       */bash)
-        mv ~/.config/shell/bashrc ~/.bashrc
-        mv ~/.config/shell/bash_profile ~/.bash_profile
+        cp shell/bashrc ~/.bashrc
+        cp shell/bash_profile ~/.bash_profile
         curl -o ~/git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
         echo "bash config copied"
         ;;
@@ -32,10 +34,6 @@ copy_dotfiles_to_home() {
         echo "Unsupported shell: $SHELL"
         ;;
     esac
-    rm -rf ~/.config/shell/bashrc
-    rm -rf ~/.config/shell/bash_profile
-    rm -rf ~/.config/shell/zshrc
-    rm -rf ~/.config/shell/zprofile
     echo "shell done"
   else
     echo "Machine found to not be linux or Mac will not copy config!"
