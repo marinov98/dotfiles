@@ -1,8 +1,6 @@
 # Coding Philosophy
 
-These are guidelines, not dogma. Prefer them where possible, but follow the project's existing
-conventions when they conflict. Apply the spirit of these even in languages where the exact mechanism
-(e.g. static types) isn't available.
+Guidelines, not dogma. Follow the project's existing conventions when they conflict.
 
 - **Think in types first.** The type signatures matter more than the implementation.
   Design the types and signatures before the code itself, and make illegal states unrepresentable.
@@ -19,44 +17,59 @@ conventions when they conflict. Apply the spirit of these even in languages wher
 - **Design deep modules.** Prefer simple interfaces over powerful implementations;
   pull complexity downward so callers stay simple. Where possible, design errors out of existence rather than handling them.
 
-# CLI Tool Preferences
+# CLI Tooling
 
-Prefer these tools via `bash` over POSIX alternatives. ALWAYS use the best available tool. NEVER
-fall back to a weaker alternative when a better one is installed.
+## Why These Tools
 
-## File & Content Search
+These tools respect `.gitignore` by default, filtering `.git/`, `.venv`, `node_modules/`, and build artifacts.
+With a venv present, `find` (can) return **937x more files** and `grep` (can) return **310x more results** — every extra result is wasted context tokens.
 
-- **`rg`** (ripgrep) over `grep` — respects `.gitignore`, faster
-- **`fd`** over `find` — respects `.gitignore`, sane defaults
-- **`ast-grep`** (`sg` alias) for AST-aware structural code search/refactor — use when regex is fragile (e.g., "find all calls to X with 3+ args", "rewrite optional chaining")
+| Tool            | Purpose                   | Key Advantage                          |
+| --------------- | ------------------------- | -------------------------------------- |
+| `rg (ripgrep)`  | Content search            | Gitignore-aware; 98x faster with venvs |
+| `fd`            | File discovery            | Gitignore-aware; 937x fewer results    |
+| `sd`            | Text replacement          | Cleaner syntax than sed; `-F` literal  |
+| `scc`           | Codebase overview         | LOC, complexity, language breakdown    |
+| `ast-grep (sg)` | Structural code transform | AST patterns + `--rewrite`             |
+| `jq`            | JSON processing           | Pipe from scc, git, package managers   |
+| `yq`            | YAML/INI/XML processing   | Query/edit with comment preservation   |
+| `shellcheck`    | Shell validation          | Catches bugs before they ship          |
 
-## Text Manipulation
+**Not used:** `grep`/`find` (no gitignore), `sed` (sd is cleaner), `bat` (redundant with `read`)
 
-- **`sd`** over `sed` — PCRE regex, use `-F` for literal strings with metacharacters
-- **`ast-grep --pattern '<PATTERN>' --rewrite '<TEMPLATE>'`** for structural refactoring
+## Search Strategy
 
-## Validation & Analysis
+1. `rg -l "pattern"` — locate files (gitignore-aware, fastest)
+2. `fd -e ext . path/` — scope workspace by extension
+3. `rg -n -C 2 "pattern"` — read context around matches
+4. `sg -p 'pattern' -l lang` — structural search for code patterns
+5. `scc` — understand codebase composition
+6. Built-in `read` — deep dive into specific files
 
-- **`shellcheck`** — validate every `.sh` script I generate
-- **`scc`** — codebase overview (languages, LOC, complexity) before diving in
-- **`yq`** — query/edit YAML (preserves comments/formatting)
-- **`jq`** — JSON processing
+## Pipelines
 
-## File Viewing (via bash)
+- `fd -e py | xargs rg "pat"` — scope text search to file types
+- `scc --format json | jq '.[] | {lang: .Name, files: .Count}'` — structured queries
+- `sd 'old' 'new' file` — simple replacement (no escaping needed)
+- `sd -F '$var' 'val' file` — literal replacement (metacharacters safe)
+- `ast-grep -p 'pat' --rewrite 'new' -l lang` — structural code transformation
 
-- **`bat`** over `cat` — syntax highlighting
+## ast-grep (sg) — Syntax Reminder
 
-## When to Use Built-in Tools vs. CLI
+Patterns must be **syntactically complete code**:
 
-| Task                   | Tool                          |
-| ---------------------- | ----------------------------- |
-| Read file contents     | built-in `read`               |
-| Write/edit files       | built-in `write`/`edit`       |
-| Content search         | `rg` via bash                 |
-| File search / globbing | `fd` via bash                 |
-| Structural code search | `ast-grep` via bash           |
-| Text replacement       | `sd` via bash                 |
-| Structural refactoring | `ast-grep --rewrite` via bash |
+```
+ast-grep -p 'def $NAME' -l py              # Python functions
+ast-grep -p 'pub fn $NAME' -l rust         # Rust public functions
+ast-grep -p 'match $EXPR { $$$ARMS }' -l rust  # Match expressions
+ast-grep -p 'X' --rewrite 'Y' -l rust     # Structural rename
+```
+
+- `$NAME` = any identifier
+- `$$$ARGS` = zero-or-more (in function args, match arms, etc.)
+- `$_NAME` = non-capturing match (performance optimization)
+- `--dry-run` not supported — test with `ast-grep -p 'pat'` first, then add `--rewrite`
+- Patterns that fail: incomplete statements (`def main()`, `fn main()`), multi-var in certain positions (`fn $NAME($$$ARGS)`)
 
 # Workflow
 
