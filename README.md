@@ -4,8 +4,8 @@ All my dot files
 
 ### Deeper dive into emacs and/or (n)vim
 
-- My [**Emacs**](https://github.com/marinov98/dotfiles/blob/master/xdg_config/emacs/) config guide
-- My [**Neovim**](https://github.com/marinov98/dotfiles/blob/master/xdg_config/nvim/) config guide
+- My [**Emacs**](https://github.com/marinov98/dotfiles/blob/main/xdg_config/emacs/) config guide
+- My [**Neovim**](https://github.com/marinov98/dotfiles/blob/main/xdg_config/nvim/) config guide
 
 ### Quick Start
 
