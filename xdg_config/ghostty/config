@@ -11,6 +11,7 @@ cursor-style-blink = false
 
 background-opacity = 0.9
 window-padding-x = 5
+clipboard-read = allow
 
 # Bindings
 keybind = ctrl+,>z=toggle_split_zoom
