@@ -1,5 +1,3 @@
-.git
-*.bak
+.git/
 .projectile
 .project.el
-.DS_Store
