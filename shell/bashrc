@@ -18,7 +18,6 @@ export HISTFILESIZE=120000
 
 bind '"\C-f":"vz\n"'
 bind '"\C-l":"zfd\n"'
-bind '"\C-p":"zfd && vz\n"'
 
 ###################################
 ####### PS1
