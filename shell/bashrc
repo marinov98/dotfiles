@@ -18,6 +18,8 @@ export HISTFILESIZE=120000
 
 bind '"\C-f":"vz\n"'
 bind '"\C-l":"zfd\n"'
+#eval "$(fzf --bash)" # for fzf bindings
+
 
 ###################################
 ####### PS1

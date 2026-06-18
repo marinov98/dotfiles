@@ -51,6 +51,7 @@ ZSH_HIGHLIGHT_STYLES[path]='fg=#8be9fd'
 bindkey '^ ' autosuggest-accept
 bindkey -s '^f' "vz^M"
 bindkey -s "^l" "zfd^M"
+#source <(fzf --zsh) # fzf keybindings
 
 
 ###################################
