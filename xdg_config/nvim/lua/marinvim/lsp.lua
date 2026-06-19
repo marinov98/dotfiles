@@ -80,6 +80,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = opts.buffer }),
           { bufnr = opts.buffer })
       end, opts)
+    map("n", "<leader>lo",
+      function()
+        lsp.code_action({
+          apply = true,
+          context = { only = { "source.organizeImports" }, diagnostics = {} },
+        })
+      end, opts)
 
     -- Picker
     map("n", "gd", picker.lsp_definitions, opts)
