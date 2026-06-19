@@ -46,17 +46,39 @@ _T_MAGENTA=$'\033[1;35m'
 
 ## Git integration
 parse_git_branch() {
-   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1]/'
+   local branch
+   branch="$(git symbolic-ref --short HEAD 2>/dev/null)"
+   [[ -n "$branch" ]] && echo " [${branch}]"
 }
 
 parse_git_status() {
-   git_status="$(git status 2> /dev/null)"
-   [[ "$git_status" =~ "Changes to be committed:" ]] && echo -n "${_GREEN} *"
-   [[ "$git_status" =~ "Changes not staged for commit:" ]] && echo -n "${_YELLOW} *"
-   [[ "$git_status" =~ "Untracked files:" ]] && echo -n "${_RED} *"
-   [[ "$git_status" =~ "Your branch is behind" ]] && echo -n "${_RED} ^"
-   [[ "$git_status" =~ "Your branch is ahead" ]] && echo -n "${_GREEN} ^"
-   [[ "$git_status" =~ "have diverged" ]] && echo -n "${_RED} !"
+   local repo_status
+   repo_status="$(git status --branch --porcelain 2>/dev/null)" || return
+
+   local has_staged=0 has_unstaged=0 has_untracked=0
+
+   while IFS= read -r line; do
+     [[ "$line" == "##"* ]] && continue
+
+     local first="${line:0:1}"
+     local second="${line:1:1}"
+
+     [[ "$first" == "?" && "$second" == "?" ]] && { has_untracked=1; continue; }
+     [[ "$first" == "!" || "$second" == "!" ]] && continue
+
+     [[ "$first" != " " ]] && has_staged=1
+     [[ "$second" != " " ]] && has_unstaged=1
+   done <<< "$repo_status"
+
+   (( has_staged )) && echo -n "${_GREEN} *"
+   (( has_unstaged )) && echo -n "${_YELLOW} *"
+   (( has_untracked )) && echo -n "${_RED} *"
+
+   local branch_line="${repo_status%%$'
+'*}"
+   [[ "$branch_line" == *"ahead"* ]] && echo -n "${_GREEN} ^"
+   [[ "$branch_line" == *"behind"* ]] && echo -n "${_RED} ^"
+   [[ "$branch_line" == *"diverged"* ]] && echo -n "${_RED} !"
 }
 
 # Git autocompletetion
