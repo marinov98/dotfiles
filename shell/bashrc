@@ -25,13 +25,24 @@ bind '"\C-l":"zfd\n"'
 ####### PS1
 ###################################
 
-_RED=$(tput setaf 1)
-_GREEN=$(tput setaf 2)
-_YELLOW=$(tput setaf 3)
-_BLUE=$(tput setaf 4)
-_MAGENTA=$(tput setaf 5)
-_CYAN=$(tput setaf 6)
-_WHITE=$(tput setaf 7)
+# theme colors
+_T_CYAN=$'\033[38;2;94;241;255m'
+_T_GREEN=$'\033[38;2;94;255;108m'
+_T_ORANGE=$'\033[38;2;255;189;94m'
+_T_RED=$'\033[38;2;255;110;94m'
+_T_YELLOW=$'\033[38;2;241;255;94m'
+_T_PURPLE=$'\033[38;2;189;94;255m'
+_T_GREY=$'\033[38;2;123;132;150m'
+_T_RESET=$'\033[0m'
+
+# git status colors
+_RED="$_T_RED"
+_GREEN="$_T_GREEN"
+_YELLOW="$_T_YELLOW"
+
+
+_T_BLUE=$'\033[38;2;94;161;255m'
+_T_MAGENTA=$'\033[1;35m'
 
 ## Git integration
 parse_git_branch() {
@@ -53,6 +64,20 @@ if [ -f "$HOME/git-completion.bash" ]; then
     source "$HOME/git-completion.bash"
 fi
 
-export PS1="\[\033[36m\]\u@\h:\033[32m\]\w\[\033[1;35m\]\$(parse_git_branch)\[\033[00m\]\$(parse_git_status)\n\[\033[1;33m\]$ \[\033[00m\]"
+_PS1=""
+_PS1+="\[${_T_CYAN}\]["
+_PS1+="\[${_T_BLUE}\]\u"
+_PS1+="\[${_T_CYAN}\]@"
+_PS1+="\[${_T_GREEN}\]\h"
+_PS1+="\[${_T_CYAN}\]]"
+_PS1+="\[${_T_CYAN}\]("
+_PS1+="\[${_T_ORANGE}\]\w"
+_PS1+="\[${_T_CYAN}\])"
+_PS1+="\[${_T_MAGENTA}\]\$(parse_git_branch)"
+_PS1+="\[${_T_RESET}\]\$(parse_git_status)"
+_PS1+="\n\[${_T_YELLOW}\]$ "
+_PS1+="\[${_T_RESET}\]"
+export PS1="$_PS1"
+unset _PS1
 
 [ -f ~/.custom_local.sh ] && source ~/.custom_local.sh
