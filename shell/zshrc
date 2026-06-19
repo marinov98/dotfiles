@@ -42,7 +42,7 @@ source $ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#6272a4'
-ZSH_HIGHLIGHT_STYLES[path]='fg=#8be9fd'
+ZSH_HIGHLIGHT_STYLES[path]='fg=#5ef1ff'
 
 ###################################
 ####### Bindings
