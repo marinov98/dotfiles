@@ -51,7 +51,7 @@ ZSH_HIGHLIGHT_STYLES[path]='fg=#5ef1ff'
 bindkey '^ ' autosuggest-accept
 bindkey -s '^f' "vz^M"
 bindkey -s "^l" "zfd^M"
-#source <(fzf --zsh) # fzf keybindings
+source <(fzf --zsh) # fzf keybindings
 
 
 ###################################
@@ -66,16 +66,37 @@ autoload -Uz compinit && compinit
 autoload -Uz vcs_info
 precmd_functions+=(vcs_info)
 zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git:*' formats '(%b)'
+# zstyle ':vcs_info:git:*' formats '(%b)'
+zstyle ':vcs_info:git:*' formats ' %b'
 
 parse_git_status() {
-  git_status="$(git status 2> /dev/null)"
-  [[ "$git_status" =~ "Changes to be committed:" ]] && echo -n "%F{green}·%f "
-  [[ "$git_status" =~ "Changes not staged for commit:" ]] && echo -n "%F{yellow}·%f "
-  [[ "$git_status" =~ "Untracked files:" ]] && echo -n "%F{red}·%f "
-  [[ "$git_status" =~ "Your branch is behind" ]] && echo -n "%F{red}^%f "
-  [[ "$git_status" =~ "Your branch is ahead" ]] && echo -n "%F{green}^%f "
-  [[ "$git_status" =~ "have diverged" ]] && echo -n "%F{red}!%f "
+  local repo_status
+  repo_status="$(git status --branch --porcelain 2>/dev/null)" || return
+
+  local has_staged=0 has_unstaged=0 has_untracked=0
+
+  while IFS= read -r line; do
+    [[ "$line" == "##"* ]] && continue
+
+    local first="${line:0:1}"
+    local second="${line:1:1}"
+
+    [[ "$first" == "?" && "$second" == "?" ]] && { has_untracked=1; continue; }
+    [[ "$first" == "!" || "$second" == "!" ]] && continue
+
+    [[ "$first" != " " ]] && has_staged=1
+    [[ "$second" != " " ]] && has_unstaged=1
+  done <<< "$repo_status"
+
+  (( has_staged )) && echo -n "%F{#5eff6c}·%f "
+  (( has_unstaged )) && echo -n "%F{#f1ff5e}·%f "
+  (( has_untracked )) && echo -n "%F{#ff6e5e}·%f "
+
+  local branch_line="${repo_status%%$'
+'*}"
+  [[ "$branch_line" == *"ahead"* ]] && echo -n "%F{#5eff6c}%f "
+  [[ "$branch_line" == *"behind"* ]] && echo -n "%F{#ff6e5e}%f "
+  [[ "$branch_line" == *"diverged"* ]] && echo -n "%F{#ffbd5e}%f "
 }
 
 ###################################
@@ -86,9 +107,9 @@ setopt PROMPT_SUBST
 NEWLINE=$'\n'
 
 # No (Nerdfont) Icons Prompt
-PROMPT='%F{81}%n:%f%F{green}${PWD/#$HOME/~}%f %F{183}${vcs_info_msg_0_}%f $(parse_git_status)%F{yellow}$NEWLINE$%f '
+PROMPT='%f%F{110}${PWD/#$HOME/~}%f %F{146}${vcs_info_msg_0_}%f $(parse_git_status)%F{yellow}$NEWLINE$%f '
 
 # Lambda variant
-#PROMPT='%F{246}󰌢 %f%F{110}${PWD/#$HOME/~}%f %F{146}${vcs_info_msg_0_}%f $(parse_git_status)%F{209}${NEWLINE}󰘧%f '
+# PROMPT='%F{246}󰌢 %f%F{110}${PWD/#$HOME/~}%f %F{146}${vcs_info_msg_0_}%f $(parse_git_status)%F{209}${NEWLINE}󰘧%f '
 
 [ -f ~/.custom_local.sh ] && source ~/.custom_local.sh
