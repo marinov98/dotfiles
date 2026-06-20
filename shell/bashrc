@@ -102,4 +102,4 @@ _PS1+="\[${_T_RESET}\]"
 export PS1="$_PS1"
 unset _PS1
 
-[ -f ~/.custom_local.sh ] && source ~/.custom_local.sh
+
