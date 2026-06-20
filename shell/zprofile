@@ -1,2 +1,2 @@
-[[ -f ~/.shell/custom_exports.sh ]] && . ~/.shell/custom_exports.sh
 [[ -f ~/.profile ]] && . ~/.profile
+[[ -f ~/.shell/custom_exports.sh ]] && . ~/.shell/custom_exports.sh

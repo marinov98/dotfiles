@@ -1,3 +1,14 @@
+path_prepend() {
+    [ -d "$1" ] || return
+    case ":$PATH:" in
+        *":$1:"*) ;;
+        *) PATH="$1:$PATH" ;;
+    esac
+}
+
+path_prepend "$HOME/.local/bin"
+path_prepend "$HOME/.custom/bin"
+
 if command -v nvim >/dev/null 2>&1; then
   export EDITOR="nvim"
   export VISUAL="nvim"
@@ -13,4 +24,3 @@ fi
 # emacs option
 # export EDITOR="emacsclient -t -a ''"
 # export VISUAL="emacsclient -c -a emacs"
-
