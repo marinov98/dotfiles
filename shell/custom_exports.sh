@@ -6,8 +6,9 @@ path_prepend() {
     esac
 }
 
-path_prepend "$HOME/.local/bin"
+path_prepend "$HOME/.custom/npm-global/bin"
 path_prepend "$HOME/.custom/bin"
+path_prepend "$HOME/.local/bin"
 
 if command -v nvim >/dev/null 2>&1; then
   export EDITOR="nvim"
@@ -24,3 +25,4 @@ fi
 # emacs option
 # export EDITOR="emacsclient -t -a ''"
 # export VISUAL="emacsclient -c -a emacs"
+
