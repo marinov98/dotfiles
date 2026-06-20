@@ -1,6 +1,6 @@
-if [ -f ~/.config/shell/custom_exports.sh ];
+if [ -f ~/.shell/custom_exports.sh ];
 then
-    .  ~/.config/shell/custom_exports.sh;
+    .  ~/.shell/custom_exports.sh;
 fi
 
 if [ -f ~/.bashrc ];
