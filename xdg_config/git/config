@@ -14,15 +14,11 @@
   enabled = true
 
 [merge]
-  tool = "nvim"
-  conflictStyle = zdiff3
+  tool = nvimdiff
 
 [mergetool]
   keepBackup = false
   prompt = false
-
-[mergetool "nvim"]
-	cmd = "nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\""
 
 [delta]
   navigate = true
