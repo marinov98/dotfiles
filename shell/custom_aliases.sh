@@ -34,10 +34,10 @@ CUSTOM_PROJECTS_DIR_PATH="$HOME/projects/"
 if command -v fd >/dev/null 2>&1; then
   export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
   export FZF_ALT_C_COMMAND='fd --type d --hidden --exclude .git'
-  alias zfd='cd "$CUSTOM_PROJECTS_DIR_PATH" && cd "$(fd . -d 2 -t d | fzf)"'
+  alias zfd='cd "$CUSTOM_PROJECTS_DIR_PATH" && cd "$(fd . -d 3 -t d | fzf)"'
 elif command -v rg >/dev/null 2>&1; then
   export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{.git}"'
-  alias zfd='cd "$CUSTOM_PROJECTS_DIR_PATH" && cd "$(find . -maxdepth 2 -name ".git" -prune -o -type d -print | fzf)"'
+  alias zfd='cd "$CUSTOM_PROJECTS_DIR_PATH" && cd "$(find . -maxdepth 3 -name ".git" -prune -o -type d -print | fzf)"'
 fi
 
 [ -n "$FZF_DEFAULT_COMMAND" ] && export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
