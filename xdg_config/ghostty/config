@@ -15,7 +15,7 @@ clipboard-read = allow
 
 # Bindings
 # always treat ctrl + [ as escape
-keybind = ctrl+[=text:\x1b 
+keybind = ctrl+[=text:\x1b
 
 keybind = ctrl+,>z=toggle_split_zoom
 keybind = ctrl+,>shift+f=toggle_fullscreen
