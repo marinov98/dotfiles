@@ -14,6 +14,8 @@ window-padding-x = 5
 clipboard-read = allow
 
 # Bindings
+keybind = ctrl+[=text:\x1b # always treat ctrl + [ as escape
+
 keybind = ctrl+,>z=toggle_split_zoom
 keybind = ctrl+,>shift+f=toggle_fullscreen
 keybind = ctrl+,>c=new_tab
