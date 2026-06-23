@@ -19,6 +19,7 @@ config.colors = {
 
 config.window_decorations = 'RESIZE'
 config.max_fps = 120
+-- config.prefer_egl = true
 
 -- Window Padding & Opacity
 config.window_background_opacity = 0.9
@@ -34,28 +35,28 @@ config.leader = { key = ',', mods = 'CTRL', timeout_milliseconds = 2000 }
 
 config.keys = {
   -- Layout & Window Management
-  { key = 'z', mods = 'LEADER',       action = wezterm.action.TogglePaneZoomState },
-  { key = 'f', mods = 'LEADER|SHIFT', action = wezterm.action.ToggleFullScreen },
-  { key = 'c', mods = 'LEADER',       action = wezterm.action.SpawnTab 'CurrentPaneDomain' },
+  { key = 'z',              mods = 'LEADER',       action = wezterm.action.TogglePaneZoomState },
+  { key = 'f',              mods = 'LEADER|SHIFT', action = wezterm.action.ToggleFullScreen },
+  { key = 'c',              mods = 'LEADER',       action = wezterm.action.SpawnTab 'CurrentPaneDomain' },
 
   -- Splitting (with current directory preservation)
-  { key = '|', mods = 'LEADER',       action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' } },
-  { key = '-', mods = 'LEADER',       action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' } },
+  { key = 'phys:Backslash', mods = 'LEADER|SHIFT', action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' } },
+  { key = '-',              mods = 'LEADER',       action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' } },
 
   -- Pane Movement (Directional navigation)
-  { key = 'h', mods = 'LEADER',       action = wezterm.action.ActivatePaneDirection 'Left' },
-  { key = 'j', mods = 'LEADER',       action = wezterm.action.ActivatePaneDirection 'Down' },
-  { key = 'k', mods = 'LEADER',       action = wezterm.action.ActivatePaneDirection 'Up' },
-  { key = 'l', mods = 'LEADER',       action = wezterm.action.ActivatePaneDirection 'Right' },
+  { key = 'h',              mods = 'LEADER',       action = wezterm.action.ActivatePaneDirection 'Left' },
+  { key = 'j',              mods = 'LEADER',       action = wezterm.action.ActivatePaneDirection 'Down' },
+  { key = 'k',              mods = 'LEADER',       action = wezterm.action.ActivatePaneDirection 'Up' },
+  { key = 'l',              mods = 'LEADER',       action = wezterm.action.ActivatePaneDirection 'Right' },
 
   -- Tab Switching
-  { key = 'p', mods = 'LEADER',       action = wezterm.action.ActivateTabRelative(-1) },
-  { key = 'n', mods = 'LEADER',       action = wezterm.action.ActivateTabRelative(1) },
+  { key = 'p',              mods = 'LEADER',       action = wezterm.action.ActivateTabRelative(-1) },
+  { key = 'n',              mods = 'LEADER',       action = wezterm.action.ActivateTabRelative(1) },
 
   -- Closing / Quitting
-  { key = 'x', mods = 'LEADER',       action = wezterm.action.CloseCurrentPane { confirm = false } },
-  { key = 'k', mods = 'LEADER|SHIFT', action = wezterm.action.CloseCurrentTab { confirm = false } },
-  { key = 'q', mods = 'LEADER|SHIFT', action = wezterm.action.QuitApplication },
+  { key = 'x',              mods = 'LEADER',       action = wezterm.action.CloseCurrentPane { confirm = false } },
+  { key = 'k',              mods = 'LEADER|SHIFT', action = wezterm.action.CloseCurrentTab { confirm = false } },
+  { key = 'q',              mods = 'LEADER|SHIFT', action = wezterm.action.QuitApplication },
 }
 
 -- Quick loop to generate your 'ctrl+,' followed by 1, 2, 3, 4 tab jumps
@@ -66,5 +67,8 @@ for i = 1, 4 do
     action = wezterm.action.ActivateTab(i - 1), -- Lua loops are 1-indexed, but WezTerm tabs are 0-indexed
   })
 end
+
+-- WSL
+-- config.default_prog = { "wsl.exe", "~" }
 
 return config
