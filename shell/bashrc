@@ -16,10 +16,15 @@ export HISTFILESIZE=120000
 ####### Bindings
 ###################################
 
-bind '"\C-f":"vz\n"'
-bind '"\C-l":"zfd\n"'
-#eval "$(fzf --bash)" # for fzf bindings
+if command -v fzf >/dev/null 2>&1; then
+  bind '"\C-f":"vz\n"'
+  bind '"\C-l":"zfd\n"'
+  eval "$(fzf --bash)" # for fzf bindings
+fi
 
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init bash --cmd cd)"
+fi
 
 ###################################
 ####### PS1
