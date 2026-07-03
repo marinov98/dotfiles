@@ -49,10 +49,16 @@ ZSH_HIGHLIGHT_STYLES[path]='fg=#5ef1ff'
 ###################################
 
 bindkey '^ ' autosuggest-accept
-bindkey -s '^f' "vz^M"
-bindkey -s "^l" "zfd^M"
-source <(fzf --zsh) # fzf keybindings
 
+if command -v fzf >/dev/null 2>&1; then
+  bindkey -s '^f' "vz^M"
+  bindkey -s "^l" "zfd^M"
+  source <(fzf --zsh) # fzf keybindings
+fi
+
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh --cmd cd)"
+fi
 
 ###################################
 ####### Git
