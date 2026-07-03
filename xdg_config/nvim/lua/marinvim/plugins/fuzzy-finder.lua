@@ -64,17 +64,6 @@ return {
       end, { desc = "Find (Smart) Files" })
       map("n", "<C-p>", function() Snacks.picker.files({ cmd = "fd", hidden = false }) end,
         { desc = "Find (Project) Files" })
-      map("n", "gf", function()
-          local file_with_suffix = vim.fn.expand("<cWORD>")
-          local file = vim.fn.expand("<cfile>")
-          vim.api.nvim_command("wincmd k")
-          if vim.uv.fs_stat(file) then
-            vim.api.nvim_command(string.format("e %s", file_with_suffix))
-          else
-            Snacks.picker.files({ search = file_with_suffix })
-          end
-        end,
-        { desc = "Find File under cursor" })
       map("n", "<leader>um", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end,
         { desc = "Find Config File" })
       map("n", "<leader>ud", function() Snacks.picker.files({ cwd = "~/.config" }) end, { desc = "Find Dotfiles" })
