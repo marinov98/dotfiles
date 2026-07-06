@@ -44,3 +44,15 @@ vim.opt.splitright = true -- vertical split to the right
 vim.opt.cursorline = true
 vim.opt.clipboard = "unnamedplus" -- use system clipboard
 vim.opt.errorbells = false        -- no sounds on error
+
+-- OSC 52
+local osc52_on = vim.env.NVIM_OSC52 == '1' or (vim.env.NVIM_OSC52 ~= '0' and vim.env.SSH_CONNECTION ~= nil)
+
+if osc52_on then
+  local osc52 = require('vim.ui.clipboard.osc52')
+  vim.g.clipboard = {
+    name = 'OSC 52',
+    copy = { ['+'] = osc52.copy('+'), ['*'] = osc52.copy("*") },
+    paste = { ['+'] = osc52.paste('+'), ['*'] = osc52.paste("*") },
+  }
+end
