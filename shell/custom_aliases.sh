@@ -34,10 +34,18 @@ CUSTOM_PROJECTS_DIR_PATH="$HOME/projects/"
 if command -v fd >/dev/null 2>&1; then
   export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
   export FZF_ALT_C_COMMAND='fd --type d --hidden --exclude .git'
-  alias zfd='cd "$CUSTOM_PROJECTS_DIR_PATH" && cd "$(fd . -d 3 -t d | fzf)"'
+  zfd() {
+    local dir
+    dir=$(fd . "$CUSTOM_PROJECTS_DIR_PATH" -d 3 -t d | fzf) || return
+    [ -n "$dir" ] && cd "$dir"
+  }
 elif command -v rg >/dev/null 2>&1; then
   export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{.git}"'
-  alias zfd='cd "$CUSTOM_PROJECTS_DIR_PATH" && cd "$(find . -maxdepth 3 -name ".git" -prune -o -type d -print | fzf)"'
+  zfd() {
+    local dir
+    dir=$(find "$CUSTOM_PROJECTS_DIR_PATH" -maxdepth 3 -name ".git" -prune -o -type d -print | fzf) || return
+    [ -n "$dir" ] && cd "$dir"
+  }
 fi
 
 [ -n "$FZF_DEFAULT_COMMAND" ] && export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -51,8 +59,16 @@ if command -v bat >/dev/null 2>&1; then
   --preview-window 'right:60%,50%,wrap'
   --preview 'bat --color=always --style=numbers --line-range=:500 {}'
   "
-  alias vz='v "$(fzf --preview "bat --color=always --style=numbers --line-range=:500 {}")"'
+  vz() {
+    local file
+    file=$(fzf --preview "bat --color=always --style=numbers --line-range=:500 {}") || return
+    [ -n "$file" ] && v "$file"
+  }
 else
-  alias vz='v "$(fzf)"'
+  vz() {
+    local file
+    file=$(fzf) || return
+    [ -n "$file" ] && v "$file"
+  }
 fi
 
