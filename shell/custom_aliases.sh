@@ -72,3 +72,7 @@ else
   }
 fi
 
+# tmux
+if command -v tmux >/dev/null 2>&1; then
+  alias tdev="~/.config/tmux/sessions/dev.sh"
+fi
