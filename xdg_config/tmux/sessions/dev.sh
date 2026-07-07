@@ -3,26 +3,28 @@
 PROJECT=$(fd . ~/projects/ -d 2 -t d | fzf)
 [[ -z "$PROJECT" ]] && exit 0
 
-SESSION="$(basename $PROJECT | tr ".:" "__")"
+SESSION="$(basename "$PROJECT" | tr ".:" "__")"
 AGENT="pi"
 
-if [ -n "$TMUX" ]; then
-  CURRENT_SESSION=$(tmux display-message -p '#S')
-  if [ "$CURRENT_SESSION" = "$SESSION" ]; then
-    exit 0
-  fi
-fi
-
-if tmux has-session -t "$SESSION" 2>/dev/null; then
-  if [ ! "$TMUX" ]; then
-    tmux attach -t "$SESSION"
-  else
-    tmux switch-client -t "$SESSION"
-  fi
+# Short-circuit if we are already in the target session
+if [ -n "$TMUX" ] && [ "$(tmux display-message -p '#S')" = "$SESSION" ]; then
   exit 0
 fi
 
-# tmux session doesn't exist, create new
+connect_to_session() {
+  if [ -z "$TMUX" ]; then
+    tmux attach -t "$1"
+  else
+    tmux switch-client -t "$1"
+  fi
+  exit 0
+}
+
+if tmux has-session -t "$SESSION" 2>/dev/null; then
+  connect_to_session "$SESSION"
+fi
+
+# Session doesn't exist, build it out
 tmux new-session -d -s "$SESSION" -c "$PROJECT" -n "editor"
 tmux send-keys -t "$SESSION:editor" "$EDITOR" C-m
 
@@ -40,9 +42,4 @@ fi
 tmux new-window -t "$SESSION" -c "$PROJECT"
 
 tmux select-window -t "$SESSION:editor"
-
-if [ ! "$TMUX" ]; then
-  tmux attach -t $SESSION
-else
-  tmux switch-client -t "$SESSION"
-fi
+connect_to_session "$SESSION"
