@@ -1,6 +1,11 @@
 #!/bin/bash
 
-PROJECT=$(fd . ~/projects/ -d 2 -t d | fzf)
+if command -v fd >/dev/null 2>&1; then
+  PROJECT=$(fd . ~/projects/ -d 2 -t d | fzf)
+else
+  PROJECT=$(find ~/projects/ -mindepth 1 -maxdepth 2 -type d | fzf)
+fi
+
 [[ -z "$PROJECT" ]] && exit 0
 
 SESSION="$(basename "$PROJECT" | tr ".:" "__")"
