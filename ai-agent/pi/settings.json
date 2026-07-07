@@ -7,7 +7,6 @@
   "packages": [
     "npm:pi-web-access",
     "npm:pi-mcp-adapter",
-    "npm:context-mode",
-    "npm:pi-subagents"
+    "npm:context-mode"
   ]
 }
