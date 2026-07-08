@@ -1,15 +1,18 @@
 #!/bin/bash
 
+AGENT="pi"
+AGENT_CMD="pi"
+TARGET_DEV_DIR="$HOME/projects"
+
 if command -v fd >/dev/null 2>&1; then
-  PROJECT=$(fd . ~/projects/ -d 2 -t d | fzf)
+  PROJECT=$(fd . $TARGET_DEV_DIR/ -d 2 -t d | fzf)
 else
-  PROJECT=$(find ~/projects/ -mindepth 1 -maxdepth 2 -type d | fzf)
+  PROJECT=$(find $TARGET_DEV_DIR/ -mindepth 1 -maxdepth 2 -type d | fzf)
 fi
 
 [[ -z "$PROJECT" ]] && exit 0
 
 SESSION="$(basename "$PROJECT" | tr ".:" "__")"
-AGENT="pi"
 
 # Short-circuit if we are already in the target session
 if [ -n "$TMUX" ] && [ "$(tmux display-message -p '#S')" = "$SESSION" ]; then
@@ -41,7 +44,7 @@ fi
 
 if command -v "$AGENT" >/dev/null 2>&1; then
   tmux new-window -t "$SESSION" -c "$PROJECT" -n "$AGENT"
-  tmux send-keys -t "$SESSION:$AGENT" "$AGENT" C-m
+  tmux send-keys -t "$SESSION:$AGENT" "$AGENT_CMD" C-m
 fi
 
 tmux new-window -t "$SESSION" -c "$PROJECT"
