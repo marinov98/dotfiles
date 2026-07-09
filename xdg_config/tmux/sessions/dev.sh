@@ -1,7 +1,5 @@
 #!/bin/bash
 
-AGENT="pi"
-AGENT_CMD="pi"
 TARGET_DEV_DIR="$HOME/projects"
 
 if command -v fd >/dev/null 2>&1; then
@@ -18,6 +16,9 @@ SESSION="$(basename "$PROJECT" | tr ".:" "__")"
 if [ -n "$TMUX" ] && [ "$(tmux display-message -p '#S')" = "$SESSION" ]; then
   exit 0
 fi
+
+AGENT="pi"
+AGENT_CMD="pi"
 
 connect_to_session() {
   if [ -z "$TMUX" ]; then
