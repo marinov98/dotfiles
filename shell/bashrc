@@ -17,7 +17,8 @@ export HISTFILESIZE=120000
 ###################################
 
 if command -v fzf >/dev/null 2>&1; then
-  bind '"\C-f":"vz\n"'
+  bind '"\C-f":"tdev\n"'
+  bind '"\C-p":"vz\n"'
   bind '"\C-l":"zfd\n"'
   eval "$(fzf --bash)" # for fzf bindings
 fi
