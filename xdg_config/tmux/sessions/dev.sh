@@ -36,12 +36,6 @@ fi
 tmux new-session -d -s "$SESSION" -c "$PROJECT" -n "editor"
 tmux send-keys -t "$SESSION:editor" "$EDITOR" C-m
 
-if command -v lazygit >/dev/null 2>&1 \
-    && git -C "$PROJECT" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-  tmux new-window -t "$SESSION" -c "$PROJECT" -n "lazygit"
-  tmux send-keys -t "$SESSION:lazygit" "lazygit" C-m
-fi
-
 if command -v "$AGENT" >/dev/null 2>&1; then
   tmux new-window -t "$SESSION" -c "$PROJECT" -n "$AGENT"
   tmux send-keys -t "$SESSION:$AGENT" "$AGENT_CMD" C-m
