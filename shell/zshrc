@@ -51,7 +51,8 @@ ZSH_HIGHLIGHT_STYLES[path]='fg=#5ef1ff'
 bindkey '^ ' autosuggest-accept
 
 if command -v fzf >/dev/null 2>&1; then
-  bindkey -s '^f' "vz^M"
+  bindkey -s '^f' "tdev^M"
+  bindkey -s '^p' "vz^M"
   bindkey -s "^l" "zfd^M"
   source <(fzf --zsh) # fzf keybindings
 fi
