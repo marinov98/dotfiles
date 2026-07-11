@@ -62,6 +62,18 @@ ast-grep -p 'X' --rewrite 'Y' -l lang     # Structural rename
 - `--dry-run` not supported — test with `ast-grep -p 'pat'` first, then add `--rewrite`
 - Patterns that fail: incomplete statements (`def main()`, `fn main()`), multi-var in certain positions (`fn $NAME($$$ARGS)`)
 
+# Comments
+
+**Baseline**: 'good code is self-documenting', therefore comments should
+only be considered when:
+- They capture information that was in the design but couldn't be
+represented or is not obvious in the code
+    - Comments should **NEVER** repeat the code i.e. if information in a comment is already 
+    obvious from the code next to the comment, then the comment is not helpful.
+- They serve a fundamental role in defining abstractions and managing system complexity
+- They augment the code by providing information at a different level of detail i.e.
+lower-level comments add precision while higher-level comments enhance intuition
+
 # Workflow
 
 - **Plan first.** For any non-trivial task (3+ steps or an architectural decision), plan
