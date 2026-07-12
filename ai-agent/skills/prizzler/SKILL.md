@@ -31,6 +31,17 @@ Describe the **net change from main**, not the branch's internal history. Review
 - **Good**: "Module layout reorganized into domain-aligned files. Internal types are now private to the crate."
 - **Bad**: "First I merged input.rs into types.rs, then I split it into config.rs and source.rs, then I renamed..."
 
+## Additional Notes
+
+Use best judgment to determine if an "Additional Notes" section is needed. Include it only when it adds genuine value:
+
+- Open questions where reviewer input is needed
+- Known limitations or tradeoffs worth highlighting
+- Follow-up work planned but not in this PR
+- Context that doesn't fit in other sections
+
+Do **not** add it as filler. A PR without additional notes is fine — most PRs don't need them. If the PR is straightforward and the description covers everything, skip it.
+
 ## Workflow
 
 ### Step 1: Sync with main
