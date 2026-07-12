@@ -68,6 +68,15 @@ Only separate test commits when:
 6. Ask the user to confirm before committing, or commit if they approve
 7. Run `git log -1` to verify the commit was created correctly
 
+## Amending Commits
+
+If a commit is missing changes that should have been part of it, amend the commit rather than creating a new "fix" commit. One task = one commit.
+
+- **Before pushing**: Always safe to amend
+- **After pushing**: Amending is acceptable on feature branches before merge to maintain clean history. Use `git commit --amend` and force push if needed.
+
+**Do not** create separate commits like "fix: forgot to add X" or "chore: address review feedback" for changes that belong in the original commit.
+
 ## Pushing
 
 When pushing to remote, use `git push origin <branch>` instead of `--set-upstream` to avoid changing the upstream configuration.
