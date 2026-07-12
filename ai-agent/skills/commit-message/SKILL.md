@@ -68,6 +68,15 @@ Only separate test commits when:
 6. Ask the user to confirm before committing, or commit if they approve
 7. Run `git log -1` to verify the commit was created correctly
 
+## Atomic Commits
+
+When reviewing staged changes, check if they contain unrelated modifications. If so, split them into separate atomic commits — each commit should represent one logical change.
+
+- **Good**: Commit A adds feature X, Commit B fixes bug Y
+- **Bad**: One commit that adds feature X and fixes bug Y
+
+Exception: feature + its tests stay together (see Test Grouping above).
+
 ## Amending Commits
 
 If a commit is missing changes that should have been part of it, amend the commit rather than creating a new "fix" commit. One task = one commit.
