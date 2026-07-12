@@ -24,15 +24,28 @@ description: Use this skill when creating or editing pull requests. Generates we
 
 Use the template in [TEMPLATE.md](TEMPLATE.md) when writing a PR description. Fill in every section that applies; omit sections (like Projects Affected or Screenshots) when they don't apply.
 
+## Writing the Description
+
+Describe the **net change from main**, not the branch's internal history. Reviewers see `main..HEAD` — they don't care about intermediate steps like "I split X into Y then renamed Z". They care about the final state: what's different, why it's better, and what the new API/structure looks like.
+
+- **Good**: "Module layout reorganized into domain-aligned files. Internal types are now private to the crate."
+- **Bad**: "First I merged input.rs into types.rs, then I split it into config.rs and source.rs, then I renamed..."
+
 ## Workflow
 
-### Step 1: Pull latest main
+### Step 1: Sync with main
 
-Ensure local `main` is up to date before comparing branches. Never compare against a stale local main.
+Ensure local `main` is up to date, then sync the current branch.
 
 ```bash
+# Fetch latest main
 git fetch origin main:main
+
+# Attempt fast-forward first, fall back to rebase
+git merge --ff-only main || git rebase main
 ```
+
+If the rebase rewrote history (commits changed), tests must be rerun before proceeding using the project's test command.
 
 ### Step 2: Gather context
 
