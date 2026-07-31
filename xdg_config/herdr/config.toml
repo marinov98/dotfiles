@@ -1,0 +1,42 @@
+onboarding = false
+[theme]
+name = "rose-pine"
+auto_switch = false
+
+[keys]
+prefix = "ctrl+j"
+detach = "prefix+d"
+settings = "prefix+shift+s"
+split_vertical = "prefix+|"
+goto = "prefix+s"
+copy_mode = "prefix+["
+close_workspace = "prefix+shift+q"
+
+[ui]
+pane_gaps = false
+sidebar_start_collapsed = true
+
+[ui.sound]
+enabled = false
+
+[[keys.command]]
+key = "prefix+ctrl+q"
+type = "shell"
+command = "herdr server stop"
+description = "kill server"
+
+[[keys.command]]
+key = "prefix+g"
+type = "popup"
+command = "lazygit"
+description = "run lazygit"
+width = "90%"
+height = "90%"
+
+[[keys.command]]
+key = "prefix+t"
+type = "popup"
+command = "exec \"${SHELL:-sh}\""
+description = "open scratch terminal"
+width = "80%"
+height = "80%"
