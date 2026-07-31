@@ -17,6 +17,7 @@ split_vertical = "prefix+|"
 goto = "prefix+ctrl+l"
 copy_mode = "prefix+["
 close_workspace = "prefix+q"
+rename_tab = ["prefix+shift+t", "prefix+,"]
 
 [[keys.command]]
 key = "prefix+ctrl+q"
