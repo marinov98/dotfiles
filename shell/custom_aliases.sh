@@ -73,10 +73,7 @@ else
 fi
 
 # multiplexer
-MULTIPLEXER="tmux"
-if command -v "$MULTIPLEXER" >/dev/null 2>&1; then
-  alias tdev="~/.config/$MULTIPLEXER/scripts/dev.sh"
-  if [ "$MULTIPLEXER" = "tmux" ]; then
-    alias tl="~/.config/tmux/scripts/session-switcher.sh"
-  fi
+if command -v tmux >/dev/null 2>&1; then
+  alias tdev="~/.config/tmux/scripts/dev.sh"
+  alias tl="~/.config/tmux/scripts/session-switcher.sh"
 fi
