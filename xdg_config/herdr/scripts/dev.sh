@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# only execute within herdr
+if [ "${HERDR_ENV:-}" != "1" ] || [ -z "${HERDR_WORKSPACE_ID}" ]; then
+  exit 0
+fi
+
 TARGET_DEV_DIR="$HOME/projects"
 PROJECT=$(find $TARGET_DEV_DIR/ -mindepth 1 -maxdepth 2 -type d | fzf)
 
@@ -7,24 +12,30 @@ PROJECT=$(find $TARGET_DEV_DIR/ -mindepth 1 -maxdepth 2 -type d | fzf)
 
 TARGET_LABEL="$(basename "$PROJECT")"
 WORKSPACES=$(herdr workspace list | jq '.result.workspaces')
-IN_HERDR=$( [ "${HERDR_ENV:-}" = "1" ] && [ -n "${HERDR_WORKSPACE_ID}" ] )
 
 
-if $IN_HERDR; then
-  FOCUSED_LABEL=$(echo "$WORKSPACES" | jq -r '.[] | select(.focused == true) | .label')
-  # Already focused on target
-  [ "$FOCUSED_LABEL" = "$TARGET_LABEL" ] && exit 0
-fi
+FOCUSED_LABEL=$(echo "$WORKSPACES" | jq -r '.[] | select(.focused == true) | .label')
+# Already focused on target
+[ "$FOCUSED_LABEL" = "$TARGET_LABEL" ] && exit 0
 
 # Workspace exists, focus it
 TARGET_ID=$(echo "$WORKSPACES" | jq -r --arg label "$TARGET_LABEL" '.[] | select(.label == $label) | .workspace_id')
 if [ -n "$TARGET_ID" ]; then
-  $IN_HERDR && herdr workspace focus "$TARGET_ID" || herdr
+  herdr workspace focus "$TARGET_ID"
   exit 0
 fi
 
-# Create and focus
-WORKSPACE_ID=$(herdr workspace create --cwd "$PROJECT" --label "$TARGET_LABEL" --focus | jq -r '.result.workspace.workspace_id')
+if [ "$FOCUSED_LABEL" == "~" ]; then
+  # turn default workspace into a project
+  HOME_PANE=$(herdr pane current | jq '.result.pane') 
+  HOME_PANE_ID=$(echo $HOME_PANE | jq -r '.pane_id')
+  WORKSPACE_ID=$(echo "$HOME_PANE" | jq -r '.workspace_id')
+
+  herdr pane run "$HOME_PANE_ID" "cd '$PROJECT'"
+else
+  # Create and focus new project
+  WORKSPACE_ID=$(herdr workspace create --cwd "$PROJECT" --label "$TARGET_LABEL" --focus | jq -r '.result.workspace.workspace_id')
+fi
 
 
 AGENT="pi"
