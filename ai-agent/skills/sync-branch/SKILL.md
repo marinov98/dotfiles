@@ -12,6 +12,27 @@ description: Use this skill when the user wants to synchronize their current bra
 3. **Never force push** to shared branches unless explicitly requested
 4. **Preserve commit history** - Avoid squashing or amending commits that have been pushed
 
+## CRITICAL: Never Block on Interactive Prompts
+
+Git opens editors/prompts (commit messages, rebase todos, merge messages) and will
+**HANG forever in non-TTY shells** — this has repeatedly blocked sessions.
+Always run state-changing git commands non-interactively:
+
+- `GIT_EDITOR=true git rebase --continue` — finalize a conflicted commit without opening an editor
+- `GIT_EDITOR=true GIT_SEQUENCE_EDITOR=true git rebase -i ...` — scripted interactive rebases
+- `git commit --no-edit` — reuse the prepared message without an editor
+- `git merge --no-edit` / `git pull --no-edit` — skip the merge-message editor
+- `git rebase --continue` with a TODO editor: same `GIT_EDITOR=true GIT_SEQUENCE_EDITOR=true` prefix
+
+If a command returns no output and appears stuck, it is almost always waiting on an
+editor or prompt. Check `ps aux | grep -iE 'git|editor|vim|nano'`. The rebase state
+in `.git/rebase-merge` is safe to resume: re-run with `GIT_EDITOR=true git rebase --continue`
+instead of killing or aborting. Inspect progress with `git status` (it reports rebase
+done/todo counts) and `cat .git/rebase-merge/done`.
+
+Also prefer explicit flags over prompts: `git push --force-with-lease` never needs
+confirmation, `git stash` is never interactive.
+
 ## Workflow
 
 ### Step 1: Analyze Current State
@@ -48,10 +69,12 @@ git rebase origin/<target-branch>
 
 ```
 git status  # identify conflicted files
-# Edit conflicted files to resolve
+# Edit conflicted files to resolve (follow the user's stated preference, e.g. "keep branch X's changes")
 git add <resolved-files>
-git rebase --continue
+GIT_EDITOR=true git rebase --continue   # NEVER plain `git rebase --continue` — it opens an editor and hangs in non-TTY shells
 ```
+
+Repeat until `git rebase` reports success.
 
 ### Step 5: Verify Success
 
