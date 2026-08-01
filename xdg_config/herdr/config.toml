@@ -13,7 +13,7 @@ enabled = false
 [keys]
 prefix = "ctrl+j"
 detach = "prefix+d"
-split_vertical = "prefix+|"
+split_vertical = ["prefix+v", "prefix+|"]
 goto = "prefix+ctrl+l"
 copy_mode = "prefix+["
 close_workspace = "prefix+q"
