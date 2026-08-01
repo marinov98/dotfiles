@@ -6,9 +6,7 @@ TMUX_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 sessions=$(tmux list-sessions -F '#{session_name}' 2>/dev/null)
 
 if [ -z "$sessions" ]; then
-  script=$(find "$TMUX_DIR/sessions" -type f | fzf)
-  [ -z "$script" ] && exit 0
-  exec "$script"
+  exec "$TMUX_DIR/scripts/dev.sh"
 fi
 
 session=$(echo "$sessions" | fzf)
