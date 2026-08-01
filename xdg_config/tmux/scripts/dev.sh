@@ -5,7 +5,7 @@ TARGET_DEV_DIR="$HOME/projects"
 if command -v fd >/dev/null 2>&1; then
   PROJECT=$(fd . $TARGET_DEV_DIR/ -d 2 -t d | fzf)
 else
-  PROJECT=$(find $TARGET_DEV_DIR/ -mindepth 1 -maxdepth 2 -type d | fzf)
+  PROJECT=$(find $TARGET_DEV_DIR/ -mindepth 1 -maxdepth 2 -type d -name .git -prune -o -type d -print | fzf)
 fi
 
 [[ -z "$PROJECT" ]] && exit 0
