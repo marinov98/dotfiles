@@ -6,7 +6,7 @@ if [ "${HERDR_ENV:-}" != "1" ] || [ -z "${HERDR_WORKSPACE_ID}" ]; then
 fi
 
 TARGET_DEV_DIR="$HOME/projects"
-PROJECT=$(find $TARGET_DEV_DIR/ -mindepth 1 -maxdepth 2 -type d | fzf)
+PROJECT=$(find $TARGET_DEV_DIR/ -mindepth 1 -maxdepth 2 -type d -name .git -prune -o -type d -print | fzf)
 
 [[ -z "$PROJECT" ]] && exit 0
 
