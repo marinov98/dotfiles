@@ -30,15 +30,12 @@ if tmux has-session -t "$SESSION" 2>/dev/null; then
 fi
 
 # Session doesn't exist, build it out
-tmux new-session -d -s "$SESSION" -c "$PROJECT" -n "editor"
-tmux send-keys -t "$SESSION:editor" "$EDITOR" C-m
+tmux new-session -d -s "$SESSION" -c "$PROJECT" -n "dev"
 
 if command -v "$AGENT" >/dev/null 2>&1; then
   tmux new-window -t "$SESSION" -c "$PROJECT" -n "$AGENT"
   tmux send-keys -t "$SESSION:$AGENT" "$AGENT_CMD" C-m
 fi
 
-tmux new-window -t "$SESSION" -c "$PROJECT"
-
-tmux select-window -t "$SESSION:editor"
+tmux select-window -t "$SESSION:dev"
 connect_to_session "$SESSION"
