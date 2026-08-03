@@ -2,7 +2,7 @@
 
 TARGET_DEV_DIR="$HOME/projects"
 
-PROJECT=$(find $TARGET_DEV_DIR/ -mindepth 1 -maxdepth 2 -type d -name .git -prune -o -type d -print | fzf)
+PROJECT=$(find $TARGET_DEV_DIR/ -mindepth 1 -maxdepth 2 -name '.*' -prune -o -type d -print  | fzf)
 
 [[ -z "$PROJECT" ]] && exit 0
 

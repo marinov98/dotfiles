@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Switch/attach to a tmxu session via fzf/ Works inside or outside tmux
-TMUX_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+TMUX_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 sessions=$(tmux list-sessions -F '#{session_name}' 2>/dev/null)
 
 if [ -z "$sessions" ]; then
-  exec "$TMUX_DIR/scripts/dev.sh"
+  exec "$TMUX_DIR/dev.sh"
 fi
 
 session=$(echo "$sessions" | fzf)
