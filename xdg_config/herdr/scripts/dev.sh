@@ -2,7 +2,8 @@
 
 # only execute within herdr
 if [ "${HERDR_ENV:-}" != "1" ] || [ -z "${HERDR_WORKSPACE_ID}" ]; then
-  exit 0
+  echo "Script can only be run inside herdr!"
+  exit 1
 fi
 
 TARGET_DEV_DIR="$HOME/projects"
