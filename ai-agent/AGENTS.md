@@ -23,7 +23,10 @@
   targeted agents are fine.
 - **Don't write memory files unless asked.**
 
-# Design
+# Philosophy
+
+Always attempt to apply the following principles when designing, refactoring
+or adding a new feature to a code base.
 
 - Types and signatures before code; make illegal states unrepresentable.
 - Parse, don't validate — unstructured input becomes a precise type
@@ -37,7 +40,6 @@
   follow the shape of the data, not the other way round. Composition
   over inheritance.
 - Dependencies passed in, not constructed or located.
-- Project convention beats every line above.
 
 # Tooling
 
