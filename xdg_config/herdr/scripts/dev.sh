@@ -7,7 +7,7 @@ if [ "${HERDR_ENV:-}" != "1" ] || [ -z "${HERDR_WORKSPACE_ID}" ]; then
 fi
 
 TARGET_DEV_DIR="$HOME/projects"
-PROJECT=$(find $TARGET_DEV_DIR/ -mindepth 1 -maxdepth 2 -name '.*' -prune -o -type d -print  | fzf)
+PROJECT=$(find "$TARGET_DEV_DIR"/ -mindepth 1 -maxdepth 2 -name '.*' -prune -o -type d -print  | fzf)
 
 [[ -z "$PROJECT" ]] && exit 0
 
@@ -29,7 +29,7 @@ fi
 if [ "$FOCUSED_LABEL" == "~" ]; then
   # turn default workspace into a project
   HOME_PANE=$(herdr pane current | jq '.result.pane') 
-  HOME_PANE_ID=$(echo $HOME_PANE | jq -r '.pane_id')
+  HOME_PANE_ID=$(echo "$HOME_PANE" | jq -r '.pane_id')
   WORKSPACE_ID=$(echo "$HOME_PANE" | jq -r '.workspace_id')
 
   herdr pane run "$HOME_PANE_ID" "cd '$PROJECT'"
