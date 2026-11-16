@@ -41,47 +41,12 @@ or adding a new feature to a code base.
   over inheritance.
 - Dependencies passed in, not constructed or located.
 
-# Tooling
+# Additional Tooling
 
-**Required:** use these by default — they're the first choice for their jobs.
-
-| Tool            | Purpose                   | Key Advantage                                   |
-| --------------- | ------------------------- | ----------------------------------------------- |
-| `sd`            | Text replacement          | Cleaner syntax than sed; `-F` literal           |
-| `scc`           | Codebase overview         | LOC, complexity, language breakdown; respects `.gitignore` |
-| `ast-grep (sg)` | Structural code transform | AST patterns + `--rewrite`; respects `.gitignore` (disable: `--no-ignore vcs`) |
-| `jq`            | JSON processing           | Pipe from scc, git, package managers            |
-| `shellcheck`    | Shell validation          | Catches bugs before they ship                   |
-| `yq`            | YAML/INI processing       | Query/edit with comment preservation            |
-
-## Search Strategy
-
-1. Locate files by name or path — prefer fuzzy search when available
-2. Scope by extension or directory before content search
-3. Search content with context lines around matches
-4. Use structural search for code patterns (functions, classes, AST)
-5. Use codebase stats to understand composition
-6. Built-in `read` for deep dives into specific files
-
-## Pipelines
-
-- `scc --format json | jq '.[] | {lang: .Name, files: .Count}'` — structured queries
-- `sd 'old' 'new' file` — simple replacement (no escaping needed)
-- `sd -F '$var' 'val' file` — literal replacement (metacharacters safe)
-- `ast-grep -p 'pat' --rewrite 'new' -l lang` — structural code transformation
-  - `ast-grep` Patterns must be **syntactically complete code**:
-  ```
-  ast-grep -p 'def $NAME' -l py              # Python functions
-  ast-grep -p 'pub fn $NAME' -l rust         # Rust public functions
-  ast-grep -p 'match $EXPR { $$$ARMS }' -l rust  # Match expressions
-  ast-grep -p 'X' --rewrite 'Y' -l lang     # Structural rename
-  ```
-
-  - `$NAME` = any identifier
-  - `$$$ARGS` = zero-or-more (in function args, match arms, etc.)
-  - `$_NAME` = non-capturing match (performance optimization)
-  - `--dry-run` not supported — test with `ast-grep -p 'pat'` first, then add `--rewrite`
-  - Patterns that fail: incomplete statements (`def main()`, `fn main()`), multi-var in certain positions (`fn $NAME($$$ARGS)`)
+- `jq`/`yq` to read JSON/YAML.
+- Edit tool for targeted edits. `sd` (`-s` for literals) for pattern
+    replacements across files; `sed` only for address ranges
+- `shellcheck` any non-trivial shell script before calling it done.
 
 ## Comments
 
