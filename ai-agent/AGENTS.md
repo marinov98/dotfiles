@@ -85,10 +85,8 @@ or adding a new feature to a code base.
 
 ## Comments
 
-Good code is self-documenting. Comment only what the code cannot say:
-design intent that didn't survive into the syntax, the contract of an
-abstraction, or a level of detail the reader is missing. A comment that
-restates the line below it is worse than none.
+Good code is self-documenting. Comments are liabilities in ai agents
+as they are not enforceable. Never comment.
 
 ## Communication
 
