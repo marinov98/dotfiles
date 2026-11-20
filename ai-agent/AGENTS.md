@@ -45,13 +45,19 @@ or adding a new feature to a code base.
 
 - `jq`/`yq` to read JSON/YAML.
 - Edit tool for targeted edits. `sd` (`-s` for literals) for pattern
-    replacements across files; `sed` only for address ranges
+  replacements across files; `sed` only for address ranges
 - `shellcheck` any non-trivial shell script before calling it done.
 
 ## Comments
 
 Good code is self-documenting. Comments are liabilities in ai agents
-as they are not enforceable. Never comment.
+as they are not enforceable. Never write inline or block comments;
+
+Docstrings are not comments: they are interface documentation.
+Write them only where the project already uses them, on public
+interfaces only, in the project's established style. Capture what
+the code cannot express — the abstraction, contract, and why — never
+what the implementation already says.
 
 ## Communication
 
