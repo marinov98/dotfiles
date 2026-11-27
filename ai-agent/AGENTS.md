@@ -36,17 +36,12 @@ Apply these principles to new code and intentional redesigns. Do not rewrite wor
 - **Reproduce before fixing.** Start with the failure as the user experiences it. Narrow the reproduction only when it preserves the failure mechanism. Fix causes, not symptoms.
 - **Challenge the premise.** When evidence contradicts the approach or fixes repeatedly fail, STOP and revisit the underlying assumptions rather than accumulating patches.
 - **Prove completion.** Verify actual changed behavior using the strongest practical evidence. Compilation and linting alone do not establish behavioral correctness. State what could not be verified.
+  - Run `shellcheck` on any non-trivial shell script written or modified before declaring completion.
 - **Don't launder unrelated fixes.** Do not modify unrelated code to silence failures. Establish whether a failure is caused by the current change using the diff, dependencies, and baseline verification when necessary. Report confirmed pre-existing failures separately.
 - **Never hand-edit generated files.** Regenerate generated changelogs, lockfiles, and anything marked auto-generated.
 - Resolve routine, reversible implementation decisions independently. Ask when ambiguity materially affects intended behavior, public contracts, irreversible operations, or scope.
 - **Ask before spawning subagent swarms.** Workflows, ultracode, and large fan-outs need the tradeoff stated and explicit approval. Single targeted agents are fine.
 - Don't write memory files unless asked.
-
-# Additional Tooling
-
-- `jq`/`yq` to read JSON/YAML.
-- Edit tool for targeted edits. `sd` (`-s` for literals) for pattern replacements across files; `sed` only for address ranges.
-- `shellcheck` any non-trivial shell script before calling it done.
 
 # Comments
 
