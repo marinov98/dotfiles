@@ -87,6 +87,17 @@ Never merge types into one document. Write the documents in the order the user c
 - No steps, no exhaustive specs. Link to how-to and reference.
 - Opinions are allowed only when they are attributed decisions ("We chose X because Y").
 
+#### Design
+
+- This is a specialized explaination which goes into a different folder and talks about a future change
+- Typically contains a template within the project but if not, it should contain the following:
+  - Current State -> Reason for change -> Proposal -> Options (if applicable) -> Decision (if applicable)
+- When a design is not finalized always come up with a minimum of 2 options regardless of how much one might be better than the other
+  - Always evaluate and portray all options fairly regardless of any initial bias from yourself or the user
+    and/or if the user states that a decision was reached after they explored the options themselves
+  - Have a pros and cons table and document how each option might handle practical real world scenarios relating to new design's goals.
+- This is the only case where any new how-to/reference that come with the design are supplied together in the same document as the explaination
+
 ## 3. Verify
 
 Do not report the document as done until all of these are true:
