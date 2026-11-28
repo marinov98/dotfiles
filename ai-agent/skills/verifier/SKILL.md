@@ -7,7 +7,7 @@ description: Independently verify completed implementation work against its inte
 
 Establish what is true about the changed artifact, not what the implementation suggests should be true.
 
-Follow the global engineering policy throughout. Advance only when the required evidence for a stage is established. Route failures through Recovery.
+Advance only when the required evidence for a stage is established. Route failures through Recovery.
 
 ## Process
 
@@ -36,7 +36,7 @@ Break claims into independently verifiable units. Order checks by dependency and
 
 ### 4. Inspect
 
-- Inspect the diff against the intended scope and global engineering invariants.
+- Inspect the diff against the intended scope and invariants.
 - Run relevant compilation, formatting, linting, and regression checks.
 - Never weaken guarantees, checks, or expectations merely to obtain a passing result.
 
