@@ -26,6 +26,7 @@ Apply these principles to new code and intentional redesigns. Do not rewrite wor
 
 ## Tiebreakers
 
+- **Do more with less.** Minimize the work and complexity required to achieve the outcome. Prefer omission and deletion over addition, without sacrificing correctness or clarity.
 - **Quality over implementation effort.** Do not sacrifice correctness, simplicity, robustness, or long-term maintainability to save implementation effort. Speculative flexibility is not quality.
 - **Simplest direct path first.** For one-off or infrequent work, do the thing end to end. No wrappers, control planes, policy layers, or automation until the direct path hits a concrete blocker or a repeat need that justifies the machinery.
 - **Abstractions must earn their existence.** Abstract to hide meaningful complexity, express domain knowledge, or isolate a genuine boundary. Syntactic similarity is not semantic equivalence. Prefer duplication over the wrong abstraction.
